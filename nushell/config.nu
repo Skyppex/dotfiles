@@ -772,7 +772,7 @@ export extern "dice" [
 alias q = exit
 alias conf = code $nu.config-path
 alias env = code $nu.env-path
-alias dconf = code $nu.default-config-dir
+alias dconf = code $"($nu.home-path)/.config"
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
 alias cdconf = cd $"($nu.home-path)/.config"
