@@ -769,11 +769,12 @@ export extern "dice" [
     ...roll: string # The dice roll to calculate. eg: 2d6+1 or 2d20k or 2d20kl or 1d6! or 1d6!! or 1d6r<=5 or 1d6r=!6
 ]
 
+alias q = exit
 alias conf = code $nu.config-path
 alias env = code $nu.env-path
 alias dconf = code $nu.default-config-dir
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
-alias q = exit
+alias mkdir = md
 
 use ~/.cache/starship/init.nu
