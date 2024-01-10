@@ -10,9 +10,9 @@
 #2E154F
 #2B3D67
 #562C93
-#5B5DAA
+#5833B0
 #6B50C8
-#8B9BF6
+
 
 add_newline = false
 
@@ -35,14 +35,12 @@ $nodejs\
 $nim\
 $rust\
 $scala\
-[](fg:#562C93 bg:#5B5DAA)\
-$docker_context\
-[](fg:#5B5DAA bg:#6B50C8)\
+[](fg:#562C93 bg:#5833B0)\
 $directory\
-[](fg:#6B50C8 bg:#8B9BF6)\
+[](fg:#5833B0 bg:#6B50C8)\
 $git_branch\
 $git_status\
-[ ](fg:#8B9BF6)\
+[ ](fg:#6B50C8)\
 """
 
 # Disable the blank line at the start of the prompt
@@ -62,8 +60,8 @@ style = "bg:#2E154F"
 disabled = true # Disabled by default
 
 [directory]
-style = "bg:#6B50C8"
-format = "[$path ]($style)"
+style = "bg:#5833B0"
+format = "[ $path ]($style)"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
@@ -90,12 +88,12 @@ format = "[$path ]($style)"
 # VCS Branch
 [git_branch]
 symbol = ""
-style = "bg:#8B9BF6"
+style = "bg:#6B50C8"
 format = '[ $symbol $branch]($style)'
 
 [git_status]
 disabled = false
-style = "bg:#8B9BF6"
+style = "bg:#6B50C8"
 format = '[ $all_status$ahead_behind]($style)'
 
 # Languages
@@ -154,7 +152,7 @@ style = "bg:#562C93"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
-symbol = ""
+symbol = "🦀"
 style = "bg:#562C93"
 format = '[ $symbol ($version) ]($style)'
 

@@ -775,6 +775,7 @@ alias env = code $nu.env-path
 alias dconf = code $nu.default-config-dir
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
+alias cdconf = cd $"($nu.home-path)/.config"
 alias mkdir = md
 
 use ~/.cache/starship/init.nu
