@@ -778,4 +778,9 @@ alias ss = code ~/.config/starship-schema.json
 alias cdconf = cd $"($nu.home-path)/.config"
 alias md = mkdir
 
+def gpa [message: string] {
+    git commit -a -m $"($message)"
+    git push
+}
+
 use ~/.cache/starship/init.nu
