@@ -15,7 +15,7 @@
             "command": "paste",
             "keys": "ctrl+v"
         },
-        {
+                {
             "command": 
             {
                 "action": "splitPane",
@@ -23,7 +23,7 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
+},
         {
             "command": "find",
             "keys": "ctrl+shift+f"
@@ -44,12 +44,12 @@
         "list": 
         [
             {
-                "commandline": "C:\\Users\\brage\\scoop\\apps\\nu\\current\\nu.exe",
+                "commandline": "%USERPROFILE%\\scoop\\apps\\nu\\current\\nu.exe",
                 "guid": "{fad7865d-59f4-425e-8564-c4c4a80b9563}",
                 "hidden": false,
+                "icon": "%USERPROFILE%\\.config\\nushell\\nushell-logo.png",
                 "name": "nushell",
-                "icon": "C:\\Users\\brage\\.config\\nushell\\nushell-logo.png",
-                "startingDirectory": "C:\\Users\\brage"
+                "startingDirectory": "%USERPROFILE%"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
