@@ -779,7 +779,8 @@ alias cdconf = cd $"($nu.home-path)/.config"
 alias md = mkdir
 
 def gcp [message: string] {
-    git commit -u -a -m $"($message)"
+    git add -A
+    git commit -m $"($message)"
     git push
 }
 
