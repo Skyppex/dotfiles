@@ -783,4 +783,9 @@ def gcp [message: string] {
     git push
 }
 
+def gsw [branch: string] {
+    git stash -u
+    git checkout $"($branch)"
+}
+
 use ~/.cache/starship/init.nu
