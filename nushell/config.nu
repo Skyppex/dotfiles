@@ -777,6 +777,8 @@ alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
 alias cdconf = cd $"($nu.home-path)/.config"
 alias md = mkdir
+alias sh = bash
+alias dir = echo $"($env.PWD)"
 
 def gcp [message: string] {
     git add -A
