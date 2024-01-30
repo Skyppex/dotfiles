@@ -769,6 +769,21 @@ export extern "dice" [
     ...roll: string # The dice roll to calculate. eg: 2d6+1 or 2d20k or 2d20kl or 1d6! or 1d6!! or 1d6r<=5 or 1d6r=!6
 ]
 
+export extern curl [
+    --help(-h) # Get help for commands
+    --data(-d): string # <data> HTTP POST data
+    --fail(-f) # Fail fast with no output on HTTP errors
+    --include(-i) # Include protocol response headers in the output
+    --output(-o): string # <file> Write to file instead of stdout
+    --silent(-s) # Silent mode
+    --upload-file(-T): string # <file> Transfer local FILE to destination
+    --user(-u): string # <user:password> Server user and password
+    --user-agent(-A): string # <name> Send User-Agent <name> to server
+    --verbose(-v) # Make the operation more talkative
+    --version(-V) # Show version number and quit
+    url: string
+]
+
 alias q = exit
 alias conf = code $nu.config-path
 alias env = code $nu.env-path
@@ -779,6 +794,11 @@ alias cdconf = cd $"($nu.home-path)/.config"
 alias md = mkdir
 alias sh = bash
 alias dir = echo $"($env.PWD)"
+
+def gprs [] {
+    git pull --rebase
+    git submodule update --init --recursive
+}
 
 def gcp [message: string] {
     git add -A
