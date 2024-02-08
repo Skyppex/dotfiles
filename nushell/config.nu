@@ -815,6 +815,10 @@ def "manifest update" [] {
     scoop export | save --force $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
+def "manifest install" [] {
+    scoop import $"($nu.home-path)/.config/scoop/user_manifest.json"
+}
+
 def "manifest rm" [] {
     rm $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
