@@ -761,6 +761,10 @@ $env.config = {
     ]
 }
 
+### From this point on it's my config
+
+use ~/.cache/starship/init.nu
+
 export extern "dice" [
     --help(-h) # Print a more detailed help message
     --expr(-e) # Print the expression used to calculate the result
@@ -784,6 +788,8 @@ export extern curl [
     url: string
 ]
 
+export extern "clip" []
+
 alias q = exit
 alias conf = code $nu.config-path
 alias env = code $nu.env-path
@@ -791,9 +797,11 @@ alias dconf = code $"($nu.home-path)/.config"
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
 alias cdconf = cd $"($nu.home-path)/.config"
+alias cddl = cd ~/Downloads
 alias md = mkdir
 alias sh = bash
-alias dir = echo $"($env.PWD)"
+alias loc = echo $"($env.PWD)"
+alias paste = powershell -command "Get-Clipboard"
 
 def gprs [] {
     git pull --rebase
@@ -810,5 +818,3 @@ def gsw [branch: string] {
     git stash -u
     git checkout $"($branch)"
 }
-
-use ~/.cache/starship/init.nu
