@@ -102,5 +102,3 @@ $env.NU_PLUGIN_DIRS = [
 
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
-
-let manifest = $"($nu.home-path)/.config/scoop/user_manifest.json"
