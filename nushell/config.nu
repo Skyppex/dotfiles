@@ -803,6 +803,36 @@ alias sh = bash
 alias loc = echo $"($env.PWD)"
 alias paste = powershell -command "Get-Clipboard"
 
+def manifest [] {
+    open $"($nu.home-path)/.config/scoop/user_manifest.json"
+}
+
+def "manifest create" [] {
+    touch $"($nu.home-path)/.config/scoop/user_manifest.json"
+}
+
+def "manifest update" [] {
+    scoop export | save --force $"($nu.home-path)/.config/scoop/user_manifest.json"
+}
+
+def "manifest rm" [] {
+    rm $"($nu.home-path)/.config/scoop/user_manifest.json"
+}
+
+def "sync git" [message: string] {
+    git pull --rebase
+    git submodule update --init --recursive
+    gcp $message
+}
+
+def "sync config" [] {
+    manifest update
+    let path = loc;
+    cdconf
+    gcp "auto sync config"
+    cd $path
+}
+
 def gprs [] {
     git pull --rebase
     git submodule update --init --recursive
