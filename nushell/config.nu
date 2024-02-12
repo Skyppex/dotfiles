@@ -833,6 +833,7 @@ def "pull config" [] {
     git pull --rebase
     git submodule update --init --recursive
     manifest install
+    scoop update
     cd $path
 }
 
