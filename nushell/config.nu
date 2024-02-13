@@ -805,13 +805,6 @@ alias paste = powershell -command "Get-Clipboard"
 
 alias manifest = open $"($nu.home-path)/.config/scoop/user_manifest.json"
 
-def "rmdl" [] {
-    let files = ls ~/Downloads
-    for file in $files {
-        rm -rv $file.name
-    }
-}
-
 def "manifest create" [] {
     touch $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
@@ -856,6 +849,22 @@ def "push config" [] {
     gcp "sync config"
     cd $path
 }
+
+def rmdl [] {
+    let files = ls ~/Downloads
+    for file in $files {
+        rm -rv $file.name
+    }
+}
+
+def "plugin add" [
+    name: string,
+] {
+    let plugin = $"~/.cargo/bin/($name).exe";
+    nu -c $'register ($plugin)'
+    version
+}
+
 
 def gprs [] {
     git pull --rebase
