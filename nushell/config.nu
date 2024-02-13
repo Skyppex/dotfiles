@@ -805,6 +805,13 @@ alias paste = powershell -command "Get-Clipboard"
 
 alias manifest = open $"($nu.home-path)/.config/scoop/user_manifest.json"
 
+def "rmdl" [] {
+    let files = ls ~/Downloads
+    for file in $files {
+        rm -rv $file.name
+    }
+}
+
 def "manifest create" [] {
     touch $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
