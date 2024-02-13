@@ -1,46 +1,46 @@
 {
-    "apps": [
-        {
-            "Name": "gh",
-            "Info": "",
-            "Updated": "2024-02-12T15:26:18.2103311+01:00",
-            "Version": "2.43.1",
-            "Source": "main"
-        },
-        {
-            "Name": "jq",
-            "Info": "",
-            "Updated": "2024-02-12T15:26:26.1150182+01:00",
-            "Version": "1.7.1",
-            "Source": "main"
-        },
-        {
-            "Name": "nu",
-            "Info": "",
-            "Updated": "2024-01-08T16:49:30.5591197+01:00",
-            "Version": "0.88.1",
-            "Source": "main"
-        },
-        {
-            "Name": "starship",
-            "Info": "",
-            "Updated": "2024-01-09T16:19:01.8684784+01:00",
-            "Version": "1.17.1",
-            "Source": "main"
-        }
-    ],
     "buckets": [
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": "2024-02-12T09:26:49+01:00",
-            "Manifests": 1974
+            "Updated": "2024-02-13T05:25:44+01:00",
+            "Manifests": 1976
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
-            "Updated": "2024-02-12T13:30:08+01:00",
+            "Updated": "2024-02-13T05:24:46+01:00",
             "Manifests": 1289
+        }
+    ],
+    "apps": [
+        {
+            "Source": "main",
+            "Updated": "2024-02-12T15:26:18.2103311+01:00",
+            "Version": "2.43.1",
+            "Info": "",
+            "Name": "gh"
+        },
+        {
+            "Source": "main",
+            "Updated": "2024-02-12T15:26:26.1150182+01:00",
+            "Version": "1.7.1",
+            "Info": "",
+            "Name": "jq"
+        },
+        {
+            "Source": "main",
+            "Updated": "2024-01-08T16:49:30.5591197+01:00",
+            "Version": "0.88.1",
+            "Info": "",
+            "Name": "nu"
+        },
+        {
+            "Source": "main",
+            "Updated": "2024-01-09T16:19:01.8684784+01:00",
+            "Version": "1.17.1",
+            "Info": "",
+            "Name": "starship"
         }
     ]
 }

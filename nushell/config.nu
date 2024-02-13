@@ -830,17 +830,22 @@ def "sync git" [message: string] {
 def "pull config" [] {
     let path = loc;
     cdconf
+    print "---- pulling config ----"
     git pull --rebase
     git submodule update --init --recursive
+    print "---- installing scoop apps ----"
     manifest install
+    print "---- updating scoop apps ----"
     scoop update
     cd $path
 }
 
 def "push config" [] {
+    print "---- updating scoop manifest ----"
     manifest update
     let path = loc;
     cdconf
+    print "---- pushing config ----"
     gcp "sync config"
     cd $path
 }
