@@ -4,9 +4,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1707783122000)\/",
+                "value": "\/Date(1707955873000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 13. februar 2024 01:12:02"
+                "DateTime": "torsdag 15. februar 2024 01:11:13"
             },
             "Manifests": 250
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1707855921000)\/",
+                "value": "\/Date(1708014425000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 13. februar 2024 21:25:21"
+                "DateTime": "torsdag 15. februar 2024 17:27:05"
             },
-            "Manifests": 1976
+            "Manifests": 1978
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1707855903000)\/",
+                "value": "\/Date(1708014358000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 13. februar 2024 21:25:03"
+                "DateTime": "torsdag 15. februar 2024 17:25:58"
             },
             "Manifests": 1289
         },
