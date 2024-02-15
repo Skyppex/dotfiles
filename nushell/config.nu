@@ -842,7 +842,7 @@ def "pull config" [] {
 
 def "push config" [] {
     print "---- fixing nushell plugins ----"
-    open ~/.config/nushell/plugin.nu | str replace -a -r '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save  plugin.nu -f
+    open ~/.config/nushell/plugin.nu | str replace -a -r '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu 
     print "---- updating scoop manifest ----"
     manifest update
     let path = loc;
