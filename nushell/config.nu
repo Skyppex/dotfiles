@@ -857,14 +857,11 @@ def rmdl [] {
     }
 }
 
-def "plugin add" [
-    name: string,
-] {
+def "plugin add" [name: string] {
     let plugin = $"~/.cargo/bin/($name).exe";
     nu -c $'register ($plugin)'
     version
 }
-
 
 def gprs [] {
     git pull --rebase
@@ -876,6 +873,8 @@ def gcp [message: string] {
     git commit -m $"($message)"
     git push
 }
+
+alias gpf = git push --force-with-lease
 
 def gsw [branch: string] {
     git stash -u
