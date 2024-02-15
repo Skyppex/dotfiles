@@ -1,4 +1,4 @@
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver",
     "usage": "Show all the semver commands",
@@ -28,7 +28,7 @@ register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
   "examples": []
 }
 
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver bump",
     "usage": "Bump the version to the next level",
@@ -181,7 +181,7 @@ register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
   ]
 }
 
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver from-record",
     "usage": "Construct a SemVer version from a record",
@@ -266,7 +266,7 @@ register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
   ]
 }
 
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver match-req",
     "usage": "Try to match a SemVer version with a version requirement",
@@ -349,7 +349,7 @@ register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
   ]
 }
 
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver sort",
     "usage": "Sort a list of versions using SemVer ordering.",
@@ -466,7 +466,7 @@ register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
   ]
 }
 
-register C:\Users\Brage\.cargo\bin\nu_plugin_semver.exe  {
+register ~\.cargo\bin\nu_plugin_semver.exe  {
   "sig": {
     "name": "semver to-record",
     "usage": "Parse a valid SemVer version into its components",
