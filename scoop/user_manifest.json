@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1708014425000)\/",
+                "value": "\/Date(1708037689000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 15. februar 2024 17:27:05"
+                "DateTime": "torsdag 15. februar 2024 23:54:49"
             },
-            "Manifests": 1978
+            "Manifests": 1979
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1708014358000)\/",
+                "value": "\/Date(1708028584000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 15. februar 2024 17:25:58"
+                "DateTime": "torsdag 15. februar 2024 21:23:04"
             },
             "Manifests": 1289
         },

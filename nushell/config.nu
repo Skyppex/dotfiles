@@ -821,7 +821,7 @@ def "manifest rm" [] {
     rm $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
-def "sync git" [message: string] {
+def "git sync" [message: string] {
     git pull --rebase
     git submodule update --init --recursive
     gcp $message
@@ -841,6 +841,8 @@ def "pull config" [] {
 }
 
 def "push config" [] {
+    print "---- fixing nushell plugins ----"
+    open ~/.config/nushell/plugin.nu | str replace -a -r '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save  plugin.nu -f
     print "---- updating scoop manifest ----"
     manifest update
     let path = loc;
