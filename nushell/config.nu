@@ -764,6 +764,7 @@ $env.config = {
 ### From this point on it's my config
 
 use ~/.cache/starship/init.nu
+source ~/.config/zoxide/.zoxide.nu
 
 export extern "dice" [
     --help(-h) # Print a more detailed help message
@@ -796,8 +797,6 @@ alias env = code $nu.env-path
 alias dconf = code $"($nu.home-path)/.config"
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
-alias cdconf = cd $"($nu.home-path)/.config"
-alias cddl = cd ~/Downloads
 alias md = mkdir
 alias sh = bash
 alias loc = echo $"($env.PWD)"
@@ -882,5 +881,3 @@ def gsw [branch: string] {
     git stash -u
     git checkout $"($branch)"
 }
-
-source ~/.config/.zoxide.nu
