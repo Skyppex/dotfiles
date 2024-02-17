@@ -4,29 +4,29 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1707955873000)\/",
+                "value": "\/Date(1708164502000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 15. februar 2024 01:11:13"
+                "DateTime": "lordag 17. februar 2024 11:08:22"
             },
-            "Manifests": 250
+            "Manifests": 251
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1708037689000)\/",
+                "value": "\/Date(1708172983000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 15. februar 2024 23:54:49"
+                "DateTime": "lordag 17. februar 2024 13:29:43"
             },
-            "Manifests": 1979
+            "Manifests": 1981
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1708028584000)\/",
+                "value": "\/Date(1708172939000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 15. februar 2024 21:23:04"
+                "DateTime": "lordag 17. februar 2024 13:28:59"
             },
             "Manifests": 1289
         },
@@ -90,6 +90,13 @@
             "Name": "trash",
             "Version": "2.0.0",
             "Updated": "\/Date(1707354806943)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "zoxide",
+            "Version": "0.9.3",
+            "Updated": "\/Date(1708180523782)\/"
         }
     ]
 }
