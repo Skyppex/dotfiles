@@ -797,8 +797,6 @@ alias env = code $nu.env-path
 alias dconf = code $"($nu.home-path)/.config"
 alias sc = code ~/.config/starship.toml
 alias ss = code ~/.config/starship-schema.json
-alias cdconf = cd $nu.config-path
-alias cddl = cd ~/Downloads
 alias md = mkdir
 alias sh = bash
 alias loc = echo $"($env.PWD)"
@@ -830,7 +828,7 @@ def "git sync" [message: string] {
 
 def "pull config" [] {
     let path = loc;
-    cdconf
+    cd $"($nu.home-path)/.config"
     print "---- pulling config ----"
     git pull --rebase
     git submodule update --init --recursive
@@ -847,7 +845,7 @@ def "push config" [] {
     print "---- updating scoop manifest ----"
     manifest update
     let path = loc;
-    cdconf
+    cd $"($nu.home-path)/.config"
     print "---- pushing config ----"
     gcp "sync config"
     cd $path
