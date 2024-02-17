@@ -59,6 +59,13 @@
         {
             "Info": "",
             "Source": "main",
+            "Name": "fzf",
+            "Version": "0.46.1",
+            "Updated": "\/Date(1708181029930)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
             "Name": "gh",
             "Version": "2.43.1",
             "Updated": "\/Date(1707355636238)\/"
