@@ -104,3 +104,4 @@ mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
 $env.USER_MANIFEST = $"($nu.home-path)/.config/scoop/user_manifest.json"
+zoxide init nushell | save -f ~/.config/.zoxide.nu

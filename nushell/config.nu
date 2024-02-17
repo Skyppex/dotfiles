@@ -882,3 +882,5 @@ def gsw [branch: string] {
     git stash -u
     git checkout $"($branch)"
 }
+
+source ~/.config/.zoxide.nu
