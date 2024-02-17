@@ -102,7 +102,6 @@ $env.NU_PLUGIN_DIRS = [
 
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
+zoxide init --cmd cd nushell | save -f ~/.config/zoxide/.zoxide.nu
 
 $env.USER_MANIFEST = $"($nu.home-path)/.config/scoop/user_manifest.json"
-
-zoxide init --cmd cd nushell | save -f ~/.config/zoxide/.zoxide.nu
