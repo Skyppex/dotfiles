@@ -832,10 +832,12 @@ def "pull config" [] {
     print "---- pulling config ----"
     git pull --rebase
     git submodule update --init --recursive
+    print "---- updating scoop ----"
+    scoop update
     print "---- installing scoop apps ----"
     manifest install
     print "---- updating scoop apps ----"
-    scoop update
+    scoop update -a
     cd $path
 }
 

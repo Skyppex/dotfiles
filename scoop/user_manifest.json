@@ -3,107 +3,91 @@
         {
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
-            "Updated": {
-                "value": "\/Date(1708164502000)\/",
-                "DisplayHint": 2,
-                "DateTime": "lordag 17. februar 2024 11:08:22"
-            },
+            "Updated": "2024-02-19T01:11:49+01:00",
             "Manifests": 251
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": {
-                "value": "\/Date(1708172983000)\/",
-                "DisplayHint": 2,
-                "DateTime": "lordag 17. februar 2024 13:29:43"
-            },
-            "Manifests": 1981
+            "Updated": "2024-02-19T09:26:38+01:00",
+            "Manifests": 1982
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
-            "Updated": {
-                "value": "\/Date(1708172939000)\/",
-                "DisplayHint": 2,
-                "DateTime": "lordag 17. februar 2024 13:28:59"
-            },
+            "Updated": "2024-02-19T09:25:48+01:00",
             "Manifests": 1289
         },
         {
             "Name": "sky-bucket",
             "Source": "https://github.com/skyppex/sky-bucket",
-            "Updated": {
-                "value": "\/Date(1707379124000)\/",
-                "DisplayHint": 2,
-                "DateTime": "torsdag 8. februar 2024 08:58:44"
-            },
+            "Updated": "2024-02-08T08:58:44+01:00",
             "Manifests": 2
         }
     ],
     "apps": [
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-02-19T10:15:53.4848119+01:00",
             "Name": "7zip",
-            "Version": "23.01",
-            "Updated": "\/Date(1707355347436)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "23.01"
         },
         {
-            "Info": "",
-            "Source": "sky-bucket",
+            "Updated": "2024-02-19T10:15:58.9604003+01:00",
             "Name": "cmdgate",
-            "Version": "1.0.1",
-            "Updated": "\/Date(1707379158097)\/"
+            "Source": "sky-bucket",
+            "Info": "",
+            "Version": "1.0.1"
         },
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-02-19T10:16:03.3976172+01:00",
             "Name": "fzf",
-            "Version": "0.46.1",
-            "Updated": "\/Date(1708181029930)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "0.46.1"
         },
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-02-19T10:17:18.7335305+01:00",
             "Name": "gh",
-            "Version": "2.43.1",
-            "Updated": "\/Date(1707355636238)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "2.44.1"
         },
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-02-12T15:26:26.1150182+01:00",
             "Name": "jq",
-            "Version": "1.7.1",
-            "Updated": "\/Date(1707759455864)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "1.7.1"
         },
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-02-19T10:17:59.8013987+01:00",
             "Name": "nu",
-            "Version": "0.90.1",
-            "Updated": "\/Date(1707352328088)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "0.90.1"
         },
         {
-            "Info": "",
-            "Source": "main",
+            "Updated": "2024-01-09T16:19:01.8684784+01:00",
             "Name": "starship",
-            "Version": "1.17.1",
-            "Updated": "\/Date(1704820973597)\/"
-        },
-        {
-            "Info": "",
-            "Source": "dorado",
-            "Name": "trash",
-            "Version": "2.0.0",
-            "Updated": "\/Date(1707354806943)\/"
-        },
-        {
-            "Info": "",
             "Source": "main",
+            "Info": "",
+            "Version": "1.17.1"
+        },
+        {
+            "Updated": "2024-02-19T10:16:21.3040252+01:00",
+            "Name": "trash",
+            "Source": "dorado",
+            "Info": "",
+            "Version": "2.0.0"
+        },
+        {
+            "Updated": "2024-02-19T10:16:25.4600868+01:00",
             "Name": "zoxide",
-            "Version": "0.9.3",
-            "Updated": "\/Date(1708180523782)\/"
+            "Source": "main",
+            "Info": "",
+            "Version": "0.9.3"
         }
     ]
 }
