@@ -801,6 +801,7 @@ alias md = mkdir
 alias sh = bash
 alias loc = echo $"($env.PWD)"
 alias paste = powershell -command "Get-Clipboard"
+alias cdq = zoxide query
 
 alias manifest = open $"($nu.home-path)/.config/scoop/user_manifest.json"
 

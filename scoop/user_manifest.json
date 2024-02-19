@@ -1,4 +1,69 @@
 {
+    "apps": [
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "23.01",
+            "Updated": "2024-02-19T10:15:53.4848119+01:00",
+            "Name": "7zip"
+        },
+        {
+            "Info": "",
+            "Source": "sky-bucket",
+            "Version": "1.0.1",
+            "Updated": "2024-02-19T10:15:58.9604003+01:00",
+            "Name": "cmdgate"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "0.46.1",
+            "Updated": "2024-02-19T10:16:03.3976172+01:00",
+            "Name": "fzf"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "2.44.1",
+            "Updated": "2024-02-19T10:17:18.7335305+01:00",
+            "Name": "gh"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "1.7.1",
+            "Updated": "2024-02-12T15:26:26.1150182+01:00",
+            "Name": "jq"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "0.90.1",
+            "Updated": "2024-02-19T10:17:59.8013987+01:00",
+            "Name": "nu"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "1.17.1",
+            "Updated": "2024-01-09T16:19:01.8684784+01:00",
+            "Name": "starship"
+        },
+        {
+            "Info": "",
+            "Source": "dorado",
+            "Version": "2.0.0",
+            "Updated": "2024-02-19T10:16:21.3040252+01:00",
+            "Name": "trash"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Version": "0.9.3",
+            "Updated": "2024-02-19T10:16:25.4600868+01:00",
+            "Name": "zoxide"
+        }
+    ],
     "buckets": [
         {
             "Name": "dorado",
@@ -23,71 +88,6 @@
             "Source": "https://github.com/skyppex/sky-bucket",
             "Updated": "2024-02-08T08:58:44+01:00",
             "Manifests": 2
-        }
-    ],
-    "apps": [
-        {
-            "Updated": "2024-02-19T10:15:53.4848119+01:00",
-            "Name": "7zip",
-            "Source": "main",
-            "Info": "",
-            "Version": "23.01"
-        },
-        {
-            "Updated": "2024-02-19T10:15:58.9604003+01:00",
-            "Name": "cmdgate",
-            "Source": "sky-bucket",
-            "Info": "",
-            "Version": "1.0.1"
-        },
-        {
-            "Updated": "2024-02-19T10:16:03.3976172+01:00",
-            "Name": "fzf",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.46.1"
-        },
-        {
-            "Updated": "2024-02-19T10:17:18.7335305+01:00",
-            "Name": "gh",
-            "Source": "main",
-            "Info": "",
-            "Version": "2.44.1"
-        },
-        {
-            "Updated": "2024-02-12T15:26:26.1150182+01:00",
-            "Name": "jq",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.7.1"
-        },
-        {
-            "Updated": "2024-02-19T10:17:59.8013987+01:00",
-            "Name": "nu",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.90.1"
-        },
-        {
-            "Updated": "2024-01-09T16:19:01.8684784+01:00",
-            "Name": "starship",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.17.1"
-        },
-        {
-            "Updated": "2024-02-19T10:16:21.3040252+01:00",
-            "Name": "trash",
-            "Source": "dorado",
-            "Info": "",
-            "Version": "2.0.0"
-        },
-        {
-            "Updated": "2024-02-19T10:16:25.4600868+01:00",
-            "Name": "zoxide",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.9.3"
         }
     ]
 }
