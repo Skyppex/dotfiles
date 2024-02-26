@@ -62,7 +62,7 @@ def "git sync" [message: string] {
     gcp $message
 }
 
-def "pull config" [] {
+def "pull dot" [] {
     let path = loc;
     cd $"($nu.home-path)/.config"
     print "---- pulling config ----"
@@ -77,7 +77,7 @@ def "pull config" [] {
     cd $path
 }
 
-def "push config" [] {
+def "push dot" [] {
     print "---- fixing nushell plugins ----"
     open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
     print "---- updating scoop manifest ----"
