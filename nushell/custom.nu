@@ -84,6 +84,11 @@ alias cdq = zoxide query
 alias gpf = git push --force-with-lease
 alias gcm = git checkout main
 
+def gca [] {
+    git add -A
+    git commit --amend
+}
+
 def "git sync" [message: string] {
     git pull --rebase
     git submodule update --init --recursive
@@ -106,7 +111,7 @@ def gsw [branch: string] {
     git checkout $"($branch)"
 }
 
-def gco [branch: string] {
+def gc [branch: string] {
     git checkout $"($branch)"
 }
 
