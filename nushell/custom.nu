@@ -82,7 +82,28 @@ alias cdq = zoxide query
 
 # Git
 alias gpf = git push --force-with-lease
-alias gcm = git checkout main
+
+def gcm [] {
+    do -ip { git checkout main --quiet }
+    let branch = git branch --show-current
+    
+    if ($branch != "main") {
+        do -ip { git checkout master --quiet }
+        
+        let branch = git branch --show-current
+        
+        if ($branch != "master") {
+            print "Couldn't find main or master branch"
+            return;
+        }
+
+        print "Switched to master branch"
+        return;
+    }
+
+    print "Switched to main branch"
+    return;
+}
 
 def gca [] {
     git add -A
