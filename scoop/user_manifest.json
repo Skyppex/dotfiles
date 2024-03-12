@@ -3,91 +3,134 @@
         {
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
-            "Updated": "2024-03-08T04:30:11+01:00",
-            "Manifests": 255
+            "Updated": {
+                "value": "\/Date(1710202337000)\/",
+                "DisplayHint": 2,
+                "DateTime": "tirsdag 12. mars 2024 01:12:17"
+            },
+            "Manifests": 256
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": "2024-03-08T09:29:11+01:00",
-            "Manifests": 1991
+            "Updated": {
+                "value": "\/Date(1710261155000)\/",
+                "DisplayHint": 2,
+                "DateTime": "tirsdag 12. mars 2024 17:32:35"
+            },
+            "Manifests": 1992
+        },
+        {
+            "Name": "games",
+            "Source": "https://github.com/Calinou/scoop-games",
+            "Updated": {
+                "value": "\/Date(1710260798000)\/",
+                "DisplayHint": 2,
+                "DateTime": "tirsdag 12. mars 2024 17:26:38"
+            },
+            "Manifests": 295
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
-            "Updated": "2024-03-08T10:39:46+01:00",
-            "Manifests": 1294
+            "Updated": {
+                "value": "\/Date(1710260891000)\/",
+                "DisplayHint": 2,
+                "DateTime": "tirsdag 12. mars 2024 17:28:11"
+            },
+            "Manifests": 1308
         },
         {
             "Name": "sky-bucket",
             "Source": "https://github.com/skyppex/sky-bucket",
-            "Updated": "2024-02-19T21:24:57+01:00",
+            "Updated": {
+                "value": "\/Date(1708374297000)\/",
+                "DisplayHint": 2,
+                "DateTime": "mandag 19. februar 2024 21:24:57"
+            },
             "Manifests": 3
+        },
+        {
+            "Name": "versions",
+            "Source": "https://github.com/ScoopInstaller/Versions",
+            "Updated": {
+                "value": "\/Date(1710261225000)\/",
+                "DisplayHint": 2,
+                "DateTime": "tirsdag 12. mars 2024 17:33:45"
+            },
+            "Manifests": 444
         }
     ],
     "apps": [
         {
+            "Info": "",
+            "Source": "main",
             "Name": "7zip",
-            "Updated": "2024-02-19T10:15:53.4848119+01:00",
             "Version": "23.01",
-            "Source": "main",
-            "Info": ""
+            "Updated": "\/Date(1707355347436)\/"
         },
         {
-            "Name": "cmdgate",
-            "Updated": "2024-02-19T10:15:58.9604003+01:00",
-            "Version": "1.0.1",
+            "Info": "",
+            "Source": "versions",
+            "Name": "bun-canary",
+            "Version": "1.0.30-canary.46+4b0eb4716",
+            "Updated": "\/Date(1710269311724)\/"
+        },
+        {
+            "Info": "",
             "Source": "sky-bucket",
-            "Info": ""
+            "Name": "cmdgate",
+            "Version": "1.0.1",
+            "Updated": "\/Date(1707379158097)\/"
         },
         {
+            "Info": "",
+            "Source": "main",
             "Name": "fzf",
-            "Updated": "2024-02-19T10:16:03.3976172+01:00",
-            "Version": "0.46.1",
-            "Source": "main",
-            "Info": ""
+            "Version": "0.47.0",
+            "Updated": "\/Date(1710269722461)\/"
         },
         {
+            "Info": "",
+            "Source": "main",
             "Name": "gh",
-            "Updated": "2024-03-08T10:54:07.1073553+01:00",
             "Version": "2.45.0",
-            "Source": "main",
-            "Info": ""
+            "Updated": "\/Date(1710269726351)\/"
         },
         {
+            "Info": "",
+            "Source": "main",
             "Name": "jq",
-            "Updated": "2024-02-12T15:26:26.1150182+01:00",
             "Version": "1.7.1",
-            "Source": "main",
-            "Info": ""
+            "Updated": "\/Date(1707759455864)\/"
         },
         {
+            "Info": "",
+            "Source": "main",
             "Name": "nu",
-            "Updated": "2024-03-08T10:56:20.628306+01:00",
-            "Version": "0.91.0",
-            "Source": "main",
-            "Info": ""
+            "Version": "0.90.1",
+            "Updated": "\/Date(1707352328088)\/"
         },
         {
+            "Info": "",
+            "Source": "main",
             "Name": "starship",
-            "Updated": "2024-01-09T16:19:01.8684784+01:00",
             "Version": "1.17.1",
-            "Source": "main",
-            "Info": ""
+            "Updated": "\/Date(1704820973597)\/"
         },
         {
-            "Name": "trash",
-            "Updated": "2024-02-19T10:16:21.3040252+01:00",
-            "Version": "2.0.0",
+            "Info": "",
             "Source": "dorado",
-            "Info": ""
+            "Name": "trash",
+            "Version": "2.0.0",
+            "Updated": "\/Date(1707354806943)\/"
         },
         {
-            "Name": "zoxide",
-            "Updated": "2024-02-22T14:57:47.6095884+01:00",
-            "Version": "0.9.4",
+            "Info": "",
             "Source": "main",
-            "Info": ""
+            "Name": "zoxide",
+            "Version": "0.9.4",
+            "Updated": "\/Date(1708972195954)\/"
         }
     ]
 }
