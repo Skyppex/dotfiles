@@ -1,67 +1,67 @@
 {
     "apps": [
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-02-19T10:15:53.4848119+01:00",
-            "Name": "7zip",
             "Version": "23.01",
-            "Info": "",
-            "Source": "main"
+            "Name": "7zip"
         },
         {
+            "Source": "sky-bucket",
+            "Info": "",
             "Updated": "2024-02-19T10:15:58.9604003+01:00",
-            "Name": "cmdgate",
             "Version": "1.0.1",
-            "Info": "",
-            "Source": "sky-bucket"
+            "Name": "cmdgate"
         },
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-02-19T10:16:03.3976172+01:00",
-            "Name": "fzf",
             "Version": "0.46.1",
-            "Info": "",
-            "Source": "main"
+            "Name": "fzf"
         },
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-03-08T10:54:07.1073553+01:00",
-            "Name": "gh",
             "Version": "2.45.0",
-            "Info": "",
-            "Source": "main"
+            "Name": "gh"
         },
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-02-12T15:26:26.1150182+01:00",
-            "Name": "jq",
             "Version": "1.7.1",
-            "Info": "",
-            "Source": "main"
+            "Name": "jq"
         },
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-03-08T10:56:20.628306+01:00",
-            "Name": "nu",
             "Version": "0.91.0",
-            "Info": "",
-            "Source": "main"
+            "Name": "nu"
         },
         {
+            "Source": "main",
+            "Info": "",
             "Updated": "2024-01-09T16:19:01.8684784+01:00",
-            "Name": "starship",
             "Version": "1.17.1",
-            "Info": "",
-            "Source": "main"
+            "Name": "starship"
         },
         {
+            "Source": "dorado",
+            "Info": "",
             "Updated": "2024-02-19T10:16:21.3040252+01:00",
-            "Name": "trash",
             "Version": "2.0.0",
-            "Info": "",
-            "Source": "dorado"
+            "Name": "trash"
         },
         {
-            "Updated": "2024-02-22T14:57:47.6095884+01:00",
-            "Name": "zoxide",
-            "Version": "0.9.4",
+            "Source": "main",
             "Info": "",
-            "Source": "main"
+            "Updated": "2024-02-22T14:57:47.6095884+01:00",
+            "Version": "0.9.4",
+            "Name": "zoxide"
         }
     ],
     "buckets": [

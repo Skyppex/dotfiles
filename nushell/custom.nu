@@ -81,6 +81,8 @@ alias ss = code ~/.config/starship-schema.json
 alias cdq = zoxide query
 
 # Git
+alias gpl = git pull
+alias gps = git push
 alias gpf = git push --force-with-lease
 
 def gcm [] {
