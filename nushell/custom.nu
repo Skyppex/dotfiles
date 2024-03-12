@@ -69,7 +69,7 @@ def "push dot" [] {
     let path = loc;
     cd $"($nu.home-path)/.config"
     print "---- pushing config ----"
-    gcp "change config files"
+    gcp "update config files"
     cd $path
 }
 
