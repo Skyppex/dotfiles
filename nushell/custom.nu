@@ -89,21 +89,21 @@ def gcm [] {
     do -ip { git checkout main --quiet }
     let branch = git branch --show-current
     
-    if ($branch != "main") {
-        do -ip { git checkout master --quiet }
-        
-        let branch = git branch --show-current
-        
-        if ($branch != "master") {
-            print "Couldn't find main or master branch"
-            return;
-        }
+    if ($branch == "main") {
+        print "Switched to main branch"
+        return;
+    }
 
+    do -ip { git checkout master --quiet }
+    
+    let branch = git branch --show-current
+    
+    if ($branch == "master") {
         print "Switched to master branch"
         return;
     }
 
-    print "Switched to main branch"
+    print "Couldn't find main or master branch"
     return;
 }
 
