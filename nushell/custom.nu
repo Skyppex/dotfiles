@@ -47,8 +47,7 @@ alias env = code $nu.env-path
 alias dconf = code $"($nu.home-path)/.config"
 
 def "pull dot" [] {
-    let path = loc;
-    cd $"($nu.home-path)/.config"
+    enter $"($nu.home-path)/.config"
     print "---- pulling config ----"
     git pull --rebase
     git submodule update --init --recursive
@@ -58,7 +57,7 @@ def "pull dot" [] {
     manifest install
     print "---- updating scoop apps ----"
     scoop update -a
-    cd $path
+    p # return to previous directory
 }
 
 def "push dot" [] {
@@ -66,11 +65,10 @@ def "push dot" [] {
     open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
     print "---- updating scoop manifest ----"
     manifest update
-    let path = loc;
-    cd $"($nu.home-path)/.config"
+    enter $"($nu.home-path)/.config"
     print "---- pushing config ----"
     gcp "update config files"
-    cd $path
+    p
 }
 
 # Startship
