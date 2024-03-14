@@ -20,25 +20,7 @@
 add_newline = false
 
 format = """
-[](#2E154F)\
-$time\
-[](fg:#2E154F bg:#2B3D67)\
-$os\
-$package\
-[](fg:#2B3D67 bg:#562C93)\
-$c\
-$elixir\
-$elm\
-$golang\
-$gradle\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$rust\
-$scala\
-[](fg:#562C93 bg:#5833B0)\
+[](#5833B0)\
 $directory\
 [](fg:#5833B0 bg:#6B50C8)\
 $git_branch\
@@ -64,24 +46,26 @@ disabled = true # Disabled by default
 
 [directory]
 style = "bg:#5833B0"
-format = "[ $path ]($style)"
+format = "[$path ]($style)"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
 "Contacts" = ""
 "Kontakter" = ""
+"Desktop" = ""
+"Documents" = ""
+"Dokumenter" = ""
+"Skrivebord" = ""
 "Downloads" = ""
 "Nedlastinger" = ""
-"Desktop" = ""
-"Skrivebord" = ""
-"Music" = ""
-"Musikk" = ""
 "Movies" = ""
 "Filmer" = ""
+"Music" = ""
+"Musikk" = ""
+"OneDrive" = " "
 "Pictures" = ""
 "Bilder" = ""
-"OneDrive" = " "
 # Keep in mind that the order matters. For example:
 # "Important Documents" = " 󰈙 "
 # will not be replaced, because "Documents" was already substituted before.
@@ -98,74 +82,3 @@ format = '[ $symbol $branch]($style)'
 disabled = false
 style = "bg:#6B50C8"
 format = '[ $all_status$ahead_behind]($style)'
-
-# Languages
-[c]
-symbol = " "
-style = "bg:#562C93"
-format = '[symbol ($version) ]($style)'
-
-[docker_context]
-symbol = " "
-style = "bg:#5B5DAA"
-format = '[$symbol $context ]($style)'
-
-[elixir]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[elm]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[golang]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[gradle]
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[haskell]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[java]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[julia]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[nodejs]
-symbol = ""
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[nim]
-symbol = "󰆥 "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[rust]
-symbol = "🦀"
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[scala]
-symbol = " "
-style = "bg:#562C93"
-format = '[$symbol ($version) ]($style)'
-
-[time]
-disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#2E154F"
-format = '[$time ]($style)'
