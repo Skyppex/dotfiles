@@ -1,0 +1,96 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0/win-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {},
+    ".NETCoreApp,Version=v5.0/win-x64": {
+      "Wox.Plugin.Runner/1.0.0": {
+        "dependencies": {
+          "Flow.Launcher.Plugin": "2.1.1",
+          "System.Data.DataSetExtensions": "4.5.0"
+        },
+        "runtime": {
+          "Wox.Plugin.Runner.dll": {}
+        }
+      },
+      "Flow.Launcher.Plugin/2.1.1": {
+        "dependencies": {
+          "JetBrains.Annotations": "2021.2.0",
+          "PropertyChanged.Fody": "3.4.0"
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/Flow.Launcher.Plugin.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Fody/6.5.1": {},
+      "JetBrains.Annotations/2021.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "assemblyVersion": "2021.2.0.0",
+            "fileVersion": "2021.2.0.0"
+          }
+        }
+      },
+      "PropertyChanged.Fody/3.4.0": {
+        "dependencies": {
+          "Fody": "6.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/PropertyChanged.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        }
+      },
+      "System.Data.DataSetExtensions/4.5.0": {}
+    }
+  },
+  "libraries": {
+    "Wox.Plugin.Runner/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Flow.Launcher.Plugin/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KXfeYJr2+8IemOi79ywqf+xR/9rPRCCPIeg/SEatjB0gcutz0Ff9jCNtDyV1lMrL0yXT0mH9IGdK3CASwe8qlw==",
+      "path": "flow.launcher.plugin/2.1.1",
+      "hashPath": "flow.launcher.plugin.2.1.1.nupkg.sha512"
+    },
+    "Fody/6.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DEw9rPG5vrpaK4vPPze0f4q6Zd0mfzjGNKy49nrmINkftIHpkyf8KH+uC/qF8y6v1askPWu9NbJS9bkmN5wXaA==",
+      "path": "fody/6.5.1",
+      "hashPath": "fody.6.5.1.nupkg.sha512"
+    },
+    "JetBrains.Annotations/2021.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kKSyoVfndMriKHLfYGmr0uzQuI4jcc3TKGyww7buJFCYeHb/X0kodYBPL7n9454q7v6ASiRmDgpPGaDGerg/Hg==",
+      "path": "jetbrains.annotations/2021.2.0",
+      "hashPath": "jetbrains.annotations.2021.2.0.nupkg.sha512"
+    },
+    "PropertyChanged.Fody/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IAZyq0uolKo2WYm4mjx+q7A8fSGFT0x2e1s3y+ODn4JI0kqTDoo9GF2tdaypUzRFJZfdMxfC5HZW9QzdJLtOnA==",
+      "path": "propertychanged.fody/3.4.0",
+      "hashPath": "propertychanged.fody.3.4.0.nupkg.sha512"
+    },
+    "System.Data.DataSetExtensions/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
+      "path": "system.data.datasetextensions/4.5.0",
+      "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
+    }
+  }
+}
