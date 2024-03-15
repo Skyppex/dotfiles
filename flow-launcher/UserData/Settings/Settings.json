@@ -100,12 +100,12 @@
   "AlwaysStartEn": false,
   "QuerySearchPrecision": "Regular",
   "AutoUpdates": false,
-  "WindowLeft": 4174,
-  "WindowTop": 270,
+  "WindowLeft": 990,
+  "WindowTop": 341,
   "CustomWindowLeft": 0,
   "CustomWindowTop": 0,
   "MaxResultsToShow": 5,
-  "ActivateTimes": 35,
+  "ActivateTimes": 41,
   "CustomPluginHotkeys": [],
   "CustomShortcuts": [],
   "DontPromptUpdateMsg": false,
@@ -130,7 +130,7 @@
   "AnimationSpeed": "Fast",
   "CustomAnimationLength": 360,
   "PluginSettings": {
-    "PythonExecutablePath": "C:\\Users\\brage.ingebrigtsen\\scoop\\apps\\python\\current\\pythonw.exe",
+    "PythonExecutablePath": "C:\\Users\\Brage\\scoop\\apps\\python\\current\\pythonw.exe",
     "NodeExecutablePath": "C:\\Program Files\\nodejs\\node.exe",
     "Plugins": {
       "0ECADE17459B49F587BF81DC3A125110": {
