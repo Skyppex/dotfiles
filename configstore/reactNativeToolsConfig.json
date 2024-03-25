@@ -1,14 +1,14 @@
 {
-	"version": "1.12.3",
+	"version": "1.13.0",
 	"surveyConfig": {
 		"shortPeriodToRemind": 30,
 		"longPeriodToRemind": 90,
 		"popCoveragePercent": 0.1,
 		"enabled": true,
-		"daysLeftBeforeSurvey": 30,
+		"daysLeftBeforeSurvey": 29,
 		"surveyName": "userSatisfactionSurvey",
 		"surveyUrl": "https://www.surveymonkey.com/r/6FJGVDV",
-		"lastExtensionUsageDate": "2024-03-21T20:17:03.600Z"
+		"lastExtensionUsageDate": "2024-03-25T21:58:45.198Z"
 	},
 	"tipsConfig": {
 		"daysLeftBeforeGeneralTip": 4,
@@ -33,6 +33,7 @@
 			"specificTips": {
 				"networkInspectorLogsColorTheme": {}
 			}
-		}
+		},
+		"lastExtensionUsageDate": "2024-03-25T21:58:45.025Z"
 	}
 }

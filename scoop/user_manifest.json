@@ -1,6 +1,16 @@
 {
     "buckets": [
         {
+            "Name": "anderlli0053_DEV-tools",
+            "Source": "https://github.com/anderlli0053/DEV-tools",
+            "Updated": {
+                "value": "\/Date(1711399743000)\/",
+                "DisplayHint": 2,
+                "DateTime": "mandag 25. mars 2024 21:49:03"
+            },
+            "Manifests": 23859
+        },
+        {
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
@@ -169,6 +179,13 @@
         },
         {
             "Info": "",
+            "Source": "main",
+            "Name": "gsudo",
+            "Version": "2.4.4",
+            "Updated": "\/Date(1711398720060)\/"
+        },
+        {
+            "Info": "",
             "Source": "extras",
             "Name": "hwinfo",
             "Version": "7.72-5355",
@@ -243,6 +260,13 @@
             "Name": "paint.net",
             "Version": "5.0.13",
             "Updated": "\/Date(1710677735886)\/"
+        },
+        {
+            "Info": "",
+            "Source": "anderlli0053_DEV-tools",
+            "Name": "par",
+            "Version": "1.53.0",
+            "Updated": "\/Date(1711400808372)\/"
         },
         {
             "Info": "",

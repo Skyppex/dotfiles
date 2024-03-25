@@ -28,11 +28,13 @@ export extern curl [
 export extern "clip" []
 
 # Utils
+alias sudo = gsudo
 alias q = exit
 alias md = mkdir
 alias sh = bash
 alias loc = echo $"($env.PWD)"
 alias paste = powershell -command "Get-Clipboard"
+alias "split lines" = split row "\n"
 
 def rmdl [] {
     let files = ls ~/Downloads
@@ -167,3 +169,110 @@ alias vim = nvim
 
 # Fun
 alias "hello world" = echo $"Hello, (whoami)!"
+alias cwm = echo "Cwm fjord bank glyphs vext quiz"
+alias fox = echo "The quick brown fox jumps over the lazy dog"
+alias dwarf = echo "Pack my box with five dozen liquor jugs"
+def lorem [] {
+    let lorem = [
+        "Lorem ipsum dolor sit amet, erroribus constituam duo ut. Eum audiam disputando",
+        "\nne, ius an assum offendit consequat. Per iuvaret detraxit et, nominati torquatos",
+        "\ncu nec. Ei ius luptatum explicari, ex has dolorum facilisis voluptatum. Te sed",
+        "\ntibique recteque imperdiet, altera invidunt liberavisse cu has. Id qui probo",
+        "\ndolorem, tota porro ei eum.",
+        "\n",
+        "\nCu duo nostrum invenire, laboramus vituperata conclusionemque et quo. Errem",
+        "\niudico et vim, no omnium accusata ius. Detracto argumentum vis et. Nam liber",
+        "\nessent facete in, in eum virtute ancillae, dico magna ea cum.",
+        "\n",
+        "\nIn audire pertinax vis, sed id insolens mnesarchum mediocritatem. Enim labore et",
+        "\nquo, nam ex aperiam interesset. Vis nonumy aliquip ei, nec habeo ridens impedit",
+        "\nei. Ea eam eleifend posidonium, no quo enim consequuntur, usu eu omnesque",
+        "\niracundia. Vim cu tamquam argumentum disputando.",
+        "\n",
+        "\nNo his iracundia voluptatibus, eos assum placerat no. Ex vel vivendo copiosae.",
+        "\nAccusam sapientem eam eu, ex duo solum ludus, an equidem accusamus euripidis",
+        "\nmel. Case epicurei ad sed, rebum nominati vix ei, tota ceteros corrumpit has in.",
+        "\n",
+        "\nId sit graece quodsi prodesset. Cu est sint elaboraret, sed veri timeam no.",
+        "\nRebum fugit populo eu eos. Eu regione enserit honestatis vix, nobis detraxit",
+        "\nduo ut. Te audiam iisque vel. Id cum choro efficiantur, per eu ubique discere",
+        "\nscripserit, nec meliore accusam invidunt id. Stet fabellas qui an, mei id",
+        "\nplacerat ponderum.",
+        "\n",
+        "\nGraeco singulis ei per, no tation interpretaris sed. Vim agam petentium an,",
+        "\nte per wisi ludus homero. Ea iuvaret efficiendi mea, vide assum dolorum ius",
+        "\nno. Fabulas feugait no cum. Nobis epicurei abhorreant vel eu, rebum dolor vim",
+        "\nad, vel menandri praesent intellegam no. Quo corpora percipitur et, ut admodum",
+        "\nullamcorper mel.",
+        "\n",
+        "\nDecore suscipiantur duo ei. Nec id hinc libris. Dolorum lucilius principes eos",
+        "\ncu, eam ad tation alterum. Posse probatus at est.",
+        "\n",
+        "\nEirmod option philosophia ne mel. Ut magna eirmod eos. Putant everti salutatus",
+        "\neu has. Affert patrioque persequeris usu ne. No vocent iuvaret elaboraret vis,",
+        "\nne sit vitae urbanitas omittantur. Has eripuit splendide efficiantur ad, ad eos",
+        "\nomnium docendi salutandi.",
+        "\n",
+        "\nNe dicant adipiscing constituam mea. Vivendum disputationi sed id. Mel tale",
+        "\ntantas no. Eu odio consulatu ullamcorper vel, nam aliquip oportere consulatu at.",
+        "\nNe iudico consequuntur eos, facilis laboramus id pri, no mea cibo salutandi.",
+        "\n",
+        "\nSonet adipiscing an nec. Quo at erroribus explicari, dissentiunt disputationi eu",
+        "\nest. Elit sale sonet no ius. An vis libris dolorum. At cibo corrumpit duo. Vis",
+        "\nei omnium audiam admodum.",
+        "\n",
+        "\nSit et probo antiopam elaboraret, ei fabulas blandit mei. Assum labitur civibus",
+        "\nin quo. Clita minimum sit eu, vel nulla ludus persecuti ei. Suscipit appetere",
+        "\nvivendum te sea. Te nec officiis nominati pericula, cu habeo dicam eum, velit",
+        "\nscripta maluisset no sed.",
+        "\n",
+        "\nEt graeci aliquip deserunt est. Qui detracto similique eu. Pro cu assentior",
+        "\nmediocritatem, his zril facilis vivendum ut. Duo no error periculis",
+        "\nvituperatoribus. Ius solum labore antiopam ei, blandit salutandi adolescens eam",
+        "\ncu, prodesset contentiones reprehendunt id vix.",
+        "\n",
+        "\nPri diceret eruditi ea, reque impetus duo in. Pri brute munere corrumpit te, ex",
+        "\nfacete omnesque democritum vim. An modus labore duo, stet regione temporibus ne",
+        "\nsed. His no veri vivendo maiestatis, ad liber officiis eum.",
+        "\n",
+        "\nVide regione iuvaret his an. Ne vis tibique suavitate, at usu legimus",
+        "\nadolescens. Te per oratio verear, cu sumo magna sea, vim no sumo graeci",
+        "\nrecusabo. Natum forensibus argumentum nec no, dico nemore aeterno id sed, mei",
+        "\nquod indoctum argumentum an. Vel euismod reprehendunt at, cum ne dicunt commune",
+        "\niudicabit. Cum ne debitis inciderint reprehendunt, vix albucius dissentias",
+        "\nconcludaturque in.",
+        "\n",
+        "\nVim brute aliquam repudiandae eu. Qui ludus ceteros salutatus id. Vel te melius",
+        "\ninermis, sea at maluisset similique. Consul nostrum ei vim. Mea eius aperiam",
+        "\nmnesarchum te.",
+        "\n",
+        "\nCu nibh verterem electram per. Iusto noster nam ad, ius ne eligendi inimicus.",
+        "\nNisl intellegam neglegentur an mel, in eos diam agam possit, mea cu assum",
+        "\nconclusionemque. Nihil invidunt facilisi mea et, ea populo nusquam ius. Nec",
+        "\nte quem aliquid, usu ex soleat expetendis quaerendum. Mel at iriure mentitum",
+        "\npostulant, vivendum contentiones est eu. Sea an tollit convenire temporibus.",
+        "\n",
+        "\nVis ad quis falli, est ad dictas dicunt adipisci. Laudem consulatu ex vix,",
+        "\npostea platonem theophrastus eu eos, copiosae appetere adipiscing vim ad. Vim",
+        "\nnulla recteque ei, vix ex etiam dicam invidunt. Mea ne graece patrioque. Pri cu",
+        "\ntation recusabo interesset. His at doctus copiosae signiferumque.",
+        "\n",
+        "\nInvenire patrioque ei eum, brute putent te vim. Legere cetero qui ex, deseruisse",
+        "\ncotidieque consequuntur mel ea. Enim choro id mel. Usu no labitur fuisset",
+        "\ntemporibus.",
+        "\n",
+        "\nMei an nibh definiebas, odio aperiam consequat vis no. Ut duo veri impedit",
+        "\nrationibus. Est eu erat ancillae. Nobis docendi appareat eam cu, erant laudem an",
+        "\nquo.",
+        "\n",
+        "\nQuo ex labitur quaeque ocurreret. Honestatis eloquentiam appellantur est ei, mei",
+        "\nveritus nusquam at. Vis te periculis conclusionemque, sed ne integre luptatum",
+        "\nconstituto. Eos ex accumsan forensibus conclusionemque. Verterem conclusionemque",
+        "\nno sea, sed soluta fabulas ex. Clita detracto lucilius eu sea, nam esse recusabo",
+        "\nne, aperiri adipiscing no sed. Tale persius comprehensam qui id, qui aliquam",
+        "\nconstituam et."
+    ]
+
+    let result = $lorem | str join ""
+    echo $result
+}
