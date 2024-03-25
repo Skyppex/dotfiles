@@ -26,8 +26,8 @@
   "FirstLaunch": false,
   "SettingWindowWidth": 940,
   "SettingWindowHeight": 875,
-  "SettingWindowTop": 128,
-  "SettingWindowLeft": 3885,
+  "SettingWindowTop": 264,
+  "SettingWindowLeft": 1382,
   "SettingWindowState": 0,
   "CustomExplorerIndex": 0,
   "CustomExplorerList": [
@@ -101,11 +101,11 @@
   "QuerySearchPrecision": "Regular",
   "AutoUpdates": false,
   "WindowLeft": 990,
-  "WindowTop": 341,
+  "WindowTop": 339,
   "CustomWindowLeft": 0,
   "CustomWindowTop": 0,
   "MaxResultsToShow": 5,
-  "ActivateTimes": 41,
+  "ActivateTimes": 144,
   "CustomPluginHotkeys": [],
   "CustomShortcuts": [],
   "DontPromptUpdateMsg": false,
@@ -259,8 +259,8 @@
           "bd",
           "yt",
           "so",
-          "gh",
-          "g"
+          "g",
+          "github"
         ],
         "Priority": 0,
         "Disabled": false
@@ -291,6 +291,46 @@
         "Version": "2.3.1",
         "ActionKeywords": [
           "r"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
+      "SY91U1N7H9D0X1DTZ8IOP4YV43KT7C5M": {
+        "ID": "SY91U1N7H9D0X1DTZ8IOP4YV43KT7C5M",
+        "Name": "SpotifyPremium",
+        "Version": "1.1.5",
+        "ActionKeywords": [
+          "sp"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
+      "4D5DF575E4964C6AAADCF86134F09CC0": {
+        "ID": "4D5DF575E4964C6AAADCF86134F09CC0",
+        "Name": "Steam Search",
+        "Version": "9.0.1",
+        "ActionKeywords": [
+          "st"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
+      "6c22cffe6b3546ec9087abe149c4a575": {
+        "ID": "6c22cffe6b3546ec9087abe149c4a575",
+        "Name": "GitHub",
+        "Version": "1.3.0",
+        "ActionKeywords": [
+          "gh"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
+      "525995402BEF4A8CA860D92F6D108092": {
+        "ID": "525995402BEF4A8CA860D92F6D108092",
+        "Name": "VS Code Workspaces",
+        "Version": "1.3.0",
+        "ActionKeywords": [
+          "code"
         ],
         "Priority": 0,
         "Disabled": false

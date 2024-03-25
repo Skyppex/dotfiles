@@ -161,3 +161,9 @@ def "plugin add" [name: string] {
     nu -c $'register ($plugin)'
     version
 }
+
+# Neovim
+alias vim = nvim
+
+# Fun
+alias "hello world" = echo $"Hello, (whoami)!"

@@ -74,7 +74,7 @@
     },
     {
       "Title": "GitHub",
-      "ActionKeyword": "gh",
+      "ActionKeyword": "github",
       "Icon": "github.png",
       "CustomIcon": false,
       "Url": "https://github.com/search?q={q}",
