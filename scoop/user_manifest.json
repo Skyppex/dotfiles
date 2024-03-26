@@ -4,9 +4,9 @@
             "Name": "anderlli0053_DEV-tools",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1711399743000)\/",
+                "value": "\/Date(1711472073000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 21:49:03"
+                "DateTime": "tirsdag 26. mars 2024 17:54:33"
             },
             "Manifests": 23859
         },
@@ -14,9 +14,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1711349321000)\/",
+                "value": "\/Date(1711411930000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 07:48:41"
+                "DateTime": "tirsdag 26. mars 2024 01:12:10"
             },
             "Manifests": 254
         },
@@ -24,9 +24,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1711384182000)\/",
+                "value": "\/Date(1711470668000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 17:29:42"
+                "DateTime": "tirsdag 26. mars 2024 17:31:08"
             },
             "Manifests": 1996
         },
@@ -34,19 +34,19 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1711383979000)\/",
+                "value": "\/Date(1711484651000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 17:26:19"
+                "DateTime": "tirsdag 26. mars 2024 21:24:11"
             },
-            "Manifests": 296
+            "Manifests": 297
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1711391827000)\/",
+                "value": "\/Date(1711472957000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 19:37:07"
+                "DateTime": "tirsdag 26. mars 2024 18:09:17"
             },
             "Manifests": 1310
         },
@@ -64,9 +64,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1711384402000)\/",
+                "value": "\/Date(1711470837000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 25. mars 2024 17:33:22"
+                "DateTime": "tirsdag 26. mars 2024 17:33:57"
             },
             "Manifests": 445
         }
@@ -90,8 +90,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "blender",
-            "Version": "4.0.2",
-            "Updated": "\/Date(1710674143781)\/"
+            "Version": "4.1.0",
+            "Updated": "\/Date(1711484882161)\/"
         },
         {
             "Info": "",
@@ -253,6 +253,13 @@
             "Name": "obs-studio",
             "Version": "30.1.1",
             "Updated": "\/Date(1711398309207)\/"
+        },
+        {
+            "Info": "",
+            "Source": "anderlli0053_DEV-tools",
+            "Name": "openjdk",
+            "Version": "21.0.1-12",
+            "Updated": "\/Date(1711485406542)\/"
         },
         {
             "Info": "",

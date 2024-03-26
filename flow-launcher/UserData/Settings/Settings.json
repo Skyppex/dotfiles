@@ -26,8 +26,8 @@
   "FirstLaunch": false,
   "SettingWindowWidth": 940,
   "SettingWindowHeight": 875,
-  "SettingWindowTop": 264,
-  "SettingWindowLeft": 1382,
+  "SettingWindowTop": -146,
+  "SettingWindowLeft": -1039,
   "SettingWindowState": 0,
   "CustomExplorerIndex": 0,
   "CustomExplorerList": [
@@ -100,12 +100,12 @@
   "AlwaysStartEn": false,
   "QuerySearchPrecision": "Regular",
   "AutoUpdates": false,
-  "WindowLeft": 990,
-  "WindowTop": 339,
+  "WindowLeft": -890,
+  "WindowTop": -10,
   "CustomWindowLeft": 0,
   "CustomWindowTop": 0,
   "MaxResultsToShow": 5,
-  "ActivateTimes": 144,
+  "ActivateTimes": 158,
   "CustomPluginHotkeys": [],
   "CustomShortcuts": [],
   "DontPromptUpdateMsg": false,
@@ -281,16 +281,6 @@
         "Version": "1.1.4",
         "ActionKeywords": [
           "ob"
-        ],
-        "Priority": 0,
-        "Disabled": false
-      },
-      "176690627AB54C8381A7FD99A3519F42": {
-        "ID": "176690627AB54C8381A7FD99A3519F42",
-        "Name": "Plugin Runner",
-        "Version": "2.3.1",
-        "ActionKeywords": [
-          "r"
         ],
         "Priority": 0,
         "Disabled": false
