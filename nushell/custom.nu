@@ -2,6 +2,8 @@ use ~/.cache/starship/init.nu
 source ~/.config/zoxide/.zoxide.nu
 
 # Externs
+
+# Calculate the result of a dice roll
 export extern "dice" [
     --help(-h) # Print a more detailed help message
     --expr(-e) # Print the expression used to calculate the result
@@ -10,6 +12,7 @@ export extern "dice" [
     ...roll: string # The dice roll to calculate. eg: 2d6+1 or 2d20k or 2d20kl or 1d6! or 1d6!! or 1d6r<=5 or 1d6r=!6
 ]
 
+# Curl
 export extern curl [
     --help(-h) # Get help for commands
     --data(-d): string # <data> HTTP POST data
@@ -25,17 +28,33 @@ export extern curl [
     url: string
 ]
 
+# Copy to clipboard
 export extern "clip" []
 
 # Utils
+
+# Elevate the current shell to admin
 alias sudo = gsudo
+
+# Exit
 alias q = exit
+
+# Make directory
 alias md = mkdir
+
+# Bash
 alias sh = bash
+
+# Current working directory
 alias loc = echo $"($env.PWD)"
+
+# Paste from the clipboard
 alias paste = powershell -command "Get-Clipboard"
+
+# Split lines in a string into rows
 alias "split lines" = split row "\n"
 
+# Remove all files from the Downloads folder
 def rmdl [] {
     let files = ls ~/Downloads
     for file in $files {
@@ -43,11 +62,49 @@ def rmdl [] {
     }
 }
 
+# History
+
+# Extra utilities for managing the history file
+def h [
+    --help(-h) # Display the help message for this command
+    --clear(-c): int # Clears out the history entries
+    --long(-l) # Show long listing of entries for sqlite history
+] {
+    if $help {
+        history -h
+        return
+    }
+
+    if $clear {
+        if $clear <= 0 {
+            history -c
+            return
+        }
+        
+        let history_path = $"($nu.home-path)/.config/nushell/history.txt"
+        let history = open $history_path
+            | split lines
+            | reverse
+            | skip ($clear + 1)
+            | reverse
+        $history | append ""
+            | str join "\n"
+            | save --force $history_path
+    }
+}
+
 # Config / Env
+
+# Open the custom nushell config file in vscode
 alias conf = code $"($nu.home-path)/.config/nushell/custom.nu"
+
+# Open the nushell env file in vscode
 alias env = code $nu.env-path
+
+# Open the config workspace in vscode
 alias dconf = code $"($nu.home-path)/.config"
 
+# Pull the dotfiles from the remote repository
 def "pull dot" [] {
     enter $"($nu.home-path)/.config"
     print "---- pulling config ----"
@@ -62,6 +119,7 @@ def "pull dot" [] {
     p # return to previous directory
 }
 
+# Push the dotfiles to the remote repository
 def "push dot" [] {
     print "---- fixing nushell plugins ----"
     open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
@@ -74,17 +132,30 @@ def "push dot" [] {
 }
 
 # Startship
+
+# Open the starship config file in vscode
 alias sc = code ~/.config/starship.toml
+
+# Open the starship schema file in vscode
 alias ss = code ~/.config/starship-schema.json
 
 # Zoxide
+
+# Zoxide query
 alias cdq = zoxide query
 
 # Git
+
+# Git pull
 alias gpl = git pull
+
+# Git push
 alias gps = git push
+
+# Git push with force and lease
 alias gpf = git push --force-with-lease
 
+# Git checkout main or master
 def gcm [] {
     do -ip { git checkout main --quiet }
     let branch = git branch --show-current
@@ -107,57 +178,70 @@ def gcm [] {
     return;
 }
 
+# Git add all, amend
 def gca [] {
     git add -A
     git commit --amend
 }
 
+# Git sync with commit message
 def "git sync" [message: string] {
-    git pull --rebase
-    git submodule update --init --recursive
+    gpr
     gcp $message
 }
 
+# Git pull with rebase and submodule update recursive
 def gpr [] {
     git pull --rebase
     git submodule update --init --recursive
 }
 
+# Git commit and push
 def gcp [message: string] {
     git add -A
     git commit -m $"($message)"
     git push
 }
 
+# Git stash and checkout
 def gsw [branch: string] {
     git stash -u
     git checkout $"($branch)"
 }
 
+# Git checkout
 def gc [branch: string] {
     git checkout $"($branch)"
 }
 
 # Scoop
+
+# Open the scoop user manifest file
 alias manifest = open $"($nu.home-path)/.config/scoop/user_manifest.json"
 
+# Create the scoop user manifest file
 def "manifest create" [] {
     touch $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
+# Update the scoop user manifest file with installed scoop apps
 def "manifest update" [] {
     scoop export | save --force $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
+# Install scoop apps from the user manifest file
 def "manifest install" [] {
     scoop import $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
+# Remove the scoop user manifest file
 def "manifest rm" [] {
     rm $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
 # Nushell
+
+# Add a plugin to the nushell config
 def "plugin add" [name: string] {
     let plugin = $"~/.cargo/bin/($name).exe";
     nu -c $'register ($plugin)'
@@ -165,13 +249,25 @@ def "plugin add" [name: string] {
 }
 
 # Neovim
+
+# Open neovim
 alias vim = nvim
 
 # Fun
+
+# Echo 'Hello, $user'
 alias "hello world" = echo $"Hello, (whoami)!"
+
+# Echo a sentence with all the letters of the alphabet only appearing once
 alias cwm = echo "Cwm fjord bank glyphs vext quiz"
+
+# Echo a sentence with all the letters of the alphabet
 alias fox = echo "The quick brown fox jumps over the lazy dog"
+
+# Echo a sentence with all the letters of the alphabet
 alias dwarf = echo "Pack my box with five dozen liquor jugs"
+
+# Echo the lorem ipsum text
 def lorem [] {
     let lorem = [
         "Lorem ipsum dolor sit amet, erroribus constituam duo ut. Eum audiam disputando",
