@@ -68,28 +68,71 @@ def rmdl [] {
 def h [
     --help(-h) # Display the help message for this command
     --clear(-c): int # Clears out the history entries
+    --clear-contains(-f): string # Clears out the history entries that match the filter
+    --clear-starts-with(-s): string # Clears out the history entries that match the filter
     --long(-l) # Show long listing of entries for sqlite history
 ] {
     if $help {
-        history -h
+        history --help
         return
     }
 
-    if $clear {
+    if $clear != null {
         if $clear <= 0 {
-            history -c
+            history --clear
             return
         }
         
-        let history_path = $"($nu.home-path)/.config/nushell/history.txt"
-        let history = open $history_path
+        let history = open $nu.history-path
             | split lines
             | reverse
             | skip ($clear + 1)
             | reverse
         $history | append ""
             | str join "\n"
-            | save --force $history_path
+            | save --force $nu.history-path
+
+        return
+    }
+
+    if $clear_contains != null {
+        if $clear_contains == "" {
+            print "An empty filter was provided, exiting."
+            return
+        }
+
+        mut history = open $nu.history-path
+            | split lines
+            | reverse
+            | where ($it | str contains --not $clear_contains)
+            | reverse
+
+        $history
+            | str join "\n"
+            | save --force $nu.history-path
+
+        return
+    }
+    
+    if $clear_starts_with != null {
+        if $clear_starts_with == "" {
+            print "An empty filter was provided, exiting."
+            return
+        }
+
+        mut history = open $nu.history-path
+            | split lines
+            | reverse
+            | where { |line|
+                let starts_with = $line | str starts-with $clear_starts_with
+                not $starts_with
+            } | reverse
+
+        $history
+            | str join "\n"
+            | save --force $nu.history-path
+
+        return
     }
 }
 

@@ -1,0 +1,620 @@
+open nushell\history.txt | str replace -h "pull dot" "pull dot" | save nushell\history.txt -fp
+open nushell\history.txt | str replace -h
+open nushell\history.txt | str replace -a "pull config" "pull dot" | save nushell\history.txt -fp
+open nushell\history.txt | str replace -a "push config" "push dot" | save nushell\history.txt -fp
+open nushell\history.txt
+cd
+cd con
+cd on
+cd con
+cdi
+pull dotecho "pull dot" | save nushell\history.txt --append
+save -h
+pull dotecho "push dot" | save nushell\history.txt -a
+push dotecho "push dot" | save nushell\history.txt -a
+open nushell\history.txt
+pull dot
+push dot
+conf
+dconf
+bun run tauri dev
+bun run tauri
+cd vir
+dconf
+bun run tauri dev
+git diff
+bun run tauri build
+pull dot
+exit
+clear
+cd con
+cd vmi
+cd mix
+pull dot
+cd con
+git diff
+git stash
+git stash drop
+pull dot
+scoop list
+scoop uninstall wox
+scoop-search
+scoop-search wonder
+scoop search wonder
+scoop-search win
+clear
+scoop-search opera
+scoop-search discord
+scoop-search unity
+scoop-search plastic
+hook
+scoop install hook
+hook
+scoop uninstall hook
+ls
+ls flow-launcher\UserData\
+git pull
+explorer .
+git status
+cargo run
+cargo run -- -d C:\Users\Brage\scoop\persist\flow-launcher\UserData -s C:\Users\Brage\.config\flow-launcher\UserData
+cargo run -- -d C:\Users\Brage\scoop\persist\flow-launcher\UserData -s C:\Users\Brage\.config\flow-launcher\UserData -f
+.. ..
+..
+code .
+git reset --hard
+git diff
+git rm --cached *.bak
+git rm --cached flow-launcher\UserData\Settings\History.json
+gcp "ignore .bak files and flow-launcher history"
+gcp "rename INavigator.MoveNext to Move"
+move -h
+cp -h
+cd ..\aon\
+code .
+cd ..\Arduino\
+code .
+cd ..\dice\
+code .
+cd `..\First Go Project\`
+code .
+cd ..\monads\
+code .
+cd ..\scripts\
+code .
+scoop-search discord
+scoop-search blender
+scoop install blender
+scoop-search auto
+scoop install autohotkey
+scoop bucket add klevgrand
+scoop-search corsair
+scoop install discord
+scoop uninstall discord
+scoop install discord
+scoop uninstall discord
+scoop install discord
+scoop uninstall discord
+scoop install discord
+scoop uninstall discord
+scoop-search docker
+scoop-search forti
+scoop-search freemake
+scoop-search gather
+scoop-search git
+scoop install git
+git install main/git
+scoop install main/git
+git
+git -h
+git --help
+clear
+scoop-search git
+scoop-search github
+scoop-search git
+scoop install github
+scoop install gitkraken
+scoop-search drive
+scoop-search google
+scoop-search go
+clear
+scoop-search helm
+scoop search helm
+scoop install go
+scoop-search hwin
+scoop install hwinfo
+scoop-search inkscape
+scoop-search inno
+scoop install inkscape
+scoop install inno-setup
+scoop-search iis
+scoop-search java
+scoop-search dotpeek
+scoop install dotPeek
+scoop-search logitech
+scoop-search hamachi
+vscode
+scoop-search vscode
+scoop-search visual
+scoop-search vscode
+scoop install rider
+scoop install vscode
+scoop-search muse
+scoop install musescore
+scoop-search native
+scoop-search node
+scoop install nodejs
+scoop-search origin
+scoop-search paint
+scoop-search panda
+scoop install paint.net
+scoop-search pgadmin
+scoop-search plover
+scoop-search razer
+scoop-search rover
+scoop-search rust
+scoop install opera-gx
+scoop-search slack
+scoop install slack
+scoop-search steam
+scoop-search splice
+scoop-search unity
+scoop-search studio
+scoop install unityhub
+scoop list
+scoop-search battle
+scoop install obs-studio
+scoop-search fmod
+scoop-search free
+scoop-search gather
+scoop uninstall spotify
+scoop install spotify
+scoop update spotify
+scoop status
+scoop update
+scoop update -a
+rustup update
+scoop list
+scoop search scoop
+rustup -h
+rustup check
+rustup update
+scoop install rustup
+scoop install rust
+scoop uninstall rust
+rustup
+rustup update
+.\.cargo\bin\cargo.exe --version
+cargo --version
+.
+bun
+bun install -g expo-cli
+scoop install expo
+scoop-search expo
+bun install -g expo-cli
+..
+cd
+cd coding
+ls
+expo init roll-play
+expo
+cd nu current
+bun uninstall expo-cli
+ls
+cd coding
+bun install -g expo-cli
+expo init roll-play
+ls
+bun -h
+bun list
+npm install -g expo-cli
+node
+expo
+npm i -g expo-cli
+npm list
+npm list -g
+npm uninstall -g expo-cli
+bun expo start -h
+bunx expo start
+bunx expo init rollplay
+npx create-expo-app rollplayer
+ls
+cd roll
+cd rollplayer
+code .
+..
+rm -rs rollplayer\
+rm -rf rollplayer
+rm -rf .\rollplayer
+..
+rm -rf .\rollplayer
+ls
+npm i -g react-native-cli
+npx react-native init rollplayer --template react-native-template-typescript
+ls
+rm -rf .\rollplayer
+ls
+npm i -g yarn
+npx react-native init rollplayer --template react-native-template-typescript
+cd rollplayer
+ls
+..
+rm -rf .\rollplayer
+npm uninstall -g yarn
+npx create-expo-app --tempalte typescript rollplayer
+exit
+cd rollplayer
+ls
+code .
+bun run start
+npm i tailwindcss
+npm start
+npm install react-native-styled-tailwind
+scoop install neovim
+nvim
+vim
+conf
+exit
+cd arcana
+cdi
+cd arcana\
+..
+ls
+zoxide -h
+zoxide add -h
+ls | get name | each { |n| zoxide add n }
+ls | get name | each { |n| zoxide add $n }
+ls | where type == dir | get name | each { |n| zoxide add $n }
+cdi
+ls
+cdi
+ls
+..
+ls | where type == dir
+cd Sentinel\
+ls
+cd commoncarweb\
+ls
+cd Microservices\
+ls | where type == dir | get name | each { |n| zoxide add $n }
+..
+cd SharedLibraries\
+ls | where type == dir | get name | each { |n| zoxide add $n }
+cdi
+øs
+ls
+..
+ls
+cd FrontendServices\
+ls
+..
+cd Carweb2\
+ls
+ls | where type == dir | get name | each { |n| zoxide add $n }
+cd
+cd cod
+..
+cd
+cd arcana
+clear
+scoop list
+vim
+dconf
+hook
+cd hook
+cd target\release\
+ls
+hook -h
+hook -s C:\Users\Brage\.config\windows\LocalState -d c:\Users\Brage\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+hook -f -s C:\Users\Brage\.config\windows\LocalState -d c:\Users\Brage\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+cd release
+hook -f -s C:\Users\Brage\.config\windows\LocalState -d c:\Users\Brage\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+clear
+ok
+clear
+hello world
+conf
+whoami
+hello world
+cargo init leet
+cd leet
+code .
+cargo add clap
+cargo add clap --feature derive
+cargo add clap --features derive
+cargo run
+cargo run -- -s D:\Coding\leet\test input.txt -d D:\Coding\leet\test output.txt
+cargo run -- -s "D:\Coding\leet\test input.txt" -d "D:\Coding\leet\test output.txt"
+cargo run -- -s "D:/Coding/leet/test input.txt" -d "D:/Coding/leet/test output.txt"
+cd release
+hook -s .\hook.exe -d d:\Coding\links\hook.exe
+sudo hook -s .\hook.exe -d d:\Coding\links\hook.exe
+hook -s .\hook.exe -d d:\Coding\links\hook.exe
+cd rele
+hook -s .\hook.exe -d d:\Coding\links\hook.exe
+hook
+hook -h
+hook
+hook -h
+hook
+cd release
+hookcd
+cd
+hook -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+cd rel
+hook -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+cd rel
+hook -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+hook -h
+hook
+hook -h
+scoop install hook
+hook -h
+scoop uninstall hook
+scoop update -a
+scoop list
+scoop update autohotkey
+scoop update -a
+scoop update bun-canary
+scoop uninstall bun-canary
+hook
+scoop update -a
+push dot
+hook -f -s ~\.config\windows\LocalState -d ~\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\
+ok
+hello world
+hello world | leet
+hook -s D:\Coding\leet\target\release\leet.exe -d d:\Coding\links\leet.exe
+cd cod
+cd
+..
+code leet
+cargo build --release
+hook -s D:\Coding\leet\target\release\leet.exe -d d:\Coding\links\leet.exe
+scoop install gsude
+scoop install gsudo
+hook -s D:\Coding\leet\target\release\leet.exe -d d:\Coding\links\leet.exe
+gsudo hook -s D:\Coding\leet\target\release\leet.exe -d d:\Coding\links\leet.exe
+gsudo config
+gsudo config CacheMode Auto
+gsudo config
+conf
+clear
+hook -s D:\Coding\leet\target\release\leet.exe -d d:\Coding\links\leet.exe
+leet
+hello world | leet
+leet
+cargo add atty
+cargo build --release
+hello world | leet
+AtraxaPreator | leet
+echo "AtraxaPreator" | leet
+clear
+history
+history -h
+echo "Jin Gitaxis" | leet
+echo "Cwm fjord bank glyphs vext quiz" | leet
+conf
+cwm | leet
+lorem | leet
+scoop-search par
+scoop-search gnu
+scoop bucket add anderlli0053_DEV-tools https://github.com/anderlli0053/DEV-tools
+scoop install anderlli0053_DEV-tools/par
+scoop update -a
+scoop-search lorem
+par
+par -h
+par --help
+par help
+par -w 80
+clear
+par help
+echo "Lorem ipsum dolor sit amet, erroribus
+echo "Lorem ipsum dolor sit amet, erroribus
+paste
+lorem
+lorem | leet
+conf
+lorem
+lorem | leet
+clear
+lorem
+lorem | wrap
+lorem | wrap hello
+lorem | first 10
+lorem | last 10
+first -h
+lines |
+lines
+lines -h
+lorem | take 10
+head -h
+head
+range -h
+lorem | range 10
+lorem | range 0..10
+lorem | split
+split -h
+lorem | split row
+lorem | split row "\n"
+lorem | split column "\n"
+lorem | split row "\n"
+lorem | split row "\n" | take 10
+lorem | split row "\n" | first 10
+lorem | split row "\n" | last 10
+lorem | split row "\n" | first 10 | str join "" | leet
+lorem | split row "\n" | first | str join "" | leet
+conf
+lorem | split lines | first | leet
+lorem | split lines | first 10 | leet
+lorem | split lines | first 10 | str join | leet
+lorem | split lines | first 10 | str join "" | leet
+lorem | split lines | first 10 | str join | leet
+lorem | split lines | first 10 | str join "\t" | leet
+lorem | split lines | first 10 | str join | leet
+lorem | split lines | first 10 | str join | leet | find 5
+lorem | split lines | first 10 | str join | leet | find 1337
+lorem | split lines | first 10 | str join | leet | find 1
+lorem | split lines | first 10 | str join | leet | find 8
+lorem | split lines | first 10 | str join | leet | find 0
+lorem | split lines | first 10 | str join | leet | find 9
+lorem | split lines | first 10 | str join | leet | find 6
+..
+cargo init 69
+cargo init 69 --name sixtynine
+cd 69
+code .
+cargo build --release
+cargo add clap --features derive
+cargo add atty
+cargo build --release
+hook -s D:\Coding\leet\target\release\69.exe -d d:\Coding\links\69.exe
+sudo hook -s D:\Coding\leet\target\release\69.exe -d d:\Coding\links\69.exe
+clear
+"69420" | 69
+69
+69.exe
+cd 69
+cd target\release\
+69.exe
+.\69.exe
+"69420" | .\69.exe
+cd
+69
+..
+cd sixtynine\
+code .
+cargo build --release
+hook -s D:\Coding\leet\target\release\sixtynine.exe -d d:\Coding\links\sixtynine.exe
+sudo hook -s D:\Coding\leet\target\release\sixtynine.exe -d d:\Coding\links\sixtynine.exe
+hook -s D:\Coding\leet\target\release\sixtynine.exe -d d:\Coding\links\sixtynine.exe
+sudo hook -s D:\Coding\leet\target\release\sixtynine.exe -d d:\Coding\links\sixtynine.exe
+sudo config
+clear
+"6420" | sixtynine
+gsudo "6420" | sixtynine
+sixtynine
+sudo hook -s D:\Coding\sixtynine\target\release\sixtynine.exe -d d:\Coding\links\sixtynine.exe
+gsudo "6420" | sixtynine
+"69420" | sixtynine
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+"69420" | nintysix
+..
+code nintysix\
+cd nintysix\
+code .
+ls
+code .
+..
+cd nintysix
+code .
+cargo build --release
+cargo build
+cargo build --release
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+cargo build --release
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+cargo build --release
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+cargo build --release
+sudo hook -f -s 
+sudo hook -f -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+cd rel
+sudo hook -f -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+cd
+sudo hook -f -s D:\Coding\hook\target\release\hook.exe -d d:\Coding\links\hook.exe
+cargo build --release
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -f -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+cargo build --release
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe -f
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe -f
+cargo build --release
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d d:\Coding\links\nintysix.exe -f
+sudo hook -s D:\Coding\nintysix\target\release\nintysix.exe -d D:\Coding\links\nintysix.exe -f
+lorem | split lines | first 10 | str join | leet -e | sixtynine
+lorem | split lines | first 10 | str join | leet -e | nintysix
+lorem | split lines | first 10 | str join | leet -e | nintysix | find 6
+leet -h
+cargo build --release
+cd leet
+cargo build --release
+hello world | leet
+hello world | leet -e
+hello world | leet -e | find 6
+lorem | split lines | first 10 | str join | leet -e | nintysix
+lorem | split lines | first 10 | str join | leet -e | nintysix | find 6
+lorem | split lines | first 10 | str join | leet -e | nintysix | find 9
+lorem | split lines | first 10 | str join | leet -e | find 9
+lorem | split lines | first 10 | str join | leet -e | find 6
+lorem | split lines | first 50 | str join | leet -e | find 6
+lorem | split lines | first 50 | str join | leet -e | nintysix | find 6
+lorem | split lines | first 50 | str join | find j
+lorem | find j
+lorem | find i
+lorem | find j
+lorem
+cwm
+fox
+dwarf
+fox | leet -e | nintysix
+fox | leet -e
+fox | leet -e | nintysix
+push dot
+conf
+enter ~
+p
+ok
+..
+code .
+scoop update -a
+scoop list
+scoop-search java
+scoop bucket add java
+scoop-search java
+scoop-search jdk
+scoop-search openjdk
+scoop bucket -h
+scoop bucket rm java
+scoop install openjdk
+push dot
+tree
+clear
+history
+history -h
+conf
+history -h
+dconf
+skip -h
+h -h
+sudo -h
+help sudo
+sudo -h
+push dot
+h -h
+t -t "Hello"
+t
+t -t "Hello"
+where -h
+where -h
+h -f '<\n>'
+str ends-with -h
+neg
+print true
+!true
+!(true)
+clear
+str -h
+$nu.history-path
+open $nu.history-path
+test
+h -s "lorem"
