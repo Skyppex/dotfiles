@@ -134,6 +134,8 @@ def h [
 
         return
     }
+
+    history
 }
 
 # Config / Env
