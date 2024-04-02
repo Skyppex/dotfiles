@@ -200,6 +200,20 @@ alias gps = git push
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
+def ghlink [repo: string] {
+    ghlink-shh $repo
+}
+
+def "ghlink-ssh" [repo: string] {
+    let user = gh api user | jq -r '.login'
+    echo $"git@github.com:($user)/($repo).git"
+}
+
+def "ghlink-http" [repo: string] {
+    let user = gh api user | jq -r '.login'
+    echo $"https://github.com/($user)/($repo).git"
+}
+
 # Git checkout main or master
 def gcm [] {
     do -ip { git checkout main --quiet }

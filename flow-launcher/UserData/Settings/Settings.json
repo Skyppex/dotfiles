@@ -24,10 +24,10 @@
   "TimeFormat": "hh:mm tt",
   "DateFormat": "MM\u0027/\u0027dd ddd",
   "FirstLaunch": false,
-  "SettingWindowWidth": 940,
+  "SettingWindowWidth": 1267,
   "SettingWindowHeight": 875,
-  "SettingWindowTop": -146,
-  "SettingWindowLeft": -1039,
+  "SettingWindowTop": 148,
+  "SettingWindowLeft": 1555,
   "SettingWindowState": 0,
   "CustomExplorerIndex": 0,
   "CustomExplorerList": [
@@ -100,12 +100,12 @@
   "AlwaysStartEn": false,
   "QuerySearchPrecision": "Regular",
   "AutoUpdates": false,
-  "WindowLeft": -890,
-  "WindowTop": -10,
+  "WindowLeft": 1430,
+  "WindowTop": 338,
   "CustomWindowLeft": 0,
   "CustomWindowTop": 0,
   "MaxResultsToShow": 5,
-  "ActivateTimes": 158,
+  "ActivateTimes": 51,
   "CustomPluginHotkeys": [],
   "CustomShortcuts": [],
   "DontPromptUpdateMsg": false,
@@ -130,7 +130,7 @@
   "AnimationSpeed": "Fast",
   "CustomAnimationLength": 360,
   "PluginSettings": {
-    "PythonExecutablePath": "C:\\Users\\Brage\\scoop\\apps\\python\\current\\pythonw.exe",
+    "PythonExecutablePath": "C:\\Users\\brage.ingebrigtsen\\scoop\\apps\\python\\current\\pythonw.exe",
     "NodeExecutablePath": "C:\\Program Files\\nodejs\\node.exe",
     "Plugins": {
       "0ECADE17459B49F587BF81DC3A125110": {
@@ -259,8 +259,8 @@
           "bd",
           "yt",
           "so",
-          "g",
-          "github"
+          "gh",
+          "g"
         ],
         "Priority": 0,
         "Disabled": false
@@ -285,6 +285,26 @@
         "Priority": 0,
         "Disabled": false
       },
+      "176690627AB54C8381A7FD99A3519F42": {
+        "ID": "176690627AB54C8381A7FD99A3519F42",
+        "Name": "Plugin Runner",
+        "Version": "2.3.1",
+        "ActionKeywords": [
+          "r"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
+      "6c22cffe6b3546ec9087abe149c4a575": {
+        "ID": "6c22cffe6b3546ec9087abe149c4a575",
+        "Name": "GitHub",
+        "Version": "1.3.0",
+        "ActionKeywords": [
+          "gh"
+        ],
+        "Priority": 0,
+        "Disabled": false
+      },
       "SY91U1N7H9D0X1DTZ8IOP4YV43KT7C5M": {
         "ID": "SY91U1N7H9D0X1DTZ8IOP4YV43KT7C5M",
         "Name": "SpotifyPremium",
@@ -305,22 +325,12 @@
         "Priority": 0,
         "Disabled": false
       },
-      "6c22cffe6b3546ec9087abe149c4a575": {
-        "ID": "6c22cffe6b3546ec9087abe149c4a575",
-        "Name": "GitHub",
-        "Version": "1.3.0",
-        "ActionKeywords": [
-          "gh"
-        ],
-        "Priority": 0,
-        "Disabled": false
-      },
       "525995402BEF4A8CA860D92F6D108092": {
         "ID": "525995402BEF4A8CA860D92F6D108092",
         "Name": "VS Code Workspaces",
         "Version": "1.3.0",
         "ActionKeywords": [
-          "code"
+          "{"
         ],
         "Priority": 0,
         "Disabled": false

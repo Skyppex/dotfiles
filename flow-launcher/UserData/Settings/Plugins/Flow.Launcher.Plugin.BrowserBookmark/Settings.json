@@ -1,13 +1,13 @@
 {
   "OpenInNewBrowserWindow": true,
   "BrowserPath": null,
-  "LoadChromeBookmark": true,
-  "LoadFirefoxBookmark": true,
-  "LoadEdgeBookmark": true,
+  "LoadChromeBookmark": false,
+  "LoadFirefoxBookmark": false,
+  "LoadEdgeBookmark": false,
   "CustomChromiumBrowsers": [
     {
       "Name": "Opera GX",
-      "DataDirectoryPath": "C:\\Users\\brage.ingebrigtsen\\AppData\\Roaming\\Opera Software\\Opera GX Stable",
+      "DataDirectoryPath": "%USERPROFILE%\\AppData\\Roaming\\Opera Software\\Opera GX Stable",
       "BrowserType": 0
     }
   ]

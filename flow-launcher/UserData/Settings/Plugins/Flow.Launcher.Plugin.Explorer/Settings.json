@@ -22,7 +22,7 @@
   "IndexSearchEngine": 0,
   "PathEnumerationEngine": 0,
   "ContentSearchEngine": 0,
-  "EverythingInstalledPath": null,
+  "EverythingInstalledPath": "C:\\Users\\brage.ingebrigtsen\\scoop\\apps\\everything\\current",
   "SortOption": 1,
   "EnableEverythingContentSearch": false,
   "EverythingEnabled": false,
