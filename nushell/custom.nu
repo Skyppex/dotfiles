@@ -290,6 +290,8 @@ def "manifest update" [] {
 
 # Install scoop apps from the user manifest file
 def "manifest install" [] {
+    let buckets = (manifest).buckets
+    $buckets | get name | zip { $buckets | get source } | each { |b| scoop bucket add $b.0 $b.1 }
     scoop import $"($nu.home-path)/.config/scoop/user_manifest.json"
 }
 
