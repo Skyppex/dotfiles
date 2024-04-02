@@ -200,18 +200,31 @@ alias gps = git push
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
-def ghlink [repo: string] {
-    ghlink-shh $repo
+def ghlink [repo?: string, owner?: string] {
+    if $repo == null {
+        let a = git remote -v | find -r 'git@github\.com.*\.git' | split lines | first
+        let s = $a | str index-of 'git@github.com'
+        let e = $a | str index-of -e '.git'
+        let link = $a | str substring $s..$e
+        echo $link
+        return
+    }
+    
+    if $owner != null {
+        ghlink-ssh $repo $owner
+        return
+    }
+
+    let owner = gh api user | jq -r '.login'
+    ghlink-ssh $repo $owner
 }
 
-def "ghlink-ssh" [repo: string] {
-    let user = gh api user | jq -r '.login'
-    echo $"git@github.com:($user)/($repo).git"
+def "ghlink-ssh" [repo: string, owner: string] {
+    echo $"git@github.com:($owner)/($repo).git"
 }
 
-def "ghlink-http" [repo: string] {
-    let user = gh api user | jq -r '.login'
-    echo $"https://github.com/($user)/($repo).git"
+def "ghlink-http" [repo: string, owner: string] {
+    echo $"https://github.com/($owner)/($repo).git"
 }
 
 # Git checkout main or master
