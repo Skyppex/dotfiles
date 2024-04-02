@@ -200,30 +200,74 @@ alias gps = git push
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
-def ghlink [repo?: string, owner?: string] {
+# Get a link to the current github repository
+def ghlink [
+    --type(-t): string #Specify the link type (default: "ssh") [ssh, http]
+    --owner(-o): string #Specify the owner of the repository
+    repo?: string, #The repository name
+] {
     if $repo == null {
+        let http_match = git remote -v | find -r 'https://github\.com.*\.git'
+        let is_https = $http_match | is-not-empty
+
+        if $is_https {
+            let a = $http_match | split lines | first
+            let s = $a | str index-of 'https://github.com'
+            let e = ($a | str index-of -e '.git') + 4
+            let link = $a | str substring $s..$e
+            
+            if $type == null or $type == "http" {
+                return $link
+            }
+
+            let repo_start = $link | str index-of -e '/'
+            let repo = $link | str substring $repo_start..
+            let link = $link | str substring ..$repo_start
+            let owner_start = ($link | str index-of -e '/') + 1
+            let owner = $link | str substring $owner_start..
+            return $"git@github:($owner)($repo)"
+        }
+
         let a = git remote -v | find -r 'git@github\.com.*\.git' | split lines | first
         let s = $a | str index-of 'git@github.com'
-        let e = $a | str index-of -e '.git'
+        let e = ($a | str index-of -e '.git') + 4
         let link = $a | str substring $s..$e
-        echo $link
-        return
+
+        if $type == null or $type == "ssh" {
+            return $link
+        }
+        
+        let repo_start = $link | str index-of -e '/'
+        let repo = $link | str substring $repo_start..
+        let link = $link | str substring ..$repo_start
+        let owner_start = ($link | str index-of -e ':') + 1
+        let owner = $link | str substring $owner_start..
+        return $"https://github.com/($owner)($repo)"
     }
     
     if $owner != null {
-        ghlink-ssh $repo $owner
-        return
+        let link = match $type {
+            "http" | "https" => { ghlink-http $owner $repo }
+            "ssh" | "shh" => { ghlink-ssh $owner $repo }
+            _ => { ghlink-ssh $owner $repo }
+        }
+        
+        return $link
     }
 
     let owner = gh api user | jq -r '.login'
-    ghlink-ssh $repo $owner
+    match $type {
+        "http" | "https" => { ghlink-http $owner $repo }
+        "ssh" | "shh" => { ghlink-ssh $owner $repo }
+        _ => { ghlink-ssh $owner $repo }
+    }
 }
 
-def "ghlink-ssh" [repo: string, owner: string] {
+def "ghlink-ssh" [owner: string, repo: string] {
     echo $"git@github.com:($owner)/($repo).git"
 }
 
-def "ghlink-http" [repo: string, owner: string] {
+def "ghlink-http" [owner: string, repo: string] {
     echo $"https://github.com/($owner)/($repo).git"
 }
 
