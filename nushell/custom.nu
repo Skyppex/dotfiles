@@ -247,7 +247,7 @@ def ghlink [
     
     if $owner != null {
         let link = match $type {
-            "http" | "https" => { ghlink-http $owner $repo }
+            "http" => { ghlink-http $owner $repo }
             "ssh" | "shh" => { ghlink-ssh $owner $repo }
             _ => { ghlink-ssh $owner $repo }
         }
@@ -257,7 +257,7 @@ def ghlink [
 
     let owner = gh api user | jq -r '.login'
     match $type {
-        "http" | "https" => { ghlink-http $owner $repo }
+        "http" => { ghlink-http $owner $repo }
         "ssh" | "shh" => { ghlink-ssh $owner $repo }
         _ => { ghlink-ssh $owner $repo }
     }
