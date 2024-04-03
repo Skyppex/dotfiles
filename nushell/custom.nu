@@ -66,20 +66,21 @@ def rmdl [] {
 
 # Extra utilities for managing the history file
 def h [
-    --help(-h) # Display the help message for this command
-    --clear(-c): int # Clears out the history entries
+    --clear(-c): int # Clears out the history entries (less than 0 clears everything)
     --clear-contains(-f): string # Clears out the history entries that match the filter
     --clear-starts-with(-s): string # Clears out the history entries that match the filter
     --long(-l) # Show long listing of entries for sqlite history
 ] {
-    if $help {
-        history --help
-        return
-    }
-
     if $clear != null {
         if $clear <= 0 {
-            history --clear
+            echo "Are you sure you wish to clear everything? (y/n)"
+            let response = input
+            
+            match $response {
+                "y" | "Y" | "yes" | "Yes" => { history --clear }
+                _ => { print "Exiting." }
+            }
+
             return
         }
         
@@ -141,13 +142,13 @@ def h [
 # Config / Env
 
 # Open the custom nushell config file in vscode
-alias conf = code $"($nu.home-path)/.config/nushell/custom.nu"
+alias conf = start $"($nu.home-path)/.config/nushell/custom.nu"
 
 # Open the nushell env file in vscode
-alias env = code $nu.env-path
+alias env = start $nu.env-path
 
 # Open the config workspace in vscode
-alias dconf = code $"($nu.home-path)/.config"
+alias dconf = start $"($nu.home-path)/.config"
 
 # Pull the dotfiles from the remote repository
 def "pull dot" [] {
@@ -179,10 +180,10 @@ def "push dot" [] {
 # Startship
 
 # Open the starship config file in vscode
-alias sc = code ~/.config/starship.toml
+alias sc = start ~/.config/starship.toml
 
 # Open the starship schema file in vscode
-alias ss = code ~/.config/starship-schema.json
+alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
 

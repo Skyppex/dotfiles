@@ -5,3 +5,5 @@ flow-launcher/UserData/Logs
 flow-launcher/UserData/Cache
 flow-launcher/**/*.bak
 flow-launcher/UserData/Settings/History.json
+flow-launcher/UserData/Settings/Plugins/Flow.Plugin.Github/Settings.json
+flow-launcher/UserData/Plugins/SpotifyPremium-1.1.5/Cache

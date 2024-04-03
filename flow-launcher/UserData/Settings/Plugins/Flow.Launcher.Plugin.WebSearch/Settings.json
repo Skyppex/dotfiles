@@ -25,14 +25,6 @@
       "Enabled": true
     },
     {
-      "Title": "FindIcon",
-      "ActionKeyword": "findicon",
-      "Icon": "pictures.png",
-      "CustomIcon": false,
-      "Url": "http://findicons.com/search/{q}",
-      "Enabled": true
-    },
-    {
       "Title": "Facebook",
       "ActionKeyword": "facebook",
       "Icon": "facebook.png",
@@ -142,14 +134,6 @@
       "Icon": "youtube.png",
       "CustomIcon": false,
       "Url": "https://www.youtube.com/results?search_query={q}",
-      "Enabled": true
-    },
-    {
-      "Title": "Baidu",
-      "ActionKeyword": "bd",
-      "Icon": "baidu.png",
-      "CustomIcon": false,
-      "Url": "https://www.baidu.com/#ie=UTF-8\u0026wd={q}",
       "Enabled": true
     }
   ],
