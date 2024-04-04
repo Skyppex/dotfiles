@@ -3,6 +3,8 @@ windows/LocalState/state.json
 scoop/config.json
 flow-launcher/UserData/Logs
 flow-launcher/UserData/Cache
+flow-launcher/UserData/Settings/UserSelectedRecord.json
+flow-launcher/UserData/Settings/TopMostRecord.json
 flow-launcher/**/*.bak
 flow-launcher/UserData/Settings/History.json
 flow-launcher/UserData/Settings/Plugins/Flow.Plugin.Github/Settings.json
