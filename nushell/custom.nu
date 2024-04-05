@@ -51,9 +51,6 @@ alias loc = echo $"($env.PWD)"
 # Paste from the clipboard
 alias paste = powershell -command "Get-Clipboard"
 
-# Split lines in a string into rows
-alias "split lines" = split row "\n"
-
 # Remove all files from the Downloads folder
 def rmdl [] {
     let files = ls ~/Downloads
@@ -85,7 +82,7 @@ def h [
         }
         
         let history = open $nu.history-path
-            | split lines
+            | lines
             | reverse
             | skip ($clear + 1)
             | reverse
@@ -103,7 +100,7 @@ def h [
         }
 
         mut history = open $nu.history-path
-            | split lines
+            | lines
             | reverse
             | where ($it | str contains --not $clear_contains)
             | reverse
@@ -122,7 +119,7 @@ def h [
         }
 
         mut history = open $nu.history-path
-            | split lines
+            | lines
             | reverse
             | where { |line|
                 let starts_with = $line | str starts-with $clear_starts_with
@@ -212,7 +209,7 @@ def ghlink [
         let is_https = $http_match | is-not-empty
 
         if $is_https {
-            let a = $http_match | split lines | first
+            let a = $http_match | lines | first
             let s = $a | str index-of 'https://github.com'
             let e = ($a | str index-of -e '.git') + 4
             let link = $a | str substring $s..$e
@@ -229,7 +226,7 @@ def ghlink [
             return $"git@github:($owner)($repo)"
         }
 
-        let a = git remote -v | find -r 'git@github\.com.*\.git' | split lines | first
+        let a = git remote -v | find -r 'git@github\.com.*\.git' | lines | first
         let s = $a | str index-of 'git@github.com'
         let e = ($a | str index-of -e '.git') + 4
         let link = $a | str substring $s..$e
@@ -343,7 +340,55 @@ def "manifest create" [] {
 
 # Update the scoop user manifest file with installed scoop apps
 def "manifest update" [] {
+    let old = manifest
     scoop export | save --force $"($nu.home-path)/.config/scoop/user_manifest.json"
+    let new = manifest
+    
+    for bucket in $old.buckets {
+        let name = $bucket.Name
+        let source = $bucket.Source
+        let old_bucket = $new.buckets | where Name == $name
+
+        if $old_bucket == null or ($old_bucket | is-empty) {
+            print $"Removed bucket -> ($name) from ($source)"
+        }
+    }
+
+    for bucket in $new.buckets {
+        let name = $bucket.Name
+        let source = $bucket.Source
+        let old_bucket = $old.buckets | where Name == $name
+
+        if $old_bucket == null or ($old_bucket | is-empty) {
+            print $"New bucket -> ($name) from ($source)"
+        }
+    }
+
+    for app in $old.apps {
+        let name = $app.Name
+        let source = $app.Source
+        let version = $app.Version
+        let new_app = $new.apps | where Name == $name
+
+        if $new_app == null or ($new_app | is-empty) {
+            print $"Removed app -> ($name) ($version) from ($source)"
+        }
+    }
+
+    for app in $new.apps {
+        let name = $app.Name
+        let source = $app.Source
+        let version = $app.Version
+        let old_app = $old.apps | where Name == $name
+
+        if $old_app == null or ($old_app | is-empty) {
+            print $"New app -> ($name) ($version) from ($source)"
+        } else if ($old_app.Version | first) != $version {
+            print $"Updated app -> ($name) from ($old_app.Version | first) to ($version)"
+        } else if ($old_app.Source | first) != $source {
+            print $"Updated app -> ($name) from ($old_app.Source | first) to ($source)"
+        }
+    }
 }
 
 # Install scoop apps from the user manifest file
