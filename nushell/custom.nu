@@ -350,7 +350,7 @@ def "manifest update" [] {
         let old_bucket = $new.buckets | where Name == $name
 
         if $old_bucket == null or ($old_bucket | is-empty) {
-            print $"Removed bucket -> ($name) from ($source)"
+            print $"Removed bucket -> ($name) : ($source)"
         }
     }
 
@@ -360,7 +360,7 @@ def "manifest update" [] {
         let old_bucket = $old.buckets | where Name == $name
 
         if $old_bucket == null or ($old_bucket | is-empty) {
-            print $"New bucket -> ($name) from ($source)"
+            print $"New bucket -> ($name) : ($source)"
         }
     }
 
@@ -371,22 +371,27 @@ def "manifest update" [] {
         let new_app = $new.apps | where Name == $name
 
         if $new_app == null or ($new_app | is-empty) {
-            print $"Removed app -> ($name) ($version) from ($source)"
+            print $"Removed app -> ($name) ($version) : ($source)"
         }
     }
 
     for app in $new.apps {
         let name = $app.Name
-        let source = $app.Source
         let version = $app.Version
+        let source = $app.Source
         let old_app = $old.apps | where Name == $name
 
         if $old_app == null or ($old_app | is-empty) {
-            print $"New app -> ($name) ($version) from ($source)"
-        } else if ($old_app.Version | first) != $version {
-            print $"Updated app -> ($name) from ($old_app.Version | first) to ($version)"
-        } else if ($old_app.Source | first) != $source {
-            print $"Updated app -> ($name) from ($old_app.Source | first) to ($source)"
+            print $"New app -> ($name) ($version) : ($source)"
+            continue
+        }
+        
+        let old_app = $old_app | first
+
+        if ($old_app.Version) != $version {
+            print $"Updated app -> ($name) from ($old_app.Version) to ($version)"
+        } else if ($old_app.Source) != $source {
+            print $"Moved app -> ($old_app.Name) ($old_app.Version) : ($old_app.Source) to ($name) ($version) : ($source)"
         }
     }
 }
