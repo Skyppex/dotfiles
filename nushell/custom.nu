@@ -331,17 +331,17 @@ def gc [branch: string] {
 # Scoop
 
 # Open the scoop user manifest file
-alias manifest = open $"($nu.home-path)/.config/scoop/user_manifest.json"
+alias manifest = open $"($nu.home-path)/.config/scoop/manifest.json"
 
 # Create the scoop user manifest file
 def "manifest create" [] {
-    touch $"($nu.home-path)/.config/scoop/user_manifest.json"
+    touch $"($nu.home-path)/.config/scoop/manifest.json"
 }
 
 # Update the scoop user manifest file with installed scoop apps
 def "manifest update" [] {
     let old = manifest
-    scoop export | save --force $"($nu.home-path)/.config/scoop/user_manifest.json"
+    scoop export | save --force $"($nu.home-path)/.config/scoop/manifest.json"
     let new = manifest
     
     for bucket in $old.buckets {
@@ -400,12 +400,12 @@ def "manifest update" [] {
 def "manifest install" [] {
     let buckets = (manifest).buckets
     $buckets | get name | zip { $buckets | get source } | each { |b| scoop bucket add $b.0 $b.1 }
-    scoop import $"($nu.home-path)/.config/scoop/user_manifest.json"
+    scoop import $"($nu.home-path)/.config/scoop/manifest.json"
 }
 
 # Remove the scoop user manifest file
 def "manifest rm" [] {
-    rm $"($nu.home-path)/.config/scoop/user_manifest.json"
+    rm $"($nu.home-path)/.config/scoop/manifest.json"
 }
 
 # Nushell
