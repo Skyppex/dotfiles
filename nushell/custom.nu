@@ -434,6 +434,9 @@ alias fox = echo "The quick brown fox jumps over the lazy dog"
 # Echo a sentence with all the letters of the alphabet
 alias dwarf = echo "Pack my box with five dozen liquor jugs"
 
+# Echo a sentence with almost all the letters of the alphabet (no f)
+alias sphinx = echo "Sphinx of black quartz, judge my vow"
+
 # Echo the lorem ipsum text
 def lorem [] {
     let lorem = [
