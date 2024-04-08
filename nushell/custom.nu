@@ -198,6 +198,9 @@ alias gps = git push
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
+# Git checkout
+alias gc = git checkout
+
 # Get a link to the current github repository
 def ghlink [
     --type(-t): string #Specify the link type (default: "ssh") [ssh, http]
@@ -320,11 +323,6 @@ def gcp [message: string] {
 # Git stash and checkout
 def gsw [branch: string] {
     git stash -u
-    git checkout $"($branch)"
-}
-
-# Git checkout
-def gc [branch: string] {
     git checkout $"($branch)"
 }
 

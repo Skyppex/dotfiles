@@ -1,6 +1,6 @@
 {
+  "Debug": "false",
   "show_on_empty_search": "true",
-  "steam_path": "E:\\Steam",
   "description": null,
-  "Debug": "false"
+  "steam_path": "E:\\Steam"
 }
