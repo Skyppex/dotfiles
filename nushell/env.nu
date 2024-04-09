@@ -105,3 +105,9 @@ starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init --cmd cd nushell | save -f ~/.config/zoxide/.zoxide.nu
 
 $env.USER_MANIFEST = $"($nu.home-path)/.config/scoop/user_manifest.json"
+
+match ($env.COMPUTERNAME) {
+    "BRAGE-PC" => { $env.PROJECT_FOLDER = ('~\repos\projects' | path expand)  },
+    "Brage" => { $env.PROJECT_FOLDER = D:\Coding\projects },
+    _ => { print "Unknown computer name" }
+}

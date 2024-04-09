@@ -31,6 +31,11 @@ export extern curl [
 # Copy to clipboard
 export extern "clip" []
 
+# Neovim
+
+# Open neovim
+alias vim = nvim
+
 # Utils
 
 # Elevate the current shell to admin
@@ -56,6 +61,48 @@ def rmdl [] {
     let files = ls ~/Downloads
     for file in $files {
         rm -rv $file.name
+    }
+}
+
+# Projects
+
+# Create symlinks for all projects under your working directory into the project folder
+def "proj update" [] {
+    let slns = ls -f **\*.sln | get name
+    $slns | each { |n|
+        print $n;
+        let base = ($n | path basename);
+        print $base;
+        sudo hook -s $n -d ($env.PROJECT_FOLDER | path join $base)
+    }
+}
+
+# Open a project from the project folder in the default editor
+def "proj launch" [
+    project_name: string # The name of the project to launch
+    --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
+] {
+    enter $env.PROJECT_FOLDER
+    let result = fzf -0 -1 -f $project_name
+    p
+
+    if ($result | is-empty) or $result == null or $result == "" {
+        print "No project found"
+        return
+    }
+
+    let result = $result | lines | first
+
+    let folder = $env.PROJECT_FOLDER | path join $result | path expand | path dirname
+    
+    let project = $env.PROJECT_FOLDER | path join $result
+
+    match $editor {
+        "code" => { code $folder }
+        "vim" => { vim $folder }
+        "nvim" => { nvim $folder }
+        "rider" => { rider $project }
+        _ => { start $project }
     }
 }
 
@@ -414,11 +461,6 @@ def "plugin add" [name: string] {
     nu -c $'register ($plugin)'
     version
 }
-
-# Neovim
-
-# Open neovim
-alias vim = nvim
 
 # Fun
 
