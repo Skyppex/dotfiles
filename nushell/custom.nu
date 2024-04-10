@@ -96,8 +96,8 @@ def "proj update" [
     }
 }
 
-# Open a project from the project folder in the default editor
-def "proj launch" [
+# Open a project from the project folder
+def "proj start" [
     project_name: string # The name of the project to launch
     --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
 ] {
@@ -490,6 +490,27 @@ def "manifest update" [] {
 # Install scoop apps from the user manifest file
 def "manifest install" [] {
     let buckets = (manifest).buckets
+    
+    let current = scoop bucket list | lines | filter {|l| $l | str trim | is-not-empty} | skip 2
+    let current_names = $current | each {|l| $l | split row " " | get 0}
+    let current_repo = $current | each {|l|
+        let s = $l | str index-of "https://";
+        let from_s = $l | str substring $s..;
+        let e = $from_s | str index-of " ";
+        $from_s | str substring ..$e;
+    }
+
+    for bucket in ($current_names | zip $current_repo) {
+        let name = $bucket.0
+        let source = $bucket.1
+        let old_bucket = $buckets | where Name == $name
+
+        if $old_bucket == null or ($old_bucket | is-empty) {
+            print $"Removing bucket -> ($name) : ($source)"
+            scoop bucket rm $name
+        }
+    }
+
     $buckets | get name | zip { $buckets | get source } | each { |b| scoop bucket add $b.0 $b.1 }
     scoop import $"($nu.home-path)/.config/scoop/manifest.json"
 }
