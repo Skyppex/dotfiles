@@ -28,6 +28,9 @@ export extern curl [
     url: string
 ]
 
+# Remember the old enter command
+alias enter-old = enter;
+
 # Copy to clipboard
 export extern "clip" []
 
@@ -98,7 +101,7 @@ def "proj launch" [
     project_name: string # The name of the project to launch
     --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
 ] {
-    enter $env.PROJECT_FOLDER
+    enter-old $env.PROJECT_FOLDER
     let result = fzf -0 -1 -f $project_name
     p
 
@@ -212,7 +215,7 @@ alias dconf = start $"($nu.home-path)/.config"
 
 # Pull the dotfiles from the remote repository
 def "pull dot" [] {
-    enter $"($nu.home-path)/.config"
+    enter-old $"($nu.home-path)/.config"
     print "---- pulling config ----"
     git pull --rebase
     git submodule update --init --recursive
@@ -231,7 +234,7 @@ def "push dot" [] {
     open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
     print "---- updating scoop manifest ----"
     manifest update
-    enter $"($nu.home-path)/.config"
+    enter-old $"($nu.home-path)/.config"
     print "---- pushing config ----"
     gcp "update config files"
     p
@@ -249,9 +252,6 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide query
 alias cdq = zoxide query
-
-# Remember the old enter command
-alias enter-old = enter;
 
 # Custom version of 'enter' using zoxide and fzf. The original 'enter' command is aliased to 'enter-old'
 # Add one or more directories to the list.
@@ -406,6 +406,21 @@ def gsw [branch: string] {
 
 # Scoop
 
+# Reinstall an app
+# This uninstalls all versions of the app and then installs the latest version
+def "scoop reinstall" [
+    app?: string
+] {
+    mut app = $app;
+    if $app == null {
+        let apps = scoop list | lines | skip 4 | drop 1 | each {|l| $l | split row " " | first | str trim} | to text
+        $app = ($apps | fzf | lines | first)
+    }
+
+    scoop uninstall $app
+    scoop install $app
+}
+
 # Open the scoop user manifest file
 alias manifest = open $"($nu.home-path)/.config/scoop/manifest.json"
 
@@ -482,6 +497,52 @@ def "manifest install" [] {
 # Remove the scoop user manifest file
 def "manifest rm" [] {
     rm $"($nu.home-path)/.config/scoop/manifest.json"
+}
+
+def "parse table" [
+    --skip(-s): int # Specify the number of rows to skip
+    --header(-h) # There is a header row
+    --header-spacer(-c) # The header row is separated by a spacer row
+    --delimiter(-d): string # Specify the delimiter (default: ",")
+    --regex(-r): string # Specify the regex to split the table
+    input: string # The table to parse
+] {
+    if $regex == false and $delimiter == false {
+        print "Either delimiter or regex must be specified"
+        return
+    }
+
+    # Skip n rows in the beginning before the table starts
+    mut lines = $input | lines | skip $skip
+
+    # Parse header if it exists
+    if $header {
+        let header = $lines | first
+        $lines = $lines | to text | lines | skip 1
+        if $header_spacer {
+            $lines = $lines | to text | lines | skip 1
+        }
+    }
+
+    mut rows = [];
+
+    # Use delimiter or regex to split each line into columns
+    match [$delimiter, $regex] {
+        [true, false] => {
+            $rows = $lines | each { |line|
+                let cols = $line | split column $delimiter
+                $cols
+            }
+        }
+        [false, true] => {
+            $rows = $lines | each { |line|
+                let cols = $line | split column -r $regex
+                $cols
+            }
+        }
+    }
+
+    # Parse list of lists into table and return
 }
 
 # Nushell
