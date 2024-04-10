@@ -67,13 +67,29 @@ def rmdl [] {
 # Projects
 
 # Create symlinks for all projects under your working directory into the project folder
-def "proj update" [] {
-    let slns = ls -f **\*.sln | get name
+def "proj update" [
+    --force(-f) # Pass force to the hook command
+    --interactive(-i) # Pass interactive to the hook command
+    --verbose(-v) # Pass verbose to the hook command
+] {
+    if $force and $interactive {
+        print "Cannot pass both force and interactive together"
+        return
+    }
+
+    let slns = ls -f **\*.sln | where type == file | get name
+
     $slns | each { |n|
-        print $n;
         let base = ($n | path basename);
-        print $base;
-        sudo hook -s $n -d ($env.PROJECT_FOLDER | path join $base)
+
+        match [$force, $interactive, $verbose] {
+            [false, false, true] => { sudo hook -v -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [true, false, true] => { sudo hook -vf -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, true, true] => { sudo hook -vi -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, false, false] => { sudo hook -q -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [true, false, false] => { sudo hook -qf -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, true, false] => { sudo hook -qi -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+        }
     }
 }
 
@@ -233,6 +249,21 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide query
 alias cdq = zoxide query
+
+# Remember the old enter command
+alias enter-old = enter;
+
+# Custom version of 'enter' using zoxide and fzf. The original 'enter' command is aliased to 'enter-old'
+# Add one or more directories to the list.
+# PWD becomes first of the newly added directories.
+def --env enter [
+    ...paths: string
+] {
+    for _path in ($paths | reverse) {
+        let target = cdq $_path;
+        enter-old $target
+    }
+}
 
 # Git
 

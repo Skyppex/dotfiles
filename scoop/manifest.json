@@ -3,31 +3,31 @@
         {
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
-            "Updated": "2024-04-05T06:54:54+02:00",
+            "Updated": "2024-04-09T15:01:11+02:00",
             "Manifests": 23859
         },
         {
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
-            "Updated": "2024-04-05T02:12:30+02:00",
+            "Updated": "2024-04-09T02:12:25+02:00",
             "Manifests": 255
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": "2024-04-05T06:32:19+02:00",
-            "Manifests": 2001
+            "Updated": "2024-04-09T14:32:58+02:00",
+            "Manifests": 2006
         },
         {
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
-            "Updated": "2024-04-05T06:27:43+02:00",
+            "Updated": "2024-04-09T14:29:53+02:00",
             "Manifests": 300
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
-            "Updated": "2024-04-05T07:09:42+02:00",
+            "Updated": "2024-04-09T15:11:37+02:00",
             "Manifests": 1311
         },
         {
@@ -39,311 +39,318 @@
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
-            "Updated": "2024-04-05T06:33:34+02:00",
-            "Manifests": 445
+            "Updated": "2024-04-09T14:44:11+02:00",
+            "Manifests": 446
         }
     ],
     "apps": [
         {
-            "Source": "main",
-            "Updated": "2024-02-19T10:15:53.4848119+01:00",
-            "Version": "23.01",
             "Name": "7zip",
-            "Info": ""
+            "Version": "23.01",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-02-19T10:15:53.4848119+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T09:53:33.6420934+02:00",
-            "Version": "2.0.12",
             "Name": "autohotkey",
-            "Info": ""
+            "Version": "2.0.12",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T09:53:33.6420934+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T09:54:00.3698162+02:00",
-            "Version": "4.1.0",
             "Name": "blender",
-            "Info": ""
+            "Version": "4.1.0",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T09:54:00.3698162+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-05T08:56:15.8116987+02:00",
-            "Version": "1.1.1",
             "Name": "bun",
-            "Info": ""
+            "Version": "1.1.3",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-09T08:59:01.9665634+02:00"
         },
         {
-            "Source": "sky-bucket",
-            "Updated": "2024-02-19T10:15:58.9604003+01:00",
-            "Version": "1.0.1",
             "Name": "cmdgate",
-            "Info": ""
+            "Version": "1.0.1",
+            "Source": "sky-bucket",
+            "Info": "",
+            "Updated": "2024-02-19T10:15:58.9604003+01:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-03-14T12:40:21.0256712+01:00",
-            "Version": "3.14",
             "Name": "dark",
-            "Info": ""
+            "Version": "3.14",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-03-14T12:40:21.0256712+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T09:54:02.7080562+02:00",
-            "Version": "2023.3.4",
+            "Name": "docker",
+            "Version": "25.0.2",
+            "Source": "anderlli",
+            "Info": "",
+            "Updated": "2024-04-09T18:13:08.6910581+02:00"
+        },
+        {
             "Name": "dotPeek",
-            "Info": ""
+            "Version": "2023.3.4",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T09:54:02.7080562+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-03-14T12:41:10.0069125+01:00",
-            "Version": "1.4.1.1024",
             "Name": "everything",
-            "Info": ""
+            "Version": "1.4.1.1024",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-03-14T12:41:10.0069125+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-03-15T10:01:51.2564622+01:00",
-            "Version": "1.17.2",
             "Name": "flow-launcher",
-            "Info": ""
+            "Version": "1.17.2",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-03-15T10:01:51.2564622+01:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-05T08:56:17.1208259+02:00",
-            "Version": "0.49.0",
             "Name": "fzf",
-            "Info": ""
+            "Version": "0.49.0",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-05T08:56:17.1208259+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-02T09:54:46.4083376+02:00",
-            "Version": "13.2.0",
             "Name": "gcc",
-            "Info": ""
+            "Version": "13.2.0",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-02T09:54:46.4083376+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-04T09:11:09.8491547+02:00",
-            "Version": "2.47.0",
             "Name": "gh",
-            "Info": ""
+            "Version": "2.47.0",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-04T09:11:09.8491547+02:00"
         },
         {
-            "Source": "dorado",
-            "Updated": "2024-04-02T10:02:16.7297398+02:00",
-            "Version": "2.44.0.windows.1",
             "Name": "git",
-            "Info": ""
+            "Version": "2.44.0.windows.1",
+            "Source": "dorado",
+            "Info": "",
+            "Updated": "2024-04-02T10:02:16.7297398+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-04T09:11:28.1995522+02:00",
-            "Version": "3.3.13",
             "Name": "github",
-            "Info": ""
+            "Version": "3.3.13",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-04T09:11:28.1995522+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:02:55.8601555+02:00",
-            "Version": "9.13.0",
             "Name": "gitkraken",
-            "Info": ""
+            "Version": "9.13.0",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:02:55.8601555+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-04T09:12:48.1214954+02:00",
-            "Version": "1.22.2",
             "Name": "go",
-            "Info": ""
+            "Version": "1.22.2",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-04T09:12:48.1214954+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-04T10:40:24.9298743+02:00",
-            "Version": "1.16.1",
             "Name": "gping",
-            "Info": ""
+            "Version": "1.16.1",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-04T10:40:24.9298743+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-02T10:04:05.565989+02:00",
-            "Version": "2.4.4",
             "Name": "gsudo",
-            "Info": ""
+            "Version": "2.4.4",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-02T10:04:05.565989+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:04:07.3711901+02:00",
-            "Version": "8.00-5400",
             "Name": "hwinfo",
-            "Info": ""
+            "Version": "8.00-5400",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:04:07.3711901+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:06:57.1348127+02:00",
-            "Version": "1.3.1_2023-11-16_91b66b0783",
             "Name": "inkscape",
-            "Info": ""
+            "Version": "1.3.1_2023-11-16_91b66b0783",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:06:57.1348127+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:07:09.3638762+02:00",
-            "Version": "6.2.2",
             "Name": "inno-setup",
-            "Info": ""
+            "Version": "6.2.2",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:07:09.3638762+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-02T10:07:00.9727251+02:00",
-            "Version": "0.50",
             "Name": "innounp",
-            "Info": ""
+            "Version": "0.50",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-02T10:07:00.9727251+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-02-12T15:26:26.1150182+01:00",
-            "Version": "1.7.1",
             "Name": "jq",
-            "Info": ""
+            "Version": "1.7.1",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-02-12T15:26:26.1150182+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:07:24.9006793+02:00",
-            "Version": "4.2.1.240230937",
             "Name": "musescore",
-            "Info": ""
+            "Version": "4.2.1.240230937",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:07:24.9006793+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-02T10:07:33.8085711+02:00",
-            "Version": "0.9.5",
             "Name": "neovim",
-            "Info": ""
+            "Version": "0.9.5",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-02T10:07:33.8085711+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-04T09:13:03.5507429+02:00",
-            "Version": "21.7.2",
             "Name": "nodejs",
-            "Info": ""
+            "Version": "21.7.2",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-04T09:13:03.5507429+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-05T10:51:28.6392689+02:00",
-            "Version": "0.92.1",
             "Name": "nu",
-            "Info": ""
+            "Version": "0.92.1",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-05T10:51:28.6392689+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:07:59.6485383+02:00",
-            "Version": "30.1.1",
             "Name": "obs-studio",
-            "Info": ""
+            "Version": "30.1.2",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-08T08:59:47.7081875+02:00"
         },
         {
-            "Source": "anderlli",
-            "Updated": "2024-04-02T11:00:32.9306655+02:00",
-            "Version": "21.0.1-12",
             "Name": "openjdk",
-            "Info": ""
-        },
-        {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:08:05.093859+02:00",
-            "Version": "5.0.13",
-            "Name": "paint.net",
-            "Info": ""
-        },
-        {
+            "Version": "21.0.1-12",
             "Source": "anderlli",
-            "Updated": "2024-04-02T10:59:19.2917019+02:00",
-            "Version": "1.53.0",
+            "Info": "",
+            "Updated": "2024-04-02T11:00:32.9306655+02:00"
+        },
+        {
+            "Name": "paint.net",
+            "Version": "5.0.13",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:08:05.093859+02:00"
+        },
+        {
             "Name": "par",
-            "Info": ""
+            "Version": "1.53.0",
+            "Source": "anderlli",
+            "Info": "",
+            "Updated": "2024-04-02T10:59:19.2917019+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-03-14T12:41:03.2987385+01:00",
-            "Version": "3.12.2",
             "Name": "python",
-            "Info": ""
+            "Version": "3.12.2",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-03-14T12:41:03.2987385+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:09:19.4326591+02:00",
-            "Version": "2023.3.4-233.14475.66",
             "Name": "rider",
-            "Info": ""
+            "Version": "2023.3.4-233.14475.66",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:09:19.4326591+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-04-02T10:09:54.3027744+02:00",
-            "Version": "1.27.0",
             "Name": "rustup",
-            "Info": ""
+            "Version": "1.27.0",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-04-02T10:09:54.3027744+02:00"
         },
         {
-            "Source": "main",
-            "Updated": "2024-03-14T10:18:44.0293305+01:00",
-            "Version": "1.4.1",
             "Name": "scoop-search",
-            "Info": ""
+            "Version": "1.4.1",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-03-14T10:18:44.0293305+01:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:10:00.9336802+02:00",
-            "Version": "4.37.98",
             "Name": "slack",
-            "Info": ""
+            "Version": "4.37.101",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-09T08:59:12.2681656+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-02T10:10:02.5345958+02:00",
-            "Version": "1.32.803",
             "Name": "speccy",
-            "Info": ""
+            "Version": "1.32.803",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-02T10:10:02.5345958+02:00"
         },
         {
-            "Source": "extras",
-            "Updated": "2024-04-04T16:32:20.7432857+02:00",
-            "Version": "1.2.34.783.g923721d9",
             "Name": "spotify",
-            "Info": ""
-        },
-        {
-            "Source": "main",
-            "Updated": "2024-04-02T10:53:48.8897784+02:00",
-            "Version": "1.18.2",
-            "Name": "starship",
-            "Info": ""
-        },
-        {
-            "Source": "dorado",
-            "Updated": "2024-02-19T10:16:21.3040252+01:00",
-            "Version": "2.0.0",
-            "Name": "trash",
-            "Info": ""
-        },
-        {
-            "Source": "dorado",
-            "Updated": "2024-04-02T10:10:28.1719086+02:00",
-            "Version": "3.7.0",
-            "Name": "unityhub",
-            "Info": ""
-        },
-        {
+            "Version": "1.2.34.783.g923721d9",
             "Source": "extras",
-            "Updated": "2024-04-05T08:56:30.5848917+02:00",
-            "Version": "1.88.0",
-            "Name": "vscode",
-            "Info": ""
+            "Info": "",
+            "Updated": "2024-04-04T16:32:20.7432857+02:00"
         },
         {
+            "Name": "starship",
+            "Version": "1.18.2",
             "Source": "main",
-            "Updated": "2024-03-14T15:18:27.1010621+01:00",
-            "Version": "0.9.4",
+            "Info": "",
+            "Updated": "2024-04-02T10:53:48.8897784+02:00"
+        },
+        {
+            "Name": "trash",
+            "Version": "2.0.0",
+            "Source": "dorado",
+            "Info": "",
+            "Updated": "2024-02-19T10:16:21.3040252+01:00"
+        },
+        {
+            "Name": "unityhub",
+            "Version": "3.7.0",
+            "Source": "dorado",
+            "Info": "",
+            "Updated": "2024-04-02T10:10:28.1719086+02:00"
+        },
+        {
+            "Name": "vscode",
+            "Version": "1.88.0",
+            "Source": "extras",
+            "Info": "",
+            "Updated": "2024-04-05T08:56:30.5848917+02:00"
+        },
+        {
             "Name": "zoxide",
-            "Info": ""
+            "Version": "0.9.4",
+            "Source": "main",
+            "Info": "",
+            "Updated": "2024-03-14T15:18:27.1010621+01:00"
         }
     ]
 }
