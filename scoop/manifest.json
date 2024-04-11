@@ -4,9 +4,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1712695206000)\/",
+                "value": "\/Date(1712868694000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 22:40:06"
+                "DateTime": "torsdag 11. april 2024 22:51:34"
             },
             "Manifests": 23859
         },
@@ -14,9 +14,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1712621545000)\/",
+                "value": "\/Date(1712794363000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 02:12:25"
+                "DateTime": "torsdag 11. april 2024 02:12:43"
             },
             "Manifests": 255
         },
@@ -24,9 +24,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1712694415000)\/",
+                "value": "\/Date(1712867224000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 22:26:55"
+                "DateTime": "torsdag 11. april 2024 22:27:04"
             },
             "Manifests": 2006
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1712694235000)\/",
+                "value": "\/Date(1712867064000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 22:23:55"
+                "DateTime": "torsdag 11. april 2024 22:24:24"
             },
             "Manifests": 300
         },
@@ -44,11 +44,11 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1712682495000)\/",
+                "value": "\/Date(1712869564000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 19:08:15"
+                "DateTime": "torsdag 11. april 2024 23:06:04"
             },
-            "Manifests": 1311
+            "Manifests": 1312
         },
         {
             "Name": "sky-bucket",
@@ -64,11 +64,11 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1712694465000)\/",
+                "value": "\/Date(1712867243000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 9. april 2024 22:27:45"
+                "DateTime": "torsdag 11. april 2024 22:27:23"
             },
-            "Manifests": 446
+            "Manifests": 449
         }
     ],
     "apps": [
@@ -127,6 +127,13 @@
             "Name": "everything",
             "Version": "1.4.1.1024",
             "Updated": "\/Date(1710454008088)\/"
+        },
+        {
+            "Info": "Install failed",
+            "Source": null,
+            "Name": "ffmpeg",
+            "Version": null,
+            "Updated": "\/Date(1712874263783)\/"
         },
         {
             "Info": "",
@@ -251,8 +258,8 @@
             "Info": "",
             "Source": "main",
             "Name": "nodejs",
-            "Version": "21.7.2",
-            "Updated": "\/Date(1712177647173)\/"
+            "Version": "21.7.3",
+            "Updated": "\/Date(1712853610965)\/"
         },
         {
             "Info": "",
@@ -335,8 +342,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "spotify",
-            "Version": "1.2.34.783.g923721d9",
-            "Updated": "\/Date(1712258954503)\/"
+            "Version": "1.2.35.663.gb699649e",
+            "Updated": "\/Date(1712853642843)\/"
         },
         {
             "Info": "",

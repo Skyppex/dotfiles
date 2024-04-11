@@ -411,14 +411,20 @@ def gsw [branch: string] {
 def "scoop reinstall" [
     app?: string
 ] {
+    print $"Reinstalling ($app)"
     mut app = $app;
+    let apps = (scoop list | parse table -s 2 -hcv " +")
+    print $apps
+
     if $app == null {
-        let apps = scoop list | lines | skip 4 | drop 1 | each {|l| $l | split row " " | first | str trim} | to text
-        $app = ($apps | fzf | lines | first)
+        $app = ($apps | get name | fzf | lines | first)
+    } else {
+        $app = ($apps | get name | fzf -0 -1 -f $app | lines | first)
     }
 
-    scoop uninstall $app
-    scoop install $app
+    print $"Reinstalling ($app)"
+    # scoop uninstall $app
+    # scoop install $app
 }
 
 # Open the scoop user manifest file
@@ -524,46 +530,80 @@ def "parse table" [
     --skip(-s): int # Specify the number of rows to skip
     --header(-h) # There is a header row
     --header-spacer(-c) # The header row is separated by a spacer row
-    --delimiter(-d): string # Specify the delimiter (default: ",")
-    --regex(-r): string # Specify the regex to split the table
-    input: string # The table to parse
+    --verbose(-v) # Print verbose output
+    regex: string # Specify the regex to split the table
 ] {
-    if $regex == false and $delimiter == false {
-        print "Either delimiter or regex must be specified"
-        return
+    let input = $in;
+
+    if $verbose {
+        print $"Input:\n($input)"
     }
 
     # Skip n rows in the beginning before the table starts
+    let skip = (if $skip != null {
+        $skip
+    } else {
+        0
+    })
+
+    if $verbose {
+        print $"Skip:\n($skip)"
+    }
+
     mut lines = $input | lines | skip $skip
 
+    if $verbose {
+        print $"Lines:\n($lines)"
+    }
+
+    mut $header_col = []
+    
     # Parse header if it exists
     if $header {
         let header = $lines | first
-        $lines = $lines | to text | lines | skip 1
+        $header_col = ($lines | first | to text | split column -r $regex | to text | lines | each {|l|
+            let s = ($l | str index-of ': ') + 2
+            $l | str substring $s..
+        })
+
+        if $verbose {
+            print $"Header:\n($header)"
+            print $"Header Columns:\n($header_col)"
+        }
+
+        $lines = ($lines | to text | lines | skip 1)
         if $header_spacer {
-            $lines = $lines | to text | lines | skip 1
+            $lines = ($lines | to text | lines | skip 1)
         }
     }
 
-    mut rows = [];
+    if $verbose {
+        print $"Lines:\n($lines)"
+    }
 
-    # Use delimiter or regex to split each line into columns
-    match [$delimiter, $regex] {
-        [true, false] => {
-            $rows = $lines | each { |line|
-                let cols = $line | split column $delimiter
-                $cols
-            }
+    # Use regex to split each line into columns
+    mut rows = $lines | each { |line|
+        let cols = $line | to text | split column -r $regex
+        $cols
+    } | reduce {|row, acc| $acc | append $row} | rename --block { str replace --all 'column' ''}
+
+    if $verbose {
+        print $"Rows:\n($rows)"
+    }
+
+    # Rename columns if header exists
+    if $header {
+        for -n $name in $header_col {
+            let i = (($name.index + 1) | to text);
+            $rows = ($rows | rename -c {$i: $name.item})
         }
-        [false, true] => {
-            $rows = $lines | each { |line|
-                let cols = $line | split column -r $regex
-                $cols
-            }
+        
+        if $verbose {
+            print $"Rows:\n($rows)"
         }
     }
 
-    # Parse list of lists into table and return
+    $rows
 }
 
 # Nushell
