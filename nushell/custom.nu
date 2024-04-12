@@ -263,6 +263,11 @@ def --env enter [
     ...paths: string
 ] {
     for _path in ($paths | reverse) {
+        mut _path = $_path;
+        if ($_path | str ends-with '/') or ($_path | str ends-with '\') {
+            $_path = ($_path | str substring ..-1)
+        }
+
         let target = cdq $_path;
         enter-old $target
     }
