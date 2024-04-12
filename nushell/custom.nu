@@ -59,6 +59,9 @@ alias loc = echo $"($env.PWD)"
 # Paste from the clipboard
 alias paste = powershell -command "Get-Clipboard"
 
+# Get current local time
+def "time now" [] { date now | format date "%H:%M:%S" }
+
 # Remove all files from the Downloads folder
 def rmdl [] {
     let files = ls ~/Downloads
