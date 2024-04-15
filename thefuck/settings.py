@@ -8,7 +8,7 @@
 # See https://github.com/nvbn/thefuck#settings for more information.
 #
 
-# rules = [<const: All rules enabled>]
+# rules = ['cd', 'sudo', 'ls', 'cd_parent']
 # exclude_rules = []
 # wait_command = 3
 # require_confirmation = True
