@@ -128,7 +128,7 @@ def "proj update" [
 }
 
 # Open a project from the project folder
-def "proj start" [
+def "proj open" [
     project_name: string # The name of the project to launch
     --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
 ] {
@@ -233,6 +233,32 @@ def h [
     history
 }
 
+def "h replace" [
+    --exact(-e) # Replace only when the entire line is an exact match (excluding the newline character at the end)
+    old: string # The old string to replace
+    new: string # The new string to replace with
+] {
+    print $"Replacing ($old) with ($new)"
+    let history = open $nu.history-path
+        | lines
+        | each { |line|
+            if $exact {
+                if $line == $old {
+                    $"($new)\n"
+                } else {
+                    $"($line)\n"
+                }
+            } else {
+                let new_line = $line | str replace -a $old $new
+                $"($new_line)\n"
+            }
+        }
+
+    $history
+        | str join ""
+        | save --force $nu.history-path
+}
+
 # Config / Env
 
 # Open the custom nushell config file in vscode
@@ -245,7 +271,7 @@ alias env = start $nu.env-path
 alias dconf = start $"($nu.home-path)/.config"
 
 # Pull the dotfiles from the remote repository
-def "pull dot" [] {
+def "pull" [] {
     enter-old $"($nu.home-path)/.config"
     print "---- pulling config ----"
     git pull --rebase
@@ -260,7 +286,7 @@ def "pull dot" [] {
 }
 
 # Push the dotfiles to the remote repository
-def "push dot" [] {
+def "push" [] {
     print "---- fixing nushell plugins ----"
     open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
     print "---- updating scoop manifest ----"
