@@ -238,7 +238,6 @@ def "h replace" [
     old: string # The old string to replace
     new: string # The new string to replace with
 ] {
-    print $"Replacing ($old) with ($new)"
     let history = open $nu.history-path
         | lines
         | each { |line|
