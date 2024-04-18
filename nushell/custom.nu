@@ -100,6 +100,34 @@ def rmdl [] {
 
 # Projects
 
+# Create a symlink for a project into the project folder
+def "proj add" [
+    --force(-f) # Pass force to the hook command
+    --interactive(-i) # Pass interactive to the hook command
+    --verbose(-v) # Pass verbose to the hook command
+    project: string # The name of the project to add
+] {
+    if $force and $interactive {
+        print "Cannot pass both force and interactive together"
+        return
+    }
+
+    let project_folder = $env.PROJECT_FOLDER | path basename
+
+    let sln = fzf -1 -0 --query $"($project) !($project_folder) .sln$"
+
+    let base = ($sln | path basename);
+
+    match [$force, $interactive, $verbose] {
+        [false, false, true] => { sudo hook -v -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [true, false, true] => { sudo hook -vf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [false, true, true] => { sudo hook -vi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [false, false, false] => { sudo hook -q -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [true, false, false] => { sudo hook -qf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [false, true, false] => { sudo hook -qi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+    }
+}
+
 # Create symlinks for all projects under your working directory into the project folder
 def "proj update" [
     --force(-f) # Pass force to the hook command
@@ -113,16 +141,16 @@ def "proj update" [
 
     let slns = ls -f **\*.sln | where type == file | get name
 
-    $slns | each { |n|
-        let base = ($n | path basename);
+    $slns | each { |sln|
+        let base = ($sln | path basename);
 
         match [$force, $interactive, $verbose] {
-            [false, false, true] => { sudo hook -v -s $n -d ($env.PROJECT_FOLDER | path join $base) }
-            [true, false, true] => { sudo hook -vf -s $n -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, true, true] => { sudo hook -vi -s $n -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, false, false] => { sudo hook -q -s $n -d ($env.PROJECT_FOLDER | path join $base) }
-            [true, false, false] => { sudo hook -qf -s $n -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, true, false] => { sudo hook -qi -s $n -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, false, true] => { sudo hook -v -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [true, false, true] => { sudo hook -vf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, true, true] => { sudo hook -vi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, false, false] => { sudo hook -q -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [true, false, false] => { sudo hook -qf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, true, false] => { sudo hook -qi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
         }
     }
 }
@@ -337,8 +365,25 @@ alias gps = git push
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
-# Git checkout
-alias gc = git checkout
+# Git checkout but with fzf for branch selection
+def gc [branch: string] {
+    let branches = git branch -a | lines
+
+    let branch_names = ($branches | each { |b|
+        mut name = ($b | str substring 2..);
+
+        if ($name | str starts-with "remotes/") {
+            $name = ($name | str substring 8..);
+            let slash = ($name | str index-of '/');
+            $name = ($name | str substring ($slash + 1)..);
+        }
+
+        $name
+    })
+
+    let $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
+    git checkout $"($branch)"
+}
 
 # Get a link to the current github repository
 def ghlink [
