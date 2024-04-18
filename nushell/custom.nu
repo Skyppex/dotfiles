@@ -28,11 +28,11 @@ export extern curl [
     url: string
 ]
 
-# Remember the old enter command
-alias enter-old = enter;
-
 # Copy to clipboard
 export extern "clip" []
+
+# Remember the old enter command
+alias enter-old = enter;
 
 # Neovim
 
@@ -333,6 +333,15 @@ alias sc = start ~/.config/starship.toml
 alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
+
+def --env cdf [...path: string] {
+    let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
+    if $target == null or $target == "" {
+        print "No result found."
+        return
+    }
+    cd $target
+}
 
 # Zoxide query
 alias cdq = zoxide query
