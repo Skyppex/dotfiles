@@ -100,6 +100,8 @@ def rmdl [] {
 
 # Projects
 
+alias proj = ls $env.PROJECT_FOLDER;
+
 # Create a symlink for a project into the project folder
 def "proj add" [
     --force(-f) # Pass force to the hook command
@@ -339,14 +341,19 @@ alias cdi = __zoxide_zi;
 
 # Zoxide change directory using fzf for selection if zoxide doesn't find a match
 def --env z [...path: string] {
-    let path = ($path | to text)
+
+    if $path == null or ($path | to text) == "" {
+        __zoxide_z
+        return
+    }
+
     let current = $env.PWD
-    __zoxide_z $"($path)"
+    __zoxide_z ...$path
     let new = $env.PWD
 
     if $current == $new {
         print "Searching in working directory"
-        let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
+        let target = (ls | get name | to text | fzf -0 -1 --query ...$path)
         if $target == null or $target == "" {
             print "No result found."
             return
