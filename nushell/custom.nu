@@ -334,14 +334,25 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
 
-def --env cdf [...path: string] {
-    let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
-    if $target == null or $target == "" {
-        print "No result found."
-        return
+alias cdi = __zoxide_zi;
+
+def --env z [...path: string] {
+    let path = ($path | to text)
+    let current = $env.PWD
+    __zoxide_z $"($path)"
+    let new = $env.PWD
+
+    if $current == $new {
+        let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
+        if $target == null or $target == "" {
+            print "No result found."
+            return
+        }
+        __zoxide_z $target
     }
-    cd $target
 }
+
+alias cd = z
 
 # Zoxide query
 alias cdq = zoxide query
