@@ -43,8 +43,7 @@ def --env __zoxide_zi [...rest:string] {
 # Commands for zoxide. Disable these using --no-cmd.
 #
 
-alias cd = __zoxide_z
-alias cdi = __zoxide_zi
+# -- not configured --
 
 # =============================================================================
 #

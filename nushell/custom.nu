@@ -334,8 +334,10 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
 
+# Zoxide interactive
 alias cdi = __zoxide_zi;
 
+# Zoxide change directory using fzf for selection if zoxide doesn't find a match
 def --env z [...path: string] {
     let path = ($path | to text)
     let current = $env.PWD
@@ -343,6 +345,7 @@ def --env z [...path: string] {
     let new = $env.PWD
 
     if $current == $new {
+        print "Searching in working directory"
         let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
         if $target == null or $target == "" {
             print "No result found."
@@ -352,6 +355,7 @@ def --env z [...path: string] {
     }
 }
 
+# Zoxide change directory using fzf for selection if zoxide doesn't find a match
 alias cd = z
 
 # Zoxide query
@@ -386,7 +390,15 @@ alias gps = git push
 alias gpf = git push --force-with-lease
 
 # Git checkout but with fzf for branch selection
-def gc [branch: string] {
+def gc [
+    --new-branch(-b) # Create a new branch
+    branch: string
+] {
+    if $new_branch {
+        git checkout -b $"($branch)"
+        return
+    }
+
     let branches = git branch -a | lines
 
     let branch_names = ($branches | each { |b|
