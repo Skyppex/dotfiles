@@ -16,6 +16,7 @@
 #5833B0
 #6B50C8
 
+# Config
 command_timeout = 1000
 
 add_newline = false
