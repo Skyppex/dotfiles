@@ -100,33 +100,40 @@ def rmdl [] {
 
 # Projects
 
-alias proj = ls $env.PROJECT_FOLDER;
+alias proj = ls $env.PROJECTS;
 
 # Create a symlink for a project into the project folder
 def "proj add" [
     --force(-f) # Pass force to the hook command
     --interactive(-i) # Pass interactive to the hook command
     --verbose(-v) # Pass verbose to the hook command
-    project: string # The name of the project to add
+    ...project: string # The name of the project to add
 ] {
     if $force and $interactive {
         print "Cannot pass both force and interactive together"
         return
     }
 
-    let project_folder = $env.PROJECT_FOLDER | path basename
+    let project_folder = $env.PROJECTS | path basename
 
-    let sln = fzf -1 -0 --query $"($project) !($project_folder) .sln$"
+    let project = $project | str join " "
+    mut project = fzf --query ($"($project) !($project_folder) .sln$ | Cargo.toml$")
 
-    let base = ($sln | path basename);
+    let base = if ($project | str ends-with "Cargo.toml") {
+        let ret = $project | path dirname | path basename
+        $project = ($project | path dirname)
+        $ret
+    } else {
+        $project | path basename
+    }
 
     match [$force, $interactive, $verbose] {
-        [false, false, true] => { sudo hook -v -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-        [true, false, true] => { sudo hook -vf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-        [false, true, true] => { sudo hook -vi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-        [false, false, false] => { sudo hook -q -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-        [true, false, false] => { sudo hook -qf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-        [false, true, false] => { sudo hook -qi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+        [false, false, true] => { sudo hook -v -s $project -d ($env.PROJECTS | path join $base) }
+        [true, false, true] => { sudo hook -vf -s $project -d ($env.PROJECTS | path join $base) }
+        [false, true, true] => { sudo hook -vi -s $project -d ($env.PROJECTS | path join $base) }
+        [false, false, false] => { sudo hook -q -s $project -d ($env.PROJECTS | path join $base) }
+        [true, false, false] => { sudo hook -qf -s $project -d ($env.PROJECTS | path join $base) }
+        [false, true, false] => { sudo hook -qi -s $project -d ($env.PROJECTS | path join $base) }
     }
 }
 
@@ -141,18 +148,20 @@ def "proj update" [
         return
     }
 
-    let slns = ls -f **\*.sln | where type == file | get name
+    let csharp_projects = ls -f **\*.sln | where type == file | get name
+    let rust_projects = ls -f **\Cargo.toml | where type == file | get name | each {|p| $p | path dirname}
+    let projects = ($csharp_projects | append $rust_projects)
 
-    $slns | each { |sln|
-        let base = ($sln | path basename);
+    $projects | each { |project|
+        let base = ($project | path basename);
 
         match [$force, $interactive, $verbose] {
-            [false, false, true] => { sudo hook -v -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-            [true, false, true] => { sudo hook -vf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, true, true] => { sudo hook -vi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, false, false] => { sudo hook -q -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-            [true, false, false] => { sudo hook -qf -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
-            [false, true, false] => { sudo hook -qi -s $sln -d ($env.PROJECT_FOLDER | path join $base) }
+            [false, false, true] => { sudo hook -v -s $project -d ($env.PROJECTS | path join $base) }
+            [true, false, true] => { sudo hook -vf -s $project -d ($env.PROJECTS | path join $base) }
+            [false, true, true] => { sudo hook -vi -s $project -d ($env.PROJECTS | path join $base) }
+            [false, false, false] => { sudo hook -q -s $project -d ($env.PROJECTS | path join $base) }
+            [true, false, false] => { sudo hook -qf -s $project -d ($env.PROJECTS | path join $base) }
+            [false, true, false] => { sudo hook -qi -s $project -d ($env.PROJECTS | path join $base) }
         }
     }
 }
@@ -161,8 +170,9 @@ def "proj update" [
 def "proj open" [
     project_name: string # The name of the project to launch
     --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
+    --verbose(-v) # Print verbose output
 ] {
-    enter-old $env.PROJECT_FOLDER
+    enter-old $env.PROJECTS
     let result = fzf -0 -1 -f $project_name
     p
 
@@ -173,16 +183,33 @@ def "proj open" [
 
     let result = $result | lines | first
 
-    let folder = $env.PROJECT_FOLDER | path join $result | path expand | path dirname
+    if $verbose {
+        print $"Result: ($result)"
+    }
+
+    mut folder = $env.PROJECTS | path join $result | path expand
+
+    if (($folder | path parse).extension | is-not-empty) {
+        $folder = ($folder | path dirname)
+    }
+
+    if $verbose {
+        print $"Folder: ($folder)"
+    }
     
-    let project = $env.PROJECT_FOLDER | path join $result
+    let project = $env.PROJECTS | path join $result
+
+    if $verbose {
+        print $"Project: ($project)"
+        print $"Editor: ($editor)"
+    }
 
     match $editor {
         "code" => { code $folder }
         "vim" => { vim $folder }
         "nvim" => { nvim $folder }
         "rider" => { rider $project }
-        _ => { start $project }
+        _ => { code $project }
     }
 }
 
@@ -336,24 +363,16 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
 
-# Zoxide interactive
 alias cdi = __zoxide_zi;
 
-# Zoxide change directory using fzf for selection if zoxide doesn't find a match
 def --env z [...path: string] {
-
-    if $path == null or ($path | to text) == "" {
-        __zoxide_z
-        return
-    }
-
+    let path = ($path | to text)
     let current = $env.PWD
-    __zoxide_z ...$path
+    __zoxide_z $"($path)"
     let new = $env.PWD
 
     if $current == $new {
-        print "Searching in working directory"
-        let target = (ls | get name | to text | fzf -0 -1 --query ...$path)
+        let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
         if $target == null or $target == "" {
             print "No result found."
             return
@@ -362,7 +381,6 @@ def --env z [...path: string] {
     }
 }
 
-# Zoxide change directory using fzf for selection if zoxide doesn't find a match
 alias cd = z
 
 # Zoxide query
@@ -397,15 +415,7 @@ alias gps = git push
 alias gpf = git push --force-with-lease
 
 # Git checkout but with fzf for branch selection
-def gc [
-    --new-branch(-b) # Create a new branch
-    branch: string
-] {
-    if $new_branch {
-        git checkout -b $"($branch)"
-        return
-    }
-
+def gc [branch: string] {
     let branches = git branch -a | lines
 
     let branch_names = ($branches | each { |b|

@@ -106,7 +106,7 @@ starship init nu | save -f ~/.cache/starship/init.nu
 $env.USER_MANIFEST = $"($nu.home-path)/.config/scoop/user_manifest.json"
 
 match ($env.COMPUTERNAME) {
-    "BRAGE-PC" => { $env.PROJECT_FOLDER = ('~\repos\projects' | path expand)  },
-    "DESKTOP-RRC642H" => { $env.PROJECT_FOLDER = D:\Coding\projects },
+    "BRAGE-PC" => { $env.PROJECTS = ('~\repos\projects' | path expand)  },
+    "DESKTOP-RRC642H" => { $env.PROJECTS = D:\Coding\projects },
     _ => { print "Unknown computer name" }
 }
