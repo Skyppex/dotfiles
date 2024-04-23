@@ -340,6 +340,7 @@ alias dconf = code $"($nu.home-path)/.config"
 def "pull" [] {
     enter-old $"($nu.home-path)/.config"
     print "---- pulling config ----"
+    git stash -u
     git pull --rebase
     git submodule update --init --recursive
     print "---- updating scoop ----"
