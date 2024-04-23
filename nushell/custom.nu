@@ -324,7 +324,7 @@ alias conf = start $"($nu.home-path)/.config/nushell/custom.nu"
 alias env = start $nu.env-path
 
 # Open the config workspace in vscode
-alias dconf = start $"($nu.home-path)/.config"
+alias dconf = code $"($nu.home-path)/.config"
 
 # Pull the dotfiles from the remote repository
 def "pull" [] {
@@ -366,13 +366,17 @@ alias ss = start ~/.config/starship-schema.json
 alias cdi = __zoxide_zi;
 
 def --env z [...path: string] {
-    let path = ($path | to text)
+    if ($path == null or ($path | is-empty)) {
+        __zoxide_z
+        return
+    }
+
     let current = $env.PWD
-    __zoxide_z $"($path)"
+    __zoxide_z ...$path
     let new = $env.PWD
 
     if $current == $new {
-        let target = (ls | get name | to text | fzf -0 -1 --query $"($path | to text)")
+        let target = (ls | get name | to text | fzf -0 -1 --query ...$path)
         if $target == null or $target == "" {
             print "No result found."
             return
