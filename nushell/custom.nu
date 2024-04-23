@@ -213,7 +213,7 @@ def "proj open" [
             let ext = ($project | path parse).extension
             match $ext {
                 "sln" => { rider $project }
-                _ => { code $project }
+                _ => { code $folder }
             }
         }
     }
