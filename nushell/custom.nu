@@ -201,7 +201,11 @@ def "proj open" [
 
     if $verbose {
         print $"Project: ($project)"
-        print $"Editor: ($editor)"
+        if ($editor | is-not-empty) {
+            print $"Editor: ($editor)"
+        } else {
+            print "Editor: auto"
+        }
     }
 
     match $editor {
