@@ -1,4 +1,4 @@
-register C:\Users\brage.ingebrigtsen\scoop\persist\rustup\.cargo\bin\nu_plugin_regex.exe  {
+register ~\scoop\persist\rustup\.cargo\bin\nu_plugin_regex.exe  {
   "sig": {
     "name": "regex",
     "usage": "Parse input with a regular expression and display the results.",
