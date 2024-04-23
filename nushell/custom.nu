@@ -197,7 +197,7 @@ def "proj open" [
         print $"Folder: ($folder)"
     }
     
-    let project = $env.PROJECTS | path join $result
+    let project = $env.PROJECTS | path join $result | path expand
 
     if $verbose {
         print $"Project: ($project)"
