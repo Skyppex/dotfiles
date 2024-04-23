@@ -209,7 +209,13 @@ def "proj open" [
         "vim" => { vim $folder }
         "nvim" => { nvim $folder }
         "rider" => { rider $project }
-        _ => { code $project }
+        _ => { 
+            let ext = ($project | path parse).extension
+            match $ext {
+                "sln" => { rider $project }
+                _ => { code $project }
+            }
+        }
     }
 }
 
