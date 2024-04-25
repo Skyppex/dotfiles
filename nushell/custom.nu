@@ -430,7 +430,15 @@ alias gps = git push
 alias gpf = git push --force-with-lease
 
 # Git checkout but with fzf for branch selection
-def gc [branch: string] {
+def gc [
+    -b # Create and checkout a new branch
+    branch: string
+] {
+    if $b {
+        git checkout -b $"($branch)"
+        return
+    }
+
     let branches = git branch -a | lines
 
     let branch_names = ($branches | each { |b|
