@@ -455,6 +455,7 @@ def gc [
 
     let $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
     git checkout $"($branch)"
+    git fetch
 }
 
 # Get a link to the current github repository
@@ -535,6 +536,7 @@ def gcm [] {
     
     if ($branch == "main") {
         print "Switched to main branch"
+        git fetch
         return;
     }
 
@@ -544,6 +546,7 @@ def gcm [] {
     
     if ($branch == "master") {
         print "Switched to master branch"
+        git fetch
         return;
     }
 
