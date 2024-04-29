@@ -173,7 +173,7 @@ def "proj open" [
     --verbose(-v) # Print verbose output
 ] {
     enter-old $env.PROJECTS
-    let result = fzf -0 -1 -f $project_name
+    let result = (ls | get name | to text | fzf -0 -1 -f $project_name)
     p
 
     if ($result | is-empty) or $result == null or $result == "" {
@@ -426,6 +426,9 @@ alias gpl = git pull
 # Git push
 alias gps = git push
 
+# Git amend commit
+alias gca = git commit --amend
+
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
@@ -554,10 +557,11 @@ def gcm [] {
     return;
 }
 
-# Git add all, amend
-def gca [] {
+# Git add all, amend, push --force-with-lease
+def gcapf [] {
     git add -A
-    git commit --amend
+    gca
+    gpf
 }
 
 # Git sync with commit message
