@@ -476,6 +476,75 @@ def gc [
     git fetch
 }
 
+def gr [
+    --verbose(-v) # Print verbose output
+] {
+    if $verbose {
+        git remote -v
+        return
+    }
+
+    git remote
+}
+
+def "gr add" [
+    name: string
+    url: string
+] {
+    git remote add $name $url
+}
+
+def "gr rm" [
+    name?: string
+] {
+    let remotes = git remote -v
+    mut table = [[name url mode]; ["", "", ""]]
+    let rows = ($remotes | lines | each { |r|
+        let split = ($r | split row "\t")
+        let split = ($split | split row " ")
+        let name = ($split | get 0)
+        let url = ($split | get 1)
+        let mode = ($split | get 2 | str replace "(" "" | str replace ")" "")
+        [[name url mode]; [$name, $url, $mode]]
+    })
+
+    $table = ($table | skip)
+
+    for row in $rows {
+        $table = ($table ++ $row)
+    }
+
+    let groups = ($table | group-by --to-table name)
+    
+    mut remotes = [];
+    for -n $it in $groups {
+        let index = $it.index
+        let group = $it.item
+        let name = ($group.items | get name | uniq | str join " -- ")
+        let url = ($group.items | get url | uniq | str join " -- ")
+        let modes = ($group.items | get mode)
+        let mode = ($modes | str join "/")
+        let mode = $"\(($mode)\)"
+        $remotes = ($remotes ++ $"($name) ($url) ($mode)")
+    }
+
+    let target = if $name == null {
+        ($remotes | to text | fzf)
+    } else {
+        ($remotes | to text | fzf -0 -1 --query $name)
+    }
+
+    if ($target | is-empty) {
+        print "No remote selected"
+        return
+    }
+    
+    print $"Removing remote: ($target)"
+    let name = ($target | split row " " | first)
+    git remote remove $name
+}
+
+
 # Get a link to the current github repository
 def ghlink [
     --type(-t): string #Specify the link type (default: "ssh") [ssh, http]
