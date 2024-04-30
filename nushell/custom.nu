@@ -435,11 +435,21 @@ alias gpf = git push --force-with-lease
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch
-    branch: string
+    branch?: string
 ] {
     if $b {
+        if $branch == null {
+            print "No branch name provided"
+            return
+        }
+
         git checkout -b $"($branch)"
         return
+    }
+
+    mut branch = $branch;
+    if $branch == null {
+        $branch = "";
     }
 
     let branches = git branch -a | lines
@@ -456,7 +466,12 @@ def gc [
         $name
     })
 
-    let $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
+    mut $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
+
+    if ($branch | str starts-with "HEAD") {
+        $branch = "HEAD"
+    }
+
     git checkout $"($branch)"
     git fetch
 }
