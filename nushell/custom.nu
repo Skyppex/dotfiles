@@ -41,6 +41,13 @@ alias vim = nvim
 
 # Utils
 
+def "str surround" [
+    start: string,
+    end: string
+] {
+   $"($start)($in)($end)"
+}
+
 def fuck [
     --yes(-y),
     --yeah,
@@ -477,14 +484,147 @@ def gc [
 }
 
 def gr [
+    --find(-f) # Find a remote
     --verbose(-v) # Print verbose output
+    --name-only(-n) # Print only the name of the remote
+    --consice(-c) # Print consice remote information (merge fetch and push into one line)
+    --query(-q): string # Query to send to fzf
 ] {
-    if $verbose {
-        git remote -v
+    if ($name_only and (not $verbose or not $find)) {
+        print "Cannot pass --name-only without --verbose and --find"
         return
     }
 
-    git remote
+    if ($name_only and $consice) {
+        print "Cannot pass --name-only with --consice"
+        return
+    }
+
+    if $consice and not $verbose {
+        print "Cannot pass --consice without --verbose"
+        return
+    }
+
+    let query = if $query == null { "" } else { $query }
+    match [$find, $verbose] {
+        [false, false] => { git remote },
+        [false, true] => {
+            let remotes = (git remote -v);
+
+            if (not $consice) {
+                $remotes
+            } else {
+                mut table = [[info modes]; ["", ""]] | skip
+
+                let remotes = ($remotes | lines | each { |r|
+                    let split = ($r | split row " ")
+                    let name_url = ($split | get 0)
+                    let mode = ($split | get 1 | str replace -ar "[()]" "")
+                    [[info modes]; [$name_url, $mode]]
+                })
+
+                for row in $remotes {
+                    $table = ($table ++ $row)
+                }
+
+                let remotes = $table | each {|r|
+                    let info = ($r | get info)
+                    let modes = ($r | get modes | str join "|" | str surround "(" ")")
+                    $info + " " + $modes
+                }
+
+                let groups = ($table | group-by --to-table info)
+            
+                mut remotes = [];
+                for -n $it in $groups {
+                    let index = $it.index
+                    let group = $it.item
+                    let info = ($group.items | get info | uniq | str join " -- ")
+                    let modes = ($group.items | get modes)
+                    let mode = ($modes | str join "|")
+                    let mode = $"\(($mode)\)"
+                    $remotes = ($remotes ++ $"($info) ($mode)")
+                }
+    
+                $remotes | to text
+            }
+        },
+        [true, false] => {
+            let remotes = git remote
+            let target = ($remotes | lines | to text | fzf -0 -1 --query $query)
+
+            if ($target | is-empty) {
+                print "No remote selected"
+                return
+            }
+
+            $target
+        },
+        [true, true] => {
+            let remotes = git remote -v
+            mut table = [[name url mode]; ["", "", ""]] | skip
+            let rows = ($remotes | lines | each { |r|
+                let split = ($r | split row "\t")
+                let split = ($split | split row " ")
+                let name = ($split | get 0)
+                let url = ($split | get 1)
+                let mode = ($split | get 2 | str replace -ar "[()]" "")
+                [[name url mode]; [$name, $url, $mode]]
+            })
+
+            for row in $rows {
+                $table = ($table ++ $row)
+            }
+            
+            let groups = ($table | group-by --to-table name)
+            
+            mut remotes = [];
+            for -n $it in $groups {
+                let index = $it.index
+                let group = $it.item
+                let name = ($group.items | get name | uniq | first)
+
+                let url_group = ($group.items | group-by --to-table url)
+
+                let urls_with_modes = ($url_group | each { |g|
+                    let url = ($g.items | get url | first)
+                    let modes = ($g.items | get mode | str join "|" | str surround "(" ")")
+                    $url + " " + $modes
+                })
+
+                let url = ($urls_with_modes | str join " | ")
+
+                $remotes = ($remotes ++ $"($name)\t($url)")
+            }
+
+            let target = ($remotes | to text | fzf -0 -1 --query $query)
+
+            if ($target | is-empty) {
+                print "No remote selected"
+                return
+            }
+
+            if $name_only {
+                let name = ($target | split row "\t" | first)
+                $name
+            } else {
+                if not $consice {
+                    let name = ($target | split row "\t" | first)
+                    let split_urls = ($target | split row "\t" | skip | first | split row " | ")
+                    $split_urls | each {|s|
+                        let split = ($s | split row " ")
+                        let url = ($split | get 0)
+                        let modes = ($split | get 1 | str replace -ar "[()]" "" | split row "|" | each { |m| $m | str surround "(" ")" })
+                        $modes | each {|m|
+                            $"($name)\t($url) ($m)"
+                        }
+                    } | to text
+                } else {
+                    $target
+                }
+            }
+        }
+    }
 }
 
 def "gr add" [
@@ -497,53 +637,33 @@ def "gr add" [
 def "gr rm" [
     name?: string
 ] {
-    let remotes = git remote -v
-    mut table = [[name url mode]; ["", "", ""]]
-    let rows = ($remotes | lines | each { |r|
-        let split = ($r | split row "\t")
-        let split = ($split | split row " ")
-        let name = ($split | get 0)
-        let url = ($split | get 1)
-        let mode = ($split | get 2 | str replace "(" "" | str replace ")" "")
-        [[name url mode]; [$name, $url, $mode]]
-    })
+    let target = if name == null { gr -fvc } else { gr -fvcq $name }
 
-    $table = ($table | skip)
-
-    for row in $rows {
-        $table = ($table ++ $row)
-    }
-
-    let groups = ($table | group-by --to-table name)
-    
-    mut remotes = [];
-    for -n $it in $groups {
-        let index = $it.index
-        let group = $it.item
-        let name = ($group.items | get name | uniq | str join " -- ")
-        let url = ($group.items | get url | uniq | str join " -- ")
-        let modes = ($group.items | get mode)
-        let mode = ($modes | str join "/")
-        let mode = $"\(($mode)\)"
-        $remotes = ($remotes ++ $"($name) ($url) ($mode)")
-    }
-
-    let target = if $name == null {
-        ($remotes | to text | fzf)
-    } else {
-        ($remotes | to text | fzf -0 -1 --query $name)
-    }
-
-    if ($target | is-empty) {
-        print "No remote selected"
+    if $target == null {
         return
     }
-    
+
     print $"Removing remote: ($target)"
-    let name = ($target | split row " " | first)
+    let name = ($target | split row "\t" | first)
     git remote remove $name
 }
 
+def "gr rename" [
+    --old(-o): string,
+    --new(-n): string
+] {
+    let input = $in;
+    let old = if $old != null { $old } else { $input }
+
+    let new = if $new == null {
+        print "Enter the new name for the remote:"
+        input
+    } else {
+        $new
+    }
+
+    git remote rename $old $new
+}
 
 # Get a link to the current github repository
 def ghlink [
