@@ -653,7 +653,15 @@ def "gr rename" [
     --new(-n): string
 ] {
     let input = $in;
-    let old = if $old != null { $old } else { $input }
+    let old = if $old != null {
+        $old
+    } else if $input != null {
+        $input
+    } else {
+        gr -fvn
+    }
+
+    print $"Renaming remote: ($old)"
 
     let new = if $new == null {
         print "Enter the new name for the remote:"
@@ -662,6 +670,7 @@ def "gr rename" [
         $new
     }
 
+    print $"($old) -> ($new)"
     git remote rename $old $new
 }
 
