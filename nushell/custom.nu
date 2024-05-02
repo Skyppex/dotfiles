@@ -442,10 +442,12 @@ alias gpf = git push --force-with-lease
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch
-    branch?: string
+    ...branch: string
 ] {
+    let branch = ($branch | str join "-")
+
     if $b {
-        if $branch == null {
+        if ($branch | is-empty) {
             print "No branch name provided"
             return
         }
@@ -455,7 +457,7 @@ def gc [
     }
 
     mut branch = $branch;
-    if $branch == null {
+    if ($branch | is-empty) {
         $branch = "";
     }
 
