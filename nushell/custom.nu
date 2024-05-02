@@ -109,6 +109,19 @@ def rmdl [] {
 
 alias proj = ls $env.PROJECTS;
 
+def "proj find" [...project: string] {
+    let project_folder = $env.PROJECTS | path basename
+    let project = $project | str join " "
+    let result = (ls $env.PROJECTS | where type == symlink | get name | to text | fzf -0 -1 --query ($"($project)"))
+    
+    if ($result | is-empty) {
+        print "No project found"
+        return
+    }
+
+    $result
+}
+
 # Create a symlink for a project into the project folder
 def "proj add" [
     --force(-f) # Pass force to the hook command
@@ -124,7 +137,7 @@ def "proj add" [
     let project_folder = $env.PROJECTS | path basename
 
     let project = $project | str join " "
-    mut project = fzf --query ($"($project) !($project_folder) .sln$ | Cargo.toml$")
+    mut project = fzf -0 -1 --query ($"($project) !($project_folder) .sln$ | Cargo.toml$")
 
     let base = if ($project | str ends-with "Cargo.toml") {
         let ret = $project | path dirname | path basename
@@ -142,6 +155,21 @@ def "proj add" [
         [true, false, false] => { sudo hook -qf -s $project -d ($env.PROJECTS | path join $base) }
         [false, true, false] => { sudo hook -qi -s $project -d ($env.PROJECTS | path join $base) }
     }
+}
+
+def "proj rm" [
+    ...project: string # The name of the project to remove
+] {
+    let project_folder = $env.PROJECTS | path basename
+    let project = $project | str join " "
+    let result = (ls $env.PROJECTS | where type == symlink | get name | to text | fzf -0 -1 --query ($"($project)"))
+
+    if ($result | is-empty) {
+        print "No project found"
+        return
+    }
+
+    rm -t $result
 }
 
 # Create symlinks for all projects under your working directory into the project folder
