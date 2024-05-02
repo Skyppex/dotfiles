@@ -650,7 +650,7 @@ def "gr rm" [
     git remote remove $name
 }
 
-def "gr rename" [
+def "gr mv" [
     --old(-o): string,
     --new(-n): string
 ] {
