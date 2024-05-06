@@ -19,6 +19,7 @@
   "UseGlyphIcons": true,
   "UseAnimation": true,
   "UseSound": false,
+  "SoundVolume": 50,
   "UseClock": true,
   "UseDate": false,
   "TimeFormat": "hh:mm tt",
