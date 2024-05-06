@@ -31,6 +31,14 @@ export extern curl [
 # Copy to clipboard
 export extern "clip" []
 
+# Cascading print
+export extern "cascade" [
+    --message(-m): string # The message to cascade print
+    --loop(-l) # Whether to loop the program
+    --help(-h) # Print help
+    --version(-V) # Print version
+]
+
 # Remember the old enter command
 alias enter-old = enter;
 
