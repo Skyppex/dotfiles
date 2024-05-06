@@ -455,12 +455,6 @@ def --env enter [
 
 # Git
 
-# Git pull
-alias gpl = git pull
-
-# Git push
-alias gps = git push
-
 # Git amend commit
 alias gca = git commit --amend
 
@@ -807,29 +801,11 @@ def gcapf [] {
     gpf
 }
 
-# Git sync with commit message
-def "git sync" [message: string] {
-    gpr
-    gcp $message
-}
-
-# Git pull with rebase and submodule update recursive
-def gpr [] {
-    git pull --rebase
-    git submodule update --init --recursive
-}
-
 # Git commit and push
 def gcp [message: string] {
     git add -A
     git commit -m $"($message)"
     git push
-}
-
-# Git stash and checkout
-def gsw [branch: string] {
-    git stash -u
-    git checkout $"($branch)"
 }
 
 # Scoop
