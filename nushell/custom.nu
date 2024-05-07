@@ -808,8 +808,9 @@ def gcapf [] {
 }
 
 # Git commit and push
-def gcp [message: string] {
+def gcp [...message: string] {
     git add -A
+    let message = ($message | str join " ")
     git commit -m $"($message)"
     git push
 }
