@@ -814,6 +814,113 @@ def gcp [message: string] {
     git push
 }
 
+# GitHub
+
+# Open a repo in the browser
+def "gh open" [
+    --verbose(-v) # Print verbose output
+    --owner(-o): string
+    --user(-u)
+    repo?: string
+] {
+    if $user {
+        if ($repo != null and $repo != "") {
+            print "Cannot pass both --user and a repo name"
+            return
+        }
+
+        if $verbose {
+            print "Opening User"
+        }
+
+        mut users = [];
+
+        if $owner != null {
+            $users = ($users | append $owner)
+        }
+
+
+        if ($users | is-empty) {
+            $users = (gh api user | jq -r '.login')
+            let orgusers = gh org list -L 100 | lines
+            $users = ($users | append $orgusers)
+        }
+
+        let user = ($users | to text | fzf -0 -1)
+        start $"https://github.com/($user)"
+    }
+
+    mut repo = $repo
+    if $repo == null { $repo = "" } else {}
+    
+    if $owner != null {
+        if $verbose {
+            print $"Owner: ($owner)"
+        }
+
+        let repos = gh repo list -L 500 $owner
+        let repos = ($repos | parse table "\t+" | get '1')
+
+        if $verbose {
+            print "Repos:"
+            print $repos
+        }
+        
+        $repo = ($repos | to text | fzf -0 -1 --query $repo)
+    } else {
+        if $verbose {
+            print "No owner provided"
+        }
+
+        mut repos = gh repo list -L 500
+        $repos = ($repos | parse table "\t+" | get '1')
+
+        if $verbose {
+            print "Owned Repos:"
+            print $repos
+        }
+
+        let orgs = gh org list -L 100 | lines
+        
+        if $verbose {
+            print "Orgs:"
+            print $orgs
+        }
+
+        for org in $orgs {
+            let orgrepos = gh repo list -L 500 $org
+            let orgrepos = ($orgrepos | parse table "\t+" | get '1')
+            
+            if $verbose {
+                print $"Org: ($org)"
+                print "Repos:"
+                print $orgrepos
+            }
+
+            $repos = ($repos | append $orgrepos)
+        }
+
+        $repo = ($repos | to text | fzf -0 -1 --query $repo)
+    }
+
+    if $verbose {
+        print $"Repo: ($repo)"
+    }
+
+    if ($repo == "" or $repo == null) {
+        print "No repo selected"
+        return
+    }
+
+    let link = $"https://github.com/($repo)"
+    
+    if $verbose {
+        print $"Link: ($link)"
+    }
+
+    start $link
+}
+
 # Scoop
 
 # Reinstall an app
