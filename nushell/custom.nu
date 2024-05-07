@@ -328,10 +328,8 @@ def h [
         mut history = open $nu.history-path
             | lines
             | reverse
-            | where { |line|
-                let starts_with = $line | str starts-with $clear_starts_with
-                not $starts_with
-            } | reverse
+            | where (not ($it | str starts-with $clear_starts_with))
+            | reverse
 
         $history
             | str join "\n"
