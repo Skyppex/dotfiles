@@ -134,7 +134,7 @@ def "proj find" [...project: string] {
 def "proj add" [
     --force(-f) # Pass force to the hook command
     --interactive(-i) # Pass interactive to the hook command
-    --verbose(-v) # Pass verbose to the hook command
+    --verbose(-v) # Print verbose output and pass verbose to the hook command
     ...project: string # The name of the project to add
 ] {
     if $force and $interactive {
@@ -144,15 +144,42 @@ def "proj add" [
 
     let project_folder = $env.PROJECTS | path basename
 
+    if $verbose {
+        print $"Project Folder: ($project_folder)"
+    }
+
     let project = $project | str join " "
     mut project = fzf -0 -1 --query ($"($project) !($project_folder) .sln$ | Cargo.toml$")
+    $project = ($project | path expand)
+
+    if $verbose {
+        print $"Project: ($project)"
+    }
 
     let base = if ($project | str ends-with "Cargo.toml") {
+        if $verbose {
+            print "Rust project"
+        }
+
         let ret = $project | path dirname | path basename
+        
+        if $verbose {
+            print $"Ret: ($ret)"
+        }
+
         $project = ($project | path dirname)
+        
+        if $verbose {
+            print $"Project2: ($project)"
+        }
+
         $ret
     } else {
         $project | path basename
+    }
+
+    if $verbose {
+        print $"Base: ($base)"
     }
 
     match [$force, $interactive, $verbose] {
