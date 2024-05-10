@@ -1177,8 +1177,14 @@ alias fox = echo "The quick brown fox jumps over the lazy dog"
 # Echo a sentence with all the letters of the alphabet
 alias dwarf = echo "Pack my box with five dozen liquor jugs"
 
-# Echo a sentence with almost all the letters of the alphabet (no f)
+# Echo a sentence with all the letters of the alphabet
 alias sphinx = echo "Sphinx of black quartz, judge my vow"
+
+# Echo a sentence with all the letters of the alphabet
+alias disco = echo "Amazingly few discoteques provide jukemoxes"
+
+# Echo a sentence with all the letters of the alphabet
+alias waltz = echo "Waltz, bad nymph, for quick jigs vex"
 
 # Echo the lorem ipsum text
 def lorem [] {
