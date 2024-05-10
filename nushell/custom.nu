@@ -488,6 +488,9 @@ def --env enter [
 
 # Git
 
+# Git status
+alias gs = git status
+
 # Git amend commit
 alias gca = git commit --amend
 
