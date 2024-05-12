@@ -49,6 +49,12 @@ alias vim = nvim
 
 # Utils
 
+# Not command
+def n [] {
+    not $in
+}
+
+# Surround the input with the provided strings
 def "str surround" [
     start: string,
     end: string
@@ -56,6 +62,7 @@ def "str surround" [
    $"($start)($in)($end)"
 }
 
+# Custom defenition for the 'fuck' command from 'thefuck'
 def fuck [
     --yes(-y),
     --yeah,
@@ -115,8 +122,10 @@ def rmdl [] {
 
 # Projects
 
+# List project folder
 alias proj = ls $env.PROJECTS;
 
+# Find project in project folder
 def "proj find" [...project: string] {
     let project_folder = $env.PROJECTS | path basename
     let project = $project | str join " "
@@ -192,6 +201,7 @@ def "proj add" [
     }
 }
 
+# Remove project from project folder
 def "proj rm" [
     ...project: string # The name of the project to remove
 ] {
@@ -336,7 +346,7 @@ def h [
         mut history = open $nu.history-path
             | lines
             | reverse
-            | where ($it | str contains --not $clear_contains)
+            | where ($it | str contains $clear_contains | n)
             | reverse
 
         $history
@@ -368,6 +378,7 @@ def h [
     history
 }
 
+# Replace strings in the history file
 def "h replace" [
     --exact(-e) # Replace only when the entire line is an exact match (excluding the newline character at the end)
     old: string # The old string to replace
@@ -442,8 +453,10 @@ alias ss = start ~/.config/starship-schema.json
 
 # Zoxide
 
+# Alias for __zoxide_zi
 alias cdi = __zoxide_zi;
 
+# The new 'cd' command using zoxide and fzf
 def --env z [...path: string] {
     if ($path == null or ($path | is-empty)) {
         __zoxide_z
@@ -464,6 +477,7 @@ def --env z [...path: string] {
     }
 }
 
+# Alias for z making it into cd
 alias cd = z
 
 # Zoxide query
@@ -543,6 +557,7 @@ def gc [
     git fetch
 }
 
+# Git remote using fzf
 def gr [
     --find(-f) # Find a remote
     --verbose(-v) # Print verbose output
@@ -687,6 +702,7 @@ def gr [
     }
 }
 
+# Git remote add
 def "gr add" [
     name: string
     url: string
@@ -694,6 +710,7 @@ def "gr add" [
     git remote add $name $url
 }
 
+# Git remote remove using fzf
 def "gr rm" [
     name?: string
 ] {
@@ -708,6 +725,7 @@ def "gr rm" [
     git remote remove $name
 }
 
+# Git remote rename using fzf
 def "gr mv" [
     --old(-o): string,
     --new(-n): string
@@ -797,10 +815,12 @@ def ghlink [
     }
 }
 
+# GitHub link using ssh
 def "ghlink-ssh" [owner: string, repo: string] {
     echo $"git@github.com:($owner)/($repo).git"
 }
 
+# GitHub link using http
 def "ghlink-http" [owner: string, repo: string] {
     echo $"https://github.com/($owner)/($repo).git"
 }
@@ -954,27 +974,6 @@ def "gh open" [
 
 # Scoop
 
-# Reinstall an app
-# This uninstalls all versions of the app and then installs the latest version
-def "scoop reinstall" [
-    app?: string
-] {
-    print $"Reinstalling ($app)"
-    mut app = $app;
-    let apps = (scoop list | parse table -s 2 -hcv " +")
-    print $apps
-
-    if $app == null {
-        $app = ($apps | get name | fzf | lines | first)
-    } else {
-        $app = ($apps | get name | fzf -0 -1 -f $app | lines | first)
-    }
-
-    print $"Reinstalling ($app)"
-    # scoop uninstall $app
-    # scoop install $app
-}
-
 # Open the scoop user manifest file
 alias manifest = open $"($nu.home-path)/.config/scoop/manifest.json"
 
@@ -1074,6 +1073,7 @@ def "manifest rm" [] {
     rm $"($nu.home-path)/.config/scoop/manifest.json"
 }
 
+# Parse text into a table using regex
 def "parse table" [
     --skip(-s): int # Specify the number of rows to skip
     --header(-h) # There is a header row
@@ -1167,6 +1167,9 @@ def "plugin add" [name: string] {
 
 # Echo 'Hello, $user'
 alias "hello world" = echo $"Hello, (whoami)!"
+
+# Echo 'Hello, $user'
+alias "hello" = echo $"Hello, (whoami)!"
 
 # Echo a sentence with all the letters of the alphabet only appearing once
 alias cwm = echo "Cwm fjord bank glyphs vext quiz"
