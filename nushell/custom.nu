@@ -505,6 +505,9 @@ def --env enter [
 # Git status
 alias gs = git status
 
+# Git log
+alias gl = git log
+
 # Git amend commit
 alias gca = git commit --amend
 
