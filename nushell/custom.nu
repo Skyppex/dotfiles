@@ -875,8 +875,10 @@ def "gh open" [
     --verbose(-v) # Print verbose output
     --owner(-o): string
     --user(-u)
-    repo?: string
+    --exact(-e)
+    ...repo: string
 ] {
+    let repo = $repo | str join " "
     if $user {
         if ($repo != null and $repo != "") {
             print "Cannot pass both --user and a repo name"
@@ -900,7 +902,12 @@ def "gh open" [
             $users = ($users | append $orgusers)
         }
 
-        let user = ($users | to text | fzf -0 -1)
+        let user = if $exact {
+            $users | to text | fzf -e -0 -1
+        } else {
+            $users | to text | fzf -0 -1
+        }
+
         start $"https://github.com/($user)"
     }
 
@@ -920,7 +927,15 @@ def "gh open" [
             print $repos
         }
         
-        $repo = ($repos | to text | fzf -0 -1 --query $repo)
+        if $verbose {
+            print $"Repo: ($repo)"
+        }
+
+        $repo = if $exact {
+            $repos | to text | fzf -e -0 -1 --query $repo
+        } else {
+            $repos | to text | fzf -0 -1 --query $repo
+        }
     } else {
         if $verbose {
             print "No owner provided"
@@ -954,7 +969,15 @@ def "gh open" [
             $repos = ($repos | append $orgrepos)
         }
 
-        $repo = ($repos | to text | fzf -0 -1 --query $repo)
+        if $verbose {
+            print $"Repo: ($repo)"
+        }
+
+        $repo = if $exact {
+            $repos | to text | fzf -e -0 -1 --query $repo
+        } else {
+            $repos | to text | fzf -0 -1 --query $repo
+        }
     }
 
     if $verbose {
