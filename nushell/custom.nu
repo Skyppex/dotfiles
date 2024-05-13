@@ -552,6 +552,11 @@ def gc [
 
     mut $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
 
+    if ($branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
     if ($branch | str starts-with "HEAD") {
         $branch = "HEAD"
     }
