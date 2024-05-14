@@ -20,6 +20,7 @@ local config = {
         { key = ".",mods = "CTRL",       action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
         { key = "z", mods = "LEADER",       action="TogglePaneZoomState" },
         { key = "n", mods = "CTRL",       action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
+        { key = "n", mods = "SHIFT|CTRL",       action=wezterm.action.ShowLauncher},
         { key = "h", mods = "CTRL",       action=wezterm.action{ActivatePaneDirection="Left"}},
         { key = "j", mods = "CTRL",       action=wezterm.action{ActivatePaneDirection="Up"}},
         { key = "k", mods = "CTRL",       action=wezterm.action{ActivatePaneDirection="Down"}},
@@ -40,7 +41,7 @@ local config = {
         { key = "X", mods = "SHIFT|CTRL", action=wezterm.action{CloseCurrentTab={confirm=true}}},
         { key = "x", mods = "CTRL",       action=wezterm.action{CloseCurrentPane={confirm=true}}},
 
-        { key = "n", mods="SHIFT|CTRL",     action="ToggleFullScreen" },
+        { key = "F", mods="SHIFT|CTRL",     action="ToggleFullScreen" },
         { key ="v",  mods="LEADER|CTRL",    action=wezterm.action.PasteFrom 'Clipboard'},
         { key ="c",  mods="LEADER|CTRL",    action=wezterm.action.CopyTo 'Clipboard'},
         { key = "+", mods="CTRL",     action="IncreaseFontSize" },
@@ -54,9 +55,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { 'nu' }
     -- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
     config.term = "" -- Set to empty so FZF works on windows
-    table.insert(config.launch_menu, { label = "powershell", args = {"powershell.exe", "-NoLogo"} })
     table.insert(config.launch_menu, { label = "nu", args = {"nu"} })
-    table.insert(config.launch_menu, { label = "git bash", args = {"git bash"} })
+    table.insert(config.launch_menu, { label = "powershell", args = {"powershell.exe", "-NoLogo"} })
 
     -- Find installed visual studio version(s) and add their compilation
     -- environment command prompts to the menu
@@ -70,7 +70,6 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 else
     config.default_prog = { 'nu' }
     table.insert(config.launch_menu, { label = "nu", args = {"nu"} })
-    table.insert(config.launch_menu, { label = "git bash", args = {"git bash", "-l"} })
 end
 
 return config
