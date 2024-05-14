@@ -9,7 +9,7 @@ local config = {
         saturation = 1.0,
         brightness = 1.0,
     },
-    font_size = 16.0,
+    font_size = 10.0,
     launch_menu = {},
     leader = { key="a", mods="CTRL" },
     disable_default_key_bindings = true,
@@ -52,9 +52,9 @@ local config = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    config.default_prog = { 'nu' }
     -- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
-    config.term = "" -- Set to empty so FZF works on windows
+
+    config.default_prog = { 'nu' }
     table.insert(config.launch_menu, { label = "nu", args = {"nu"} })
     table.insert(config.launch_menu, { label = "powershell", args = {"powershell.exe", "-NoLogo"} })
 
