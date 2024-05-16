@@ -53,7 +53,7 @@ local config = {
 		{ key = "x", mods = "CTRL", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
 
 		{ key = "F", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
-		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
+		{ key = "v", mods = "LEADER|CTRL", action = wezterm.action.PasteFrom("Clipboard") },
 		{ key = "c", mods = "LEADER|CTRL", action = wezterm.action.CopyTo("Clipboard") },
 		{ key = "c", mods = "CTRL", action = wezterm.action.SendString("\x03") },
 		{ key = "+", mods = "CTRL", action = "IncreaseFontSize" },
