@@ -37,7 +37,7 @@ What is Kickstart?
       - https://learnxinyminutes.com/docs/lua/
 
     After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
+    reference for how Neovim integrates Lua
     - :help lua-guide
     - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 
@@ -92,6 +92,8 @@ vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "j", "<up>")
 vim.keymap.set("n", "k", "<down>")
+vim.keymap.set("n", "<A-j>", ":cprev<Enter>")
+vim.keymap.set("n", "<A-k>", ":cnext<Enter>")
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -145,8 +147,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.list = false
+--vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -259,6 +261,11 @@ require("lazy").setup({
 				changedelete = { text = "~" },
 			},
 		},
+	},
+
+	{
+		"LhKipp/nvim-nu",
+		opts = {},
 	},
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -615,6 +622,8 @@ require("lazy").setup({
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
+				"rust-analyzer",
+				"csharp-language-server",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
