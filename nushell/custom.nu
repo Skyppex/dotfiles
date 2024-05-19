@@ -53,7 +53,10 @@ def vim [
     } else if (($path | str join " ") == "..") {
         nvim ..
     } else {
-        nvim (zoxide query ...$path)
+        let path = zoxide query ...$path
+        enter $path
+        nvim .
+        p
    }
 }
 
