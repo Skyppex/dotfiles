@@ -45,7 +45,17 @@ alias enter-old = enter;
 # Neovim
 
 # Open neovim
-alias vim = nvim
+def vim [
+    ...path
+] {
+    if (($path | str join " ") == ".") {
+        nvim .
+    } else if (($path | str join " ") == "..") {
+        nvim ..
+    } else {
+        nvim (zoxide query ...$path)
+   }
+}
 
 # Utils
 
