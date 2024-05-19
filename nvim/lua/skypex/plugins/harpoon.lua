@@ -46,6 +46,18 @@ return {
 			vim.keymap.set("n", "<A-l>", function()
 				ui.nav_file(4)
 			end)
+			vim.keymap.set("n", "<A-n>", function()
+				ui.nav_file(5)
+			end)
+			vim.keymap.set("n", "<A-m>", function()
+				ui.nav_file(6)
+			end)
+			vim.keymap.set("n", "<A-,>", function()
+				ui.nav_file(7)
+			end)
+			vim.keymap.set("n", "<A-.>", function()
+				ui.nav_file(8)
+			end)
 		end,
 	},
 }

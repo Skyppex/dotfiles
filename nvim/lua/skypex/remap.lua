@@ -1,19 +1,29 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("v", "<C-c>", "<Esc>")
+-- Alias ctrl+c to Esc
+vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>")
 
+-- Reverse j and k in normal mode
 vim.keymap.set({ "n", "v" }, "j", "<up>")
 vim.keymap.set({ "n", "v" }, "k", "<down>")
 
+-- Navigation in insert mode and x mode
 vim.keymap.set({ "i", "x" }, "<A-h>", "<left>")
 vim.keymap.set({ "i", "x" }, "<A-j>", "<up>")
 vim.keymap.set({ "i", "x" }, "<A-k>", "<down>")
 vim.keymap.set({ "i", "x" }, "<A-l>", "<right>")
 
+-- TIP: Disable arrow keys in insert mode and x mode
+vim.keymap.set({ "i", "x" }, "<left>", '<cmd>echo "Use alt+h to move in insert mode!!"<CR>')
+vim.keymap.set({ "i", "x" }, "<right>", '<cmd>echo "Use alt+l to move in insert mode!!"<CR>')
+vim.keymap.set({ "i", "x" }, "<up>", '<cmd>echo "Use alt+j to move in insert mode!!"<CR>')
+vim.keymap.set({ "i", "x" }, "<down>", '<cmd>echo "Use alt+k to move in insert mode!!"<CR>')
+
+-- Quickfix list navigation
 vim.keymap.set("n", "<S-A-j>", ":cprev<CR>zz")
 vim.keymap.set("n", "<S-A-k>", ":cnext<CR>zz")
 
@@ -29,7 +39,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Vzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("x", "<leader>p", '"_dP')
 
@@ -100,7 +110,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set("n", "<up>", '<cmd>echo "Use j to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use k to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
