@@ -56,7 +56,8 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 -- Handle simple things in normal mode
 vim.keymap.set("n", "<leader><CR>", "A<CR><ESC>")
 vim.keymap.set("n", "<leader><BS>", "i<BS><ESC>")
-vim.keymap.set("n", "<leader><DEL>", "i<Del><ESC>")
+vim.keymap.set("n", "<leader><del>", "i<del><ESC>")
+vim.keymap.set("n", "<leader><tab>", "i<tab><ESC>")
 
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>')

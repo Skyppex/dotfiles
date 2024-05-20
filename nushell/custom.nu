@@ -40,7 +40,7 @@ export extern "cascade" [
 ]
 
 # Remember the old enter command
-alias enter-old = ent r;
+alias enter-old = enter;
 
 # Neovim
 
@@ -515,6 +515,18 @@ def --env enter [
 
 # Git
 
+# Git push
+alias "git gud" = git push
+
+# Git push force with lease
+alias "git verygud" = git push --force-with-lease
+
+# Git reset
+alias "git bad" = git reset
+
+# Git reset --hard
+alias "git verybad" = git reset --hard
+
 # Git status
 alias gs = git status
 
@@ -771,6 +783,91 @@ def "gr mv" [
 
     print $"($old) -> ($new)"
     git remote rename $old $new
+}
+
+def gb [
+    --all(-a)
+    --show-current(-s)
+] {
+    if $all and $show_current {
+        print "Cannot pass more than one argument"
+        return
+    }
+
+    if $all {
+        git branch --all
+        return
+    }
+
+    if $show_current {
+        git branch --show-current
+        return
+    }
+
+    git branch
+}
+
+def "gb move" [...query: string] {
+    let branches = (git branch --list | lines)
+    let query = $query | str join " "
+    let selected_branch = ($branches | to text | fzf -0 -1 -q $query)
+
+    if ($selected_branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
+    let selected_branch = ($selected_branch | str substring 2..)
+    print $"Selected branch: ($selected_branch)"
+    
+    print "Enter a new name for the branch:"
+    let new_name = input
+    let new_name = ($new_name | split row " " | str join "-")
+
+    print $"Renaming ($selected_branch) -> ($new_name)"
+    git branch --move $selected_branch $new_name
+}
+
+def "gb delete" [
+    --force(-f)
+    ...query: string
+] {
+    let branches = (git branch --all | lines)
+    let query = $query | str join " "
+    let selected_branch = ($branches | to text | fzf -0 -q $query)
+
+    if ($selected_branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
+    mut selected_branch = ($selected_branch | str substring 2..)
+    
+    mut remote = false
+
+    if ($selected_branch | str starts-with "remotes") {
+        $selected_branch = ($selected_branch | str substring 8..)
+        $remote = true
+    } 
+
+    match [$force, $remote] {
+        [false, false] => {
+            print $"Deleting branch: ($selected_branch)"
+            git branch --delete $selected_branch
+        },
+        [true, false] => {
+            print $"Deleting branch even if unmerged: ($selected_branch)"
+            git branch -D $selected_branch
+        },
+        [false, true] => {
+            print $"Deleting remote branch: ($selected_branch)"
+            git branch --delete --remote $selected_branch
+        },
+        [true, true] => {
+            print $"Deleting remote branch even if unmerged: ($selected_branch)"
+            git branch -D --remote $selected_branch
+        }
+    }
 }
 
 # Get a link to the current github repository
