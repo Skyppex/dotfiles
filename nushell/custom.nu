@@ -40,7 +40,7 @@ export extern "cascade" [
 ]
 
 # Remember the old enter command
-alias enter-old = enter;
+alias enter-old = ent r;
 
 # Neovim
 

@@ -1,7 +1,8 @@
 return {
-    { -- Highlight, edit, and navigate code
+	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = "nushell/tree-sitter-nu",
 		opts = {
 			ensure_installed = { "rust", "nu", "diff", "lua", "luadoc", "markdown", "vim", "vimdoc" },
 
@@ -17,6 +18,7 @@ return {
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
 				additional_vim_regex_highlighting = false,
 			},
+			indent = { enable = true },
 		},
 		config = function(_, opts)
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -33,5 +35,8 @@ return {
 			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
+	},
+	{
+		"nushell/tree-sitter-nu",
 	},
 }

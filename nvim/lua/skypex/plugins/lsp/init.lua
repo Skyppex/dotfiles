@@ -180,7 +180,7 @@ return {
 					-- capabilities = {},
 					settings = {
 						Lua = {
-							runtime = { version = "Luajit" },
+							runtime = { version = "LuaJIT" },
 							workspace = {
 								checkThirdParty = false,
 								library = {
