@@ -39,4 +39,7 @@ return {
 	{
 		"nushell/tree-sitter-nu",
 	},
+	{
+		"tree-sitter/tree-sitter-c-sharp",
+	},
 }

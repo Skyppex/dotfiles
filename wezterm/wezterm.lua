@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local sessionizer = require("sessionizer")
 
 local config = {
 	audible_bell = "Disabled",
@@ -63,6 +64,7 @@ local config = {
 		{ key = "PageDown", mods = "SHIFT|ALT", action = wezterm.action.ScrollByPage(0.1) },
 		{ key = "PageUp", mods = "SHIFT", action = wezterm.action.ScrollByLine(-1) },
 		{ key = "PageDown", mods = "SHIFT", action = wezterm.action.ScrollByLine(1) },
+		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
 	},
 	set_environment_variables = {},
 }

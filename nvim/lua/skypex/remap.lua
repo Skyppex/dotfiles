@@ -26,8 +26,12 @@ vim.keymap.set("n", "<S-A-k>", ":cnext<CR>zz")
 vim.keymap.set("n", "<leader>j", ":lprev<CR>zz")
 vim.keymap.set("n", "<leader>k", ":lnext<CR>zz")
 
+vim.keymap.set("n", "<S-A-x>", ":cclose<CR>")
+
+-- Save file
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 
+-- Move lines of code in visual mode
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
 
@@ -55,9 +59,21 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 
 -- Handle simple things in normal mode
 vim.keymap.set("n", "<leader><CR>", "A<CR><ESC>")
+vim.keymap.set("n", "<leader>a<CR>", "a<CR><ESC>")
+vim.keymap.set("n", "<leader>i<CR>", "i<CR><ESC>")
+
 vim.keymap.set("n", "<leader><BS>", "i<BS><ESC>")
-vim.keymap.set("n", "<leader><del>", "i<del><ESC>")
-vim.keymap.set("n", "<leader><tab>", "i<tab><ESC>")
+vim.keymap.set("n", "<leader>a<BS>", "a<BS><ESC>")
+vim.keymap.set("n", "<leader>i<BS>", "i<BS><ESC>")
+
+vim.keymap.set("n", "<leader><del>", "a<del><ESC>")
+vim.keymap.set("n", "<leader>a<del>", "a<del><ESC>")
+vim.keymap.set("n", "<leader>i<del>", "i<del><ESC>")
+
+vim.keymap.set("n", "<leader><tab>", "a<tab><ESC>")
+vim.keymap.set("n", "<leader>a<tab>", "a<tab><ESC>")
+vim.keymap.set("n", "<leader>i<tab>", "i<tab><ESC>")
+vim.keymap.set("n", "<leader>0<tab>", "0i<tab><ESC>")
 
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>')
@@ -115,5 +131,5 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use k to move!!"<CR>')
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set("n", "<C-w>h", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-w>j", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<C-w>k", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-w>j", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-w>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-w>k", "<C-w><C-j>", { desc = "Move focus to the lower window" })

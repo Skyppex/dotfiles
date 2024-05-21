@@ -216,14 +216,26 @@ return {
 				"lua-language-server",
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
-				"csharp-language-server",
+				"omnisharp",
 			})
 
-			require("lspconfig").nushell.setup({
+			local lspconfig = require("lspconfig")
+			lspconfig.nushell.setup({
 				cmd = { "nu", "--lsp" },
 				filetypes = { "nu" },
 				single_file_support = true,
 				root_dir = require("lspconfig").util.find_git_ancestor,
+			})
+
+			lspconfig.omnisharp.setup({
+				capabilities = capabilities,
+				cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+				enable_import_completion = true,
+				organize_imports_on_format = true,
+				enable_roslyn_analyzers = true,
+				root_dir = function()
+					return vim.loop.cwd() -- current working directory
+				end,
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
