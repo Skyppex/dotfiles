@@ -807,7 +807,7 @@ def gb [
     git branch
 }
 
-def "gb move" [...query: string] {
+def "gb mv" [...query: string] {
     let branches = (git branch --list | lines)
     let query = $query | str join " "
     let selected_branch = ($branches | to text | fzf -0 -1 -q $query)
@@ -823,12 +823,15 @@ def "gb move" [...query: string] {
     print "Enter a new name for the branch:"
     let new_name = input
     let new_name = ($new_name | split row " " | str join "-")
-
+    if ($new_name | is-empty) {
+        print "No new name provided"
+        return
+    }
     print $"Renaming ($selected_branch) -> ($new_name)"
     git branch --move $selected_branch $new_name
 }
 
-def "gb delete" [
+def "gb rm" [
     --force(-f)
     ...query: string
 ] {
