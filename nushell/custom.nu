@@ -515,18 +515,6 @@ def --env enter [
 
 # Git
 
-# Git push
-alias "git gud" = git push
-
-# Git push force with lease
-alias "git verygud" = git push --force-with-lease
-
-# Git reset
-alias "git bad" = git reset
-
-# Git reset --hard
-alias "git verybad" = git reset --hard
-
 # Git status
 alias gs = git status
 
