@@ -501,6 +501,11 @@ alias cd = z
 # Zoxide query
 alias cdq = zoxide query
 
+def --env cv [...path: string] {
+    cd ...$path
+    vim .
+}
+
 # Custom version of 'enter' using zoxide and fzf. The original 'enter' command is aliased to 'enter-old'
 # Add one or more directories to the list.
 # PWD becomes first of the newly added directories.

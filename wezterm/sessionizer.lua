@@ -3,9 +3,20 @@ local act = wezterm.action
 
 local M = {}
 
-local fd = "C:/Users/brage.ingebrigtsen/scoop/apps/fd/current/fd.exe"
-local rootPath = "C:/Users/brage.ingebrigtsen/dev/code"
-local rootPath2 = "C:/Users/brage.ingebrigtsen/.config"
+local home = os.getenv("HOMEPATH")
+local fd = home .. "/scoop/apps/fd/current/fd.exe"
+local codePath
+local configPath = home .. "/.config"
+
+if home == nil then
+	home = "C:/Users/brage"
+end
+
+if home:find("brage.ingebrigtsen") then
+	codePath = home .. "/dev/code/"
+else
+	codePath = "D:/Coding/"
+end
 
 M.toggle = function(window, pane)
 	local projects = {}
@@ -17,8 +28,8 @@ M.toggle = function(window, pane)
 		"^.git$",
 		"--max-depth=4",
 		"--prune",
-		rootPath,
-		rootPath2,
+		codePath,
+		configPath,
 		-- add more paths here
 	})
 
