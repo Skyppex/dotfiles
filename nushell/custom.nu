@@ -261,39 +261,44 @@ def "proj update" [
 
 # Open a project from the project folder
 def "proj open" [
-    project_name: string # The name of the project to launch
+    ...project_name: string # The name of the project to launch
     --editor(-e): string # Specify the editor to use (default: from file extension) [code, vim, nvim, rider]
     --verbose(-v) # Print verbose output
 ] {
-    enter-old $env.PROJECTS
-    let result = (ls | get name | to text | fzf -0 -1 -f $project_name)
-    p
+    let paths = fd -HI -td ^.git$ --max-depth=4 --prune $env.CODE $env.CONFIG
 
-    if ($result | is-empty) or $result == null or $result == "" {
-        print "No project found"
-        return
+    if $verbose {
+        print $"Paths:"
+        print $paths
     }
 
-    let result = $result | lines | first
+    let project_name = $project_name | str join " "
+    let result = $paths | each {|p| $p | str replace -a '\.git\' ''} | fzf -0 -1 --query $project_name
 
     if $verbose {
         print $"Result: ($result)"
     }
 
-    mut folder = $env.PROJECTS | path join $result | path expand
+    let folder = $result
 
-    if (($folder | path parse).extension | is-not-empty) {
-        $folder = ($folder | path dirname)
+    let sln_file = ls -f $folder
+        | where type == file
+        | where ($it.name | str ends-with ".sln")
+        | get name
+        | to text
+
+    let project = if ($sln_file | is-empty) {
+        $folder
+    } else {
+        $sln_file
     }
 
     if $verbose {
         print $"Folder: ($folder)"
+        print $"Project: ($project)"
     }
-    
-    let project = $env.PROJECTS | path join $result | path expand
 
     if $verbose {
-        print $"Project: ($project)"
         if ($editor | is-not-empty) {
             print $"Editor: ($editor)"
         } else {

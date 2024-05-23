@@ -103,11 +103,20 @@ $env.NU_PLUGIN_DIRS = [
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
-$env.USER_MANIFEST = $"($nu.home-path)/.config/scoop/user_manifest.json"
+$env.CONFIG = $"($nu.home-path)/.config"
+$env.USER_MANIFEST = $"($env.CONFIG)/scoop/user_manifest.json"
 $env.SCOOP_APPS = $"($nu.home-path)/scoop/apps"
 
 match ($env.COMPUTERNAME) {
-    "BRAGE-PC" => { $env.PROJECTS = ('~\code\projects' | path expand)  },
-    "DESKTOP-RRC642H" => { $env.PROJECTS = D:\Coding\projects },
-    _ => { print "Unknown computer name" }
+    "BRAGE-PC" => { 
+        $env.CODE = ('~\code' | path expand)
+    },
+    "DESKTOP-RRC642H" => { 
+        $env.CODE = D:\Coding
+    },
+    _ => {
+        print "Unknown computer name"
+    }
 }
+
+$env.PROJECTS = $"($env.CODE)/projects"
