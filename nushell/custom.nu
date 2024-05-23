@@ -1114,6 +1114,29 @@ def "gh open" [
     start $link
 }
 
+def fix [] {
+    let input = $in
+    let entries = $input | to text | lines
+
+    $entries | each {|e| 
+        let index = ($e | str index-of ".") + 2
+        
+        mut value = ($e | str substring ..$index | str trim | into float)
+        let path = ($e | str substring ($index + 1)..)
+        let path = ($path | str replace -a '\Coding\' '\code\')
+
+        print $value
+        print $path
+
+
+        while $value > 0 {
+            $value = ($value - 4)
+            zoxide add $path
+            print $"added ($path)"
+        }
+    }
+}
+
 # Scoop
 
 # Open the scoop user manifest file
