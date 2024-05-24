@@ -75,6 +75,10 @@ vim.keymap.set("n", "<leader>a<tab>", "a<tab><ESC>")
 vim.keymap.set("n", "<leader>i<tab>", "i<tab><ESC>")
 vim.keymap.set("n", "<leader>0<tab>", "0i<tab><ESC>")
 
+-- Buffer navigation
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>")
+
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>')
 vim.keymap.set("i", '""', '""')
