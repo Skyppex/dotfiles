@@ -55,23 +55,19 @@ vim.keymap.set("n", "ck", "c<down>", { desc = "Down" })
 -- Just don't do this apparently'
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
+vim.keymap.set("n", "<leader>sp", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
 
 -- Handle simple things in normal mode
 vim.keymap.set("n", "<leader><CR>", "A<CR><ESC>")
-vim.keymap.set("n", "<leader>a<CR>", "a<CR><ESC>")
 vim.keymap.set("n", "<leader>i<CR>", "i<CR><ESC>")
 
 vim.keymap.set("n", "<leader><BS>", "i<BS><ESC>")
-vim.keymap.set("n", "<leader>a<BS>", "a<BS><ESC>")
 vim.keymap.set("n", "<leader>i<BS>", "i<BS><ESC>")
 
 vim.keymap.set("n", "<leader><del>", "a<del><ESC>")
-vim.keymap.set("n", "<leader>a<del>", "a<del><ESC>")
 vim.keymap.set("n", "<leader>i<del>", "i<del><ESC>")
 
 vim.keymap.set("n", "<leader><tab>", "a<tab><ESC>")
-vim.keymap.set("n", "<leader>a<tab>", "a<tab><ESC>")
 vim.keymap.set("n", "<leader>i<tab>", "i<tab><ESC>")
 vim.keymap.set("n", "<leader>0<tab>", "0i<tab><ESC>")
 

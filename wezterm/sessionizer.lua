@@ -15,7 +15,7 @@ end
 if home:find("brage.ingebrigtsen") then
 	codePath = home .. "/dev/code/"
 else
-	codePath = "D:/Coding/"
+	codePath = "D:/code/"
 end
 
 M.toggle = function(window, pane)
