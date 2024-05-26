@@ -3,7 +3,7 @@
 !i::Send "ī"
 !o::Send "ō"
 !u::Send "ū"
-!+a::Send "Ā
+!+a::Send "Ā"
 !+e::Send "Ē"
 !+i::Send "Ī"
 !+o::Send "Ō"

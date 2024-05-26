@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1716582325000)\/",
+                "value": "\/Date(1716755101000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 22:25:25"
+                "DateTime": "sondag 26. mai 2024 22:25:01"
             },
             "Manifests": 1325
         },
@@ -14,29 +14,29 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1716582496000)\/",
+                "value": "\/Date(1716755684000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 22:28:16"
+                "DateTime": "sondag 26. mai 2024 22:34:44"
             },
-            "Manifests": 2025
+            "Manifests": 2026
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1716582511000)\/",
+                "value": "\/Date(1716755225000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 22:28:31"
+                "DateTime": "sondag 26. mai 2024 22:27:05"
             },
-            "Manifests": 461
+            "Manifests": 462
         },
         {
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1716582280000)\/",
+                "value": "\/Date(1716755027000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 22:24:40"
+                "DateTime": "sondag 26. mai 2024 22:23:47"
             },
             "Manifests": 300
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1716583862000)\/",
+                "value": "\/Date(1716756026000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 22:51:02"
+                "DateTime": "sondag 26. mai 2024 22:40:26"
             },
             "Manifests": 23859
         },
@@ -54,11 +54,11 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1716509569000)\/",
+                "value": "\/Date(1716719910000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 24. mai 2024 02:12:49"
+                "DateTime": "sondag 26. mai 2024 12:38:30"
             },
-            "Manifests": 257
+            "Manifests": 258
         },
         {
             "Name": "sky-bucket",
