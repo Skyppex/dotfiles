@@ -216,6 +216,7 @@ return {
 				"lua-language-server",
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
+				"efm",
 			})
 
 			local lspconfig = require("lspconfig")
@@ -224,6 +225,26 @@ return {
 				filetypes = { "nu" },
 				single_file_support = true,
 				root_dir = require("lspconfig").util.find_git_ancestor,
+			})
+
+			lspconfig.efm.setup({
+				init_options = { documentFormatting = true },
+				filetypes = { "ahk" },
+				settings = {
+					rootMarkers = { ".git/" },
+					languages = {
+						ahk = {
+							{
+								lintCommand = "autohotkey /ErrorStdOut /Debug /Silent ${INPUT}",
+								lintStdin = false,
+								lintFormats = {
+									"%f (%l) : ==> %m",
+								},
+								lintSource = "stderr",
+							},
+						},
+					},
+				},
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
