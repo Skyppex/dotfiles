@@ -1,8 +1,5 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
--- Alias ctrl+c to Esc
-vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>")
-
 -- Reverse j and k in normal mode
 vim.keymap.set({ "n", "v" }, "j", "<up>")
 vim.keymap.set({ "n", "v" }, "k", "<down>")
@@ -27,6 +24,14 @@ vim.keymap.set("n", "<leader>j", ":lprev<CR>zz")
 vim.keymap.set("n", "<leader>k", ":lnext<CR>zz")
 
 vim.keymap.set("n", "<S-A-x>", ":cclose<CR>")
+
+-- Remap end of line
+vim.keymap.set({ "n", "v" }, "+", "$")
+vim.keymap.set("n", "d+", "d$")
+vim.keymap.set("n", "y+", "y$")
+vim.keymap.set("n", "c+", "c$")
+vim.keymap.set("n", "gc+", "gc$")
+vim.keymap.set("n", "gb+", "gc$")
 
 -- Save file
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
@@ -67,9 +72,15 @@ vim.keymap.set("n", "<leader>i<BS>", "i<BS><ESC>")
 vim.keymap.set("n", "<leader><del>", "a<del><ESC>")
 vim.keymap.set("n", "<leader>i<del>", "i<del><ESC>")
 
-vim.keymap.set("n", "<leader><tab>", "a<tab><ESC>")
-vim.keymap.set("n", "<leader>i<tab>", "i<tab><ESC>")
-vim.keymap.set("n", "<leader>0<tab>", "0i<tab><ESC>")
+vim.keymap.set("n", "<leader><tab>", function()
+	print("use >> to indent")
+end)
+vim.keymap.set("n", "<leader>i<tab>", function()
+	print("use >> to indent")
+end)
+vim.keymap.set("n", "<leader>0<tab>", function()
+	print("use >> to indent")
+end)
 
 -- Buffer navigation
 vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>")
@@ -103,7 +114,9 @@ vim.keymap.set("i", "{;<CR>", "{<CR>};<up><End><CR>")
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("i", "qq", "<Esc>")
+
+-- Alias ctrl+c to Esc
+vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>")
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "åd", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -133,3 +146,11 @@ vim.keymap.set("n", "<C-w>h", "<C-w><C-h>", { desc = "Move focus to the left win
 vim.keymap.set("n", "<C-w>j", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<C-w>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-w>k", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+
+-- Macros
+vim.keymap.set("n", "æ", "@")
+vim.keymap.set("n", "ææ", "@@")
+
+-- Indent in visual mode stays in visual mode
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")

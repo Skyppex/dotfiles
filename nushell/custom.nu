@@ -46,15 +46,31 @@ alias enter-old = enter;
 
 # Open neovim
 def vim [
+    --empty(-e) # Open neovim with an empty file
     ...path
 ] {
+
+    if $empty and ($path | is-empty) {
+        print "--empty requires a path to be specified"
+        return
+    }
+
     if (($path | str join " ") == ".") {
         nvim .
     } else if (($path | str join " ") == "..") {
         nvim ..
     } else {
-        let path = zoxide query ...$path
-        enter $path
+        if $empty {
+            nvim ...$path
+        }
+
+        let found_path = zoxide query ...$path
+
+        if $found_path == null {
+            nvim ...$path
+        }
+
+        enter $found_path
         nvim .
         p
    }
@@ -1135,6 +1151,27 @@ def fix [] {
             print $"added ($path)"
         }
     }
+}
+
+# Autohotkey
+
+# Start an autohotkey script
+def "ahk start" [
+    ...name: string
+] {
+    let name = ($name | str join " ")
+    let path = $"($env.CONFIG)/autohotkey" | path expand
+
+    enter-old $path
+    let ahks = (ls -f
+        | where type == file
+        | get name
+        | where ($it | str ends-with ".ahk"))
+    p
+
+    let result = ($ahks | to text | fzf -0 -1 --query $name)
+    print $"Starting ($result)"
+    start $result
 }
 
 # Scoop
