@@ -1179,8 +1179,63 @@ def "ahk start" [
     p
 
     let result = ($ahks | to text | fzf -0 -1 --query $name)
+
+    if ($result | is-empty) {
+        print "No script found"
+        return
+    }
+
     print $"Starting ($result)"
     start $result
+}
+
+def --env "ahk kill" [
+    --force(-f) # Force kill the process
+    --verbose(-v) # Print verbose output
+    ...name: string
+] {
+    let name = ($name | str join " ")
+
+    let ahks = ps -l | where { |p|
+        let command = $p.command
+        let split = ($command | split row " ")
+        ($split | length) == 2
+    } | where {|p| 
+        let command = $p.command
+        let split = $command | split row " "
+        let ahk = $split | get 0
+        let name = $split | get 1
+        ($ahk | str contains -i "autohotkey") and ($name | str ends-with ".ahk")
+    }
+
+    let result = ($ahks | each {|a| $a.command | split row " " | get 1} | to text | fzf -0 -1 --query $name)
+
+    if ($result | is-empty) {
+        print "No running process found"
+        return
+    }
+
+    let pids = (ps -l | where ($it.command | str ends-with $result) | get pid)
+
+    if $verbose {
+        print $"Pids: ($pids)"
+    }
+
+    if ($pids | is-empty) {
+        print "No running process found"
+        return
+    }
+
+    for pid in $pids {
+        if $verbose {
+            print $"Killing ($pid)"
+        }
+        if $force {
+            kill -f $pid
+        } else {
+            kill $pid
+        }
+    }
 }
 
 # Scoop

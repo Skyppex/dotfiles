@@ -4,7 +4,20 @@ return {
 		build = ":TSUpdate",
 		dependencies = "nushell/tree-sitter-nu",
 		opts = {
-			ensure_installed = { "rust", "nu", "diff", "lua", "luadoc", "markdown", "vim", "vimdoc" },
+			ensure_installed = {
+				"rust",
+				"nu",
+				"diff",
+				"lua",
+				"luadoc",
+				"markdown",
+				"vim",
+				"vimdoc",
+				"xml",
+				"http",
+				"json",
+				"graphql",
+			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
