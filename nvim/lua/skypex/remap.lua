@@ -109,26 +109,31 @@ vim.keymap.set("n", "æb", "<cmd>bnext<CR>zz", { noremap = true, silent = true }
 
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>', { noremap = true, silent = true })
+vim.keymap.set("i", '<A-">', '"', { noremap = true, silent = true })
 vim.keymap.set("i", '""', '""', { noremap = true, silent = true })
 vim.keymap.set("i", '"<CR>', '"<CR>"<up><End><CR>', { noremap = true, silent = true })
 vim.keymap.set("i", '";<CR>', '"<CR>";<up><End><CR>', { noremap = true, silent = true })
 
 vim.keymap.set("i", "'", "''<left>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-'>", '"', { noremap = true, silent = true })
 vim.keymap.set("i", "''", "''", { noremap = true, silent = true })
 vim.keymap.set("i", "'<CR>", "'<CR>'<up><End><CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "';<CR>", "'<CR>;'<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "(", "()<left>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-(>", "(", { noremap = true, silent = true })
 vim.keymap.set("i", "()", "()", { noremap = true, silent = true })
 vim.keymap.set("i", "(<CR>", "(<CR>)<up><End><CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "(;<CR>", "(<CR>);<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "[", "[]<left>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-[>", "[", { noremap = true, silent = true })
 vim.keymap.set("i", "[]", "[]", { noremap = true, silent = true })
 vim.keymap.set("i", "[<CR>", "[<CR>]<up><End><CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "[;<CR>", "[<CR>];<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "{", "{}<left>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-{>", "{", { noremap = true, silent = true })
 vim.keymap.set("i", "{}", "{}", { noremap = true, silent = true })
 vim.keymap.set("i", "{<CR>", "{<CR>}<up><End><CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "{;<CR>", "{<CR>};<up><End><CR>", { noremap = true, silent = true })
