@@ -62,7 +62,7 @@ M.toggle = function(window, pane)
 							name = id,
 							spawn = {
 								cwd = label,
-								args = { "nvim", "." },
+								args = { "nvim" },
 							},
 						}),
 						pane

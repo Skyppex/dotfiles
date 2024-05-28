@@ -49,31 +49,40 @@ def vim [
     --empty(-e) # Open neovim with an empty file
     ...path
 ] {
-
     if $empty and ($path | is-empty) {
         print "--empty requires a path to be specified"
         return
     }
 
+    if ($path | is-empty) {
+        nvim
+        return
+    }
+
+    if (($path | str join " ") == "..") {
+        nvim ..
+        return
+    } 
+
     if (($path | str join " ") == ".") {
         nvim .
-    } else if (($path | str join " ") == "..") {
-        nvim ..
-    } else {
-        if $empty {
-            nvim ...$path
-        }
+        return
+    }
 
-        let found_path = zoxide query ...$path
+    if $empty {
+        nvim ...$path
+        return
+    }
 
-        if $found_path == null {
-            nvim ...$path
-        }
+    let found_path = zoxide query ...$path
 
-        enter $found_path
-        nvim .
-        p
-   }
+    if $found_path == null {
+        nvim ...$path
+    }
+
+    enter $found_path
+    nvim .
+    p
 }
 
 # Utils
