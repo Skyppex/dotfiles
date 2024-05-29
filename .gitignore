@@ -9,5 +9,8 @@ flow-launcher/**/*.bak
 flow-launcher/UserData/Settings/History.json
 flow-launcher/UserData/Settings/Plugins/Flow.Plugin.Github/Settings.json
 flow-launcher/UserData/Plugins/SpotifyPremium-1.1.5/Cache
+flow-launcher/UserData/Settings/Plugins/Flow.Launcher.Plugin.Program/Settings.json
+flow-launcher/UserData/Settings/Plugins/Steam Search/Settings.json
+flow-launcher/UserData/Settings/Settings.json
 thefuck/__pycache__
 .netcoredbg_hist
