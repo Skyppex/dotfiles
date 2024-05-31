@@ -87,7 +87,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.textwidth = 80
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10000
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

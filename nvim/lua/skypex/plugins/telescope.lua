@@ -49,11 +49,12 @@ return {
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
+				defaults = {
+					path_display = { "tail" },
+					-- mappings = {
+					--   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+					-- },
+				},
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
@@ -71,7 +72,9 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+			vim.keymap.set("n", "<leader>sf", function()
+				builtin.find_files({ path_display = "absolute" })
+			end, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Search Git Files" })
 			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
@@ -91,9 +94,22 @@ return {
 
 				builtin.live_grep(opts)
 			end, { desc = "[S]earch [S]elect Telescope" })
+
 			vim.keymap.set("n", "<leader>pws", function()
 				local word = vim.fn.expand("<cword>")
 				builtin.grep_string({ search = word })
+			end)
+
+			vim.keymap.set("n", "<leader>w/", function()
+				local word = vim.fn.expand("<cword>")
+
+				local opts = require("telescope.themes").get_dropdown({
+					winblend = 10,
+					previewer = false,
+					search = word,
+				})
+
+				builtin.current_buffer_fuzzy_find(opts)
 			end)
 
 			-- Slightly advanced example of overriding default behavior and theme

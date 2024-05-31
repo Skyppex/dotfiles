@@ -17,7 +17,7 @@ return {
 			})
 
 			local sl = require("auto-session.session-lens")
-			vim.keymap.set("n", "<leader>sh", function()
+			vim.keymap.set("n", "<leader>sq", function()
 				sl.search_session()
 			end, { noremap = true, silent = true })
 		end,

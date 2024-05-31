@@ -115,7 +115,7 @@ vim.keymap.set("i", '"<CR>', '"<CR>"<up><End><CR>', { noremap = true, silent = t
 vim.keymap.set("i", '";<CR>', '"<CR>";<up><End><CR>', { noremap = true, silent = true })
 
 vim.keymap.set("i", "'", "''<left>", { noremap = true, silent = true })
-vim.keymap.set("i", "<A-'>", '"', { noremap = true, silent = true })
+vim.keymap.set("i", "<A-'>", "'", { noremap = true, silent = true })
 vim.keymap.set("i", "''", "''", { noremap = true, silent = true })
 vim.keymap.set("i", "'<CR>", "'<CR>'<up><End><CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "';<CR>", "'<CR>;'<up><End><CR>", { noremap = true, silent = true })

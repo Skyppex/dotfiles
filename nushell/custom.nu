@@ -818,13 +818,11 @@ def gb [
     }
 
     if $all {
-        git branch --all
-        return
+        return (git branch --all)
     }
 
     if $show_current {
-        git branch --show-current
-        return
+        return (git branch --show-current)
     }
 
     git branch

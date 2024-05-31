@@ -7,7 +7,7 @@ return {
 			local hint = require("hop.hint")
 
 			hop.setup({
-				keys = "etovxqpdygfblzhckisuran",
+				keys = "etovxqpdygfblhkisurn",
 				quit_key = "<C-c>",
 				multi_windows = true,
 			})
