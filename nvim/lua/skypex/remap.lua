@@ -106,6 +106,7 @@ end, { noremap = true, silent = true })
 -- Buffer navigation
 vim.keymap.set("n", "åb", "<cmd>bprevious<CR>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "æb", "<cmd>bnext<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", "<cmd>b#<CR>zz", { noremap = true, silent = true })
 
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>', { noremap = true, silent = true })
