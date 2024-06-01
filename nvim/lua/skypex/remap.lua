@@ -106,38 +106,44 @@ end, { noremap = true, silent = true })
 -- Buffer navigation
 vim.keymap.set("n", "åb", "<cmd>bprevious<CR>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "æb", "<cmd>bnext<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>b", "<cmd>b#<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", "<cmd>b#<CR><<", { noremap = true, silent = true })
 
 -- Autoclose brackets
 vim.keymap.set("i", '"', '""<left>', { noremap = true, silent = true })
 vim.keymap.set("i", '<A-">', '"', { noremap = true, silent = true })
 vim.keymap.set("i", '""', '""', { noremap = true, silent = true })
 vim.keymap.set("i", '"<CR>', '"<CR>"<up><End><CR>', { noremap = true, silent = true })
-vim.keymap.set("i", '";<CR>', '"<CR>";<up><End><CR>', { noremap = true, silent = true })
+vim.keymap.set("i", '";', '"<CR>";<up><End><CR>', { noremap = true, silent = true })
 
 vim.keymap.set("i", "'", "''<left>", { noremap = true, silent = true })
 vim.keymap.set("i", "<A-'>", "'", { noremap = true, silent = true })
 vim.keymap.set("i", "''", "''", { noremap = true, silent = true })
 vim.keymap.set("i", "'<CR>", "'<CR>'<up><End><CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "';<CR>", "'<CR>;'<up><End><CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "';", "'<CR>;'<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "(", "()<left>", { noremap = true, silent = true })
 vim.keymap.set("i", "<A-(>", "(", { noremap = true, silent = true })
 vim.keymap.set("i", "()", "()", { noremap = true, silent = true })
 vim.keymap.set("i", "(<CR>", "(<CR>)<up><End><CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "(;<CR>", "(<CR>);<up><End><CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "(;", "(<CR>);<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "[", "[]<left>", { noremap = true, silent = true })
 vim.keymap.set("i", "<A-[>", "[", { noremap = true, silent = true })
 vim.keymap.set("i", "[]", "[]", { noremap = true, silent = true })
 vim.keymap.set("i", "[<CR>", "[<CR>]<up><End><CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "[;<CR>", "[<CR>];<up><End><CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "[;", "[<CR>];<up><End><CR>", { noremap = true, silent = true })
 
 vim.keymap.set("i", "{", "{}<left>", { noremap = true, silent = true })
 vim.keymap.set("i", "<A-{>", "{", { noremap = true, silent = true })
 vim.keymap.set("i", "{}", "{}", { noremap = true, silent = true })
 vim.keymap.set("i", "{<CR>", "{<CR>}<up><End><CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "{;<CR>", "{<CR>};<up><End><CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "{;", "{<CR>};<up><End><CR>", { noremap = true, silent = true })
+
+vim.keymap.set("i", "<", "<><left>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-<>", "<", { noremap = true, silent = true })
+vim.keymap.set("i", "<>", "<>", { noremap = true, silent = true })
+vim.keymap.set("i", "<<CR>", "<<CR>><up><End><CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "<;", "<<CR>>;<up><End><CR>", { noremap = true, silent = true })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { noremap = true, silent = true })
