@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1717273488000)\/",
+                "value": "\/Date(1717316818000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 1. juni 2024 22:24:48"
+                "DateTime": "sondag 2. juni 2024 10:26:58"
             },
             "Manifests": 1327
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1717281122000)\/",
+                "value": "\/Date(1717316946000)\/",
                 "DisplayHint": 2,
-                "DateTime": "sondag 2. juni 2024 00:32:02"
+                "DateTime": "sondag 2. juni 2024 10:29:06"
             },
-            "Manifests": 2028
+            "Manifests": 2029
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1717273732000)\/",
+                "value": "\/Date(1717317209000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 1. juni 2024 22:28:52"
+                "DateTime": "sondag 2. juni 2024 10:33:29"
             },
             "Manifests": 463
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1717273435000)\/",
+                "value": "\/Date(1717316748000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 1. juni 2024 22:23:55"
+                "DateTime": "sondag 2. juni 2024 10:25:48"
             },
             "Manifests": 301
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1717200869000)\/",
+                "value": "\/Date(1717287208000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 1. juni 2024 02:14:29"
+                "DateTime": "sondag 2. juni 2024 02:13:28"
             },
             "Manifests": 259
         },
