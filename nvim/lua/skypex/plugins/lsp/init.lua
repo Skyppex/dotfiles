@@ -14,6 +14,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
+			"Decodetalkers/csharpls-extended-lsp.nvim",
 		},
 		opts = {
 			setup = {
@@ -240,7 +241,7 @@ return {
 				"lua-language-server",
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
-				"omnisharp",
+				-- "omnisharp",
 			})
 
 			local lspconfig = require("lspconfig")
@@ -250,6 +251,24 @@ return {
 				single_file_support = true,
 				root_dir = lspconfig.util.find_git_ancestor,
 			})
+
+			local cs_ls_ex = require("csharpls_extended")
+			local cs_ls_ex_cfg = {
+				handlers = {
+					["textDocument/definition"] = function(err, result, ctx, config)
+						if err then
+							vim.notify("Error: " .. err, vim.log.levels.ERROR)
+						else
+							vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
+						end
+						cs_ls_ex.handler(err, result, ctx, config)
+					end,
+					["textDocument/typeDefinition"] = cs_ls_ex.handler,
+				},
+				cmd = { "csharp-ls" },
+			}
+
+			lspconfig.csharp_ls.setup(cs_ls_ex_cfg)
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

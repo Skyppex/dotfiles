@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1717316818000)\/",
+                "value": "\/Date(1717345637000)\/",
                 "DisplayHint": 2,
-                "DateTime": "sondag 2. juni 2024 10:26:58"
+                "DateTime": "sondag 2. juni 2024 18:27:17"
             },
             "Manifests": 1327
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1717316946000)\/",
+                "value": "\/Date(1717345790000)\/",
                 "DisplayHint": 2,
-                "DateTime": "sondag 2. juni 2024 10:29:06"
+                "DateTime": "sondag 2. juni 2024 18:29:50"
             },
             "Manifests": 2029
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1717317209000)\/",
+                "value": "\/Date(1717346123000)\/",
                 "DisplayHint": 2,
-                "DateTime": "sondag 2. juni 2024 10:33:29"
+                "DateTime": "sondag 2. juni 2024 18:35:23"
             },
             "Manifests": 463
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1717316748000)\/",
+                "value": "\/Date(1717345592000)\/",
                 "DisplayHint": 2,
-                "DateTime": "sondag 2. juni 2024 10:25:48"
+                "DateTime": "sondag 2. juni 2024 18:26:32"
             },
             "Manifests": 301
         },
@@ -155,6 +155,13 @@
             "Name": "docker",
             "Version": "26.1.3",
             "Updated": "\/Date(1716322823320)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "dotnet-sdk",
+            "Version": "8.0.301",
+            "Updated": "\/Date(1717354407716)\/"
         },
         {
             "Info": "",
