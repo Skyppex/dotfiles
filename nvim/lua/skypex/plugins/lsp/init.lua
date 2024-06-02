@@ -241,6 +241,7 @@ return {
 				"lua-language-server",
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
+				"csharp-language-server",
 				-- "omnisharp",
 			})
 
