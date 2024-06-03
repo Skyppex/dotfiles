@@ -224,6 +224,18 @@ return {
 						},
 					},
 				},
+				graphql = {
+					filetypes = { "graphql", "gql" },
+					on_attach = function(_, bufnr)
+						vim.notify("GraphQL LSP attached to buffer " .. bufnr)
+					end,
+					flags = {
+						debounce_text_changes = 150,
+					},
+					root_dir = function(fname)
+						return require("lspconfig").util.root_pattern("*.sln", ".git")(fname) or vim.fn.getcwd()
+					end,
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -242,7 +254,7 @@ return {
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
 				"csharp-language-server",
-				-- "omnisharp",
+				"graphql-language-service-cli",
 			})
 
 			local lspconfig = require("lspconfig")
@@ -271,17 +283,20 @@ return {
 
 			lspconfig.csharp_ls.setup(cs_ls_ex_cfg)
 
+			vim.lsp.set_log_level("debug")
+
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
+						-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
+						lspconfig[server_name].setup(server)
 					end,
 				},
 			})

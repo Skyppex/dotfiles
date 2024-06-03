@@ -200,6 +200,14 @@ vim.keymap.set("n", "<C-w>j", "<C-w><C-k>", { desc = "Move focus to the upper wi
 vim.keymap.set("n", "<C-w>l", "<C-w><C-l>", { desc = "Move focus to the right window", noremap = true, silent = true })
 vim.keymap.set("n", "<C-w>k", "<C-w><C-j>", { desc = "Move focus to the lower window", noremap = true, silent = true })
 
+vim.keymap.set("n", "<C-w>-", "<C-w>s", { desc = "Split window below", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>|", "<C-w>v", { desc = "Split window right", noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-w><C-y>", "<C-w><", { desc = "Shrink window horizontal", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-u>", "<C-w>+", { desc = "Grow window vertical", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-i>", "<C-w>-", { desc = "Grow window horizontal", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-o>", "<C-w>>", { desc = "Shrink window vertical", noremap = true, silent = true })
+
 -- Macros
 vim.keymap.set("n", "ø", "@", { noremap = true, silent = true })
 vim.keymap.set("n", "øø", "@@", { noremap = true, silent = true })
