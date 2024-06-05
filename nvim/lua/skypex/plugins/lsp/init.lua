@@ -233,7 +233,7 @@ return {
 						debounce_text_changes = 150,
 					},
 					root_dir = function(fname)
-						return require("lspconfig").util.root_pattern("*.sln", ".git")(fname) or vim.fn.getcwd()
+						return require("lspconfig").util.root_pattern("*.sln")(fname) or vim.fn.getcwd()
 					end,
 				},
 			}
