@@ -215,9 +215,3 @@ vim.keymap.set("n", "øø", "@@", { noremap = true, silent = true })
 -- Indent in visual mode stays in visual mode
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
-
--- Git navigation
-vim.keymap.set("n", "åg", "<cmd>Gitsigns prev_hunk<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "æg", "<cmd>Gitsigns next_hunk<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "guh", "<cmd>Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "gp", "<cmd>Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
