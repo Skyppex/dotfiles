@@ -1328,6 +1328,21 @@ def "manifest install" [] {
         }
     }
 
+    let apps = (manifest).apps
+
+    let current = scoop list | lines | filter {|l| $l | str trim | is-not-empty} | skip 3
+    let current_names = $current | each {|l| $l | split row " " | get 0}
+
+    for app in $current_names {
+        let name = $app
+        let old_app = $apps | where Name == $name | get Name
+
+        if $old_app == null or ($old_app | is-empty) {
+            print $"Removing app -> ($name)"
+            scoop uninstall $name
+        }
+    }
+
     $buckets | get name | zip { $buckets | get source } | each { |b| scoop bucket add $b.0 $b.1 }
     scoop import $"($nu.home-path)/.config/scoop/manifest.json"
 }
