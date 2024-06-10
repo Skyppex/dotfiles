@@ -1433,6 +1433,27 @@ def "parse table" [
     $rows
 }
 
+# Scoop uninstall with fzf
+def "scoop rm" [
+    ...name: string
+] {
+    let names = (scoop list | lines | skip 4 | each { |l| $l | split row " " | get 0 }) | where ($it | is-not-empty)
+
+    let selected = if ($name | is-empty) {
+        ($names | to text | fzf -0 -1)
+    } else {
+        ($names | to text | fzf -0 -1 --query ...$name)
+    }
+
+    if ($selected | is-empty) {
+        print "No app selected"
+        return
+    }
+
+    print $"Uninstalling ($selected)"
+    scoop uninstall $selected
+}
+
 # Nushell
 
 # Add a plugin to the nushell config
