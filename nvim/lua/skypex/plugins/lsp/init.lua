@@ -6,12 +6,6 @@ return {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
 			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
 			"Decodetalkers/csharpls-extended-lsp.nvim",
@@ -156,6 +150,7 @@ return {
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
+			capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 			require("fidget").setup({})
 			-- Enable the following language servers
@@ -206,36 +201,6 @@ return {
 						},
 					},
 				},
-				efm = {
-					init_options = { documentFormatting = true },
-					filetypes = { "autohotkey" },
-					settings = {
-						rootMarkers = { ".git/" },
-						languages = {
-							autohotkey = {
-								{
-									lintCommand = "autohotkey  ${INPUT}",
-									lintStdin = false,
-									lintFormats = {
-										"%f (%l) : ==> %m",
-									},
-								},
-							},
-						},
-					},
-				},
-				graphql = {
-					filetypes = { "graphql", "gql" },
-					on_attach = function(_, bufnr)
-						vim.notify("GraphQL LSP attached to buffer " .. bufnr)
-					end,
-					flags = {
-						debounce_text_changes = 150,
-					},
-					root_dir = function(fname)
-						return require("lspconfig").util.root_pattern("*.sln")(fname) or vim.fn.getcwd()
-					end,
-				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -254,7 +219,6 @@ return {
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
 				"csharp-language-server",
-				"graphql-language-service-cli",
 			})
 
 			local lspconfig = require("lspconfig")
@@ -265,6 +229,7 @@ return {
 				root_dir = lspconfig.util.find_git_ancestor,
 			})
 
+			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
 			local cs_ls_ex = require("csharpls_extended")
 			local cs_ls_ex_cfg = {
 				handlers = {
@@ -278,7 +243,7 @@ return {
 					end,
 					["textDocument/typeDefinition"] = cs_ls_ex.handler,
 				},
-				cmd = { "csharp-ls" },
+				cmd = { csharpls },
 			}
 
 			lspconfig.csharp_ls.setup(cs_ls_ex_cfg)

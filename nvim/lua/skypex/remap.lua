@@ -55,6 +55,7 @@ vim.keymap.set("n", "gb+", "gc$", { noremap = true, silent = true })
 
 -- Save file
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-S-s>", "<cmd>wa<CR>", { noremap = true, silent = true })
 
 -- Move lines of code in visual mode
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
@@ -203,10 +204,10 @@ vim.keymap.set("n", "<C-w>k", "<C-w><C-j>", { desc = "Move focus to the lower wi
 vim.keymap.set("n", "<C-w>-", "<C-w>s", { desc = "Split window below", noremap = true, silent = true })
 vim.keymap.set("n", "<C-w>|", "<C-w>v", { desc = "Split window right", noremap = true, silent = true })
 
-vim.keymap.set("n", "<C-w><C-y>", "<C-w><", { desc = "Shrink window horizontal", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-u>", "<C-w>+", { desc = "Grow window vertical", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-i>", "<C-w>-", { desc = "Grow window horizontal", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-o>", "<C-w>>", { desc = "Shrink window vertical", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-y>", "3<C-w><", { desc = "Shrink window horizontal", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-u>", "3<C-w>+", { desc = "Grow window vertical", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-i>", "3<C-w>-", { desc = "Grow window horizontal", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w><C-o>", "3<C-w>>", { desc = "Shrink window vertical", noremap = true, silent = true })
 
 -- Macros
 vim.keymap.set("n", "ø", "@", { noremap = true, silent = true })
@@ -215,3 +216,49 @@ vim.keymap.set("n", "øø", "@@", { noremap = true, silent = true })
 -- Indent in visual mode stays in visual mode
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+
+-- Camel case motion
+vim.keymap.set(
+	"n",
+	"<leader>cC",
+	"<left>/\\u<CR>N",
+	{ desc = "Camel/Pascal Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("n", "<leader>cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+
+vim.keymap.set(
+	"n",
+	"<leader>ciC",
+	"<left>/\\u<CR>N<right>",
+	{ desc = "Camel/Pascal Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("n", "<leader>cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+
+vim.keymap.set("v", "cC", "<left>/\\u<CR>N", { desc = "Camel/Pascal Case Word Back", noremap = true, silent = true })
+vim.keymap.set("v", "cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+
+vim.keymap.set(
+	"v",
+	"ciC",
+	"<left>/\\u<CR>N<right>",
+	{ desc = "Camel/Pascal Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("v", "cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+
+-- Snake case motion
+vim.keymap.set("n", "<leader>cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
+
+vim.keymap.set(
+	"n",
+	"<leader>ciS",
+	"<left>/_<CR>N<right>",
+	{ desc = "Snake Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("n", "<leader>cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
+
+vim.keymap.set("v", "cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
+vim.keymap.set("v", "cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
+
+vim.keymap.set("v", "ciS", "<left>/_<CR>N<right>", { desc = "Snake Case Word Back", noremap = true, silent = true })
+vim.keymap.set("v", "cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
