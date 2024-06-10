@@ -76,6 +76,7 @@ return {
 				builtin.find_files({ path_display = { "absolute" } })
 			end, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Search Git Files" })
+			vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch [C]ommits" })
 			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })

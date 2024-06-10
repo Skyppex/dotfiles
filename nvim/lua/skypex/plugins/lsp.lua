@@ -60,8 +60,7 @@ return {
 					end
 
 					local builtin = require("telescope.builtin")
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
+					-- Jump to the definition of the word under your cursor.--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
 					map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 
@@ -121,7 +120,6 @@ return {
 							group = highlight_augroup,
 							callback = vim.lsp.buf.clear_references,
 						})
-
 						vim.api.nvim_create_autocmd("LspDetach", {
 							group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
 							callback = function(event2)

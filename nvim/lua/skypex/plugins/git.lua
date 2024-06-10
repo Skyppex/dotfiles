@@ -1,4 +1,56 @@
 return {
+	{
+		"tpope/vim-fugitive",
+		config = function()
+			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status", noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>gl", vim.cmd.Git, { desc = "Git Status", noremap = true, silent = true })
+		end,
+	},
+	{
+		"akinsho/git-conflict.nvim",
+		version = "*",
+		config = function()
+			require("git-conflict").setup({
+				default_mappings = true,
+				default_comands = true,
+				disable_diagnostics = true,
+				list_opener = "copen",
+				highlights = {
+					incoming = "DiffAdd",
+					current = "DiffChange",
+				},
+			})
+
+			vim.keymap.set(
+				"n",
+				"<leader>gc",
+				"<cmd>GitConflictRefresh<CR>",
+				{ desc = "Git Conflict Refresh", noremap = true, silent = true }
+			)
+
+			vim.keymap.set(
+				"n",
+				"<leader>gq",
+				"<cmd>GitConflictQf<CR>",
+				{ desc = "Git Conflict Quickfix", noremap = true, silent = true }
+			)
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "GitConflictDetected",
+				callback = function()
+					vim.notify("Conflict detected in file" .. vim.api.nvim_buf_get_name(0))
+					vim.cmd("LspStop")
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "GitConflictResolved",
+				callback = function()
+					vim.cmd("LspRestart")
+				end,
+			})
+		end,
+	},
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -51,7 +103,7 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<leader>gs",
+				"<leader>gg",
 				"<cmd>Gitsigns stage_hunk<CR>",
 				{ desc = "Git Stage Hunk", noremap = true, silent = true }
 			)

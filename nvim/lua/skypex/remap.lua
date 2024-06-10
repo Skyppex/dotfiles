@@ -37,13 +37,14 @@ vim.keymap.set(
 )
 
 -- Quickfix list navigation
-vim.keymap.set("n", "<S-A-j>", ":cprev<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-A-k>", ":cnext<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-A-j>", "<cmd>cprev<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-A-k>", "<cmd>cnext<CR>zz", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>j", ":lprev<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>k", ":lnext<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<S-A-x>", ":cclose<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<S-A-x>", "<cmd>cclose<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n" "<S-A-x>", "<cmd>copen<CR>", { noremap = true, silent = true })
 
 -- Remap end of line
 vim.keymap.set({ "n", "v" }, "+", "$", { noremap = true, silent = true })
@@ -58,14 +59,14 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-S-s>", "<cmd>wa<CR>", { noremap = true, silent = true })
 
 -- Move lines of code in visual mode
-vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
-vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "J", "<cmd>m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "K", "<cmd>m '>+1<CR>gv=gv", { noremap = true, silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "n", "nzzzv", { noremap = true, silent = true })
-vim.keymap.set("n", "N", "Nzzzv", { noremap = true, silent = true })
+vim.keymap.set("n", "n", "nzz", { noremap = true, silent = true })
+vim.keymap.set("n", "N", "Nzz", { noremap = true, silent = true })
 
 vim.keymap.set("x", "<leader>p", '"_dP', { noremap = true, silent = true })
 
