@@ -225,11 +225,13 @@ return {
 				filetypes = { "nu" },
 				single_file_support = true,
 				root_dir = lspconfig.util.find_git_ancestor,
+				capabilities = capabilities,
 			})
 
 			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
 			local cs_ls_ex = require("csharpls_extended")
-			local cs_ls_ex_cfg = {
+
+			lspconfig.csharp_ls.setup({
 				handlers = {
 					["textDocument/definition"] = function(err, result, ctx, config)
 						if err then
@@ -242,9 +244,8 @@ return {
 					["textDocument/typeDefinition"] = cs_ls_ex.handler,
 				},
 				cmd = { csharpls },
-			}
-
-			lspconfig.csharp_ls.setup(cs_ls_ex_cfg)
+				capabilities = capabilities,
+			})
 
 			vim.lsp.set_log_level("debug")
 

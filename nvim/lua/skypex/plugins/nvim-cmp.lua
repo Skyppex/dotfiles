@@ -10,24 +10,24 @@ return {
 					-- Build Step is needed for regex support in snippets.
 					-- This step is not supported in many windows environments.
 					-- Remove the below condition to re-enable on windows.
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
+					-- if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+					-- 	return
+					-- end
 					return "make install_jsregexp"
 				end)(),
 				dependencies = {
+					"saadparwaiz1/cmp_luasnip",
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
 					--    https://github.com/rafamadriz/friendly-snippets
-					-- {
-					--   'rafamadriz/friendly-snippets',
-					--   config = function()
-					--     require('luasnip.loaders.from_vscode').lazy_load()
-					--   end,
-					-- },
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 			},
-			"saadparwaiz1/cmp_luasnip",
 
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
@@ -49,24 +49,30 @@ return {
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
 
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
 				--
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
 				mapping = cmp.mapping.preset.insert({
 					-- Select the [n]ext item
-					["<A-k>"] = cmp.mapping.select_next_item(),
+					["<down>"] = cmp.mapping.select_next_item(),
 					-- Select the [p]revious item
-					["<A-j>"] = cmp.mapping.select_prev_item(),
+					["<up>"] = cmp.mapping.select_prev_item(),
 
 					-- Scroll the documentation window [b]ack / [f]orward
-					["<A-b>"] = cmp.mapping.scroll_docs(-4),
-					["<A-f>"] = cmp.mapping.scroll_docs(4),
+					["<A-u>"] = cmp.mapping.scroll_docs(-4),
+					["<A-d>"] = cmp.mapping.scroll_docs(4),
 
 					-- Accept ([y]es) the completion.
 					--  This will auto-import if your LSP supports it.
 					--  This will expand snippets if the LSP sent a snippet.
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
+					["<TAB>"] = cmp.mapping.confirm({ select = true }),
+					["<C-e>"] = cmp.mapping.abort(),
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
@@ -110,4 +116,3 @@ return {
 		end,
 	},
 }
-

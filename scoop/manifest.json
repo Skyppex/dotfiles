@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1718051142000)\/",
+                "value": "\/Date(1718125512000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 22:25:42"
+                "DateTime": "tirsdag 11. juni 2024 19:05:12"
             },
             "Manifests": 1327
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1718051318000)\/",
+                "value": "\/Date(1718123560000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 22:28:38"
+                "DateTime": "tirsdag 11. juni 2024 18:32:40"
             },
-            "Manifests": 2034
+            "Manifests": 2036
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1718051402000)\/",
+                "value": "\/Date(1718123855000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 22:30:02"
+                "DateTime": "tirsdag 11. juni 2024 18:37:35"
             },
             "Manifests": 463
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1718051098000)\/",
+                "value": "\/Date(1718123287000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 22:24:58"
+                "DateTime": "tirsdag 11. juni 2024 18:28:07"
             },
             "Manifests": 305
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1718052495000)\/",
+                "value": "\/Date(1718124296000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 22:48:15"
+                "DateTime": "tirsdag 11. juni 2024 18:44:56"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1717978447000)\/",
+                "value": "\/Date(1718064826000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 10. juni 2024 02:14:07"
+                "DateTime": "tirsdag 11. juni 2024 02:13:46"
             },
             "Manifests": 259
         },
@@ -370,8 +370,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "rider",
-            "Version": "2024.1.2-241.15989.179",
-            "Updated": "\/Date(1715111906657)\/"
+            "Version": "2024.1.3-241.17011.166",
+            "Updated": "\/Date(1718136904649)\/"
         },
         {
             "Info": "",
@@ -384,8 +384,8 @@
             "Info": "",
             "Source": "main",
             "Name": "rust-analyzer",
-            "Version": "2024-06-03",
-            "Updated": "\/Date(1717531993254)\/"
+            "Version": "2024-06-11",
+            "Updated": "\/Date(1718136909043)\/"
         },
         {
             "Info": "",

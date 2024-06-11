@@ -1,6 +1,9 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+		},
 		config = function()
 			local dap = require("dap")
 
@@ -18,32 +21,43 @@ return {
 					name = "launch - netcoredbg",
 					request = "launch",
 					program = function()
-						local pipe = io.popen("fd -HI -a .dll$ | fzf --query bindebug", "r")
+						local project_file = io.popen("fd -HI -e .csproj | fzf", "r")
+
+						if project_file == nil then
+							return nil
+						end
+
+						local project = project_file:read("*a")
+						project = project:gsub(".csproj", "")
+						project = project:gsub(".*[\\/]", "")
+						local query = project .. "binDebug"
+						local pipe = io.popen("fd -HI -a -e .dll | fzf --query " .. query, "r")
 
 						if pipe == nil then
 							return nil
 						end
 
 						local result = pipe:read("*a")
+						result = result:match("^%s*(.-)%s*$")
 
 						return vim.fn.input("Path to dll: ", result, "file")
 					end,
 				},
 			}
 
-			vim.keymap.set("n", "<F5>", function()
+			vim.keymap.set("n", "<leader>dr", function()
 				dap.continue()
 			end)
 
-			vim.keymap.set("n", "<F10>", function()
+			vim.keymap.set("n", "<leader>dl", function()
 				dap.step_over()
 			end)
 
-			vim.keymap.set("n", "<F11>", function()
+			vim.keymap.set("n", "<leader>dk", function()
 				dap.step_into()
 			end)
 
-			vim.keymap.set("n", "<F12>", function()
+			vim.keymap.set("n", "<leader>dj", function()
 				dap.step_out()
 			end)
 
@@ -59,11 +73,11 @@ return {
 				dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 			end)
 
-			vim.keymap.set("n", "<leader>dr", function()
+			vim.keymap.set("n", "<leader>do", function()
 				dap.repl.open()
 			end)
 
-			vim.keymap.set("n", "<leader>dl", function()
+			vim.keymap.set("n", "<leader>dh", function()
 				dap.run_last()
 			end)
 		end,
