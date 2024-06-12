@@ -36,7 +36,7 @@ return {
 			vim.keymap.set(
 				"n",
 				"<leader>gq",
-				"<cmd>GitConflictQf<CR>",
+				"<cmd>GitConflictListQf<CR>",
 				{ desc = "Git Conflict Quickfix", noremap = true, silent = true }
 			)
 

@@ -263,3 +263,6 @@ vim.keymap.set("v", "cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, 
 
 vim.keymap.set("v", "ciS", "<left>/_<CR>N<right>", { desc = "Snake Case Word Back", noremap = true, silent = true })
 vim.keymap.set("v", "cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
+
+-- Redo
+vim.keymap.set("n", "U", "<C-r>", { desc = "Redo", noremap = true, silent = true })

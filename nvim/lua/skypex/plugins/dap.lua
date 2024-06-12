@@ -47,39 +47,39 @@ return {
 
 			vim.keymap.set("n", "<leader>dr", function()
 				dap.continue()
-			end)
+			end, { desc = "Continue", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dl", function()
 				dap.step_over()
-			end)
+			end, { desc = "Step Over", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dk", function()
 				dap.step_into()
-			end)
+			end, { desc = "Step Into", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dj", function()
 				dap.step_out()
-			end)
+			end, { desc = "Step Out", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>db", function()
 				dap.toggle_breakpoint()
-			end)
+			end, { desc = "Toggle Breakpoint", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dB", function()
 				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			end)
+			end, { desc = "Set Breakpoint", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dp", function()
 				dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-			end)
+			end, { desc = "Log Point", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>do", function()
 				dap.repl.open()
-			end)
+			end, { desc = "Open REPL", noremap = true, silent = true })
 
 			vim.keymap.set("n", "<leader>dh", function()
 				dap.run_last()
-			end)
+			end, { desc = "Run Last", noremap = true, silent = true })
 		end,
 	},
 	{
