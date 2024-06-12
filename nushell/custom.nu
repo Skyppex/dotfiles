@@ -1471,6 +1471,9 @@ alias "hello world" = echo $"Hello, (whoami)!"
 # Echo 'Hello, $user'
 alias "hello" = echo $"Hello, (whoami)!"
 
+# Echo 'Hello, $user'
+alias "hi" = echo $"Hi, (whoami)!"
+
 # Echo a sentence with all the letters of the alphabet only appearing once
 alias cwm = echo "Cwm fjord bank glyphs vext quiz"
 

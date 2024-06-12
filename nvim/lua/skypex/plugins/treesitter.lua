@@ -5,6 +5,7 @@ return {
 		dependencies = "nushell/tree-sitter-nu",
 		opts = {
 			ensure_installed = {
+				"query",
 				"rust",
 				"nu",
 				"diff",
@@ -47,6 +48,13 @@ return {
 			--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+
+			vim.keymap.set(
+				"n",
+				"<leader>tt",
+				"<cmd>TSPlaygroundToggle<CR>",
+				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
+			)
 		end,
 	},
 	{
@@ -54,5 +62,9 @@ return {
 	},
 	{
 		"tree-sitter/tree-sitter-c-sharp",
+	},
+	{
+		"nvim-treesitter/playground",
+		cmd = "TSPlaygroundToggle",
 	},
 }
