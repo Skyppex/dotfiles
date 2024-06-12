@@ -7,17 +7,20 @@ local home_drive = os.getenv("HOMEDRIVE")
 local home_path = os.getenv("HOMEPATH")
 local home = home_drive .. home_path
 local fd = home .. "/scoop/apps/fd/current/fd.exe"
-local codePath
-local configPath = home .. "/.config"
+local code_path
+local code_path_2
+local config_path = home .. "/.config"
 
 if home == nil then
 	home = "C:/Users/brage"
 end
 wezterm.log_info("Home: " .. home)
 if home:find("brage.ingebrigtsen") then
-	codePath = home .. "/dev/code/"
+	code_path = home .. "/dev/code/"
+	code_path_2 = home .. "/dev/code/commoncarweb"
 else
-	codePath = "D:/code/"
+	code_path = "D:/code/"
+	code_path_2 = "D:/code/sentinel/commoncarweb"
 end
 
 M.toggle = function(window, pane)
@@ -28,10 +31,11 @@ M.toggle = function(window, pane)
 		"-HI",
 		"-td",
 		"^.git$",
-		"--max-depth=4",
+		"--max-depth=3",
 		"--prune",
-		codePath,
-		configPath,
+		code_path,
+		code_path_2,
+		config_path,
 		-- add more paths here
 	})
 
