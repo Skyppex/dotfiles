@@ -19,10 +19,5 @@ return {
 				null_ls.builtins.formatting.isort,
 			},
 		})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = vim.lsp.buf.format,
-		})
 	end,
 }

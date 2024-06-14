@@ -40,6 +40,20 @@ return {
 				{ desc = "Git Conflict Quickfix", noremap = true, silent = true }
 			)
 
+			vim.keymap.set(
+				"n",
+				"åc",
+				"<cmd>GitConflictPrevConflict<CR>",
+				{ desc = "Previous Conflict", noremap = true, silent = true }
+			)
+
+			vim.keymap.set(
+				"n",
+				"æc",
+				"<cmd>GitConflictNextConflict<CR>",
+				{ desc = "Next Conflict", noremap = true, silent = true }
+			)
+
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "GitConflictDetected",
 				callback = function()

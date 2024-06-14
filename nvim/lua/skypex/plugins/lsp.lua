@@ -151,6 +151,12 @@ return {
 			capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 			require("fidget").setup({})
+
+			-- Define variables use din the server configuration below
+			local lspconfig = require("lspconfig")
+			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
+			local cs_ls_ex = require("csharpls_extended")
+
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 			--
@@ -199,7 +205,30 @@ return {
 						},
 					},
 				},
+				csharp_ls = {
+					handlers = {
+						["textDocument/definition"] = function(err, result, ctx, config)
+							if err then
+								vim.notify("Error: " .. err, vim.log.levels.ERROR)
+							else
+								vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
+							end
+							cs_ls_ex.handler(err, result, ctx, config)
+						end,
+						["textDocument/typeDefinition"] = cs_ls_ex.handler,
+					},
+					cmd = { csharpls },
+					capabilities = capabilities,
+				},
 			}
+
+			lspconfig.nushell.setup({
+				cmd = { "nu", "--lsp" },
+				filetypes = { "nu" },
+				single_file_support = true,
+				root_dir = lspconfig.util.find_git_ancestor,
+				capabilities = capabilities,
+			})
 
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
@@ -218,36 +247,6 @@ return {
 				"rust-analyzer",
 				"csharp-language-server",
 			})
-
-			local lspconfig = require("lspconfig")
-			lspconfig.nushell.setup({
-				cmd = { "nu", "--lsp" },
-				filetypes = { "nu" },
-				single_file_support = true,
-				root_dir = lspconfig.util.find_git_ancestor,
-				capabilities = capabilities,
-			})
-
-			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
-			local cs_ls_ex = require("csharpls_extended")
-
-			lspconfig.csharp_ls.setup({
-				handlers = {
-					["textDocument/definition"] = function(err, result, ctx, config)
-						if err then
-							vim.notify("Error: " .. err, vim.log.levels.ERROR)
-						else
-							vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
-						end
-						cs_ls_ex.handler(err, result, ctx, config)
-					end,
-					["textDocument/typeDefinition"] = cs_ls_ex.handler,
-				},
-				cmd = { csharpls },
-				capabilities = capabilities,
-			})
-
-			vim.lsp.set_log_level("debug")
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

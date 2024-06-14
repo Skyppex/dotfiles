@@ -60,9 +60,9 @@ return {
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
 				mapping = cmp.mapping.preset.insert({
 					-- Select the [n]ext item
-					["<down>"] = cmp.mapping.select_next_item(),
+					["<S-A-k>"] = cmp.mapping.select_next_item(),
 					-- Select the [p]revious item
-					["<up>"] = cmp.mapping.select_prev_item(),
+					["<S-A-j>"] = cmp.mapping.select_prev_item(),
 
 					-- Scroll the documentation window [b]ack / [f]orward
 					["<A-u>"] = cmp.mapping.scroll_docs(-4),
