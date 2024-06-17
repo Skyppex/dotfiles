@@ -3,8 +3,10 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
 		},
 		config = function()
+			require("nvim-dap-virtual-text").setup()
 			local dap = require("dap")
 
 			dap.adapters.coreclr = {

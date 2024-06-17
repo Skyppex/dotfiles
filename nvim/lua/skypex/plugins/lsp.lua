@@ -181,9 +181,7 @@ return {
 				--
 
 				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
+					-- filetypes = { "lua" },
 					settings = {
 						Lua = {
 							runtime = { version = "LuaJIT" },
@@ -199,13 +197,14 @@ return {
 							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 							diagnostics = {
-								disable = { "missing-fields" },
+								disable = { "missing-fields", "undefined-fields" },
 								globals = { "vim" },
 							},
 						},
 					},
 				},
 				csharp_ls = {
+					cmd = { csharpls },
 					filetypes = { "cs", "csx" },
 					single_file_support = true,
 					handlers = {
@@ -218,11 +217,6 @@ return {
 							cs_ls_ex.handler(err, result, ctx, config)
 						end,
 						["textDocument/typeDefinition"] = cs_ls_ex.handler,
-					},
-					cmd = { csharpls },
-					capabilities = capabilities,
-					completion = {
-						callSnippet = "Replace",
 					},
 				},
 			}

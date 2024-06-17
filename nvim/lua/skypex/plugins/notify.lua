@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 return {
 	"rcarriga/nvim-notify",
 	config = function()
