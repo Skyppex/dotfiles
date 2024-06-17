@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		"hrsh7th/nvim-cmp",
 		"MunifTanjim/nui.nvim",
-		"rcarriga/nvim-notify",
 	},
 	config = function()
 		require("noice").setup({
