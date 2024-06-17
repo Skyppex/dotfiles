@@ -25,7 +25,7 @@ return {
 				trigger_hop_command(hop.hint_char2, {}, "HopChar2")
 			end, { desc = "Hop to character 2" })
 
-			vim.keymap.set({ "n", "v" }, "<leader>hp", function()
+			vim.keymap.set({ "n", "v" }, "<leader>hk", function()
 				trigger_hop_command(hop.hint_patterns, {}, "HopPattern")
 			end, { desc = "Hop to pattern" })
 

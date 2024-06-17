@@ -2,7 +2,14 @@ return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		dependencies = "nushell/tree-sitter-nu",
+		dependencies = {
+			"nushell/tree-sitter-nu",
+			"tree-sitter/tree-sitter-c-sharp",
+			{
+				"nvim-treesitter/playground",
+				cmd = "TSPlaygroundToggle",
+			},
+		},
 		opts = {
 			ensure_installed = {
 				"query",
@@ -12,12 +19,15 @@ return {
 				"lua",
 				"luadoc",
 				"markdown",
+				"markdown_inline",
 				"vim",
 				"vimdoc",
 				"xml",
 				"http",
 				"json",
 				"graphql",
+				"regex",
+				"bash",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -56,15 +66,5 @@ return {
 				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
 			)
 		end,
-	},
-	{
-		"nushell/tree-sitter-nu",
-	},
-	{
-		"tree-sitter/tree-sitter-c-sharp",
-	},
-	{
-		"nvim-treesitter/playground",
-		cmd = "TSPlaygroundToggle",
 	},
 }

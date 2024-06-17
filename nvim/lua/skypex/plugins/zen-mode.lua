@@ -10,6 +10,7 @@ return {
 					options = {
 						laststatus = 3,
 					},
+					twilight = { enabled = false },
 					wezterm = {
 						enabled = true,
 						-- can be either an absolute font size or the number of incremental steps

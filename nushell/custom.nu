@@ -85,6 +85,16 @@ def vim [
     p
 }
 
+def "fix shada" [] {
+    ls | where type == file
+        | where $it.name =~ "tmp"
+        | each { |f| rm $f.name }
+
+cp main.shada main.shada-cp
+    rm main.shada
+    mv main.shada-cp main.shada
+}
+
 # Utils
 
 # Not command

@@ -206,6 +206,8 @@ return {
 					},
 				},
 				csharp_ls = {
+					filetypes = { "cs", "csx" },
+					single_file_support = true,
 					handlers = {
 						["textDocument/definition"] = function(err, result, ctx, config)
 							if err then
@@ -219,6 +221,9 @@ return {
 					},
 					cmd = { csharpls },
 					capabilities = capabilities,
+					completion = {
+						callSnippet = "Replace",
+					},
 				},
 			}
 

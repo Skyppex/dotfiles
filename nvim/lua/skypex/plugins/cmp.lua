@@ -34,6 +34,10 @@ return {
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			"f3fora/cmp-spell",
+			"dmitmel/cmp-digraphs",
+			"DasGandlaf/nvim-autohotkey",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -72,6 +76,9 @@ return {
 					--  This will auto-import if your LSP supports it.
 					--  This will expand snippets if the LSP sent a snippet.
 					["<TAB>"] = cmp.mapping.confirm({ select = true }),
+
+					-- Abort ([n]o) the completion.
+					-- This will close the completion menu.
 					["<C-e>"] = cmp.mapping.abort(),
 
 					-- If you prefer more traditional completion keymaps,
@@ -83,16 +90,16 @@ return {
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display
 					--  completions whenever it has completion options available.
-					["<C-Space>"] = cmp.mapping.complete({}),
+					["<C-space>"] = cmp.mapping.complete(),
 
-					-- Think of <c-l> as moving to the right of your snippet expansion.
+					-- Think of <c-a-l> as moving to the right of your snippet expansion.
 					--  So if you have a snippet that's like:
 					--  function $name($args)
 					--    $body
 					--  end
 					--
-					-- <c-l> will move you to the right of each of the expansion locations.
-					-- <c-h> is similar, except moving you backwards.
+					-- <c-a-l> will move you to the right of each of the expansion locations.
+					-- <c-a-h> is similar, except moving you backwards.
 					["<C-A-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
@@ -110,7 +117,31 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "path" },
+					{
+						name = "path",
+						option = {
+							get_cwd = function()
+								print(vim.fn.getcwd())
+								return vim.fn.getcwd()
+							end,
+						},
+					},
+					{
+						name = "buffer",
+						option = {
+							keyword_length = 2,
+							get_bufnrs = function()
+								local bufs = {}
+								for _, win in ipairs(vim.api.nvim_list_wins()) do
+									bufs[vim.api.nvim_win_get_buf(win)] = true
+								end
+								return vim.tbl_keys(bufs)
+							end,
+						},
+					},
+					{ name = "spell" },
+					{ name = "digraphs" },
+					{ name = "autohotkey", filetypes = { "ahk", "autohotkey" } },
 				},
 			})
 		end,
