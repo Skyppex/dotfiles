@@ -7,6 +7,7 @@ local home_drive = os.getenv("HOMEDRIVE")
 local home_path = os.getenv("HOMEPATH")
 local home = home_drive .. home_path
 local fd = home .. "/scoop/apps/fd/current/fd.exe"
+local temp_path
 local code_path
 local code_path_2
 local config_path = home .. "/.config"
@@ -16,9 +17,11 @@ if home == nil then
 end
 wezterm.log_info("Home: " .. home)
 if home:find("brage.ingebrigtsen") then
+	temp_path = home .. "/dev/temp/"
 	code_path = home .. "/dev/code/"
 	code_path_2 = home .. "/dev/code/commoncarweb"
 else
+	temp_path = "D:/code/temp/"
 	code_path = "D:/code/"
 	code_path_2 = "D:/code/sentinel/commoncarweb"
 end
@@ -33,6 +36,7 @@ M.toggle = function(window, pane)
 		"^.git$",
 		"--max-depth=3",
 		"--prune",
+		temp_path,
 		code_path,
 		code_path_2,
 		config_path,
@@ -45,7 +49,7 @@ M.toggle = function(window, pane)
 	end
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
-		local project = line:gsub("\\.git\\", "")
+		local project = line:gsub("[\\/].git[\\/]", "")
 		local label = project
 		local id = project:gsub(".*/", "")
 		table.insert(projects, { label = tostring(label), id = tostring(id) })

@@ -46,17 +46,9 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { noremap = true, silent = 
 -- vim.keymap.set("n", "<S-A-x>", "<cmd>cclose<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n" "<S-A-x>", "<cmd>copen<CR>", { noremap = true, silent = true })
 
--- Remap end of line
-vim.keymap.set({ "n", "v" }, "+", "$", { noremap = true, silent = true })
-vim.keymap.set("n", "d+", "d$", { noremap = true, silent = true })
-vim.keymap.set("n", "y+", "y$", { noremap = true, silent = true })
-vim.keymap.set("n", "c+", "c$", { noremap = true, silent = true })
-vim.keymap.set("n", "gc+", "gc$", { noremap = true, silent = true })
-vim.keymap.set("n", "gb+", "gc$", { noremap = true, silent = true })
-
 -- Save file
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-S-s>", "<cmd>wa<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-S>", "<cmd>wa<CR>", { noremap = true, silent = true })
 
 -- Move lines of code in visual mode
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
