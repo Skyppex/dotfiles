@@ -9,6 +9,8 @@ return {
 				"method_declaration",
 				"table",
 				"if_statement",
+				"decl_def",
+				"ctrl_if",
 			},
 		})
 

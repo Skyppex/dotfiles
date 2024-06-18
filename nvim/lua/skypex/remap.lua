@@ -1,8 +1,8 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { noremap = true, silent = true })
 
--- Reverse j and k in normal mode
-vim.keymap.set({ "n", "v" }, "j", "<up>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "k", "<down>", { noremap = true, silent = true })
+-- Reverse j and k
+vim.keymap.set({ "n", "v", "o" }, "j", "<up>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v", "o" }, "k", "<down>", { noremap = true, silent = true })
 
 -- Navigation in insert mode and x mode
 vim.keymap.set({ "i", "x" }, "<A-h>", "<left>", { noremap = true, silent = true })
@@ -40,9 +40,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<S-A-j>", "<cmd>cprev<CR>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-A-k>", "<cmd>cnext<CR>zz", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { noremap = true, silent = true })
-
 -- vim.keymap.set("n", "<S-A-x>", "<cmd>cclose<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n" "<S-A-x>", "<cmd>copen<CR>", { noremap = true, silent = true })
 
@@ -61,15 +58,6 @@ vim.keymap.set("n", "n", "nzz", { noremap = true, silent = true })
 vim.keymap.set("n", "N", "Nzz", { noremap = true, silent = true })
 
 vim.keymap.set("x", "<leader>p", '"_dP', { noremap = true, silent = true })
-
-vim.keymap.set("n", "yj", "y<up>", { desc = "Up", noremap = true, silent = true })
-vim.keymap.set("n", "yk", "y<down>", { desc = "Down", noremap = true, silent = true })
-
-vim.keymap.set("n", "dj", "d<up>", { desc = "Up", noremap = true, silent = true })
-vim.keymap.set("n", "dk", "d<down>", { desc = "Down", noremap = true, silent = true })
-
-vim.keymap.set("n", "cj", "c<up>", { desc = "Up", noremap = true, silent = true })
-vim.keymap.set("n", "ck", "c<down>", { desc = "Down", noremap = true, silent = true })
 
 -- Just don't do this apparently'
 vim.keymap.set("n", "Q", "<nop>", { noremap = true, silent = true })
