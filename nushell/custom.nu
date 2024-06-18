@@ -579,6 +579,14 @@ def gc [
 ] {
     let branch = ($branch | str join "-")
 
+    let in_workspace = (git rev-parse --git-common-dir
+        | str ends-with ".git" | n)
+
+    if $in_workspace {
+        git w c $branch
+        return
+    }
+
     if $b {
         if ($branch | is-empty) {
             print "No branch name provided"
@@ -818,6 +826,7 @@ def "gr mv" [
     git remote rename $old $new
 }
 
+# Git branch alias
 def gb [
     --all(-a)
     --show-current(-s)
@@ -838,6 +847,7 @@ def gb [
     git branch
 }
 
+# Git branch rename using fzf
 def "gb mv" [...query: string] {
     let branches = (git branch --list | lines)
     let query = $query | str join " "
@@ -862,6 +872,7 @@ def "gb mv" [...query: string] {
     git branch --move $selected_branch $new_name
 }
 
+# Git branch delete using fzf
 def "gb rm" [
     --force(-f)
     ...query: string
@@ -1017,6 +1028,90 @@ def gcp [...message: string] {
     git push
 }
 
+def --env "git w c" [
+    ...query: string
+] {
+    let root = git rev-parse --git-common-dir
+    let worktrees = (ls worktrees | get name | path basename)
+    let selected_branch = ($worktrees | to text | fzf -0 -q ($query | str join "-"))
+
+    if ($selected_branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
+    cd $selected_branch
+}
+
+# Git worktree add using fzf
+def --env "git w add" [
+    --branch(-b): string
+    ...query: string
+] {
+    let root = git rev-parse --git-common-dir
+
+    enter-old $root
+
+    let query = ($query | str join "-")
+
+    if $branch != null {
+        git worktree add -b $branch $query
+        return
+    }
+
+    let branches = (git branch --all | lines)
+    let selected_branch = ($branches | to text | fzf -0 -q $query)
+
+    if ($selected_branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
+    mut selected_branch = ($selected_branch | str substring 2..)
+
+    if ($selected_branch | str starts-with "remotes") {
+        $selected_branch = ($selected_branch | str substring 8..)
+        let slash = ($selected_branch | str index-of '/')
+        $selected_branch = ($selected_branch | str substring ($slash + 1)..)
+    }
+
+    print $"Selected branch: ($selected_branch)"
+
+    git worktree add $selected_branch
+    cd $selected_branch
+    print "Run 'p' to return to the previous directory"
+}
+
+# Git worktree remove using fzf
+def --env "git w rm" [
+    ...query: string
+] {
+    let root = git rev-parse --git-common-dir
+    let current_dir = $env.PWD | path basename
+    enter-old $root
+
+    let query = ($query | str join "-")
+    let worktrees = (ls worktrees | get name | path basename)
+    let selected_branch = ($worktrees | to text | fzf -0 -q $query)
+
+    if ($selected_branch | is-empty) {
+        print "No branch selected"
+        return
+    }
+
+    print $"Selected branch: ($selected_branch)"
+
+    print $"Current dir: ($current_dir)"
+    if ($current_dir == $selected_branch) {
+        p
+        print "Cannot remove the current directory"
+        return
+    }
+
+    git worktree remove $selected_branch
+    p
+}
+
 # GitHub
 
 # Open a repo in the browser
@@ -1145,29 +1240,6 @@ def "gh open" [
     }
 
     start $link
-}
-
-def fix [] {
-    let input = $in
-    let entries = $input | to text | lines
-
-    $entries | each {|e| 
-        let index = ($e | str index-of ".") + 2
-        
-        mut value = ($e | str substring ..$index | str trim | into float)
-        let path = ($e | str substring ($index + 1)..)
-        let path = ($path | str replace -a '\Coding\' '\code\')
-
-        print $value
-        print $path
-
-
-        while $value > 0 {
-            $value = ($value - 4)
-            zoxide add $path
-            print $"added ($path)"
-        }
-    }
 }
 
 # Autohotkey
