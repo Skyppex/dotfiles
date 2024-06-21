@@ -88,7 +88,9 @@ return {
 					--  Most Language Servers support renaming across files, etc.
 					map("<leader>rn", function()
 						vim.lsp.buf.rename()
-						vim.api.nvim_cmd({ cmd = "wa" })
+						vim.schedule(function()
+							vim.api.nvim_cmd({ cmd = "wa" }, {})
+						end)
 					end, "[R]e[n]ame")
 
 					-- Execute a code action, usually your cursor needs to be on top of an error

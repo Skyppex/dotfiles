@@ -23,6 +23,8 @@ return {
 				-- is found.
 				javascript = { { "prettierd", "prettier" } },
 				typescript = { { "prettierd", "prettier" } },
+				cs = { "csharpier" },
+				csx = { "csharpier" },
 			},
 		},
 	},

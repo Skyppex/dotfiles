@@ -44,8 +44,7 @@ vim.keymap.set("n", "<S-A-k>", "<cmd>cnext<CR>zz", { noremap = true, silent = tr
 -- vim.keymap.set("n" "<S-A-x>", "<cmd>copen<CR>", { noremap = true, silent = true })
 
 -- Save file
-vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-S>", "<cmd>wa<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-s>", "<cmd>wa<CR>", { noremap = true, silent = true })
 
 -- Move lines of code in visual mode
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
@@ -246,3 +245,14 @@ vim.keymap.set("v", "cis", "/_<CR><left>", { desc = "Snake Case Word", noremap =
 
 -- Redo
 vim.keymap.set("n", "U", "<C-r>", { desc = "Redo", noremap = true, silent = true })
+
+-- Newline before .
+vim.keymap.set("n", "<leader>.", function()
+	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
+	for _ = 1, count do
+		vim.cmd("normal! f.i<cr><esc>")
+	end
+end)
+
+-- Delete word
+vim.keymap.set("i", "<m-bs>", "<c-w>", { desc = "Delete word", noremap = true, silent = true })

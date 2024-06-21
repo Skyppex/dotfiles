@@ -120,3 +120,6 @@ match ($env.COMPUTERNAME) {
 }
 
 $env.PROJECTS = $"($env.CODE)/projects"
+
+# AWS
+$env.AWS_PROFILE = "dev"
