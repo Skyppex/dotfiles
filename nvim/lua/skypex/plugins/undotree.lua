@@ -1,6 +1,7 @@
 return {
 	{
 		"mbbill/undotree",
+		event = "VeryLazy",
 		config = function()
 			vim.g.undotree_DiffCommand = "FC"
 			vim.keymap.set(

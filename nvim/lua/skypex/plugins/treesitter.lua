@@ -1,6 +1,7 @@
 return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		event = "VeryLazy",
 		build = ":TSUpdate",
 		dependencies = {
 			"nushell/tree-sitter-nu",

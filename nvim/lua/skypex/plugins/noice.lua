@@ -4,6 +4,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		"MunifTanjim/nui.nvim",
 	},
+	event = "VeryLazy",
 	config = function()
 		require("noice").setup({
 			lsp = {

@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/zen-mode.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("zen-mode").setup({
 				window = {

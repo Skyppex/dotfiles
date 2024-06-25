@@ -1,5 +1,6 @@
 return {
 	"folke/twilight.nvim",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("twilight").setup({
 			context = 20,

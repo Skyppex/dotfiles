@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/oil.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("oil").setup({
@@ -36,6 +37,7 @@ return {
 	},
 	{
 		"SirZenith/oil-vcs-status",
+		event = "VeryLazy",
 		dependencies = {
 			"stevearc/oil.nvim",
 		},

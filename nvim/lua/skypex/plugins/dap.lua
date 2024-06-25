@@ -5,6 +5,7 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 		},
+		event = "BufReadPre",
 		config = function()
 			require("nvim-dap-virtual-text").setup()
 			local dap = require("dap")
@@ -87,6 +88,7 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		event = "BufReadPre",
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
 

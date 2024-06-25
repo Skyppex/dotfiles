@@ -206,6 +206,8 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
 
+vim.keymap.set("o", "<leader>cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+
 vim.keymap.set(
 	"n",
 	"<leader>ciC",
@@ -228,6 +230,8 @@ vim.keymap.set("v", "cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", 
 -- Snake case motion
 vim.keymap.set("n", "<leader>cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
 vim.keymap.set("n", "<leader>cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
+
+vim.keymap.set("o", "<leader>cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
 
 vim.keymap.set(
 	"n",

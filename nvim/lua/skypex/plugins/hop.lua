@@ -1,6 +1,7 @@
 return {
 	{
 		"smoka7/hop.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "v2",
 		config = function()
 			local function trigger_hop_command(cmd, opts, cmdname)

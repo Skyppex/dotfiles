@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-fugitive",
+		event = "BufReadPre",
 		config = function()
 			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status", noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gl", function()
@@ -13,6 +14,7 @@ return {
 	},
 	{
 		"akinsho/git-conflict.nvim",
+		event = "BufReadPre",
 		version = "*",
 		config = function()
 			require("git-conflict").setup({
@@ -72,6 +74,7 @@ return {
 	},
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
+		event = "BufReadPre",
 		config = function()
 			local gitsigns = require("gitsigns")
 			gitsigns.setup({

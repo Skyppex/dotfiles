@@ -1,6 +1,8 @@
 return {
 	{
 		"simrat39/rust-tools.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		ft = "rust",
 		config = function()
 			local rt = require("rust-tools")
 
