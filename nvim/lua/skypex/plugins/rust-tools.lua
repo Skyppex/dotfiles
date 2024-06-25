@@ -1,6 +1,7 @@
 return {
 	{
 		"simrat39/rust-tools.nvim",
+		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		event = { "BufReadPre", "BufNewFile" },
 		ft = "rust",
 		config = function()
