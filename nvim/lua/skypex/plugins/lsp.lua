@@ -9,8 +9,8 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
-			-- "Decodetalkers/csharpls-extended-lsp.nvim",
-			"Hoffs/omnisharp-extended-lsp.nvim",
+			"Decodetalkers/csharpls-extended-lsp.nvim",
+			-- "Hoffs/omnisharp-extended-lsp.nvim",
 			"Issafalcon/lsp-overloads.nvim",
 		},
 		opts = {
@@ -21,31 +21,6 @@ return {
 			},
 		},
 		config = function()
-			-- Brief aside: **What is LSP?**
-			--
-			-- LSP is an initialism you've probably heard, but might not understand what it is.
-			--
-			-- LSP stands for Language Server Protocol. It's a protocol that helps editors
-			-- and language tooling communicate in a standardized fashion.
-			--
-			-- In general, you have a "server" which is some tool built to understand a particular
-			-- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-			-- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-			-- processes that communicate with some "client" - in this case, Neovim!
-			--
-			-- LSP provides Neovim with features like:
-			--  - Go to definition
-			--  - Find references
-			--  - Autocompletion
-			--  - Symbol Search
-			--  - and more!
-			--
-			-- Thus, Language Servers are external tools that must be installed separately from
-			-- Neovim. This is where `mason` and related plugins come into play.
-			--
-			-- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-			-- and elegantly composed help section, `:help lsp-vs-treesitter`
-
 			--  This function gets run when an LSP attaches to a particular buffer.
 			--    That is to say, every time a new file is opened that is associated with
 			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -114,6 +89,7 @@ return {
 					--
 					-- When you move your cursor, the highlights will be cleared (the second autocommand).
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
+
 					if client and client.server_capabilities.documentHighlightProvider then
 						local highlight_augroup =
 							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
@@ -202,111 +178,112 @@ return {
 			end
 
 			-- CREATE AUTOCMD FOR CSHARP FILES
-			vim.api.nvim_create_autocmd("FileType", {
-				-- pattern = 'cs',
-				pattern = { "cs", "cshtml", "vb" },
-				callback = function()
-					-- print("FileType: cs, cshtml, vb")
-					if vim.g.dotnetlsp then
-						-- print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
-						return
-					end
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	-- pattern = 'cs',
+			-- 	pattern = { "cs", "cshtml", "vb" },
+			-- 	callback = function()
+			-- 		-- print("FileType: cs, cshtml, vb")
+			-- 		if vim.g.dotnetlsp then
+			-- 			-- print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
+			-- 			return
+			-- 		end
+			--
+			-- 		local on_attach = function(client, bufnr)
+			-- 			--- Guard against servers without the signatureHelper capability
+			-- 			if client.server_capabilities.signatureHelpProvider then
+			-- 				require("lsp-overloads").setup(client, {})
+			-- 				-- ...
+			-- 				-- keymaps = {
+			-- 				-- 		next_signature = "<C-j>",
+			-- 				-- 		previous_signature = "<C-k>",
+			-- 				-- 		next_parameter = "<C-l>",
+			-- 				-- 		previous_parameter = "<C-h>",
+			-- 				-- 		close_signature = "<A-s>"
+			-- 				-- 	},
+			-- 				-- ...
+			-- 			end
+			--
+			-- 			vim.keymap.set("n", "gd", function()
+			-- 				require("omnisharp_extended").telescope_lsp_definitions()
+			-- 			end, { buffer = bufnr, desc = "LSP: [G]oto [D]efinition", noremap = true, silent = true })
+			-- 		end
+			--
+			-- 		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
+			-- 		local settings = {
+			-- 			FormattingOptions = {
+			-- 				-- Enables support for reading code style, naming convention and analyzer
+			-- 				-- settings from .editorconfig.
+			-- 				EnableEditorConfigSupport = true,
+			-- 				-- Specifies whether 'using' directives should be grouped and sorted during
+			-- 				-- document formatting.
+			-- 				OrganizeImports = true,
+			-- 			},
+			-- 			MsBuild = {
+			-- 				-- If true, MSBuild project system will only load projects for files that
+			-- 				-- were opened in the editor. This setting is useful for big C# codebases
+			-- 				-- and allows for faster initialization of code navigation features only
+			-- 				-- for projects that are relevant to code that is being edited. With this
+			-- 				-- setting enabled OmniSharp may load fewer projects and may thus display
+			-- 				-- incomplete reference lists for symbols.
+			-- 				LoadProjectsOnDemand = nil,
+			-- 			},
+			-- 			RoslynExtensionsOptions = {
+			-- 				-- Enables support for roslyn analyzers, code fixes and rulesets.
+			-- 				EnableAnalyzersSupport = false, -- THIS ADED FIX FORMATTING ON EVERY SINGLE LINE IN CS FILES!
+			-- 				-- Enables support for showing unimported types and unimported extension
+			-- 				-- methods in completion lists. When committed, the appropriate using
+			-- 				-- directive will be added at the top of the current file. This option can
+			-- 				-- have a negative impact on initial completion responsiveness,
+			-- 				-- particularly for the first few completion sessions after opening a
+			-- 				-- solution.
+			-- 				EnableImportCompletion = nil,
+			-- 				-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+			-- 				-- true
+			-- 				AnalyzeOpenDocumentsOnly = nil,
+			-- 				enableDecompilationSupport = true,
+			-- 			},
+			-- 			Sdk = {
+			-- 				-- Specifies whether to include preview versions of the .NET SDK when
+			-- 				-- determining which version to use for project loading.
+			-- 				IncludePrereleases = true,
+			-- 			},
+			-- 		}
+			--
+			-- 		-- CHECK THE CSPROJ OR SOMETHING ELSE TO CONFIRM IT'S .NET FRAMEWORK OR .NET CORE PROJECT
+			-- 		local frameworkType = getFrameworkType()
+			-- 		if frameworkType == "netframework" then
+			-- 			print("Found a .NET Framework project, starting .NET Framework OmniSharp")
+			-- 			require("lspconfig").omnisharp_mono.setup({
+			-- 				enable_decompilation_support = true,
+			-- 				handlers = {
+			-- 					["textDocument/definition"] = require("omnisharp_extended").handler,
+			-- 				},
+			-- 				organize_imports_on_format = true,
+			-- 				settings = settings,
+			-- 				on_attach = on_attach,
+			-- 			})
+			-- 			vim.g.dotnetlsp = "omnisharp_mono"
+			-- 			vim.cmd("LspStart omnisharp_mono")
+			-- 		elseif frameworkType == "netcore" then
+			-- 			print("Found a .NET Core project, starting .NET Core OmniSharp")
+			-- 			require("lspconfig").omnisharp.setup({
+			-- 				enable_decompilation_support = true,
+			-- 				handlers = {
+			-- 					["textDocument/definition"] = require("omnisharp_extended").handler,
+			-- 				},
+			-- 				organize_imports_on_format = true,
+			-- 				settings = settings,
+			-- 				on_attach = on_attach,
+			-- 			})
+			-- 			vim.g.dotnetlsp = "omnisharp"
+			-- 			vim.cmd("LspStart omnisharp")
+			-- 		else
+			-- 			return
+			-- 		end
+			-- 	end,
+			-- 	group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true }),
+			-- })
 
-					local on_attach = function(client, bufnr)
-						--- Guard against servers without the signatureHelper capability
-						if client.server_capabilities.signatureHelpProvider then
-							require("lsp-overloads").setup(client, {})
-							-- ...
-							-- keymaps = {
-							-- 		next_signature = "<C-j>",
-							-- 		previous_signature = "<C-k>",
-							-- 		next_parameter = "<C-l>",
-							-- 		previous_parameter = "<C-h>",
-							-- 		close_signature = "<A-s>"
-							-- 	},
-							-- ...
-						end
-
-						vim.keymap.set("n", "gd", function()
-							require("omnisharp_extended").telescope_lsp_definitions()
-						end, { buffer = bufnr, desc = "LSP: [G]oto [D]efinition", noremap = true, silent = true })
-					end
-
-					-- SEE: https://github.com/omnisharp/omnisharp-roslyn
-					local settings = {
-						FormattingOptions = {
-							-- Enables support for reading code style, naming convention and analyzer
-							-- settings from .editorconfig.
-							EnableEditorConfigSupport = true,
-							-- Specifies whether 'using' directives should be grouped and sorted during
-							-- document formatting.
-							OrganizeImports = true,
-						},
-						MsBuild = {
-							-- If true, MSBuild project system will only load projects for files that
-							-- were opened in the editor. This setting is useful for big C# codebases
-							-- and allows for faster initialization of code navigation features only
-							-- for projects that are relevant to code that is being edited. With this
-							-- setting enabled OmniSharp may load fewer projects and may thus display
-							-- incomplete reference lists for symbols.
-							LoadProjectsOnDemand = nil,
-						},
-						RoslynExtensionsOptions = {
-							-- Enables support for roslyn analyzers, code fixes and rulesets.
-							EnableAnalyzersSupport = false, -- THIS ADED FIX FORMATTING ON EVERY SINGLE LINE IN CS FILES!
-							-- Enables support for showing unimported types and unimported extension
-							-- methods in completion lists. When committed, the appropriate using
-							-- directive will be added at the top of the current file. This option can
-							-- have a negative impact on initial completion responsiveness,
-							-- particularly for the first few completion sessions after opening a
-							-- solution.
-							EnableImportCompletion = nil,
-							-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-							-- true
-							AnalyzeOpenDocumentsOnly = nil,
-							enableDecompilationSupport = true,
-						},
-						Sdk = {
-							-- Specifies whether to include preview versions of the .NET SDK when
-							-- determining which version to use for project loading.
-							IncludePrereleases = true,
-						},
-					}
-
-					-- CHECK THE CSPROJ OR SOMETHING ELSE TO CONFIRM IT'S .NET FRAMEWORK OR .NET CORE PROJECT
-					local frameworkType = getFrameworkType()
-					if frameworkType == "netframework" then
-						print("Found a .NET Framework project, starting .NET Framework OmniSharp")
-						require("lspconfig").omnisharp_mono.setup({
-							enable_decompilation_support = true,
-							handlers = {
-								["textDocument/definition"] = require("omnisharp_extended").handler,
-							},
-							organize_imports_on_format = true,
-							settings = settings,
-							on_attach = on_attach,
-						})
-						vim.g.dotnetlsp = "omnisharp_mono"
-						vim.cmd("LspStart omnisharp_mono")
-					elseif frameworkType == "netcore" then
-						print("Found a .NET Core project, starting .NET Core OmniSharp")
-						require("lspconfig").omnisharp.setup({
-							enable_decompilation_support = true,
-							handlers = {
-								["textDocument/definition"] = require("omnisharp_extended").handler,
-							},
-							organize_imports_on_format = true,
-							settings = settings,
-							on_attach = on_attach,
-						})
-						vim.g.dotnetlsp = "omnisharp"
-						vim.cmd("LspStart omnisharp")
-					else
-						return
-					end
-				end,
-				group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true }),
-			})
 			local cmp_lsp = require("cmp_nvim_lsp")
 			-- LSP servers and clients are able to communicate to each other what features they support.
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -320,8 +297,8 @@ return {
 
 			-- Define variables use din the server configuration below
 			local lspconfig = require("lspconfig")
-			-- local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
-			-- local cs_ls_ex = require("csharpls_extended")
+			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
+			local cs_ls_ex = require("csharpls_extended")
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -369,22 +346,32 @@ return {
 						},
 					},
 				},
-				-- csharp_ls = {
-				-- 	cmd = { csharpls },
-				-- 	filetypes = { "cs", "csx" },
-				-- 	single_file_support = true,
-				-- 	handlers = {
-				-- 		["textDocument/definition"] = function(err, result, ctx, config)
-				-- 			if err then
-				-- 				vim.notify("Error: " .. err, vim.log.levels.ERROR)
-				-- 			else
-				-- 				vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
-				-- 			end
-				-- 			cs_ls_ex.handler(err, result, ctx, config)
-				-- 		end,
-				-- 		["textDocument/typeDefinition"] = cs_ls_ex.handler,
-				-- 	},
-				-- },
+				csharp_ls = {
+					cmd = { csharpls },
+					filetypes = { "cs", "csx" },
+					single_file_support = true,
+					handlers = {
+						["textDocument/definition"] = function(err, result, ctx, config)
+							if err then
+								vim.notify("Error: " .. err, vim.log.levels.ERROR)
+							else
+								vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
+							end
+							cs_ls_ex.handler(err, result, ctx, config)
+						end,
+						["textDocument/typeDefinition"] = cs_ls_ex.handler,
+					},
+					on_attach = function(client, bufnr)
+						vim.keymap.set("n", "gd", function()
+							cs_ls_ex.lsp_definitions()
+						end, {
+							buffer = bufnr,
+							desc = "csharls: [G]oto [D]efinition",
+							noremap = true,
+							silent = true,
+						})
+					end,
+				},
 			}
 
 			lspconfig.nushell.setup({
@@ -410,9 +397,9 @@ return {
 				"lua-language-server",
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
-				-- "csharp-language-server",
-				"omnisharp",
-				"omnisharp_mono",
+				"csharp-language-server",
+				-- "omnisharp",
+				-- "omnisharp_mono",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -421,9 +408,9 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						if string.find(server_name, "omnisharp") then
-							return
-						end
+						-- if string.find(server_name, "omnisharp") then
+						-- 	return
+						-- end
 						-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
