@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1719332947000)\/",
+                "value": "\/Date(1719519997000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 18:29:07"
+                "DateTime": "torsdag 27. juni 2024 22:26:37"
             },
             "Manifests": 1331
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1719334111000)\/",
+                "value": "\/Date(1719520115000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 18:48:31"
+                "DateTime": "torsdag 27. juni 2024 22:28:35"
             },
-            "Manifests": 2040
+            "Manifests": 2043
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1719342842000)\/",
+                "value": "\/Date(1719520159000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 21:14:02"
+                "DateTime": "torsdag 27. juni 2024 22:29:19"
             },
             "Manifests": 465
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1719332871000)\/",
+                "value": "\/Date(1719519893000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 18:27:51"
+                "DateTime": "torsdag 27. juni 2024 22:24:53"
             },
             "Manifests": 308
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1719334293000)\/",
+                "value": "\/Date(1719520983000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 18:51:33"
+                "DateTime": "torsdag 27. juni 2024 22:43:03"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1719274371000)\/",
+                "value": "\/Date(1719495947000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 25. juni 2024 02:12:51"
+                "DateTime": "torsdag 27. juni 2024 15:45:47"
             },
             "Manifests": 259
         },
@@ -90,8 +90,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.17.0",
-            "Updated": "\/Date(1719073391807)\/"
+            "Version": "2.17.4",
+            "Updated": "\/Date(1719528022887)\/"
         },
         {
             "Info": "",
@@ -111,8 +111,8 @@
             "Info": "",
             "Source": "main",
             "Name": "bun",
-            "Version": "1.1.16",
-            "Updated": "\/Date(1719245484586)\/"
+            "Version": "1.1.17",
+            "Updated": "\/Date(1719429230727)\/"
         },
         {
             "Info": "",
@@ -153,8 +153,8 @@
             "Info": "",
             "Source": "main",
             "Name": "docker",
-            "Version": "26.1.4",
-            "Updated": "\/Date(1717705203875)\/"
+            "Version": "27.0.2",
+            "Updated": "\/Date(1719528034121)\/"
         },
         {
             "Info": "",
@@ -167,8 +167,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "dotPeek",
-            "Version": "2024.1.3",
-            "Updated": "\/Date(1718056722064)\/"
+            "Version": "2024.1.4",
+            "Updated": "\/Date(1719429257156)\/"
         },
         {
             "Info": "",
@@ -209,8 +209,8 @@
             "Info": "",
             "Source": "main",
             "Name": "gh",
-            "Version": "2.51.0",
-            "Updated": "\/Date(1718383365236)\/"
+            "Version": "2.52.0",
+            "Updated": "\/Date(1719429261532)\/"
         },
         {
             "Info": "",
@@ -223,8 +223,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "github",
-            "Version": "3.4.1",
-            "Updated": "\/Date(1717705240321)\/"
+            "Version": "3.4.2",
+            "Updated": "\/Date(1719528073655)\/"
         },
         {
             "Info": "",
@@ -398,8 +398,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "rider",
-            "Version": "2024.1.3-241.17011.166",
-            "Updated": "\/Date(1718136904649)\/"
+            "Version": "2024.1.4-241.18034.76",
+            "Updated": "\/Date(1719528390153)\/"
         },
         {
             "Info": "",
