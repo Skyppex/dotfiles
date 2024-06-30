@@ -2,9 +2,6 @@ return {
 	{
 		"theprimeagen/harpoon",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
 		config = function()
 			require("harpoon").setup({
 				global_settings = {
@@ -29,6 +26,8 @@ return {
 					tabline_suffix = "   ",
 				},
 			})
+
+			require("telescope").load_extension("harpoon")
 
 			local mark = require("harpoon.mark")
 			local ui = require("harpoon.ui")

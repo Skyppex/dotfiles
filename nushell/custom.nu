@@ -572,6 +572,9 @@ alias gca = git commit --amend
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
+# Git add patch
+alias gap = git add --patch
+
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch

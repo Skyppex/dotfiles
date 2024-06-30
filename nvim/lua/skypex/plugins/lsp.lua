@@ -1,7 +1,6 @@
 return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -11,7 +10,28 @@ return {
 			"j-hui/fidget.nvim",
 			"Decodetalkers/csharpls-extended-lsp.nvim",
 			-- "Hoffs/omnisharp-extended-lsp.nvim",
-			"Issafalcon/lsp-overloads.nvim",
+			-- "Issafalcon/lsp-overloads.nvim",
+			{
+				"mfussenegger/nvim-lint",
+				config = function()
+					local lint = require("lint")
+
+					lint.linters_by_ft = {
+						lua = { "luacheck" },
+						javascript = { "eslint_d" },
+						typescript = { "eslint_d" },
+						cs = { "sonarlint-language-server" },
+						csx = { "sonarlint-language-server" },
+					}
+
+					vim.api.nvim_create_autocmd("BufWritePost", {
+						group = vim.api.nvim_create_augroup("lint", { clear = true }),
+						callback = function()
+							lint.try_lint()
+						end,
+					})
+				end,
+			},
 		},
 		opts = {
 			setup = {
@@ -26,7 +46,7 @@ return {
 			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
 			--    function will be executed to configure the current buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
 					-- NOTE: Remember that Lua is a real programming language, and as such it is possible
 					-- to define small helper and utility functions so you don't have to repeat yourself.
@@ -79,6 +99,9 @@ return {
 					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
 
+					-- Opens a popup that displays the signature of whatever is under your cursor
+					map("H", vim.lsp.buf.signature_help, "Signature Help")
+
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -91,8 +114,7 @@ return {
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 
 					if client and client.server_capabilities.documentHighlightProvider then
-						local highlight_augroup =
-							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+						local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 							buffer = event.buf,
 							group = highlight_augroup,
@@ -105,10 +127,10 @@ return {
 							callback = vim.lsp.buf.clear_references,
 						})
 						vim.api.nvim_create_autocmd("LspDetach", {
-							group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+							group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 							callback = function(event2)
 								vim.lsp.buf.clear_references()
-								vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+								vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
 							end,
 						})
 					end
@@ -418,6 +440,19 @@ return {
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 						lspconfig[server_name].setup(server)
 					end,
+				},
+			})
+
+			vim.diagnostic.config({
+				severity_sort = true,
+				update_in_insert = true,
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = true,
+					header = "",
+					prefix = "",
 				},
 			})
 		end,

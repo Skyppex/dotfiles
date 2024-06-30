@@ -28,6 +28,10 @@ return {
 			},
 			sections = {
 				lualine_c = { get_session_name },
+				lualine_x = { {
+					"filename",
+					path = 1,
+				}, "fileformat", "filetype" },
 			},
 		},
 	},

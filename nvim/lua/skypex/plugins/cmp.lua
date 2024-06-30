@@ -1,11 +1,13 @@
 return {
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
+		lazy = true,
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
 			{
 				"L3MON4D3/LuaSnip",
+				lazy = true,
 				event = "InsertEnter",
 				build = (function()
 					-- Build Step is needed for regex support in snippets.
@@ -19,6 +21,7 @@ return {
 				dependencies = {
 					{
 						"saadparwaiz1/cmp_luasnip",
+						lazy = true,
 						event = "InsertEnter",
 					},
 					-- `friendly-snippets` contains a variety of premade snippets.
@@ -26,9 +29,21 @@ return {
 					--    https://github.com/rafamadriz/friendly-snippets
 					{
 						"rafamadriz/friendly-snippets",
+						lazy = true,
 						event = "InsertEnter",
 						config = function()
 							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
+					{
+						"benfowler/telescope-luasnip.nvim",
+						config = function()
+							require("telescope").load_extension("luasnip")
+							vim.keymap.set("n", "sn", "<cmd>Telescope luasnip<CR>", {
+								desc = "[S]earch S[n]ippets",
+								noremap = true,
+								silent = true,
+							})
 						end,
 					},
 				},
@@ -39,26 +54,32 @@ return {
 			--  into multiple repos for maintenance purposes.
 			{
 				"hrsh7th/cmp-nvim-lsp",
+				lazy = true,
 				event = { "BufReadPre", "BufNewFile" },
 			},
 			{
 				"hrsh7th/cmp-path",
-
+				lazy = true,
 				event = "InsertEnter",
 			},
 			{
 				"hrsh7th/cmp-buffer",
-
+				lazy = true,
 				event = "InsertEnter",
 			},
 			{
 				"f3fora/cmp-spell",
-
+				lazy = true,
 				event = "InsertEnter",
 			},
 			{
 				"DasGandlaf/nvim-autohotkey",
-
+				lazy = true,
+				event = "InsertEnter",
+			},
+			{
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+				lazy = true,
 				event = "InsertEnter",
 			},
 		},
@@ -139,6 +160,7 @@ return {
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
+					{ name = "nvim_lsp_signature_help" },
 					{ name = "luasnip" },
 					{
 						name = "path",

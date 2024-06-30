@@ -2,24 +2,35 @@ return {
 	{
 		"kylechui/nvim-surround",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			keymaps = {
+		config = function()
+			local keymaps = {
 				insert = false,
 				insert_line = false,
-				normal = "<leader>o",
-				normal_cur = "<leader>oc",
-				normal_line = "<leader>ol",
-				normal_cur_line = "<leader>os",
-				visual = "<leader>o",
-				visual_cur = "<leader>oc",
-				delete = "do",
-				change = "co",
-			},
-			surrounds = {
+				normal = "s",
+				normal_cur = "sc",
+				normal_line = "sl",
+				normal_cur_line = "so",
+				visual = "s",
+				visual_cur = "sc",
+				delete = "ds",
+				change = "cs",
+			}
+
+			local aliases = {
+				["a"] = ">",
+				["p"] = ")",
+				["b"] = "}",
+				["s"] = "]",
+				["q"] = { '"', "'", "`" },
+				["e"] = { "}", "]", ")", ">", '"', "'", "`" },
+			}
+
+			local config = require("nvim-surround.config")
+
+			local surrounds = {
 				["("] = {
 					add = { "(", ")" },
 					find = function()
-						local config = require("nvim-surround.config")
 						return config.get_selection({ motion = "a)" })
 					end,
 					delete = "^(.)().-(.)()$",
@@ -27,7 +38,6 @@ return {
 				["{"] = {
 					add = { "{", "}" },
 					find = function()
-						local config = require("nvim-surround.config")
 						return config.get_selection({ motion = "a}" })
 					end,
 					delete = "^(.)().-(.)()$",
@@ -35,7 +45,6 @@ return {
 				["["] = {
 					add = { "[", "]" },
 					find = function()
-						local config = require("nvim-surround.config")
 						return config.get_selection({ motion = "a]" })
 					end,
 					delete = "^(.)().-(.)()$",
@@ -43,12 +52,19 @@ return {
 				["<"] = {
 					add = { "<", ">" },
 					find = function()
-						local config = require("nvim-surround.config")
 						return config.get_selection({ motion = "a>" })
 					end,
 					delete = "^(.)().-(.)()$",
 				},
-			},
-		},
+			}
+
+			local surround = require("nvim-surround")
+
+			surround.setup({
+				keymaps = keymaps,
+				aliases = aliases,
+				surrounds = surrounds,
+			})
+		end,
 	},
 }

@@ -4,13 +4,13 @@ return {
 		event = "VimEnter",
 		branch = "0.1.x",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 
 			-- Useful for getting pretty icons, but requires a Nerd Font.
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
+			local telescope = require("telescope")
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
 			-- it can fuzzy find! It's more than just a "file finder", it can search
 			-- many different aspects of Neovim, your workspace, LSP, and more!
@@ -32,7 +32,7 @@ return {
 
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
-			require("telescope").setup({
+			telescope.setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
@@ -51,27 +51,32 @@ return {
 			})
 
 			-- Enable Telescope extensions if they are installed
-			pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "harpoon")
+			pcall(telescope.load_extension, "ui-select")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
+
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", function()
-				builtin.find_files({ path_display = { "absolute" } })
-			end, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Search Git Files" })
+			vim.keymap.set("n", "<leader>sf", builtin.git_files, { desc = "Search Git Files" })
 			vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch [C]ommits" })
 			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope builtin" })
-			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-			vim.keymap.set("n", "<leader>ss", function()
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch existing [B]uffers" })
+
+			vim.keymap.set("n", "<C-p>", function()
+				builtin.find_files({ path_display = { "absolute" } })
+			end, { desc = "[S]earch [F]iles" })
+
+			vim.keymap.set(
+				"n",
+				"<leader>ss",
+				builtin.lsp_dynamic_workspace_symbols,
+				{ desc = "[S]earch LSP [S]ymbols" }
+			)
+
+			vim.keymap.set("n", "<leader>sg", function()
 				local git_dir =
 					vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
 				git_dir = string.gsub(git_dir, "\n", "") -- remove newline character from git_dir
@@ -81,23 +86,16 @@ return {
 				}
 
 				builtin.live_grep(opts)
-			end, { desc = "[S]earch [S]elect Telescope" })
+			end, { desc = "[S]earch [G]it files by grep" })
 
 			vim.keymap.set("n", "<leader>pws", function()
 				local word = vim.fn.expand("<cword>")
 				builtin.grep_string({ search = word })
 			end)
 
-			vim.keymap.set("n", "<leader>w/", function()
-				local word = vim.fn.expand("<cword>")
-
-				local opts = require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-					search = word,
-				})
-
-				builtin.current_buffer_fuzzy_find(opts)
+			vim.keymap.set("n", "<leader>pWs", function()
+				local word = vim.fn.expand("<cWORD>")
+				builtin.grep_string({ search = word })
 			end)
 
 			-- Slightly advanced example of overriding default behavior and theme
@@ -117,11 +115,6 @@ return {
 					prompt_title = "Live Grep in Open Files",
 				})
 			end, { desc = "[S]earch [/] in Open Files" })
-
-			-- Shortcut for searching your Neovim configuration files
-			vim.keymap.set("n", "<leader>sn", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
 		end,
 	},
 }
