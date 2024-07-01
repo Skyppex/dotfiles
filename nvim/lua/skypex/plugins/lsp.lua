@@ -20,8 +20,6 @@ return {
 						lua = { "luacheck" },
 						javascript = { "eslint_d" },
 						typescript = { "eslint_d" },
-						cs = { "sonarlint-language-server" },
-						csx = { "sonarlint-language-server" },
 					}
 
 					vim.api.nvim_create_autocmd("BufWritePost", {
@@ -101,6 +99,12 @@ return {
 
 					-- Opens a popup that displays the signature of whatever is under your cursor
 					map("H", vim.lsp.buf.signature_help, "Signature Help")
+					vim.keymap.set(
+						"i",
+						"<A-H>",
+						vim.lsp.buf.signature_help,
+						{ buffer = event.buf, desc = "LSP: Signature Help" }
+					)
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
