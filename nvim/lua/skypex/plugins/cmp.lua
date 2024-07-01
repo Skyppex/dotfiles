@@ -1,57 +1,10 @@
 return {
-	{ -- Autocompletion
+	{
 		"hrsh7th/nvim-cmp",
 		lazy = true,
 		event = "InsertEnter",
 		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			{
-				"L3MON4D3/LuaSnip",
-				lazy = true,
-				event = "InsertEnter",
-				build = (function()
-					-- Build Step is needed for regex support in snippets.
-					-- This step is not supported in many windows environments.
-					-- Remove the below condition to re-enable on windows.
-					-- if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-					-- 	return
-					-- end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					{
-						"saadparwaiz1/cmp_luasnip",
-						lazy = true,
-						event = "InsertEnter",
-					},
-					-- `friendly-snippets` contains a variety of premade snippets.
-					--    See the README about individual language/framework/plugin snippets:
-					--    https://github.com/rafamadriz/friendly-snippets
-					{
-						"rafamadriz/friendly-snippets",
-						lazy = true,
-						event = "InsertEnter",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-					{
-						"benfowler/telescope-luasnip.nvim",
-						config = function()
-							require("telescope").load_extension("luasnip")
-							vim.keymap.set("n", "sn", "<cmd>Telescope luasnip<CR>", {
-								desc = "[S]earch S[n]ippets",
-								noremap = true,
-								silent = true,
-							})
-						end,
-					},
-				},
-			},
-
-			-- Adds other completion capabilities.
-			--  nvim-cmp does not ship with all sources by default. They are split
-			--  into multiple repos for maintenance purposes.
+			{ "L3MON4D3/LuaSnip" },
 			{
 				"hrsh7th/cmp-nvim-lsp",
 				lazy = true,
@@ -84,7 +37,6 @@ return {
 			},
 		},
 		config = function()
-			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
@@ -102,61 +54,34 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 
-				-- For an understanding of why these mappings were
-				-- chosen, you will need to read `:help ins-completion`
-				--
-				-- No, but seriously. Please read `:help ins-completion`, it is really good!
 				mapping = cmp.mapping.preset.insert({
-					-- Select the [n]ext item
 					["<S-A-k>"] = cmp.mapping.select_next_item(),
-					-- Select the [p]revious item
 					["<S-A-j>"] = cmp.mapping.select_prev_item(),
-
-					-- Scroll the documentation window [b]ack / [f]orward
 					["<A-u>"] = cmp.mapping.scroll_docs(-4),
 					["<A-d>"] = cmp.mapping.scroll_docs(4),
-
-					-- Accept ([y]es) the completion.
-					--  This will auto-import if your LSP supports it.
-					--  This will expand snippets if the LSP sent a snippet.
 					["<TAB>"] = cmp.mapping.confirm({ select = true }),
-
-					-- Abort ([n]o) the completion.
-					-- This will close the completion menu.
 					["<C-e>"] = cmp.mapping.abort(),
-
-					-- If you prefer more traditional completion keymaps,
-					-- you can uncomment the following lines
-					--['<CR>'] = cmp.mapping.confirm { select = true },
-					--['<Tab>'] = cmp.mapping.select_next_item(),
-					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-					-- Manually trigger a completion from nvim-cmp.
-					--  Generally you don't need this, because nvim-cmp will display
-					--  completions whenever it has completion options available.
 					["<C-space>"] = cmp.mapping.complete(),
-
-					-- Think of <c-a-l> as moving to the right of your snippet expansion.
-					--  So if you have a snippet that's like:
-					--  function $name($args)
-					--    $body
-					--  end
-					--
-					-- <c-a-l> will move you to the right of each of the expansion locations.
-					-- <c-a-h> is similar, except moving you backwards.
-					["<C-A-l>"] = cmp.mapping(function()
+					["<A-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						end
 					end, { "i", "s" }),
-					["<C-A-h>"] = cmp.mapping(function()
+					["<A-h>"] = cmp.mapping(function()
 						if luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
 						end
 					end, { "i", "s" }),
-
-					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+					["<A-k"] = cmp.mapping(function()
+						if luasnip.choice_active() then
+							luasnip.change_choice(1)
+						end
+					end, { "i", "s" }),
+					["<A-j"] = cmp.mapping(function()
+						if luasnip.choice_active() then
+							luasnip.change_choice(-1)
+						end
+					end, { "i" }),
 				}),
 				sources = {
 					{ name = "nvim_lsp" },

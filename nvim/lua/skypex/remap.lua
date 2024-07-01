@@ -4,37 +4,11 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { noremap = true, silent = true })
 vim.keymap.set({ "n", "v", "o" }, "j", "<up>", { noremap = true, silent = true })
 vim.keymap.set({ "n", "v", "o" }, "k", "<down>", { noremap = true, silent = true })
 
--- Navigation in insert mode and x mode
-vim.keymap.set({ "i", "x" }, "<A-h>", "<left>", { noremap = true, silent = true })
-vim.keymap.set({ "i", "x" }, "<A-j>", "<up>", { noremap = true, silent = true })
-vim.keymap.set({ "i", "x" }, "<A-k>", "<down>", { noremap = true, silent = true })
-vim.keymap.set({ "i", "x" }, "<A-l>", "<right>", { noremap = true, silent = true })
-
 -- TIP: Disable arrow keys in insert mode and x mode
-vim.keymap.set(
-	{ "i", "x" },
-	"<left>",
-	'<cmd>echo "Use alt+h to move in insert mode!!"<CR>',
-	{ noremap = true, silent = true }
-)
-vim.keymap.set(
-	{ "i", "x" },
-	"<right>",
-	'<cmd>echo "Use alt+l to move in insert mode!!"<CR>',
-	{ noremap = true, silent = true }
-)
-vim.keymap.set(
-	{ "i", "x" },
-	"<up>",
-	'<cmd>echo "Use alt+j to move in insert mode!!"<CR>',
-	{ noremap = true, silent = true }
-)
-vim.keymap.set(
-	{ "i", "x" },
-	"<down>",
-	'<cmd>echo "Use alt+k to move in insert mode!!"<CR>',
-	{ noremap = true, silent = true }
-)
+vim.keymap.set({ "i", "x" }, "<left>", '<cmd>echo "Use normal mode to move!!"<CR>', { noremap = true, silent = true })
+vim.keymap.set({ "i", "x" }, "<right>", '<cmd>echo "Use normal mode to move!!"<CR>', { noremap = true, silent = true })
+vim.keymap.set({ "i", "x" }, "<up>", '<cmd>echo "Use normal mode to move!!"<CR>', { noremap = true, silent = true })
+vim.keymap.set({ "i", "x" }, "<down>", '<cmd>echo "Use normal mode to move!!"<CR>', { noremap = true, silent = true })
 
 -- Quickfix list navigation
 vim.keymap.set("n", "<S-A-j>", "<cmd>cprev<CR>zz", { noremap = true, silent = true })
