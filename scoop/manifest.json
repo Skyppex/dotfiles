@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1719837082000)\/",
+                "value": "\/Date(1720024134000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 14:31:22"
+                "DateTime": "onsdag 3. juli 2024 18:28:54"
             },
             "Manifests": 1331
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1719841681000)\/",
+                "value": "\/Date(1720024314000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 15:48:01"
+                "DateTime": "onsdag 3. juli 2024 18:31:54"
             },
             "Manifests": 2043
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1719838274000)\/",
+                "value": "\/Date(1720024629000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 14:51:14"
+                "DateTime": "onsdag 3. juli 2024 18:37:09"
             },
             "Manifests": 465
         },
@@ -34,19 +34,19 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1719822482000)\/",
+                "value": "\/Date(1720024083000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 10:28:02"
+                "DateTime": "onsdag 3. juli 2024 18:28:03"
             },
-            "Manifests": 308
+            "Manifests": 309
         },
         {
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1719838024000)\/",
+                "value": "\/Date(1720025312000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 14:47:04"
+                "DateTime": "onsdag 3. juli 2024 18:48:32"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1719792883000)\/",
+                "value": "\/Date(1720012909000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 1. juli 2024 02:14:43"
+                "DateTime": "onsdag 3. juli 2024 15:21:49"
             },
             "Manifests": 259
         },
@@ -90,8 +90,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.17.5",
-            "Updated": "\/Date(1719850781973)\/"
+            "Version": "2.17.7",
+            "Updated": "\/Date(1720036690514)\/"
         },
         {
             "Info": "",
@@ -125,8 +125,8 @@
             "Info": "",
             "Source": "main",
             "Name": "curl",
-            "Version": "8.8.0_2",
-            "Updated": "\/Date(1718383360890)\/"
+            "Version": "8.8.0_3",
+            "Updated": "\/Date(1719951150858)\/"
         },
         {
             "Info": "",
@@ -244,8 +244,8 @@
             "Info": "",
             "Source": "main",
             "Name": "go",
-            "Version": "1.22.4",
-            "Updated": "\/Date(1717603505165)\/"
+            "Version": "1.22.5",
+            "Updated": "\/Date(1720036792816)\/"
         },
         {
             "Info": "",
@@ -342,8 +342,8 @@
             "Info": "",
             "Source": "main",
             "Name": "nodejs",
-            "Version": "22.3.0",
-            "Updated": "\/Date(1718221005758)\/"
+            "Version": "22.4.0",
+            "Updated": "\/Date(1719951168849)\/"
         },
         {
             "Info": "Held package",
@@ -426,8 +426,8 @@
             "Info": "",
             "Source": "main",
             "Name": "scc",
-            "Version": "3.3.4",
-            "Updated": "\/Date(1716322957675)\/"
+            "Version": "3.3.5",
+            "Updated": "\/Date(1720036795324)\/"
         },
         {
             "Info": "",

@@ -67,7 +67,7 @@ vim.keymap.set("n", "<leader>b", "<cmd>b#<CR>zz", { noremap = true, silent = tru
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { noremap = true, silent = true })
 
 -- Alias ctrl+c to Esc
-vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set({ "i", "v", "s" }, "<C-c>", "<Esc>", { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set(
