@@ -72,12 +72,12 @@ return {
 							luasnip.jump(-1)
 						end
 					end, { "i", "s" }),
-					["<A-k"] = cmp.mapping(function()
+					["<A-k>"] = cmp.mapping(function()
 						if luasnip.choice_active() then
 							luasnip.change_choice(1)
 						end
 					end, { "i", "s" }),
-					["<A-j"] = cmp.mapping(function()
+					["<A-j>"] = cmp.mapping(function()
 						if luasnip.choice_active() then
 							luasnip.change_choice(-1)
 						end
