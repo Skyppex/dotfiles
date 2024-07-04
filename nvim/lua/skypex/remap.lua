@@ -113,10 +113,10 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use k to move!!"<CR>', { noremap = tru
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-w><C-h>", "<C-w>h", { desc = "Move focus to the left window", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-k>", "<C-w>j", { desc = "Move focus to the upper window", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-l>", "<C-w>l", { desc = "Move focus to the right window", noremap = true, silent = true })
-vim.keymap.set("n", "<C-w><C-j>", "<C-w>k", { desc = "Move focus to the lower window", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>h", "<C-w><C-h>", { desc = "Move focus to the left window", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>j", "<C-w><C-k>", { desc = "Move focus to the upper window", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>l", "<C-w><C-l>", { desc = "Move focus to the right window", noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>k", "<C-w><C-j>", { desc = "Move focus to the lower window", noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-w>-", "<C-w>s", { desc = "Split window below", noremap = true, silent = true })
 vim.keymap.set("n", "<C-w>|", "<C-w>v", { desc = "Split window right", noremap = true, silent = true })

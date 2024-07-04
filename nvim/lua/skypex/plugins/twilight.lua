@@ -6,6 +6,7 @@ return {
 			context = 20,
 			expand = {
 				"function",
+				"function_item",
 				"method",
 				"method_declaration",
 				"table",

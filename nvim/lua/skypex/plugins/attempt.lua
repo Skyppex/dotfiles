@@ -6,13 +6,14 @@ return {
 		local attempt = require("attempt")
 
 		attempt.setup({
-			ext_options = { "lua", "py", "cs", "rs", "" },
+			ext_options = { "lua", "py", "cs", "rs", "ar", "" },
 			run = {
 				cs = { "w", "!dotnet script %" },
 				py = { "w !python" }, -- Either table of strings or lua functions
 				js = { "w !node" },
 				lua = { "w", "luafile %" },
 				rs = { "w", "!rustc % && nu -c 'let ex = (echo %' | str replace '.rs' ''); exec $ex" },
+				ar = { "w", "!mage %" },
 			},
 		})
 
