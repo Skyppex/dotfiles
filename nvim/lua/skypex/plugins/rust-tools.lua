@@ -41,6 +41,15 @@ return {
 						other_hints_prefix = ": ",
 					},
 				},
+				dap = {
+					adapter = function()
+						local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path()
+							.. "/extension/"
+						local codelldb_path = codelldb_root .. "adapter/codelldb"
+						local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
+						return require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+					end,
+				},
 			})
 		end,
 	},

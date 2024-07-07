@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1720110527000)\/",
+                "value": "\/Date(1720269043000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 18:28:47"
+                "DateTime": "lordag 6. juli 2024 14:30:43"
             },
             "Manifests": 1331
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1720110693000)\/",
+                "value": "\/Date(1720269192000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 18:31:33"
+                "DateTime": "lordag 6. juli 2024 14:33:12"
             },
             "Manifests": 2043
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1720097321000)\/",
+                "value": "\/Date(1720269939000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 14:48:41"
+                "DateTime": "lordag 6. juli 2024 14:45:39"
             },
             "Manifests": 465
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1720110462000)\/",
+                "value": "\/Date(1720269022000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 18:27:42"
+                "DateTime": "lordag 6. juli 2024 14:30:22"
             },
             "Manifests": 310
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1720097274000)\/",
+                "value": "\/Date(1720255942000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 14:47:54"
+                "DateTime": "lordag 6. juli 2024 10:52:22"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1720077288000)\/",
+                "value": "\/Date(1720224746000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 4. juli 2024 09:14:48"
+                "DateTime": "lordag 6. juli 2024 02:12:26"
             },
             "Manifests": 259
         },
@@ -454,8 +454,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "spotify",
-            "Version": "1.2.40.599.g606b7f29",
-            "Updated": "\/Date(1719073616927)\/"
+            "Version": "1.2.41.434.g39a25e2c",
+            "Updated": "\/Date(1720274670868)\/"
         },
         {
             "Info": "",

@@ -371,6 +371,7 @@ return {
 							},
 						},
 					},
+					capabilities = capabilities,
 				},
 				csharp_ls = {
 					cmd = { csharpls },
@@ -397,6 +398,7 @@ return {
 							silent = true,
 						})
 					end,
+					capabilities = capabilities,
 				},
 			}
 

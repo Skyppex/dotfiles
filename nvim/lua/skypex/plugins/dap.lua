@@ -18,6 +18,15 @@ return {
 				args = { "--interpreter=vscode" },
 			}
 
+			dap.adapters.codelldb = {
+				type = "server",
+				port = "5000",
+				executable = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/codelldb.CMD",
+					args = { "..port", "5000" },
+				},
+			}
+
 			dap.configurations.cs = {
 				{
 					type = "coreclr",
@@ -45,6 +54,30 @@ return {
 
 						return vim.fn.input("Path to dll: ", result, "file")
 					end,
+				},
+			}
+
+			dap.configurations.rust = {
+				{
+					name = "Debug with codelldb",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+				},
+				{
+					name = "Debug with rust-tools",
+					type = "rt_lldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+					args = {},
 				},
 			}
 
