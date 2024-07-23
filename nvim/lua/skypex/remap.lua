@@ -132,16 +132,21 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
 
-vim.keymap.set("v", "cC", "<left>/\\u<CR>N", { desc = "Camel/Pascal Case Word Back", noremap = true, silent = true })
-vim.keymap.set("v", "cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+vim.keymap.set(
+	"v",
+	"<leader>cC",
+	"<left>/\\u<CR>N",
+	{ desc = "Camel/Pascal Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("v", "<leader>cc", "/\\u<CR>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
 
 vim.keymap.set(
 	"v",
-	"ciC",
+	"<leader>ciC",
 	"<left>/\\u<CR>N<right>",
 	{ desc = "Camel/Pascal Case Word Back", noremap = true, silent = true }
 )
-vim.keymap.set("v", "cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
+vim.keymap.set("v", "<leader>cic", "/\\u<CR><left>", { desc = "Camel/Pascal Case Word", noremap = true, silent = true })
 
 -- Snake case motion
 vim.keymap.set("n", "<leader>cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
@@ -157,11 +162,16 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
 
-vim.keymap.set("v", "cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
-vim.keymap.set("v", "cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
+vim.keymap.set("v", "<leader>cS", "<left>/_<CR>N", { desc = "Snake Case Word Back", noremap = true, silent = true })
+vim.keymap.set("v", "<leader>cs", "/_<CR>", { desc = "Snake Case Word", noremap = true, silent = true })
 
-vim.keymap.set("v", "ciS", "<left>/_<CR>N<right>", { desc = "Snake Case Word Back", noremap = true, silent = true })
-vim.keymap.set("v", "cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
+vim.keymap.set(
+	"v",
+	"<leader>ciS",
+	"<left>/_<CR>N<right>",
+	{ desc = "Snake Case Word Back", noremap = true, silent = true }
+)
+vim.keymap.set("v", "<leader>cis", "/_<CR><left>", { desc = "Snake Case Word", noremap = true, silent = true })
 
 -- Redo
 vim.keymap.set("n", "U", "<C-r>", { desc = "Redo", noremap = true, silent = true })
@@ -170,6 +180,7 @@ vim.keymap.set("n", "U", "<C-r>", { desc = "Redo", noremap = true, silent = true
 vim.keymap.set("n", "<leader>.", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		vim.cmd("normal! f.i<cr><esc>")
+		local keys = vim.api.nvim_replace_termcodes("f.i<CR><Esc>l", true, true, true)
+		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)

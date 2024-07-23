@@ -142,6 +142,10 @@ def fuck [
 # Elevate the current shell to admin
 alias sudo = gsudo
 
+def --env nudo [func: closure] {
+    sudo nu --stdin --command $"do (view source $func)"
+}
+
 # Exit
 alias q = exit
 

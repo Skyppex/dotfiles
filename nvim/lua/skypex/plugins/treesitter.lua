@@ -66,6 +66,20 @@ return {
 				"<cmd>TSPlaygroundToggle<CR>",
 				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
 			)
+
+			-- Add local parser f[r arcana
+			vim.treesitter.language.add("arcana", {
+				path = "D:/code/arcana/tree-sitter-arcana/parser.so",
+			})
+
+			vim.treesitter.language.register("arcana", "arcana")
+
+			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+				pattern = "*.ar",
+				callback = function()
+					vim.bo.filetype = "arcana"
+				end,
+			})
 		end,
 	},
 }
