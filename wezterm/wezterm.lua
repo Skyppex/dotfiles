@@ -5,6 +5,16 @@ local config = {
 	audible_bell = "Disabled",
 	check_for_updates = false,
 	color_scheme = "Andromeda",
+	enable_tab_bar = false,
+	window_decorations = "RESIZE",
+	window_background_opacity = 0.5,
+	win32_system_backdrop = "Tabbed",
+	window_padding = {
+		left = 2,
+		right = 0,
+		top = 2,
+		bottom = 0,
+	},
 	inactive_pane_hsb = {
 		hue = 1.0,
 		saturation = 1.0,
@@ -83,7 +93,7 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 		elseif number_value < 0 then
 			window:perform_action(wezterm.action.ResetFontSize, pane)
 			overrides.font_size = nil
-			overrides.enable_tab_bar = true
+			overrides.enable_tab_bar = false
 		else
 			overrides.font_size = number_value
 			overrides.enable_tab_bar = false

@@ -21,17 +21,20 @@ end
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"archibate/lualine-time",
+		},
 		opts = {
 			options = {
 				theme = "dracula",
 			},
 			sections = {
-				lualine_c = { get_session_name },
-				lualine_x = { {
+				lualine_c = { get_session_name, {
 					"filename",
 					path = 1,
-				}, "fileformat", "filetype" },
+				}, "filetype" },
+				lualine_x = { "cdate", "ctime" },
 			},
 		},
 	},

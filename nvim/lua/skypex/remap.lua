@@ -37,27 +37,6 @@ vim.keymap.set("n", "Q", "<nop>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>sp", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>", { noremap = true, silent = true })
 
--- Handle simple things in normal mode
-vim.keymap.set("n", "<leader><CR>", "A<CR><ESC>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>i<CR>", "i<CR><ESC>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>0<CR>", "0<CR><ESC>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader><BS>", "i<BS><ESC>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>i<BS>", "i<BS><ESC>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader><del>", "a<del><ESC>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>i<del>", "i<del><ESC>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader><tab>", function()
-	print("use >> to indent")
-end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>i<tab>", function()
-	print("use >> to indent")
-end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>0<tab>", function()
-	print("use >> to indent")
-end, { noremap = true, silent = true })
-
 -- Buffer navigation
 vim.keymap.set("n", "åb", "<cmd>bprevious<CR>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "æb", "<cmd>bnext<CR>zz", { noremap = true, silent = true })
@@ -194,6 +173,3 @@ vim.keymap.set("n", "<leader>.", function()
 		vim.cmd("normal! f.i<cr><esc>")
 	end
 end)
-
--- Delete word
-vim.keymap.set("i", "<m-bs>", "<c-w>", { desc = "Delete word", noremap = true, silent = true })
