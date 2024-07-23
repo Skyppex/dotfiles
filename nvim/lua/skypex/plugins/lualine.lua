@@ -28,6 +28,7 @@ return {
 		opts = {
 			options = {
 				theme = "dracula",
+				component_separators = { left = "│", right = "" },
 			},
 			sections = {
 				lualine_c = { get_session_name, {
