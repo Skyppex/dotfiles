@@ -4,19 +4,19 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1721752211000)\/",
+                "value": "\/Date(1721838528000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 18:30:11"
+                "DateTime": "onsdag 24. juli 2024 18:28:48"
             },
-            "Manifests": 1336
+            "Manifests": 1337
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1721752345000)\/",
+                "value": "\/Date(1721838755000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 18:32:25"
+                "DateTime": "onsdag 24. juli 2024 18:32:35"
             },
             "Manifests": 2053
         },
@@ -24,19 +24,19 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1721752756000)\/",
+                "value": "\/Date(1721825374000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 18:39:16"
+                "DateTime": "onsdag 24. juli 2024 14:49:34"
             },
-            "Manifests": 466
+            "Manifests": 467
         },
         {
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1721752181000)\/",
+                "value": "\/Date(1721838549000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 18:29:41"
+                "DateTime": "onsdag 24. juli 2024 18:29:09"
             },
             "Manifests": 310
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1721753664000)\/",
+                "value": "\/Date(1721825681000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 18:54:24"
+                "DateTime": "onsdag 24. juli 2024 14:54:41"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1721693603000)\/",
+                "value": "\/Date(1721822736000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 23. juli 2024 02:13:23"
+                "DateTime": "onsdag 24. juli 2024 14:05:36"
             },
             "Manifests": 260
         },
@@ -90,8 +90,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.17.15",
-            "Updated": "\/Date(1721763781951)\/"
+            "Version": "2.17.16",
+            "Updated": "\/Date(1721839019673)\/"
         },
         {
             "Info": "",
@@ -125,8 +125,8 @@
             "Info": "",
             "Source": "main",
             "Name": "curl",
-            "Version": "8.8.0_3",
-            "Updated": "\/Date(1719951150858)\/"
+            "Version": "8.9.0_1",
+            "Updated": "\/Date(1721839027474)\/"
         },
         {
             "Info": "",
@@ -153,8 +153,8 @@
             "Info": "",
             "Source": "main",
             "Name": "docker",
-            "Version": "27.1.0",
-            "Updated": "\/Date(1721763912499)\/"
+            "Version": "27.1.1",
+            "Updated": "\/Date(1721839035075)\/"
         },
         {
             "Info": "",
@@ -328,8 +328,8 @@
             "Info": "",
             "Source": "main",
             "Name": "neovim",
-            "Version": "0.10.0",
-            "Updated": "\/Date(1716322955347)\/"
+            "Version": "0.10.1",
+            "Updated": "\/Date(1721839044239)\/"
         },
         {
             "Info": "",
@@ -342,8 +342,8 @@
             "Info": "",
             "Source": "main",
             "Name": "nodejs",
-            "Version": "22.4.1",
-            "Updated": "\/Date(1720558618196)\/"
+            "Version": "22.5.1",
+            "Updated": "\/Date(1721839093210)\/"
         },
         {
             "Info": "Held package",
@@ -356,8 +356,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "obs-studio",
-            "Version": "30.2.1",
-            "Updated": "\/Date(1721764303244)\/"
+            "Version": "30.2.2",
+            "Updated": "\/Date(1721839123197)\/"
         },
         {
             "Info": "",
@@ -454,8 +454,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "spotify",
-            "Version": "1.2.41.434.g39a25e2c",
-            "Updated": "\/Date(1720274670868)\/"
+            "Version": "1.2.42.290.g242057a2",
+            "Updated": "\/Date(1721839146305)\/"
         },
         {
             "Info": "",

@@ -184,3 +184,7 @@ vim.keymap.set("n", "<leader>.", function()
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
+
+-- Increment and decrement numbers
+vim.keymap.set({ "n", "v" }, "<leader>+", "<C-a>", { desc = "Increment number", noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>-", "<C-x>", { desc = "Decrement number", noremap = true, silent = true })

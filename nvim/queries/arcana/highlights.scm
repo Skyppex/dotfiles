@@ -1,65 +1,3 @@
-(struct_declaration
-  name: (identifier) @type)
-
-(struct_declaration
-  field_name: (identifier) @property)
-
-(enum_declaration
-  name: (identifier) @type)
-
-(enum_variant
-  variant_name: (identifier) @constant)
-
-(enum_variant
-  field_name: (identifier) @property)
-
-(union_declaration
-  name: (identifier) @type)
-
-(function_declaration
-  (identifier) @function)
-
-(function_declaration
-  body: (identifier) @variable)
-
-(parameters
-  (identifier) @variable.parameter)
-
-(call
-  callee: (function_propagation
-    function: (identifier) @function.call))
-
-(call
-  callee: (identifier) @function.call)
-
-(type_annotation) @type
-
-(type_annotation
-  type: (identifier) @type)
-
-(line_comment
-  "//" @comment) @comment
-
-(block_comment
-  "/" @comment) @comment
-
-(literal
-  (string) @string)
-
-(literal
-  (bool) @boolean)
-
-(literal
-  (int) @number)
-
-(literal
-  (float) @number.float)
-
-(literal
-  (char) @char)
-
-(identifier) @variable
-
 "fun" @keyword.function
 
 "let" @keyword
@@ -125,3 +63,66 @@
 "&=" @operator
 "|=" @operator
 "^=" @operator
+
+(line_comment
+  "//" @comment) @comment
+
+(block_comment
+  "/" @comment) @comment
+
+(literal
+  (string) @string)
+
+(escape_sequence) @string.escape
+
+(literal
+  (bool) @boolean)
+
+(literal
+  (int) @number)
+
+(literal
+  (float) @number.float)
+
+(literal
+  (char) @char)
+
+(identifier) @variable
+
+(function_declaration
+  (identifier) @function)
+
+(function_declaration
+  body: (identifier) @variable)
+
+(parameters
+  (identifier) @variable.parameter)
+
+(call
+  callee: (function_propagation
+    function: (identifier) @function.call))
+
+(call
+  callee: (identifier) @function.call)
+
+(type_annotation) @type
+
+(type_annotation
+  type: (identifier) @type)
+(struct_declaration
+  name: (identifier) @type)
+
+(struct_declaration
+  field_name: (identifier) @property)
+
+(enum_declaration
+  name: (identifier) @type)
+
+(enum_variant
+  variant_name: (identifier) @constant)
+
+(enum_variant
+  field_name: (identifier) @property)
+
+(union_declaration
+  name: (identifier) @type)
