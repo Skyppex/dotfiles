@@ -44,6 +44,7 @@ return {
 				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
+			injections = { enable = true },
 		},
 		config = function(_, opts)
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -67,9 +68,20 @@ return {
 				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
 			)
 
-			-- Add local parser f[r arcana
+			-- Add local parser for arcana
+			local home_drive = os.getenv("HOMEDRIVE")
+			local home_path = os.getenv("HOMEPATH")
+			local home = home_drive .. home_path
+			local path
+
+			if home:find("brage.ingebrigtsen") then
+				path = home .. "/dev/code/arcana/tree-sitter-arcana/parser.so"
+			else
+				path = "D:/code/arcana/tree-sitter-arcana/parser.so"
+			end
+
 			vim.treesitter.language.add("arcana", {
-				path = "D:/code/arcana/tree-sitter-arcana/parser.so",
+				path = path,
 			})
 
 			vim.treesitter.language.register("arcana", "arcana")
@@ -78,6 +90,7 @@ return {
 				pattern = "*.ar",
 				callback = function()
 					vim.bo.filetype = "arcana"
+					vim.bo.commentstring = "//%s"
 				end,
 			})
 		end,

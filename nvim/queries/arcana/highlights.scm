@@ -1,22 +1,20 @@
-"fun" @keyword
-"let" @keyword
+(struct_declaration
+  name: (identifier) @type)
 
-(literal
-  (string) @string)
-(literal
-  (bool) @boolean)
+(struct_declaration
+  field_name: (identifier) @property)
 
-(literal
-  (int) @number)
+(enum_declaration
+  name: (identifier) @type)
 
-(literal
-  (float) @number.float)
+(enum_variant
+  variant_name: (identifier) @constant)
 
+(enum_variant
+  field_name: (identifier) @property)
 
-(literal
-  (char) @char)
-
-(identifier) @variable
+(union_declaration
+  name: (identifier) @type)
 
 (function_declaration
   (identifier) @function)
@@ -27,5 +25,103 @@
 (parameters
   (identifier) @variable.parameter)
 
+(call
+  callee: (function_propagation
+    function: (identifier) @function.call))
+
+(call
+  callee: (identifier) @function.call)
 
 (type_annotation) @type
+
+(type_annotation
+  type: (identifier) @type)
+
+(line_comment
+  "//" @comment) @comment
+
+(block_comment
+  "/" @comment) @comment
+
+(literal
+  (string) @string)
+
+(literal
+  (bool) @boolean)
+
+(literal
+  (int) @number)
+
+(literal
+  (float) @number.float)
+
+(literal
+  (char) @char)
+
+(identifier) @variable
+
+"fun" @keyword.function
+
+"let" @keyword
+"mut" @keyword
+
+"struct" @keyword.type
+"enum" @keyword.type
+"union" @keyword.type
+
+"if" @keyword.conditional
+"else" @keyword.conditional
+
+"loop" @keyword.repeat
+"while" @keyword.repeat
+
+"break" @keyword.return
+"continue" @keyword.repeat
+"return" @keyword.return
+
+"void" @keyword.type
+"unit" @keyword.type
+"bool" @keyword.type
+"int" @keyword.type
+"float" @keyword.type
+"char" @keyword.type
+"string" @keyword.type
+
+":" @punctuation.delimiter
+";" @punctuation.delimiter
+"," @punctuation.delimiter
+"=>" @punctuation.delimiter
+"{" @punctuation.bracket
+"}" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
+"(" @punctuation.bracket
+")" @punctuation.bracket
+
+"+" @operator
+"-" @operator
+"*" @operator
+"/" @operator
+"%" @operator
+"&" @operator
+"|" @operator
+"^" @operator
+"<<" @operator
+">>" @operator
+"&&" @operator
+"||" @operator
+"==" @operator
+"!=" @operator
+"<" @operator
+">" @operator
+"<=" @operator
+">=" @operator
+
+"+=" @operator
+"-=" @operator
+"*=" @operator
+"/=" @operator
+"%=" @operator
+"&=" @operator
+"|=" @operator
+"^=" @operator
