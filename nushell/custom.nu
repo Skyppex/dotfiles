@@ -692,7 +692,7 @@ def gr [
                 let groups = ($table | group-by --to-table info)
             
                 mut remotes = [];
-                for -n $it in $groups {
+                for $it in ($groups | enumerate) {
                     let index = $it.index
                     let group = $it.item
                     let info = ($group.items | get info | uniq | str join " -- ")
@@ -735,7 +735,7 @@ def gr [
             let groups = ($table | group-by --to-table name)
             
             mut remotes = [];
-            for -n $it in $groups {
+            for $it in ($groups | enumerate) {
                 let index = $it.index
                 let group = $it.item
                 let name = ($group.items | get name | uniq | first)
@@ -1509,7 +1509,7 @@ def "parse table" [
 
     # Rename columns if header exists
     if $header {
-        for -n $name in $header_col {
+        for $name in ($header_col | enumerate) {
             let i = (($name.index + 1) | to text);
             $rows = ($rows | rename -c {$i: $name.item})
         }
