@@ -13,17 +13,21 @@
 "loop" @keyword.repeat
 "while" @keyword.repeat
 
+(for
+  "for" @keyword.repeat
+  "in" @keyword.repeat)
+
 "break" @keyword.return
 "continue" @keyword.repeat
 "return" @keyword.return
 
-"void" @keyword.type
-"unit" @keyword.type
-"bool" @keyword.type
-"int" @keyword.type
-"float" @keyword.type
-"char" @keyword.type
-"string" @keyword.type
+"void" @type.builtin
+"unit" @type.builtin
+"bool" @type.builtin
+"int" @type.builtin
+"float" @type.builtin
+"char" @type.builtin
+"string" @type.builtin
 
 ":" @punctuation.delimiter
 ";" @punctuation.delimiter
@@ -104,6 +108,9 @@
 
 (call
   callee: (identifier) @function.call)
+
+(call
+  callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
 
 (type_annotation) @type
 

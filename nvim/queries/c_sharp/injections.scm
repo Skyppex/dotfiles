@@ -77,7 +77,3 @@
     (_ (_ (_ (_ (_ (_ (_ (_
         (raw_string_literal
             (raw_string_content) @injection.content))))))))))
-
-; ((raw_string_content) @injection.content
-;     (#set! injection.language "json")
-;     (#set! injection.include-children true))
