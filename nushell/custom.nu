@@ -490,8 +490,6 @@ def "pull" [] {
 
 # Push the dotfiles to the remote repository
 def "push" [] {
-    print "---- fixing nushell plugins ----"
-    open ~/.config/nushell/plugin.nu | str replace -ar '[Cc]:\\[Uu]sers\\.*?\\' '~\' | save -f ~/.config/nushell/plugin.nu
     print "---- updating scoop manifest ----"
     manifest update
     enter-old $"($nu.home-path)/.config"
@@ -1541,15 +1539,6 @@ def "scoop rm" [
 
     print $"Uninstalling ($selected)"
     scoop uninstall $selected
-}
-
-# Nushell
-
-# Add a plugin to the nushell config
-def "plugin add" [name: string] {
-    let plugin = $"~/.cargo/bin/($name).exe";
-    nu -c $'register ($plugin)'
-    version
 }
 
 # Fun
