@@ -1,0 +1,224 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0/win-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {},
+    ".NETCoreApp,Version=v7.0/win-x64": {
+      "Flow.Plugin.WindowWalker/1.1.0": {
+        "dependencies": {
+          "Flow.Launcher.Plugin": "4.1.1",
+          "JetBrains.Annotations": "2023.3.0",
+          "Microsoft.CodeAnalysis.NetAnalyzers": "8.0.0",
+          "Microsoft.Windows.CsWin32": "0.3.49-beta",
+          "Microsoft.Windows.SDK.Win32Metadata": "58.0.18-preview"
+        },
+        "runtime": {
+          "Flow.Plugin.WindowWalker.dll": {}
+        },
+        "resources": {
+          "ar-SA/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "ar-SA"
+          },
+          "cs-CZ/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "cs-CZ"
+          },
+          "da-DK/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "da-DK"
+          },
+          "de-DE/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "de-DE"
+          },
+          "es-419/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "es-419"
+          },
+          "fr-FR/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "it-IT/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "it-IT"
+          },
+          "ja-JP/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "ko-KR/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "ko-KR"
+          },
+          "nb-NO/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "nb-NO"
+          },
+          "nl-NL/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "nl-NL"
+          },
+          "pl-PL/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "pl-PL"
+          },
+          "pt-BR/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "pt-PT/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "pt-PT"
+          },
+          "ru-RU/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "sk-SK/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "sk-SK"
+          },
+          "sr-CS/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "sr-CS"
+          },
+          "tr-TR/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "tr-TR"
+          },
+          "uk-UA/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "uk-UA"
+          },
+          "zh-cn/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "zh-cn"
+          },
+          "zh-TW/Flow.Plugin.WindowWalker.resources.dll": {
+            "locale": "zh-TW"
+          }
+        }
+      },
+      "Flow.Launcher.Plugin/4.1.1": {
+        "dependencies": {
+          "JetBrains.Annotations": "2023.3.0",
+          "PropertyChanged.Fody": "3.4.0"
+        },
+        "runtime": {
+          "lib/net7.0-windows7.0/Flow.Launcher.Plugin.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Fody/6.5.1": {},
+      "JetBrains.Annotations/2023.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "assemblyVersion": "4242.42.42.42",
+            "fileVersion": "2023.3.0.0"
+          }
+        }
+      },
+      "Microsoft.CodeAnalysis.NetAnalyzers/8.0.0": {},
+      "Microsoft.Windows.CsWin32/0.3.49-beta": {
+        "dependencies": {
+          "Microsoft.Windows.SDK.Win32Docs": "0.1.42-alpha",
+          "Microsoft.Windows.SDK.Win32Metadata": "58.0.18-preview",
+          "Microsoft.Windows.WDK.Win32Metadata": "0.9.9-experimental",
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "Microsoft.Windows.SDK.Win32Docs/0.1.42-alpha": {},
+      "Microsoft.Windows.SDK.Win32Metadata/58.0.18-preview": {},
+      "Microsoft.Windows.WDK.Win32Metadata/0.9.9-experimental": {
+        "dependencies": {
+          "Microsoft.Windows.SDK.Win32Metadata": "58.0.18-preview"
+        }
+      },
+      "PropertyChanged.Fody/3.4.0": {
+        "dependencies": {
+          "Fody": "6.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/PropertyChanged.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        }
+      },
+      "System.Memory/4.5.5": {},
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {}
+    }
+  },
+  "libraries": {
+    "Flow.Plugin.WindowWalker/1.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Flow.Launcher.Plugin/4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Yw0CZD6fDHhJI0DgkWTL6FD9GaF7CeYCDEOgXQPtSN8ufl9LquU8pVidAKwfAssrR3XJXCm/LKZLouc2SkuJIw==",
+      "path": "flow.launcher.plugin/4.1.1",
+      "hashPath": "flow.launcher.plugin.4.1.1.nupkg.sha512"
+    },
+    "Fody/6.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DEw9rPG5vrpaK4vPPze0f4q6Zd0mfzjGNKy49nrmINkftIHpkyf8KH+uC/qF8y6v1askPWu9NbJS9bkmN5wXaA==",
+      "path": "fody/6.5.1",
+      "hashPath": "fody.6.5.1.nupkg.sha512"
+    },
+    "JetBrains.Annotations/2023.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PHfnvdBUdGaTVG9bR/GEfxgTwWM0Z97Y6X3710wiljELBISipSfF5okn/vz+C2gfO+ihoEyVPjaJwn8ZalVukA==",
+      "path": "jetbrains.annotations/2023.3.0",
+      "hashPath": "jetbrains.annotations.2023.3.0.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.NetAnalyzers/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DxiTgkCl3CGq1rYmBX2wjY7XGbxiBdL4J+/AJIAFLKy5z70NxhnVRnPghnicXZ8oF6JKVXlW3xwznRbI3ioEKg==",
+      "path": "microsoft.codeanalysis.netanalyzers/8.0.0",
+      "hashPath": "microsoft.codeanalysis.netanalyzers.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Windows.CsWin32/0.3.49-beta": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/iAXplVDKESFyLz/MShuVYVx62YFvFePpq3qrzREl8KScQqG6Z2kV7r9UJTjQS1g+hfy3V+e4m1x9lsu24YNSg==",
+      "path": "microsoft.windows.cswin32/0.3.49-beta",
+      "hashPath": "microsoft.windows.cswin32.0.3.49-beta.nupkg.sha512"
+    },
+    "Microsoft.Windows.SDK.Win32Docs/0.1.42-alpha": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Z/9po23gUA9aoukirh2ItMU2ZS9++Js9Gdds9fu5yuMojDrmArvY2y+tq9985tR3cxFxpZO1O35Wjfo0khj5HA==",
+      "path": "microsoft.windows.sdk.win32docs/0.1.42-alpha",
+      "hashPath": "microsoft.windows.sdk.win32docs.0.1.42-alpha.nupkg.sha512"
+    },
+    "Microsoft.Windows.SDK.Win32Metadata/58.0.18-preview": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oZMCcoWUwBHzSWBr9X1sJUJbGr8GOSRmcuvFU4FJ79lV9IYWLNqy2DZ+z70j2vVvzfhoWyGPgkAwOUzh0KX19Q==",
+      "path": "microsoft.windows.sdk.win32metadata/58.0.18-preview",
+      "hashPath": "microsoft.windows.sdk.win32metadata.58.0.18-preview.nupkg.sha512"
+    },
+    "Microsoft.Windows.WDK.Win32Metadata/0.9.9-experimental": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cncPlxLqR25mFOuvpxZPgXgJqRmXyV5eTULj/9w8AQvO/c1xJDEapohRsWkYaia7hCR/EwEzBHr7RU9u93T03w==",
+      "path": "microsoft.windows.wdk.win32metadata/0.9.9-experimental",
+      "hashPath": "microsoft.windows.wdk.win32metadata.0.9.9-experimental.nupkg.sha512"
+    },
+    "PropertyChanged.Fody/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IAZyq0uolKo2WYm4mjx+q7A8fSGFT0x2e1s3y+ODn4JI0kqTDoo9GF2tdaypUzRFJZfdMxfC5HZW9QzdJLtOnA==",
+      "path": "propertychanged.fody/3.4.0",
+      "hashPath": "propertychanged.fody.3.4.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "path": "system.memory/4.5.5",
+      "hashPath": "system.memory.4.5.5.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    }
+  }
+}

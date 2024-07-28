@@ -30,6 +30,7 @@
 "string" @type.builtin
 
 ":" @punctuation.delimiter
+"::" @punctuation.delimiter
 ";" @punctuation.delimiter
 "," @punctuation.delimiter
 "=>" @punctuation.delimiter
@@ -93,6 +94,16 @@
 
 (identifier) @variable
 
+(struct_literal
+  struct_name: (identifier) @type)
+
+(enum_literal
+  enum_name: (identifier) @type
+  enum_variant: (identifier) @type)
+
+(fields
+  field_name: (identifier) @property)
+
 (function_declaration
   (identifier) @function)
 
@@ -102,9 +113,11 @@
 (parameters
   (identifier) @variable.parameter)
 
-(call
-  callee: (function_propagation
-    function: (identifier) @function.call))
+(trailing_closure
+  function: (identifier) @function.call)
+
+(function_propagation
+  function: (identifier) @function.call)
 
 (call
   callee: (identifier) @function.call)
@@ -116,6 +129,11 @@
 
 (type_annotation
   type: (identifier) @type)
+
+(type_annotation
+  enum_name: (identifier) @type
+  enum_variant: (identifier) @type)
+
 (struct_declaration
   name: (identifier) @type)
 
