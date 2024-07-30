@@ -137,7 +137,7 @@ map("n", "U", "<C-r>", "Redo")
 map("n", "<leader>.", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		local keys = vim.api.nvim_replace_termcodes("f.i<CR><Esc>l", true, true, true)
+		local keys = vim.api.nvim_replace_termcodes("f.i<CR><Esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
