@@ -1,0 +1,153 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Flow.Plugin.Github/1.3.1": {
+        "dependencies": {
+          "FSharp.Core": "8.0.300",
+          "Flow.Launcher.Plugin": "4.3.0",
+          "Humanizer.Core": "2.14.1",
+          "IcedTasks": "0.11.6",
+          "Octokit": "11.0.1"
+        },
+        "runtime": {
+          "Flow.Plugin.Github.dll": {}
+        }
+      },
+      "Flow.Launcher.Plugin/4.3.0": {
+        "dependencies": {
+          "JetBrains.Annotations": "2023.3.0",
+          "PropertyChanged.Fody": "3.4.0"
+        },
+        "runtime": {
+          "lib/net7.0-windows7.0/Flow.Launcher.Plugin.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Fody/6.5.1": {},
+      "FSharp.Core/8.0.300": {
+        "runtime": {
+          "lib/netstandard2.1/FSharp.Core.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.3.24.21101"
+          }
+        }
+      },
+      "Humanizer.Core/2.14.1": {
+        "runtime": {
+          "lib/net6.0/Humanizer.dll": {
+            "assemblyVersion": "2.14.0.0",
+            "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "IcedTasks/0.11.6": {
+        "dependencies": {
+          "FSharp.Core": "8.0.300"
+        },
+        "runtime": {
+          "lib/net6.0/IcedTasks.dll": {
+            "assemblyVersion": "0.11.6.0",
+            "fileVersion": "0.11.6.0"
+          }
+        }
+      },
+      "JetBrains.Annotations/2023.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "assemblyVersion": "4242.42.42.42",
+            "fileVersion": "2023.3.0.0"
+          }
+        }
+      },
+      "Octokit/11.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Octokit.dll": {
+            "assemblyVersion": "11.0.1.0",
+            "fileVersion": "11.0.1.0"
+          }
+        }
+      },
+      "PropertyChanged.Fody/3.4.0": {
+        "dependencies": {
+          "Fody": "6.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/PropertyChanged.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Flow.Plugin.Github/1.3.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Flow.Launcher.Plugin/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cc/8sTjwNl1kGLhcv+JEsGzxYBWFtdHfh6a752Ycq0AM8vQILVHRhKhptl4GUk4qIHNY1/V9DDVRvCLb79wJ9A==",
+      "path": "flow.launcher.plugin/4.3.0",
+      "hashPath": "flow.launcher.plugin.4.3.0.nupkg.sha512"
+    },
+    "Fody/6.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DEw9rPG5vrpaK4vPPze0f4q6Zd0mfzjGNKy49nrmINkftIHpkyf8KH+uC/qF8y6v1askPWu9NbJS9bkmN5wXaA==",
+      "path": "fody/6.5.1",
+      "hashPath": "fody.6.5.1.nupkg.sha512"
+    },
+    "FSharp.Core/8.0.300": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jv44fV7TNglyMku89lQcA4Q6mFKLyHb2bs1Yb72nvSVc+cHplEnoZ4XQUaaTLJGUTx/iMqcrkYGtaLzkkIhpaA==",
+      "path": "fsharp.core/8.0.300",
+      "hashPath": "fsharp.core.8.0.300.nupkg.sha512"
+    },
+    "Humanizer.Core/2.14.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
+      "path": "humanizer.core/2.14.1",
+      "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "IcedTasks/0.11.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j3bg2QRP8H3xiywSdv5qdu7rF5T79RA/TbBmNgSucI8FrtefOhF9iVJzCz5DKB8HAHbDNLUnommieeR7A4cvjw==",
+      "path": "icedtasks/0.11.6",
+      "hashPath": "icedtasks.0.11.6.nupkg.sha512"
+    },
+    "JetBrains.Annotations/2023.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PHfnvdBUdGaTVG9bR/GEfxgTwWM0Z97Y6X3710wiljELBISipSfF5okn/vz+C2gfO+ihoEyVPjaJwn8ZalVukA==",
+      "path": "jetbrains.annotations/2023.3.0",
+      "hashPath": "jetbrains.annotations.2023.3.0.nupkg.sha512"
+    },
+    "Octokit/11.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fpwF/DxMJyGS+pIXDKQozx0wCIpOfG8VDr10ls+m9Gn9Lz8GslhhApxkKD9JCNO60HRUeMJsedsAS24gCjTD7Q==",
+      "path": "octokit/11.0.1",
+      "hashPath": "octokit.11.0.1.nupkg.sha512"
+    },
+    "PropertyChanged.Fody/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IAZyq0uolKo2WYm4mjx+q7A8fSGFT0x2e1s3y+ODn4JI0kqTDoo9GF2tdaypUzRFJZfdMxfC5HZW9QzdJLtOnA==",
+      "path": "propertychanged.fody/3.4.0",
+      "hashPath": "propertychanged.fody.3.4.0.nupkg.sha512"
+    }
+  }
+}
