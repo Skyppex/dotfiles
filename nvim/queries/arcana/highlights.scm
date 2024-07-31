@@ -9,6 +9,7 @@
 
 "if" @keyword.conditional
 "else" @keyword.conditional
+"match" @keyword.conditional
 
 "loop" @keyword.repeat
 "while" @keyword.repeat
@@ -105,10 +106,11 @@
   field_name: (identifier) @property)
 
 (function_declaration
-  (identifier) @function)
+  name: (identifier) @function
+  body: (identifier) @variable)
 
 (function_declaration
-  body: (identifier) @variable)
+  name: (identifier) @constructor (#match? @constructor "new.*"))
 
 (parameter
   (identifier) @variable.parameter)
@@ -125,10 +127,8 @@
 (call
   callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
 
-(type_annotation) @type
-
 (type_annotation
-  type: (identifier) @type)
+  type: (identifier) @type) @type
 
 (type_annotation
   enum_name: (identifier) @type
@@ -148,3 +148,9 @@
 
 (union_declaration
   name: (identifier) @type)
+
+(match_arms
+  "|" @punctuation.delimiter
+  "=>" @punctuation.delimiter)
+
+(wildcard) @character.special
