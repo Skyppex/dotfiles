@@ -143,5 +143,5 @@ map("n", "<leader>.", function()
 end)
 
 -- Increment and decrement numbers
-map({ "n", "v" }, "<leader>+", "<C-a>", "Increment number")
-map({ "n", "v" }, "<leader>-", "<C-x>", "Decrement number")
+map({ "n", "x" }, "+", "<C-a>", "Increment number")
+map({ "n", "x" }, "-", "<C-x>", "Decrement number")

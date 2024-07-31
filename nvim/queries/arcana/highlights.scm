@@ -101,7 +101,7 @@
   enum_name: (identifier) @type
   enum_variant: (identifier) @type)
 
-(fields
+(field
   field_name: (identifier) @property)
 
 (function_declaration
@@ -110,7 +110,7 @@
 (function_declaration
   body: (identifier) @variable)
 
-(parameters
+(parameter
   (identifier) @variable.parameter)
 
 (trailing_closure
@@ -137,7 +137,7 @@
 (struct_declaration
   name: (identifier) @type)
 
-(struct_declaration
+(struct_field
   field_name: (identifier) @property)
 
 (enum_declaration
@@ -145,9 +145,6 @@
 
 (enum_variant
   variant_name: (identifier) @constant)
-
-(enum_variant
-  field_name: (identifier) @property)
 
 (union_declaration
   name: (identifier) @type)

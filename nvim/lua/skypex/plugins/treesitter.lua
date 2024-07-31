@@ -1,4 +1,9 @@
 return {
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
@@ -45,6 +50,51 @@ return {
 			},
 			indent = { enable = true },
 			injections = { enable = true },
+			textobjects = {
+				select = {
+					enable = true,
+
+					-- Automatically jump forward to textobj, similar to targets.vim
+					lookahead = true,
+
+					keymaps = {
+						["if"] = "@function.inner",
+						["af"] = "@function.outer",
+						["it"] = "@class.inner",
+						["at"] = "@class.outer",
+					},
+					include_surrounding_whitespace = true,
+				},
+				move = {
+					enable = true,
+					set_jumps = true,
+					goto_next_start = {
+						["æf"] = "@function.outer",
+						["æt"] = "@class.outer",
+					},
+					goto_next_end = {
+						["æF"] = "@function.outer",
+						["æT"] = "@class.outer",
+					},
+					goto_previous_start = {
+						["åf"] = "@function.outer",
+						["åt"] = "@class.outer",
+					},
+					goto_previous_end = {
+						["åF"] = "@function.outer",
+						["åT"] = "@class.outer",
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["æa"] = "@parameter.inner",
+					},
+					swap_previous = {
+						["åa"] = "@parameter.inner",
+					},
+				},
+			},
 		},
 		config = function(_, opts)
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`

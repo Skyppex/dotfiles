@@ -69,13 +69,6 @@ return {
 				builtin.find_files({ path_display = { "absolute" } })
 			end, { desc = "[S]earch [F]iles" })
 
-			vim.keymap.set(
-				"n",
-				"<leader>ss",
-				builtin.lsp_dynamic_workspace_symbols,
-				{ desc = "[S]earch LSP [S]ymbols" }
-			)
-
 			vim.keymap.set("n", "<leader>sg", function()
 				local git_dir =
 					vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
