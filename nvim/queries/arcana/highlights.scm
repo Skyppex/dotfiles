@@ -76,22 +76,18 @@
 (block_comment
   "/" @comment) @comment
 
-(literal
-  (string) @string)
+(string) @string
 
 (escape_sequence) @string.escape
 
-(literal
-  (bool) @boolean)
+(bool) @boolean
 
-(literal
-  (int) @number)
+(int) @number
+(uint) @number
 
-(literal
-  (float) @number.float)
+(float) @number.float
 
-(literal
-  (char) @char)
+(char) @character
 
 (identifier) @variable
 
@@ -150,7 +146,6 @@
   name: (identifier) @type)
 
 (match_arms
-  "|" @punctuation.delimiter
-  "=>" @punctuation.delimiter)
+  "|" @punctuation.special)
 
 (wildcard) @character.special
