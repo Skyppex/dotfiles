@@ -16,3 +16,5 @@ vnoremap <silent> <C-c> <Esc>
 
 nnoremap <leader>. f.i<CR><Esc>l==
 
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
