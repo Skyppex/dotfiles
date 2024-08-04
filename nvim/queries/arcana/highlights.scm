@@ -1,3 +1,8 @@
+(access_modifier) @keyword.modifier
+
+"mod" @keyword.import
+"use" @keyword.import
+
 "fun" @keyword.function
 
 "let" @keyword
@@ -75,6 +80,15 @@
 
 (block_comment
   "/" @comment) @comment
+
+(mod_path
+  (identifier) @module)
+
+(use_path
+  (identifier) @module)
+
+(use_path
+  (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
 (string) @string
 
