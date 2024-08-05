@@ -77,3 +77,10 @@
     (_ (_ (_ (_ (_ (_ (_ (_
         (raw_string_literal
             (raw_string_content) @injection.content))))))))))
+
+(invocation_expression
+  function: (member_access_expression
+    name: (identifier) @_name (#eq? @_name "Match"))
+  arguments: (argument_list
+    (argument
+      (verbatim_string_literal) @regex (#offset! @regex 0 2 0 -1))))

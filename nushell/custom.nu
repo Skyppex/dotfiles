@@ -577,6 +577,9 @@ alias gpf = git push --force-with-lease
 # Git add patch
 alias gap = git add --patch
 
+# Git Squash
+alias "git squash" = git rebase -i
+
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch
