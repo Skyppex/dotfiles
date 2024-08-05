@@ -116,7 +116,9 @@
   field_name: (identifier) @property)
 
 (function_declaration
-  name: (identifier) @function
+  name: (identifier) @function)
+
+(function_declaration
   body: (identifier) @variable)
 
 (function_declaration
@@ -124,6 +126,9 @@
 
 (parameter
   (identifier) @variable.parameter)
+
+(closure_parameter
+  param_name: (identifier) @variable.parameter)
 
 (trailing_closure
   function: (identifier) @function.call)
@@ -138,7 +143,7 @@
   callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
 
 (type_annotation
-  type: (identifier) @type) @type
+  (identifier) @type) @type
 
 (type_annotation
   enum_name: (identifier) @type
