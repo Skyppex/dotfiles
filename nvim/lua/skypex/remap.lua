@@ -46,6 +46,10 @@ map("n", "åb", "<cmd>bprevious<CR>zz")
 map("n", "æb", "<cmd>bnext<CR>zz")
 map("n", "<leader>b", "<cmd>b#<CR>zz")
 
+-- Spell check navigation
+map("n", "ås", "[s")
+map("n", "æs", "]s")
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 

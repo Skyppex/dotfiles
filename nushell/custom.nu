@@ -838,6 +838,7 @@ def "gr mv" [
 def gb [
     --all(-a)
     --show-current(-s)
+    --set-upstream(-u)
 ] {
     if $all and $show_current {
         print "Cannot pass more than one argument"
@@ -850,6 +851,10 @@ def gb [
 
     if $show_current {
         return (git branch --show-current)
+    }
+
+    if $set_upstream {
+
     }
 
     git branch

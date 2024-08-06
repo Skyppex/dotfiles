@@ -75,11 +75,10 @@
 "|=" @operator
 "^=" @operator
 
-(line_comment
-  "//" @comment) @comment
+(line_comment) @comment @spell
 
 (block_comment
-  "/" @comment) @comment
+  "/" @comment) @comment @spell
 
 (mod_path
   (identifier) @module)
@@ -90,7 +89,7 @@
 (use_path
   (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
-(string) @string
+(string) @string @spell
 
 (escape_sequence) @string.escape
 
@@ -113,22 +112,19 @@
   enum_variant: (identifier) @type)
 
 (field
-  field_name: (identifier) @property)
-
-(function_declaration
-  name: (identifier) @function)
+  field_name: (identifier) @property @spell)
 
 (function_declaration
   body: (identifier) @variable)
 
 (function_declaration
-  name: (identifier) @constructor (#match? @constructor "new.*"))
+  identifier: (function_type_identifier) @constructor @spell (#match? @constructor "new.*"))
 
 (parameter
-  (identifier) @variable.parameter)
+  (identifier) @variable.parameter @spell)
 
 (closure_parameter
-  param_name: (identifier) @variable.parameter)
+  param_name: (identifier) @variable.parameter @spell)
 
 (trailing_closure
   function: (identifier) @function.call)
@@ -146,23 +142,32 @@
   (identifier) @type) @type
 
 (type_annotation
-  enum_name: (identifier) @type
-  enum_variant: (identifier) @type)
+  enum_name: (type_identifier_name) @type
+  enum_variant: (type_identifier_name) @type)
 
 (struct_declaration
-  name: (identifier) @type)
+  identifier: (type_identifier) @type)
 
 (struct_field
-  field_name: (identifier) @property)
+  field_name: (identifier) @property @spell)
 
-(enum_declaration
-  name: (identifier) @type)
+(type_identifier
+  (type_identifier_name) @type @spell)
+
+(function_type_identifier
+  (function_type_identifier_name) @function @spell)
+
+(generic_type_parameters
+  "<" @punctuation.special
+  ">" @punctuation.special)
+
+(generic_identifier) @type @spell
 
 (enum_variant
-  variant_name: (identifier) @constant)
+  variant_name: (type_identifier_name) @constant @spell)
 
 (union_declaration
-  name: (identifier) @type)
+  name: (identifier) @type @spell)
 
 (match_arms
   "|" @punctuation.special)

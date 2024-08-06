@@ -115,7 +115,7 @@ return {
 				"n",
 				"<leader>tt",
 				"<cmd>TSPlaygroundToggle<CR>",
-				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
+				{ desc = "[T]oggle [T]reesitter Playground", noremap = true, silent = true }
 			)
 
 			-- Add local parser for arcana

@@ -20,6 +20,9 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.opt.spell = false
+vim.opt.spelllang = { "en" }
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
