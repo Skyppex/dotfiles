@@ -2,11 +2,19 @@ local map = function(mode, left, right, desc)
 	vim.keymap.set(mode, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+local nvim_config_path = string.gsub(vim.fn.stdpath("config") .. "", "\\", "/")
+local skypex_config_path = nvim_config_path .. "/lua/skypex/config.lua"
+local remap_path = nvim_config_path .. "/lua/skypex/remap.lua"
+
 map("n", "<leader>pv", vim.cmd.Ex)
+map("n", "<leader>so", function()
+	vim.cmd("source " .. skypex_config_path)
+	vim.cmd("source " .. remap_path)
+end, "Source config")
 
 -- Reverse j and k
-map({ "n", "v", "o" }, "j", "<up>")
-map({ "n", "v", "o" }, "k", "<down>")
+map({ "n", "x", "o" }, "j", "<up>")
+map({ "n", "x", "o" }, "k", "<down>")
 
 -- TIP: Disable arrow keys in insert mode and x mode
 map({ "i", "x" }, "<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
@@ -25,8 +33,8 @@ map("n", "<S-A-k>", "<cmd>cnext<CR>zz")
 map("n", "<C-s>", "<cmd>wa<CR>")
 
 -- Move lines of code in visual mode
-map("v", "J", ":m '<-2<CR>gv=gv")
-map("v", "K", ":m '>+1<CR>gv=gv")
+map("x", "J", ":m '<-2<CR>gv=gv")
+map("x", "K", ":m '>+1<CR>gv=gv")
 
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
@@ -54,7 +62,7 @@ map("n", "æs", "]s")
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Alias ctrl+c to Esc
-map({ "i", "v", "s" }, "<C-c>", "<Esc>")
+map({ "i", "x", "s" }, "<C-c>", "<Esc>")
 
 -- Diagnostic keymaps
 map("n", "åd", vim.diagnostic.goto_prev, "Go to previous [D]iagnostic message")
@@ -101,8 +109,8 @@ map("n", "øø", "@@")
 map({ "n", "x" }, "'", '"')
 
 -- Indent in visual mode stays in visual mode
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+map("x", "<", "<gv")
+map("x", ">", ">gv")
 
 -- Camel case motion
 map("n", "<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
@@ -113,11 +121,11 @@ map("o", "<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
 map("n", "<leader>ciC", "<left>/\\u<CR>N<right>", "Camel/Pascal Case Word Back")
 map("n", "<leader>cic", "/\\u<CR><left>", "Camel/Pascal Case Word")
 
-map("v", "<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
-map("v", "<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
+map("x", "<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
+map("x", "<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
 
-map("v", "<leader>ciC", "<left>/\\u<CR>N<right>", "Camel/Pascal Case Word Back")
-map("v", "<leader>cic", "/\\u<CR><left>", "Camel/Pascal Case Word")
+map("x", "<leader>ciC", "<left>/\\u<CR>N<right>", "Camel/Pascal Case Word Back")
+map("x", "<leader>cic", "/\\u<CR><left>", "Camel/Pascal Case Word")
 
 -- Snake case motion
 map("n", "<leader>cS", "<left>/_<CR>N", "Snake Case Word Back")
@@ -128,11 +136,11 @@ map("o", "<leader>cs", "/_<CR>", "Snake Case Word")
 map("n", "<leader>ciS", "<left>/_<CR>N<right>", "Snake Case Word Back")
 map("n", "<leader>cis", "/_<CR><left>", "Snake Case Word")
 
-map("v", "<leader>cS", "<left>/_<CR>N", "Snake Case Word Back")
-map("v", "<leader>cs", "/_<CR>", "Snake Case Word")
+map("x", "<leader>cS", "<left>/_<CR>N", "Snake Case Word Back")
+map("x", "<leader>cs", "/_<CR>", "Snake Case Word")
 
-map("v", "<leader>ciS", "<left>/_<CR>N<right>", "Snake Case Word Back")
-map("v", "<leader>cis", "/_<CR><left>", "Snake Case Word")
+map("x", "<leader>ciS", "<left>/_<CR>N<right>", "Snake Case Word Back")
+map("x", "<leader>cis", "/_<CR><left>", "Snake Case Word")
 
 -- Redo
 map("n", "U", "<C-r>", "Redo")
@@ -149,3 +157,7 @@ end)
 -- Increment and decrement numbers
 map({ "n", "x" }, "+", "<C-a>", "Increment number")
 map({ "n", "x" }, "-", "<C-x>", "Decrement number")
+
+-- System clipboard
+map({ "n", "x" }, "<leader>y", '"+y', "Yank to system clipboard")
+map({ "n", "x" }, "<leader>p", '"+p', "Paste from system clipboard")

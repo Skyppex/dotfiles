@@ -11,6 +11,7 @@
 "struct" @keyword.type
 "enum" @keyword.type
 "union" @keyword.type
+"type" @keyword.type
 
 "if" @keyword.conditional
 "else" @keyword.conditional
@@ -27,19 +28,25 @@
 "continue" @keyword.repeat
 "return" @keyword.return
 
-"void" @type.builtin
-"unit" @type.builtin
-"bool" @type.builtin
-"int" @type.builtin
-"float" @type.builtin
-"char" @type.builtin
-"string" @type.builtin
+[
+  "void"
+  "bool"
+  "int"
+  "float"
+  "char"
+  "string"
+] @type.builtin
+
+[
+ "unit"
+] @constant.builtin
 
 ":" @punctuation.delimiter
 "::" @punctuation.delimiter
 ";" @punctuation.delimiter
 "," @punctuation.delimiter
 "=>" @punctuation.delimiter
+
 "{" @punctuation.bracket
 "}" @punctuation.bracket
 "[" @punctuation.bracket
@@ -47,33 +54,35 @@
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 
-"+" @operator
-"-" @operator
-"*" @operator
-"/" @operator
-"%" @operator
-"&" @operator
-"|" @operator
-"^" @operator
-"<<" @operator
-">>" @operator
-"&&" @operator
-"||" @operator
-"==" @operator
-"!=" @operator
-"<" @operator
-">" @operator
-"<=" @operator
-">=" @operator
-
-"+=" @operator
-"-=" @operator
-"*=" @operator
-"/=" @operator
-"%=" @operator
-"&=" @operator
-"|=" @operator
-"^=" @operator
+[
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "&"
+  "|"
+  "^"
+  "<<"
+  ">>"
+  "&&"
+  "||"
+  "=="
+  "!="
+  "<"
+  ">"
+  "<="
+  ">="
+  "="
+  "+="
+  "-="
+  "*="
+  "/="
+  "%="
+  "&="
+  "|="
+  "^="
+] @operator
 
 (line_comment) @comment @spell
 
@@ -142,6 +151,9 @@
   (identifier) @type) @type
 
 (type_annotation
+  "unit" @type.builtin)
+
+(type_annotation
   enum_name: (type_identifier_name) @type
   enum_variant: (type_identifier_name) @type)
 
@@ -158,8 +170,8 @@
   (function_type_identifier_name) @function @spell)
 
 (generic_type_parameters
-  "<" @punctuation.special
-  ">" @punctuation.special)
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
 
 (generic_identifier) @type @spell
 
@@ -168,6 +180,12 @@
 
 (union_declaration
   name: (identifier) @type @spell)
+
+(type_alias_declaration
+  name: (type_identifier) @type @spell)
+
+(type_alias_variants
+  "|" @punctuation.special)
 
 (match_arms
   "|" @punctuation.special)
