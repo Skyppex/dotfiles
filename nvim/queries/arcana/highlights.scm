@@ -1,24 +1,38 @@
 (access_modifier) @keyword.modifier
 
-"mod" @keyword.import
-"use" @keyword.import
+[
+  "mod"
+  "use"
+] @keyword.import
 
 "fun" @keyword.function
 
-"let" @keyword
-"mut" @keyword
+[
+  "let"
+  "mut"
+] @keyword
 
-"struct" @keyword.type
-"enum" @keyword.type
-"union" @keyword.type
-"type" @keyword.type
+[
+  "struct"
+  "enum"
+  "union"
+  "type"
+] @keyword.type
 
-"if" @keyword.conditional
-"else" @keyword.conditional
-"match" @keyword.conditional
+[
+  "if"
+  "else"
+  "match"
+] @keyword.conditional
 
-"loop" @keyword.repeat
-"while" @keyword.repeat
+[
+  "loop"
+  "while"
+] @keyword.repeat
+
+[
+ "or"
+] @keyword.operator
 
 (for
   "for" @keyword.repeat
@@ -183,9 +197,6 @@
 
 (type_alias_declaration
   name: (type_identifier) @type @spell)
-
-(type_alias_variants
-  "|" @punctuation.special)
 
 (match_arms
   "|" @punctuation.special)

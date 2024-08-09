@@ -790,3 +790,4 @@ $env.config = {
 
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 source ~/.config/nushell/custom.nu
+use ~/.config/nushell/task.nu
