@@ -128,10 +128,10 @@
 (identifier) @variable
 
 (struct_literal
-  struct_name: (identifier) @type)
+  struct_name: (type_identifier_name) @type)
 
 (enum_literal
-  enum_name: (identifier) @type
+  enum_name: (type_identifier_name) @type
   enum_variant: (identifier) @type)
 
 (field
