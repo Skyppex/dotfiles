@@ -154,6 +154,15 @@ map("n", "<leader>.", function()
 	end
 end)
 
+-- Newline after ,
+map("n", "<leader>,", function()
+	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
+	for _ = 1, count do
+		local keys = vim.api.nvim_replace_termcodes("f,a<CR><Esc>l==", true, true, true)
+		vim.api.nvim_feedkeys(keys, "n", false)
+	end
+end)
+
 -- Increment and decrement numbers
 map({ "n", "x" }, "+", "<C-a>", "Increment number")
 map({ "n", "x" }, "-", "<C-x>", "Decrement number")

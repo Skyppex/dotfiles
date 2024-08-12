@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1723220933000)\/",
+                "value": "\/Date(1723393683000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 18:28:53"
+                "DateTime": "sondag 11. august 2024 18:28:03"
             },
             "Manifests": 1337
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1723221105000)\/",
+                "value": "\/Date(1723408078000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 18:31:45"
+                "DateTime": "sondag 11. august 2024 22:27:58"
             },
-            "Manifests": 2053
+            "Manifests": 2054
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1723221445000)\/",
+                "value": "\/Date(1723408168000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 18:37:25"
+                "DateTime": "sondag 11. august 2024 22:29:28"
             },
             "Manifests": 468
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1723220891000)\/",
+                "value": "\/Date(1723407891000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 18:28:11"
+                "DateTime": "sondag 11. august 2024 22:24:51"
             },
             "Manifests": 313
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1723222641000)\/",
+                "value": "\/Date(1723409074000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 18:57:21"
+                "DateTime": "sondag 11. august 2024 22:44:34"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1723162447000)\/",
+                "value": "\/Date(1723335278000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 9. august 2024 02:14:07"
+                "DateTime": "sondag 11. august 2024 02:14:38"
             },
             "Manifests": 256
         },
@@ -295,6 +295,13 @@
             "Name": "jq",
             "Version": "1.7.1",
             "Updated": "\/Date(1707759455864)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "keepass",
+            "Version": "2.57",
+            "Updated": "\/Date(1723410147001)\/"
         },
         {
             "Info": "",
