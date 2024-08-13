@@ -15,6 +15,7 @@ local config_path = home .. "/.config"
 if home == nil then
 	home = "C:/Users/brage"
 end
+
 wezterm.log_info("Home: " .. home)
 if home:find("brage.ingebrigtsen") then
 	temp_path = home .. "/dev/temp/"
