@@ -560,6 +560,106 @@ def --env enter [
     }
 }
 
+def "dt test" [
+    --verbose(-v) # Print verbose output
+    name?: string
+] {
+    let test_folder = (ls -f | get name | where ($it | str contains "test") |
+        first)
+
+    if $verbose {
+        print $"Test folder: ($test_folder)"
+    }
+
+    if ($test_folder | is-empty) {
+        print "No test folder found"
+        return
+    }
+
+    enter-old $test_folder
+    let projects = glob "**/*.csproj"
+
+    if $verbose {
+        print $"Projects: ($projects)"
+    }
+
+    if ($projects | is-empty) {
+        print "No projects found"
+        p
+        return
+    }
+
+    mut namespaces = [];
+
+    for $project in $projects {
+        let dirname = ($project | path dirname)
+
+        if $verbose {
+            print $"Dirname: ($dirname)"
+        }
+
+        enter-old $dirname
+
+        let files = (glob "**/*.cs")
+
+        if ($files | is-empty) {
+            print $"No files found in project: ($project)"
+            p
+            continue
+        }
+
+        for $file in $files {
+            if $verbose {
+                print $"File: ($file)"
+            }
+
+            let content = open $file | lines
+
+            if ($content | is-empty) {
+                print $"No content found in file: ($file)"
+                continue
+            }
+
+            let line = ($content | where ($it | str starts-with "namespace"))
+
+            if ($line | is-empty) {
+                print $"No namespace found in file: ($file)"
+                continue
+            }
+
+            let namespace = ($line | first | split row " " | get 1)
+            let namespace = ($namespace | str replace -a ";" "")
+            $namespaces = ($namespaces ++ $namespace)
+        }
+
+        p
+    }
+
+    p
+
+    let namespaces = ($namespaces | uniq)
+
+    if $verbose {
+        print $"Namespaces: ($namespaces)"
+    }
+
+    let name = if $name == null { "" } else { $name }
+
+    let selected = ($namespaces | to text | fzf -0 -1 --query $name)
+
+    if $verbose {
+        print $"Selected: ($selected)"
+    }
+
+    if ($selected | is-empty) {
+        print "No namespace selected"
+        return
+    }
+
+    print $"Running tests for: ($selected) in WD: ($env.PWD)"
+    dotnet test --filter $"FullyQualifiedName~($selected)"
+}
+
 # Git
 
 # Git status
@@ -1529,6 +1629,21 @@ def "parse table" [
     }
 
     $rows
+}
+
+# Scoop reinstall
+def "scoop reinstall" [
+    ...name: string
+] {
+    if ($name | str contains "/") {
+        let split = ($name | split row "/")
+        let app = ($split | get 1)
+        scoop uninstall $app
+        scoop install $name
+    } else {
+        scoop uninstall $name
+        scoop install $name
+    }
 }
 
 # Scoop uninstall with fzf
