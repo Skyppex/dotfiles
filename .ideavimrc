@@ -10,6 +10,7 @@ nnoremap <leader>sg :action FindInPath<cr>
 nnoremap gr :action FindUsages<cr>
 nnoremap <leader>rn :action RenameElement<cr>
 nnoremap gc :action CommentByLineComment<cr>
+vnoremap gc :action CommentByLineComment<cr>
 nnoremap H :action CodeCompletion<cr>
 nnoremap <S-M-H> :action CodeCompletion<cr>
 inoremap <S-M-H> :action CodeCompletion<cr>

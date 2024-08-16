@@ -398,7 +398,7 @@ return {
 							cs_ls_ex.lsp_definitions()
 						end, {
 							buffer = bufnr,
-							desc = "csharls: [G]oto [D]efinition",
+							desc = "csharpls: [G]oto [D]efinition",
 							noremap = true,
 							silent = true,
 						})
@@ -412,6 +412,17 @@ return {
 				filetypes = { "nu" },
 				single_file_support = true,
 				root_dir = lspconfig.util.find_git_ancestor,
+				capabilities = capabilities,
+			})
+
+			local code_path = require("skypex.utils").get_code_path()
+			local proof_path = code_path .. "proof/"
+			local proof_exe = proof_path .. "proof.exe"
+			local log_file = proof_path .. "log.txt"
+
+			lspconfig.proof.setup({
+				cmd = { proof_exe, log_file },
+				filetypes = { "*" },
 				capabilities = capabilities,
 			})
 
