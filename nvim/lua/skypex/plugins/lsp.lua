@@ -467,6 +467,8 @@ return {
 				},
 				settings = {
 					proof = {
+						dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
+						maxSuggestions = 5,
 						allowImplicitPlurals = true,
 						spellCheckNodes = {
 							default = { "comment", "line_comment", "block_comment" },
@@ -492,6 +494,15 @@ return {
 				"stylua", -- Used to format Lua code
 				"rust-analyzer",
 				"csharp-language-server",
+				"black",
+				"codelldb",
+				"eslint_d",
+				"gopls",
+				"graphql-language-service-cli",
+				"isort",
+				"prettierd",
+				"python-lsp-server",
+				"typescript-language-server",
 				-- "omnisharp",
 				-- "omnisharp_mono",
 			})

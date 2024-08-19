@@ -1,0 +1,5 @@
+filepath
+folke
+neodev
+luacheck
+eslint
