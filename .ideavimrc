@@ -20,9 +20,6 @@ nnoremap æd :action GotoNextError<cr>
 
 nnoremap <leader>ca :action ShowIntentionActions<cr>
 
-vnoremap J :m '<-2<CR>gv=gv
-vnoremap K :m '>+1<CR>gv=gv
-
 nnoremap <leader>hj :action AceWordStartAction<cr>
 nnoremap <leader>hl :action AceLineAction<cr>
 nnoremap <leader>hp :action AceTargetAction<cr>

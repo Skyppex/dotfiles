@@ -39,6 +39,17 @@ return {
 			},
 		},
 		config = function()
+			-- Alter hover style
+			local handlers = {
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+					border = "rounded",
+				}),
+
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+					border = "rounded",
+				}),
+			}
+
 			--  This function gets run when an LSP attaches to a particular buffer.
 			--    That is to say, every time a new file is opened that is associated with
 			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -355,7 +366,7 @@ return {
 				--
 
 				lua_ls = {
-					-- filetypes = { "lua" },
+					filetypes = { "lua" },
 					settings = {
 						Lua = {
 							runtime = { version = "LuaJIT" },
@@ -420,10 +431,49 @@ return {
 			local proof_exe = proof_path .. "proof.exe"
 			local log_file = proof_path .. "log.txt"
 
+			local configs = require("lspconfig.configs")
+
+			local get_tree = function()
+				local parser = vim.treesitter.get_parser(0)
+				local tree = parser:parse()[1]
+				return tree
+			end
+
+			if not configs.proof then
+				configs.proof = {
+					default_config = {
+						cmd = { proof_exe, log_file },
+						filetypes = { "*" },
+						single_file_support = true,
+						root_dir = lspconfig.util.find_git_ancestor,
+						settings = {},
+						capabilities = capabilities,
+					},
+				}
+			end
+
 			lspconfig.proof.setup({
-				cmd = { proof_exe, log_file },
-				filetypes = { "*" },
-				capabilities = capabilities,
+				handlers = {
+					["textDocument/didOpen"] = function()
+						local params = vim.lsp.util.make_text_document_params()
+						params.tree = get_tree()
+						vim.lsp.buf_notify(0, "textDocument/didOpen", params)
+					end,
+					["textDocument/didChange"] = function()
+						local params = vim.lsp.util.make_text_document_params()
+						params.tree = get_tree()
+						vim.lsp.buf_notify(0, "textDocument/didChange", params)
+					end,
+				},
+				settings = {
+					proof = {
+						allowImplicitPlurals = true,
+						spellCheckNodes = {
+							default = { "comment", "line_comment", "block_comment" },
+							lua = { "comment" },
+						},
+					},
+				},
 			})
 
 			-- Ensure the servers and tools above are installed
@@ -452,23 +502,23 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						if string.find(server_name, "ltex") then
-							return
-						end
 						-- if string.find(server_name, "omnisharp") then
 						-- 	return
 						-- end
+
 						-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
+						server.handlers =
+							vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, server.handlers or {})
+
 						lspconfig[server_name].setup(server)
 					end,
 				},
 			})
-
-			require("skypex.proof")
 
 			vim.diagnostic.config({
 				severity_sort = true,

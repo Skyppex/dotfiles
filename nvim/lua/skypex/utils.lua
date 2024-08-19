@@ -13,7 +13,26 @@ local function get_code_path()
 	end
 end
 
+local function table_to_string(tbl)
+	local result = "{"
+	for k, v in pairs(tbl) do
+		if type(k) == "number" then
+			result = result .. "[" .. k .. "] = "
+		else
+			result = result .. k .. " = "
+		end
+		if type(v) == "table" then
+			result = result .. tableToString(v)
+		else
+			result = result .. tostring(v)
+		end
+		result = result .. ", "
+	end
+	return result:sub(1, -3) .. "}"
+end
+
 return {
 	get_home = get_home,
 	get_code_path = get_code_path,
+	table_to_string = table_to_string,
 }

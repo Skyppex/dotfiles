@@ -47,50 +47,86 @@ alias enter-old = enter;
 # Open neovim
 def vim [
     --empty(-e) # Open neovim with an empty file
+    --verbose(-v) # Enable verbose output
     ...path
 ] {
+    let stdin = $in
+
     if $empty and ($path | is-empty) {
         print "--empty requires a path to be specified"
         return
     }
 
     if ($path | is-empty) {
-        nvim
+        if $verbose {
+            print "Path is empty"
+        }
+
+        $stdin | nvim
         return
     }
 
     if (($path | str join " ") == "..") {
-        nvim ..
+        if $verbose {
+            print "Entering nvim in parent directory"
+        }
+
+        $stdin | nvim ..
         return
     } 
 
     if (($path | str join " ") == ".") {
-        nvim .
+        if $verbose {
+            print "Entering nvim in current directory"
+        }
+
+        $stdin | nvim .
         return
     }
 
     if $empty {
-        nvim ...$path
+        if $verbose {
+            print "Entering nvim in empty file"
+        }
+
+        $stdin | nvim ...$path
         return
     }
 
     let found_path = zoxide query ...$path
 
-    if $found_path == null {
-        nvim ...$path
+    if ($found_path | is-empty)  {
+        if $verbose {
+            print $"Found no path in zoxide. Entering nvim at '($path | str join ' ')'"
+        }
+
+        $stdin | nvim ...$path
+        return
     }
 
     enter $found_path
-    nvim .
+
+    if $verbose {
+        print $"Found path in zoxide: ($found_path)"
+    }
+
+    $stdin | nvim .
     p
 }
 
 def "fix shada" [] {
-    ls | where type == file
-        | where $it.name =~ "tmp"
-        | each { |f| rm $f.name }
+    let newest = ls | where type == file
+    | where $it.name =~ "tmp"
+    | sort-by --reverse modified
+    | first
+    | get name
 
-cp main.shada main.shada-cp
+    cp $newest main.shada-cp
+
+    ls | where type == file
+    | where $it.name =~ "tmp"
+    | each { |f| rm $f.name }
+
     rm main.shada
     mv main.shada-cp main.shada
 }
@@ -1665,6 +1701,21 @@ def "scoop rm" [
 
     print $"Uninstalling ($selected)"
     scoop uninstall $selected
+}
+
+# Unleash
+
+# List Toggles
+def "unleash list" [
+    --auth(-a): string
+] {
+    if ($auth | is-empty) {
+        print "You must provide an api-key in the 'auth' flag"
+        return
+    }
+
+    let raw = curl -X GET "https://features.carweb.no/api/admin/features" -H $auth
+    print $raw
 }
 
 # Fun
