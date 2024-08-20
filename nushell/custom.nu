@@ -146,7 +146,7 @@ def "str surround" [
    $"($start)($in)($end)"
 }
 
-# Custom defenition for the 'fuck' command from 'thefuck'
+# Custom definition for the 'fuck' command from 'thefuck'
 def fuck [
     --yes(-y),
     --yeah,

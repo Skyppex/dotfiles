@@ -74,27 +74,27 @@ return {
 					local builtin = require("telescope.builtin")
 					-- Jump to the definition of the word under your cursor.--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+					map("gd", builtin.lsp_definitions, "Goto Definition")
 
 					-- Find references for the word under your cursor.
-					map("gr", builtin.lsp_references, "[G]oto [R]eferences")
+					map("gr", builtin.lsp_references, "Goto References")
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+					map("gI", builtin.lsp_implementations, "Goto Implementation")
 
 					-- Jump to the type of the word under your cursor.
 					--  Useful when you're not sure what type a variable is and you want to see
 					--  the definition of its *type*, not where it was *defined*.
-					map("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
+					map("<leader>D", builtin.lsp_type_definitions, "Type Definition")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("<leader>ds", builtin.lsp_document_symbols, "Document Symbols")
 
 					-- Fuzzy find all the symbols in your current workspace.
 					--  Similar to document symbols, except searches over your entire project.
-					map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+					map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
@@ -107,7 +107,7 @@ return {
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					mapnv("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+					mapnv("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
@@ -124,7 +124,7 @@ return {
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -162,7 +162,7 @@ return {
 					if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 						map("<leader>th", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-						end, "[T]oggle Inlay [H]ints")
+						end, "Toggle Inlay Hints")
 					end
 				end,
 			})
@@ -247,7 +247,7 @@ return {
 			--
 			-- 			vim.keymap.set("n", "gd", function()
 			-- 				require("omnisharp_extended").telescope_lsp_definitions()
-			-- 			end, { buffer = bufnr, desc = "LSP: [G]oto [D]efinition", noremap = true, silent = true })
+			-- 			end, { buffer = bufnr, desc = "LSP: Goto Definition", noremap = true, silent = true })
 			-- 		end
 			--
 			-- 		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
@@ -409,7 +409,7 @@ return {
 							cs_ls_ex.lsp_definitions()
 						end, {
 							buffer = bufnr,
-							desc = "csharpls: [G]oto [D]efinition",
+							desc = "csharpls: Goto Definition",
 							noremap = true,
 							silent = true,
 						})
@@ -452,6 +452,26 @@ return {
 				}
 			end
 
+			local ts_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+			-- Example ts_config entry
+			-- c_sharp = {
+			--   filetype = "cs",
+			--   install_info = {
+			--     files = { "src/parser.c", "src/scanner.c" },
+			--     url = "https://github.com/tree-sitter/tree-sitter-c-sharp"
+			--   },
+			--   maintainers = { "@amaanq" }
+			-- },
+
+			local ts_map = {}
+
+			for ts_lang, info in pairs(ts_configs) do
+				if info.filetype then
+					ts_map[info.filetype = ts_lang
+				end
+			end
+
 			lspconfig.proof.setup({
 				handlers = {
 					["textDocument/didOpen"] = function()
@@ -474,6 +494,7 @@ return {
 							default = { "comment", "line_comment", "block_comment" },
 							lua = { "comment" },
 						},
+						treesitterTypeMap = {},
 					},
 				},
 			})
