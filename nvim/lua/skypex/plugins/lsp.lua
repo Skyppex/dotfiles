@@ -9,6 +9,24 @@ return {
 			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
 			"Decodetalkers/csharpls-extended-lsp.nvim",
+			{
+				"aznhe21/actions-preview.nvim",
+				opts = {
+					telescope = {
+						sorting_strategy = "ascending",
+						layout_strategy = "vertical",
+						layout_config = {
+							width = 0.3,
+							height = 0.4,
+							prompt_position = "top",
+							preview_cutoff = 20,
+							preview_height = function(_, _, max_lines)
+								return max_lines - 15
+							end,
+						},
+					},
+				},
+			},
 			-- "Hoffs/omnisharp-extended-lsp.nvim",
 			-- "Issafalcon/lsp-overloads.nvim",
 			{
@@ -64,11 +82,30 @@ return {
 					-- for LSP related items. It sets the mode, buffer and description for us each time.
 
 					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+						vim.keymap.set("n", keys, func, {
+							noremap = true,
+							silent = true,
+							buffer = event.buf,
+							desc = "LSP: " .. desc,
+						})
 					end
 
+					-- local mapv = function(keys, func, desc)
+					-- 	vim.keymap.set("v", keys, func, {
+					-- 		noremap = true,
+					-- 		silent = true,
+					-- 		buffer = event.buf,
+					-- 		desc = "LSP: " .. desc,
+					-- 	})
+					-- end
+
 					local mapnv = function(keys, func, desc)
-						vim.keymap.set({ "n", "v" }, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+						vim.keymap.set({ "n", "v" }, keys, func, {
+							noremap = true,
+							silent = true,
+							buffer = event.buf,
+							desc = "LSP: " .. desc,
+						})
 					end
 
 					local builtin = require("telescope.builtin")
@@ -105,9 +142,10 @@ return {
 						end)
 					end, "[R]e[n]ame")
 
+					local ap = require("actions-preview")
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					mapnv("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+					mapnv("<leader>ca", ap.code_actions, "Code Action")
 
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
@@ -271,7 +309,7 @@ return {
 			-- 			},
 			-- 			RoslynExtensionsOptions = {
 			-- 				-- Enables support for roslyn analyzers, code fixes and rulesets.
-			-- 				EnableAnalyzersSupport = false, -- THIS ADED FIX FORMATTING ON EVERY SINGLE LINE IN CS FILES!
+			-- 				EnableAnalyzersSupport = false, -- THIS ADDED FIX FORMATTING ON EVERY SINGLE LINE IN CS FILES!
 			-- 				-- Enables support for showing unimported types and unimported extension
 			-- 				-- methods in completion lists. When committed, the appropriate using
 			-- 				-- directive will be added at the top of the current file. This option can
@@ -468,7 +506,7 @@ return {
 
 			for ts_lang, info in pairs(ts_configs) do
 				if info.filetype then
-					ts_map[info.filetype = ts_lang
+					ts_map[info.filetype] = ts_lang
 				end
 			end
 

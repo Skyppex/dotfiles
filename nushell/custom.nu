@@ -1,4 +1,5 @@
 use ~/.cache/starship/init.nu
+source ~/.config/nushell/scripts.nu
 source ~/.config/zoxide/.zoxide.nu
 
 # Externs
@@ -42,7 +43,15 @@ export extern "cascade" [
 # Remember the old enter command
 alias enter-old = enter;
 
+# Fzf with preview
+alias fzp = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
+
 # Neovim
+
+def fim [...path] {
+    fzp -1 --query ($path | str join " ") --bind "enter:become(nvim {})"
+}
+
 
 # Open neovim
 def vim [
@@ -548,14 +557,32 @@ alias ss = start ~/.config/starship-schema.json
 alias cdi = __zoxide_zi;
 
 # The new 'cd' command using zoxide and fzf
-def --env z [...path: string] {
+def --env z [
+    --fzf-only(-f)
+    ...path: string
+] {
     if ($path == null or ($path | is-empty)) {
+        if $fzf_only {
+            let target = (ls
+                | where type == dir
+                | get name
+                | to text
+                | fzf --preview='dir {}')
+
+            __zoxide_z $target
+            return
+        }
+
         __zoxide_z
         return
     }
 
     let current = $env.PWD
-    __zoxide_z ...$path
+
+    if not $fzf_only {
+        __zoxide_z ...$path
+    }
+
     let new = $env.PWD
 
     if $current == $new {
@@ -570,6 +597,7 @@ def --env z [...path: string] {
 
 # Alias for z making it into cd
 alias cd = z
+alias cdf = z --fzf-only
 
 # Zoxide query
 alias cdq = zoxide query
@@ -704,6 +732,9 @@ alias gs = git status
 # Git log
 alias gl = git log
 
+# Git diff
+alias gd = git diff
+
 # Git amend commit
 alias gca = git commit --amend
 
@@ -715,6 +746,9 @@ alias gap = git add --patch
 
 # Git Squash
 alias "git squash" = git rebase -i
+
+# Git diff with fzf
+alias gdf = git diff (fzf)
 
 # Git checkout but with fzf for branch selection
 def gc [
@@ -1748,6 +1782,7 @@ alias disco = echo "Amazingly few discoteques provide jukemoxes"
 alias waltz = echo "Waltz, bad nymph, for quick jigs vex"
 
 # Echo the lorem ipsum text
+# proof: ignore
 def lorem [] {
     let lorem = [
         "Lorem ipsum dolor sit amet, erroribus constituam duo ut. Eum audiam disputando",
