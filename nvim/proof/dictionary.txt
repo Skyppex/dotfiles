@@ -131,3 +131,10 @@ edcrypt
 ci
 uuid
 jit
+xor
+binop
+unop
+todo
+callee
+deref
+lexer
