@@ -138,3 +138,5 @@ todo
 callee
 deref
 lexer
+aspnetcore
+applicationinsights

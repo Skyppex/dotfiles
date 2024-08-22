@@ -25,8 +25,8 @@ def "bcp" [
         let content = open $file
         let string_data = ($content | get stringData)
         let string_data = ($string_data
-            | insert BCP_API_ID { $api_id }
-            | insert BCP_API_KEY { $api_key })
+            | upsert BCP_API_ID { $api_id }
+            | upsert BCP_API_KEY { $api_key })
         let content = ($content | update stringData { $string_data })
         print $string_data
         print (ls)
