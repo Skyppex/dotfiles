@@ -543,7 +543,7 @@ def "push" [] {
     p
 }
 
-# Startship
+# Starship
 
 # Open the starship config file in vscode
 alias sc = start ~/.config/starship.toml
@@ -1776,7 +1776,7 @@ alias dwarf = echo "Pack my box with five dozen liquor jugs"
 alias sphinx = echo "Sphinx of black quartz, judge my vow"
 
 # Echo a sentence with all the letters of the alphabet
-alias disco = echo "Amazingly few discoteques provide jukemoxes"
+alias disco = echo "Amazingly few discoteques provide jukeboxes"
 
 # Echo a sentence with all the letters of the alphabet
 alias waltz = echo "Waltz, bad nymph, for quick jigs vex"

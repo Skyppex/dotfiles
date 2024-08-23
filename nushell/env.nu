@@ -112,7 +112,7 @@ match ($env.COMPUTERNAME) {
         $env.CODE = ('~\code' | path expand)
     },
     "DESKTOP-RRC642H" => { 
-        $env.CODE = D:\Coding
+        $env.CODE = "D:/code"
     },
     _ => {
         print "Unknown computer name"

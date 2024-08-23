@@ -140,3 +140,10 @@ deref
 lexer
 aspnetcore
 applicationinsights
+multiline
+urlpattern
+openshift
+otel
+sessionizer
+tonumber
+scrollback
