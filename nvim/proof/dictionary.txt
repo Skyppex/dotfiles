@@ -147,3 +147,7 @@ otel
 sessionizer
 tonumber
 scrollback
+eprintln
+usize
+itertool
+writeln
