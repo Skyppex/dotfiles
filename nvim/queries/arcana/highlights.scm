@@ -132,7 +132,7 @@
 
 (enum_literal
   enum_name: (type_identifier_name) @type
-  enum_variant: (identifier) @type)
+  enum_variant: (type_identifier_name) @type)
 
 (field
   field_name: (identifier) @property @spell)
@@ -171,6 +171,9 @@
   enum_name: (type_identifier_name) @type
   enum_variant: (type_identifier_name) @type)
 
+(type_annotation
+  type_name: (type_identifier_name) @type)
+
 (struct_declaration
   identifier: (type_identifier) @type)
 
@@ -189,11 +192,15 @@
 
 (generic_identifier) @type @spell
 
+(enum_shared_field
+  field_name: (identifier) @property @spell
+  field_type: (type_annotation) @type)
+
 (enum_variant
   variant_name: (type_identifier_name) @constant @spell)
 
 (union_declaration
-  name: (identifier) @type @spell)
+  name: (type_identifier_name) @type @spell)
 
 (type_alias_declaration
   name: (type_identifier) @type @spell)

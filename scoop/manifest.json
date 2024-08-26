@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1724502678000)\/",
+                "value": "\/Date(1724675474000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 14:31:18"
+                "DateTime": "mandag 26. august 2024 14:31:14"
             },
             "Manifests": 1339
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1724502818000)\/",
+                "value": "\/Date(1724683340000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 14:33:38"
+                "DateTime": "mandag 26. august 2024 16:42:20"
             },
-            "Manifests": 2059
+            "Manifests": 2060
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1724503808000)\/",
+                "value": "\/Date(1724676717000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 14:50:08"
+                "DateTime": "mandag 26. august 2024 14:51:57"
             },
             "Manifests": 469
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1724502608000)\/",
+                "value": "\/Date(1724675439000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 14:30:08"
+                "DateTime": "mandag 26. august 2024 14:30:39"
             },
             "Manifests": 324
         },
@@ -44,9 +44,9 @@
             "Name": "anderlli",
             "Source": "https://github.com/anderlli0053/DEV-tools",
             "Updated": {
-                "value": "\/Date(1724504030000)\/",
+                "value": "\/Date(1724676472000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 14:53:50"
+                "DateTime": "mandag 26. august 2024 14:47:52"
             },
             "Manifests": 23859
         },
@@ -54,9 +54,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1724458364000)\/",
+                "value": "\/Date(1724631207000)\/",
                 "DisplayHint": 2,
-                "DateTime": "lordag 24. august 2024 02:12:44"
+                "DateTime": "mandag 26. august 2024 02:13:27"
             },
             "Manifests": 256
         },
@@ -174,8 +174,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "dotPeek",
-            "Version": "2024.2.1",
-            "Updated": "\/Date(1724270230662)\/"
+            "Version": "2024.2.2",
+            "Updated": "\/Date(1724688156265)\/"
         },
         {
             "Info": "",
@@ -370,8 +370,8 @@
             "Info": "",
             "Source": "main",
             "Name": "nu",
-            "Version": "0.96.1",
-            "Updated": "\/Date(1722539259511)\/"
+            "Version": "0.97.1",
+            "Updated": "\/Date(1724688567700)\/"
         },
         {
             "Info": "",
@@ -426,8 +426,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "rider",
-            "Version": "2024.2.1-242.20224.418",
-            "Updated": "\/Date(1724270626709)\/"
+            "Version": "2024.2.2-242.20224.431",
+            "Updated": "\/Date(1724688523523)\/"
         },
         {
             "Info": "",
@@ -440,8 +440,8 @@
             "Info": "",
             "Source": "main",
             "Name": "rust-analyzer",
-            "Version": "2024-08-19",
-            "Updated": "\/Date(1724098938962)\/"
+            "Version": "2024-08-26",
+            "Updated": "\/Date(1724688527596)\/"
         },
         {
             "Info": "",

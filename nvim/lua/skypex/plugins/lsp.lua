@@ -490,26 +490,6 @@ return {
 				}
 			end
 
-			local ts_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
-			-- Example ts_config entry
-			-- c_sharp = {
-			--   filetype = "cs",
-			--   install_info = {
-			--     files = { "src/parser.c", "src/scanner.c" },
-			--     url = "https://github.com/tree-sitter/tree-sitter-c-sharp"
-			--   },
-			--   maintainers = { "@amaanq" }
-			-- },
-
-			local ts_map = {}
-
-			for ts_lang, info in pairs(ts_configs) do
-				if info.filetype then
-					ts_map[info.filetype] = ts_lang
-				end
-			end
-
 			lspconfig.proof.setup({
 				handlers = {
 					["textDocument/didOpen"] = function()
@@ -528,11 +508,7 @@ return {
 						dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
 						maxSuggestions = 5,
 						allowImplicitPlurals = true,
-						spellCheckNodes = {
-							default = { "comment", "line_comment", "block_comment" },
-							lua = { "comment" },
-						},
-						treesitterTypeMap = {},
+						ignoredWords = {},
 					},
 				},
 			})

@@ -151,3 +151,9 @@ eprintln
 usize
 itertool
 writeln
+lshortfile
+ltime
+ldate
+wronly
+trunc
+unrecurse

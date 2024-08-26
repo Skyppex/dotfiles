@@ -2,7 +2,7 @@
   fields: (struct_fields) @class.inner) @class.outer
 
 (enum_declaration
-  variants: (enum_variants) @class.inner) @class.outer
+  members: (enum_members) @class.inner) @class.outer
 
 (union_declaration
   variants: (union_variants) @class.inner) @class.outer

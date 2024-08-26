@@ -7,8 +7,8 @@
   "}" @delimiter @sentinel) @container
 
 (enum_variant
-  "(" @delimiter
-  ")" @delimiter @sentinel) @container
+  "{" @delimiter
+  "}" @delimiter @sentinel) @container
 
 (union_declaration
   "{" @delimiter
