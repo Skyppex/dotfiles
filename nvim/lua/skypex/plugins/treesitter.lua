@@ -62,6 +62,8 @@ return {
 						["af"] = "@function.outer",
 						["it"] = "@class.inner",
 						["at"] = "@class.outer",
+						["il"] = "@loop.inner",
+						["al"] = "@loop.outer",
 					},
 					include_surrounding_whitespace = true,
 				},
