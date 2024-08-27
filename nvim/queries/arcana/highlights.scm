@@ -16,7 +16,9 @@
   "struct"
   "enum"
   "union"
+  "proto"
   "type"
+  "where"
 ] @keyword.type
 
 [
@@ -55,18 +57,22 @@
  "unit"
 ] @constant.builtin
 
-":" @punctuation.delimiter
-"::" @punctuation.delimiter
-";" @punctuation.delimiter
-"," @punctuation.delimiter
-"=>" @punctuation.delimiter
+[
+  ":"
+  "::"
+  ";"
+  ","
+  "=>" 
+] @punctuation.delimiter
 
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"(" @punctuation.bracket
-")" @punctuation.bracket
+[
+  "{"
+  "}"
+  "["
+  "]"
+  "("
+  ")"
+] @punctuation.bracket
 
 [
   "+"
@@ -103,14 +109,8 @@
 (block_comment
   "/" @comment) @comment @spell
 
-(mod_path
-  (identifier) @module)
-
 (use_path
-  (identifier) @module)
-
-(use_path
-  (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
+  (type_identifier_name) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
 (string) @string @spell
 
@@ -127,6 +127,19 @@
 
 (identifier) @variable
 
+(mod_path
+  (identifier) @module)
+
+(use_path
+  (type_identifier_name) @type)
+
+(use_path
+  (identifier) @type)
+
+(use_path
+  (identifier) @module
+  "::")
+
 (struct_literal
   struct_name: (type_identifier_name) @type)
 
@@ -138,13 +151,23 @@
   field_name: (identifier) @property @spell)
 
 (function_declaration
-  body: (identifier) @variable)
+  body: (identifier) @variable @spell)
 
 (function_declaration
   identifier: (function_type_identifier) @constructor @spell (#match? @constructor "new.*"))
 
+(function_declaration
+  params: (parameters
+    (parameter) @keyword @spell (#eq? @keyword "self")))
+
 (parameter
   (identifier) @variable.parameter @spell)
+
+(protocol_declaration
+  (function_declaration
+    params: (parameters
+      (parameter
+        param_name: (identifier) @keyword @spell (#eq? @keyword "self")))))
 
 (closure_parameter
   param_name: (identifier) @variable.parameter @spell)
@@ -155,8 +178,15 @@
 (function_propagation
   function: (identifier) @function.call)
 
+(member
+  member: (identifier) @property)
+
 (call
   callee: (identifier) @function.call)
+
+(call
+  callee: (member
+    member: (identifier) @function.call))
 
 (call
   callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
@@ -187,6 +217,10 @@
   (function_type_identifier_name) @function @spell)
 
 (generic_type_parameters
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
+(type_annotation
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
