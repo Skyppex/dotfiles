@@ -806,10 +806,6 @@ def gc [
     }
 
     git checkout $"($branch)"
-    pueued -d
-    pueue add git fetch
-    let id = (pueue status --json | jq .tasks.[].id | lines | last)
-    pueue add --after $id pueue shutdown
 }
 
 # Git remote using fzf

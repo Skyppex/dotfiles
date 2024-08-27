@@ -27,13 +27,13 @@
   "ShowModifiedDateInPreviewPanel": true,
   "PreviewPanelDateFormat": "yyyy-MM-dd",
   "PreviewPanelTimeFormat": "HH:mm",
-  "IndexSearchEngine": 1,
-  "PathEnumerationEngine": 1,
-  "ContentSearchEngine": 1,
-  "EverythingInstalledPath": "%USERPROFILE%\\scoop\\apps\\everything\\current\\Everything.exe",
+  "IndexSearchEngine": 0,
+  "PathEnumerationEngine": 0,
+  "ContentSearchEngine": 0,
+  "EverythingInstalledPath": null,
   "SortOption": 1,
   "EnableEverythingContentSearch": false,
-  "EverythingEnabled": true,
+  "EverythingEnabled": false,
   "EverythingSearchFullPath": false,
   "EverythingEnableRunCount": true
 }

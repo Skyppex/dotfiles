@@ -157,3 +157,15 @@ ldate
 wronly
 trunc
 unrecurse
+workflow
+diagnoseporten
+gpt
+openai
+apikey
+webhook
+zeebe
+basefarm
+camunda
+utv
+activitystore
+newable
