@@ -19,6 +19,7 @@
   "proto"
   "type"
   "where"
+  "imp"
 ] @keyword.type
 
 [
@@ -62,7 +63,7 @@
   "::"
   ";"
   ","
-  "=>" 
+  ".."
 ] @punctuation.delimiter
 
 [
@@ -73,6 +74,10 @@
   "("
   ")"
 ] @punctuation.bracket
+
+[
+  "=>" 
+] @punctuation.special
 
 [
   "+"
@@ -102,15 +107,13 @@
   "&="
   "|="
   "^="
+  "->" 
 ] @operator
 
 (line_comment) @comment @spell
 
 (block_comment
   "/" @comment) @comment @spell
-
-(use_path
-  (type_identifier_name) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
 (string) @string @spell
 
@@ -130,6 +133,9 @@
 (mod_path
   (identifier) @module)
 
+(mod_path
+  (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
+
 (use_path
   (type_identifier_name) @type)
 
@@ -139,6 +145,9 @@
 (use_path
   (identifier) @module
   "::")
+
+(use_path
+  (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
 (struct_literal
   struct_name: (type_identifier_name) @type)
@@ -239,7 +248,17 @@
 (type_alias_declaration
   name: (type_identifier) @type @spell)
 
+(implementation_declaration
+  "for" @keyword.type)
+
 (match_arms
   "|" @punctuation.special)
 
 (wildcard) @character.special
+
+(constructor_field
+  field_pattern: (identifier) @property)
+
+(constructor_field
+  field_name: (identifier) @property
+  field_pattern: (_))

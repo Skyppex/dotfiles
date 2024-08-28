@@ -6,7 +6,7 @@ local nvim_config_path = string.gsub(vim.fn.stdpath("config") .. "", "\\", "/")
 local skypex_config_path = nvim_config_path .. "/lua/skypex/config.lua"
 local remap_path = nvim_config_path .. "/lua/skypex/remap.lua"
 
-map("n", "<leader>pv", vim.cmd.Ex)
+map("n", "<leader>v", vim.cmd.Ex)
 map("n", "<leader>so", function()
 	vim.cmd("source " .. skypex_config_path)
 	vim.cmd("source " .. remap_path)

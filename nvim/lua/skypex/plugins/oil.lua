@@ -32,7 +32,7 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>pv", "<cmd>Oil<CR>", { desc = "Project View" })
+			vim.keymap.set("n", "<leader>v", "<cmd>Oil<CR>", { desc = "Project View" })
 		end,
 	},
 	{
