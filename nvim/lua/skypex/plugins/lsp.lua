@@ -375,9 +375,8 @@ return {
 
 			require("fidget").setup({})
 
-			-- Define variables use din the server configuration below
+			-- Define variables used in the server configuration below
 			local lspconfig = require("lspconfig")
-			local csharpls = vim.fn.stdpath("data") .. "/mason/bin/csharp-ls.cmd"
 			local cs_ls_ex = require("csharpls_extended")
 
 			-- Enable the following language servers
@@ -428,7 +427,6 @@ return {
 					capabilities = capabilities,
 				},
 				csharp_ls = {
-					cmd = { csharpls },
 					filetypes = { "cs", "csx" },
 					single_file_support = true,
 					handlers = {
@@ -471,12 +469,6 @@ return {
 
 			local configs = require("lspconfig.configs")
 
-			local get_tree = function()
-				local parser = vim.treesitter.get_parser(0)
-				local tree = parser:parse()[1]
-				return tree
-			end
-
 			if not configs.proof then
 				configs.proof = {
 					default_config = {
@@ -491,24 +483,16 @@ return {
 			end
 
 			lspconfig.proof.setup({
-				handlers = {
-					["textDocument/didOpen"] = function()
-						local params = vim.lsp.util.make_text_document_params()
-						params.tree = get_tree()
-						vim.lsp.buf_notify(0, "textDocument/didOpen", params)
-					end,
-					["textDocument/didChange"] = function()
-						local params = vim.lsp.util.make_text_document_params()
-						params.tree = get_tree()
-						vim.lsp.buf_notify(0, "textDocument/didChange", params)
-					end,
-				},
 				settings = {
 					proof = {
 						dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
+						maxErrors = 4,
 						maxSuggestions = 5,
 						allowImplicitPlurals = true,
 						ignoredWords = {},
+						excludedFileNames = {},
+						excludedFileTypes = {},
+						excludedFileExtensions = {},
 					},
 				},
 			})
