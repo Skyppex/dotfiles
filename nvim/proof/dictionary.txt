@@ -76,3 +76,4 @@ dapui
 dylib
 vadimcn
 ulong
+ushort
