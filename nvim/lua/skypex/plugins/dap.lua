@@ -20,10 +20,10 @@ return {
 
 			dap.adapters.codelldb = {
 				type = "server",
-				port = "5000",
+				port = "3500",
 				executable = {
 					command = vim.fn.stdpath("data") .. "/mason/bin/codelldb.CMD",
-					args = { "..port", "5000" },
+					args = { "--port", "3500" },
 				},
 			}
 
@@ -68,17 +68,6 @@ return {
 					cwd = "${workspaceFolder}",
 					stopOnEntry = false,
 				},
-				{
-					name = "Debug with rust-tools",
-					type = "rt_lldb",
-					request = "launch",
-					program = function()
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-					args = {},
-				},
 			}
 
 			vim.keymap.set("n", "<leader>dr", function()
@@ -116,6 +105,10 @@ return {
 			vim.keymap.set("n", "<leader>dh", function()
 				dap.run_last()
 			end, { desc = "Run Last", noremap = true, silent = true })
+
+			vim.keymap.set("n", "<leader>dt", function()
+				vim.cmd("RustLsp testables")
+			end, { desc = "Test", noremap = true, silent = true })
 		end,
 	},
 	{
@@ -123,9 +116,9 @@ return {
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		event = "BufReadPre",
 		config = function()
-			local dap, dapui = require("dap"), require("dapui")
+			local dap, dap_ui = require("dap"), require("dapui")
 
-			dapui.setup({
+			dap_ui.setup({
 				icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
 				mappings = {
 					-- Use a table to apply multiple mappings
@@ -207,13 +200,13 @@ return {
 			})
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
+				dap_ui.open()
 			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
+				dap_ui.close()
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
+				dap_ui.close()
 			end
 		end,
 	},
