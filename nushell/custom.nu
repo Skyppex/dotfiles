@@ -198,7 +198,17 @@ alias q = exit
 alias md = mkdir
 
 # Bash
-alias sh = bash
+def sh [
+    ...args: string
+] {
+    let cmd = $env.SCOOP_APPS + "/git/current/bash.exe"
+
+    if ($args | is-empty) {
+        exec $cmd
+    } else {
+        exec $"($cmd) (...$args)"
+    }
+}
 
 # Current working directory
 alias loc = echo $"($env.PWD)"
@@ -646,6 +656,7 @@ def "dn run" [
         
         let dir = (glob "**/*.csproj"
             | path dirname
+            | path basename
             | to text
             | fzf --height 90% --layout=reverse)
 
