@@ -586,7 +586,7 @@ def --env z [
     let new = $env.PWD
 
     if $current == $new {
-        let target = (ls | get name | to text | fzf -0 -1 --query ...$path)
+        let target = (ls | get name | to text | fzf --height 90% --layout=reverse -0 -1 --query ...$path)
         if $target == null or $target == "" {
             print "No result found."
             return
@@ -624,11 +624,69 @@ def --env enter [
     }
 }
 
-def "dt test" [
+def "dn run" [
+    --verbose(-V) # Print verbose output for the nushell script
+    ...launch_profile: string
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        enter-old $dir
+    }
+
+    if (glob "**/*.csproj" | is-empty) {
+        print "No csproj file found"
+        return
+    }
+
+    let launch_settings_path = glob "**/launchSettings.json"
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if ($launch_settings_path | is-empty) {
+        print "No launch settings found"
+        return
+    }
+
+    let launch_settings = open $launch_settings_path
+
+    if $verbose {
+        print $launch_settings
+    }
+
+    let launch_profile = $launch_profile | str join " "
+    let launch_profile = ($launch_settings
+    | to json
+    | jq ".profiles | keys[]" -r
+    | fzf --height 90% --layout=reverse -0 -1 --query $launch_profile)
+
+    dotnet run --launch-profile $launch_profile
+}
+
+# Dotnet test with some help to find what file you wish to test
+def "dn test" [
     --verbose(-v) # Print verbose output
     name?: string
 ] {
-    let test_folder = (ls -f | get name | where ($it | str contains "test") |
+    let test_folder = (ls -f | get name | where ($it | str contains "nest") |
         first)
 
     if $verbose {
@@ -709,7 +767,7 @@ def "dt test" [
 
     let name = if $name == null { "" } else { $name }
 
-    let selected = ($namespaces | to text | fzf -0 -1 --query $name)
+    let selected = ($namespaces | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
 
     if $verbose {
         print $"Selected: ($selected)"
@@ -748,7 +806,7 @@ alias gap = git add --patch
 alias "git squash" = git rebase -i
 
 # Git diff with fzf
-alias gdf = git diff (fzf)
+alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str trim | to text | fzf --height 90% --layout=reverse)
 
 # Git checkout but with fzf for branch selection
 def gc [
@@ -794,7 +852,7 @@ def gc [
         $name
     })
 
-    mut $branch = $branch_names | uniq | to text | fzf -1 -0 --query $branch
+    mut $branch = $branch_names | uniq | to text | fzf --height 90% --layout=reverse -1 -0 --query $branch
 
     if ($branch | is-empty) {
         print "No branch selected"
@@ -877,7 +935,7 @@ def gr [
         },
         [true, false] => {
             let remotes = git remote
-            let target = ($remotes | lines | to text | fzf -0 -1 --query $query)
+            let target = ($remotes | lines | to text | fzf --height 90% --layout=reverse -0 -1 --query $query)
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -923,7 +981,7 @@ def gr [
                 $remotes = ($remotes ++ $"($name)\t($url)")
             }
 
-            let target = ($remotes | to text | fzf -0 -1 --query $query)
+            let target = ($remotes | to text | fzf --height 90% --layout=reverse -0 -1 --query $query)
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -1033,7 +1091,7 @@ def gb [
 def "gb mv" [...query: string] {
     let branches = (git branch --list | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf -0 -1 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -1 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1061,7 +1119,7 @@ def "gb rm" [
 ] {
     let branches = (git branch --all | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf -0 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1215,7 +1273,7 @@ def --env "git w c" [
 ] {
     let root = git rev-parse --git-common-dir
     let worktrees = (ls worktrees | get name | path basename)
-    let selected_branch = ($worktrees | to text | fzf -0 -q ($query | str join "-"))
+    let selected_branch = ($worktrees | to text | fzf --height 90% --layout=reverse -0 -q ($query | str join "-"))
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1242,7 +1300,7 @@ def --env "git w add" [
     }
 
     let branches = (git branch --all | lines)
-    let selected_branch = ($branches | to text | fzf -0 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1274,7 +1332,7 @@ def --env "git w rm" [
 
     let query = ($query | str join "-")
     let worktrees = (ls worktrees | get name | path basename)
-    let selected_branch = ($worktrees | to text | fzf -0 -q $query)
+    let selected_branch = ($worktrees | to text | fzf --height 90% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1329,9 +1387,9 @@ def "gh open" [
         }
 
         let user = if $exact {
-            $users | to text | fzf -e -0 -1
+            $users | to text | fzf --height 90% --layout=reverse -e -0 -1
         } else {
-            $users | to text | fzf -0 -1
+            $users | to text | fzf --height 90% --layout=reverse -0 -1
         }
 
         start $"https://github.com/($user)"
@@ -1358,9 +1416,9 @@ def "gh open" [
         }
 
         $repo = if $exact {
-            $repos | to text | fzf -e -0 -1 --query $repo
+            $repos | to text | fzf --height 90% --layout=reverse -e -0 -1 --query $repo
         } else {
-            $repos | to text | fzf -0 -1 --query $repo
+            $repos | to text | fzf --height 90% --layout=reverse -0 -1 --query $repo
         }
     } else {
         if $verbose {
@@ -1400,9 +1458,9 @@ def "gh open" [
         }
 
         $repo = if $exact {
-            $repos | to text | fzf -e -0 -1 --query $repo
+            $repos | to text | fzf --height 90% --layout=reverse -e -0 -1 --query $repo
         } else {
-            $repos | to text | fzf -0 -1 --query $repo
+            $repos | to text | fzf --height 90% --layout=reverse -0 -1 --query $repo
         }
     }
 
@@ -1440,7 +1498,7 @@ def "ahk start" [
         | where ($it | str ends-with ".ahk"))
     p
 
-    let result = ($ahks | to text | fzf -0 -1 --query $name)
+    let result = ($ahks | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
 
     if ($result | is-empty) {
         print "No script found"
@@ -1470,7 +1528,7 @@ def --env "ahk kill" [
         ($ahk | str contains -i "autohotkey") and ($name | str ends-with ".ahk")
     }
 
-    let result = ($ahks | each {|a| $a.command | split row " " | get 1} | to text | fzf -0 -1 --query $name)
+    let result = ($ahks | each {|a| $a.command | split row " " | get 1} | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
 
     if ($result | is-empty) {
         print "No running process found"
@@ -1719,9 +1777,9 @@ def "scoop rm" [
     let names = (scoop list | lines | skip 4 | each { |l| $l | split row " " | get 0 }) | where ($it | is-not-empty)
 
     let selected = if ($name | is-empty) {
-        ($names | to text | fzf -0 -1)
+        ($names | to text | fzf --height 90% --layout=reverse -0 -1)
     } else {
-        ($names | to text | fzf -0 -1 --query ...$name)
+        ($names | to text | fzf --height 90% --layout=reverse -0 -1 --query ...$name)
     }
 
     if ($selected | is-empty) {
