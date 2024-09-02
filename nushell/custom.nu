@@ -656,9 +656,13 @@ def "dn run" [
         
         let dir = (glob "**/*.csproj"
             | path dirname
-            | path basename
+            | path relative-to $env.PWD
             | to text
             | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
 
         enter-old $dir
     }
@@ -669,6 +673,7 @@ def "dn run" [
     }
 
     let launch_settings_path = glob "**/launchSettings.json"
+    | path relative-to $env.PWD
     | to text
     | fzf --height 90% --layout=reverse -0 -1
 
@@ -690,6 +695,181 @@ def "dn run" [
     | fzf --height 90% --layout=reverse -0 -1 --query $launch_profile)
 
     dotnet run --launch-profile $launch_profile
+}
+
+def "dn us init" [
+    --verbose(-v)
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | path relative-to $env.PWD
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
+
+        enter-old $dir
+    }
+
+    dotnet user-secrets init
+}
+
+def "dn us list" [
+    --verbose(-v)
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | path relative-to $env.PWD
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
+
+        enter-old $dir
+    }
+
+
+    let secrets = dotnet user-secrets list
+
+    mut map = {}
+
+    for $secret in ($secrets | lines) {
+        let split = ($secret | split row " = ")
+        let key = $split | get 0
+        let value = $split | get 1
+        $map = ($map | insert $key $value)
+    }
+
+    return $map
+}
+
+def "dn us set" [
+    --verbose(-v)
+    key: string,
+    value: string,
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | path relative-to $env.PWD
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
+
+        enter-old $dir
+    }
+
+    dotnet user-secrets set $key $value
+}
+
+def "dn us rm" [
+    --verbose(-v)
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | path relative-to $env.PWD
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
+
+        enter-old $dir
+    }
+
+    let secrets = dotnet user-secrets list | lines | str replace " =" ":"
+
+    if $verbose {
+        print $secrets
+    }
+
+    let selected_secrets = $secrets | to text | fzf --multi --height 90% --layout=reverse
+
+    if $verbose {
+        print $selected_secrets
+    }
+
+    for $secret in $selected_secrets {
+        let e = ($secret | str index-of ":") - 1
+        let key = $secret | str substring ..$e
+
+        if $verbose {
+            print $"Deleting secret: ($key)"
+        }
+
+        dotnet user-secrets remove $key
+    }
 }
 
 # Dotnet test with some help to find what file you wish to test
