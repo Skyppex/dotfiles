@@ -1,23 +1,17 @@
 local wezterm = require("wezterm")
+local utils = require("utils")
 local act = wezterm.action
 
 local M = {}
 
-local home_drive = os.getenv("HOMEDRIVE")
-local home_path = os.getenv("HOMEPATH")
-local home = home_drive .. home_path
+local home = utils.get_home()
 local fd = home .. "/scoop/apps/fd/current/fd.exe"
+local config_path = utils.get_config_path()
 local temp_path
 local code_path
 local code_path_2
-local config_path = home .. "/.config"
 
-if home == nil then
-	home = "C:/Users/brage"
-end
-
-wezterm.log_info("Home: " .. home)
-if home:find("brage.ingebrigtsen") then
+if utils.is_work_computer() then
 	temp_path = home .. "/dev/temp/"
 	code_path = home .. "/dev/code/"
 	code_path_2 = home .. "/dev/code/commoncarweb"

@@ -22,7 +22,7 @@ local function table_to_string(tbl)
 			result = result .. k .. " = "
 		end
 		if type(v) == "table" then
-			result = result .. tableToString(v)
+			result = result .. table_to_string(v)
 		else
 			result = result .. tostring(v)
 		end

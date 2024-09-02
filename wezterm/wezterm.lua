@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local sessionizer = require("sessionizer")
+local background = require("background")
 
 local config = {
 	audible_bell = "Disabled",
@@ -7,8 +8,9 @@ local config = {
 	color_scheme = "Andromeda",
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
-	window_background_opacity = 0.5,
-	win32_system_backdrop = "Tabbed",
+	background = background,
+	-- window_background_opacity = 0.5,
+	-- win32_system_backdrop = "Tabbed",
 	window_padding = {
 		left = 2,
 		right = 0,
