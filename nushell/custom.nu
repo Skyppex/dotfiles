@@ -877,7 +877,7 @@ def "dn test" [
     --verbose(-v) # Print verbose output
     name?: string
 ] {
-    let test_folder = (ls -f | get name | where ($it | str contains "nest") |
+    let test_folder = (ls -f | get name | where ($it | str contains "test") |
         first)
 
     if $verbose {
@@ -913,7 +913,10 @@ def "dn test" [
 
         enter-old $dirname
 
-        let files = (glob "**/*.cs")
+        let files = glob "**/*.cs"
+        | str replace -a "\\" "/"
+        | where ($it | str contains "/bin/" | n)
+        | where ($it | str contains "/obj/" | n)
 
         if ($files | is-empty) {
             print $"No files found in project: ($project)"
@@ -950,7 +953,7 @@ def "dn test" [
 
     p
 
-    let namespaces = ($namespaces | uniq)
+    let namespaces = ($namespaces | uniq | append "Test All")
 
     if $verbose {
         print $"Namespaces: ($namespaces)"
@@ -966,6 +969,12 @@ def "dn test" [
 
     if ($selected | is-empty) {
         print "No namespace selected"
+        return
+    }
+
+    if $selected == "Test All" {
+        print $"Running all tests in WD: ($env.PWD)"
+        dotnet test
         return
     }
 
