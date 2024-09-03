@@ -39,7 +39,7 @@ return {
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
 
-			-- Autoinstall languages that are not installed
+			-- Auto-install languages that are not installed
 			auto_install = true,
 			highlight = {
 				enable = true,
@@ -54,7 +54,7 @@ return {
 				select = {
 					enable = true,
 
-					-- Automatically jump forward to textobj, similar to targets.vim
+					-- Automatically jump forward to textobject, similar to targets.vim
 					lookahead = true,
 
 					keymaps = {
@@ -117,7 +117,7 @@ return {
 				"n",
 				"<leader>tt",
 				"<cmd>TSPlaygroundToggle<CR>",
-				{ desc = "[T]oggle [T]reesitter Playground", noremap = true, silent = true }
+				{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
 			)
 
 			-- Add local parser for arcana
@@ -142,6 +142,14 @@ return {
 				pattern = "*.ar",
 				callback = function()
 					vim.bo.filetype = "arcana"
+					vim.bo.commentstring = "//%s"
+				end,
+			})
+
+			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+				pattern = "*.cake",
+				callback = function()
+					vim.bo.filetype = "cs"
 					vim.bo.commentstring = "//%s"
 				end,
 			})

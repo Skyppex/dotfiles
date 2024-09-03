@@ -12,7 +12,7 @@ if utils.is_work_computer() then
 		height = "100%",
 		vertical_align = "Bottom",
 		repeat_x = "NoRepeat",
-		hsb = { brightness = 0.05 },
+		hsb = { brightness = 0.02, saturation = 1 },
 	}
 else
 	background = {

@@ -872,6 +872,147 @@ def "dn us rm" [
     }
 }
 
+def "dn add" [
+    --verbose(-v) # Print verbose output
+    --dry-run(-d) # Print the command that would be run
+    query: string
+] {
+    let sln = ls
+    | where type == file
+    | where ($it.name | str ends-with ".sln")
+    | get name
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
+
+    if $verbose {
+        print $sln
+    }
+
+    if ($sln | is-not-empty) {
+        if $verbose {
+            print "Found sln file"
+        }
+        
+        let dir = (glob "**/*.csproj"
+            | path dirname
+            | path relative-to $env.PWD
+            | to text
+            | fzf --height 90% --layout=reverse)
+
+        if $verbose {
+            print $dir
+        }
+
+        enter-old $dir
+    }
+
+    let packages = dotnet search $query --take 500
+
+    let packages = $packages 
+    | lines
+    | where ($it | is-not-empty)
+    | where ($it | str contains "-----" | n)
+    | where ($it | str starts-with " " | n)
+    | drop 1
+
+    let headers = $packages | first
+    let packages = $packages | skip 2
+
+    if ($packages | is-empty) {
+        print -e "No packages found"
+        return
+    }
+
+    let name_index = ($headers | str index-of "Name")
+    let description_index = ($headers | str index-of "Description")
+    let author_index = ($headers | str index-of "Author")
+    let version_index = ($headers | str index-of "Version")
+    let downloads_index = ($headers | str index-of "Downloads")
+    let verified_index = ($headers | str index-of "Verified")
+
+    let names = $packages | each { |p|
+        let end = $description_index - 1
+        $p | str substring $name_index..$end | str trim
+    }
+    
+    let authors = $packages | each { |p|
+        let end = $version_index - 1
+        $p | str substring $author_index..$end | str trim
+    }
+    
+    let versions = $packages | each { |p|
+        let end = $downloads_index - 1
+        $p | str substring $version_index..$end | str trim
+    }
+    
+    let downloads = $packages | each { |p|
+        let end = $verified_index - 1
+        $p | str substring $downloads_index..$end | str trim
+    }
+
+    let verified = $packages | each { |p|
+        $p
+        | str substring $verified_index..
+        | str trim
+        | str replace -a "*" "true"
+    }
+
+    mut packages = []
+
+    let len = ($names | length) - 1
+
+    if ($len <= 0) {
+        print -e "No packages found"
+        return
+    }
+
+    if $verbose {
+        print $"Listing ($len) packages"
+    }
+
+    for i in 0..$len {
+        $packages = ($packages | append {
+            name: ($names | get $i),
+            author: ($authors | get $i),
+            version: ($versions | get $i),
+            downloads: ($downloads| get $i),
+            verified: ($verified| get $i)
+        })
+    }
+
+    if $verbose {
+        print $"Packages:"
+        print $packages
+    }
+
+    let selections = $packages
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1 --multi --query $query
+
+    let selections = $selections | lines
+
+    if $verbose {
+        print $"Selections:"
+        print $selections
+    }
+    
+    for $selection in $selections {
+        let name_start = ($selection | str index-of "name: ") + 6
+        let name_end = ($selection | str index-of ", author: ") - 1
+        let name = ($selection | str substring $name_start..$name_end)
+
+        if $dry_run {
+            print $"dotnet add package ($name)"
+        } else {
+            if $verbose {
+                print $"Adding package: ($name)"
+            }
+
+            dotnet add package $name
+        }
+    }
+}
+
 # Dotnet test with some help to find what file you wish to test
 def "dn test" [
     --verbose(-v) # Print verbose output
