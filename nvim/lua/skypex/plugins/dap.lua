@@ -98,6 +98,10 @@ return {
 				dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 			end, { desc = "Log Point", noremap = true, silent = true })
 
+			vim.keymap.set("n", "<leader>ds", function()
+				dap.terminate()
+			end, { desc = "Terminate", noremap = true, silent = true })
+
 			vim.keymap.set("n", "<leader>do", function()
 				dap.repl.open()
 			end, { desc = "Open REPL", noremap = true, silent = true })

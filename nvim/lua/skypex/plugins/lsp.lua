@@ -125,10 +125,6 @@ return {
 					--  the definition of its *type*, not where it was *defined*.
 					map("<leader>D", builtin.lsp_type_definitions, "Type Definition")
 
-					-- Fuzzy find all the symbols in your current document.
-					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ds", builtin.lsp_document_symbols, "Document Symbols")
-
 					-- Fuzzy find all the symbols in your current workspace.
 					--  Similar to document symbols, except searches over your entire project.
 					map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
