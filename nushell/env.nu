@@ -103,8 +103,8 @@ $env.NU_PLUGIN_DIRS = [
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
-$env.CONFIG = $"($nu.home-path)/.config"
-$env.USER_MANIFEST = $"($env.CONFIG)/scoop/user_manifest.json"
+$env.CONFIG_PATH = $"($nu.home-path)/.config"
+$env.USER_MANIFEST = $"($env.CONFIG_PATH)/scoop/user_manifest.json"
 $env.SCOOP_APPS = $"($nu.home-path)/scoop/apps"
 
 match ($env.COMPUTERNAME) {

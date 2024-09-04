@@ -197,18 +197,21 @@ alias q = exit
 # Make directory
 alias md = mkdir
 
-# Bash
-def sh [
+# Pseudo alias to gits bash command which can parse \r\n line endings
+def bash [
     ...args: string
 ] {
-    let cmd = $env.SCOOP_APPS + "/git/current/bash.exe"
+    let cmd = $env.SCOOP_APPS + "/git/current/bin/bash.exe"
 
     if ($args | is-empty) {
-        exec $cmd
+        nu --commands $cmd
     } else {
-        exec $"($cmd) (...$args)"
+        nu --commands $"($cmd) ($args | str join "")"
     }
 }
+
+# Shorthand for bash
+alias sh = bash
 
 # Current working directory
 alias loc = echo $"($env.PWD)"
@@ -416,6 +419,20 @@ def "proj open" [
 }
 
 # History
+
+def --env history-fzf [] {
+    let selected = history
+    | reverse
+    | get command
+    | uniq
+    | to text
+    | fzf --height 90% --layout=reverse
+
+    let command = [$selected (char nl)] | str join ""
+    let config_file = $env.CONFIG_PATH | path join "nushell/config.nu"
+    let env_file = $env.CONFIG_PATH | path join "nushell/env.nu"
+    nu --config $config_file --env-config $env_file --execute $command
+}
 
 # Extra utilities for managing the history file
 def h [

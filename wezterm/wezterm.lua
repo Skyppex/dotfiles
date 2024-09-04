@@ -29,6 +29,7 @@ local config = {
 	keys = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
+		{ key = "r", mods = "CTRL", action = wezterm.action({ SendString = "history-fzf\x0D" }) },
 		{ key = ",", mods = "CTRL", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 		{ key = "z", mods = "LEADER|CTRL", action = "TogglePaneZoomState" },
