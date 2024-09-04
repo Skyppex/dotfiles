@@ -88,9 +88,16 @@ local config = {
 				label = "open url",
 				patterns = {
 					"https?://\\S+",
+					"github.com:.*.git",
 				},
 				action = wezterm.action_callback(function(window, pane)
 					local url = window:get_selection_text_for_pane(pane)
+
+					if url:find("github.com") then
+						url = url:gsub("github.com:", "")
+						url = url:gsub(".git", "")
+						url = "https://github.com/" .. url
+					end
 					wezterm.open_with(url)
 				end),
 			}),
