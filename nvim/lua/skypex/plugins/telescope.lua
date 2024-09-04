@@ -56,18 +56,18 @@ return {
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
 
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
+			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.git_files, { desc = "Search Git Files" })
-			vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch [C]ommits" })
-			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope builtin" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch existing [B]uffers" })
+			vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "Search Commits" })
+			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Search Telescope builtin" })
+			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
+			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search existing Buffers" })
 
 			vim.keymap.set("n", "<C-p>", function()
 				builtin.find_files({ path_display = { "absolute" } })
-			end, { desc = "[S]earch [F]iles" })
+			end, { desc = "Search Files" })
 
 			vim.keymap.set("n", "<leader>sg", function()
 				local git_dir =
@@ -79,7 +79,7 @@ return {
 				}
 
 				builtin.live_grep(opts)
-			end, { desc = "[S]earch [G]it files by grep" })
+			end, { desc = "Search Git files by grep" })
 
 			vim.keymap.set("n", "<leader>pws", function()
 				local word = vim.fn.expand("<cword>")
@@ -107,7 +107,7 @@ return {
 					grep_open_files = true,
 					prompt_title = "Live Grep in Open Files",
 				})
-			end, { desc = "[S]earch [/] in Open Files" })
+			end, { desc = "Search [/] in Open Files" })
 		end,
 	},
 }

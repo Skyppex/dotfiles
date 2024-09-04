@@ -5,6 +5,8 @@
         "go_back",
         "save_buffer_position",
         "clear_buffer_stack",
-        "toggle_quickfix_list"
+        "toggle_quickfix_list",
+        "icon",
+        "utils"
     ]
 }

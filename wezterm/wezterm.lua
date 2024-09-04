@@ -79,7 +79,7 @@ local config = {
 		{ key = "PageDown", mods = "SHIFT", action = wezterm.action.ScrollByLine(1) },
 		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
 
-		{ key = "i", mods = "CTRL|ALT", action = wezterm.action.ActivateCopyMode },
+		{ key = "i", mods = "LEADER|CTRL", action = wezterm.action.ActivateCopyMode },
 
 		{
 			key = "h",
