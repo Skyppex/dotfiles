@@ -80,6 +80,21 @@ local config = {
 		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
 
 		{ key = "i", mods = "CTRL|ALT", action = wezterm.action.ActivateCopyMode },
+
+		{
+			key = "h",
+			mods = "LEADER|CTRL",
+			action = wezterm.action.QuickSelectArgs({
+				label = "open url",
+				patterns = {
+					"https?://\\S+",
+				},
+				action = wezterm.action_callback(function(window, pane)
+					local url = window:get_selection_text_for_pane(pane)
+					wezterm.open_with(url)
+				end),
+			}),
+		},
 	},
 	key_tables = {
 		copy_mode = {

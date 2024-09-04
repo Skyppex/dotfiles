@@ -1166,6 +1166,9 @@ alias "git squash" = git rebase -i
 # Git diff with fzf
 alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str trim | to text | fzf --height 90% --layout=reverse)
 
+# Start tracking files with git
+alias "git track" = git add --intent-to-add
+
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch
