@@ -6,6 +6,7 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 		},
 		event = "BufReadPre",
+		ft = { "cs", "rust", "go" },
 		config = function()
 			require("nvim-dap-virtual-text").setup()
 			local dap = require("dap")

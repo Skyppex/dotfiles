@@ -1,7 +1,7 @@
 return {
 	{
 		"theprimeagen/harpoon",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		config = function()
 			require("harpoon").setup({
 				global_settings = {

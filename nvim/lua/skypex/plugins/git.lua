@@ -1,20 +1,34 @@
 return {
 	{
 		"tpope/vim-fugitive",
-		event = "BufReadPre",
+		event = "VeryLazy",
 		config = function()
-			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status", noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, {
+				desc = "Git Status",
+				noremap = true,
+				silent = true,
+			})
+
 			vim.keymap.set("n", "<leader>gl", function()
 				vim.cmd("Git log")
-			end, { desc = "Git Log", noremap = true, silent = true })
+			end, {
+				desc = "Git Log",
+				noremap = true,
+				silent = true,
+			})
+
 			vim.keymap.set("n", "<leader>gB", function()
 				vim.cmd("Git blame")
-			end, { desc = "Git Blame", noremap = true, silent = true })
+			end, {
+				desc = "Git Blame",
+				noremap = true,
+				silent = true,
+			})
 		end,
 	},
 	{
 		"akinsho/git-conflict.nvim",
-		event = "BufReadPre",
+		event = "VeryLazy",
 		version = "*",
 		config = function()
 			require("git-conflict").setup({
