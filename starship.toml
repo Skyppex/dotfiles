@@ -16,36 +16,60 @@
 #5833B0
 #6B50C8
 
+# Andromeda
+# Foreground: #D5CED9 (general text)
+# Background: #23262E (editor background)
+# Accent Colors:
+# Cyan: #00e8c6 (highlight and important elements)
+# Orange: #f39c12 (warnings or special sections)
+# Yellow: #FFE66D (information or secondary highlights)
+# Pink: #ff00aa (special or unique sections)
+# Purple: #c74ded (keywords or important text)
+# Blue: #7cb7ff (links or references)
+# Red: #ee5d43 (errors or critical sections)
+# Green: #96E072 (success or positive indicators)
+# {
+#   "name": "branch",
+#   "foreground": "#00e8c6",
+#   "background": "#23262E"
+# },
+# {
+#   "name": "file",
+#   "foreground": "#f39c12",
+#   "background": "#23262E"
+# }
+
 # Config
 command_timeout = 1000
 
 # Disable the blank line at the start of the prompt
-add_newline = false
+add_newline = true
 
 format = """
-[](#5833B0)\
+[](#23262E)\
 $directory\
-[](fg:#5833B0 bg:#6B50C8)\
 $git_branch\
 $git_status\
-[ ](fg:#6B50C8)\
+[](fg:#23262E)
+$character
 """
-
-# You can also replace your username with a neat symbol like   or disable this
-# and use the os module below
-[package]
-style = "bg:#2B3D67"
-format = '[$symbol$version ]($style)'
-disabled = false
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#2E154F"
-disabled = true # Disabled by default
+style = "fg:#7cb7ff bg:#23262E"
+format = "[$symbol ]($style)"
+disabled = false # Disabled by default
+
+[os.symbols]
+Arch = "󰣇 "
+Linux = " "
+NixOS = " "
+Ubuntu = " "
+Windows = " "
 
 [directory]
-style = "bg:#5833B0"
+style = "fg:#ff00aa bg:#23262E"
 format = "[$path ]($style)"
 
 # Here is how you can shorten some long paths by text replacement
@@ -75,10 +99,22 @@ format = "[$path ]($style)"
 # VCS Branch
 [git_branch]
 symbol = ""
-style = "bg:#6B50C8"
+style = "fg:#00e8c6 bg:#23262E"
 format = '[ $symbol $branch]($style)'
+
+[git_state]
+rebase = ""
+merge = ""
+revert = "󰕍"
+cherry_pick = ""
+bisect = "󰕝"
 
 [git_status]
 disabled = false
-style = "bg:#6B50C8"
+style = "fg:#f39c12 bg:#23262E"
 format = '[ $all_status$ahead_behind]($style)'
+
+[character]
+success_symbol = "[❯](#96E072)"
+error_symbol = "[❯](#ee5d43)"
+vimcmd_symbol = "[❮](#96E072)"

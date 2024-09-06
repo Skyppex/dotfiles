@@ -173,3 +173,5 @@ nowait
 spc
 startify
 startswith
+ubuntu
+tokenizer
