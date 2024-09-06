@@ -46,12 +46,11 @@ command_timeout = 1000
 add_newline = true
 
 format = """
-[](#23262E)\
+$character\
 $directory\
 $git_branch\
 $git_status\
-[](fg:#23262E)
-$character
+[ ](prev_bg)
 """
 
 # An alternative to the username module which displays a symbol that
@@ -69,8 +68,8 @@ Ubuntu = " "
 Windows = " "
 
 [directory]
-style = "fg:#ff00aa bg:#23262E"
-format = "[$path ]($style)"
+style = "fg:#FFE66D bg:prev_fg"
+format = "[$path]($style)"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
@@ -99,7 +98,7 @@ format = "[$path ]($style)"
 # VCS Branch
 [git_branch]
 symbol = ""
-style = "fg:#00e8c6 bg:#23262E"
+style = "fg:#00e8c6 bg:prev_bg"
 format = '[ $symbol $branch]($style)'
 
 [git_state]
@@ -108,13 +107,15 @@ merge = ""
 revert = "󰕍"
 cherry_pick = ""
 bisect = "󰕝"
+style = "fg:#00e8c6 bg:prev_bg"
 
 [git_status]
 disabled = false
-style = "fg:#f39c12 bg:#23262E"
+style = "fg:#96E072 bg:prev_bg"
 format = '[ $all_status$ahead_behind]($style)'
 
 [character]
-success_symbol = "[❯](#96E072)"
-error_symbol = "[❯](#ee5d43)"
-vimcmd_symbol = "[❮](#96E072)"
+success_symbol = "[](fg:#23262E)"
+error_symbol = "[](#d13d32)"
+vimcmd_symbol = "[](#c74ded)"
+format = "$symbol"
