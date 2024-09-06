@@ -1596,7 +1596,6 @@ def gcm [] {
     
     if ($branch == "main") {
         print "Switched to main branch"
-        git fetch
         return;
     }
 
@@ -1606,7 +1605,6 @@ def gcm [] {
     
     if ($branch == "master") {
         print "Switched to master branch"
-        git fetch
         return;
     }
 
