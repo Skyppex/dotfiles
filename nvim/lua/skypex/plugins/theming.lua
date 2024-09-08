@@ -194,7 +194,7 @@ return {
 			-- 	[[   █   █  █      ▄▄           ▄▀   ]],
 			-- }
 
-			dashboard.section.buttons = {}
+			dashboard.section.buttons.val = {}
 			-- dashboard.section.buttons.val = {
 			-- 	dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
 			-- 	dashboard.button(":ene <BAR> startinsert <CR>", "  New file", "e"),
@@ -204,12 +204,12 @@ return {
 			-- 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 			-- }
 
-			-- dashboard.section.mru = {
-			-- 	type = "group",
-			-- 	val = function()
-			-- 		return { mru(10) }
-			-- 	end,
-			-- }
+			dashboard.section.mru = {
+				type = "group",
+				val = function()
+					return { mru(10) }
+				end,
+			}
 
 			dashboard.section.header.opts.hl = "Include"
 

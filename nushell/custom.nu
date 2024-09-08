@@ -155,34 +155,34 @@ def "str surround" [
    $"($start)($in)($end)"
 }
 
-# Custom definition for the 'fuck' command from 'thefuck'
-def fuck [
-    --yes(-y),
-    --yeah,
-    --hard,
-    --repeat(-r),
-    --debug(-d)
-    --enable-experimental-instant-mode,
-    --shell-logger(-l)
-    --help(-h),
-    --version(-v),
-] {
-    if $help { thefuck -h; return }
-    if $version { thefuck -v; return }
-
-    mut options = []
-
-    if $yes or $yeah or $hard { $options = ($options | append "-y") }
-    if $repeat { $options = ($options | append "-r") }
-    if $debug { $options = ($options | append "-d") }
-    if $enable_experimental_instant_mode { $options = ($options | append "--enable-experimental-instant-mode") }
-    if $shell_logger { $options = ($options | append "-l") }
-
-    let options = ($options | str join " ")
-    let hist = (history | last 1) | get command.0
-    let fuck = $"(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 thefuck $options $hist)"
-    nu -e $"($fuck | str replace -a "\r" "" | str replace -a "\n" "")"
-}
+# # Custom definition for the 'fuck' command from 'thefuck'
+# def fuck [
+#     --yes(-y),
+#     --yeah,
+#     --hard,
+#     --repeat(-r),
+#     --debug(-d)
+#     --enable-experimental-instant-mode,
+#     --shell-logger(-l)
+#     --help(-h),
+#     --version(-v),
+# ] {
+#     if $help { thefuck -h; return }
+#     if $version { thefuck -v; return }
+#
+#     mut options = []
+#
+#     if $yes or $yeah or $hard { $options = ($options | append "-y") }
+#     if $repeat { $options = ($options | append "-r") }
+#     if $debug { $options = ($options | append "-d") }
+#     if $enable_experimental_instant_mode { $options = ($options | append "--enable-experimental-instant-mode") }
+#     if $shell_logger { $options = ($options | append "-l") }
+#
+#     let options = ($options | str join " ")
+#     let hist = (history | last 1) | get command.0
+#     let fuck = $"(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 thefuck $options $hist)"
+#     nu -e $"($fuck | str replace -a "\r" "" | str replace -a "\n" "")"
+# }
 
 # Elevate the current shell to admin
 alias sudo = gsudo
