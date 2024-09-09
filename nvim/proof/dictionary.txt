@@ -176,3 +176,9 @@ startswith
 ubuntu
 tokenizer
 typeparam
+hjklyuioasdqwe
+horiz
+rdp
+vsver
+vcvar
+roadmap

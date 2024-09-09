@@ -1,3 +1,48 @@
+local function setup_nu_lsp(lspconfig, capabilities)
+	lspconfig.nushell.setup({
+		cmd = { "nu", "--lsp" },
+		filetypes = { "nu" },
+		single_file_support = true,
+		root_dir = lspconfig.util.find_git_ancestor,
+		capabilities = capabilities,
+	})
+end
+
+local function setup_proof(lspconfig, configs, capabilities)
+	local code_path = require("skypex.utils").get_code_path()
+	local proof_path = code_path .. "proof/"
+	local proof_exe = proof_path .. "proof.exe"
+	local log_file = proof_path .. "log.txt"
+
+	if not configs.proof then
+		configs.proof = {
+			default_config = {
+				cmd = { proof_exe, log_file },
+				filetypes = { "*" },
+				single_file_support = true,
+				root_dir = lspconfig.util.find_git_ancestor,
+				settings = {},
+				capabilities = capabilities,
+			},
+		}
+	end
+
+	lspconfig.proof.setup({
+		settings = {
+			proof = {
+				dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
+				maxErrors = 6,
+				maxSuggestions = 3,
+				allowImplicitPlurals = true,
+				ignoredWords = {},
+				excludedFileNames = { "package.json" },
+				excludedFileTypes = {},
+				excludedFileExtensions = {},
+			},
+		},
+	})
+end
+
 return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
@@ -451,48 +496,10 @@ return {
 				},
 			}
 
-			lspconfig.nushell.setup({
-				cmd = { "nu", "--lsp" },
-				filetypes = { "nu" },
-				single_file_support = true,
-				root_dir = lspconfig.util.find_git_ancestor,
-				capabilities = capabilities,
-			})
-
-			local code_path = require("skypex.utils").get_code_path()
-			local proof_path = code_path .. "proof/"
-			local proof_exe = proof_path .. "proof.exe"
-			local log_file = proof_path .. "log.txt"
-
 			local configs = require("lspconfig.configs")
 
-			if not configs.proof then
-				configs.proof = {
-					default_config = {
-						cmd = { proof_exe, log_file },
-						filetypes = { "*" },
-						single_file_support = true,
-						root_dir = lspconfig.util.find_git_ancestor,
-						settings = {},
-						capabilities = capabilities,
-					},
-				}
-			end
-
-			lspconfig.proof.setup({
-				settings = {
-					proof = {
-						dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
-						maxErrors = 4,
-						maxSuggestions = 5,
-						allowImplicitPlurals = true,
-						ignoredWords = {},
-						excludedFileNames = {},
-						excludedFileTypes = {},
-						excludedFileExtensions = {},
-					},
-				},
-			})
+			setup_nu_lsp(lspconfig, capabilities)
+			setup_proof(lspconfig, configs)
 
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install

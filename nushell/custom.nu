@@ -1035,8 +1035,14 @@ def "dn test" [
     --verbose(-v) # Print verbose output
     name?: string
 ] {
-    let test_folder = (ls -f | get name | where ($it | str contains "test") |
-        first)
+    let test_folders = ls -f
+    | get name
+    | where ($it | str contains "test")
+    | where ($it | path type | str contains "dir")
+
+    let test_folder = $test_folders
+    | to text
+    | fzf --height 90% --layout=reverse -0 -1
 
     if $verbose {
         print $"Test folder: ($test_folder)"
@@ -1590,12 +1596,26 @@ def "ghlink-http" [owner: string, repo: string] {
 }
 
 # Git checkout main or master
-def gcm [] {
+def gcm [
+    --pull(-p) # Pull the latest changes
+    --fetch(-f) # Fetch the latest changes
+] {
     do -ip { git checkout main --quiet }
     let branch = git branch --show-current
     
     if ($branch == "main") {
         print "Switched to main branch"
+
+        if $fetch {
+            print "Fetching latest changes"
+            git fetch
+        }
+
+        if $pull {
+            print "Pulling latest changes"
+            git pull
+        }
+
         return;
     }
 
@@ -1605,6 +1625,17 @@ def gcm [] {
     
     if ($branch == "master") {
         print "Switched to master branch"
+
+        if $fetch {
+            print "Fetching latest changes"
+            git fetch
+        }
+
+        if $pull {
+            print "Pulling latest changes"
+            git pull
+        }
+
         return;
     }
 
