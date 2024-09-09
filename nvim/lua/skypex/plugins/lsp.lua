@@ -43,6 +43,8 @@ local function setup_proof(lspconfig, configs, capabilities)
 	})
 end
 
+vim.lsp.set_log_level("off")
+
 return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",

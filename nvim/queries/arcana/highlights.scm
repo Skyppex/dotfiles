@@ -46,17 +46,15 @@
 "return" @keyword.return
 
 [
-  "void"
-  "bool"
-  "int"
-  "float"
-  "char"
-  "string"
+  "Void"
+  "Unit"
+  "Bool"
+  "Int"
+  "UInt"
+  "Float"
+  "Char"
+  "String"
 ] @type.builtin
-
-[
- "unit"
-] @constant.builtin
 
 [
   ":"
@@ -119,6 +117,7 @@
 
 (escape_sequence) @string.escape
 
+(unit) @constant.builtin
 (bool) @boolean
 
 (int) @number
@@ -202,9 +201,6 @@
 
 (type_annotation
   (identifier) @type) @type
-
-(type_annotation
-  "unit" @type.builtin)
 
 (type_annotation
   enum_name: (type_identifier_name) @type
