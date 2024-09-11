@@ -204,3 +204,13 @@ yamlfix
 xmlformatter
 gofumpt
 gofmt
+akinsho
+tpope
+topdelete
+changedelete
+virt
+eol
+ctermbg
+lualine
+archibate
+gitsignscurrentlineblame

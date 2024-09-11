@@ -159,6 +159,9 @@ return {
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
+			vim.cmd.hi("CursorLine guibg=none")
+			vim.cmd.hi("CursorLineNr guibg=none")
+			vim.cmd.hi("Visual guibg=#2e2e2e")
 		end,
 	},
 	{

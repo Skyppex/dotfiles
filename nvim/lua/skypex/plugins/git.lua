@@ -33,7 +33,7 @@ return {
 		config = function()
 			require("git-conflict").setup({
 				default_mappings = true,
-				default_comands = true,
+				default_commands = true,
 				disable_diagnostics = true,
 				list_opener = "copen",
 				highlights = {
@@ -109,9 +109,6 @@ return {
 					ignore_whitespace = true,
 				},
 			})
-
-			local c = require("andromeda.colors")
-			vim.api.nvim_set_hl(0, "gitsignscurrentlineblame", { fg = "#ff8800", bg = "#282c34" })
 
 			vim.keymap.set(
 				"n",
