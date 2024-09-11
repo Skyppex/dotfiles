@@ -426,7 +426,7 @@ def --env history-fzf [] {
     | get command
     | uniq
     | to text
-    | fzf --height 90% --layout=reverse
+    | fzf --height 40% --layout=reverse
 
     let command = [$selected (char nl)] | str join ""
     let config_file = $env.CONFIG_PATH | path join "nushell/config.nu"
@@ -613,7 +613,7 @@ def --env z [
     let new = $env.PWD
 
     if $current == $new {
-        let target = (ls | get name | to text | fzf --height 90% --layout=reverse -0 -1 --query ...$path)
+        let target = (ls | get name | to text | fzf --height 40% --layout=reverse -0 -1 --query ...$path)
         if $target == null or $target == "" {
             print "No result found."
             return
@@ -660,7 +660,7 @@ def "dn run" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -675,7 +675,7 @@ def "dn run" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -692,7 +692,7 @@ def "dn run" [
     let launch_settings_path = glob "**/launchSettings.json"
     | path relative-to $env.PWD
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if ($launch_settings_path | is-empty) {
         print "No launch settings found"
@@ -709,7 +709,7 @@ def "dn run" [
     let launch_profile = ($launch_settings
     | to json
     | jq ".profiles | keys[]" -r
-    | fzf --height 90% --layout=reverse -0 -1 --query $launch_profile)
+    | fzf --height 40% --layout=reverse -0 -1 --query $launch_profile)
 
     dotnet run --launch-profile $launch_profile
 }
@@ -722,7 +722,7 @@ def "dn us init" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -737,7 +737,7 @@ def "dn us init" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -757,7 +757,7 @@ def "dn us list" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -772,7 +772,7 @@ def "dn us list" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -806,7 +806,7 @@ def "dn us set" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -821,7 +821,7 @@ def "dn us set" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -841,7 +841,7 @@ def "dn us rm" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -856,7 +856,7 @@ def "dn us rm" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -871,7 +871,7 @@ def "dn us rm" [
         print $secrets
     }
 
-    let selected_secrets = $secrets | to text | fzf --multi --height 90% --layout=reverse
+    let selected_secrets = $secrets | to text | fzf --multi --height 40% --layout=reverse
 
     if $verbose {
         print $selected_secrets
@@ -899,7 +899,7 @@ def "dn add" [
     | where ($it.name | str ends-with ".sln")
     | get name
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $sln
@@ -914,7 +914,7 @@ def "dn add" [
             | path dirname
             | path relative-to $env.PWD
             | to text
-            | fzf --height 90% --layout=reverse)
+            | fzf --height 40% --layout=reverse)
 
         if $verbose {
             print $dir
@@ -1004,7 +1004,7 @@ def "dn add" [
 
     let selections = $packages
     | to text
-    | fzf --height 90% --layout=reverse -0 -1 --multi --query $query
+    | fzf --height 40% --layout=reverse -0 -1 --multi --query $query
 
     let selections = $selections | lines
 
@@ -1042,7 +1042,7 @@ def "dn test" [
 
     let test_folder = $test_folders
     | to text
-    | fzf --height 90% --layout=reverse -0 -1
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $"Test folder: ($test_folder)"
@@ -1143,7 +1143,7 @@ def "dn test" [
 
     let name = if $name == null { "" } else { $name }
 
-    let selected = ($namespaces | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
+    let selected = ($namespaces | to text | fzf --height 40% --layout=reverse -0 -1 --query $name)
 
     if $verbose {
         print $"Selected: ($selected)"
@@ -1188,7 +1188,7 @@ alias gap = git add --patch
 alias "git squash" = git rebase -i
 
 # Git diff with fzf
-alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str trim | to text | fzf --height 90% --layout=reverse)
+alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str trim | to text | fzf --height 40% --layout=reverse)
 
 # Start tracking files with git
 alias gt = git add --intent-to-add
@@ -1237,7 +1237,7 @@ def gc [
         $name
     })
 
-    mut $branch = $branch_names | uniq | to text | fzf --height 90% --layout=reverse -1 -0 --query $branch
+    mut $branch = $branch_names | uniq | to text | fzf --height 40% --layout=reverse -1 -0 --query $branch
 
     if ($branch | is-empty) {
         print "No branch selected"
@@ -1320,7 +1320,7 @@ def gr [
         },
         [true, false] => {
             let remotes = git remote
-            let target = ($remotes | lines | to text | fzf --height 90% --layout=reverse -0 -1 --query $query)
+            let target = ($remotes | lines | to text | fzf --height 40% --layout=reverse -0 -1 --query $query)
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -1366,7 +1366,7 @@ def gr [
                 $remotes = ($remotes ++ $"($name)\t($url)")
             }
 
-            let target = ($remotes | to text | fzf --height 90% --layout=reverse -0 -1 --query $query)
+            let target = ($remotes | to text | fzf --height 40% --layout=reverse -0 -1 --query $query)
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -1476,7 +1476,7 @@ def gb [
 def "gb mv" [...query: string] {
     let branches = (git branch --list | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -1 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 40% --layout=reverse -0 -1 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1504,7 +1504,7 @@ def "gb rm" [
 ] {
     let branches = (git branch --all | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 40% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1681,7 +1681,7 @@ def --env "git w c" [
 ] {
     let root = git rev-parse --git-common-dir
     let worktrees = (ls worktrees | get name | path basename)
-    let selected_branch = ($worktrees | to text | fzf --height 90% --layout=reverse -0 -q ($query | str join "-"))
+    let selected_branch = ($worktrees | to text | fzf --height 40% --layout=reverse -0 -q ($query | str join "-"))
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1708,7 +1708,7 @@ def --env "git w add" [
     }
 
     let branches = (git branch --all | lines)
-    let selected_branch = ($branches | to text | fzf --height 90% --layout=reverse -0 -q $query)
+    let selected_branch = ($branches | to text | fzf --height 40% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1740,7 +1740,7 @@ def --env "git w rm" [
 
     let query = ($query | str join "-")
     let worktrees = (ls worktrees | get name | path basename)
-    let selected_branch = ($worktrees | to text | fzf --height 90% --layout=reverse -0 -q $query)
+    let selected_branch = ($worktrees | to text | fzf --height 40% --layout=reverse -0 -q $query)
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -1795,9 +1795,9 @@ def "gh open" [
         }
 
         let user = if $exact {
-            $users | to text | fzf --height 90% --layout=reverse -e -0 -1
+            $users | to text | fzf --height 40% --layout=reverse -e -0 -1
         } else {
-            $users | to text | fzf --height 90% --layout=reverse -0 -1
+            $users | to text | fzf --height 40% --layout=reverse -0 -1
         }
 
         start $"https://github.com/($user)"
@@ -1824,9 +1824,9 @@ def "gh open" [
         }
 
         $repo = if $exact {
-            $repos | to text | fzf --height 90% --layout=reverse -e -0 -1 --query $repo
+            $repos | to text | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
         } else {
-            $repos | to text | fzf --height 90% --layout=reverse -0 -1 --query $repo
+            $repos | to text | fzf --height 40% --layout=reverse -0 -1 --query $repo
         }
     } else {
         if $verbose {
@@ -1866,9 +1866,9 @@ def "gh open" [
         }
 
         $repo = if $exact {
-            $repos | to text | fzf --height 90% --layout=reverse -e -0 -1 --query $repo
+            $repos | to text | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
         } else {
-            $repos | to text | fzf --height 90% --layout=reverse -0 -1 --query $repo
+            $repos | to text | fzf --height 40% --layout=reverse -0 -1 --query $repo
         }
     }
 
@@ -1906,7 +1906,7 @@ def "ahk start" [
         | where ($it | str ends-with ".ahk"))
     p
 
-    let result = ($ahks | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
+    let result = ($ahks | to text | fzf --height 40% --layout=reverse -0 -1 --query $name)
 
     if ($result | is-empty) {
         print "No script found"
@@ -1936,7 +1936,7 @@ def --env "ahk kill" [
         ($ahk | str contains -i "autohotkey") and ($name | str ends-with ".ahk")
     }
 
-    let result = ($ahks | each {|a| $a.command | split row " " | get 1} | to text | fzf --height 90% --layout=reverse -0 -1 --query $name)
+    let result = ($ahks | each {|a| $a.command | split row " " | get 1} | to text | fzf --height 40% --layout=reverse -0 -1 --query $name)
 
     if ($result | is-empty) {
         print "No running process found"
@@ -2185,9 +2185,9 @@ def "scoop rm" [
     let names = (scoop list | lines | skip 4 | each { |l| $l | split row " " | get 0 }) | where ($it | is-not-empty)
 
     let selected = if ($name | is-empty) {
-        ($names | to text | fzf --height 90% --layout=reverse -0 -1)
+        ($names | to text | fzf --height 40% --layout=reverse -0 -1)
     } else {
-        ($names | to text | fzf --height 90% --layout=reverse -0 -1 --query ...$name)
+        ($names | to text | fzf --height 40% --layout=reverse -0 -1 --query ...$name)
     }
 
     if ($selected | is-empty) {
@@ -2215,6 +2215,105 @@ def "unleash list" [
 }
 
 # Fun
+
+# Wrapper for wezterm imgcat using fzf to find images
+def img [
+    --width(-W): int # Specify the display width; defaults to "auto" which automatically selects an appropriate size.  You may also use an integer value `N` to specify the number of cells, or `Npx` to specify the number of pixels, or `N%` to size relative to the terminal width
+    --height(-H): int # Specify the display height; defaults to "auto" which automatically selects an appropriate size.  You may also use an integer value `N` to specify the number of cells, or `Npx` to specify the number of pixels, or `N%` to size relative to the terminal height
+    --no-preserve-aspect-ratio(-P) # Do not respect the aspect ratio.  The default is to respect the aspect ratio
+    --position(-p): string # Set the cursor position prior to displaying the image. The default is to use the current cursor position. Coordinates are expressed in cells with 0,0 being the top left cell position
+    --no-move-cursor(-M) # Do not move the cursor after displaying the image. Note that when used like this from the shell, there is a very high chance that shell prompt will overwrite the image; you may wish to also use `--hold` in that case
+    --hold # Wait for enter to be pressed after displaying the image
+    --max-pixels(-m): int # Set the maximum number of pixels per image frame. Images will be scaled down so that they do not exceed this size, unless `--no-resample` is also used. The default value matches the limit set by wezterm. Note that resampling the image here will reduce any animated images to a single frame [default: 25000000]
+    --no-resample(-R) # Do not resample images whose frames are larger than the max-pixels value. Note that this will typically result in the image refusing to display in wezterm
+    --resample-format: string # Specify the image format to use to encode resampled/resized images.  The default is to match the input format, but you can choose an alternative format [default: input] [possible values: png, jpeg, input]
+    --resample-filter: string # Specify the filtering technique used when resizing/resampling images.  The default is a reasonable middle ground of speed and quality [default: catmull-rom] [possible values: nearest, triangle, catmull-rom, gaussian, lanczos3]
+    --resize(-r): string # Pre-process the image to resize it to the specified dimensions, expressed as eg: 800x600 (width x height). The resize is independent of other parameters that control the image placement and dimensions in the terminal; this is provided as a convenience preprocessing step
+    --show-resample-timing(-t) # When resampling or resizing, display some diagnostics around the timing/performance of that operation
+    --direct(-d) # Use the weztern imgcat command directly instead of going through fzf
+    file_name?: string # The name of the image file to be displayed. If omitted, will attempt to read it from stdin
+] {
+    let stdin = $in
+    mut params = []
+
+    if $width != null {
+        $params = ($params | append $"--width=($width)")
+    }
+
+    if $height != null {
+        $params = ($params | append $"--height=($height)")
+    }
+
+    if $no_preserve_aspect_ratio {
+        $params = ($params | append "--no-preserve-aspect-ratio")
+    }
+
+    if $position != null {
+        $params = ($params | append $"--position=($position)")
+    }
+
+    if $no_move_cursor {
+        $params = ($params | append "--no-move-cursor")
+    }
+
+    if $hold {
+        $params = ($params | append "--hold")
+    }
+
+    if $max_pixels != null {
+        $params = ($params | append $"--max-pixels=($max_pixels)")
+    }
+
+    if $no_resample {
+        $params = ($params | append "--no-resample")
+    }
+
+    if $resample_format != null {
+        $params = ($params | append $"--resample-format=($resample_format)")
+    }
+
+    if $resample_filter != null {
+        $params = ($params | append $"--resample-filter=($resample_filter)")
+    }
+
+    if $resize != null {
+        $params = ($params | append $"--resize=($resize)")
+    }
+
+    if $show_resample_timing {
+        $params = ($params | append "--show-resample-timing")
+    }
+
+    if $direct {
+        if ($stdin | is-empty) {
+            wezterm imgcat ($params | str join " ") $file_name
+            return
+        }
+
+        $stdin | wezterm imgcat ($params | str join " ") $file_name
+        return
+    }
+
+    mut query = ""
+
+    if $file_name != null {
+        $query = $"($file_name) .png$ | .jpg$ | .jpeg$ | .gif$ | .bmp$ | .tiff$ | .webp$ | .ico$ | .svg$"
+    } else {
+        $query = $".png$ | .jpg$ | .jpeg$ | .gif$ | .bmp$ | .tiff$ | .webp$ | .ico$ | .svg$"
+    }
+
+    let file_name = fzf --height 40% --layout=reverse -0 -1 --query $query
+
+    print $"wezterm imgcat ($params | str join ' ') ($file_name)"
+    print $"Displaying image: ($file_name)"
+
+    if ($params | is-empty) {
+        wezterm imgcat $file_name
+        return
+    }
+
+    wezterm imgcat ($params | str join " ") ($file_name)
+}
 
 # Echo 'Hello, $user'
 alias "hello world" = echo $"Hello, (whoami)!"
