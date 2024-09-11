@@ -19,6 +19,9 @@ return {
 					inherit = true,
 					prepend_args = { "--config-path", vim.fn.stdpath("config") .. "/.csharpierrc.json" },
 				},
+				gofmt = {
+					command = "gofmt",
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -28,9 +31,18 @@ return {
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
 				javascript = { { "prettierd", "prettier" } },
+				javascriptreact = { { "prettierd", "prettier" } },
 				typescript = { { "prettierd", "prettier" } },
+				typescriptreact = { { "prettierd", "prettier" } },
+				css = { { "prettierd", "prettier" } },
+				scss = { { "prettierd", "prettier" } },
+				json = { { "jq", "prettierd", "prettier" } },
 				cs = { "csharpier" },
 				csx = { "csharpier" },
+				go = { "gofmt" },
+				xml = { "xmlformatter" },
+				yaml = { { "yamlfix", "prettierd", "prettier" } },
+				markdown = { { "markdownlint", "prettierd", "prettier" } },
 			},
 		},
 	},
