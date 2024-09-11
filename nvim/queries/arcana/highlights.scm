@@ -148,14 +148,11 @@
 (use_path
   (identifier) @module.builtin (#any-of? @module.builtin "core" "lib"))
 
-(struct_literal
-  struct_name: (type_identifier_name) @type)
+(type_identifier_name) @type
 
-(enum_literal
-  enum_name: (type_identifier_name) @type
-  enum_variant: (type_identifier_name) @type)
+(function_type_identifier_name) @function @spell
 
-(field
+(named_field
   field_name: (identifier) @property @spell)
 
 (function_declaration
@@ -199,33 +196,14 @@
 (call
   callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
 
-(type_annotation
-  (identifier) @type) @type
-
-(type_annotation
-  enum_name: (type_identifier_name) @type
-  enum_variant: (type_identifier_name) @type)
-
-(type_annotation
-  type_name: (type_identifier_name) @type)
-
-(struct_declaration
-  identifier: (type_identifier) @type)
-
 (struct_field
   field_name: (identifier) @property @spell)
-
-(type_identifier
-  (type_identifier_name) @type @spell)
-
-(function_type_identifier
-  (function_type_identifier_name) @function @spell)
 
 (generic_type_parameters
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-(type_annotation
+(concrete_type_parameters
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
@@ -238,11 +216,12 @@
 (enum_variant
   variant_name: (type_identifier_name) @constant @spell)
 
+(type_constructor
+  member_type_name: (type_annotation
+    (type_identifier_name) @constant @spell))
+
 (union_declaration
   name: (type_identifier_name) @type @spell)
-
-(type_alias_declaration
-  name: (type_identifier) @type @spell)
 
 (implementation_declaration
   "for" @keyword.type)

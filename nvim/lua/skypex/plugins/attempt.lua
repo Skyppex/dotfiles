@@ -1,6 +1,6 @@
 return {
 	"m-demare/attempt.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	dependencies = "nvim-telescope/telescope.nvim",
 	config = function()
 		local attempt = require("attempt")

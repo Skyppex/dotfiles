@@ -185,3 +185,9 @@ roadmap
 omitempty
 jsonrpc
 skyppex
+turbofish
+guifg
+guibg
+agg
+endregion
+parallelizable

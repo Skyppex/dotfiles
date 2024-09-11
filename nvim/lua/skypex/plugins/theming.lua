@@ -146,11 +146,9 @@ return {
 		},
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
-			local transparent = true
-
 			require("andromeda").setup({
 				preset = "andromeda",
-				transparent_bg = transparent,
+				transparent_bg = true,
 			})
 
 			-- Load the colorscheme here.
@@ -160,6 +158,7 @@ return {
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
+			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
 		end,
 	},
 	{

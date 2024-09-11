@@ -1117,6 +1117,24 @@ def "dn test" [
 
     p
 
+    $namespaces = ($namespaces | each {|n|
+        let split = $n | split row "."
+        mut namespaces = []
+        mut namespace = ""
+
+        for part in $split {
+            if ($namespace | is-empty) {
+                $namespace = $part
+            } else {
+                $namespace = ($namespace ++ "." ++ $part)
+            }
+
+            $namespaces = ($namespaces ++ $namespace)
+        }
+
+        $namespaces
+    } | flatten)
+
     let namespaces = ($namespaces | uniq | append "Test All")
 
     if $verbose {

@@ -111,7 +111,7 @@ return {
 			})
 
 			local c = require("andromeda.colors")
-			vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = c.gray, bg = "NONE" })
+			vim.api.nvim_set_hl(0, "gitsignscurrentlineblame", { fg = "#ff8800", bg = "#282c34" })
 
 			vim.keymap.set(
 				"n",
