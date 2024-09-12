@@ -1,13 +1,6 @@
 let mapleader = " "
 nmap <space> <leader>
 
-nnoremap <silent> j k
-nnoremap <silent> k j
-vnoremap <silent> j k
-vnoremap <silent> k j
-onoremap <silent> j k
-onoremap <silent> k j
-
 nnoremap <silent> U <C-r>
 
 nnoremap <silent> <C-c> <Esc>
@@ -16,8 +9,8 @@ vnoremap <silent> <C-c> <Esc>
 
 nnoremap <leader>. f.i<CR><Esc>l==
 
-vnoremap J :m '<-2<CR>gv=gv
-vnoremap K :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
 
 vnoremap <silent> < <gv
 vnoremap <silent> > >gv

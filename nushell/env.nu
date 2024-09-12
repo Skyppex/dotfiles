@@ -123,3 +123,6 @@ $env.PROJECTS = $"($env.CODE)/projects"
 
 # AWS
 $env.AWS_PROFILE = "dev"
+
+# Yazi
+$env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"

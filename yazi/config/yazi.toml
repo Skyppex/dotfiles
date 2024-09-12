@@ -1,0 +1,40 @@
+[manager]
+show_hidden = true
+show_symlink = true
+sort_by = "natural"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+sort_translit = false
+scrolloff = 10
+
+[preview]
+wrap = "no"
+
+[opener]
+edit = [
+	{ run = "nvim %*",   block = true, for = "windows" },
+]
+play = [
+	{ run = '"C:\Program Files\mpv.exe" %*', orphan = true, for = "windows" }
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
+
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ mime = "video/*", use = "play" },
+	{ mime = "application/json", use = "edit" },
+
+	{ name = "*.json", use = "edit" },
+
+	# Multiple openers for a single rule
+	{ name = "*.html", use = [ "open", "edit" ] },
+]
+
+[which]
+sort_sensitive = false
+sort_reverse = false
+sort_translit = false

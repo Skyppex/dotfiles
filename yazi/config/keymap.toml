@@ -1,0 +1,3 @@
+[[input.prepend_keymap]]
+{ on = "<C-c>", run = "escape" }
+{ on = "U", run = "redo" }
