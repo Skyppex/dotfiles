@@ -1,9 +1,10 @@
 [manager]
-cwd = { fg = "#96e072" }
+cwd = { fg = "#94e2d5" }
 
 hovered         = { reversed = true }
 preview_hovered = { underline = true }
 
+<<<<<<< HEAD
 find_keyword  = { fg = "#ffe66d", bold = true, italic = true, underline = true }
 find_position = { fg = "#ff00aa", bg = "reset", bold = true, italic = true }
 
@@ -11,21 +12,40 @@ marker_copied   = { fg = "#96e072", bg = "#96e072" }
 marker_cut      = { fg = "#f92672", bg = "#f92672" }
 marker_marked   = { fg = "#00e8c6", bg = "#00e8c6" }
 marker_selected = { fg = "#ffe66d", bg = "#ffe66d" }
+=======
+find_keyword  = { fg = "#f9e2af", bold = true, italic = true, underline = true }
+find_position = { fg = "#f5c2e7", bg = "reset", bold = true, italic = true }
+
+marker_copied   = { fg = "#a6e3a1", bg = "#a6e3a1" }
+marker_cut      = { fg = "#f38ba8", bg = "#f38ba8" }
+marker_marked   = { fg = "#94e2d5", bg = "#94e2d5" }
+marker_selected = { fg = "#f9e2af", bg = "#f9e2af" }
+>>>>>>> test
 
 tab_active   = { reversed = true }
 tab_inactive = {}
 tab_width    = 1
 
+<<<<<<< HEAD
 count_copied   = { fg = "#1e1e2e", bg = "#96e072" }
 count_cut      = { fg = "#1e1e2e", bg = "#f92672" }
 count_selected = { fg = "#1e1e2e", bg = "#ffe66d" }
 
 border_symbol = "│"
 border_style  = { fg = "#746f77" }
+=======
+count_copied   = { fg = "#1e1e2e", bg = "#a6e3a1" }
+count_cut      = { fg = "#1e1e2e", bg = "#f38ba8" }
+count_selected = { fg = "#1e1e2e", bg = "#f9e2af" }
+
+border_symbol = "│"
+border_style  = { fg = "#7f849c" }
+>>>>>>> test
 
 [status]
 separator_open  = ""
 separator_close = ""
+<<<<<<< HEAD
 separator_style = { fg = "#181a16", bg = "#181a16" }
 
 mode_normal = { fg = "#ff00aa", bg = "#373941", bold = true }
@@ -49,11 +69,37 @@ inactive = {}
 
 [input]
 border   = { fg = "#7cb7ff" }
+=======
+separator_style = { fg = "#45475a", bg = "#45475a" }
+
+mode_normal = { fg = "#1e1e2e", bg = "#89b4fa", bold = true }
+mode_select = { fg = "#1e1e2e", bg = "#a6e3a1", bold = true }
+mode_unset  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
+
+progress_label  = { fg = "#ffffff", bold = true }
+progress_normal = { fg = "#89b4fa", bg = "#45475a" }
+progress_error  = { fg = "#f38ba8", bg = "#45475a" }
+
+permissions_t = { fg = "#89b4fa" }
+permissions_r = { fg = "#f9e2af" }
+permissions_w = { fg = "#f38ba8" }
+permissions_x = { fg = "#a6e3a1" }
+permissions_s = { fg = "#7f849c" }
+
+[select]
+border   = { fg = "#89b4fa" }
+active   = { fg = "#f5c2e7", bold = true }
+inactive = {}
+
+[input]
+border   = { fg = "#89b4fa" }
+>>>>>>> test
 title    = {}
 value    = {}
 selected = { reversed = true }
 
 [completion]
+<<<<<<< HEAD
 border = { fg = "#7cb7ff" }
 
 [tasks]
@@ -66,23 +112,49 @@ mask            = { bg = "#181a16" }
 cand            = { fg = "#00e8c6" }
 rest            = { fg = "#23262e" }
 desc            = { fg = "#ff00aa" }
+=======
+border = { fg = "#89b4fa" }
+
+[tasks]
+border  = { fg = "#89b4fa" }
+title   = {}
+hovered = { fg = "#f5c2e7", underline = true }
+
+[which]
+mask            = { bg = "#313244" }
+cand            = { fg = "#94e2d5" }
+rest            = { fg = "#9399b2" }
+desc            = { fg = "#f5c2e7" }
+>>>>>>> test
 separator       = "  "
 separator_style = { fg = "#585b70" }
 
 [help]
+<<<<<<< HEAD
 on      = { fg = "#00e8c6" }
 run     = { fg = "#ff00aa" }
+=======
+on      = { fg = "#94e2d5" }
+run     = { fg = "#f5c2e7" }
+>>>>>>> test
 hovered = { reversed = true, bold = true }
 footer  = { fg = "#45475a", bg = "#cdd6f4" }
 
 [notify]
+<<<<<<< HEAD
 title_info  = { fg = "#96e072" }
 title_warn  = { fg = "#ffe66d" }
 title_error = { fg = "#f92672" }
+=======
+title_info  = { fg = "#a6e3a1" }
+title_warn  = { fg = "#f9e2af" }
+title_error = { fg = "#f38ba8" }
+>>>>>>> test
 
 [filetype]
 
 rules = [
+<<<<<<< HEAD
 	# images
 	{ mime = "image/*", fg = "#00e8c6" },
 
@@ -103,5 +175,23 @@ rules = [
 	# fallback
 	{ name = "*", fg = "#d5ced9" },
 	{ name = "*/", fg = "#7cb7ff" }
+=======
+	# Images
+	{ mime = "image/*", fg = "#94e2d5" },
+
+	# Media
+	{ mime = "{audio,video}/*", fg = "#f9e2af" },
+
+	# Archives
+	{ mime = "application/*zip", fg = "#f5c2e7" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#f5c2e7" },
+
+	# Documents
+	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#a6e3a1" },
+
+	# Fallback
+	{ name = "*", fg = "#cdd6f4" },
+	{ name = "*/", fg = "#89b4fa" }
+>>>>>>> test
 ]
 

@@ -35,4 +35,3 @@ prepend_keymap = [
 prepend_keymap = [
 	{ on = "<C-c>", run = "close" },
 ]
-
