@@ -7,39 +7,39 @@ local colors = {
 	yellow = "#ffe66d",
 	green = "#96e072",
 	white = "#D5CED9",
-	black = "#282a36",
+	black = "#181a16",
 }
 
 local theme = {
 	normal = {
-		a = { bg = colors.pink, fg = colors.black, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.pink, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 	insert = {
-		a = { bg = colors.green, fg = colors.black, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.green, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 	visual = {
-		a = { bg = colors.yellow, fg = colors.black, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.yellow, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 	replace = {
-		a = { bg = colors.blue, fg = colors.black, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.blue, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 	command = {
-		a = { bg = colors.orange, fg = colors.black, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.orange, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 	inactive = {
-		a = { bg = colors.gray, fg = colors.white, gui = "bold" },
-		b = { bg = colors.light_gray, fg = colors.white },
-		c = { bg = colors.gray, fg = colors.white },
+		a = { bg = colors.light_gray, fg = colors.gray, gui = "bold" },
+		b = { bg = colors.gray, fg = colors.white },
+		c = { bg = colors.black, fg = colors.white },
 	},
 }
 

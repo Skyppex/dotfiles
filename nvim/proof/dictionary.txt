@@ -214,3 +214,6 @@ ctermbg
 lualine
 archibate
 gitsignscurrentlineblame
+windo
+diffoff
+diffthi
