@@ -110,7 +110,7 @@ bisect = "󰕝 "
 am = "󰛮 "
 am_or_rebase = "󰛮 / "
 style = "fg:#00e8c6 bg:prev_bg"
-format = '\([$state($progress_current/$progress_total)]($style)\) '
+format = ' \([$state($progress_current/$progress_total)]($style)\)'
 
 [git_status]
 disabled = false
