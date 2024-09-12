@@ -162,6 +162,7 @@ return {
 			vim.cmd.hi("CursorLine guibg=none")
 			vim.cmd.hi("CursorLineNr guibg=none")
 			vim.cmd.hi("Visual guibg=#2e2e2e")
+			vim.cmd.hi("LspInlayHint guifg=#464959")
 		end,
 	},
 	{

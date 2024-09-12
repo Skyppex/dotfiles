@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1726072248000)\/",
+                "value": "\/Date(1726144315000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 18:30:48"
+                "DateTime": "torsdag 12. september 2024 14:31:55"
             },
             "Manifests": 1340
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1726072334000)\/",
+                "value": "\/Date(1726144409000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 18:32:14"
+                "DateTime": "torsdag 12. september 2024 14:33:29"
             },
             "Manifests": 2070
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1726072791000)\/",
+                "value": "\/Date(1726145666000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 18:39:51"
+                "DateTime": "torsdag 12. september 2024 14:54:26"
             },
             "Manifests": 469
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1726072141000)\/",
+                "value": "\/Date(1726144240000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 18:29:01"
+                "DateTime": "torsdag 12. september 2024 14:30:40"
             },
             "Manifests": 327
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1726013677000)\/",
+                "value": "\/Date(1726100097000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 02:14:37"
+                "DateTime": "torsdag 12. september 2024 02:14:57"
             },
             "Manifests": 256
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1726030249000)\/",
+                "value": "\/Date(1726116584000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 11. september 2024 06:50:49"
+                "DateTime": "torsdag 12. september 2024 06:49:44"
             },
-            "Manifests": 13290
+            "Manifests": 13308
         },
         {
             "Name": "okibcn",
@@ -142,8 +142,8 @@
             "Info": "",
             "Source": "main",
             "Name": "curl",
-            "Version": "8.9.1_3",
-            "Updated": "\/Date(1724787845825)\/"
+            "Version": "8.10.0_1",
+            "Updated": "\/Date(1726156233973)\/"
         },
         {
             "Info": "",
@@ -219,8 +219,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "flow-launcher",
-            "Version": "1.19.0",
-            "Updated": "\/Date(1724009108601)\/"
+            "Version": "1.19.1",
+            "Updated": "\/Date(1726156286198)\/"
         },
         {
             "Info": "",
@@ -305,6 +305,13 @@
             "Name": "hyperfine",
             "Version": "1.18.0",
             "Updated": "\/Date(1715873808172)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "imagemagick",
+            "Version": "7.1.1-38",
+            "Updated": "\/Date(1726161877009)\/"
         },
         {
             "Info": "",
@@ -435,6 +442,13 @@
         {
             "Info": "",
             "Source": "main",
+            "Name": "poppler",
+            "Version": "24.07.0-0",
+            "Updated": "\/Date(1726161804200)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
             "Name": "pueue",
             "Version": "3.4.1",
             "Updated": "\/Date(1723225686004)\/"
@@ -534,8 +548,8 @@
             "Info": "",
             "Source": "main",
             "Name": "surrealdb",
-            "Version": "1.5.4",
-            "Updated": "\/Date(1721764323690)\/"
+            "Version": "1.5.5",
+            "Updated": "\/Date(1726156241471)\/"
         },
         {
             "Info": "",

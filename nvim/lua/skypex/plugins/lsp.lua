@@ -46,11 +46,10 @@ end
 vim.lsp.set_log_level("off")
 
 return {
-	{ -- LSP Configuration & Plugins
+	{
 		"neovim/nvim-lspconfig",
 		event = "VeryLazy",
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -116,19 +115,9 @@ return {
 				}),
 			}
 
-			--  This function gets run when an LSP attaches to a particular buffer.
-			--    That is to say, every time a new file is opened that is associated with
-			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-			--    function will be executed to configure the current buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
-					-- NOTE: Remember that Lua is a real programming language, and as such it is possible
-					-- to define small helper and utility functions so you don't have to repeat yourself.
-					--
-					-- In this case, we create a function that lets us more easily define mappings specific
-					-- for LSP related items. It sets the mode, buffer and description for us each time.
-
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, {
 							noremap = true,
@@ -157,28 +146,13 @@ return {
 					end
 
 					local builtin = require("telescope.builtin")
-					-- Jump to the definition of the word under your cursor.--  This is where a variable was first declared, or where a function is defined, etc.
-					--  To jump back, press <C-t>.
+
 					map("gd", builtin.lsp_definitions, "Goto Definition")
-
-					-- Find references for the word under your cursor.
 					map("gr", builtin.lsp_references, "Goto References")
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gI", builtin.lsp_implementations, "Goto Implementation")
-
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
 					map("gt", builtin.lsp_type_definitions, "Goto Type Definition")
-
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
 					map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
-					-- Rename the variable under your cursor.
-					--  Most Language Servers support renaming across files, etc.
 					map("<leader>rn", function()
 						vim.lsp.buf.rename()
 						vim.schedule(function()
@@ -187,16 +161,11 @@ return {
 					end, "[R]e[n]ame")
 
 					local ap = require("actions-preview")
-					-- Execute a code action, usually your cursor needs to be on top of an error
-					-- or a suggestion from your LSP for this to activate.
+
 					mapnv("<leader>ca", ap.code_actions, "Code Action")
-
-					-- Opens a popup that displays documentation about the word under your cursor
-					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
-
-					-- Opens a popup that displays the signature of whatever is under your cursor
 					map("H", vim.lsp.buf.signature_help, "Signature Help")
+
 					vim.keymap.set(
 						"i",
 						"<A-H>",
@@ -204,15 +173,8 @@ return {
 						{ buffer = event.buf, desc = "LSP: Signature Help" }
 					)
 
-					-- WARN: This is not Goto Definition, this is Goto Declaration.
-					--  For example, in C this would take you to the header.
 					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
-					-- The following two autocommands are used to highlight references of the
-					-- word under your cursor when your cursor rests there for a little while.
-					--    See `:help CursorHold` for information about when this is executed
-					--
-					-- When you move your cursor, the highlights will be cleared (the second autocommand).
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 
 					if client and client.server_capabilities.documentHighlightProvider then
