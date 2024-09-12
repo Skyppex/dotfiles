@@ -1,7 +1,0 @@
-mut
-enum
-builtin
-bool
-uint
-param
-callee

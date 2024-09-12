@@ -74,21 +74,21 @@ format = "[$path]($style)"
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
-"Contacts" = ""
-"Kontakter" = ""
-"Desktop" = ""
-"Skrivebord" = ""
-"Documents" = ""
-"Dokumenter" = ""
-"Downloads" = ""
-"Nedlastinger" = ""
-"Movies" = ""
-"Filmer" = ""
-"Music" = ""
-"Musikk" = ""
+"Contacts" = " "
+"Kontakter" = " "
+"Desktop" = " "
+"Skrivebord" = " "
+"Documents" = "󰈙 "
+"Dokumenter" = "󰈙 "
+"Downloads" = " "
+"Nedlastinger" = " "
+"Movies" = " "
+"Filmer" = " "
+"Music" = " "
+"Musikk" = " "
 "OneDrive" = " "
-"Pictures" = ""
-"Bilder" = ""
+"Pictures" = " "
+"Bilder" = " "
 # Keep in mind that the order matters. For example:
 # "Important Documents" = " 󰈙 "
 # will not be replaced, because "Documents" was already substituted before.
@@ -97,17 +97,20 @@ format = "[$path]($style)"
 
 # VCS Branch
 [git_branch]
-symbol = ""
+symbol = " "
 style = "fg:#00e8c6 bg:prev_bg"
-format = '[ $symbol $branch]($style)'
+format = '[ $symbol$branch]($style)'
 
 [git_state]
-rebase = ""
-merge = ""
-revert = "󰕍"
-cherry_pick = ""
-bisect = "󰕝"
+rebase = " "
+merge = " "
+revert = "󰕍 "
+cherry_pick = " "
+bisect = "󰕝 "
+am = "󰛮 "
+am_or_rebase = "󰛮 / "
 style = "fg:#00e8c6 bg:prev_bg"
+format = '\([$state($progress_current/$progress_total)]($style)\) '
 
 [git_status]
 disabled = false

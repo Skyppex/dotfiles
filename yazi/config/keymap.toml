@@ -1,0 +1,38 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[manager]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+
+[tasks]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+
+[select]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+
+[input]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+	{ on = "U", run = "redo" }
+]
+
+[confirm]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+
+[completion]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+
+[help]
+prepend_keymap = [
+	{ on = "<C-c>", run = "close" },
+]
+

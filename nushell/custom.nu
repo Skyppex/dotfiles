@@ -41,7 +41,7 @@ export extern "cascade" [
 ]
 
 # Remember the old enter command
-alias enter-old = enter;
+alias enter-old = enter
 
 # Fzf with preview
 alias fzp = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
@@ -125,7 +125,6 @@ def vim [
 
 def "fix shada" [] {
     let newest = ls | where type == file
-    | where $it.name =~ "tmp"
     | sort-by --reverse modified
     | first
     | get name

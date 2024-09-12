@@ -1,12 +1,12 @@
 local colors = {
-	gray = "#23262E",
+	gray = "#23262e",
 	light_gray = "#373941",
 	orange = "#f39c12",
 	pink = "#ff00aa",
 	blue = "#7cb7ff",
 	yellow = "#ffe66d",
 	green = "#96e072",
-	white = "#D5CED9",
+	white = "#d5ced9",
 	black = "#181a16",
 }
 

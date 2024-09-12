@@ -12,10 +12,6 @@ map("n", "<leader>so", function()
 	vim.cmd("source " .. remap_path)
 end, "Source config")
 
--- Reverse j and k
-map({ "n", "x", "o" }, "j", "<up>")
-map({ "n", "x", "o" }, "k", "<down>")
-
 -- TIP: Disable arrow keys in insert mode and x mode
 map({ "i", "x" }, "<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
 map({ "i", "x" }, "<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
@@ -23,18 +19,15 @@ map({ "i", "x" }, "<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
 map({ "i", "x" }, "<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
 
 -- Quickfix list navigation
-map("n", "<S-A-j>", "<cmd>cprev<CR>zz")
-map("n", "<S-A-k>", "<cmd>cnext<CR>zz")
-
--- map("n", "<S-A-x>", "<cmd>cclose<CR>")
--- map("n" "<S-A-x>", "<cmd>copen<CR>")
+map("n", "<S-A-k>", "<cmd>cprev<CR>zz")
+map("n", "<S-A-j>", "<cmd>cnext<CR>zz")
 
 -- Save file
 map("n", "<C-s>", "<cmd>wa<CR>")
 
 -- Move lines of code in visual mode
-map("x", "J", ":m '<-2<CR>gv=gv")
-map("x", "K", ":m '>+1<CR>gv=gv")
+map("x", "K", ":m '<-2<CR>gv=gv")
+map("x", "J", ":m '>+1<CR>gv=gv")
 
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
@@ -54,10 +47,6 @@ map("n", "åb", "<cmd>bprevious<CR>zz")
 map("n", "æb", "<cmd>bnext<CR>zz")
 map("n", "<leader>b", "<cmd>b#<CR>zz")
 
--- Spell check navigation
-map("n", "ås", "[s")
-map("n", "æs", "]s")
-
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -70,23 +59,23 @@ map("n", "æd", vim.diagnostic.goto_next, "Go to next Diagnostic message")
 map("n", "<leader>de", vim.diagnostic.open_float, "Show diagnostic Error messages")
 map("n", "<leader>dq", vim.diagnostic.setloclist, "Open diagnostic Quickfix list")
 
--- TIP: Disable arrow keys in normal mode
+-- Disable arrow keys in normal mode
 map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-map("n", "<up>", '<cmd>echo "Use j to move!!"<CR>')
-map("n", "<down>", '<cmd>echo "Use k to move!!"<CR>')
+map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 map("n", "<C-w>h", "<C-w><C-h>", "Move focus to the left window")
-map("n", "<C-w>j", "<C-w><C-k>", "Move focus to the upper window")
+map("n", "<C-w>j", "<C-w><C-j>", "Move focus to the lower window")
+map("n", "<C-w>k", "<C-w><C-k>", "Move focus to the upper window")
 map("n", "<C-w>l", "<C-w><C-l>", "Move focus to the right window")
-map("n", "<C-w>k", "<C-w><C-j>", "Move focus to the lower window")
 
 map("n", "<C-w>-", "<C-w>s", "Split window below")
 map("n", "<C-w>|", "<C-w>v", "Split window right")
 
 map("n", "<C-w><C-y>", "3<C-w><", "Shrink window horizontal")
-map("n", "<C-w><C-u>", "3<C-w>+", "Grow window vertical")
-map("n", "<C-w><C-i>", "3<C-w>-", "Grow window horizontal")
+map("n", "<C-w><C-u>", "3<C-w>-", "Grow window horizontal")
+map("n", "<C-w><C-i>", "3<C-w>+", "Grow window vertical")
 map("n", "<C-w><C-o>", "3<C-w>>", "Shrink window vertical")
 
 -- Macros
@@ -99,8 +88,6 @@ map({ "n", "x" }, "'", '"')
 -- Indent in visual mode stays in visual mode
 map("x", "<", "<gv")
 map("x", ">", ">gv")
-
--- CreateVehicleIDAsGUID
 
 -- Camel case motion
 map("n", "<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
@@ -149,6 +136,15 @@ map("n", "<leader>,", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
 		local keys = vim.api.nvim_replace_termcodes("f,a<CR><Esc>l==", true, true, true)
+		vim.api.nvim_feedkeys(keys, "n", false)
+	end
+end)
+
+-- Newline before |
+map("n", "<leader>|", function()
+	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
+	for _ = 1, count do
+		local keys = vim.api.nvim_replace_termcodes("f|i<CR><Esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
