@@ -5,6 +5,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("oil").setup({
+				default_file_explorer = true,
 				win_options = {
 					signcolumn = "yes:2",
 				},
@@ -25,9 +26,9 @@ return {
 					end,
 				},
 				keymaps = {
-					["<CR>"] = "actions.select",
+					["L"] = "actions.select",
 					["<leader>"] = "actions.preview",
-					["-"] = "actions.parent",
+					["H"] = "actions.parent",
 					["<C-r>"] = "actions.refresh",
 				},
 			})
@@ -47,17 +48,18 @@ return {
 
 			require("oil-vcs-status").setup({
 				status_symbol = {
-					[StatusType.Added] = "",
-					[StatusType.Copied] = "󰆏",
-					[StatusType.Deleted] = "",
-					[StatusType.Ignored] = "",
-					[StatusType.Modified] = "",
-					[StatusType.Renamed] = "",
-					[StatusType.TypeChanged] = "󰉺",
+
+					[StatusType.Added] = "+",
+					[StatusType.Copied] = "c",
+					[StatusType.Deleted] = "✘",
+					[StatusType.Ignored] = "i",
+					[StatusType.Modified] = "!",
+					[StatusType.Renamed] = "m",
+					[StatusType.TypeChanged] = "t",
 					[StatusType.Unmodified] = " ",
 					[StatusType.Unmerged] = "",
-					[StatusType.Untracked] = "",
-					[StatusType.External] = "",
+					[StatusType.Untracked] = "?",
+					[StatusType.External] = "e",
 
 					[StatusType.UpstreamAdded] = "󰈞",
 					[StatusType.UpstreamCopied] = "󰈢",
@@ -68,7 +70,7 @@ return {
 					[StatusType.UpstreamTypeChanged] = "󱧶",
 					[StatusType.UpstreamUnmodified] = " ",
 					[StatusType.UpstreamUnmerged] = "",
-					[StatusType.UpstreamUntracked] = " ",
+					[StatusType.UpstreamUntracked] = "",
 					[StatusType.UpstreamExternal] = "",
 				},
 				status_priority = {

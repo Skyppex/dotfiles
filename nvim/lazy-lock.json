@@ -5,6 +5,7 @@
   "alpha-nvim": { "branch": "main", "commit": "b6f4129302db197a7249e67a90de3f2b676de13e" },
   "ascii.nvim": { "branch": "master", "commit": "c1a315e811fa7c133f8f4827e63015a480d8a81b" },
   "attempt.nvim": { "branch": "main", "commit": "3905db768478a2152fd927ab5a8def85bc2e34e7" },
+  "cellular-automaton.nvim": { "branch": "main", "commit": "11aea08aa084f9d523b0142c2cd9441b8ede09ed" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
   "cmp-nvim-lsp-signature-help": { "branch": "main", "commit": "031e6ba70b0ad5eee49fd2120ff7a2e325b17fa7" },

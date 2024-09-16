@@ -17,3 +17,44 @@
     (string_literal
       (string_content) @injection.content
       (#set! "injection.language" "regex"))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_
+        (raw_string_literal
+            (string_content) @injection.content)))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_
+        (raw_string_literal
+            (string_content) @injection.content))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content)))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content))))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content)))))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content))))))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content)))))))))
+
+((line_comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_ (_ (_ (_
+        (raw_string_literal
+            (string_content) @injection.content))))))))))
+

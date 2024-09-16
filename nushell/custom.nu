@@ -2,46 +2,21 @@ use ~/.cache/starship/init.nu
 source ~/.config/nushell/scripts.nu
 source ~/.config/zoxide/.zoxide.nu
 
-# Externs
-
-# Calculate the result of a dice roll
-export extern "dice" [
-    --help(-h) # Print a more detailed help message
-    --expr(-e) # Print the expression used to calculate the result
-    --time(-t) # Print the time it took to calculate the result
-    --mode(-m): string #Specify the evaluation mode (default: "random") [avg, simavg:uint, min, max, med]
-    ...roll: string # The dice roll to calculate. eg: 2d6+1 or 2d20k or 2d20kl or 1d6! or 1d6!! or 1d6r<=5 or 1d6r=!6
-]
-
-# Curl
-export extern curl [
-    --help(-h) # Get help for commands
-    --data(-d): string # <data> HTTP POST data
-    --fail(-f) # Fail fast with no output on HTTP errors
-    --include(-i) # Include protocol response headers in the output
-    --output(-o): string # <file> Write to file instead of stdout
-    --silent(-s) # Silent mode
-    --upload-file(-T): string # <file> Transfer local FILE to destination
-    --user(-u): string # <user:password> Server user and password
-    --user-agent(-A): string # <name> Send User-Agent <name> to server
-    --verbose(-v) # Make the operation more talkative
-    --version(-V) # Show version number and quit
-    url: string
-]
-
-# Copy to clipboard
-export extern "clip" []
-
-# Cascading print
-export extern "cascade" [
-    --message(-m): string # The message to cascade print
-    --loop(-l) # Whether to loop the program
-    --help(-h) # Print help
-    --version(-V) # Print version
-]
-
 # Remember the old enter command
 alias enter-old = enter
+
+# Yazi with cwd
+def --env y [...args] {
+    let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+    yazi ...$args --cwd-file $tmp
+    let cwd = (open $tmp)
+
+    if $cwd != "" and $cwd != $env.PWD {
+        cd $cwd
+    }
+
+    rm -fp $tmp
+}
 
 # Fzf with preview
 alias fzp = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
@@ -211,9 +186,6 @@ def bash [
 
 # Shorthand for bash
 alias sh = bash
-
-# Current working directory
-alias loc = echo $"($env.PWD)"
 
 # Paste from the clipboard
 alias paste = powershell -command "Get-Clipboard"

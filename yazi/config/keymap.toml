@@ -2,36 +2,38 @@
 
 [manager]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
+	{ on = "L", run = "enter" },
+	{ on = "H", run = "leave" },
 ]
 
 [tasks]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
 ]
 
 [select]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
 ]
 
 [input]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
-	{ on = "U", run = "redo" }
+	{ on = "<C-c>", run = "escape" },
+	{ on = "U", run = "redo" },
 ]
 
 [confirm]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
 ]
 
 [completion]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
 ]
 
 [help]
 prepend_keymap = [
-	{ on = "<C-c>", run = "close" },
+	{ on = "<C-c>", run = "escape" },
 ]
