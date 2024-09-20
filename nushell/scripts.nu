@@ -35,30 +35,3 @@ def "bcp" [
         cd ..
     }
 }
-
-def "aws" [
-    from: string
-    to: string
-] {
-    let launch_settings_path = glob "**/launchSettings.json"
-    | to text
-    | fzf --height 40% --layout=reverse -0 -1
-
-    print $launch_settings_path
-    let launch_settings = open $launch_settings_path -r
-    let launch_settings = $launch_settings | str replace -a $"\"($from)\"" $"\"($to)\""
-    $launch_settings | save --force $launch_settings_path
-
-    git diff
-
-    gc -b us 42852 set aws env to local
-
-    let answer = input "Do you want to push the changes?"
-
-    if $answer == "y" {
-        gcp set aws env to local
-        gh pr create
-        gh pr merge --auto
-        gcm
-    }
-}

@@ -78,3 +78,9 @@ gitsignscurrentlineblame
 saadparwaiz
 rafamadriz
 benfowler
+barista
+hotchocolate
+commandline
+workdir
+chmod
+entrypoint
