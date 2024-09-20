@@ -1512,6 +1512,13 @@ def "gb rm" [
 }
 
 def "bisect start" [...query] {
+    let status = git status --porcelain
+
+    if ($status | is-not-empty) {
+        print "There are uncommitted changes"
+        return
+    }
+
     git bisect start
     git bisect bad
 
