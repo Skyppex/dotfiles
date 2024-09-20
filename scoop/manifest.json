@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1726590618000)\/",
+                "value": "\/Date(1726763401000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 18:30:18"
+                "DateTime": "torsdag 19. september 2024 18:30:01"
             },
             "Manifests": 1340
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1726590755000)\/",
+                "value": "\/Date(1726763532000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 18:32:35"
+                "DateTime": "torsdag 19. september 2024 18:32:12"
             },
             "Manifests": 2071
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1726591214000)\/",
+                "value": "\/Date(1726764052000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 18:40:14"
+                "DateTime": "torsdag 19. september 2024 18:40:52"
             },
             "Manifests": 469
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1726590545000)\/",
+                "value": "\/Date(1726763360000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 18:29:05"
+                "DateTime": "torsdag 19. september 2024 18:29:20"
             },
             "Manifests": 327
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1726531947000)\/",
+                "value": "\/Date(1726711909000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 02:12:27"
+                "DateTime": "torsdag 19. september 2024 04:11:49"
             },
             "Manifests": 256
         },
@@ -54,9 +54,9 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1726548402000)\/",
+                "value": "\/Date(1726721315000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 17. september 2024 06:46:42"
+                "DateTime": "torsdag 19. september 2024 06:48:35"
             },
             "Manifests": 13356
         },
@@ -64,11 +64,11 @@
             "Name": "okibcn",
             "Source": "https://github.com/okibcn/ScoopMaster",
             "Updated": {
-                "value": "\/Date(1710530921000)\/",
+                "value": "\/Date(1726703840000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 15. mars 2024 20:28:41"
+                "DateTime": "torsdag 19. september 2024 01:57:20"
             },
-            "Manifests": 46473
+            "Manifests": 23088
         },
         {
             "Name": "sky-bucket",
@@ -592,6 +592,13 @@
             "Name": "unzip",
             "Version": "6.00",
             "Updated": "\/Date(1724950888796)\/"
+        },
+        {
+            "Info": "",
+            "Source": "okibcn",
+            "Name": "virtualbox",
+            "Version": "7.1.0",
+            "Updated": "\/Date(1726777109093)\/"
         },
         {
             "Info": "",

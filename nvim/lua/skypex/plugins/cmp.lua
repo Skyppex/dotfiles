@@ -39,7 +39,6 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			luasnip.config.setup({})
 
 			cmp.setup({
 				snippet = {
@@ -55,8 +54,8 @@ return {
 				},
 
 				mapping = cmp.mapping.preset.insert({
-					["<S-A-k>"] = cmp.mapping.select_next_item(),
-					["<S-A-j>"] = cmp.mapping.select_prev_item(),
+					["<S-A-j>"] = cmp.mapping.select_next_item(),
+					["<S-A-k>"] = cmp.mapping.select_prev_item(),
 					["<A-u>"] = cmp.mapping.scroll_docs(-4),
 					["<A-d>"] = cmp.mapping.scroll_docs(4),
 					["<TAB>"] = cmp.mapping.confirm({ select = true }),
@@ -72,12 +71,12 @@ return {
 							luasnip.jump(-1)
 						end
 					end, { "i", "s" }),
-					["<A-k>"] = cmp.mapping(function()
+					["<A-j>"] = cmp.mapping(function()
 						if luasnip.choice_active() then
 							luasnip.change_choice(1)
 						end
 					end, { "i", "s" }),
-					["<A-j>"] = cmp.mapping(function()
+					["<A-k>"] = cmp.mapping(function()
 						if luasnip.choice_active() then
 							luasnip.change_choice(-1)
 						end
@@ -89,12 +88,7 @@ return {
 					{ name = "luasnip" },
 					{
 						name = "path",
-						option = {
-							get_cwd = function()
-								print(vim.fn.getcwd())
-								return vim.fn.getcwd()
-							end,
-						},
+						option = { get_cwd = vim.fn.getcwd },
 					},
 					{
 						name = "buffer",

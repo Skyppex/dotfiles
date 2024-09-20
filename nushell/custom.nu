@@ -1511,6 +1511,39 @@ def "gb rm" [
     }
 }
 
+def "bisect start" [...query] {
+    git bisect start
+    git bisect bad
+
+    let query = $query | str join " "
+    let chosen = git log --oneline 
+    | lines 
+    | to text 
+    | fzf --height 40% --layout=reverse --query $query
+
+    if ($chosen | is-empty) {
+        print "No commit selected"
+        return
+    }
+
+    let commit = ($chosen | split row " " | first)
+
+    print $"Selected commit: ($commit)"
+    git checkout $commit
+}
+
+def "bisect good" [] {
+    git bisect good
+}
+
+def "bisect bad" [] {
+    git bisect bad
+}
+
+def "bisect reset" [] {
+    git bisect reset
+}
+
 # Get a link to the current github repository
 def ghlink [
     --type(-t): string #Specify the link type (default: "ssh") [ssh, http]

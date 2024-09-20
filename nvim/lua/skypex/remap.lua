@@ -156,6 +156,7 @@ map({ "n", "x" }, "-", "<C-x>", "Decrement number")
 -- System clipboard
 map({ "n", "x" }, "<leader>y", '"+y', "Yank to system clipboard")
 map({ "n", "x" }, "<leader>p", '"+p', "Paste from system clipboard")
+map({ "n", "x" }, "<leader>d", '"+d', "Cut to system clipboard")
 
 -- Diff mode
 map("n", "<leader>Do", "<cmd>windo diffthis<CR>", "Diff buffers")

@@ -1,13 +1,5 @@
 local function all_snippets(ls)
-	ls.snippets = {
-		all = {},
-	}
-end
-
-local function config()
-	local ls = require("luasnip")
-	vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/skypex/plugins/snippets.lua<cr>")
-	all_snippets(ls)
+	ls.add_snippets("all", {})
 end
 
 return {
@@ -15,7 +7,6 @@ return {
 	version = "v2.*",
 	lazy = true,
 	event = "InsertEnter",
-	config = config,
 	dependencies = {
 		{
 			"saadparwaiz1/cmp_luasnip",
@@ -34,12 +25,20 @@ return {
 			"benfowler/telescope-luasnip.nvim",
 			config = function()
 				require("telescope").load_extension("luasnip")
-				vim.keymap.set("n", "sn", "<cmd>Telescope luasnip<CR>", {
-					desc = "[S]earch S[n]ippets",
+				vim.keymap.set("n", "<leader>sn", "<cmd>Telescope luasnip<CR>", {
+					desc = "Search Snippets",
 					noremap = true,
 					silent = true,
 				})
 			end,
 		},
 	},
+	config = function()
+		local ls = require("luasnip")
+		ls.setup()
+
+		all_snippets(ls)
+
+		vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/skypex/plugins/snippets.lua<cr>")
+	end,
 }
