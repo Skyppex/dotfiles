@@ -84,3 +84,8 @@ commandline
 workdir
 chmod
 entrypoint
+oneline
+zbirenbaum
+lspkind
+onsail
+maxwidth

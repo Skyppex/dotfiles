@@ -503,6 +503,9 @@ return {
 						-- if string.find(server_name, "omnisharp") then
 						-- 	return
 						-- end
+						if string.find(server_name, "rust_analyzer") then
+							return
+						end
 
 						-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
 						-- This handles overriding only values explicitly passed

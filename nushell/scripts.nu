@@ -35,3 +35,8 @@ def "bcp" [
         cd ..
     }
 }
+
+def g [...query] {
+    let x = git log --all --grep=($query | str join ` `) --oneline | split row " " | first;
+    git log $x
+}

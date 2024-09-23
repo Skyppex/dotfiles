@@ -4,10 +4,12 @@ local colors = {
 	orange = "#f39c12",
 	pink = "#ff00aa",
 	blue = "#7cb7ff",
+	cyan = "#00e8c6",
 	yellow = "#ffe66d",
 	green = "#96e072",
 	white = "#d5ced9",
 	black = "#181a16",
+	purple = "#c74ded",
 }
 
 local theme = {
