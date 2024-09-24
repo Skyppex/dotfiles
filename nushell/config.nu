@@ -136,6 +136,86 @@ let light_theme = {
     shape_vardecl: purple
 }
 
+let colors = {
+    gray: "#23262e"
+    light_gray: "#857e89" # Custom stuff for hints
+    orange: "#f39c12"
+    pink: "#ff00aa"
+    blue: "#7cb7ff"
+    cyan: "#00e8c6"
+    yellow: "#ffe66d"
+    green: "#96e072"
+    white: "#d5ced9"
+    black: "#181a16"
+    purple: "#c74ded"
+    red: "#a52a2a"
+}
+
+let andromeda_theme = {
+    # color for nushell primitives
+    separator: $colors.gray
+    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
+    header: { fg: $colors.pink, attr: b }
+    empty: $colors.blue
+    # Closures can be used to choose colors for specific values.
+    # The value (in this case, a bool) is piped into the closure.
+    # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
+    bool: $colors.purple
+    int: $colors.orange
+    filesize: $colors.blue
+    duration: $colors.blue
+    date: $colors.yellow
+    range: $colors.white
+    float: $colors.orange
+    string: $colors.green
+    nothing: $colors.black
+    binary: $colors.red
+    cell-path: $colors.orange
+    row_index: $colors.cyan
+    record: $colors.white
+    list: $colors.white
+    block: $colors.white
+    hints: $colors.light_gray
+    search_result: $colors.white
+    shape_and: $colors.purple
+    shape_binary: $colors.red
+    shape_block: $colors.white
+    shape_bool: $colors.purple
+    shape_closure: $colors.pink
+    shape_custom: $colors.yellow
+    shape_datetime: $colors.orange
+    shape_directory: $colors.blue
+    shape_external: $colors.blue
+    shape_externalarg: $colors.pink
+    shape_external_resolved: $colors.yellow
+    shape_filepath: $colors.green
+    shape_flag: $colors.pink
+    shape_float: $colors.orange
+    # shapes are used to change the cli syntax highlighting
+    shape_garbage: $colors.red
+    shape_globpattern: $colors.green
+    shape_int: $colors.orange
+    shape_internalcall: $colors.purple
+    shape_keyword: $colors.purple
+    shape_list: $colors.white
+    shape_literal: $colors.orange
+    shape_match_pattern: $colors.blue
+    shape_matching_brackets: $colors.white
+    shape_nothing: $colors.black
+    shape_operator: $colors.red
+    shape_or: $colors.purple
+    shape_pipe: $colors.orange
+    shape_range: $colors.white
+    shape_record: $colors.white
+    shape_redirection: $colors.yellow
+    shape_signature: $colors.blue
+    shape_string: $colors.green
+    shape_string_interpolation: $colors.purple
+    shape_table: $colors.white
+    shape_variable: $colors.cyan
+    shape_vardecl: $colors.cyan
+}
+
 # External completer example
 # let carapace_completer = {|spans|
 #     carapace $spans.0 nushell $spans | from json
@@ -225,8 +305,7 @@ $env.config = {
         vi_normal: underscore # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
     }
 
-    color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    use_grid_icons: true
+    color_config: $andromeda_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
     buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
@@ -787,6 +866,11 @@ $env.config = {
         }
     ]
 }
+
+$env.PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = ""
+$env.PROMPT_INDICATOR_VI_NORMAL = ""
+$env.PROMPT_MULTILINE_INDICATOR = ""
 
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 source ~/.config/nushell/custom.nu

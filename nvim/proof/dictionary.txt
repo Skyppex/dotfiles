@@ -89,3 +89,17 @@ zbirenbaum
 lspkind
 onsail
 maxwidth
+vimcmd
+musikk
+nedlastinger
+dokumenter
+skrivebord
+kontakter
+nufmt
+filesize
+datetime
+globpattern
+chown
+internalcall
+externalarg
+vardecl

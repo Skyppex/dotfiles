@@ -130,7 +130,7 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"gp",
+				"<leader>gp",
 				"<cmd>Gitsigns preview_hunk<CR>",
 				{ desc = "Git Preview hunk", noremap = true, silent = true }
 			)

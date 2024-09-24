@@ -22,12 +22,16 @@ return {
 				gofmt = {
 					command = "gofmt",
 				},
+				nufmt = {
+					command = "nufmt",
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
+				-- Runs each formatter sequentially
 				python = { "isort", "black" },
 
+				-- Tries to run each formatter until one succeeds
 				javascript = { { "prettierd", "prettier" } },
 				javascriptreact = { { "prettierd", "prettier" } },
 				typescript = { { "prettierd", "prettier" } },
@@ -41,6 +45,7 @@ return {
 				xml = { "xmlformatter" },
 				yaml = { { "yamlfix", "prettierd", "prettier" } },
 				markdown = { { "markdownlint", "prettierd", "prettier" } },
+				nu = { "nufmt" },
 			},
 		},
 	},

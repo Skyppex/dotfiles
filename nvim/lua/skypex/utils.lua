@@ -31,8 +31,24 @@ local function table_to_string(tbl)
 	return result:sub(1, -3) .. "}"
 end
 
+local andromeda = {
+	gray = "#23262e",
+	light_gray = "#373941",
+	lighter_gray = "#857e89", -- Custom addition
+	orange = "#f39c12",
+	pink = "#ff00aa",
+	blue = "#7cb7ff",
+	cyan = "#00e8c6",
+	yellow = "#ffe66d",
+	green = "#96e072",
+	white = "#d5ced9",
+	black = "#181a16",
+	purple = "#c74ded",
+}
+
 return {
 	get_home = get_home,
 	get_code_path = get_code_path,
 	table_to_string = table_to_string,
+	andromeda = andromeda,
 }

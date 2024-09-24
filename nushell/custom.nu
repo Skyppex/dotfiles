@@ -2225,6 +2225,30 @@ def "unleash list" [
     print $raw
 }
 
+# Fuck?
+def --env "fuck" [] {
+    let h = history | get command
+    let last = $h | last
+
+    let h = history | get command | drop 1
+
+    let selected = $h | to text | fzf --height 40% --layout=reverse -0 -1 --query $last
+
+    if ($selected | is-empty) {
+        print "No substitute found"
+        return
+    } else {
+        let r = input $"Run '($selected)'? \(y/n\): "
+
+        if ($r == "y") {
+            let command = [$selected (char nl)] | str join ""
+            let config_file = $env.CONFIG_PATH | path join "nushell/config.nu"
+            let env_file = $env.CONFIG_PATH | path join "nushell/env.nu"
+            nu --config $config_file --env-config $env_file --execute $command
+        }
+    }
+}
+
 # Fun
 
 # Wrapper for wezterm imgcat using fzf to find images
