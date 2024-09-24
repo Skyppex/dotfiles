@@ -9,6 +9,13 @@ return {
 				win_options = {
 					signcolumn = "yes:2",
 				},
+				view_options = {
+					show_hidden = false,
+					is_hidden_file = function(name, _)
+						return vim.startswith(name, "..")
+					end,
+				},
+				case_insensitive = true,
 				use_default_keymaps = false,
 				float = {
 					-- Padding around the floating window
