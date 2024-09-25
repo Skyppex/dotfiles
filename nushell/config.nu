@@ -185,7 +185,7 @@ let andromeda_theme = {
     shape_custom: $colors.yellow
     shape_datetime: $colors.orange
     shape_directory: $colors.blue
-    shape_external: $colors.blue
+    shape_external: $colors.purple
     shape_externalarg: $colors.pink
     shape_external_resolved: $colors.yellow
     shape_filepath: $colors.green

@@ -77,7 +77,7 @@ def vim [
         return
     }
 
-    let found_path = zoxide query ...$path
+    let found_path = do --ignore-errors { zoxide query ...$path }
 
     if ($found_path | is-empty)  {
         if $verbose {
@@ -115,6 +115,12 @@ def "fix shada" [] {
 }
 
 # Utils
+
+# Lazydocker
+alias ld = lazydocker
+
+# Lazygit
+alias lg = lazygit
 
 # Not command
 def n [] {

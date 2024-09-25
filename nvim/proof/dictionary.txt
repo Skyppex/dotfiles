@@ -103,3 +103,4 @@ chown
 internalcall
 externalarg
 vardecl
+keybinding
