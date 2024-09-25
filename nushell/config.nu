@@ -177,6 +177,7 @@ let andromeda_theme = {
     block: $colors.white
     hints: $colors.light_gray
     search_result: $colors.white
+    # shapes are used to change the cli syntax highlighting
     shape_and: $colors.purple
     shape_binary: $colors.red
     shape_block: $colors.white
@@ -191,7 +192,6 @@ let andromeda_theme = {
     shape_filepath: $colors.green
     shape_flag: $colors.pink
     shape_float: $colors.orange
-    # shapes are used to change the cli syntax highlighting
     shape_garbage: $colors.red
     shape_globpattern: $colors.green
     shape_int: $colors.orange
