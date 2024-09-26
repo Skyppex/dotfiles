@@ -35,9 +35,8 @@ local function setup_proof(lspconfig, configs, capabilities)
 				maxSuggestions = 3,
 				allowImplicitPlurals = true,
 				ignoredWords = {},
-				excludedFileNames = { "package.json" },
+				excludedFilePatterns = { ".*package.json^", "*.env^" },
 				excludedFileTypes = {},
-				excludedFileExtensions = {},
 			},
 		},
 	})

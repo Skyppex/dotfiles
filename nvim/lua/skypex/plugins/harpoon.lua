@@ -18,7 +18,7 @@ return {
 					excluded_filetypes = {},
 
 					-- set marks specific to each git branch inside git repository
-					mark_branch = true,
+					mark_branch = false,
 
 					-- enable tabline with harpoon marks
 					tabline = false,
