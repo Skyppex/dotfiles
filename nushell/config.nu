@@ -874,7 +874,6 @@ $env.PROMPT_MULTILINE_INDICATOR = ""
 
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 use ~/.cache/starship/init.nu
-source ~/.config/nushell/scripts.nu
 source ~/.config/nushell/utils.nu
 source ~/.config/nushell/projects.nu
 source ~/.config/nushell/history.nu
@@ -887,6 +886,7 @@ source ~/.config/nushell/unleash.nu
 source ~/.config/nushell/fun.nu
 source ~/.config/nushell/docker.nu
 use ~/.config/nushell/task.nu
+source ~/.config/nushell/scripts.nu
 
 # Remember the old enter command
 alias enter-old = enter
