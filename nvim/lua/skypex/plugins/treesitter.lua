@@ -1,5 +1,11 @@
 return {
 	{
+		"nvim-treesitter/playground",
+		cmd = "TSPlaygroundToggle",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -11,10 +17,6 @@ return {
 		dependencies = {
 			"nushell/tree-sitter-nu",
 			"tree-sitter/tree-sitter-c-sharp",
-			{
-				"nvim-treesitter/playground",
-				cmd = "TSPlaygroundToggle",
-			},
 		},
 		opts = {
 			ensure_installed = {
@@ -34,6 +36,7 @@ return {
 				"graphql",
 				"regex",
 				"bash",
+				"dockerfile",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -138,21 +141,38 @@ return {
 
 			vim.treesitter.language.register("arcana", "arcana")
 
-			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-				pattern = "*.ar",
-				callback = function()
-					vim.bo.filetype = "arcana"
-					vim.bo.commentstring = "//%s"
-				end,
-			})
+			local filetype_map = {
+				{
+					pattern = "*.ar",
+					filetype = "arcana",
+					commentstring = "//%s",
+				},
+				{
+					pattern = "*Dockerfile*",
+					filetype = "dockerfile",
+					commentstring = "#%s",
+				},
+				{
+					pattern = "*.cake",
+					filetype = "cs",
+					commentstring = "//%s",
+				},
+				{
+					pattern = "*.http",
+					filetype = "http",
+					commentstring = "#%s",
+				},
+			}
 
-			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-				pattern = "*.cake",
-				callback = function()
-					vim.bo.filetype = "cs"
-					vim.bo.commentstring = "//%s"
-				end,
-			})
+			for _, value in ipairs(filetype_map) do
+				vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+					pattern = value.pattern,
+					callback = function()
+						vim.bo.filetype = value.filetype
+						vim.bo.commentstring = value.commentstring
+					end,
+				})
+			end
 		end,
 	},
 }

@@ -22,6 +22,9 @@ return {
 				gofmt = {
 					command = "gofmt",
 				},
+				json = {
+					command = "jq",
+				},
 				nufmt = {
 					command = "nufmt",
 				},

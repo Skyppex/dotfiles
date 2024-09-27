@@ -1,3 +1,3 @@
 ###
 
-GET http://db1.sentinel-dev.int:9200/vehicle_status/_mappings
+GET http://db1.sentinel-dev.int:9200/vehicle_status/_search?q=IsActive:false

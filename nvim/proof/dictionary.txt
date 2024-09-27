@@ -104,3 +104,9 @@ internalcall
 externalarg
 vardecl
 keybinding
+vhyrro
+luarock
+folke
+mistweaverco
+kulala
+scs

@@ -126,3 +126,6 @@ $env.AWS_PROFILE = "dev"
 
 # Yazi
 $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
+
+# jq colors
+$env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
