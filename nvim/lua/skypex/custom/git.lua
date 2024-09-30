@@ -80,7 +80,7 @@ M.conflict = function()
 	})
 end
 
-M.gitisgns = function()
+M.gitsigns = function()
 	local gitsigns = require("gitsigns")
 	gitsigns.setup({
 		signs = {

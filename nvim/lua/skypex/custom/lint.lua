@@ -9,7 +9,6 @@ M.lint = function()
 		typescript = { "eslint_d" },
 		javascriptreact = { "eslint_d" },
 		typescriptreact = { "eslint_d" },
-		rust = { "bacon" },
 		json = { "jsonlint" },
 		yaml = { "yamllint" },
 		markdown = { "markdownlint" },

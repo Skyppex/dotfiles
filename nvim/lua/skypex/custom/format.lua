@@ -8,6 +8,7 @@ require("conform").setup({
 		local disable_filetypes = { c = true, cpp = true }
 		return {
 			lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+			timeout = 5000,
 		}
 	end,
 	formatters = {

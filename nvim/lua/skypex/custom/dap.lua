@@ -9,6 +9,12 @@ M.dap = function()
 		args = { "--interpreter=vscode" },
 	}
 
+	dap.adapters.netcoredbg = {
+		type = "executable",
+		command = path.concat({ vim.fn.stdpath("data"), "mason", "bin", "netcoredbg.CMD" }),
+		args = { "--interpreter=vscode" },
+	}
+
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "3500",

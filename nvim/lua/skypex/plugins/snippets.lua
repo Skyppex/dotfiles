@@ -1,7 +1,3 @@
-local function all_snippets(ls)
-	ls.add_snippets("all", {})
-end
-
 return {
 	"L3MON4D3/LuaSnip",
 	version = "v2.*",
@@ -18,13 +14,13 @@ return {
 			lazy = true,
 			event = "InsertEnter",
 			config = function()
-				require("skypex.custom.luasnip").friendly_snippets()
+				require("skypex.custom.snippets").friendly_snippets()
 			end,
 		},
 		{
 			"benfowler/telescope-luasnip.nvim",
 			config = function()
-				require("skypex.custom.luasnip").telescope()
+				require("skypex.custom.snippets").telescope()
 			end,
 		},
 	},
