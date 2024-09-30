@@ -6,7 +6,7 @@ return {
 		local attempt = require("attempt")
 
 		attempt.setup({
-			ext_options = { "lua", "py", "cs", "rs", "ar", "" },
+			ext_options = { "lua", "py", "cs", "rs", "ar", "http", "" },
 			run = {
 				cs = { "w", "!dotnet script %" },
 				py = { "w !python" }, -- Either table of strings or lua functions
@@ -28,7 +28,7 @@ return {
 			desc = "New Attempt By Extension",
 			noremap = true,
 			silent = true,
-		}) -- new attempt, inputing extension
+		}) -- new attempt, inputting extension
 		vim.keymap.set("n", "<leader>AR", attempt.run, {
 			desc = "Run Attempt",
 			noremap = true,

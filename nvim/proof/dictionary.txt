@@ -113,3 +113,12 @@ scs
 jsonlint
 rshkarin
 shellcheck
+rse
+ri
+ri
+luafile
+rustc
+demare
+contenttype
+pathresolver
+jsonpath
