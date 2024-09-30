@@ -25,7 +25,7 @@ def fim [...path] {
 def vim [
     --empty(-e) # Open neovim with an empty file
     --verbose(-v) # Enable verbose output
-    ...path
+    ...path: string
 ] {
     let stdin = $in
 
@@ -43,7 +43,9 @@ def vim [
         return
     }
 
-    if (($path | str join " ") == "..") {
+    let path = $path | str join " "
+
+    if ($path == "..") {
         if $verbose {
             print "Entering nvim in parent directory"
         }
@@ -52,7 +54,7 @@ def vim [
         return
     } 
 
-    if (($path | str join " ") == ".") {
+    if ($path == ".") {
         if $verbose {
             print "Entering nvim in current directory"
         }
@@ -70,25 +72,27 @@ def vim [
         return
     }
 
-    let found_path = do --ignore-errors { zoxide query ...$path }
+    try {
+        let found_path = fd --type=d
+        | fzf --height 40% --layout=reverse -0 -1 --query $path
 
-    if ($found_path | is-empty)  {
+        enter $found_path
+
         if $verbose {
-            print $"Found no path in zoxide. Entering nvim at '($path | str join ' ')'"
+            print $"Found path in zoxide: ($found_path)"
         }
 
-        $stdin | nvim ...$path
+        $stdin | nvim .
+        p
+    } catch {
+        if $verbose {
+            print $"Found no path in zoxide. Entering nvim at '($path)'"
+        }
+
+        $stdin | nvim $path
         return
     }
 
-    enter $found_path
-
-    if $verbose {
-        print $"Found path in zoxide: ($found_path)"
-    }
-
-    $stdin | nvim .
-    p
 }
 
 def "fix shada" [] {
