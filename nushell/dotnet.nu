@@ -97,7 +97,7 @@ def "dn us init" [
     dotnet user-secrets init
 }
 
-def "dn us list" [
+def "dn us ls" [
     --verbose(-v)
 ] {
     let sln = ls

@@ -873,6 +873,10 @@ $env.PROMPT_INDICATOR_VI_NORMAL = ""
 $env.PROMPT_MULTILINE_INDICATOR = ""
 
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
+
+# Remember the old enter command
+alias enter-old = enter
+
 use ~/.cache/starship/init.nu
 source ~/.config/nushell/utils.nu
 source ~/.config/nushell/projects.nu
@@ -887,9 +891,6 @@ source ~/.config/nushell/fun.nu
 source ~/.config/nushell/docker.nu
 use ~/.config/nushell/task.nu
 source ~/.config/nushell/scripts.nu
-
-# Remember the old enter command
-alias enter-old = enter
 
 # Pull the dotfiles from the remote repository
 def "pull" [] {

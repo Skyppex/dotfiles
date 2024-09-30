@@ -126,3 +126,4 @@ mktemp
 xxxxxx
 lazydocker
 lazygit
+configurator
