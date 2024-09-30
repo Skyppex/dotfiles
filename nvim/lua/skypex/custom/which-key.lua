@@ -1,0 +1,30 @@
+require("which-key").setup()
+
+-- Document existing key chains
+require("which-key").add({
+	{ "<leader>c", group = "Code" },
+	{ "<leader>c_", hidden = true },
+	{ "<leader>d", group = "Document" },
+	{ "<leader>d_", hidden = true },
+	{ "<leader>g", group = "Git" },
+	{ "<leader>g_", hidden = true },
+	{ "<leader>gh", group = "Git Hunk" },
+	{ "<leader>gh", desc = "Git Hunk", mode = "v" },
+	{ "<leader>gh_", hidden = true },
+	{ "<leader>h", group = "Hop" },
+	{ "<leader>h_", hidden = true },
+	{ "<leader>m", group = "Misc" },
+	{ "<leader>m_", hidden = true },
+	{ "<leader>p", group = "Project" },
+	{ "<leader>p_", hidden = true },
+	{ "<leader>r", group = "Rename" },
+	{ "<leader>r_", hidden = true },
+	{ "<leader>s", group = "Search" },
+	{ "<leader>s_", hidden = true },
+	{ "<leader>t", group = "Toggle" },
+	{ "<leader>t_", hidden = true },
+	{ "<leader>w", group = "Workspace" },
+	{ "<leader>w_", hidden = true },
+	{ "<leader>A", group = "Attempt" },
+	{ "<leader>A_", hidden = true },
+})

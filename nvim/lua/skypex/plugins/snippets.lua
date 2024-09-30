@@ -18,27 +18,17 @@ return {
 			lazy = true,
 			event = "InsertEnter",
 			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
+				require("skypex.custom.luasnip").friendly_snippets()
 			end,
 		},
 		{
 			"benfowler/telescope-luasnip.nvim",
 			config = function()
-				require("telescope").load_extension("luasnip")
-				vim.keymap.set("n", "<leader>sn", "<cmd>Telescope luasnip<CR>", {
-					desc = "Search Snippets",
-					noremap = true,
-					silent = true,
-				})
+				require("skypex.custom.luasnip").telescope()
 			end,
 		},
 	},
 	config = function()
-		local ls = require("luasnip")
-		ls.setup()
-
-		all_snippets(ls)
-
-		vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/skypex/plugins/snippets.lua<cr>")
+		require("skypex.custom.snippets").luasnip()
 	end,
 }

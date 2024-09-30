@@ -6,10 +6,6 @@ return {
 		vim.fn["mkdp#util#install"]()
 	end,
 	config = function()
-		vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", {
-			desc = "Preview Markdown",
-			noremap = true,
-			silent = true,
-		})
+		require("skypex.custom.markdown-preview")
 	end,
 }

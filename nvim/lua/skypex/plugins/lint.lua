@@ -6,37 +6,7 @@ return {
 		},
 		event = { "BufWritePre", "BufNewFile" },
 		config = function()
-			local lint = require("lint")
-
-			lint.linters_by_ft = {
-				go = { "golangci-lint" },
-				javascript = { "eslint_d" },
-				typescript = { "eslint_d" },
-				javascriptreact = { "eslint_d" },
-				typescriptreact = { "eslint_d" },
-				rust = { "bacon" },
-				json = { "jsonlint" },
-				yaml = { "yamllint" },
-				markdown = { "markdownlint" },
-				css = { "stylelint" },
-			}
-
-			vim.keymap.set("n", "<leader>l", function()
-				lint.try_lint()
-			end, {
-				desc = "Lint current file",
-				noremap = true,
-				silent = true,
-			})
-
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					lint.try_lint()
-				end,
-			})
+			require("skypex.custom.lint").lint()
 		end,
 	},
 	{
@@ -47,18 +17,7 @@ return {
 		},
 		event = { "BufWritePre", "BufNewFile" },
 		config = function()
-			require("mason-nvim-lint").setup({
-				ensure_installed = {
-					"eslint_d",
-					"golangci-lint",
-					"jsonlint",
-					"markdownlint",
-					"shellcheck",
-					"stylelint",
-					"yamllint",
-				},
-				automatic_installation = true,
-			})
+			require("skypex.custom.lint").mason()
 		end,
 	},
 }

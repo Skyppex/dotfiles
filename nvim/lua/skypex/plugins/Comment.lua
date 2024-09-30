@@ -2,7 +2,6 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = "BufReadPre",
-		opts = {},
+		config = true,
 	},
 }
-
