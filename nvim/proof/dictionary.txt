@@ -110,3 +110,6 @@ folke
 mistweaverco
 kulala
 scs
+jsonlint
+rshkarin
+shellcheck

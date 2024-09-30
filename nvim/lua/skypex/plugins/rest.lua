@@ -10,6 +10,10 @@ return {
 	config = function()
 		local kulala = require("kulala")
 
+		kulala.setup({
+			default_env = "local",
+		})
+
 		vim.keymap.set("n", "<leader>rr", function()
 			kulala.run()
 		end, {
