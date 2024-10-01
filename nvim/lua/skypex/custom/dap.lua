@@ -11,7 +11,7 @@ M.dap = function()
 
 	dap.adapters.netcoredbg = {
 		type = "executable",
-		command = path.concat({ vim.fn.stdpath("data"), "mason", "bin", "netcoredbg.CMD" }),
+		command = vim.fn.stdpath("data") .. "/mason" .. "/bin" .. "/netcoredbg.CMD",
 		args = { "--interpreter=vscode" },
 	}
 
