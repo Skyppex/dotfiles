@@ -148,3 +148,10 @@ kubernete
 sentinelsoftware
 defaultconfig
 tcp
+svg
+tsx
+href
+reactj
+noopener
+noreferrer
+surrealdb
