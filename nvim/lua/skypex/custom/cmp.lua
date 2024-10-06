@@ -1,3 +1,4 @@
+print("cmp0")
 require("copilot").setup({
 	suggestion = { enabled = false },
 	panel = { enabled = false },
@@ -35,6 +36,33 @@ cmp.setup({
 		},
 		{ name = "copilot" },
 	},
+	sorting = {
+		-- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+
+			-- copied from cmp-under, but I don't think I need the plugin for this.
+			-- I might add some more of my own.
+			function(entry1, entry2)
+				local _, entry1_under = entry1.completion_item.label:find("^_+")
+				local _, entry2_under = entry2.completion_item.label:find("^_+")
+				entry1_under = entry1_under or 0
+				entry2_under = entry2_under or 0
+				if entry1_under > entry2_under then
+					return false
+				elseif entry1_under < entry2_under then
+					return true
+				end
+			end,
+
+			cmp.config.compare.kind,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
+	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -45,7 +73,6 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-
 	mapping = cmp.mapping.preset.insert({
 		["<S-A-j>"] = cmp.mapping.select_next_item(),
 		["<S-A-k>"] = cmp.mapping.select_prev_item(),
@@ -82,7 +109,7 @@ cmp.setup({
 			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 			-- can also be a function to dynamically calculate max width such as
 			-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+			ellipsis_char = "..", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 			show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 			symbol_map = {
 				Copilot = "",
@@ -101,37 +128,40 @@ cmp.setup({
 	},
 })
 
+local andromeda = require("skypex.utils").andromeda
+
 local colors = {
-	Unit = "#d5ced9",
-	Property = "#ff00aa",
-	Module = "#c74ded",
-	Interface = "#ffe66d",
-	Class = "#ffe66d",
-	Value = "#00e8c6",
-	Variable = "#00e8c6",
-	Field = "#ff00aa",
-	Constructor = "#ffe66d",
-	Function = "#ffe66d",
-	Method = "#ffe66d",
-	TypeParameter = "#ffe66d",
-	Operator = "#f39c12",
-	Event = "#ffe66d",
-	Struct = "#ffe66d",
-	Constant = "#f39c12",
-	EnumMember = "#f39c12",
-	File = "#7cb7ff",
-	Enum = "#ffe66d",
-	Keyword = "#c74ded",
-	Text = "#96e072",
-	Folder = "#7cb7ff",
-	Color = "#d5ced9",
-	Reference = "#c74ded",
-	Snippet = "#7cb7ff",
-	Copilot = "#7cb7ff",
+	Unit = andromeda.white,
+	Property = andromeda.pink,
+	Module = andromeda.purple,
+	Interface = andromeda.yellow,
+	Class = andromeda.yellow,
+	Value = andromeda.cyan,
+	Variable = andromeda.cyan,
+	Field = andromeda.pink,
+	Constructor = andromeda.yellow,
+	Function = andromeda.yellow,
+	Method = andromeda.yellow,
+	TypeParameter = andromeda.yellow,
+	Operator = andromeda.orange,
+	Event = andromeda.yellow,
+	Struct = andromeda.yellow,
+	Constant = andromeda.orange,
+	EnumMember = andromeda.orange,
+	File = andromeda.blue,
+	Enum = andromeda.yellow,
+	Keyword = andromeda.purple,
+	Text = andromeda.green,
+	Folder = andromeda.blue,
+	Color = andromeda.white,
+	Reference = andromeda.purple,
+	Snippet = andromeda.blue,
+	Copilot = andromeda.blue,
 }
 
 for name, color in pairs(colors) do
-	local c = "CmpItemKind" .. name .. " guifg=" .. color
-	print(c)
-	vim.cmd.hi(c)
+	vim.cmd.hi("CmpItemKind" .. name .. " guifg=" .. color)
 end
+
+print("cmp")
+vim.keymap.set("n", "<leader>tc", "<cmd>Copilot toggle<cr>", { noremap = true, silent = true })
