@@ -61,7 +61,6 @@ local config = {
 		{ key = "X", mods = "SHIFT|CTRL", action = act({ CloseCurrentTab = { confirm = true } }) },
 		{ key = "x", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = true } }) },
 
-		{ key = "F", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
 		{ key = "v", mods = "LEADER|CTRL", action = act.PasteFrom("Clipboard") },
 		{ key = "c", mods = "LEADER|CTRL", action = act.CopyTo("Clipboard") },
 		{ key = "c", mods = "CTRL", action = act.SendString("\x03") },

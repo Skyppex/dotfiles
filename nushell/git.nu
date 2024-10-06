@@ -27,6 +27,37 @@ alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str t
 # Start tracking files with git
 alias gt = git add --intent-to-add
 
+# Conventional commit
+def cc [] {
+    let type = gum choose "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert"
+
+    if ($type | is-empty) {
+        print "No type provided"
+        return
+    }
+
+    let scope = gum input --placeholder "scope"
+    let scope = if ($scope | is-empty) { "" } else { $"\(($scope)\)" }
+
+    let summary = gum input --value $"($type + $scope): " --placeholder "Summary of this change"
+
+    if ($summary | is-empty) {
+        print "No summary provided"
+        return
+    }
+
+    let description = gum write --placeholder "Details of this change"
+
+    if ($description | is-empty) {
+        gum confirm "Commit changes?"
+        git commit -m ($summary)
+        return
+    }
+
+    gum confirm "Commit changes?"
+    git commit -m ($summary) -m ($description)
+}
+
 # Git checkout but with fzf for branch selection
 def gc [
     -b # Create and checkout a new branch

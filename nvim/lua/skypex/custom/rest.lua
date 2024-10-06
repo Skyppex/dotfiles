@@ -31,6 +31,12 @@ M.kulala = function()
 		silent = true,
 	})
 
+	vim.keymap.set("n", "<leader>ri", kulala.inspect, {
+		desc = "Inspect last request",
+		noremap = true,
+		silent = true,
+	})
+
 	vim.keymap.set("n", "<leader>rss", kulala.show_stats, {
 		desc = "Show stats for last request",
 		noremap = true,
@@ -39,6 +45,12 @@ M.kulala = function()
 
 	vim.keymap.set("n", "<leader>rse", kulala.set_selected_env, {
 		desc = "Set selected environment",
+		noremap = true,
+		silent = true,
+	})
+
+	vim.keymap.set("n", "<leader>tr", kulala.toggle_view, {
+		desc = "Toggle headers view",
 		noremap = true,
 		silent = true,
 	})

@@ -121,6 +121,9 @@ match ($env.COMPUTERNAME) {
 
 $env.PROJECTS = $"($env.CODE)/projects"
 
+# My favorite editor
+$env.EDITOR = "nvim"
+
 # AWS
 $env.AWS_PROFILE = "dev"
 

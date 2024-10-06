@@ -10,6 +10,7 @@ local lspkind = require("lspkind")
 ---@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
 	sources = {
+		{ "cmp-dbee", max_item_count = 10 },
 		{
 			name = "path",
 			option = { get_cwd = vim.fn.getcwd },

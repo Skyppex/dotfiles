@@ -22,4 +22,9 @@ return {
 			require("skypex.custom.treesitter")
 		end,
 	},
+	{
+		"dariuscorvus/tree-sitter-surrealdb.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = true,
+	},
 }
