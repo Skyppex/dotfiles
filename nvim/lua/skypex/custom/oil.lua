@@ -37,7 +37,7 @@ M.oil = function()
 		},
 	})
 
-	vim.keymap.set("n", "<leader>v", "<cmd>Oil<CR>", { desc = "Project View" })
+	require("skypex.utils").nmap("<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
 end
 
 M.oil_vcs = function()

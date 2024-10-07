@@ -1,3 +1,5 @@
+local nmap = require("skypex.utils").nmap
+
 local M = {}
 
 local function all_snippets(ls)
@@ -11,11 +13,7 @@ end
 M.telescope = function()
 	require("telescope").load_extension("luasnip")
 
-	vim.keymap.set("n", "<leader>sn", "<cmd>Telescope luasnip<CR>", {
-		desc = "Search Snippets",
-		noremap = true,
-		silent = true,
-	})
+	nmap("<leader>sn", "<cmd>Telescope luasnip<CR>", "Search Snippets")
 end
 
 M.luasnip = function()
@@ -24,7 +22,7 @@ M.luasnip = function()
 
 	all_snippets(ls)
 
-	vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/skypex/plugins/snippets.lua<cr>")
+	nmap("<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
 end
 
 M.all = function()

@@ -168,30 +168,69 @@ nmap("<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
 
 -- Source config
 nmap("<leader><leader>c", function()
+	-- Config
+	package.loaded["skypex.config"] = nil
+	require("skypex.config")
+	package.loaded["skypex.proof"] = nil
+	require("skypex.proof")
+	package.loaded["skypex.quickfix"] = nil
+	require("skypex.quickfix")
+	package.loaded["skypex.remap"] = nil
+	require("skypex.remap")
+	package.loaded["skypex.utils"] = nil
+	require("skypex.utils")
+
+	-- Plugins
+	package.loaded["skypex.custom.attempt"] = nil
 	require("skypex.custom.attempt")
+	package.loaded["skypex.custom.cmp"] = nil
 	require("skypex.custom.cmp")
+	package.loaded["skypex.custom.dap"] = nil
 	require("skypex.custom.dap").all()
+	package.loaded["skypex.custom.format"] = nil
 	require("skypex.custom.format")
+	package.loaded["skypex.custom.fun"] = nil
 	require("skypex.custom.fun").all()
+	package.loaded["skypex.custom.git"] = nil
 	require("skypex.custom.git").all()
+	package.loaded["skypex.custom.harpoon"] = nil
 	require("skypex.custom.harpoon")
+	package.loaded["skypex.custom.hop"] = nil
 	require("skypex.custom.hop")
+	package.loaded["skypex.custom.lint"] = nil
 	require("skypex.custom.lint").all()
+	package.loaded["skypex.custom.lsp"] = nil
 	require("skypex.custom.lsp")
+	package.loaded["skypex.custom.lualine"] = nil
 	require("skypex.custom.lualine")
+	package.loaded["skypex.custom.markdown-preview"] = nil
 	require("skypex.custom.markdown-preview")
+	package.loaded["skypex.custom.mini"] = nil
 	require("skypex.custom.mini")
+	package.loaded["skypex.custom.noice"] = nil
 	require("skypex.custom.noice")
+	package.loaded["skypex.custom.oil"] = nil
 	require("skypex.custom.oil").all()
+	package.loaded["skypex.custom.rainbow-delimiters"] = nil
 	require("skypex.custom.rainbow-delimiters")
+	package.loaded["skypex.custom.rest"] = nil
 	require("skypex.custom.rest").all()
+	package.loaded["skypex.custom.snippets"] = nil
 	require("skypex.custom.snippets").all()
+	package.loaded["skypex.custom.surround"] = nil
 	require("skypex.custom.surround")
+	package.loaded["skypex.custom.telescope"] = nil
 	require("skypex.custom.telescope")
+	package.loaded["skypex.custom.theming"] = nil
 	require("skypex.custom.theming").all()
+	package.loaded["skypex.custom.treesitter"] = nil
 	require("skypex.custom.treesitter")
+	package.loaded["skypex.custom.twilight"] = nil
 	require("skypex.custom.twilight")
+	package.loaded["skypex.custom.undotree"] = nil
 	require("skypex.custom.undotree")
+	package.loaded["skypex.custom.which-key"] = nil
 	require("skypex.custom.which-key")
+	package.loaded["skypex.custom.zen-mode"] = nil
 	require("skypex.custom.zen-mode")
 end, "Source config")

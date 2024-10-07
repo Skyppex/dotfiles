@@ -44,20 +44,22 @@ pcall(telescope.load_extension, "ui-select")
 -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
-vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
-vim.keymap.set("n", "<leader>sf", builtin.git_files, { desc = "Search Git Files" })
-vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "Search Commits" })
-vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Search Telescope builtin" })
-vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
-vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
-vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search existing Buffers" })
+local nmap = require("skypex.utils").nmap
 
-vim.keymap.set("n", "<C-p>", function()
+nmap("<leader>sh", builtin.help_tags, "Search Help")
+nmap("<leader>sk", builtin.keymaps, "Search Keymaps")
+nmap("<leader>sf", builtin.git_files, "Search Git Files")
+nmap("<leader>sc", builtin.git_commits, "Search Commits")
+nmap("<leader>st", builtin.builtin, "Search Telescope builtin")
+nmap("<leader>sd", builtin.diagnostics, "Search Diagnostics")
+nmap("<leader>sr", builtin.resume, "Search Resume")
+nmap("<leader>sb", builtin.buffers, "Search existing Buffers")
+
+nmap("<C-p>", function()
 	builtin.find_files({ path_display = { "absolute" } })
-end, { desc = "Search Files" })
+end, "Search Files")
 
-vim.keymap.set("n", "<leader>sg", function()
+nmap("<leader>sg", function()
 	local git_dir = vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
 	git_dir = string.gsub(git_dir, "\n", "") -- remove newline character from git_dir
 
@@ -66,32 +68,32 @@ vim.keymap.set("n", "<leader>sg", function()
 	}
 
 	builtin.live_grep(opts)
-end, { desc = "Search Git files by grep" })
+end, "Search Git files by grep")
 
-vim.keymap.set("n", "<leader>pws", function()
+nmap("<leader>pws", function()
 	local word = vim.fn.expand("<cword>")
 	builtin.grep_string({ search = word })
 end)
 
-vim.keymap.set("n", "<leader>pWs", function()
+nmap("<leader>pWs", function()
 	local word = vim.fn.expand("<cWORD>")
 	builtin.grep_string({ search = word })
 end)
 
 -- Slightly advanced example of overriding default behavior and theme
-vim.keymap.set("n", "<leader>/", function()
+nmap("<leader>/", function()
 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 		winblend = 10,
 		previewer = false,
 	}))
-end, { desc = "[/] Fuzzily search in current buffer" })
+end, "[/] Fuzzily search in current buffer")
 
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
-vim.keymap.set("n", "<leader>s/", function()
+nmap("<leader>s/", function()
 	builtin.live_grep({
 		grep_open_files = true,
 		prompt_title = "Live Grep in Open Files",
 	})
-end, { desc = "Search [/] in Open Files" })
+end, "Search [/] in Open Files")

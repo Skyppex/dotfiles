@@ -12,4 +12,4 @@ require("twilight").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>x", "<cmd>Twilight<CR>", { noremap = true, silent = true })
+require("skypex.utils").nmap("<leader>x", "<cmd>Twilight<CR>", "Toggle Twilight")

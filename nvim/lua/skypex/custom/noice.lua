@@ -17,4 +17,4 @@ require("noice").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>mm", "<cmd>Noice<CR>", { noremap = true, silent = true })
+require("skypex.utils").nmap("<leader>mm", "<cmd>Noice<CR>", "Open messages")

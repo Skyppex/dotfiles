@@ -93,12 +93,7 @@ require("nvim-treesitter.configs").setup({
 --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 
-vim.keymap.set(
-	"n",
-	"<leader>tt",
-	"<cmd>TSPlaygroundToggle<CR>",
-	{ desc = "Toggle Treesitter Playground", noremap = true, silent = true }
-)
+require("skypex.utils").nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
 local home_drive = os.getenv("HOMEDRIVE")
