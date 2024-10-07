@@ -21,7 +21,6 @@ require("nvim-treesitter.configs").setup({
 		"graphql",
 		"regex",
 		"bash",
-		"dockerfile",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
