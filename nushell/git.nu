@@ -580,7 +580,7 @@ def gcapf [] {
 # Git commit and push
 def gcp [...message: string] {
     git add -A
-    cc
+    cc ...$message
     gum confirm "Push changes?"
     git push
 }

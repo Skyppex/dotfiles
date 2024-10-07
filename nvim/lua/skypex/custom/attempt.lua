@@ -14,33 +14,11 @@ attempt.setup({
 
 require("telescope").load_extension("attempt")
 
-vim.keymap.set("n", "<leader>AN", attempt.new_select, {
-	desc = "New Attempt",
-	noremap = true,
-	silent = true,
-}) -- new attempt, selecting extension
-vim.keymap.set("n", "<leader>AI", attempt.new_input_ext, {
-	desc = "New Attempt By Extension",
-	noremap = true,
-	silent = true,
-}) -- new attempt, inputting extension
-vim.keymap.set("n", "<leader>AR", attempt.run, {
-	desc = "Run Attempt",
-	noremap = true,
-	silent = true,
-}) -- run attempt
-vim.keymap.set("n", "<leader>AD", attempt.delete_buf, {
-	desc = "Delete Attempt",
-	noremap = true,
-	silent = true,
-}) -- delete attempt from current buffer
-vim.keymap.set("n", "<leader>AC", attempt.rename_buf, {
-	desc = "Rename Attempt",
-	noremap = true,
-	silent = true,
-}) -- rename attempt from current buffer
-vim.keymap.set("n", "<leader>AS", "<cmd>Telescope attempt<CR>", {
-	desc = "Search Attempts",
-	noremap = true,
-	silent = true,
-}) -- search through attempts
+local nmap = require("skypex.utils").nmap
+
+nmap("<leader>AN", attempt.new_select, "New Attempt")
+nmap("<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
+nmap("<leader>AR", attempt.run, "Run Attempt")
+nmap("<leader>AD", attempt.delete_buf, "Delete Attempt")
+nmap("<leader>AC", attempt.rename_buf, "Rename Attempt")
+nmap("<leader>AS", "<cmd>Telescope attempt<CR>", "Search Attempts")

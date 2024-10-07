@@ -21,16 +21,4 @@ return {
 			require("skypex.custom.git").gitsigns()
 		end,
 	},
-	{
-		"pwntester/octo.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("skypex.custom.git").octo()
-		end,
-	},
 }

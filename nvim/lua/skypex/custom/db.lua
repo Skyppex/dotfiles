@@ -1,7 +1,3 @@
 require("dbee").setup(--[[optional config]])
 
-vim.keymap.set("n", "<leader>td", require("dbee").toggle, {
-	desc = "Toggle DB",
-	noremap = true,
-	silent = true,
-})
+require("skypex.utils").nmap("<leader>td", require("dbee").toggle, "Toggle DB")

@@ -1,4 +1,3 @@
-print("cmp0")
 require("copilot").setup({
 	suggestion = { enabled = false },
 	panel = { enabled = false },
@@ -163,5 +162,4 @@ for name, color in pairs(colors) do
 	vim.cmd.hi("CmpItemKind" .. name .. " guifg=" .. color)
 end
 
-print("cmp")
-vim.keymap.set("n", "<leader>tc", "<cmd>Copilot toggle<cr>", { noremap = true, silent = true })
+require("skypex.utils").nmap("<leader>tc", "<cmd>Copilot toggle<cr>")

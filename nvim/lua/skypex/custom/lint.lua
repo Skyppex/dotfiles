@@ -15,13 +15,9 @@ M.lint = function()
 		css = { "stylelint" },
 	}
 
-	vim.keymap.set("n", "<leader>l", function()
+	require("skypex.utils").nmap("<leader>l", function()
 		lint.try_lint()
-	end, {
-		desc = "Lint current file",
-		noremap = true,
-		silent = true,
-	})
+	end, "Lint current file")
 
 	local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

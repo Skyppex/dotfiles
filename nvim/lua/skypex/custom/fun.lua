@@ -25,10 +25,11 @@ M.cellular_automation = function()
 
 	require("cellular-automaton").register_animation(slide)
 
-	vim.keymap.set("n", "<leader>fmir", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Make it rain" })
-	vim.keymap.set("n", "<leader>fgol", "<cmd>CellularAutomaton game_of_life<cr>", { desc = "Game of life" })
-	vim.keymap.set("n", "<leader>fscr", "<cmd>CellularAutomaton scramble<cr>", { desc = "Scramble" })
-	vim.keymap.set("n", "<leader>fsld", "<cmd>CellularAutomaton slide<cr>", { desc = "Slide" })
+	local nmap = require("skypex.utils").nmap
+	nmap("<leader>fmir", "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain")
+	nmap("<leader>fgol", "<cmd>CellularAutomaton game_of_life<cr>", "Game of life")
+	nmap("<leader>fscr", "<cmd>CellularAutomaton scramble<cr>", "Scramble")
+	nmap("<leader>fsld", "<cmd>CellularAutomaton slide<cr>", "Slide")
 end
 
 M.all = M.cellular_automation

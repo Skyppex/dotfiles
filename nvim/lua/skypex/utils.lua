@@ -4,6 +4,7 @@ local function get_home()
 	return string.gsub(home_drive .. home_path, "\\", "/")
 end
 
+--- @return string
 local function get_code_path()
 	local home = get_home()
 	if home:find("brage.ingebrigtsen") then
@@ -13,6 +14,7 @@ local function get_code_path()
 	end
 end
 
+--- @return string
 local function table_to_string(tbl)
 	local result = "{"
 	for k, v in pairs(tbl) do
@@ -46,62 +48,107 @@ local andromeda = {
 	purple = "#c74ded",
 }
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nmap = function(left, right, desc)
 	vim.keymap.set("n", left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local xmap = function(left, right, desc)
 	vim.keymap.set("x", left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local imap = function(left, right, desc)
 	vim.keymap.set("i", left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local smap = function(left, right, desc)
 	vim.keymap.set("s", left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local omap = function(left, right, desc)
 	vim.keymap.set("o", left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nxmap = function(left, right, desc)
 	vim.keymap.set({ "n", "x" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nimap = function(left, right, desc)
 	vim.keymap.set({ "n", "i" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nsmap = function(left, right, desc)
 	vim.keymap.set({ "n", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local ximap = function(left, right, desc)
 	vim.keymap.set({ "x", "i" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local xsmap = function(left, right, desc)
 	vim.keymap.set({ "x", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nximap = function(left, right, desc)
 	vim.keymap.set({ "n", "x", "i" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nxsmap = function(left, right, desc)
 	vim.keymap.set({ "n", "x", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nismap = function(left, right, desc)
 	vim.keymap.set({ "n", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local xismap = function(left, right, desc)
 	vim.keymap.set({ "x", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end
 
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nxismap = function(left, right, desc)
 	vim.keymap.set({ "n", "x", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
 end

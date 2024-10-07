@@ -26,39 +26,39 @@ require("telescope").load_extension("harpoon")
 
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
+local nmap = require("skypex.utils").nmap
 
-vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Add File to Harpoon", noremap = true, silent = true })
+nmap("<leader>a", mark.add_file, "Add File to Harpoon")
+nmap("<leader>e", ui.toggle_quick_menu, "Toggle Harpoon Menu")
 
-vim.keymap.set("n", "<leader>e", ui.toggle_quick_menu, { desc = "Toggle Harpoon Menu", noremap = true, silent = true })
-
-vim.keymap.set("n", "<A-h>", function()
+nmap("<A-h>", function()
 	ui.nav_file(1)
-end, { desc = "Navigate to Harpoon File 1", noremap = true, silent = true })
+end, "Navigate to Harpoon File 1")
 
-vim.keymap.set("n", "<A-j>", function()
+nmap("<A-j>", function()
 	ui.nav_file(2)
-end, { desc = "Navigate to Harpoon File 2", noremap = true, silent = true })
+end, "Navigate to Harpoon File 2")
 
-vim.keymap.set("n", "<A-k>", function()
+nmap("<A-k>", function()
 	ui.nav_file(3)
-end, { desc = "Navigate to Harpoon File 3", noremap = true, silent = true })
+end, "Navigate to Harpoon File 3")
 
-vim.keymap.set("n", "<A-l>", function()
+nmap("<A-l>", function()
 	ui.nav_file(4)
-end, { desc = "Navigate to Harpoon File 4", noremap = true, silent = true })
+end, "Navigate to Harpoon File 4")
 
-vim.keymap.set("n", "<A-n>", function()
+nmap("<A-n>", function()
 	ui.nav_file(5)
-end, { desc = "Navigate to Harpoon File 5", noremap = true, silent = true })
+end, "Navigate to Harpoon File 5")
 
-vim.keymap.set("n", "<A-m>", function()
+nmap("<A-m>", function()
 	ui.nav_file(6)
-end, { desc = "Navigate to Harpoon File 6", noremap = true, silent = true })
+end, "Navigate to Harpoon File 6")
 
-vim.keymap.set("n", "<A-,>", function()
+nmap("<A-,>", function()
 	ui.nav_file(7)
-end, { desc = "Navigate to Harpoon File 7", noremap = true, silent = true })
+end, "Navigate to Harpoon File 7")
 
-vim.keymap.set("n", "<A-.>", function()
+nmap("<A-.>", function()
 	ui.nav_file(8)
-end, { desc = "Navigate to Harpoon File 8", noremap = true, silent = true })
+end, "Navigate to Harpoon File 8")

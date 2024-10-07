@@ -1,5 +1,1 @@
-vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", {
-	desc = "Preview Markdown",
-	noremap = true,
-	silent = true,
-})
+require("skypex.utils").nmap("<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", "Preview Markdown")
