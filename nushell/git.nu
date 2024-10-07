@@ -28,7 +28,7 @@ alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str t
 alias gt = git add --intent-to-add
 
 # Conventional commit
-def cc [] {
+def cc [...message: string] {
     let type = gum filter --height=8 "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert"
 
     if ($type | is-empty) {
@@ -39,7 +39,11 @@ def cc [] {
     let scope = gum input --placeholder "scope"
     let scope = if ($scope | is-empty) { "" } else { $"\(($scope)\)" }
 
-    let summary = gum input --value $"($type + $scope): " --placeholder "Summary of this change"
+    let summary = if ($message | is-not-empty) {
+        $message | str join " "
+    } else {
+        gum input --value $"($type + $scope): " --placeholder "Summary of this change"
+    }
 
     if ($summary | is-empty) {
         print "No summary provided"
@@ -576,8 +580,8 @@ def gcapf [] {
 # Git commit and push
 def gcp [...message: string] {
     git add -A
-    let message = ($message | str join " ")
-    git commit -m $"($message)"
+    cc
+    gum confirm "Push changes?"
     git push
 }
 
