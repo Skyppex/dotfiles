@@ -46,9 +46,84 @@ local andromeda = {
 	purple = "#c74ded",
 }
 
+local nmap = function(left, right, desc)
+	vim.keymap.set("n", left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local xmap = function(left, right, desc)
+	vim.keymap.set("x", left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local imap = function(left, right, desc)
+	vim.keymap.set("i", left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local smap = function(left, right, desc)
+	vim.keymap.set("s", left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local omap = function(left, right, desc)
+	vim.keymap.set("o", left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nxmap = function(left, right, desc)
+	vim.keymap.set({ "n", "x" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nimap = function(left, right, desc)
+	vim.keymap.set({ "n", "i" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nsmap = function(left, right, desc)
+	vim.keymap.set({ "n", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local ximap = function(left, right, desc)
+	vim.keymap.set({ "x", "i" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local xsmap = function(left, right, desc)
+	vim.keymap.set({ "x", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nximap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "i" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nxsmap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nismap = function(left, right, desc)
+	vim.keymap.set({ "n", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local xismap = function(left, right, desc)
+	vim.keymap.set({ "x", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
+local nxismap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "i", "s" }, left, right, { desc = desc, noremap = true, silent = true })
+end
+
 return {
 	get_home = get_home,
 	get_code_path = get_code_path,
 	table_to_string = table_to_string,
 	andromeda = andromeda,
+	nmap = nmap,
+	xmap = xmap,
+	imap = imap,
+	smap = smap,
+	omap = omap,
+	nxmap = nxmap,
+	nimap = nimap,
+	nsmap = nsmap,
+	ximap = ximap,
+	xsmap = xsmap,
+	nximap = nximap,
+	nxsmap = nxsmap,
+	nismap = nismap,
+	xismap = xismap,
+	nxismap = nxismap,
 }
