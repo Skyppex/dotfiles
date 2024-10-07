@@ -29,7 +29,7 @@ alias gt = git add --intent-to-add
 
 # Conventional commit
 def cc [] {
-    let type = gum choose "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert"
+    let type = gum filter --height=8 "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert"
 
     if ($type | is-empty) {
         print "No type provided"
@@ -55,7 +55,7 @@ def cc [] {
     }
 
     gum confirm "Commit changes?"
-    git commit -m ($summary) -m ($description)
+    git commit -m $summary -m $description
 }
 
 # Git checkout but with fzf for branch selection
