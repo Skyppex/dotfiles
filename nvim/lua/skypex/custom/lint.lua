@@ -4,7 +4,7 @@ M.lint = function()
 	local lint = require("lint")
 
 	lint.linters_by_ft = {
-		go = { "golangci-lint" },
+		-- go = { "golangci-lint" },
 		javascript = { "eslint_d" },
 		typescript = { "eslint_d" },
 		javascriptreact = { "eslint_d" },
@@ -33,7 +33,7 @@ M.mason = function()
 	require("mason-nvim-lint").setup({
 		ensure_installed = {
 			"eslint_d",
-			"golangci-lint",
+			-- "golangci-lint",
 			"jsonlint",
 			"markdownlint",
 			"shellcheck",
