@@ -13,71 +13,38 @@ neotest.setup({
 		-- }),
 		require("neotest-rust")({
 			args = { "--no-capture" },
-			dap_adapter = "codelldb",
 		}),
 	},
 })
 
-vim.keymap.set("n", "<leader>nr", function()
+nmap("<leader>nr", function()
 	neotest.run.run()
-end, {
-	desc = "Run test",
-	noremap = true,
-	silent = true,
-})
+end, "Run test")
 
-vim.keymap.set("n", "<leader>nf", function()
+nmap("<leader>nf", function()
 	neotest.run.run(vim.fn.expand("%"))
-end, {
-	desc = "Run tests in file",
-	noremap = true,
-	silent = true,
-})
+end, "Run tests in file")
 
-vim.keymap.set("n", "<leader>nd", function()
+nmap("<leader>nd", function()
 	neotest.run.run({ strategy = "dap" })
-end, {
-	desc = "Debug test",
-	noremap = true,
-	silent = true,
-})
+end, "Debug test")
 
-vim.keymap.set("n", "<leader>ns", function()
+nmap("<leader>ns", function()
 	neotest.run.stop()
-end, {
-	desc = "Stop test",
-	noremap = true,
-	silent = true,
-})
+end, "Stop test")
 
-vim.keymap.set("n", "<leader>nsa", function()
+nmap("<leader>nsa", function()
 	neotest.run.stop(vim.fn.expand("%"))
-end, {
-	desc = "Stop all tests",
-	noremap = true,
-	silent = true,
-})
+end, "Stop all tests")
 
-vim.keymap.set("n", "<leader>na", function()
+nmap("<leader>na", function()
 	neotest.run.attach()
-end, {
-	desc = "Attach to test",
-	noremap = true,
-	silent = true,
-})
+end, "Attach to test")
 
-vim.keymap.set("n", "<leader>no", function()
+nmap("<leader>no", function()
 	neotest.output.open()
-end, {
-	desc = "Open test output",
-	noremap = true,
-	silent = true,
-})
+end, "Open test output")
 
-vim.keymap.set("n", "<leader>tn", function()
+nmap("<leader>tn", function()
 	neotest.summary.toggle()
-end, {
-	desc = "Toggle test summary",
-	noremap = true,
-	silent = true,
-})
+end, "Toggle test summary")

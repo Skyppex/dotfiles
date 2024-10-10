@@ -11,4 +11,8 @@ return {
 	config = function()
 		require("skypex.custom.neotest")
 	end,
+	-- "klen/nvim-test",
+	-- config = function()
+	-- 	require("skypex.custom.test")
+	-- end,
 }

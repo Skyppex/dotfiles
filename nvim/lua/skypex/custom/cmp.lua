@@ -75,7 +75,6 @@ cmp.setup({
 	view = {
 		entries = {
 			vertical_positioning = "above",
-			selection_order = "near_cursor",
 		},
 	},
 	mapping = cmp.mapping.preset.insert({

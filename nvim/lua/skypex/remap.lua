@@ -187,6 +187,8 @@ nmap("<leader><leader>c", function()
 	require("skypex.custom.cmp")
 	package.loaded["skypex.custom.dap"] = nil
 	require("skypex.custom.dap").all()
+	package.loaded["skypex.custom.db"] = nil
+	require("skypex.custom.db").all()
 	package.loaded["skypex.custom.format"] = nil
 	require("skypex.custom.format")
 	package.loaded["skypex.custom.fun"] = nil
@@ -221,6 +223,8 @@ nmap("<leader><leader>c", function()
 	require("skypex.custom.surround")
 	package.loaded["skypex.custom.telescope"] = nil
 	require("skypex.custom.telescope")
+	package.loaded["skypex.custom.test"] = nil
+	require("skypex.custom.test")
 	package.loaded["skypex.custom.theming"] = nil
 	require("skypex.custom.theming").all()
 	package.loaded["skypex.custom.treesitter"] = nil
