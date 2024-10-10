@@ -12,7 +12,6 @@ M.lint = function()
 		json = { "jsonlint" },
 		yaml = { "yamllint" },
 		markdown = { "markdownlint" },
-		css = { "stylelint" },
 	}
 
 	require("skypex.utils").nmap("<leader>l", function()
@@ -37,7 +36,6 @@ M.mason = function()
 			"jsonlint",
 			"markdownlint",
 			"shellcheck",
-			"stylelint",
 			"yamllint",
 		},
 		automatic_installation = true,

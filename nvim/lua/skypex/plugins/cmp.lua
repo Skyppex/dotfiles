@@ -55,6 +55,9 @@ return {
 				},
 				config = true,
 			},
+			{
+				"roobert/tailwindcss-colorizer-cmp.nvim",
+			},
 		},
 		config = function()
 			require("skypex.custom.cmp")

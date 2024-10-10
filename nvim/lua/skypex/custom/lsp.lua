@@ -393,8 +393,14 @@ local servers = {
 		end,
 		capabilities = capabilities,
 	},
+	tailwindcss = {
+		on_attach = function(_, bufnr)
+			require("tailwindcss-colors").buf_attach(bufnr)
+		end,
+	},
 }
 
+local no_config_servers = { "rust_analyzer" }
 local configs = require("lspconfig.configs")
 
 setup_nu_lsp(lspconfig, capabilities)
@@ -425,6 +431,7 @@ vim.list_extend(ensure_installed, {
 	"prettierd",
 	"python-lsp-server",
 	"typescript-language-server",
+	"tailwindcss-language-server",
 	-- "omnisharp",
 	-- "omnisharp_mono",
 })
@@ -438,8 +445,11 @@ require("mason-lspconfig").setup({
 			-- if string.find(server_name, "omnisharp") then
 			-- 	return
 			-- end
-			if string.find(server_name, "rust_analyzer") then
-				return
+
+			for _, name in ipairs(no_config_servers) do
+				if server_name == name then
+					return
+				end
 			end
 
 			-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
