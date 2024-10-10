@@ -512,3 +512,7 @@ def "dn test" [
     dotnet test --filter $"FullyQualifiedName~($selected)"
 }
 
+def "dn test all" [] {
+    dotnet test
+}
+

@@ -72,6 +72,12 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+	view = {
+		entries = {
+			vertical_positioning = "above",
+			selection_order = "near_cursor",
+		},
+	},
 	mapping = cmp.mapping.preset.insert({
 		["<S-A-j>"] = cmp.mapping.select_next_item(),
 		["<S-A-k>"] = cmp.mapping.select_prev_item(),

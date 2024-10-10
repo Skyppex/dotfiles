@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
-		"Issafalcon/neotest-dotnet",
+		-- "Issafalcon/neotest-dotnet",
 		"rouge8/neotest-rust",
 	},
 	config = function()
