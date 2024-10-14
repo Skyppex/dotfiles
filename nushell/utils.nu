@@ -72,27 +72,26 @@ def vim [
         return
     }
 
-    try {
-        let found_path = fd --type=d
-        | fzf --height 40% --layout=reverse -0 -1 --query $path
-
-        enter $found_path
-
-        if $verbose {
-            print $"Found path in zoxide: ($found_path)"
-        }
-
-        $stdin | nvim .
-        p
-    } catch {
+    if ($path | path exists) {
         if $verbose {
             print $"Found no path in zoxide. Entering nvim at '($path)'"
         }
 
         $stdin | nvim $path
         return
+    } 
+
+    let found_path = fd --type=d
+    | fzf --height 40% --layout=reverse -0 -1 --query $path
+
+    enter $found_path
+
+    if $verbose {
+        print $"Found path in zoxide: ($found_path)"
     }
 
+    $stdin | nvim .
+    p
 }
 
 def "fix shada" [] {

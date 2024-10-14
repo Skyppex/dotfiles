@@ -385,6 +385,7 @@ def "dn test" [
 ] {
     let test_folders = ls -f
     | get name
+    | str downcase
     | where ($it | str contains "test")
     | where ($it | path type | str contains "dir")
 

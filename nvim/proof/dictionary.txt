@@ -233,3 +233,12 @@ themaxmarchuk
 jsx
 xl
 google
+png
+jpeg
+bmp
+webp
+bakgrunnsjobb
+ikke
+aktivert
+downcase
+deconstruct
