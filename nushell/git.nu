@@ -327,7 +327,21 @@ def gb [
     }
 
     if $set_upstream {
+        let branch = git branch --show-current
+        print $"Select upstream branch for ($branch)"
 
+        let remote_branches = git branch --all 
+        | lines 
+        | str substring 2.. 
+        | where ($it | str starts-with "remotes")
+        | str substring 8..
+
+        let selected = $remote_branches | to text | fzf --height 40% --layout=reverse -0 -1
+        print $"Selected ($selected)"
+
+        print $"Setting upstream branch for ($branch) to ($selected)"
+        git branch --set-upstream-to=($selected) ($branch)
+        return
     }
 
     git branch
