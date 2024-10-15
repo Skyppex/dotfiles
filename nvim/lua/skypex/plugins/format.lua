@@ -1,7 +1,7 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "BufReadPre",
 		config = function()
 			require("skypex.custom.format")
 		end,

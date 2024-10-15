@@ -6,15 +6,7 @@ local nxmap = utils.nxmap
 local ximap = utils.ximap
 local xismap = utils.xismap
 
-local nvim_config_path = string.gsub(vim.fn.stdpath("config") .. "", "\\", "/")
-local skypex_config_path = nvim_config_path .. "/lua/skypex/config.lua"
-local remap_path = nvim_config_path .. "/lua/skypex/remap.lua"
-
 nmap("<leader>v", vim.cmd.Ex)
-nmap("<leader>so", function()
-	vim.cmd("source " .. skypex_config_path)
-	vim.cmd("source " .. remap_path)
-end, "Source config")
 
 -- TIP: Disable arrow keys in insert mode and x mode
 ximap("<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
@@ -151,6 +143,15 @@ nmap("<leader>|", function()
 		local keys = vim.api.nvim_replace_termcodes("f|i<CR><Esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
+end)
+
+-- Disable jump list for some motions
+nxmap("{", function()
+	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "{"')
+end)
+
+nxmap("}", function()
+	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "}"')
 end)
 
 -- Increment and decrement numbers

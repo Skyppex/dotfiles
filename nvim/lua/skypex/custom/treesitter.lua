@@ -131,6 +131,11 @@ local filetype_map = {
 		commentstring = "#%s",
 	},
 	{
+		pattern = ".dockerignore",
+		filetype = "gitignore",
+		commentstring = "#%s",
+	},
+	{
 		pattern = "*.cake",
 		filetype = "cs",
 		commentstring = "//%s",
