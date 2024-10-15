@@ -914,6 +914,6 @@ def "push" [] {
     manifest update
     enter-old $"($nu.home-path)/.config"
     print "---- pushing config ----"
-    gcp "update config files"
+    gcp
     p
 }
