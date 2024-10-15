@@ -23,3 +23,14 @@ nnoremap <leader>ca :action ShowIntentionActions<cr>
 nnoremap <leader>hj :action AceWordStartAction<cr>
 nnoremap <leader>hl :action AceLineAction<cr>
 nnoremap <leader>hp :action AceTargetAction<cr>
+
+nnoremap <leader>db :action ToggleLineBreakpoint<cr>
+nnoremap <leader>dB :action AddConditionalBreakpoint<cr>
+nnoremap <leader>de :action ToggleBreakpointEnabled<cr>
+nnoremap <leader>dr :action Resume<cr>
+nnoremap <leader>dl :action StepOver<cr>
+nnoremap <leader>dk :action StepOut<cr>
+nnoremap <leader>dj :action StepInto<cr>
+nnoremap <leader>ds :action Stop<cr>
+
+nnoremap <leader>nd :action RiderUnitTestContextAction<cr>

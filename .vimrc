@@ -16,3 +16,11 @@ vnoremap J :m '>+1<CR>gv=gv
 
 vnoremap <silent> < <gv
 vnoremap <silent> > >gv
+
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>d "+d
+
+xnoremap <leader>y "+y
+xnoremap <leader>p "+p
+xnoremap <leader>d "+d

@@ -21,6 +21,7 @@ require("conform").setup({
 		},
 		json = {
 			command = "jq",
+			args = { "--monochrome-output" },
 		},
 		nufmt = {
 			command = "nufmt",
@@ -32,19 +33,19 @@ require("conform").setup({
 		python = { "isort", "black" },
 
 		-- Tries to run each formatter until one succeeds
-		javascript = { { "prettierd", "prettier" } },
-		javascriptreact = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
-		typescriptreact = { { "prettierd", "prettier" } },
-		css = { { "prettierd", "prettier" } },
-		scss = { { "prettierd", "prettier" } },
-		json = { { "jq", "prettierd", "prettier" } },
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		css = { "prettierd", "prettier", stop_after_first = true },
+		scss = { "prettierd", "prettier", stop_after_first = true },
+		json = { "jq", "prettierd", "prettier", stop_after_first = true },
 		cs = { "csharpier" },
 		csx = { "csharpier" },
 		go = { "gofmt" },
 		xml = { "xmlformatter" },
-		yaml = { { "yamlfix", "prettierd", "prettier" } },
-		markdown = { { "markdownlint", "prettierd", "prettier" } },
+		yaml = { "yamlfix", "prettierd", "prettier", stop_after_first = true },
+		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
 		nu = { "nufmt" },
 	},
 })

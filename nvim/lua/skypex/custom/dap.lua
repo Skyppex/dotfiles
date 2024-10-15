@@ -76,11 +76,11 @@ M.dap = function()
 		dap.step_over()
 	end, "Step Over")
 
-	nmap("<leader>dk", function()
+	nmap("<leader>dj", function()
 		dap.step_into()
 	end, "Step Into")
 
-	nmap("<leader>dj", function()
+	nmap("<leader>dk", function()
 		dap.step_out()
 	end, "Step Out")
 

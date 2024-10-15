@@ -51,6 +51,8 @@ require("nvim-treesitter.configs").setup({
 				["at"] = "@class.outer",
 				["il"] = "@loop.inner",
 				["al"] = "@loop.outer",
+				["ic"] = "@comment.inner",
+				["ac"] = "@comment.outer",
 			},
 			include_surrounding_whitespace = true,
 		},
@@ -60,18 +62,22 @@ require("nvim-treesitter.configs").setup({
 			goto_next_start = {
 				["æf"] = "@function.outer",
 				["æt"] = "@class.outer",
+				["æc"] = "@comment.outer",
 			},
 			goto_next_end = {
 				["æF"] = "@function.outer",
 				["æT"] = "@class.outer",
+				["æC"] = "@comment.outer",
 			},
 			goto_previous_start = {
 				["åf"] = "@function.outer",
 				["åt"] = "@class.outer",
+				["åc"] = "@comment.outer",
 			},
 			goto_previous_end = {
 				["åF"] = "@function.outer",
 				["åT"] = "@class.outer",
+				["åC"] = "@comment.outer",
 			},
 		},
 		swap = {

@@ -6,6 +6,15 @@ local function all_snippets(ls)
 	ls.add_snippets("all", {})
 end
 
+local function js_snippets(ls)
+	local t = ls.text_node
+
+	ls.add_snippets("js", {
+		trig = "jsdoc",
+		t("/**\n * ${1}\n */"),
+	})
+end
+
 M.friendly_snippets = function()
 	require("luasnip.loaders.from_vscode").lazy_load()
 end
@@ -21,6 +30,7 @@ M.luasnip = function()
 	ls.setup()
 
 	all_snippets(ls)
+	-- js_snippets(ls)
 
 	nmap("<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
 end

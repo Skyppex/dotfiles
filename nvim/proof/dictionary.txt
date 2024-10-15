@@ -242,3 +242,6 @@ ikke
 aktivert
 downcase
 deconstruct
+typedef
+jsdoc
+xnoremap

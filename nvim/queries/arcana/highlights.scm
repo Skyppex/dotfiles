@@ -109,9 +109,7 @@
 ] @operator
 
 (line_comment) @comment @spell
-
-(block_comment
-  "/" @comment) @comment @spell
+(block_comment) @comment @spell
 
 (string) @string @spell
 
