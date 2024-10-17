@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1729009817000)\/",
+                "value": "\/Date(1729196882000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 18:30:17"
+                "DateTime": "torsdag 17. oktober 2024 22:28:02"
             },
             "Manifests": 1344
         },
@@ -14,19 +14,19 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1729009949000)\/",
+                "value": "\/Date(1729197035000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 18:32:29"
+                "DateTime": "torsdag 17. oktober 2024 22:30:35"
             },
-            "Manifests": 2086
+            "Manifests": 2088
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1729010508000)\/",
+                "value": "\/Date(1729197291000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 18:41:48"
+                "DateTime": "torsdag 17. oktober 2024 22:34:51"
             },
             "Manifests": 469
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1729009774000)\/",
+                "value": "\/Date(1729196824000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 18:29:34"
+                "DateTime": "torsdag 17. oktober 2024 22:27:04"
             },
             "Manifests": 329
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1728951375000)\/",
+                "value": "\/Date(1729124121000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 02:16:15"
+                "DateTime": "torsdag 17. oktober 2024 02:15:21"
             },
             "Manifests": 257
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1728967883000)\/",
+                "value": "\/Date(1729140645000)\/",
                 "DisplayHint": 2,
-                "DateTime": "tirsdag 15. oktober 2024 06:51:23"
+                "DateTime": "torsdag 17. oktober 2024 06:50:45"
             },
-            "Manifests": 13724
+            "Manifests": 13848
         },
         {
             "Name": "okibcn",
@@ -156,8 +156,8 @@
             "Info": "",
             "Source": "main",
             "Name": "curl",
-            "Version": "8.10.1_3",
-            "Updated": "\/Date(1728330557197)\/"
+            "Version": "8.10.1_6",
+            "Updated": "\/Date(1729199290015)\/"
         },
         {
             "Info": "",
@@ -226,8 +226,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "flow-launcher",
-            "Version": "1.19.2",
-            "Updated": "\/Date(1728494854907)\/"
+            "Version": "1.19.3",
+            "Updated": "\/Date(1729199322162)\/"
         },
         {
             "Info": "",
@@ -247,8 +247,8 @@
             "Info": "",
             "Source": "main",
             "Name": "gh",
-            "Version": "2.58.0",
-            "Updated": "\/Date(1727879522112)\/"
+            "Version": "2.59.0",
+            "Updated": "\/Date(1729092913229)\/"
         },
         {
             "Info": "",
@@ -450,8 +450,8 @@
             "Info": "",
             "Source": "main",
             "Name": "nu",
-            "Version": "0.98.0",
-            "Updated": "\/Date(1728574600206)\/"
+            "Version": "0.99.0",
+            "Updated": "\/Date(1729199670381)\/"
         },
         {
             "Info": "",
@@ -464,8 +464,8 @@
             "Info": "",
             "Source": "kkzzhizhou",
             "Name": "openjdk",
-            "Version": "21.0.2-13",
-            "Updated": "\/Date(1725706014815)\/"
+            "Version": "23.0.1-11",
+            "Updated": "\/Date(1729199360705)\/"
         },
         {
             "Info": "",
@@ -604,8 +604,8 @@
             "Info": "",
             "Source": "main",
             "Name": "starship",
-            "Version": "1.20.1",
-            "Updated": "\/Date(1722458642625)\/"
+            "Version": "1.21.0",
+            "Updated": "\/Date(1729199362982)\/"
         },
         {
             "Info": "",

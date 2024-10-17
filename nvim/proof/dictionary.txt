@@ -278,3 +278,7 @@ yml
 zbirenbaum
 zsh
 txn
+gf
+ewgk
+ewgf
+golangcilint

@@ -1,7 +1,13 @@
+--- @return string, integer
 local function get_home()
 	local home_drive = os.getenv("HOMEDRIVE")
 	local home_path = os.getenv("HOMEPATH")
 	return string.gsub(home_drive .. home_path, "\\", "/")
+end
+
+--- @return string
+local function get_config_path()
+	return get_home() .. "/.config"
 end
 
 --- @return string
@@ -12,6 +18,16 @@ local function get_code_path()
 	else
 		return "D:/code/"
 	end
+end
+
+--- @return boolean
+local function is_work_computer()
+	return get_home():find("brage.ingebrigtsen") ~= nil
+end
+
+--- @return boolean
+local function is_home_computer()
+	return not is_work_computer()
 end
 
 --- @return string
@@ -156,6 +172,9 @@ end
 return {
 	get_home = get_home,
 	get_code_path = get_code_path,
+	get_config_path = get_config_path,
+	is_home_computer = is_home_computer,
+	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,
 	andromeda = andromeda,
 	nmap = nmap,

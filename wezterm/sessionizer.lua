@@ -10,6 +10,7 @@ local config_path = utils.get_config_path()
 local temp_path
 local code_path
 local code_path_2
+local obsidian_path = home .. "/OneDrive/Obsidian"
 
 if utils.is_work_computer() then
 	temp_path = home .. "/dev/temp/"
@@ -35,6 +36,7 @@ M.toggle = function(window, pane)
 		code_path,
 		code_path_2,
 		config_path,
+		obsidian_path,
 		-- add more paths here
 	})
 

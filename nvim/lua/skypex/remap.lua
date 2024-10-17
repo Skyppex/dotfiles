@@ -50,10 +50,28 @@ nmap("<Esc>", "<cmd>nohlsearch<CR>")
 xismap("<C-c>", "<Esc>")
 
 -- Diagnostic keymaps
-nmap("åd", vim.diagnostic.goto_prev, "Go to previous Diagnostic message")
-nmap("æd", vim.diagnostic.goto_next, "Go to next Diagnostic message")
-nmap("<leader>de", vim.diagnostic.open_float, "Show diagnostic Error messages")
-nmap("<leader>dq", vim.diagnostic.setloclist, "Open diagnostic Quickfix list")
+local function jump_to_diagnostic(direction)
+	local diagnostics = vim.diagnostic.get(0)
+
+	if #diagnostics == 0 then
+		print("No diagnostics found")
+		return
+	end
+
+	table.sort(diagnostics, function(a, b)
+		return a.severity < b.severity
+	end)
+
+	direction({ severity = diagnostics[1].severity })
+end
+
+nmap("åd", function()
+	jump_to_diagnostic(vim.diagnostic.goto_prev)
+end, "Go to previous Diagnostic message")
+
+nmap("æd", function()
+	jump_to_diagnostic(vim.diagnostic.goto_next)
+end, "Go to next Diagnostic message")
 
 -- Disable arrow keys in normal mode
 nmap("<left>", '<cmd>echo "Use h to move!!"<CR>')
@@ -84,36 +102,6 @@ nxmap("'", '"')
 -- Indent in visual mode stays in visual mode
 xmap("<", "<gv")
 xmap(">", ">gv")
-
--- Camel case motion
-nmap("<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
-nmap("<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
-
-omap("<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
-
-nmap("<leader>ciC", "<left>/\\u<CR>N<right>", "Camel/Pascal Case Word Back")
-nmap("<leader>cic", "/\\u<CR><left>", "Camel/Pascal Case Word")
-
-xmap("<leader>cC", "<left>/\\u<CR>N", "Camel/Pascal Case Word Back")
-xmap("<leader>cc", "/\\u<CR>", "Camel/Pascal Case Word")
-
-xmap("<leader>ciC", "<left>/\\u<CR>N<right>", "Camel/Pascal Case Word Back")
-xmap("<leader>cic", "/\\u<CR><left>", "Camel/Pascal Case Word")
-
--- Snake case motion
-nmap("<leader>cS", "<left>/_<CR>N", "Snake Case Word Back")
-nmap("<leader>cs", "/_<CR>", "Snake Case Word")
-
-omap("<leader>cs", "/_<CR>", "Snake Case Word")
-
-nmap("<leader>ciS", "<left>/_<CR>N<right>", "Snake Case Word Back")
-nmap("<leader>cis", "/_<CR><left>", "Snake Case Word")
-
-xmap("<leader>cS", "<left>/_<CR>N", "Snake Case Word Back")
-xmap("<leader>cs", "/_<CR>", "Snake Case Word")
-
-xmap("<leader>ciS", "<left>/_<CR>N<right>", "Snake Case Word Back")
-xmap("<leader>cis", "/_<CR><left>", "Snake Case Word")
 
 -- Redo
 nmap("U", "<C-r>", "Redo")

@@ -4,14 +4,13 @@ M.lint = function()
 	local lint = require("lint")
 
 	lint.linters_by_ft = {
-		-- go = { "golangci-lint" },
+		go = { "golangcilint" },
 		javascript = { "eslint_d" },
 		typescript = { "eslint_d" },
 		javascriptreact = { "eslint_d" },
 		typescriptreact = { "eslint_d" },
 		json = { "jsonlint" },
 		yaml = { "yamllint" },
-		markdown = { "markdownlint" },
 	}
 
 	require("skypex.utils").nmap("<leader>l", function()
@@ -32,9 +31,8 @@ M.mason = function()
 	require("mason-nvim-lint").setup({
 		ensure_installed = {
 			"eslint_d",
-			-- "golangci-lint",
+			"golangcilint",
 			"jsonlint",
-			"markdownlint",
 			"shellcheck",
 			"yamllint",
 		},
