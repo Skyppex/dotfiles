@@ -201,10 +201,16 @@ alias md = mkdir
 
 # Pseudo alias to gits bash command which can parse \r\n line endings
 def bash [
+    --version(-v) # Print the version of bash
     ...args: string
 ] {
     let cmd = $env.SCOOP_APPS + "/git/current/bin/bash.exe"
 
+    if $version {
+        nu --commands $"($cmd) --version"
+        return
+    }
+    
     if ($args | is-empty) {
         nu --commands $cmd
     } else {
