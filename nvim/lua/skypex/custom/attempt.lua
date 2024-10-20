@@ -1,7 +1,7 @@
 local attempt = require("attempt")
 
 attempt.setup({
-	ext_options = { "lua", "py", "cs", "rs", "ar", "http", "" },
+	ext_options = { "lua", "py", "cs", "js", "rs", "ar", "http", "" },
 	run = {
 		cs = { "w", "!dotnet script %" },
 		py = { "w !python" }, -- Either table of strings or lua functions

@@ -284,3 +284,11 @@ ewgf
 golangcilint
 pbi
 qcd
+sy
+fprintf
+lipglos
+scanln
+errorf
+golang
+charmbracelet
+prefetch
