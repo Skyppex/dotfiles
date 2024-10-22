@@ -876,6 +876,7 @@ $env.PROMPT_INDICATOR_VI_INSERT = ""
 $env.PROMPT_INDICATOR_VI_NORMAL = ""
 $env.PROMPT_MULTILINE_INDICATOR = ""
 
+use std/dirs shells-aliases *
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 
 # Remember the old enter command
