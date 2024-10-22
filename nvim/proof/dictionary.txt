@@ -292,3 +292,15 @@ errorf
 golang
 charmbracelet
 prefetch
+altgr
+komorebic
+whkd
+taskkill
+pwsh
+wshell
+firefox
+oem
+spotify
+komorebi
+ultrawide
+bsp

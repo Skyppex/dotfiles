@@ -84,8 +84,11 @@ nmap("<C-w>j", "<C-w><C-j>", "Move focus to the lower window")
 nmap("<C-w>k", "<C-w><C-k>", "Move focus to the upper window")
 nmap("<C-w>l", "<C-w><C-l>", "Move focus to the right window")
 
-nmap("<C-w>-", "<C-w>s", "Split window below")
-nmap("<C-w>|", "<C-w>v", "Split window right")
+nmap("<C-w>-", '<cmd>echo "Use <C-w>, to split window below!!"<CR>')
+nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split window right!!"<CR>')
+
+nmap("<C-w>,", "<C-w>s", "Split window below")
+nmap("<C-w>.", "<C-w>v", "Split window right")
 
 nmap("<C-w><C-y>", "3<C-w><", "Shrink window horizontal")
 nmap("<C-w><C-u>", "3<C-w>-", "Grow window horizontal")
