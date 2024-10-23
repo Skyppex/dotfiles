@@ -7,6 +7,8 @@ Komorebic(cmd) {
 
 #r::Reload
 
+#Delete::Run("rundll32.exe user32.dll,LockWorkStation")
+
 #q::Komorebic("close")
 
 ; Focus windows
@@ -28,14 +30,6 @@ Komorebic(cmd) {
         Run("wezterm-gui.exe")
     } else {
         WinActivate("ahk_exe wezterm-gui.exe")
-    }
-}
-
-#d::{
-    if !WinExist("ahk_exe discord-portable.exe") {
-        Run("discord-portable.exe")
-    } else {
-        WinActivate("ahk_exe discord-portable.exe")
     }
 }
 

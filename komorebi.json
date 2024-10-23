@@ -25,10 +25,12 @@
     "fps": 60
   },
   "stackbar": {
+    "label": "Process",
     "height": 20,
     "mode": "OnStack",
     "tabs": {
-      "width": 150
+      "width": 150,
+      "font_family": "JetBrains Mono"
     }
   },
   "monitors": [
