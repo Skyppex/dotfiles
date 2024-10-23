@@ -15,19 +15,27 @@ Komorebic(cmd) {
 #k::Komorebic("focus up")
 #l::Komorebic("focus right")
 
-; #b::{
-;     if !WinExist("ahk_exe opera.exe") {
-;         Run("opera.exe")
-;     } else {
-;         WinActivate("ahk_exe opera.exe")
-;     }
-; }
+#b::{
+    if !WinExist("ahk_exe opera.exe") {
+        Run("opera.exe")
+    } else {
+        WinActivate("ahk_exe opera.exe")
+    }
+}
 
 #t::{
     if !WinExist("ahk_exe wezterm-gui.exe") {
         Run("wezterm-gui.exe")
     } else {
         WinActivate("ahk_exe wezterm-gui.exe")
+    }
+}
+
+#d::{
+    if !WinExist("ahk_exe discord-portable.exe") {
+        Run("discord-portable.exe")
+    } else {
+        WinActivate("ahk_exe discord-portable.exe")
     }
 }
 

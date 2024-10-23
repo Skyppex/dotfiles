@@ -17,9 +17,9 @@
   },
   "font_family": "JetBrains Mono",
   "theme": {
-    "palette": "Base16",
-    "name": "Ashes",
-    "accent": "Base0D"
+    "palette": "Catppuccin",
+    "name": "Mocha",
+    "accent": "Lavender"
   },
   "left_widgets": [
     {

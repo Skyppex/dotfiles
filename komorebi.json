@@ -9,15 +9,20 @@
   "border_width": 4,
   "border_offset": -1,
   "theme": {
-    "palette": "Base16",
-    "name": "Ashes",
-    "unfocused_border": "Base03",
-    "bar_accent": "Base0D"
+    "palette": "Catppuccin",
+    "name": "Mocha",
+    "unfocused_border": "Base",
+    "bar_accent": "Mauve",
+    "single_border": "Mauve",
+    "stack_border": "Red",
+    "stackbar_focused_text": "Red",
+    "stackbar_unfocused_text": "Subtext0"
   },
   "animation": {
     "enabled": false,
-    "duration": 200,
-    "style": "EaseOutQuad"
+    "duration": 100,
+    "style": "EaseOutQuad",
+    "fps": 60
   },
   "stackbar": {
     "height": 20,

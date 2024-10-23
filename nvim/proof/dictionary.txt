@@ -304,3 +304,6 @@ spotify
 komorebi
 ultrawide
 bsp
+egui
+catppuccin
+stackbar
