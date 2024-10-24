@@ -7,9 +7,10 @@ Komorebic(cmd) {
 
 #r::Reload
 
-#Delete::Run("rundll32.exe user32.dll,LockWorkStation")
+#Delete::Return
 
 #q::Komorebic("close")
+#i::Komorebic("minimize")
 
 ; Focus windows
 #h::Komorebic("focus left")
