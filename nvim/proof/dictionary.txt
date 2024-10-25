@@ -314,3 +314,6 @@ rgba
 keyframe
 taskbar
 btn
+timezone
+ipinfo
+weatherapi

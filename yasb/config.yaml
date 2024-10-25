@@ -19,13 +19,15 @@ bars:
     class_name: "yasb-bar"
     alignment:
       position: "top"
-      center: false
+      center: true
     blur_effect:
-      enabled: true # Blur effect will be applied to the bar
+      enabled: false # Blur effect will be applied to the bar
       acrylic: false # Acrylic effect will be applied to the bar
       dark_mode: false # Dark mode will add more shadow to the bar
       round_corners: false # Default radius from OS
-      border_color: System # None, System or HEX color (this option is related to round_corners=true)
+      # None, System or HEX color (this option is related to round_corners=true)
+      border_color: System
+
     window_flags:
       always_on_top: false
       windows_app_bar: true
@@ -39,32 +41,30 @@ bars:
       right: 0
     widgets:
       left:
-        [
-          "komorebi_active_layout",
-          "active_window"
-        ]
-      center: [
-         "clock",
-          "github",
-        ]
+        - "komorebi_active_layout"
+        - "active_window"
+      center:
+        - "clock"
+        - "github"
       right:
-        [
-          "media",
-          "wifi",
-          "cpu",
-          "memory",
-        ]
+        - "media"
+        - "wifi"
+        - "cpu"
+        - "memory"
+
 widgets:
   disk:
     type: "yasb.disk.DiskWidget"
     options:
-        label: "{volume_label} {space[used][percent]}"
-        label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
-        volume_label: "C"
-        update_interval: 60 # Update interval in seconds
-        callbacks:
-          on_middle: "do_nothing"
-          on_right: "exec explorer C:\\" # Open disk C in file explorer
+      label: "{volume_label} {space[used][percent]}"
+      label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
+      volume_label: "C"
+      # Update interval in seconds
+      update_interval: 60
+      callbacks:
+        on_middle: "do_nothing"
+        # Open disk C in file explorer
+        on_right: "exec explorer C:\\"
 
   media:
     type: "yasb.media.MediaWidget"
@@ -80,7 +80,8 @@ widgets:
       hide_empty: true
       thumbnail_alpha: 80
       thumbnail_padding: 8
-      thumbnail_corner_radius: 16 # Set to 0 for square corners
+      # Set to 0 for square corners
+      thumbnail_corner_radius: 16
       icons:
         prev_track: "\ue892"
         next_track: "\ue893"
@@ -90,14 +91,14 @@ widgets:
   active_window:
     type: "yasb.active_window.ActiveWindowWidget"
     options:
-      label: "{win[title]}"
+      label: "{win[process][name]}"
       label_alt: "[class_name='{win[class_name]}' exe='{win[process][name]}' hwnd={win[hwnd]}]"
       label_no_window: ""
       label_icon: true
       label_icon_size: 16
       max_length: 56
       max_length_ellipsis: "..."
-      monitor_exclusive: true
+      monitor_exclusive: false
 
   battery:
     type: "yasb.battery.BatteryWidget"
@@ -112,9 +113,10 @@ widgets:
     options:
       label: "{%a %d, %b %H:%M}"
       label_alt: "{%A %d %B %Y, %H:%M}"
-      #locale: 'en_EN' # Langugae for date, you can set your own, example fr_FR
-      timezones: ["Europe/Oslo"] #Looking up time zone info from registry
-      #timezones: ["America/Montreal"]
+      # locale: 'en_EN' # Language for date, you can set your own, example fr_FR
+      # Looking up time zone info from registry
+      timezones: ["Europe/Oslo"]
+      # timezones: ["America/Montreal"]
 
   cpu:
     type: "yasb.cpu.CpuWidget"
@@ -157,19 +159,19 @@ widgets:
   komorebi_workspaces:
     type: "komorebi.workspaces.WorkspaceWidget"
     options:
-        label_offline: "Komorebi Offline"
-        label_workspace_btn: "\udb81\udc3d"
-        label_workspace_active_btn: "\udb81\udc3e"
-        label_default_name: "{index}"
-        label_zero_index: false
-        hide_empty_workspaces: false
-        hide_if_offline: false
-        animation: true
-        container_padding:
-          top: 0
-          left: 8
-          bottom: 0
-          right: 8
+      label_offline: "Komorebi Offline"
+      label_workspace_btn: "\udb81\udc3d"
+      label_workspace_active_btn: "\udb81\udc3e"
+      label_default_name: "{index}"
+      label_zero_index: false
+      hide_empty_workspaces: false
+      hide_if_offline: false
+      animation: true
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
 
   komorebi_active_layout:
     type: "komorebi.active_layout.ActiveLayoutWidget"
@@ -234,20 +236,24 @@ widgets:
       callbacks:
         on_left: "toggle_label"
         on_middle: "exec cmd /c ncpa.cpl" # open network settings
-        on_right: "exec cmd /c start https://ipinfo.io/{data[ip]} " # open ipinfo in browser
+        # open ipinfo in browser
+        on_right: "exec cmd /c start https://ipinfo.io/{data[ip]} "
 
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
       label: "<span>{icon}</span> {temp_c}"
       label_alt: "{location}: Min {min_temp_c}, Max {max_temp_c}, Humidity {humidity}"
-      api_key: '3bf4cf9a7c3f40d6b31174128242807' # Get your free API key from https://www.weatherapi.com/
+      # Get your free API key from https://www.weatherapi.com/
+      api_key: '3bf4cf9a7c3f40d6b31174128242807'
       update_interval: 600 # Update interval in seconds, Min 600 seconds
       hide_decimal: true
-      location: 'Los Angeles, CA, USA' # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE}, or just city.
+      # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE},
+      # or just city.
+      location: 'Los Angeles, CA, USA'
       callbacks:
         on_left: "toggle_label"
-      icons: 
+      icons:
         sunnyDay: "\ue30d"
         clearNight: "\ue32b"
         cloudyDay: "\udb81\udd99"
@@ -259,7 +265,8 @@ widgets:
         blizzard: "\uebaa"
         default: "\uebaa"
         # https://www.weatherapi.com/docs/
-        # Usage {temp_c}, {min_temp_c}, {max_temp_c}, {temp_f}, {min_temp_f}, {max_temp_f}, {location}, {humidity}, {icon}, {conditions}
+        # Usage {temp_c}, {min_temp_c}, {max_temp_c}, {temp_f}, {min_temp_f},
+        # {max_temp_f}, {location}, {humidity}, {icon}, {conditions}
 
   volume:
     type: "yasb.volume.VolumeWidget"
@@ -282,19 +289,19 @@ widgets:
       uptime: True
       blur: False
       blur_background: True
-      animation_duration: 300 # Milisecond 
+      animation_duration: 300 # Milisecond
       button_row: 3 # Number of buttons in row, min 1 max 5
       buttons:
-        lock: ["\uea75","Lock"]
-        signout: ["\udb80\udf43","Sign out"]
+        lock: ["\uea75", "Lock"]
+        signout: ["\udb80\udf43", "Sign out"]
         #sleep: ["\u23fe","Sleep"]
-        shutdown: ["\uf011","Shut Down"]
-        restart: ["\uead2","Restart"]
-        hibernate: ["\uf28e","Hibernate"]
-        cancel: ["\udb81\udf3a","Cancel"]
-        #force_shutdown: ["\uf011","Force Shut Down"]
-        #force_restart: ["\uead2","Force Restart"]
- 
+        shutdown: ["\uf011", "Shut Down"]
+        restart: ["\uead2", "Restart"]
+        hibernate: ["\uf28e", "Hibernate"]
+        cancel: ["\udb81\udf3a", "Cancel"]
+        #force_shutdown: ["\uf011", "Force Shut Down"]
+        #force_restart: ["\uead2", "Force Restart"]
+
 
   apps:
     type: "yasb.applications.ApplicationsWidget"
@@ -307,21 +314,25 @@ widgets:
         #- {icon: "\uf46a", launch: "cmd.exe /c start ms-settings:windowsupdate"}
         - {icon: "\uf422", launch: "search"}
         #- {icon: "\udb84\udf55", launch: "widget"}
-        # Currently available to use quick_settings, notification_center, search, widget, launcher (launcher will trigger ALT+A)
+        # Currently available to use quick_settings, notification_center,
+        # search, widget, launcher (launcher will trigger ALT+A)
 
   github:
     type: "yasb.github.GithubWidget"
     options:
       label: "<span>\ueba1</span>"
-      label_alt: "Notifications {data}" # {data} return number of unread notification
-      token: env # GitHub Personal access tokens (classic) https://github.com/settings/tokens
+      # {data} return number of unread notification
+      label_alt: "Notifications {data}"
+      # GitHub Personal access tokens (classic) https://github.com/settings/tokens
+      token: env
       # You can set token: env, this means you have to set YASB_GITHUB_TOKEN in environment variable
-      max_notification: 20 # Max number of notification displaying in menu max: 50
-      only_unread: false # Show only unread or all notifications; 
+      # Max number of notification displaying in menu max: 50
+      max_notification: 20
+      only_unread: false # Show only unread or all notifications;
       max_field_size: 54 # Max characters in title before truncation.
-      menu_width: 400 
-      menu_height: 400 
-      menu_offset: 240 
+      menu_width: 400
+      menu_height: 400
+      menu_offset: 240
       update_interval: 300 # Check for new notification in seconds
 
   wallapers:
@@ -330,7 +341,8 @@ widgets:
       label: "<span>\udb83\ude09</span>"
       image_path: "C:\\Users\\xxx\\Images" # Path to folder with images
       change_automatically: false # Automatically change wallpaper
-      update_interval: 60 # If change_automatically is true, update interval in seconds
+      # If change_automatically is true, update interval in seconds
+      update_interval: 60
 
   taskbar:
     type: "yasb.taskbar.TaskbarWidget"
