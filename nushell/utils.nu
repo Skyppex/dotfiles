@@ -322,3 +322,21 @@ def "parse table" [
     $rows
 }
 
+# Specify a color to echo (gray|light_gray|lighter_gray|orange|pink|blue|cyan|yellow|green|white|black|purple)
+def "andromeda" [] {
+    echo "Specify a color to echo (gray|light_gray|lighter_gray|orange|pink|blue|cyan|yellow|green|white|black|purple)"
+}
+
+alias "andromeda gray" = echo "#23262e"
+alias "andromeda light_gray" = echo "#373941"
+alias "andromeda lighter_gray" = echo "#857e89"
+alias "andromeda orange" = echo "#f39c12"
+alias "andromeda pink" = echo "#ff00aa"
+alias "andromeda blue" = echo "#7cb7ff"
+alias "andromeda cyan" = echo "#00e8c6"
+alias "andromeda yellow" = echo "#ffe66d"
+alias "andromeda green" = echo "#96e072"
+alias "andromeda white" = echo "#d5ced9"
+alias "andromeda black" = echo "#181a16"
+alias "andromeda purple" = echo "#c74ded"
+alias "andromeda red" = echo "#ee5d43"
