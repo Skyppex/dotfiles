@@ -90,10 +90,10 @@ nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split window right!!"<CR>')
 nmap("<C-w>,", "<C-w>s", "Split window below")
 nmap("<C-w>.", "<C-w>v", "Split window right")
 
-nmap("<C-w><C-y>", "3<C-w><", "Shrink window horizontal")
-nmap("<C-w><C-u>", "3<C-w>-", "Grow window horizontal")
-nmap("<C-w><C-i>", "3<C-w>+", "Grow window vertical")
-nmap("<C-w><C-o>", "3<C-w>>", "Shrink window vertical")
+nmap("<C-w>+", "3<C-w>-", "Grow window horizontal")
+nmap("<C-w>-", "3<C-w><", "Shrink window horizontal")
+nmap("<C-w>?", "3<C-w>+", "Grow window vertical")
+nmap("<C-w>_", "3<C-w>>", "Shrink window vertical")
 
 -- Macros
 nmap("ø", "@")
