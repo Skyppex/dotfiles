@@ -7,8 +7,8 @@ Komorebic(cmd) {
 
 #r::Reload
 
-#Delete::Return
-
+#^s::Komorebic("start --ahk")
+#^q::Komorebic("stop")
 #q::Komorebic("close")
 #i::Komorebic("minimize")
 
@@ -88,8 +88,9 @@ Komorebic(cmd) {
 ; Layouts
 #x::Komorebic("flip-layout horizontal")
 #y::Komorebic("flip-layout vertical")
+#^æ::Komorebic("change-layout grid")
 #^h::Komorebic("change-layout bsp")
 #^j::Komorebic("change-layout columns")
 #^k::Komorebic("change-layout rows")
 #^l::Komorebic("change-layout vertical-stack")
-#^n::Komorebic("change-layout grid")
+#^ø::Komorebic("change-layout grid")
