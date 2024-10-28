@@ -18,11 +18,11 @@ cmp.setup({
 		},
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
-		{ name = "luasnip", max_item_count = 3 },
+		{ name = "luasnip", max_item_count = 2 },
 		{
 			name = "buffer",
 			option = {
-				keyword_length = 2,
+				keyword_length = 3,
 				get_bufnrs = function()
 					local bufs = {}
 					for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -40,6 +40,8 @@ cmp.setup({
 		comparators = {
 			cmp.config.compare.offset,
 			cmp.config.compare.exact,
+			cmp.config.compare.order,
+			cmp.config.compare.kind,
 			cmp.config.compare.score,
 
 			-- copied from cmp-under, but I don't think I need the plugin for this.
@@ -56,10 +58,8 @@ cmp.setup({
 				end
 			end,
 
-			cmp.config.compare.kind,
 			cmp.config.compare.sort_text,
 			cmp.config.compare.length,
-			cmp.config.compare.order,
 		},
 	},
 	snippet = {
