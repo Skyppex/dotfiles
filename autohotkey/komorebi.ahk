@@ -7,6 +7,7 @@ Komorebic(cmd) {
 
 #r::Reload
 
+#^y::RunWait("yasb.exe")
 #^s::Komorebic("start --ahk")
 #^q::Komorebic("stop")
 #q::Komorebic("close")
