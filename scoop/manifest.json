@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1729859503000)\/",
+                "value": "\/Date(1730133068000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 14:31:43"
+                "DateTime": "mandag 28. oktober 2024 17:31:08"
             },
             "Manifests": 1344
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1729871659000)\/",
+                "value": "\/Date(1730133151000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 17:54:19"
+                "DateTime": "mandag 28. oktober 2024 17:32:31"
             },
             "Manifests": 2091
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1729860912000)\/",
+                "value": "\/Date(1730133774000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 14:55:12"
+                "DateTime": "mandag 28. oktober 2024 17:42:54"
             },
             "Manifests": 469
         },
@@ -34,19 +34,19 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1729859464000)\/",
+                "value": "\/Date(1730132967000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 14:31:04"
+                "DateTime": "mandag 28. oktober 2024 17:29:27"
             },
-            "Manifests": 330
+            "Manifests": 331
         },
         {
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1729815452000)\/",
+                "value": "\/Date(1730074586000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 02:17:32"
+                "DateTime": "mandag 28. oktober 2024 01:16:26"
             },
             "Manifests": 257
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1729831967000)\/",
+                "value": "\/Date(1730091088000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 25. oktober 2024 06:52:47"
+                "DateTime": "mandag 28. oktober 2024 05:51:28"
             },
-            "Manifests": 13865
+            "Manifests": 13876
         },
         {
             "Name": "okibcn",
@@ -219,8 +219,8 @@
             "Info": "",
             "Source": "main",
             "Name": "fzf",
-            "Version": "0.55.0",
-            "Updated": "\/Date(1724950893880)\/"
+            "Version": "0.56.0",
+            "Updated": "\/Date(1730141092948)\/"
         },
         {
             "Info": "",
@@ -233,8 +233,8 @@
             "Info": "",
             "Source": "main",
             "Name": "gh",
-            "Version": "2.60.0",
-            "Updated": "\/Date(1729871970464)\/"
+            "Version": "2.60.1",
+            "Updated": "\/Date(1730141097458)\/"
         },
         {
             "Info": "",
@@ -254,8 +254,8 @@
             "Info": "",
             "Source": "main",
             "Name": "gitleaks",
-            "Version": "8.21.1",
-            "Updated": "\/Date(1729275446261)\/"
+            "Version": "8.21.2",
+            "Updated": "\/Date(1730141100071)\/"
         },
         {
             "Info": "",
@@ -534,8 +534,8 @@
             "Info": "",
             "Source": "main",
             "Name": "rust-analyzer",
-            "Version": "2024-10-21",
-            "Updated": "\/Date(1729626728633)\/"
+            "Version": "2024-10-28",
+            "Updated": "\/Date(1730141104271)\/"
         },
         {
             "Info": "",
