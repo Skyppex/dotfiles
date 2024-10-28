@@ -26,7 +26,7 @@ conform.setup({
 		gofmt = {
 			command = "gofmt",
 		},
-		json = {
+		jq = {
 			command = "jq",
 			args = { "--monochrome-output" },
 		},
