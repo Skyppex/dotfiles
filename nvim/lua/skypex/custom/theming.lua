@@ -178,9 +178,21 @@ M.alpha = function()
 	alpha.setup(dashboard.opts)
 end
 
+M.smartcolumn = function()
+	local smartcolumn = require("smartcolumn")
+	smartcolumn.setup({
+		colorcolumn = "80",
+		disabled_filetypes = {
+			"help",
+			"dbout",
+		},
+	})
+end
+
 M.all = function()
 	M.andromeda()
 	M.alpha()
+	M.smartcolumn()
 end
 
 return M

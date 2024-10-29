@@ -4,7 +4,7 @@ M.lint = function()
 	local lint = require("lint")
 
 	lint.linters_by_ft = {
-		go = { "golangcilint" },
+		go = { "golangci-lint" },
 		javascript = { "eslint_d" },
 		typescript = { "eslint_d" },
 		javascriptreact = { "eslint_d" },

@@ -33,7 +33,11 @@ def --env z [
     let new = $env.PWD
 
     if $current == $new {
-        let target = (ls | get name | to text | fzf --height 40% --layout=reverse -0 -1 --query ...$path)
+        let target = ls 
+        | get name 
+        | to text 
+        | fzf --height 40% --layout=reverse -0 -1 --query ...$path
+
         if $target == null or $target == "" {
             print "No result found."
             return

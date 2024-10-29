@@ -22,7 +22,12 @@ alias gap = git add --patch
 alias "git squash" = git rebase -i
 
 # Git diff with fzf
-alias gdf = git diff (git status --porcelain | lines | str substring 2.. | str trim | to text | fzf --height 40% --layout=reverse)
+alias gdf = git diff (git status --porcelain 
+    | lines 
+    | str substring 2.. 
+    | str trim 
+    | to text 
+    | fzf --height 40% --layout=reverse)
 
 # Start tracking files with git
 alias gt = git add --intent-to-add
@@ -98,7 +103,10 @@ def gc [
         $name
     })
 
-    mut $branch = $branch_names | uniq | to text | fzf --height 40% --layout=reverse -1 -0 --query $branch
+    mut $branch = $branch_names 
+    | uniq 
+    | to text 
+    | fzf --height 40% --layout=reverse -1 -0 --query $branch
 
     if ($branch | is-empty) {
         print "No branch selected"
@@ -158,20 +166,28 @@ def gr [
                 }
 
                 let remotes = $table | each {|r|
-                    let info = ($r | get info)
-                    let modes = ($r | get modes | str join "|" | str surround "(" ")")
+                    let info = $r | get info
+                    let modes = $r | get modes 
+                    | str join "|" 
+                    | str surround "(" ")"
+
                     $info + " " + $modes
                 }
 
                 let groups = ($table | group-by --to-table info)
             
                 mut remotes = [];
+
                 for $it in ($groups | enumerate) {
                     let index = $it.index
                     let group = $it.item
-                    let info = ($group.items | get info | uniq | str join " -- ")
-                    let modes = ($group.items | get modes)
-                    let mode = ($modes | str join "|")
+                    let info = $group.items 
+                    | get info 
+                    | uniq 
+                    | str join " -- "
+
+                    let modes = $group.items | get modes
+                    let mode = $modes | str join "|"
                     let mode = $"\(($mode)\)"
                     $remotes = ($remotes ++ $"($info) ($mode)")
                 }
@@ -181,7 +197,10 @@ def gr [
         },
         [true, false] => {
             let remotes = git remote
-            let target = ($remotes | lines | to text | fzf --height 40% --layout=reverse -0 -1 --query $query)
+            let target = $remotes 
+            | lines 
+            | to text 
+            | fzf --height 40% --layout=reverse -0 -1 --query $query
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -212,22 +231,27 @@ def gr [
             for $it in ($groups | enumerate) {
                 let index = $it.index
                 let group = $it.item
-                let name = ($group.items | get name | uniq | first)
+                let name = $group.items | get name | uniq | first
 
                 let url_group = ($group.items | group-by --to-table url)
 
                 let urls_with_modes = ($url_group | each { |g|
-                    let url = ($g.items | get url | first)
-                    let modes = ($g.items | get mode | str join "|" | str surround "(" ")")
+                    let url = $g.items | get url | first
+                    let modes = $g.items 
+                    | get mode 
+                    | str join "|" 
+                    | str surround "(" ")"
+
                     $url + " " + $modes
                 })
 
-                let url = ($urls_with_modes | str join " | ")
-
+                let url = $urls_with_modes | str join " | "
                 $remotes = ($remotes ++ $"($name)\t($url)")
             }
 
-            let target = ($remotes | to text | fzf --height 40% --layout=reverse -0 -1 --query $query)
+            let target = $remotes 
+            | to text 
+            | fzf --height 40% --layout=reverse -0 -1 --query $query
 
             if ($target | is-empty) {
                 print "No remote selected"
@@ -239,12 +263,22 @@ def gr [
                 $name
             } else {
                 if not $consice {
-                    let name = ($target | split row "\t" | first)
-                    let split_urls = ($target | split row "\t" | skip | first | split row " | ")
+                    let name = $target | split row "\t" | first
+                    let split_urls = $target 
+                    | split row "\t" 
+                    | skip 
+                    | first 
+                    | split row " | "
+
                     $split_urls | each {|s|
-                        let split = ($s | split row " ")
-                        let url = ($split | get 0)
-                        let modes = ($split | get 1 | str replace -ar "[()]" "" | split row "|" | each { |m| $m | str surround "(" ")" })
+                        let split = $s | split row " "
+                        let url = $split | get 0
+                        let modes = $split 
+                        | get 1 
+                        | str replace -ar "[()]" "" 
+                        | split row "|" 
+                        | each { |m| $m | str surround "(" ")" }
+
                         $modes | each {|m|
                             $"($name)\t($url) ($m)"
                         }
@@ -336,7 +370,10 @@ def gb [
         | where ($it | str starts-with "remotes")
         | str substring 8..
 
-        let selected = $remote_branches | to text | fzf --height 40% --layout=reverse -0 -1
+        let selected = $remote_branches 
+        | to text 
+        | fzf --height 40% --layout=reverse -0 -1
+
         print $"Selected ($selected)"
 
         print $"Setting upstream branch for ($branch) to ($selected)"
@@ -351,23 +388,29 @@ def gb [
 def "gb mv" [...query: string] {
     let branches = (git branch --list | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf --height 40% --layout=reverse -0 -1 -q $query)
+    let selected_branch = $branches 
+    | to text 
+    | fzf --height 40% --layout=reverse -0 -1 -q $query
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
         return
     }
 
-    let selected_branch = ($selected_branch | str substring 2..)
+    let selected_branch = $selected_branch | str substring 2..
     print $"Selected branch: ($selected_branch)"
     
     print "Enter a new name for the branch:"
     let new_name = input
-    let new_name = ($new_name | split row " " | str join "-")
+    let new_name = $new_name 
+    | split row " " 
+    | str join "-"
+
     if ($new_name | is-empty) {
         print "No new name provided"
         return
     }
+
     print $"Renaming ($selected_branch) -> ($new_name)"
     git branch --move $selected_branch $new_name
 }
@@ -379,7 +422,9 @@ def "gb rm" [
 ] {
     let branches = (git branch --all | lines)
     let query = $query | str join " "
-    let selected_branch = ($branches | to text | fzf --height 40% --layout=reverse -0 -q $query)
+    let selected_branch = $branches 
+    | to text 
+    | fzf --height 40% --layout=reverse -0 -q $query
 
     if ($selected_branch | is-empty) {
         print "No branch selected"
@@ -655,9 +700,13 @@ def "gh open" [
         }
 
         $repo = if $exact {
-            $repos | to text | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
+            $repos 
+            | to text 
+            | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
         } else {
-            $repos | to text | fzf --height 40% --layout=reverse -0 -1 --query $repo
+            $repos 
+            | to text 
+            | fzf --height 40% --layout=reverse -0 -1 --query $repo
         }
     } else {
         if $verbose {
@@ -696,11 +745,11 @@ def "gh open" [
             print $"Repo: ($repo)"
         }
 
-        $repo = if $exact {
+        $repo = (if $exact {
             $repos | to text | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
         } else {
             $repos | to text | fzf --height 40% --layout=reverse -0 -1 --query $repo
-        }
+        })
     }
 
     if $verbose {

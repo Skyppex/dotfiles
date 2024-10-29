@@ -884,14 +884,12 @@ alias enter-old = enter
 
 use ~/.cache/starship/init.nu
 source ~/.config/nushell/utils.nu
-source ~/.config/nushell/projects.nu
 source ~/.config/nushell/history.nu
 source ~/.config/nushell/zoxide.nu
 source ~/.config/nushell/dotnet.nu
 source ~/.config/nushell/git.nu
 source ~/.config/nushell/autohotkey.nu
 source ~/.config/nushell/scoop.nu
-source ~/.config/nushell/unleash.nu
 source ~/.config/nushell/fun.nu
 source ~/.config/nushell/docker.nu
 use ~/.config/nushell/task.nu

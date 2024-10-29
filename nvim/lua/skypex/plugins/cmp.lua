@@ -47,13 +47,11 @@ return {
 				event = "InsertEnter",
 			},
 			{
-				"MattiasMTS/cmp-dbee",
-				lazy = true,
+				"kristijanhusak/vim-dadbod-completion",
 				ft = "sql",
 				dependencies = {
-					"kndndrj/nvim-dbee",
+					"tpope/vim-dadbod",
 				},
-				config = true,
 			},
 			{
 				"roobert/tailwindcss-colorizer-cmp.nvim",

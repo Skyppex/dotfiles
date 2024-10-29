@@ -219,7 +219,9 @@ def "dn us rm" [
         print $secrets
     }
 
-    let selected_secrets = $secrets | to text | fzf --multi --height 40% --layout=reverse
+    let selected_secrets = $secrets 
+    | to text 
+    | fzf --multi --height 40% --layout=reverse
 
     if $verbose {
         print $selected_secrets
@@ -492,7 +494,9 @@ def "dn test" [
 
     let name = if $name == null { "" } else { $name }
 
-    let selected = ($namespaces | to text | fzf --height 40% --layout=reverse -0 -1 --query $name)
+    let selected = $namespaces 
+    | to text 
+    | fzf --height 40% --layout=reverse -0 -1 --query $name
 
     if $verbose {
         print $"Selected: ($selected)"

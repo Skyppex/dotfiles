@@ -88,7 +88,8 @@ vim.opt.inccommand = "split"
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
-vim.opt.colorcolumn = "80"
+-- This option is being set by smartcolumn-nvim
+-- vim.opt.colorcolumn = "80"
 vim.opt.textwidth = 80
 
 -- Minimal number of screen lines to keep above and below the cursor.

@@ -165,7 +165,9 @@ def --env "fuck" [] {
 
     let h = history | get command | drop 1
 
-    let selected = $h | to text | fzf --height 40% --layout=reverse -0 -1 --query $last
+    let selected = $h 
+    | to text 
+    | fzf --height 40% --layout=reverse -0 -1 --query $last
 
     if ($selected | is-empty) {
         print "No substitute found"
@@ -277,10 +279,17 @@ def "parse table" [
     # Parse header if it exists
     if $header {
         let header = $lines | first
-        $header_col = ($lines | first | to text | split column -r $regex | to text | lines | each {|l|
-            let s = ($l | str index-of ': ') + 2
-            $l | str substring $s..
-        })
+        $header_col = ($lines 
+            | first 
+            | to text 
+            | split column -r $regex 
+            | to text 
+            | lines 
+            | each {|l|
+                let s = ($l | str index-of ': ') + 2
+                $l | str substring $s..
+            }
+        )
 
         if $verbose {
             print $"Header:\n($header)"
@@ -301,7 +310,8 @@ def "parse table" [
     mut rows = $lines | each { |line|
         let cols = $line | to text | split column -r $regex
         $cols
-    } | reduce {|row, acc| $acc | append $row} | rename --block { str replace --all 'column' ''}
+    } | reduce {|row, acc| $acc | append $row} 
+    | rename --block { str replace --all 'column' ''}
 
     if $verbose {
         print $"Rows:\n($rows)"

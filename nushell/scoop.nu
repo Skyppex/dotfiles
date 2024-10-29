@@ -68,7 +68,11 @@ def "manifest update" [] {
 def "manifest install" [] {
     let buckets = (manifest).buckets
     
-    let current = scoop bucket list | lines | filter {|l| $l | str trim | is-not-empty} | skip 2
+    let current = scoop bucket list 
+    | lines 
+    | filter {|l| $l | str trim | is-not-empty} 
+    | skip 2
+
     let current_names = $current | each {|l| $l | split row " " | get 0}
     let current_repo = $current | each {|l|
         let s = $l | str index-of "https://";
@@ -103,7 +107,11 @@ def "manifest install" [] {
         }
     }
 
-    $buckets | get name | zip { $buckets | get source } | each { |b| scoop bucket add $b.0 $b.1 }
+    $buckets 
+    | get name 
+    | zip { $buckets | get source } 
+    | each { |b| scoop bucket add $b.0 $b.1 }
+
     scoop import $"($nu.home-path)/.config/scoop/manifest.json"
 }
 
@@ -131,12 +139,20 @@ def "scoop reinstall" [
 def "scoop rm" [
     ...name: string
 ] {
-    let names = (scoop list | lines | skip 4 | each { |l| $l | split row " " | get 0 }) | where ($it | is-not-empty)
+    let names = scoop list 
+    | lines 
+    | skip 4 
+    | each { |l| $l | split row " " | get 0 } 
+    | where ($it | is-not-empty)
 
     let selected = if ($name | is-empty) {
-        ($names | to text | fzf --height 40% --layout=reverse -0 -1)
+        $names 
+        | to text 
+        | fzf --height 40% --layout=reverse -0 -1
     } else {
-        ($names | to text | fzf --height 40% --layout=reverse -0 -1 --query ...$name)
+        $names 
+        | to text 
+        | fzf --height 40% --layout=reverse -0 -1 --query ...$name
     }
 
     if ($selected | is-empty) {

@@ -1,7 +1,6 @@
 local utils = require("skypex.utils")
 local nmap = utils.nmap
 local xmap = utils.xmap
-local omap = utils.omap
 local nxmap = utils.nxmap
 local ximap = utils.ximap
 local xismap = utils.xismap
@@ -79,21 +78,39 @@ nmap("<right>", '<cmd>echo "Use l to move!!"<CR>')
 nmap("<up>", '<cmd>echo "Use k to move!!"<CR>')
 nmap("<down>", '<cmd>echo "Use j to move!!"<CR>')
 
-nmap("<C-w>h", "<C-w><C-h>", "Move focus to the left window")
-nmap("<C-w>j", "<C-w><C-j>", "Move focus to the lower window")
-nmap("<C-w>k", "<C-w><C-k>", "Move focus to the upper window")
-nmap("<C-w>l", "<C-w><C-l>", "Move focus to the right window")
+nmap("<C-w>h", "<C-w><C-h>", "Move focus to the left buffer")
+nmap("<C-w>j", "<C-w><C-j>", "Move focus to the lower buffer")
+nmap("<C-w>k", "<C-w><C-k>", "Move focus to the upper buffer")
+nmap("<C-w>l", "<C-w><C-l>", "Move focus to the right buffer")
 
-nmap("<C-w>-", '<cmd>echo "Use <C-w>, to split window below!!"<CR>')
-nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split window right!!"<CR>')
+nmap("<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
+nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
 
-nmap("<C-w>,", "<C-w>s", "Split window below")
-nmap("<C-w>.", "<C-w>v", "Split window right")
+nmap("<C-w>,", "<C-w>s", "Split buffer below")
+nmap("<C-w>.", "<C-w>v", "Split buffer right")
 
-nmap("<C-w>+", "3<C-w>-", "Grow window horizontal")
-nmap("<C-w>-", "3<C-w><", "Shrink window horizontal")
-nmap("<C-w>?", "3<C-w>+", "Grow window vertical")
-nmap("<C-w>_", "3<C-w>>", "Shrink window vertical")
+-- Resize buffers
+local change = 5
+
+nmap("<C-w>+", function()
+	local current_width = vim.api.nvim_win_get_width(0)
+	vim.api.nvim_win_set_width(0, current_width + change)
+end, "Grow buffer horizontal")
+
+nmap("<C-w>-", function()
+	local current_width = vim.api.nvim_win_get_width(0)
+	vim.api.nvim_win_set_width(0, current_width - change)
+end, "Shrink buffer horizontal")
+
+nmap("<C-w>?", function()
+	local current_height = vim.api.nvim_win_get_height(0)
+	vim.api.nvim_win_set_height(0, current_height + change)
+end, "Grow buffer vertical")
+
+nmap("<C-w>_", function()
+	local current_height = vim.api.nvim_win_get_height(0)
+	vim.api.nvim_win_set_height(0, current_height - change)
+end, "Shrink buffer vertical")
 
 -- Macros
 nmap("ø", "@")

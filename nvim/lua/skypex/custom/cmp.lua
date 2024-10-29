@@ -7,36 +7,43 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 
+local sources = {
+	path = {
+		name = "path",
+		max_item_count = 2,
+	},
+	lsp = { name = "nvim_lsp", max_item_count = 5 },
+	lsp_signature_help = { name = "nvim_lsp_signature_help" },
+	luasnip = { name = "luasnip", max_item_count = 2 },
+	dadbod = { name = "vim-dadbod-completion" },
+	buffer = {
+		name = "buffer",
+		option = {
+			keyword_length = 3,
+			get_bufnrs = function()
+				local bufs = {}
+				for _, win in ipairs(vim.api.nvim_list_wins()) do
+					bufs[vim.api.nvim_win_get_buf(win)] = true
+				end
+				return vim.tbl_keys(bufs)
+			end,
+		},
+		max_item_count = 1,
+	},
+	copilot = { name = "copilot" },
+}
+
 ---@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
 	sources = {
-		{ "cmp-dbee", max_item_count = 10 },
-		{
-			name = "path",
-			option = { get_cwd = vim.fn.getcwd },
-			max_item_count = 2,
-		},
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "luasnip", max_item_count = 2 },
-		{
-			name = "buffer",
-			option = {
-				keyword_length = 3,
-				get_bufnrs = function()
-					local bufs = {}
-					for _, win in ipairs(vim.api.nvim_list_wins()) do
-						bufs[vim.api.nvim_win_get_buf(win)] = true
-					end
-					return vim.tbl_keys(bufs)
-				end,
-			},
-			max_item_count = 1,
-		},
-		{ name = "copilot" },
+		sources.path,
+		sources.lsp,
+		sources.lsp_signature_help,
+		sources.luasnip,
+		sources.buffer,
+		sources.copilot,
 	},
 	sorting = {
-		-- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
 		comparators = {
 			cmp.config.compare.offset,
 			cmp.config.compare.exact,
@@ -138,6 +145,13 @@ cmp.setup({
 	},
 	experimental = {
 		ghost_text = true,
+	},
+})
+
+cmp.setup.filetype({ "sql" }, {
+	sources = {
+		sources.dadbod,
+		sources.buffer,
 	},
 })
 
