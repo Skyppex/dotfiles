@@ -146,23 +146,7 @@ return {
 		},
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
-			require("andromeda").setup({
-				preset = "andromeda",
-				transparent_bg = true,
-			})
-
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("andromeda")
-
-			-- You can configure highlights by doing something like:
-			vim.cmd.hi("Comment gui=none")
-			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
-			vim.cmd.hi("CursorLine guibg=none")
-			vim.cmd.hi("CursorLineNr guibg=none")
-			vim.cmd.hi("Visual guibg=#2e2e2e")
-			vim.cmd.hi("LspInlayHint guifg=#464959")
+			require("skypex.custom.theming").andromeda()
 		end,
 	},
 	{
