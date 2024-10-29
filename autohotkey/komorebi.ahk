@@ -12,6 +12,7 @@ Komorebic(cmd) {
 #^q::Komorebic("stop")
 #q::Komorebic("close")
 #i::Komorebic("minimize")
+#+f::Komorebic("manage")
 
 ; Focus windows
 #h::Komorebic("focus left")
