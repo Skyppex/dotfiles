@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		map("gd", builtin.lsp_definitions, "Goto Definition")
 		map("gr", builtin.lsp_references, "Goto References")
-		map("gI", builtin.lsp_implementations, "Goto Implementation")
+		map("gi", builtin.lsp_implementations, "Goto Implementation")
 		map("gt", builtin.lsp_type_definitions, "Goto Type Definition")
 		map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 

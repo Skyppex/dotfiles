@@ -326,3 +326,4 @@ dadbod
 kristijanhusak
 dbui
 smartcolumn
+archivable
