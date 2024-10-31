@@ -13,10 +13,6 @@ ximap("<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
 ximap("<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
 ximap("<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
 
--- Quickfix list navigation
-nmap("<S-A-k>", "<cmd>cprev<CR>zz")
-nmap("<S-A-j>", "<cmd>cnext<CR>zz")
-
 -- Save file
 nmap("<C-s>", "<cmd>wa<CR>")
 

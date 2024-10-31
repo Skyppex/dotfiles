@@ -185,6 +185,7 @@ M.smartcolumn = function()
 		disabled_filetypes = {
 			"help",
 			"dbout",
+			"qf",
 		},
 	})
 end

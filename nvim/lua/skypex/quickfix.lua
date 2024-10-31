@@ -19,6 +19,6 @@ function toggle_quickfix_list()
 	end
 end
 
-vim.keymap.set("n", "<S-A-x>", function()
-	toggle_quickfix_list()
-end, { desc = "Toggle Quickfix List", noremap = true, silent = true })
+-- vim.keymap.set("n", "<S-A-x>", function()
+-- 	toggle_quickfix_list()
+-- end, { desc = "Toggle Quickfix List", noremap = true, silent = true })
