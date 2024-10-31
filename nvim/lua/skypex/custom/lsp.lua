@@ -87,10 +87,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local builtin = require("telescope.builtin")
 
-		map("gd", builtin.lsp_definitions, "Goto Definition")
-		map("gr", builtin.lsp_references, "Goto References")
-		map("gi", builtin.lsp_implementations, "Goto Implementation")
-		map("gt", builtin.lsp_type_definitions, "Goto Type Definition")
+		map("gd", builtin.lsp_definitions, "Go to Definition")
+		map("gr", builtin.lsp_references, "Go to References")
+		map("gi", builtin.lsp_implementations, "Go to Implementation")
+		map("gt", builtin.lsp_type_definitions, "Go to Type Definition")
 		map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 		map("<leader>rn", function()
@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set("i", "<A-H>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
 
-		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		map("gD", vim.lsp.buf.declaration, "Go to Declaration")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -226,7 +226,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --
 -- 			vim.keymap.set("n", "gd", function()
 -- 				require("omnisharp_extended").telescope_lsp_definitions()
--- 			end, { buffer = bufnr, desc = "LSP: Goto Definition", noremap = true, silent = true })
+-- 			end, { buffer = bufnr, desc = "LSP: Go to Definition", noremap = true, silent = true })
 -- 		end
 --
 -- 		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
@@ -386,7 +386,7 @@ local servers = {
 				cs_ls_ex.lsp_definitions()
 			end, {
 				buffer = bufnr,
-				desc = "csharpls: Goto Definition",
+				desc = "csharpls: Go to Definition",
 				noremap = true,
 				silent = true,
 			})
