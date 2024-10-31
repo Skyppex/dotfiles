@@ -48,7 +48,7 @@ def --env z [
 
 # Alias for z making it into cd
 alias cd = z
-alias cdf = z --fzf-only
+alias cdf = cd (fzf | path dirname)
 
 # Zoxide query
 alias cdq = zoxide query
