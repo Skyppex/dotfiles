@@ -186,6 +186,7 @@ M.smartcolumn = function()
 			"help",
 			"dbout",
 			"qf",
+			"alpha",
 		},
 	})
 end
