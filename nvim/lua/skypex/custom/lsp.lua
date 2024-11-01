@@ -9,10 +9,12 @@ local function setup_nu_lsp(lspconfig, capabilities)
 end
 
 local function setup_proof(lspconfig, configs, capabilities)
-	local code_path = require("skypex.utils").get_code_path()
+	local utils = require("skypex.utils")
+	local code_path = utils.get_code_path()
 	local proof_path = code_path .. "proof/"
 	local proof_exe = proof_path .. "proof.exe"
 	local log_file = proof_path .. "log.txt"
+	local dictionary_file = utils.get_chezmoi_path() .. "nvim/proof/dictionary.txt"
 
 	if not configs.proof then
 		configs.proof = {
@@ -30,7 +32,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 	lspconfig.proof.setup({
 		settings = {
 			proof = {
-				dictionaryPath = string.gsub(vim.fn.stdpath("config") .. "/proof/dictionary.txt", "\\", "/"),
+				dictionaryPath = string.gsub(dictionary_file, "\\", "/"),
 				maxErrors = 6,
 				maxSuggestions = 3,
 				allowImplicitPlurals = true,

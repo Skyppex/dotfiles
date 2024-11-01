@@ -333,3 +333,7 @@ cnext
 wsl
 bugfix
 chezmoi
+cma
+vma
+kda
+

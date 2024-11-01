@@ -6,6 +6,7 @@ end
 
 local wezterm = require("wezterm")
 local sessionizer = require("sessionizer")
+wezterm.log_info("Loaded sessionizer")
 local background = require("background")
 
 local act = wezterm.action

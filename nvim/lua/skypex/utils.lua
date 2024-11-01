@@ -11,6 +11,11 @@ local function get_config_path()
 end
 
 --- @return string
+local function get_chezmoi_path()
+	return get_home() .. "/.local/share/chezmoi/"
+end
+
+--- @return string
 local function get_code_path()
 	local home = get_home()
 	if home:find("brage.ingebrigtsen") then
@@ -173,6 +178,7 @@ return {
 	get_home = get_home,
 	get_code_path = get_code_path,
 	get_config_path = get_config_path,
+	get_chezmoi_path = get_chezmoi_path,
 	is_home_computer = is_home_computer,
 	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,

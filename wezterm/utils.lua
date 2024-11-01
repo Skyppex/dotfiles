@@ -10,6 +10,10 @@ M.get_config_path = function()
 	return M.get_home() .. "/.config"
 end
 
+M.get_chezmoi_path = function()
+	return M.get_home() .. "/.local/share/chezmoi"
+end
+
 M.is_work_computer = function()
 	return M.get_home():find("brage.ingebrigtsen")
 end

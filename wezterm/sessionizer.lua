@@ -6,7 +6,7 @@ local M = {}
 
 local home = utils.get_home()
 local fd = home .. "/scoop/apps/fd/current/fd.exe"
-local config_path = utils.get_config_path()
+local chezmoi_path = utils.get_chezmoi_path()
 local temp_path
 local code_path
 local code_path_2
@@ -35,7 +35,7 @@ M.toggle = function(window, pane)
 		temp_path,
 		code_path,
 		code_path_2,
-		config_path,
+		chezmoi_path,
 		obsidian_path,
 		-- add more paths here
 	})
