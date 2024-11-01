@@ -1,4 +1,4 @@
-nushell/history.txt
+{{- if eq .chezmoi.os "windows" }}
 windows/LocalState/state.json
 scoop/config.json
 flow-launcher/UserData/Logs
@@ -14,5 +14,8 @@ flow-launcher/UserData/Settings/Plugins/Flow.Launcher.Plugin.Program/Settings.js
 flow-launcher/UserData/Settings/Plugins/Steam Search/Settings.json
 flow-launcher/UserData/Settings/Settings.json
 thefuck/__pycache__
-.netcoredbg_hist
 yasb/yasb.log
+{{- end }}
+
+nushell/history.txt
+.netcoredbg_hist
