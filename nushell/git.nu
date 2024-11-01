@@ -517,7 +517,7 @@ def ghlink [
             let link = $a | str substring $s..$e
             
             if $type == null or $type == "http" {
-                return $link
+                return ($link | str trim)
             }
 
             let repo_start = $link | str index-of -e '/'
@@ -525,7 +525,7 @@ def ghlink [
             let link = $link | str substring ..$repo_start
             let owner_start = ($link | str index-of -e '/') + 1
             let owner = $link | str substring $owner_start..
-            return $"git@github:($owner)($repo)"
+            return ($"git@github:($owner)($repo)" | str trim)
         }
 
         let a = git remote -v | find -r 'git@github\.com.*\.git' | lines | first
@@ -534,7 +534,7 @@ def ghlink [
         let link = $a | str substring $s..$e
 
         if $type == null or $type == "ssh" {
-            return $link
+            return ($link | str trim)
         }
         
         let repo_start = $link | str index-of -e '/'
@@ -542,7 +542,7 @@ def ghlink [
         let link = $link | str substring ..$repo_start
         let owner_start = ($link | str index-of -e ':') + 1
         let owner = $link | str substring $owner_start..
-        return $"https://github.com/($owner)($repo)"
+        return ($"https://github.com/($owner)($repo)" | str trim)
     }
     
     if $owner != null {
@@ -552,7 +552,7 @@ def ghlink [
             _ => { ghlink-ssh $owner $repo }
         }
         
-        return $link
+        return ($link | str trim)
     }
 
     let owner = gh api user | jq -r '.login'
