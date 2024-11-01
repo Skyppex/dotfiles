@@ -367,3 +367,4 @@ def "andromeda" [] {
     echo $str
 }
 
+alias cm = chezmoi

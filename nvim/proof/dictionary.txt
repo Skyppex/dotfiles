@@ -332,3 +332,4 @@ cprev
 cnext
 wsl
 bugfix
+chezmoi
