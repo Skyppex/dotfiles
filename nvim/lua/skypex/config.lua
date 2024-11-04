@@ -108,3 +108,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "*",
+	group = vim.api.nvim_create_augroup("apply-chezmoi", { clear = true }),
+	callback = function()
+		local target_directory = require("skypex.utils").get_chezmoi_path()
+		local current_file = vim.fn.expand("%:p")
+
+		if string.find(current_file, target_directory, 1, true) == 1 then
+			vim.notify("Applying chezmoi changes")
+			vim.fn.system("chezmoi apply --force")
+		end
+	end,
+})

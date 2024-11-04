@@ -12,7 +12,7 @@ end
 
 --- @return string
 local function get_chezmoi_path()
-	return get_home() .. "/.local/share/chezmoi/"
+	return get_home() .. "/.local/share/chezmoi"
 end
 
 --- @return string

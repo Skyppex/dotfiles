@@ -45,7 +45,7 @@ def cc [...message: string] {
     let scope = if ($scope | is-empty) { "" } else { $"\(($scope)\)" }
 
     let summary = if ($message | is-not-empty) {
-        $message | str join " "
+        $"($type + $scope): ($message | str join ' ')"
     } else {
         gum input --value $"($type + $scope): " --placeholder "Summary of this change"
     }
