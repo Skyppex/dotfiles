@@ -1,15 +1,15 @@
 # Open the scoop user manifest file
-alias manifest = open $"($nu.home-path)/.config/scoop/manifest.json"
+alias manifest = open $"($nu.home-path)/.local/share/chezmoi/scoop/manifest.json"
 
 # Create the scoop user manifest file
 def "manifest create" [] {
-    touch $"($nu.home-path)/.config/scoop/manifest.json"
+    touch $"($nu.home-path)/.local/share/chezmoi/scoop/manifest.json"
 }
 
 # Update the scoop user manifest file with installed scoop apps
 def "manifest update" [] {
     let old = manifest
-    scoop export | save --force $"($nu.home-path)/.config/scoop/manifest.json"
+    scoop export | save --force $"($nu.home-path)/.local/share/chezmoi/scoop/manifest.json"
     let new = manifest
     
     for bucket in $old.buckets {
@@ -112,12 +112,12 @@ def "manifest install" [] {
     | zip { $buckets | get source } 
     | each { |b| scoop bucket add $b.0 $b.1 }
 
-    scoop import $"($nu.home-path)/.config/scoop/manifest.json"
+    scoop import $"($nu.home-path)/.local/share/chezmoi/scoop/manifest.json"
 }
 
 # Remove the scoop user manifest file
 def "manifest rm" [] {
-    rm $"($nu.home-path)/.config/scoop/manifest.json"
+    rm $"($nu.home-path)/.local/share/chezmoi/scoop/manifest.json"
 }
 
 # Scoop reinstall
