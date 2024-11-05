@@ -90,7 +90,7 @@ Komorebic(cmd) {
 ; Layouts
 #x::Komorebic("flip-layout horizontal")
 #y::Komorebic("flip-layout vertical")
-#^æ::Komorebic("change-layout grid")
+#^æ::Komorebic("change-layout ultrawide-vertical-stack")
 #^h::Komorebic("change-layout bsp")
 #^j::Komorebic("change-layout columns")
 #^k::Komorebic("change-layout rows")
