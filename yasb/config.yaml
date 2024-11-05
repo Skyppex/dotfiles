@@ -42,7 +42,6 @@ bars:
     widgets:
       left:
         - "komorebi_active_layout"
-        - "active_window"
       center:
         - "clock"
         - "github"
