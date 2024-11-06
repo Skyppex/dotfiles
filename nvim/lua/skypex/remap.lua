@@ -62,11 +62,19 @@ end
 
 nmap("åd", function()
 	jump_to_diagnostic(vim.diagnostic.goto_prev)
-end, "Go to previous Diagnostic message")
+end, "Go to previous diagnostic by severity")
 
 nmap("æd", function()
 	jump_to_diagnostic(vim.diagnostic.goto_next)
-end, "Go to next Diagnostic message")
+end, "Go to next diagnostic by severity")
+
+nmap("åD", function()
+	vim.diagnostic.goto_prev({ wrap = true })
+end, "Go to previous diagnostic")
+
+nmap("æD", function()
+	vim.diagnostic.goto_next({ wrap = true })
+end, "Go to next diagnostic")
 
 -- Disable arrow keys in normal mode
 nmap("<left>", '<cmd>echo "Use h to move!!"<CR>')

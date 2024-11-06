@@ -57,6 +57,228 @@ local handlers = {
 	}),
 }
 
+-- -- LOOK IN CURRENT DIRECTORY FOR csproj FILE using glob
+-- -- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
+-- local function find_closest_csproj(directory)
+-- 	-- print("currentFileDirectory: " .. directory)
+-- 	local csproj = vim.fn.glob(directory .. "/*.csproj", true, false)
+--
+-- 	if csproj == "" then
+-- 		csproj = vim.fn.glob(directory .. "/*.vbproj", true, false)
+-- 	end
+--
+-- 	if csproj == "" then
+-- 		-- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
+-- 		local parent_directory = vim.fn.fnamemodify(directory, ":h")
+--
+-- 		if parent_directory == directory then
+-- 			return nil
+-- 		end
+--
+-- 		return find_closest_csproj(parent_directory)
+--
+-- 	-- elseif there are multiple csproj files, then return the first one
+-- 	elseif string.find(csproj, "\n") ~= nil then
+-- 		local first_csproj = string.sub(csproj, 0, string.find(csproj, "\n") - 1)
+-- 		print("Found multiple csproj files, using: " .. first_csproj)
+-- 		return first_csproj
+-- 	else
+-- 		return csproj
+-- 	end
+-- end
+--
+-- -- CHECK CSPROJ FILE TO SEE IF ITS .NET CORE OR .NET FRAMEWORK
+-- local function getFrameworkType()
+-- 	local currentFileDirectory = vim.fn.expand("%:p:h")
+--
+-- 	-- print("currentFileDirectory file: " .. currentFileDirectory)
+-- 	local csproj = find_closest_csproj(currentFileDirectory)
+--
+-- 	-- print("csproj file: " .. csproj)
+-- 	if csproj == nil then
+-- 		return false
+-- 	end
+--
+-- 	local f = io.open(csproj, "rb")
+-- 	local content = f:read("*all")
+-- 	f:close()
+--
+-- 	-- return string.find(content, "<TargetFramework>netcoreapp") ~= nil
+-- 	local frameworkType = ""
+--
+-- 	-- IF FILE CONTAINS <TargetFrameworkVersion> THEN IT'S .NET FRAMEWORK
+-- 	if string.find(content, "<TargetFrameworkVersion>") ~= nil then
+-- 		frameworkType = "netframework"
+--
+-- 	-- IF FILE CONTAINS <TargetFramework>net48 THEN IT'S .NET FRAMEWORK
+-- 	elseif string.find(content, "<TargetFramework>net48") ~= nil then
+-- 		frameworkType = "netframework"
+--
+-- 	-- ELSE IT'S .NET CORE
+-- 	else
+-- 		frameworkType = "netcore"
+-- 	end
+--
+-- 	return frameworkType
+-- end
+
+-- CREATE AUTOCMD FOR CSHARP FILES
+vim.api.nvim_create_autocmd("FileType", {
+	-- pattern = 'cs',
+	pattern = { "cs", "cshtml", "vb" },
+	callback = function()
+		-- print("FileType: cs, cshtml, vb")
+		if vim.g.dotnetlsp then
+			-- print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
+			return
+		end
+	end,
+	group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true }),
+})
+
+local cmp_lsp = require("cmp_nvim_lsp")
+-- LSP servers and clients are able to communicate to each other what features they support.
+--  By default, Neovim doesn't support everything that is in the LSP specification.
+--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
+--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
+capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
+require("fidget").setup({})
+
+-- Define variables used in the server configuration below
+local lspconfig = require("lspconfig")
+local cs_ls_ex = require("csharpls_extended")
+
+-- Enable the following language servers
+--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--
+--  Add any additional override configuration in the following tables. Available keys are:
+--  - cmd (table): Override the default command used to start the server
+--  - filetypes (table): Override the default list of associated filetypes for the server
+--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+--  - settings (table): Override the default settings passed when initializing the server.
+--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+local servers = {
+	-- clangd = {},
+	-- gopls = {},
+	-- pyright = {},
+	-- rust_analyzer = {},
+	-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+	--
+	-- Some languages (like typescript) have entire language plugins that can be useful:
+	--    https://github.com/pmizio/typescript-tools.nvim
+	--
+	-- But for many setups, the LSP (`tsserver`) will work just fine
+	-- tsserver = {},
+	--
+
+	lua_ls = {
+		filetypes = { "lua" },
+		settings = {
+			Lua = {
+				runtime = { version = "LuaJIT" },
+				workspace = {
+					checkThirdParty = false,
+					library = {
+						"${3rd}/luv/library",
+						unpack(vim.api.nvim_get_runtime_file("", true)),
+					},
+				},
+				completion = {
+					callSnippet = "Replace",
+				},
+				-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+				diagnostics = {
+					disable = { "missing-fields", "undefined-fields" },
+					globals = { "vim" },
+				},
+			},
+		},
+		capabilities = capabilities,
+	},
+	csharp_ls = {
+		filetypes = { "cs", "csx" },
+		single_file_support = true,
+		handlers = {
+			["textDocument/definition"] = cs_ls_ex.handler,
+			["textDocument/typeDefinition"] = cs_ls_ex.handler,
+		},
+		after_attach = function(client, bufnr)
+			if client.server_capabilities.signatureHelpProvider then
+				require("lsp-overloads").setup(client, {
+					keymaps = {
+						previous_signature = "<up>",
+						next_signature = "<down>",
+						previous_parameter = "<left>",
+						next_parameter = "<right>",
+						close_signature = "<C-e>",
+					},
+				})
+			end
+
+			require("telescope").load_extension("csharpls_definition")
+
+			vim.keymap.set("n", "gd", function()
+				vim.cmd("Telescope csharpls_definition")
+				--[[ cs_ls_ex.lsp_definitions() ]]
+			end, {
+				buffer = bufnr,
+				desc = "csharpls: Go to Definition",
+				noremap = true,
+				silent = true,
+			})
+		end,
+		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
+		settings = {
+			FormattingOptions = {
+				-- Enables support for reading code style, naming convention and analyzer
+				-- settings from .editorconfig.
+				EnableEditorConfigSupport = true,
+				-- Specifies whether 'using' directives should be grouped and sorted during
+				-- document formatting.
+				OrganizeImports = true,
+			},
+			MsBuild = {
+				-- If true, MSBuild project system will only load projects for files that
+				-- were opened in the editor. This setting is useful for big C# codebases
+				-- and allows for faster initialization of code navigation features only
+				-- for projects that are relevant to code that is being edited. With this
+				-- setting enabled OmniSharp may load fewer projects and may thus display
+				-- incomplete reference lists for symbols.
+				LoadProjectsOnDemand = nil,
+			},
+			RoslynExtensionsOptions = {
+				-- Enables support for roslyn analyzers, code fixes and rulesets.
+				EnableAnalyzersSupport = true,
+				-- Enables support for showing unimported types and unimported extension
+				-- methods in completion lists. When committed, the appropriate using
+				-- directive will be added at the top of the current file. This option can
+				-- have a negative impact on initial completion responsiveness,
+				-- particularly for the first few completion sessions after opening a
+				-- solution.
+				EnableImportCompletion = nil,
+				-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+				-- true
+				AnalyzeOpenDocumentsOnly = nil,
+				enableDecompilationSupport = true,
+			},
+			Sdk = {
+				-- Specifies whether to include preview versions of the .NET SDK when
+				-- determining which version to use for project loading.
+				IncludePrereleases = true,
+			},
+		},
+		capabilities = capabilities,
+	},
+	tailwindcss = {
+		on_attach = function(_, bufnr)
+			require("tailwindcss-colors").buf_attach(bufnr)
+		end,
+	},
+}
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
@@ -68,15 +290,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP: " .. desc,
 			})
 		end
-
-		-- local mapv = function(keys, func, desc)
-		-- 	vim.keymap.set("v", keys, func, {
-		-- 		noremap = true,
-		-- 		silent = true,
-		-- 		buffer = event.buf,
-		-- 		desc = "LSP: " .. desc,
-		-- 	})
-		-- end
 
 		local mapnv = function(keys, func, desc)
 			vim.keymap.set({ "n", "v" }, keys, func, {
@@ -145,262 +358,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			end, "Toggle Inlay Hints")
 		end
+
+		if client then
+			local server = servers[client.name]
+
+			if server and server.after_attach then
+				server.after_attach(client, event.buf)
+			end
+		end
 	end,
 })
-
--- -- LOOK IN CURRENT DIRECTORY FOR csproj FILE using glob
--- -- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
--- local function find_closest_csproj(directory)
--- 	-- print("currentFileDirectory: " .. directory)
--- 	local csproj = vim.fn.glob(directory .. "/*.csproj", true, false)
--- 	if csproj == "" then
--- 		csproj = vim.fn.glob(directory .. "/*.vbproj", true, false)
--- 	end
--- 	if csproj == "" then
--- 		-- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
--- 		local parent_directory = vim.fn.fnamemodify(directory, ":h")
--- 		if parent_directory == directory then
--- 			return nil
--- 		end
--- 		return find_closest_csproj(parent_directory)
--- 	-- elseif there are multiple csproj files, then return the first one
--- 	elseif string.find(csproj, "\n") ~= nil then
--- 		local first_csproj = string.sub(csproj, 0, string.find(csproj, "\n") - 1)
--- 		print("Found multiple csproj files, using: " .. first_csproj)
--- 		return first_csproj
--- 	else
--- 		return csproj
--- 	end
--- end
---
--- -- CHECK CSPROJ FILE TO SEE IF ITS .NET CORE OR .NET FRAMEWORK
--- local function getFrameworkType()
--- 	local currentFileDirectory = vim.fn.expand("%:p:h")
--- 	-- print("currentFileDirectory file: " .. currentFileDirectory)
--- 	local csproj = find_closest_csproj(currentFileDirectory)
--- 	-- print("csproj file: " .. csproj)
--- 	if csproj == nil then
--- 		return false
--- 	end
--- 	local f = io.open(csproj, "rb")
--- 	local content = f:read("*all")
--- 	f:close()
--- 	-- return string.find(content, "<TargetFramework>netcoreapp") ~= nil
--- 	local frameworkType = ""
--- 	-- IF FILE CONTAINS <TargetFrameworkVersion> THEN IT'S .NET FRAMEWORK
--- 	if string.find(content, "<TargetFrameworkVersion>") ~= nil then
--- 		frameworkType = "netframework"
--- 	-- IF FILE CONTAINS <TargetFramework>net48 THEN IT'S .NET FRAMEWORK
--- 	elseif string.find(content, "<TargetFramework>net48") ~= nil then
--- 		frameworkType = "netframework"
--- 	-- ELSE IT'S .NET CORE
--- 	else
--- 		frameworkType = "netcore"
--- 	end
--- 	return frameworkType
--- end
-
--- CREATE AUTOCMD FOR CSHARP FILES
--- vim.api.nvim_create_autocmd("FileType", {
--- 	-- pattern = 'cs',
--- 	pattern = { "cs", "cshtml", "vb" },
--- 	callback = function()
--- 		-- print("FileType: cs, cshtml, vb")
--- 		if vim.g.dotnetlsp then
--- 			-- print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
--- 			return
--- 		end
---
--- 		local on_attach = function(client, bufnr)
--- 			--- Guard against servers without the signatureHelper capability
--- 			if client.server_capabilities.signatureHelpProvider then
--- 				require("lsp-overloads").setup(client, {})
--- 				-- ...
--- 				-- keymaps = {
--- 				-- 		next_signature = "<C-j>",
--- 				-- 		previous_signature = "<C-k>",
--- 				-- 		next_parameter = "<C-l>",
--- 				-- 		previous_parameter = "<C-h>",
--- 				-- 		close_signature = "<A-s>"
--- 				-- 	},
--- 				-- ...
--- 			end
---
--- 			vim.keymap.set("n", "gd", function()
--- 				require("omnisharp_extended").telescope_lsp_definitions()
--- 			end, { buffer = bufnr, desc = "LSP: Go to Definition", noremap = true, silent = true })
--- 		end
---
--- 		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
--- 		local settings = {
--- 			FormattingOptions = {
--- 				-- Enables support for reading code style, naming convention and analyzer
--- 				-- settings from .editorconfig.
--- 				EnableEditorConfigSupport = true,
--- 				-- Specifies whether 'using' directives should be grouped and sorted during
--- 				-- document formatting.
--- 				OrganizeImports = true,
--- 			},
--- 			MsBuild = {
--- 				-- If true, MSBuild project system will only load projects for files that
--- 				-- were opened in the editor. This setting is useful for big C# codebases
--- 				-- and allows for faster initialization of code navigation features only
--- 				-- for projects that are relevant to code that is being edited. With this
--- 				-- setting enabled OmniSharp may load fewer projects and may thus display
--- 				-- incomplete reference lists for symbols.
--- 				LoadProjectsOnDemand = nil,
--- 			},
--- 			RoslynExtensionsOptions = {
--- 				-- Enables support for roslyn analyzers, code fixes and rulesets.
--- 				EnableAnalyzersSupport = false, -- THIS ADDED FIX FORMATTING ON EVERY SINGLE LINE IN CS FILES!
--- 				-- Enables support for showing unimported types and unimported extension
--- 				-- methods in completion lists. When committed, the appropriate using
--- 				-- directive will be added at the top of the current file. This option can
--- 				-- have a negative impact on initial completion responsiveness,
--- 				-- particularly for the first few completion sessions after opening a
--- 				-- solution.
--- 				EnableImportCompletion = nil,
--- 				-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
--- 				-- true
--- 				AnalyzeOpenDocumentsOnly = nil,
--- 				enableDecompilationSupport = true,
--- 			},
--- 			Sdk = {
--- 				-- Specifies whether to include preview versions of the .NET SDK when
--- 				-- determining which version to use for project loading.
--- 				IncludePrereleases = true,
--- 			},
--- 		}
---
--- 		-- CHECK THE CSPROJ OR SOMETHING ELSE TO CONFIRM IT'S .NET FRAMEWORK OR .NET CORE PROJECT
--- 		local frameworkType = getFrameworkType()
--- 		if frameworkType == "netframework" then
--- 			print("Found a .NET Framework project, starting .NET Framework OmniSharp")
--- 			require("lspconfig").omnisharp_mono.setup({
--- 				enable_decompilation_support = true,
--- 				handlers = {
--- 					["textDocument/definition"] = require("omnisharp_extended").handler,
--- 				},
--- 				organize_imports_on_format = true,
--- 				settings = settings,
--- 				on_attach = on_attach,
--- 			})
--- 			vim.g.dotnetlsp = "omnisharp_mono"
--- 			vim.cmd("LspStart omnisharp_mono")
--- 		elseif frameworkType == "netcore" then
--- 			print("Found a .NET Core project, starting .NET Core OmniSharp")
--- 			require("lspconfig").omnisharp.setup({
--- 				enable_decompilation_support = true,
--- 				handlers = {
--- 					["textDocument/definition"] = require("omnisharp_extended").handler,
--- 				},
--- 				organize_imports_on_format = true,
--- 				settings = settings,
--- 				on_attach = on_attach,
--- 			})
--- 			vim.g.dotnetlsp = "omnisharp"
--- 			vim.cmd("LspStart omnisharp")
--- 		else
--- 			return
--- 		end
--- 	end,
--- 	group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true }),
--- })
-
-local cmp_lsp = require("cmp_nvim_lsp")
--- LSP servers and clients are able to communicate to each other what features they support.
---  By default, Neovim doesn't support everything that is in the LSP specification.
---  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
---  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
-capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
-
-require("fidget").setup({})
-
--- Define variables used in the server configuration below
-local lspconfig = require("lspconfig")
-local cs_ls_ex = require("csharpls_extended")
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. Available keys are:
---  - cmd (table): Override the default command used to start the server
---  - filetypes (table): Override the default list of associated filetypes for the server
---  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
---  - settings (table): Override the default settings passed when initializing the server.
---        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-local servers = {
-	-- clangd = {},
-	-- gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-	-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-	--
-	-- Some languages (like typescript) have entire language plugins that can be useful:
-	--    https://github.com/pmizio/typescript-tools.nvim
-	--
-	-- But for many setups, the LSP (`tsserver`) will work just fine
-	-- tsserver = {},
-	--
-
-	lua_ls = {
-		filetypes = { "lua" },
-		settings = {
-			Lua = {
-				runtime = { version = "LuaJIT" },
-				workspace = {
-					checkThirdParty = false,
-					library = {
-						"${3rd}/luv/library",
-						unpack(vim.api.nvim_get_runtime_file("", true)),
-					},
-				},
-				completion = {
-					callSnippet = "Replace",
-				},
-				-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-				diagnostics = {
-					disable = { "missing-fields", "undefined-fields" },
-					globals = { "vim" },
-				},
-			},
-		},
-		capabilities = capabilities,
-	},
-	csharp_ls = {
-		filetypes = { "cs", "csx" },
-		single_file_support = true,
-		handlers = {
-			["textDocument/definition"] = function(err, result, ctx, config)
-				if err then
-					vim.notify("Error: " .. err, vim.log.levels.ERROR)
-				else
-					vim.notify("Result: " .. vim.inspect(result), vim.log.levels.INFO)
-				end
-				cs_ls_ex.handler(err, result, ctx, config)
-			end,
-			["textDocument/typeDefinition"] = cs_ls_ex.handler,
-		},
-		on_attach = function(_, bufnr)
-			vim.keymap.set("n", "gd", function()
-				cs_ls_ex.lsp_definitions()
-			end, {
-				buffer = bufnr,
-				desc = "csharpls: Go to Definition",
-				noremap = true,
-				silent = true,
-			})
-		end,
-		capabilities = capabilities,
-	},
-	tailwindcss = {
-		on_attach = function(_, bufnr)
-			require("tailwindcss-colors").buf_attach(bufnr)
-		end,
-	},
-}
 
 local no_config_servers = { "rust_analyzer" }
 local configs = require("lspconfig.configs")
@@ -448,13 +415,12 @@ require("mason-lspconfig").setup({
 			-- 	return
 			-- end
 
-			for _, name in ipairs(no_config_servers) do
-				if server_name == name then
-					return
-				end
+			if no_config_servers[server_name] then
+				return
 			end
 
 			-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
+
 			-- This handles overriding only values explicitly passed
 			-- by the server configuration above. Useful when disabling
 			-- certain features of an LSP (for example, turning off formatting for tsserver)

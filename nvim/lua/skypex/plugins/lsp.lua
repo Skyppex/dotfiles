@@ -27,8 +27,8 @@ return {
 					},
 				},
 			},
-			-- "Hoffs/omnisharp-extended-lsp.nvim",
-			-- "Issafalcon/lsp-overloads.nvim",
+			"Issafalcon/lsp-overloads.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 		opts = {
 			setup = {
