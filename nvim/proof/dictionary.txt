@@ -339,3 +339,5 @@ kda
 ffff
 kib
 qf
+globpath
+exepath

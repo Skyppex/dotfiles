@@ -2,43 +2,45 @@ local M = {}
 
 M.dap = function()
 	local dap = require("dap")
+	dap.set_log_level("TRACE")
 
-	dap.adapters.coreclr = {
-		type = "executable",
-		command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg.cmd",
-		args = { "--interpreter=vscode", "--engineLogging=~/netcoredbg.log" },
-	}
-
-	dap.configurations.cs = {
-		{
-			type = "coreclr",
-			name = "launch - netcoredbg",
-			request = "launch",
-			program = function()
-				local project_file = io.popen("fd -HI -e .csproj | fzf", "r")
-
-				if project_file == nil then
-					return nil
-				end
-
-				local project = project_file:read("*a")
-				project = project:gsub(".csproj", "")
-				project = project:gsub(".*[\\/]", "")
-				local query = project .. "binDebug"
-				local pipe = io.popen("fd -HI -a -e .dll | fzf --query " .. query, "r")
-
-				if pipe == nil then
-					return nil
-				end
-
-				local result = pipe:read("*a")
-				result = result:match("^%s*(.-)%s*$")
-
-				return vim.fn.input("Path to dll: ", result, "file")
-			end,
-		},
-	}
-
+	--
+	-- dap.adapters.coreclr = {
+	-- 	type = "executable",
+	-- 	command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg.cmd",
+	-- 	args = { "--interpreter=vscode", "--engineLogging=~/netcoredbg.log" },
+	-- }
+	--
+	-- dap.configurations.cs = {
+	-- 	{
+	-- 		type = "coreclr",
+	-- 		name = "launch - netcoredbg",
+	-- 		request = "launch",
+	-- 		program = function()
+	-- 			local project_file = io.popen("fd -HI -e .csproj | fzf", "r")
+	--
+	-- 			if project_file == nil then
+	-- 				return nil
+	-- 			end
+	--
+	-- 			local project = project_file:read("*a")
+	-- 			project = project:gsub(".csproj", "")
+	-- 			project = project:gsub(".*[\\/]", "")
+	-- 			local query = project .. "binDebug"
+	-- 			local pipe = io.popen("fd -HI -a -e .dll | fzf --query " .. query, "r")
+	--
+	-- 			if pipe == nil then
+	-- 				return nil
+	-- 			end
+	--
+	-- 			local result = pipe:read("*a")
+	-- 			result = result:match("^%s*(.-)%s*$")
+	--
+	-- 			return vim.fn.input("Path to dll: ", result, "file")
+	-- 		end,
+	-- 	},
+	-- }
+	--
 	-- dap.adapters.netcoredbg = {
 	-- 	type = "executable",
 	-- 	command = vim.fn.stdpath("data") .. "/mason" .. "/bin" .. "/netcoredbg.CMD",
@@ -238,10 +240,49 @@ M.dapui = function()
 	end
 end
 
+local function get_dll()
+	require("skypex.utils").run_command("dotnet build")
+
+	return coroutine.create(function(dap_run_co)
+		local items = vim.fn.globpath(vim.fn.getcwd(), "**/bin/Debug/**/*.dll", 0, 1)
+		vim.notify("number of dlls found in CWD '" .. vim.fn.getcwd() .. "': " .. #items)
+
+		local opts = {
+			format_item = function(path)
+				return vim.fn.fnamemodify(path, ":t")
+			end,
+		}
+
+		local function cont(choice)
+			if choice == nil then
+				return nil
+			else
+				coroutine.resume(dap_run_co, choice)
+			end
+		end
+
+		vim.ui.select(items, opts, cont)
+	end)
+end
+
 M.mason = function()
 	require("mason-nvim-dap").setup({
 		ensure_installed = { "coreclr", "codelldb" },
-		automatic_installation = true,
+		automatic_installation = false,
+		handlers = {
+			coreclr = function(config)
+				config.configurations = {
+					{
+						type = "coreclr",
+						name = "NetCoreDbg: Launch",
+						request = "launch",
+						cwd = "${fileDirname}",
+						program = get_dll,
+					},
+				}
+				require("mason-nvim-dap").default_setup(config)
+			end,
+		},
 	})
 end
 

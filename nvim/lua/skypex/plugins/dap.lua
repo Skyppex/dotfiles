@@ -20,7 +20,10 @@ return {
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = "williamboman/mason.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+		},
 		event = "BufReadPre",
 		config = function()
 			require("skypex.custom.dap").mason()

@@ -54,6 +54,51 @@ local function table_to_string(tbl)
 	return result:sub(1, -3) .. "}"
 end
 
+--- @param command string
+local function run_command(command)
+	local stdout = vim.loop.new_pipe(false)
+	local stderr = vim.loop.new_pipe(false)
+
+	local handle
+	handle = vim.loop.spawn(command, {
+		stdio = { nil, stdout, stderr },
+	}, function(code, signal)
+		if stdout then
+			stdout:close()
+		end
+
+		if stderr then
+			stderr:close()
+		end
+
+		if handle then
+			handle:close()
+		end
+
+		if code ~= 0 then
+			vim.notify("Command exited with code " .. code, vim.log.levels.ERROR)
+		end
+	end)
+
+	if stdout then
+		vim.loop.read_start(stdout, function(err, data)
+			assert(not err, err)
+			if data then
+				vim.notify(data, vim.log.levels.INFO)
+			end
+		end)
+	end
+
+	if stderr then
+		vim.loop.read_start(stderr, function(err, data)
+			assert(not err, err)
+			if data then
+				vim.notify(data, vim.log.levels.ERROR)
+			end
+		end)
+	end
+end
+
 local andromeda = {
 	gray = "#23262e",
 	light_gray = "#373941",
@@ -182,6 +227,7 @@ return {
 	is_home_computer = is_home_computer,
 	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,
+	run_command = run_command,
 	andromeda = andromeda,
 	nmap = nmap,
 	xmap = xmap,
