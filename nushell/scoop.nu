@@ -1,15 +1,17 @@
+let manifest_path = $"($env.CHEZMOI_PATH)/scoop/manifest.json";
+
 # Open the scoop user manifest file
-alias manifest = open $"($env.CHEZMOI_PATH)/scoop/manifest.json"
+alias manifest = open $manifest_path
 
 # Create the scoop user manifest file
 def "manifest create" [] {
-    touch $"($env.CHEZMOI_PATH)/scoop/manifest.json"
+    touch $manifest_path
 }
 
 # Update the scoop user manifest file with installed scoop apps
 def "manifest update" [] {
     let old = manifest
-    scoop export | save --force $"($env.CHEZMOI_PATH)/scoop/manifest.json"
+    scoop export | save --force $manifest_path
     let new = manifest
     
     for bucket in $old.buckets {
@@ -112,12 +114,12 @@ def "manifest install" [] {
     | zip { $buckets | get source } 
     | each { |b| scoop bucket add $b.0 $b.1 }
 
-    scoop import $"($env.CHEZMOI_PATH)/scoop/manifest.json"
+    scoop import $manifest_path
 }
 
 # Remove the scoop user manifest file
 def "manifest rm" [] {
-    rm $"($env.CHEZMOI_PATH)/scoop/manifest.json"
+    rm $manifest_path
 }
 
 # Scoop reinstall
