@@ -898,7 +898,7 @@ source ~/.config/nushell/scripts.nu
 
 # Pull the dotfiles from the remote repository
 def "pull" [] {
-    enter-old $"($nu.home-path)/.config"
+    enter-old $env.CHEZMOI_PATH
     print "---- pulling config ----"
     git stash -u
     git pull --rebase
@@ -916,8 +916,8 @@ def "pull" [] {
 def "push" [] {
     print "---- updating scoop manifest ----"
     manifest update
-    enter-old $"($nu.home-path)/.config"
+    enter-old $env.CHEZMOI_PATH
     print "---- pushing config ----"
     gcp
-    p
+    p # return to previous directory
 }
