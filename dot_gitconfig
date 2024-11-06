@@ -1,0 +1,41 @@
+[core]
+	editor = nvim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Skypex
+	email = 84551201+Skyppex@users.noreply.github.com
+	signingKey = ""
+[init]
+	defaultBranch = main
+[pull]
+	rebase = merges
+[fetch]
+	prune = true
+[gpg]
+	format = openpgp
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[gpg "ssh"]
+	program = ssh-keygen
+	allowedSignersFile = ""
+[credential "https://github.com"]
+	useHttpPath = true
+[push]
+	autoSetupRemote = true
+[credential]
+	helper = store
+[credential "helperselector"]
+	selected = manager
+[diff]
+	tool = nvim
+[difftool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE
+[difftool]
+	prompt = true
