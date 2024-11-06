@@ -18,5 +18,13 @@ return {
 			require("skypex.custom.dap").dapui()
 		end,
 	},
-	{ "nvim-neotest/nvim-nio" },
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = "williamboman/mason.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("skypex.custom.dap").mason()
+		end,
+	},
+	"nvim-neotest/nvim-nio",
 }

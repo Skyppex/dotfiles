@@ -5,23 +5,8 @@ M.dap = function()
 
 	dap.adapters.coreclr = {
 		type = "executable",
-		command = os.getenv("HOMEDRIVE") .. os.getenv("HOMEPATH") .. "/scoop/apps/netcoredbg/current/netcoredbg",
-		args = { "--interpreter=vscode" },
-	}
-
-	dap.adapters.netcoredbg = {
-		type = "executable",
-		command = vim.fn.stdpath("data") .. "/mason" .. "/bin" .. "/netcoredbg.CMD",
-		args = { "--interpreter=vscode" },
-	}
-
-	dap.adapters.codelldb = {
-		type = "server",
-		port = "3500",
-		executable = {
-			command = vim.fn.stdpath("data") .. "/mason/bin/codelldb.CMD",
-			args = { "--port", "3500" },
-		},
+		command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg.cmd",
+		args = { "--interpreter=vscode", "--engineLogging=~/netcoredbg.log" },
 	}
 
 	dap.configurations.cs = {
@@ -54,18 +39,63 @@ M.dap = function()
 		},
 	}
 
-	dap.configurations.rust = {
-		{
-			name = "Debug with codelldb",
-			type = "codelldb",
-			request = "launch",
-			program = function()
-				return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-			end,
-			cwd = "${workspaceFolder}",
-			stopOnEntry = false,
-		},
-	}
+	-- dap.adapters.netcoredbg = {
+	-- 	type = "executable",
+	-- 	command = vim.fn.stdpath("data") .. "/mason" .. "/bin" .. "/netcoredbg.CMD",
+	-- 	args = { "--interpreter=vscode" },
+	-- }
+	--
+	-- dap.adapters.codelldb = {
+	-- 	type = "server",
+	-- 	port = "3500",
+	-- 	executable = {
+	-- 		command = vim.fn.stdpath("data") .. "/mason/bin/codelldb.CMD",
+	-- 		args = { "--port", "3500" },
+	-- 	},
+	-- }
+	--
+	-- dap.configurations.cs = {
+	-- 	{
+	-- 		type = "coreclr",
+	-- 		name = "launch - netcoredbg",
+	-- 		request = "launch",
+	-- 		program = function()
+	-- 			local project_file = io.popen("fd -HI -e .csproj | fzf", "r")
+	--
+	-- 			if project_file == nil then
+	-- 				return nil
+	-- 			end
+	--
+	-- 			local project = project_file:read("*a")
+	-- 			project = project:gsub(".csproj", "")
+	-- 			project = project:gsub(".*[\\/]", "")
+	-- 			local query = project .. "binDebug"
+	-- 			local pipe = io.popen("fd -HI -a -e .dll | fzf --query " .. query, "r")
+	--
+	-- 			if pipe == nil then
+	-- 				return nil
+	-- 			end
+	--
+	-- 			local result = pipe:read("*a")
+	-- 			result = result:match("^%s*(.-)%s*$")
+	--
+	-- 			return vim.fn.input("Path to dll: ", result, "file")
+	-- 		end,
+	-- 	},
+	-- }
+	--
+	-- dap.configurations.rust = {
+	-- 	{
+	-- 		name = "Debug with codelldb",
+	-- 		type = "codelldb",
+	-- 		request = "launch",
+	-- 		program = function()
+	-- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+	-- 		end,
+	-- 		cwd = "${workspaceFolder}",
+	-- 		stopOnEntry = false,
+	-- 	},
+	-- }
 
 	local nmap = require("skypex.utils").nmap
 	nmap("<leader>dr", function()
@@ -208,9 +238,17 @@ M.dapui = function()
 	end
 end
 
+M.mason = function()
+	require("mason-nvim-dap").setup({
+		ensure_installed = { "coreclr", "codelldb" },
+		automatic_installation = true,
+	})
+end
+
 M.all = function()
 	M.dap()
 	M.dapui()
+	M.mason()
 end
 
 return M
