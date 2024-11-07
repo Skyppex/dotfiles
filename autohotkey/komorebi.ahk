@@ -5,6 +5,13 @@ Komorebic(cmd) {
     RunWait(format("komorebic.exe {}", cmd), , "Hide")
 }
 
+; # = Win key or super key
+; ^ = Ctrl key
+; + = Shift key
+; ! = Alt key
+; & = Used to combine two hotkeys
+; :: = Separates the hotkey from the action
+; {} = Used to group actions together
 #r::Reload
 
 #^y::RunWait("yasb.exe")

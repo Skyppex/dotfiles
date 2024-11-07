@@ -3,17 +3,10 @@ local neotest = require("neotest")
 
 neotest.setup({
 	adapters = {
-		-- require("neotest-dotnet")({
-		-- 	dap = {
-		-- 		-- Set to false to debug decompiled code
-		-- 		args = { justMyCode = true },
-		-- 		-- Enter the name of your dap adapter, the default value is netcoredbg
-		-- 		adapter_name = "netcoredbg",
-		-- 	},
+		require("neotest-dotnet"),
+		-- require("neotest-rust")({
+		-- 	args = { "--no-capture" },
 		-- }),
-		require("neotest-rust")({
-			args = { "--no-capture" },
-		}),
 	},
 })
 

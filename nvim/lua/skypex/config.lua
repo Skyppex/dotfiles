@@ -116,9 +116,28 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		local target_directory = require("skypex.utils").get_chezmoi_path()
 		local current_file = vim.fn.expand("%:p")
 
-		if string.find(current_file, target_directory, 1, true) == 1 then
-			vim.notify("Applying chezmoi changes")
-			vim.fn.system("chezmoi apply --force")
+		if string.find(current_file, target_directory, 1, true) ~= 1 then
+			return
 		end
+
+		vim.notify("Applying chezmoi changes", vim.log.levels.DEBUG)
+
+		require("plenary.job")
+			:new({
+				command = "chezmoi",
+				args = { "apply", "--force" },
+				on_exit = function(_, return_val)
+					if return_val == 0 then
+						vim.schedule(function()
+							vim.notify("Applied chezmoi changes", vim.log.levels.INFO)
+						end)
+					else
+						vim.schedule(function()
+							vim.notify("Failed to apply chezmoi changes", vim.log.levels.ERROR)
+						end)
+					end
+				end,
+			})
+			:start()
 	end,
 })

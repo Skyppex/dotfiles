@@ -341,3 +341,4 @@ kib
 qf
 globpath
 exepath
+endswith
