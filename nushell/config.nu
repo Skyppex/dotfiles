@@ -903,6 +903,7 @@ def "pull" [] {
     git stash -u
     git pull --rebase
     git submodule update --init --recursive
+    chezmoi apply --force
     print "---- updating scoop ----"
     scoop update
     print "---- installing scoop apps ----"
