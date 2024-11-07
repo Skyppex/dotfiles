@@ -34,7 +34,7 @@ alias gt = git add --intent-to-add
 
 # Conventional commit
 def cc [...message: string] {
-    let type = gum filter --height=8 "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert"
+    let type = gum filter --height=9 "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert" "wip"
 
     if ($type | is-empty) {
         print "No type provided"
