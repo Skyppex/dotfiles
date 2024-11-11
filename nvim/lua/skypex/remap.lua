@@ -166,6 +166,14 @@ nxmap("}", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "}"')
 end)
 
+nxmap("(", function()
+	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "("')
+end)
+
+nxmap(")", function()
+	vim.cmd('execute "keepjumps norm! " .. v:count1 .. ")"')
+end)
+
 vim.opt.relativenumber = true
 
 nxmap("<leader>tr", function()
