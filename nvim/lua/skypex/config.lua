@@ -118,7 +118,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 			return
 		end
 
-		vim.notify("Applying chezmoi changes", vim.log.levels.DEBUG)
+		vim.notify("Applying chezmoi changes", vim.log.levels.DEBUG, {
+			group = "chezmoi",
+		})
 
 		require("plenary.job")
 			:new({
@@ -127,11 +129,15 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 				on_exit = function(_, return_val)
 					if return_val == 0 then
 						vim.schedule(function()
-							vim.notify("Applied chezmoi changes", vim.log.levels.INFO)
+							vim.notify("Applied chezmoi changes", vim.log.levels.INFO, {
+								group = "chezmoi",
+							})
 						end)
 					else
 						vim.schedule(function()
-							vim.notify("Failed to apply chezmoi changes", vim.log.levels.ERROR)
+							vim.notify("Failed to apply chezmoi changes", vim.log.levels.ERROR, {
+								group = "chezmoi",
+							})
 						end)
 					end
 				end,
