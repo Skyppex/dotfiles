@@ -343,3 +343,6 @@ globpath
 exepath
 endswith
 wip
+popupmenu
+cmdline
+cmdheight
