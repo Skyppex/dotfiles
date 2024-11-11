@@ -919,6 +919,8 @@ def "push" [] {
     manifest update
     enter-old $env.CHEZMOI_PATH
     print "---- pushing config ----"
-    gcp
+    git add -A
+    git commit -m "chore(scoop): update manifest"
+    git push
     p # return to previous directory
 }
