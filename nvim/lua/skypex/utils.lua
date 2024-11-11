@@ -55,47 +55,34 @@ local function table_to_string(tbl)
 end
 
 --- @param command string
-local function run_command(command)
-	local stdout = vim.loop.new_pipe(false)
-	local stderr = vim.loop.new_pipe(false)
+--- @param args string[]?
+--- @param should_block boolean
+local function run_command(command, args, should_block)
+	local Job = require("plenary.job")
 
-	local handle
-	handle = vim.loop.spawn(command, {
-		stdio = { nil, stdout, stderr },
-	}, function(code, signal)
-		if stdout then
-			stdout:close()
-		end
-
-		if stderr then
-			stderr:close()
-		end
-
-		if handle then
-			handle:close()
-		end
-
-		if code ~= 0 then
-			vim.notify("Command exited with code " .. code, vim.log.levels.ERROR)
-		end
-	end)
-
-	if stdout then
-		vim.loop.read_start(stdout, function(err, data)
-			assert(not err, err)
+	local job = Job:new({
+		command = command,
+		args = args,
+		on_stdout = function(_, data)
 			if data then
-				vim.notify(data, vim.log.levels.INFO)
+				vim.schedule(function()
+					vim.notify(data, vim.log.levels.OFF)
+				end)
 			end
-		end)
-	end
-
-	if stderr then
-		vim.loop.read_start(stderr, function(err, data)
-			assert(not err, err)
+		end,
+		on_stderr = function(_, data)
 			if data then
-				vim.notify(data, vim.log.levels.ERROR)
+				vim.schedule(function()
+					vim.notify(data, vim.log.levels.ERROR)
+				end)
 			end
-		end)
+		end,
+	})
+
+	if should_block then
+		job:sync() -- This will block until the job completes
+	else
+		job:start() -- This will run the job asynchronously
 	end
 end
 
