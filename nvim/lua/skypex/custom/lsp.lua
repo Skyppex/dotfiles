@@ -145,8 +145,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
 capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
-require("fidget").setup({})
-
 -- Define variables used in the server configuration below
 local lspconfig = require("lspconfig")
 local cs_ls_ex = require("csharpls_extended")
