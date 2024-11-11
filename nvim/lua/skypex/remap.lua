@@ -166,6 +166,12 @@ nxmap("}", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "}"')
 end)
 
+vim.opt.relativenumber = true
+
+nxmap("<leader>tr", function()
+	vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end, "Toggle relative line numbers")
+
 -- Increment and decrement numbers
 nxmap("+", "<C-a>", "Increment number")
 nxmap("-", "<C-x>", "Decrement number")

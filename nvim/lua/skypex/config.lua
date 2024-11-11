@@ -31,9 +31,6 @@ vim.opt.wrap = false
 -- Make line numbers default
 vim.opt.number = true
 
--- Not needed since i use hop to jump around on the viewport
-vim.opt.relativenumber = false
-
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
 
