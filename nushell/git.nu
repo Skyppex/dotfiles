@@ -729,7 +729,7 @@ def "gh open" [
         }
 
         for org in $orgs {
-            let orgrepos = gh repo list -L 500 $org
+            let orgrepos = gh repo list --limit 500 $org
             let orgrepos = ($orgrepos | parse table "\t+" | get '1')
             
             if $verbose {
@@ -746,7 +746,7 @@ def "gh open" [
         }
 
         $repo = (if $exact {
-            $repos | to text | fzf --height 40% --layout=reverse -e -0 -1 --query $repo
+            $repos | to text | fzf --height 40% --layout=reverse --exact -0 -1 --query $repo
         } else {
             $repos | to text | fzf --height 40% --layout=reverse -0 -1 --query $repo
         })
@@ -769,4 +769,3 @@ def "gh open" [
 
     start $link
 }
-
