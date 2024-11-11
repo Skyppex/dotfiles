@@ -369,3 +369,9 @@ def "andromeda" [] {
 
 alias cm = chezmoi
 alias cma = chezmoi apply
+
+def "count-by-group" [] {
+    $in
+    | group-by --to-table
+    | each { |g| { group: $g.group, count: ($g.items | length) } }
+}
