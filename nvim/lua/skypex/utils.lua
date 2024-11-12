@@ -54,6 +54,25 @@ local function table_to_string(tbl)
 	return result:sub(1, -3) .. "}"
 end
 
+--- @class Separated
+--- @field keys string[]
+--- @field values string[]
+---
+--- @param tbl table
+--- @return Separated
+local function separate(tbl)
+	local keys = {}
+	local values = {}
+
+	for key, value in pairs(tbl) do
+		table.insert(keys, key)
+	end
+	return {
+		keys = keys,
+		values = values,
+	}
+end
+
 --- @param command string
 --- @param args string[]?
 --- @param should_block boolean
@@ -274,6 +293,7 @@ return {
 	is_home_computer = is_home_computer,
 	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,
+	separate = separate,
 	run_command = run_command,
 	andromeda = andromeda,
 	nmap = nmap,

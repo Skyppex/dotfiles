@@ -33,7 +33,9 @@ local function set_fidget_log_level(level)
 			filter = vim.log.levels[level],
 		},
 	})
-	vim.notify("Fidget log level set to " .. level, vim.log.levels.INFO)
+
+	vim.lsp.set_log_level(level)
+	vim.notify("Set log level to " .. level, vim.log.levels.INFO .. " for fidget and LSP")
 end
 
 local nmap = require("skypex.utils").nmap

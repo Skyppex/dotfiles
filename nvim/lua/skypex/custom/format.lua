@@ -30,11 +30,13 @@ conform.setup({
 			command = "jq",
 			args = { "--monochrome-output" },
 		},
-		nufmt = {
-			command = "nufmt",
-		},
+		-- nufmt is not ready to be used yet, it breaks the code
+		-- nufmt = {
+		-- 	command = "nufmt",
+		-- },
 	},
 	formatters_by_ft = {
+		-- Runs the single formatter
 		lua = { "stylua" },
 		-- Runs each formatter sequentially
 		python = { "isort", "black" },
@@ -50,10 +52,10 @@ conform.setup({
 		cs = { "csharpier" },
 		csx = { "csharpier" },
 		go = { "gofmt" },
-		xml = { "xmlformatter" },
+		xml = { "xmlformat" },
 		yaml = { "yamlfix", "prettierd", "prettier", stop_after_first = true },
 		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
-		nu = { "nufmt" },
+		-- nu = { "nufmt" }, Disabled because it breaks the code
 	},
 })
 
