@@ -30,7 +30,7 @@ M.toggle = function(window, pane)
 		"-HI",
 		"-td",
 		"^.git$",
-		"--max-depth=3",
+		"--max-depth=4",
 		"--prune",
 		temp_path,
 		code_path,
