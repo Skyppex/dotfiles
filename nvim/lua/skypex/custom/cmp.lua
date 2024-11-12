@@ -13,7 +13,10 @@ local sources = {
 		max_item_count = 2,
 	},
 	lsp = { name = "nvim_lsp", max_item_count = 5 },
-	lsp_signature_help = { name = "nvim_lsp_signature_help" },
+	lsp_signature_help = {
+		name = "nvim_lsp_signature_help",
+		max_item_count = 2,
+	},
 	luasnip = { name = "luasnip", max_item_count = 2 },
 	dadbod = { name = "vim-dadbod-completion" },
 	buffer = {
@@ -81,7 +84,12 @@ cmp.setup({
 	},
 	view = {
 		entries = {
+			selection_order = "bottom_up",
 			vertical_positioning = "above",
+			follow_cursor = false,
+		},
+		docs = {
+			auto_open = true,
 		},
 	},
 	mapping = cmp.mapping.preset.insert({

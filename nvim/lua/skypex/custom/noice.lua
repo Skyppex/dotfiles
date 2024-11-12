@@ -1,6 +1,9 @@
 require("noice").setup({
 	messages = { enabled = false },
-	popupmenu = { enabled = false },
+	popupmenu = {
+		enabled = true,
+		backend = "nui",
+	},
 	notify = { enabled = false },
 	lsp = {
 		progress = { enabled = false },

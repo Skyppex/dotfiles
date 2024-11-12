@@ -1,7 +1,7 @@
 return {
 	{
-		"llllvvuu/nvim-cmp",
-		branch = "feat/above",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		lazy = true,
 		event = "InsertEnter",
 		dependencies = {
@@ -18,11 +18,6 @@ return {
 			},
 			{
 				"hrsh7th/cmp-buffer",
-				lazy = true,
-				event = "InsertEnter",
-			},
-			{
-				"f3fora/cmp-spell",
 				lazy = true,
 				event = "InsertEnter",
 			},
