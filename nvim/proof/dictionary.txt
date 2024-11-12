@@ -346,3 +346,7 @@ wip
 popupmenu
 cmdline
 cmdheight
+iguanacucumber
+xmlformat
+tf
+kvp

@@ -70,16 +70,6 @@ nmap("<leader>sg", function()
 	builtin.live_grep(opts)
 end, "Search Git files by grep")
 
-nmap("<leader>pws", function()
-	local word = vim.fn.expand("<cword>")
-	builtin.grep_string({ search = word })
-end)
-
-nmap("<leader>pWs", function()
-	local word = vim.fn.expand("<cWORD>")
-	builtin.grep_string({ search = word })
-end)
-
 -- Slightly advanced example of overriding default behavior and theme
 nmap("<leader>/", function()
 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
