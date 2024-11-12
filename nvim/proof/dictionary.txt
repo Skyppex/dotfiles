@@ -353,3 +353,8 @@ kvp
 saecki
 checkhealth
 dbout
+capitalizechar
+emac
+keycode
+lowercaseword
+mutex

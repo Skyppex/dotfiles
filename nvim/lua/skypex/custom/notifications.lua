@@ -6,6 +6,7 @@ require("fidget").setup({
 			stack_upwards = false,
 		},
 		window = {
+			max_width = 50,
 			align = "top",
 			border = "rounded",
 		},
