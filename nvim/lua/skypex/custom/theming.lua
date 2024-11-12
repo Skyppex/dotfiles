@@ -187,6 +187,7 @@ M.smartcolumn = function()
 			"dbout",
 			"qf",
 			"alpha",
+			"checkhealth",
 		},
 	})
 end
