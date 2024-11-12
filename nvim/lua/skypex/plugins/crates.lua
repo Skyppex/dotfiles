@@ -3,6 +3,12 @@ return {
 	tag = "stable",
 	ft = { "rust", "toml" },
 	config = function()
-		require("crates").setup()
+		require("crates").setup({
+			completion = {
+				cmp = {
+					enabled = true,
+				},
+			},
+		})
 	end,
 }

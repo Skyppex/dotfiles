@@ -33,6 +33,7 @@ local sources = {
 		},
 		max_item_count = 1,
 	},
+	crates = { name = "crates" },
 	copilot = { name = "copilot" },
 }
 
@@ -161,6 +162,18 @@ cmp.setup.filetype({ "sql" }, {
 		sources.dadbod,
 		sources.buffer,
 	},
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "Cargo.toml",
+	callback = function()
+		cmp.setup.buffer({
+			sources = {
+				sources.crates,
+				sources.buffer,
+			},
+		})
+	end,
 })
 
 local andromeda = require("skypex.utils").andromeda
