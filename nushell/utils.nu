@@ -375,3 +375,5 @@ def "count-by-group" [] {
     | group-by --to-table
     | each { |g| { group: $g.group, count: ($g.items | length) } }
 }
+
+def void [] {}
