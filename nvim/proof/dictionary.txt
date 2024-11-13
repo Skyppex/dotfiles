@@ -358,3 +358,6 @@ emac
 keycode
 lowercaseword
 mutex
+annote
+deepcopy
+dottet

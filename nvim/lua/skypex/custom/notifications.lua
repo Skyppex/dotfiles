@@ -1,4 +1,6 @@
-require("fidget").setup({
+local fidget = require("fidget")
+
+fidget.setup({
 	notification = {
 		filter = vim.log.levels.INFO,
 		override_vim_notify = true,
@@ -6,12 +8,24 @@ require("fidget").setup({
 			stack_upwards = false,
 		},
 		window = {
-			max_width = 50,
+			-- The window is always trying to show the start of the message, so it's better to not limit the width
+			-- max_width = 50,
 			align = "top",
 			border = "rounded",
 		},
 	},
 })
+
+-- reroute print to fidget
+function print(...)
+	local args = { ... }
+	local message = table.concat(vim.tbl_map(tostring, args), " | ")
+	fidget.notify(message, nil, {
+		key = "print",
+		group = "print",
+		annote = "MESSAGE",
+	})
+end
 
 local log_levels = {
 	"TRACE",
@@ -19,6 +33,7 @@ local log_levels = {
 	"INFO",
 	"WARN",
 	"ERROR",
+	"OFF",
 }
 
 local actions = require("telescope.actions")
