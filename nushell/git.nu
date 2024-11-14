@@ -33,16 +33,49 @@ alias gdf = git diff (git status --porcelain
 alias gt = git add --intent-to-add
 
 # Conventional commit
-def cc [...message: string] {
-    let type = gum filter --height=9 "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert" "wip"
+def cc [
+    --type(-t): string # Specify the type of the commit
+    --scope(-s): string # Specify the scope of the commit
+    --no-details(-n) # Do not prompt for a description
+    ...message: string
+] {
+    let types = [
+        "fix",
+        "feat",
+        "docs",
+        "style",
+        "refactor",
+        "test",
+        "chore",
+        "revert",
+        "wip"
+    ]
+
+    if ($type | is-not-empty) {
+        if ($types | any { |t| $t == $type } | n) {
+            print $"Invalid type: ($type)"
+            return
+        }
+    }
+
+    let type = if ($type | is-empty) {
+        gum filter --height=9 ...$types 
+    } else {
+        $type
+    }
 
     if ($type | is-empty) {
         print "No type provided"
         return
     }
 
-    let scope = gum input --placeholder "scope"
-    let scope = if ($scope | is-empty) { "" } else { $"\(($scope)\)" }
+
+    let scope = if ($scope | is-empty) {
+        let s = (gum input --placeholder "scope")
+        if ($s | is-empty) { "" } else { $"\(($s)\)" }
+    } else {
+        $"\(($scope)\)"
+    }
 
     let summary = if ($message | is-not-empty) {
         $"($type + $scope): ($message | str join ' ')"
@@ -55,16 +88,20 @@ def cc [...message: string] {
         return
     }
 
-    let description = gum write --placeholder "Details of this change"
+    mut details = ""
 
-    if ($description | is-empty) {
+    if not $no_details {
+        $details = (gum write --placeholder "Details of this change")
+    }
+
+    if ($details | is-empty) {
         gum confirm "Commit changes?"
         git commit -m ($summary)
         return
     }
 
     gum confirm "Commit changes?"
-    git commit -m $summary -m $description
+    git commit -m $summary -m $details
 }
 
 # Git checkout but with fzf for branch selection
@@ -629,9 +666,13 @@ def gcapf [] {
 }
 
 # Git commit and push
-def gcp [...message: string] {
+def gcp [
+    --type(-t): string # Specify the type of the commit
+    --scope(-s): string # Specify the scope of the commit
+    ...message: string
+] {
     git add -A
-    cc ...$message
+    cc $type $scope ...$message
     gum confirm "Push changes?"
     git push
 }
