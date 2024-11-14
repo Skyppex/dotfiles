@@ -11,15 +11,6 @@ local keymaps = {
 	change = "cs",
 }
 
-local aliases = {
-	["a"] = ">",
-	["p"] = ")",
-	["b"] = "}",
-	["s"] = "]",
-	["q"] = { '"', "'", "`" },
-	["e"] = { "}", "]", ")", ">", '"', "'", "`" },
-}
-
 local config = require("nvim-surround.config")
 
 local surrounds = {
@@ -57,6 +48,5 @@ local surround = require("nvim-surround")
 
 surround.setup({
 	keymaps = keymaps,
-	aliases = aliases,
 	surrounds = surrounds,
 })
