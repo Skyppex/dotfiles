@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local utils = require("utils")
 local act = wezterm.action
+local mux = wezterm.mux
 
 local M = {}
 
@@ -67,11 +68,44 @@ M.toggle = function(window, pane)
 							name = id,
 							spawn = {
 								cwd = label,
-								args = { "nvim" },
+								args = { "nu" },
 							},
 						}),
 						pane
 					)
+
+					wezterm.log_info("Switched to workspace " .. id)
+
+					local windows = mux.all_windows()
+
+					local target = nil
+
+					for _, w in ipairs(windows) do
+						if w:get_workspace() == id then
+							target = w
+							break
+						end
+					end
+
+					-- This should never happen since
+					-- we just created the workspace
+					if target == nil then
+						return
+					end
+
+					wezterm.log_info("#win:mux_win:tabs: " .. #win:mux_window():tabs())
+
+					if #target:tabs() <= 1 then
+						wezterm.log_info("Creating tab")
+
+						win:perform_action(
+							act.SpawnCommandInNewTab({
+								cwd = label,
+								args = { "nvim" },
+							}),
+							pane
+						)
+					end
 				end
 			end),
 		}),

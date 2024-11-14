@@ -672,7 +672,18 @@ def gcp [
     ...message: string
 ] {
     git add -A
-    cc $type $scope ...$message
+
+    mut args = []
+
+    let has_type = $type | is-not-empty
+    let has_scope = $scope | is-not-empty
+
+    match [$has_type, $has_scope] {
+        [false, false] => (cc ...$message)
+        [true, false] => (cc --type $type ...$message)
+        [false, true] => (cc --scope $scope ...$message)
+        [true, true] => (cc --type $type --scope $scope ...$message)
+    }
     gum confirm "Push changes?"
     git push
 }
