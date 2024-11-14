@@ -93,8 +93,6 @@ M.toggle = function(window, pane)
 						return
 					end
 
-					wezterm.log_info("#win:mux_win:tabs: " .. #win:mux_window():tabs())
-
 					if #target:tabs() <= 1 then
 						wezterm.log_info("Creating tab")
 

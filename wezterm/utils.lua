@@ -18,4 +18,8 @@ M.is_work_computer = function()
 	return M.get_home():find("brage.ingebrigtsen")
 end
 
+M.str_ends_with = function(str, ending)
+	return ending == "" or str:sub(-#ending) == ending
+end
+
 return M
