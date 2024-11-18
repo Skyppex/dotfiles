@@ -203,7 +203,7 @@ local servers = {
 			["textDocument/definition"] = cs_ls_ex.handler,
 			["textDocument/typeDefinition"] = cs_ls_ex.handler,
 		},
-		after_attach = function(client, bufnr)
+		after_attach = function(client)
 			if client.server_capabilities.signatureHelpProvider then
 				require("lsp-overloads").setup(client, {
 					keymaps = {
@@ -215,7 +215,8 @@ local servers = {
 					},
 				})
 			end
-
+		end,
+		override_gd = function(bufnr)
 			require("telescope").load_extension("csharpls_definition")
 
 			vim.keymap.set("n", "gd", function()
@@ -280,7 +281,7 @@ local servers = {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
-		local map = function(keys, func, desc)
+		local nmap = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, {
 				noremap = true,
 				silent = true,
@@ -289,7 +290,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end
 
-		local mapnv = function(keys, func, desc)
+		local nvmap = function(keys, func, desc)
 			vim.keymap.set({ "n", "v" }, keys, func, {
 				noremap = true,
 				silent = true,
@@ -300,13 +301,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local builtin = require("telescope.builtin")
 
-		map("gd", builtin.lsp_definitions, "Go to Definition")
-		map("gr", builtin.lsp_references, "Go to References")
-		map("gi", builtin.lsp_implementations, "Go to Implementation")
-		map("gt", builtin.lsp_type_definitions, "Go to Type Definition")
-		map("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
+		nmap("gr", builtin.lsp_references, "Go to References")
+		nmap("gi", builtin.lsp_implementations, "Go to Implementation")
+		nmap("gt", builtin.lsp_type_definitions, "Go to Type Definition")
+		nmap("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
-		map("<leader>rn", function()
+		nmap("<leader>rn", function()
 			vim.lsp.buf.rename()
 			vim.schedule(function()
 				vim.api.nvim_cmd({ cmd = "wa" }, {})
@@ -315,15 +315,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local ap = require("actions-preview")
 
-		mapnv("<leader>ca", ap.code_actions, "Code Action")
-		map("K", vim.lsp.buf.hover, "Hover Documentation")
-		map("H", vim.lsp.buf.signature_help, "Signature Help")
+		nvmap("<leader>ca", ap.code_actions, "Code Action")
+		nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+		nmap("H", vim.lsp.buf.signature_help, "Signature Help")
 
-		vim.keymap.set("i", "<A-H>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
+		vim.keymap.set("i", "<C-M-H>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
 
-		map("gD", vim.lsp.buf.declaration, "Go to Declaration")
+		nmap("gD", vim.lsp.buf.declaration, "Go to Declaration")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+		if client then
+			local server = servers[client.name]
+			local gd_exists, rhs = require("skypex.utils").local_keymap_exists(event.buf, "n", "gd")
+
+			if server and server.override_gd then
+				server.override_gd(event.buf)
+			elseif not gd_exists then
+				nmap("gd", builtin.lsp_definitions, "Go to Definition")
+			end
+		end
 
 		if client and client.server_capabilities.documentHighlightProvider then
 			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
@@ -352,7 +363,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		--
 		-- This may be unwanted, since they displace some of your code
 		if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-			map("<leader>th", function()
+			nmap("<leader>th", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			end, "Toggle Inlay Hints")
 		end
@@ -361,7 +372,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			local server = servers[client.name]
 
 			if server and server.after_attach then
-				server.after_attach(client, event.buf)
+				server.after_attach(client)
 			end
 		end
 	end,

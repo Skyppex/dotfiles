@@ -54,6 +54,37 @@ local function table_to_string(tbl)
 	return result:sub(1, -3) .. "}"
 end
 
+--- @param mode string
+--- @param lhs string
+--- @return boolean, string?
+local function keymap_exists(mode, lhs)
+	local keymaps = vim.api.nvim_get_keymap(mode)
+
+	for _, keymap in ipairs(keymaps) do
+		if keymap.lhs == lhs then
+			return true, keymap.rhs
+		end
+	end
+
+	return false, nil
+end
+
+--- @param bufnr integer
+--- @param mode string
+--- @param lhs string
+--- @return boolean, string?
+local function local_keymap_exists(bufnr, mode, lhs)
+	local keymaps = vim.api.nvim_buf_get_keymap(bufnr, mode)
+
+	for _, keymap in ipairs(keymaps) do
+		if keymap.lhs == lhs then
+			return true, keymap.rhs
+		end
+	end
+
+	return false, nil
+end
+
 --- @class Separated
 --- @field keys string[]
 --- @field values string[]
@@ -293,6 +324,8 @@ return {
 	is_home_computer = is_home_computer,
 	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,
+	keymap_exists = keymap_exists,
+	local_keymap_exists = local_keymap_exists,
 	separate = separate,
 	run_command = run_command,
 	andromeda = andromeda,
