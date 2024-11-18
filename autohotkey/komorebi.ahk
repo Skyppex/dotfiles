@@ -48,10 +48,10 @@ Komorebic(cmd) {
 #+t::Run("wezterm-gui.exe")
 
 #c::{
-    if !WinExist("ahk_exe slack.exe") {
+    if !WinExist("ahk_exe slack-app.exe") {
         Run("slack.exe")
     } else {
-        WinActivate("ahk_exe slack.exe")
+        WinActivate("ahk_exe slack-app.exe")
     }
 }
 
