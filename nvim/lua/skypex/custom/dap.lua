@@ -241,7 +241,7 @@ M.dapui = function()
 end
 
 local function get_dll()
-	require("skypex.utils").run_command("dotnet build")
+	require("skypex.utils").run_command("dotnet", { "build" }, true)
 
 	return coroutine.create(function(dap_run_co)
 		local items = vim.fn.globpath(vim.fn.getcwd(), "**/bin/Debug/**/*.dll", 0, 1)
