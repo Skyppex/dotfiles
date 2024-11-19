@@ -49,7 +49,7 @@ Komorebic(cmd) {
 
 #c::{
     if !WinExist("ahk_exe slack-app.exe") {
-        Run("slack.exe")
+        Run("slack-app.exe")
     } else {
         WinActivate("ahk_exe slack-app.exe")
     }
