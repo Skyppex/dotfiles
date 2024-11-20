@@ -100,6 +100,10 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
+if $env.HOMEPATH? != null {
+    $env.HOME = $env.HOMEPATH
+}
+
 # Carapace
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
 mkdir ~/.cache/carapace
@@ -112,14 +116,21 @@ $env.CONFIG_PATH = $"($nu.home-path)/.config"
 $env.CHEZMOI_PATH = $"($nu.home-path)/.local/share/chezmoi"
 $env.USER_MANIFEST = $"($env.CONFIG_PATH)/scoop/user_manifest.json"
 $env.SCOOP_APPS = $"($nu.home-path)/scoop/apps"
+$env.HOSTNAME = (sys host | get hostname)
 
-match ($env.COMPUTERNAME) {
+match ($env.HOSTNAME) {
     "BRAGE-PC" => { 
         $env.CODE = ('~\code' | path expand)
+        $env.LANG = "en_US"
     },
     "DESKTOP-RRC642H" => { 
         $env.CODE = "D:/code"
+        $env.LANG = "en_US"
     },
+    "brage-desktop" => {
+        $env.CODE = ('~/dev/code' | path expand)
+        $env.Path = $"($env.Path):/home/brage/dev/code/links"
+    }
     _ => {
         print "Unknown computer name"
     }
@@ -134,4 +145,7 @@ $env.AWS_PROFILE = "dev"
 $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 $env.DOCKER_CONTEXT = "desktop-linux"
-$env.YASB_GITHUB_TOKEN = (skate get github-yasb@secrets)
+
+if $env.HOSTNAME != "brage-desktop" {
+    $env.YASB_GITHUB_TOKEN = (skate get github-yasb@secrets)
+}

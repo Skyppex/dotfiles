@@ -98,20 +98,11 @@ require("nvim-treesitter.configs").setup({
 --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-
-require("skypex.utils").nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
+local utils = require("skypex.utils")
+utils.nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
-local home_drive = os.getenv("HOMEDRIVE")
-local home_path = os.getenv("HOMEPATH")
-local home = home_drive .. home_path
-local path
-
-if home:find("brage.ingebrigtsen") then
-	path = home .. "/dev/code/arcana/tree-sitter-arcana/parser.so"
-else
-	path = "D:/code/arcana/tree-sitter-arcana/parser.so"
-end
+local path = utils.get_code_path() .. "/arcana/tree-sitter-arcana/parser.so"
 
 vim.treesitter.language.add("arcana", {
 	path = path,

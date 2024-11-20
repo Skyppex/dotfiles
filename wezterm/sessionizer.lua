@@ -8,19 +8,15 @@ local M = {}
 local home = utils.get_home()
 local fd = home .. "/scoop/apps/fd/current/fd.exe"
 local chezmoi_path = utils.get_chezmoi_path()
-local temp_path
-local code_path
+local temp_path = utils.get_temp_path()
+local code_path = utils.get_code_path()
 local code_path_2
 local obsidian_path = home .. "/OneDrive/Obsidian"
 
-if utils.is_work_computer() then
-	temp_path = home .. "/dev/temp/"
-	code_path = home .. "/dev/code/"
-	code_path_2 = home .. "/dev/code/commoncarweb"
+if utils.is_home_computer_windows() then
+	code_path_2 = code_path .. "sentinel/commoncarweb"
 else
-	temp_path = "D:/code/temp/"
-	code_path = "D:/code/"
-	code_path_2 = "D:/code/sentinel/commoncarweb"
+	code_path_2 = code_path .. "/commoncarweb"
 end
 
 M.toggle = function(window, pane)

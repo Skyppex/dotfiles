@@ -3,7 +3,7 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.cmd("language en_US")
+vim.cmd("language " .. os.getenv("LANG"))
 vim.opt.cmdheight = 0
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
@@ -48,7 +48,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOMEPATH") .. "/.vim/undodir"
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false

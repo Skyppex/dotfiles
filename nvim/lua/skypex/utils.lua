@@ -1,8 +1,17 @@
 --- @return string, integer
 local function get_home()
 	local home_drive = os.getenv("HOMEDRIVE")
-	local home_path = os.getenv("HOMEPATH")
-	return string.gsub(home_drive .. home_path, "\\", "/")
+	local home = os.getenv("HOME")
+
+	if home_drive ~= nil then
+		home = home_drive .. home
+	end
+
+	if home == nil then
+		return "", 0
+	end
+
+	return string.gsub(home, "\\", "/")
 end
 
 --- @return string
@@ -15,14 +24,14 @@ local function get_chezmoi_path()
 	return get_home() .. "/.local/share/chezmoi"
 end
 
---- @return string
-local function get_code_path()
-	local home = get_home()
-	if home:find("brage.ingebrigtsen") then
-		return home .. "/dev/code/"
-	else
-		return "D:/code/"
-	end
+--- @return boolean
+local function is_home_computer_windows()
+	return get_home():find("C:/Users/Brage") ~= nil
+end
+
+--- @return boolean
+local function is_home_computer_linux()
+	return get_home():find("/home/brage") ~= nil
 end
 
 --- @return boolean
@@ -30,9 +39,16 @@ local function is_work_computer()
 	return get_home():find("brage.ingebrigtsen") ~= nil
 end
 
---- @return boolean
-local function is_home_computer()
-	return not is_work_computer()
+--- @return string
+local function get_code_path()
+	local home = get_home()
+	if is_work_computer() then
+		return home .. "/dev/code"
+	elseif is_home_computer_windows() then
+		return "D:/code"
+	else
+		return home .. "/dev/code"
+	end
 end
 
 --- @return string
@@ -321,7 +337,8 @@ return {
 	get_code_path = get_code_path,
 	get_config_path = get_config_path,
 	get_chezmoi_path = get_chezmoi_path,
-	is_home_computer = is_home_computer,
+	is_home_computer_windows = is_home_computer_windows,
+	is_home_computer_linux = is_home_computer_linux,
 	is_work_computer = is_work_computer,
 	table_to_string = table_to_string,
 	keymap_exists = keymap_exists,

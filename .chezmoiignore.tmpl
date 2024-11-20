@@ -1,0 +1,33 @@
+# Ignore everything by default
+*
+
+{{- if eq .chezmoi.os "windows" }}
+!autohotkey/
+!configstore/
+!flow-launcher/
+!komorebi/
+!scoop/
+!whkdrc
+!windows/
+!yasb/
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+!gh/
+{{- end }}
+
+!dot_gitconfig
+!lazydocker/
+!lazygit/
+!mods.yml
+!nushell/
+!nvim/
+!starship-schema.json
+!starship.toml
+!wezterm/
+!yamllint/
+!yazi/
+!zoxide/
+!jgit/
+!pipes-rs/
+!thefuck/
