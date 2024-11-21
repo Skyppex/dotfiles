@@ -3,7 +3,15 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.cmd("language " .. os.getenv("LANG"))
+
+local utils = require("skypex.utils")
+
+if utils.is_home_computer_linux() then
+	vim.cmd("language " .. os.getenv("LANG"))
+else
+	vim.cmd("language en_US")
+end
+
 vim.opt.cmdheight = 0
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
@@ -48,7 +56,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = utils.get_home() .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false

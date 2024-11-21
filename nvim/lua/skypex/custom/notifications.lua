@@ -10,7 +10,7 @@ fidget.setup({
 		window = {
 			-- The window is always trying to show the start of the message, so it's better to not limit the width
 			-- max_width = 50,
-			align = "top",
+			align = "bottom",
 			border = "rounded",
 		},
 	},

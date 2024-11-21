@@ -101,7 +101,7 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 if $env.HOMEPATH? != null {
-    $env.HOME = $env.HOMEPATH
+    $env.HOME = ($env.HOMEDRIVE ++ $env.HOMEPATH | str replace "\\" "/")
 }
 
 # Carapace
@@ -119,11 +119,11 @@ $env.SCOOP_APPS = $"($nu.home-path)/scoop/apps"
 $env.HOSTNAME = (sys host | get hostname)
 
 match ($env.HOSTNAME) {
-    "BRAGE-PC" => { 
+    "brage-pc" => { 
         $env.CODE = ('~\code' | path expand)
         $env.LANG = "en_US"
     },
-    "DESKTOP-RRC642H" => { 
+    "desktop-rrc642h" => { 
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
     },

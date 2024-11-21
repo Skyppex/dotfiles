@@ -1,10 +1,12 @@
 --- @return string, integer
 local function get_home()
 	local home_drive = os.getenv("HOMEDRIVE")
-	local home = os.getenv("HOME")
+	local home
 
 	if home_drive ~= nil then
-		home = home_drive .. home
+		home = home_drive .. os.getenv("HOMEPATH")
+	else
+		home = os.getenv("HOME")
 	end
 
 	if home == nil then
