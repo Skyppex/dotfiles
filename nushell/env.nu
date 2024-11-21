@@ -123,7 +123,7 @@ match ($env.HOSTNAME) {
         $env.CODE = ('~\code' | path expand)
         $env.LANG = "en_US"
     },
-    "desktop-rrc642h" => { 
+    "DESKTOP-RRC642H" => { 
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
     },
