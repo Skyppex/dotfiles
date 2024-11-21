@@ -44,16 +44,22 @@ M.toggle = function(window, pane)
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
 		local project = line:gsub("[\\/].git[\\/]", "")
-		local label = project
+		local label = project:gsub("\\", "/")
 		local id = project:gsub(".*/", "")
-		table.insert(projects, { label = tostring(label), id = tostring(id) })
+		projects[tostring(label)] = tostring(id)
+	end
+
+	local choices = {}
+
+	for k, v in pairs(projects) do
+		table.insert(choices, { label = k, id = v })
 	end
 
 	window:perform_action(
 		act.InputSelector({
 			fuzzy = true,
 			title = "Select project",
-			choices = projects,
+			choices = choices,
 			action = wezterm.action_callback(function(win, _, id, label)
 				if not id and not label then
 					wezterm.log_info("Cancelled")
