@@ -669,6 +669,7 @@ def gcapf [] {
 def gcp [
     --type(-t): string # Specify the type of the commit
     --scope(-s): string # Specify the scope of the commit
+    --no-details(-n) # Do not prompt for a description
     ...message: string
 ] {
     git add -A
@@ -677,12 +678,17 @@ def gcp [
 
     let has_type = $type | is-not-empty
     let has_scope = $scope | is-not-empty
+    let has_no_details = $no_details | is-not-empty
 
-    match [$has_type, $has_scope] {
-        [false, false] => (cc ...$message)
-        [true, false] => (cc --type $type ...$message)
-        [false, true] => (cc --scope $scope ...$message)
-        [true, true] => (cc --type $type --scope $scope ...$message)
+    match [$has_type, $has_scope, $has_no_details] {
+        [false, false, false] => (cc ...$message)
+        [true, false, false] => (cc --type $type ...$message)
+        [false, true, false] => (cc --scope $scope ...$message)
+        [true, true, false] => (cc --type $type --scope $scope ...$message)
+        [false, false, true] => (cc --no-details ...$message)
+        [true, false, true] => (cc --type $type --no-details ...$message)
+        [false, true, true] => (cc --scope $scope --no-details ...$message)
+        [true, true, true] => (cc --type $type --scope $scope --no-details ...$message)
     }
     gum confirm "Push changes?"
     git push
