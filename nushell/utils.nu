@@ -1,21 +1,6 @@
-# Yazi with cwd
-def --env y [...args] {
-    let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-    yazi ...$args --cwd-file $tmp
-    let cwd = (open $tmp)
-
-    if $cwd != "" and $cwd != $env.PWD {
-        cd $cwd
-    }
-
-    rm -fp $tmp
-}
-
-# Fzf with preview
-alias fzp = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
-
 # Neovim
 
+# Open a file found using fzf in neovim
 def fim [...path] {
     fzp -1 --query ($path | str join " ") --bind "enter:become(nvim {})"
 }
@@ -94,6 +79,7 @@ def vim [
     p
 }
 
+# Fix the shada file sutff. You have to be in the shada directory
 def "fix shada" [] {
     let newest = ls | where type == file
     | sort-by --reverse modified
@@ -191,15 +177,13 @@ def cheat [...doc] {
 # Elevate the current shell to admin
 alias sudo = gsudo
 
+# Elevate the current shell and execute the nu command in the closure
 def --env nudo [func: closure] {
     sudo nu --stdin --command $"do (view source $func)"
 }
 
 # Exit
 alias q = exit
-
-# Make directory
-alias md = mkdir
 
 # Pseudo alias to gits bash command which can parse \r\n line endings
 def bash [
@@ -228,14 +212,6 @@ alias paste = powershell -command "Get-Clipboard"
 
 # Get current local time
 def "time now" [] { date now | format date "%H:%M:%S" }
-
-# Remove all files from the Downloads folder
-def rmdl [] {
-    let files = ls ~/Downloads
-    for file in $files {
-        rm -rv $file.name
-    }
-}
 
 # Open the starship config file in vscode
 alias sc = start ~/.config/starship.toml

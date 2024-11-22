@@ -885,6 +885,7 @@ alias enter-old = enter
 use ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
 source ~/.config/nushell/utils.nu
+source ~/.config/nushell/fs.nu
 source ~/.config/nushell/history.nu
 source ~/.config/nushell/zoxide.nu
 source ~/.config/nushell/dotnet.nu
