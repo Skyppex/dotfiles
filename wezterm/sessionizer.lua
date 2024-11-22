@@ -43,8 +43,8 @@ M.toggle = function(window, pane)
 	end
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
-		local project = line:gsub("[\\/].git[\\/]", "")
-		local label = project:gsub("\\", "/")
+		local project = line:gsub("[\\/].git[\\/]", ""):gsub("\\", "/")
+		local label = project
 		local id = project:gsub(".*/", "")
 		projects[tostring(label)] = tostring(id)
 	end
