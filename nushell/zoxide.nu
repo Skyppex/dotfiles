@@ -8,7 +8,7 @@ def --env z [
     --fzf-only(-f)
     ...path: string
 ] {
-    if ($path == null or ($path | is-empty)) {
+    if ($path | is-empty) {
         if $fzf_only {
             let target = (ls
                 | where type == dir
@@ -27,16 +27,24 @@ def --env z [
     let current = $env.PWD
 
     if not $fzf_only {
-        enter (zoxide query ...$path)
+        do --env -pis { enter (zoxide query ...$path) }
     }
 
     let new = $env.PWD
 
     if $current == $new {
-        let target = ls 
+        mut path = ($path | str join " ")
+
+        if ($path | str ends-with "/") {
+            $path = ($path | str substring 0..(($path | str length) - 2))
+        } else if ($path | str ends-with "\\") {
+            $path = ($path | str substring 0..(($path | str length) - 2))
+        }
+
+        let target = ls
         | get name 
         | to text 
-        | fzf --height 40% --layout=reverse -0 -1 --query ...$path
+        | fzf --height 40% --layout=reverse -0 -1 --query $path
 
         if $target == null or $target == "" {
             print "No result found."
