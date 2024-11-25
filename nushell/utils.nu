@@ -190,7 +190,7 @@ def bash [
     --version(-v) # Print the version of bash
     ...args: string
 ] {
-    let cmd = $env.SCOOP_APPS + "/git/current/bin/bash.exe"
+    let cmd = $env.SCOOP_SHIMS + "/bash.exe"
 
     if $version {
         nu --commands $"($cmd) --version"
