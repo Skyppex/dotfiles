@@ -21,7 +21,6 @@ conform.setup({
 	formatters = {
 		csharpier = {
 			inherit = true,
-			prepend_args = { "--config-path", vim.fn.stdpath("config") .. "/.csharpierrc.json" },
 		},
 		gofmt = {
 			command = "gofmt",
