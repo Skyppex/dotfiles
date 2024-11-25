@@ -1,6 +1,7 @@
 # Ignore everything by default
 *
 
+# Things to keep on windows
 {{- if eq .chezmoi.os "windows" }}
 !autohotkey/
 !configstore/
@@ -12,11 +13,14 @@
 !yasb/
 {{- end }}
 
+# Things to keep on linux
 {{- if eq .chezmoi.os "linux" }}
 !gh/
 {{- end }}
 
-!dot_gitconfig
+# Things to keep on everywhere
+!.gitconfig
+!.csharpierrc.json
 !lazydocker/
 !lazygit/
 !mods.yml
