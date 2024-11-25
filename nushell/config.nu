@@ -879,9 +879,6 @@ $env.PROMPT_MULTILINE_INDICATOR = ""
 use std/dirs shells-aliases *
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 
-# Remember the old enter command
-alias enter-old = enter
-
 use ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
 source ~/.config/nushell/utils.nu
@@ -899,7 +896,7 @@ source ~/.config/nushell/scripts.nu
 
 # Pull the dotfiles from the remote repository
 def "pull" [] {
-    enter-old $env.CHEZMOI_PATH
+    enter $env.CHEZMOI_PATH
     print "---- pulling config ----"
     git stash -u
     git pull --rebase
@@ -918,7 +915,7 @@ def "pull" [] {
 def "push" [] {
     print "---- updating scoop manifest ----"
     manifest update
-    enter-old $env.CHEZMOI_PATH
+    enter $env.CHEZMOI_PATH
     print "---- pushing config ----"
     git add -A
     git commit -m "chore(scoop): update manifest"

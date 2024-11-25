@@ -16,18 +16,18 @@ def --env z [
                 | to text
                 | fzf --preview='dir {}')
 
-            __zoxide_z $target
+            enter $target
             return
         }
 
-        __zoxide_z
+        enter $env.HOME
         return
     }
 
     let current = $env.PWD
 
     if not $fzf_only {
-        __zoxide_z ...$path
+        enter (zoxide query ...$path)
     }
 
     let new = $env.PWD
@@ -42,7 +42,8 @@ def --env z [
             print "No result found."
             return
         }
-        __zoxide_z $target
+
+        enter $target
     }
 }
 
@@ -57,4 +58,3 @@ def --env cv [...path: string] {
     cd ...$path
     vim .
 }
-

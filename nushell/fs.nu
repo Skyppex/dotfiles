@@ -32,7 +32,7 @@ def rev-parse [glob: glob]: glob -> list<path> {
 
     while ($results | is-empty) {
         let pwd = pwd
-        enter-old ..
+        enter ..
 
         if (pwd) == $pwd {
             print "No results found"

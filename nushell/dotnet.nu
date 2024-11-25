@@ -29,7 +29,7 @@ def "dn run" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
     if (glob "**/*.csproj" | is-empty) {
@@ -91,7 +91,7 @@ def "dn us init" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
     dotnet user-secrets init
@@ -126,7 +126,7 @@ def "dn us ls" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
 
@@ -175,7 +175,7 @@ def "dn us set" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
     dotnet user-secrets set $key $value
@@ -210,7 +210,7 @@ def "dn us rm" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
     let secrets = dotnet user-secrets list | lines | str replace " =" ":"
@@ -270,7 +270,7 @@ def "dn add" [
             print $dir
         }
 
-        enter-old $dir
+        enter $dir
     }
 
     let packages = dotnet search $query --take 500
@@ -404,7 +404,7 @@ def "dn test" [
         return
     }
 
-    enter-old $test_folder
+    enter $test_folder
     let projects = glob "**/*.csproj"
 
     if $verbose {
@@ -426,7 +426,7 @@ def "dn test" [
             print $"Dirname: ($dirname)"
         }
 
-        enter-old $dirname
+        enter $dirname
 
         let files = glob "**/*.cs"
         | str replace -a "\\" "/"
