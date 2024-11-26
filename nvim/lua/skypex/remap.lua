@@ -97,23 +97,27 @@ nmap("<C-w>.", "<C-w>v", "Split buffer right")
 local change = 5
 
 nmap("<C-w>+", function()
+	local count = vim.v.count1
 	local current_width = vim.api.nvim_win_get_width(0)
-	vim.api.nvim_win_set_width(0, current_width + change)
+	vim.api.nvim_win_set_width(0, current_width + change * count)
 end, "Grow buffer horizontal")
 
 nmap("<C-w>-", function()
+	local count = vim.v.count1
 	local current_width = vim.api.nvim_win_get_width(0)
-	vim.api.nvim_win_set_width(0, current_width - change)
+	vim.api.nvim_win_set_width(0, current_width - change * count)
 end, "Shrink buffer horizontal")
 
 nmap("<C-w>?", function()
+	local count = vim.v.count1
 	local current_height = vim.api.nvim_win_get_height(0)
-	vim.api.nvim_win_set_height(0, current_height + change)
+	vim.api.nvim_win_set_height(0, current_height + change * count)
 end, "Grow buffer vertical")
 
 nmap("<C-w>_", function()
+	local count = vim.v.count1
 	local current_height = vim.api.nvim_win_get_height(0)
-	vim.api.nvim_win_set_height(0, current_height - change)
+	vim.api.nvim_win_set_height(0, current_height - change * count)
 end, "Shrink buffer vertical")
 
 -- Macros
