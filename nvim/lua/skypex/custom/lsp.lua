@@ -207,10 +207,10 @@ local servers = {
 			if client.server_capabilities.signatureHelpProvider then
 				require("lsp-overloads").setup(client, {
 					keymaps = {
-						previous_signature = "<up>",
-						next_signature = "<down>",
-						previous_parameter = "<left>",
-						next_parameter = "<right>",
+						previous_signature = "<S-up>",
+						next_signature = "<S-down>",
+						previous_parameter = "<S-left>",
+						next_parameter = "<S-right>",
 						close_signature = "<C-e>",
 					},
 				})
