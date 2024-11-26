@@ -6,7 +6,7 @@
 	process = git-lfs filter-process
 	required = true
 [user]
-	name = Skypex
+	name = Brage Ingebrigtsen
 	email = 84551201+Skyppex@users.noreply.github.com
 	signingKey = ""
 [init]
