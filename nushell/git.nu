@@ -4,7 +4,7 @@ source ~/.config/nushell/utils.nu
 alias gs = git status
 
 # Git log
-alias gl = git log
+alias gl = git log --ext-diff
 
 # Git diff
 alias gd = git diff
@@ -18,8 +18,11 @@ alias gpf = git push --force-with-lease
 # Git add patch
 alias gap = git add --patch
 
-# Git Squash
+# Git squash
 alias "git squash" = git rebase -i
+
+# Git show with --ext-diff
+alias "git show" = git show --ext-diff
 
 # Git diff with fzf
 alias gdf = git diff (git status --porcelain 
