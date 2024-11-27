@@ -28,8 +28,8 @@ M.conflict = function()
 
 	nmap("<leader>gc", "<cmd>GitConflictRefresh<CR>", "Git Conflict Refresh")
 	nmap("<leader>gq", "<cmd>GitConflictListQf<CR>", "Git Conflict Quickfix")
-	nmap("åc", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
-	nmap("æc", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
+	nmap("åG", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
+	nmap("æG", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "GitConflictDetected",
