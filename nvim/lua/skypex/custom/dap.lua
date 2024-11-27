@@ -267,7 +267,11 @@ end
 
 M.mason = function()
 	require("mason-nvim-dap").setup({
-		ensure_installed = { "coreclr", "codelldb" },
+		ensure_installed = {
+			"coreclr",
+			"codelldb",
+			"delve",
+		},
 		automatic_installation = false,
 		handlers = {
 			coreclr = function(config)
