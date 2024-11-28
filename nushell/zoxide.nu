@@ -25,9 +25,18 @@ def --env z [
     }
 
     let current = $env.PWD
+    let path = ($path | str join " ")
 
     if not $fzf_only {
-        do --env -pis { enter (zoxide query ...$path) }
+        if (($path | str ends-with "/") or ($path | str ends-with "\\")) {
+            enter $path
+
+            if ($env.LAST_EXIT_CODE == 0) {
+                return
+            }
+        }
+
+        do --env -pis { enter (zoxide query $path) }
     }
 
     let new = $env.PWD
@@ -35,9 +44,7 @@ def --env z [
     if $current == $new {
         mut path = ($path | str join " ")
 
-        if ($path | str ends-with "/") {
-            $path = ($path | str substring 0..(($path | str length) - 2))
-        } else if ($path | str ends-with "\\") {
+        if (($path | str ends-with "/") or ($path | str ends-with "\\")) {
             $path = ($path | str substring 0..(($path | str length) - 2))
         }
 
