@@ -748,8 +748,9 @@ def "gh open" [
             print $"Owner: ($owner)"
         }
 
-        let repos = gh repo list -L 500 $owner
-        let repos = ($repos | parse table "\t+" | get '1')
+        let repos = gh repo list -L 500 $owner --json nameWithOwner 
+        | from json
+        | get nameWithOwner
 
         if $verbose {
             print "Repos:"
@@ -774,8 +775,9 @@ def "gh open" [
             print "No owner provided"
         }
 
-        mut repos = gh repo list -L 500
-        $repos = ($repos | parse table "\t+" | get '1')
+        mut repos = gh repo list -L 500 --json nameWithOwner 
+        | from json
+        | get nameWithOwner
 
         if $verbose {
             print "Owned Repos:"
@@ -790,8 +792,9 @@ def "gh open" [
         }
 
         for org in $orgs {
-            let orgrepos = gh repo list --limit 500 $org
-            let orgrepos = ($orgrepos | parse table "\t+" | get '1')
+            let orgrepos = gh repo list --limit 500 $org --json nameWithOwner 
+            | from json
+            | get nameWithOwner
             
             if $verbose {
                 print $"Org: ($org)"
