@@ -529,3 +529,71 @@ def "dn test all" [] {
     dotnet test
 }
 
+def "dn ref add" [
+    project?: string # The project to add the reference to
+    reference?: string # The project to reference
+] {
+    let project = if $project == null { "" } else { $project }
+    let reference = if $reference == null { "" } else { $reference }
+
+    let solution = rev-parse "*.sln" | first | path dirname
+    enter $solution
+
+    let projects = glob "**/*.csproj"
+    | path relative-to $solution
+
+    print "What project do you want to add a reference to?"
+    let project = $projects
+    | to text
+    | fzf --height 40% --layout=reverse -0 -1 --query $project
+    print $project
+
+    print "What project do you want to reference?"
+    let reference = $projects
+    | where ($it != $project)
+    | to text
+    | fzf --height 40% --layout=reverse -0 -1 --query $reference
+    print $reference
+
+    dotnet add $project reference $reference
+}
+
+def "dn ref rm" [
+    project?: string # The project to add the reference to
+    reference?: string # The project to reference
+] {
+    let project = if $project == null { "" } else { $project }
+    let reference = if $reference == null { "" } else { $reference }
+
+    let solution = rev-parse "*.sln" | first | path dirname
+    enter $solution
+
+    let projects = glob "**/*.csproj"
+    | path relative-to $solution
+
+    print "What project do you want to remove a reference from?"
+    let project = $projects
+    | to text
+    | fzf --height 40% --layout=reverse -0 --query $project
+    print $project
+    enter ($project | path dirname)
+
+    let references = dotnet list reference
+    | lines
+    | skip 2
+    | path expand
+    | path relative-to $solution
+    print 1
+    print $references
+    p
+
+    print "What reference do you want to remove?"
+    let reference = $references
+    | where ($it != $project)
+    | to text
+    | fzf --height 40% --layout=reverse -0 --query $reference
+    print 2
+    print $reference
+
+    dotnet remove $project reference $reference
+}
