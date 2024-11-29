@@ -37,14 +37,20 @@ def "dn run" [
         return
     }
 
-    let launch_settings_path = glob "**/launchSettings.json"
-    | path relative-to $env.PWD
-    | to text
-    | do -pis { fzf --height 40% --layout=reverse -0 -1 }
+    let paths = glob "**/launchSettings.json"
+
+    let launch_settings_path = if ($paths | is-empty) {
+        []
+    } else {
+        $paths
+        | path relative-to $env.PWD
+        | to text
+        | do -pis { fzf --height 40% --layout=reverse -0 -1 }
+    }
 
     if ($launch_settings_path | is-empty) {
         print "No launch settings found"
-        gum confirm "Run without launch settings?" --default false
+        gum confirm --default="Yes" "Run without launch settings?"
         dotnet run
         return
     }
