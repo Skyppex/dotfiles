@@ -389,3 +389,5 @@ filetime
 fsp
 eb
 rp
+longsword
+surql
