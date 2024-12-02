@@ -35,7 +35,7 @@
 	selected = manager
 [diff]
 	tool = nvim
-    # external = difft --width=200 --color=always
+    external = difft --width=200 --color=always
 [difftool "nvim"]
 	cmd = nvim -d $LOCAL $REMOTE
 [difftool]
