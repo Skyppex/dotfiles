@@ -242,8 +242,8 @@ nmap("<leader><leader>c", function()
 	require("skypex.custom.mini")
 	package.loaded["skypex.custom.noice"] = nil
 	require("skypex.custom.noice")
-	package.loaded["skypex.custom.oil"] = nil
-	require("skypex.custom.oil").all()
+	package.loaded["skypex.custom.file-tree"] = nil
+	require("skypex.custom.file-tree").all()
 	package.loaded["skypex.custom.rainbow-delimiters"] = nil
 	require("skypex.custom.rainbow-delimiters")
 	package.loaded["skypex.custom.rest"] = nil

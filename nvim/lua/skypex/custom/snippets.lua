@@ -3,7 +3,19 @@ local nmap = require("skypex.utils").nmap
 local M = {}
 
 local function all_snippets(ls)
-	ls.add_snippets("all", {})
+	local s, t, i, rep = ls.snippet, ls.text_node, ls.insert_node, ls.rep
+
+	ls.add_snippets("all", {
+		s("tag", {
+			t("<"),
+			i(1, "name"),
+			t(">"),
+			i("2"),
+			t("</"),
+			rep(1),
+			t(">"),
+		}),
+	})
 end
 
 local function js_snippets(ls)

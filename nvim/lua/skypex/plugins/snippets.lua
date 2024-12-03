@@ -24,6 +24,7 @@ return {
 			end,
 		},
 	},
+	run = "make install_jsregexp",
 	config = function()
 		require("skypex.custom.snippets").luasnip()
 	end,

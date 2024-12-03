@@ -85,7 +85,7 @@ cmp.setup({
 	},
 	view = {
 		entries = {
-			selection_order = "bottom_up",
+			selection_order = "top_down",
 			vertical_positioning = "above",
 			follow_cursor = false,
 		},
