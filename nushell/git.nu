@@ -3,6 +3,9 @@ source ~/.config/nushell/utils.nu
 # Git status
 alias gs = git status
 
+# Git status --porcelain
+alias gsp = git status --porcelain
+
 # Git log
 alias gl = git log --ext-diff
 
