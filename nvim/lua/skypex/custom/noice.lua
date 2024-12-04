@@ -23,5 +23,3 @@ require("noice").setup({
 		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
 })
-
-require("skypex.utils").nmap("<leader>mm", "<cmd>Noice<CR>", "Open messages")
