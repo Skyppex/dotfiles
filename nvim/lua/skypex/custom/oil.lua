@@ -1,7 +1,7 @@
 local M = {}
 
 --- @param path string
---- @return string?
+--- @return string
 local function find_csproj_file(path)
 	local csproj_file = vim.fn.glob(path .. "/*.csproj")
 	if csproj_file ~= "" then
@@ -11,43 +11,54 @@ local function find_csproj_file(path)
 	local parent_path = vim.fn.fnamemodify(path, ":h")
 
 	if parent_path == path then
-		return nil
+		return ""
 	end
 
 	return find_csproj_file(parent_path)
 end
 
---- @return string?
+--- @return string
 local function get_root_namespace(filename)
-	local path = vim.fn.fnamemodify(filename, ":h")
-	local csproj_file = find_csproj_file(path)
+	local path = vim.fn.fnamemodify(filename, ":h"):gsub("\\", "/")
+	local csproj_file = find_csproj_file(path):gsub("\\", "/")
 
-	if csproj_file then
+	if csproj_file ~= "" then
+		local prefix = vim.fn.fnamemodify(csproj_file, ":h")
+
+		local root = path:gsub(prefix, ""):gsub("/src", ""):gsub("/tests", ""):gsub("/test", "")
+
 		for line in io.lines(csproj_file) do
 			local namespace = line:match("<RootNamespace>(.-)</RootNamespace>")
 
 			if namespace then
-				return namespace
+				return namespace .. root
 			end
 		end
-	else
-		local namespace = path:gsub("/", "."):gsub("\\", ".")
-		return namespace
-	end
 
-	return nil
+		local name = vim.fn.fnamemodify(csproj_file, ":t:r")
+		return name .. root
+	else
+		return ""
+	end
 end
 
 local function insert_namespace_in_cs_file(filename)
 	local namespace = get_root_namespace(filename)
-	if namespace then
-		vim.fn.setline(1, "namespace " .. namespace .. " {\n\n}")
-		vim.cmd("normal! G")
+
+	if namespace == "" then
+		return
+	end
+
+	local file = io.open(filename, "w")
+
+	if file then
+		file:write("namespace " .. namespace:gsub("/", ".") .. ";\r\n\r\n")
+		file:close()
 	end
 end
 
 M.oil = function()
-	require("lua.skypex.plugins.file-tree").setup({
+	require("oil").setup({
 		default_file_explorer = true,
 		win_options = {
 			signcolumn = "yes:2",
@@ -84,6 +95,32 @@ M.oil = function()
 	})
 
 	require("skypex.utils").nmap("<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "OilActionsPost",
+		callback = function(args)
+			if args.data.err ~= nil then
+				return
+			end
+
+			for _, action in ipairs(args.data.actions) do
+				if action.type ~= "create" then
+					goto continue
+				end
+
+				local path = action.url
+				path = path:gsub("oil:///", "")
+				path = path:sub(1, 1) .. ":" .. path:sub(2)
+
+				if not path:match("%.cs$") then
+					goto continue
+				end
+
+				insert_namespace_in_cs_file(path)
+				::continue::
+			end
+		end,
+	})
 end
 
 M.oil_vcs = function()
@@ -149,21 +186,9 @@ M.oil_vcs = function()
 	})
 end
 
-M.hooks = function()
-	vim.api.nvim_create_autocmd("BufNewFile", {
-		pattern = "*.cs",
-		callback = function(args)
-			local path = vim.api.nvim_buf_get_name(args.buf)
-			print(path)
-			insert_namespace_in_cs_file(path)
-		end,
-	})
-end
-
 M.all = function()
 	M.oil()
 	M.oil_vcs()
-	M.hooks()
 end
 
 return M

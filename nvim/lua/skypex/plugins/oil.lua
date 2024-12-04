@@ -2,11 +2,9 @@ return {
 	{
 		"stevearc/oil.nvim",
 		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "j-hui/fidget.nvim" },
 		config = function()
-			local file_tree = require("skypex.custom.file-tree")
-			file_tree.oil()
-			file_tree.hook()
+			require("skypex.custom.oil").oil()
 		end,
 	},
 	{
@@ -16,7 +14,7 @@ return {
 			"stevearc/oil.nvim",
 		},
 		config = function()
-			require("skypex.custom.file-tree").oil_vcs()
+			require("skypex.custom.oil").oil_vcs()
 		end,
 	},
 }
