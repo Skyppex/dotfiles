@@ -150,6 +150,7 @@ goolord
 gpf
 graphqlconfig
 graphqlrc
+gsp
 hamsta
 har
 hjklyuioasdqwe
