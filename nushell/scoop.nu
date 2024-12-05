@@ -124,7 +124,7 @@ def "manifest rm" [] {
 
 # Scoop reinstall
 def "scoop reinstall" [
-    ...name: string
+    name: string
 ] {
     if ($name | str contains "/") {
         let split = ($name | split row "/")
