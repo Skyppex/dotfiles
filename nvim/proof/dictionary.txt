@@ -416,3 +416,7 @@ yml
 youtube
 zbirenbaum
 zsh
+formattable
+readme
+snupkg
+renovatebot
