@@ -1,42 +1,43 @@
 [core]
-	editor = nvim
+    editor = nvim
+    pager = less -+F -+X -R
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [user]
-	name = Brage Ingebrigtsen
-	email = 84551201+Skyppex@users.noreply.github.com
-	signingKey = ""
+    name = Brage Ingebrigtsen
+    email = 84551201+Skyppex@users.noreply.github.com
+    signingKey = ""
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [pull]
-	rebase = merges
+    rebase = merges
 [fetch]
-	prune = true
+    prune = true
 [gpg]
-	format = openpgp
-	program = gpg
+    format = openpgp
+    program = gpg
 [commit]
-	gpgSign = false
+    gpgSign = false
 [tag]
-	forceSignAnnotated = false
+    forceSignAnnotated = false
 [gpg "ssh"]
-	program = ssh-keygen
-	allowedSignersFile = ""
+    program = ssh-keygen
+    allowedSignersFile = ""
 [credential "https://github.com"]
-	useHttpPath = true
+    useHttpPath = true
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 [credential]
-	helper = store
+    helper = store
 [credential "helperselector"]
-	selected = manager
+    selected = manager
 [diff]
-	tool = nvim
+    tool = nvim
     external = difft --width=200 --color=always
 [difftool "nvim"]
-	cmd = nvim -d $LOCAL $REMOTE
+    cmd = nvim -d $LOCAL $REMOTE
 [difftool]
-	prompt = true
+    prompt = true
