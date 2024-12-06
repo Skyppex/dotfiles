@@ -52,7 +52,7 @@ local function insert_namespace_in_cs_file(filename)
 	local file = io.open(filename, "w")
 
 	if file then
-		file:write("namespace " .. namespace:gsub("/", ".") .. ";\r\n\r\n")
+		file:write("namespace " .. namespace:gsub("/", ".") .. ";\n\n")
 		file:close()
 	end
 end
