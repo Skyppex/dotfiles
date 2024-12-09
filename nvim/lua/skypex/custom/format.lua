@@ -51,7 +51,7 @@ conform.setup({
 		cs = { "csharpier" },
 		csx = { "csharpier" },
 		go = { "gofmt" },
-		xml = { "xmlformat" },
+		xml = { "xmlformatter" },
 		yaml = { "yamlfix", "prettierd", "prettier", stop_after_first = true },
 		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
 		-- nu = { "nufmt" }, Disabled because it breaks the code
