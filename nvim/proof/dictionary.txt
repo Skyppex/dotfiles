@@ -421,3 +421,7 @@ readme
 snupkg
 renovatebot
 tpc
+deserializing
+schemastore
+launchsetting
+pragma
