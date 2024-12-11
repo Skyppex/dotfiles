@@ -193,4 +193,6 @@ M.all = function()
 	M.oil_vcs()
 end
 
+M.all()
+
 return M

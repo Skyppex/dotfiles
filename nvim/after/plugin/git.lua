@@ -83,4 +83,6 @@ M.all = function()
 	M.gitsigns()
 end
 
+M.all()
+
 return M

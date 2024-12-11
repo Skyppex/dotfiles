@@ -18,13 +18,9 @@ return {
 			"nushell/tree-sitter-nu",
 			"tree-sitter/tree-sitter-c-sharp",
 		},
-		config = function()
-			require("skypex.custom.treesitter")
-		end,
 	},
 	{
 		"dariuscorvus/tree-sitter-surrealdb.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = true,
 	},
 }

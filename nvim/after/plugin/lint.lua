@@ -45,4 +45,6 @@ M.all = function()
 	M.mason()
 end
 
+M.all()
+
 return M

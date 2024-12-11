@@ -38,7 +38,6 @@ return {
 			},
 		},
 		config = function()
-			require("skypex.custom.lsp")
 		end,
 	},
 }

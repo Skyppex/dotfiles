@@ -5,9 +5,6 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			require("skypex.custom.db")
-		end,
 	},
 	{
 		"kristijanhusak/vim-dadbod-ui",

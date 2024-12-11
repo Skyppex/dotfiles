@@ -6,8 +6,5 @@ return {
 			"archibate/lualine-time",
 		},
 		event = "VeryLazy",
-		config = function()
-			require("skypex.custom.lualine")
-		end,
 	},
 }

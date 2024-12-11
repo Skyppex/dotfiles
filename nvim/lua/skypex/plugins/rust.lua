@@ -1,6 +1,4 @@
 return {
-	{
-		"mrcjkb/rustaceanvim",
-		lazy = false,
-	},
+	"mrcjkb/rustaceanvim",
+	lazy = false,
 }

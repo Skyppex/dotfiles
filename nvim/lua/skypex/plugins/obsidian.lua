@@ -16,7 +16,4 @@ return {
 
 		-- see below for full list of optional dependencies 👇
 	},
-	config = function()
-		require("skypex.custom.obsidian")
-	end,
 }

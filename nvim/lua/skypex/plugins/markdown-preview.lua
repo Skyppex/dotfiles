@@ -5,7 +5,4 @@ return {
 	build = function()
 		vim.fn["mkdp#util#install"]()
 	end,
-	config = function()
-		require("skypex.custom.markdown-preview")
-	end,
 }

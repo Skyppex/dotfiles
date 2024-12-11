@@ -1,29 +1,21 @@
 local nmap = require("skypex.utils").nmap
+local ls = require("luasnip")
+local s, t, i = ls.snippet, ls.text_node, ls.insert_node
+local fmt = require("luasnip.extras.fmt").fmt
+local lsex = require("luasnip.extras")
+local rep = lsex.rep
 
 local M = {}
 
-local function all_snippets(ls)
-	local s, t, i, rep = ls.snippet, ls.text_node, ls.insert_node, ls.rep
-
+local function all_snippets()
 	ls.add_snippets("all", {
-		s("tag", {
-			t("<"),
-			i(1, "name"),
-			t(">"),
-			i("2"),
-			t("</"),
-			rep(1),
-			t(">"),
-		}),
+		s("tag", fmt("<{}>{}</{}>", { i(1, "name"), i(2), rep(1) })),
 	})
 end
 
-local function js_snippets(ls)
-	local t = ls.text_node
-
+local function js_snippets()
 	ls.add_snippets("js", {
-		trig = "jsdoc",
-		t("/**\n * ${1}\n */"),
+		s("jsdoc", t("/**\n * ${1}\n */")),
 	})
 end
 
@@ -38,11 +30,14 @@ M.telescope = function()
 end
 
 M.luasnip = function()
-	local ls = require("luasnip")
-	ls.setup()
+	ls.setup({
+		history = true,
+		update_events = { "TextChanged", "TextChangedI" },
+		enable_autosnippets = true,
+	})
 
-	all_snippets(ls)
-	-- js_snippets(ls)
+	all_snippets()
+	js_snippets()
 
 	nmap("<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
 end
@@ -52,5 +47,7 @@ M.all = function()
 	M.telescope()
 	M.luasnip()
 end
+
+M.all()
 
 return M

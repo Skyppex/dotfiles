@@ -5,9 +5,6 @@ return {
 			"williamboman/mason.nvim",
 		},
 		event = { "BufWritePre", "BufNewFile" },
-		config = function()
-			require("skypex.custom.lint").lint()
-		end,
 	},
 	{
 		"rshkarin/mason-nvim-lint",
@@ -16,8 +13,5 @@ return {
 			"williamboman/mason.nvim",
 		},
 		event = { "BufWritePre", "BufNewFile" },
-		config = function()
-			require("skypex.custom.lint").mason()
-		end,
 	},
 }

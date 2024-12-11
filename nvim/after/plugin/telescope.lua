@@ -35,11 +35,13 @@ telescope.setup({
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown(),
 		},
+		fzf = {},
 	},
 })
 
 -- Enable Telescope extensions if they are installed
 pcall(telescope.load_extension, "ui-select")
+pcall(telescope.load_extension, "fzf")
 
 -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")

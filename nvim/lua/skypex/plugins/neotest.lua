@@ -10,7 +10,5 @@ return {
 	-- 	"Issafalcon/neotest-dotnet",
 	-- 	"rouge8/neotest-rust",
 	-- },
-	-- config = function()
-	-- 	require("skypex.custom.neotest")
-	-- end,
+	-- config = true,
 }
