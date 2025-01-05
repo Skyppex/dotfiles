@@ -53,6 +53,15 @@ local function get_code_path()
 	end
 end
 
+--- @return string?
+local function get_game_dev_path()
+	if is_home_computer_windows() then
+		return "D:/Game Dev/Unity Projects"
+	end
+
+	return nil
+end
+
 --- @return string
 local function table_to_string(tbl)
 	local result = "{"
@@ -342,6 +351,7 @@ return {
 	is_home_computer_windows = is_home_computer_windows,
 	is_home_computer_linux = is_home_computer_linux,
 	is_work_computer = is_work_computer,
+	get_game_dev_path = get_game_dev_path,
 	table_to_string = table_to_string,
 	keymap_exists = keymap_exists,
 	local_keymap_exists = local_keymap_exists,

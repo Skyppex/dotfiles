@@ -79,7 +79,7 @@ def vim [
     p
 }
 
-# Fix the shada file sutff. You have to be in the shada directory
+# Fix the shada file stuff. You have to be in the shada directory
 def "fix shada" [] {
     let newest = ls | where type == file
     | sort-by --reverse modified

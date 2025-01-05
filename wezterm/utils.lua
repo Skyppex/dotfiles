@@ -41,6 +41,15 @@ local function is_work_computer()
 	return get_home():find("brage.ingebrigtsen") ~= nil
 end
 
+--- @return string?
+local function get_game_dev_path()
+	if is_home_computer_windows() then
+		return "D:/Game Dev/Unity Projects"
+	end
+
+	return nil
+end
+
 --- @return string
 local function get_code_path()
 	local home = get_home()
@@ -74,4 +83,5 @@ return {
 	is_work_computer = is_work_computer,
 	get_code_path = get_code_path,
 	get_temp_path = get_temp_path,
+	get_game_dev_path = get_game_dev_path,
 }

@@ -10,19 +10,20 @@ local fd = home .. "/scoop/apps/fd/current/fd.exe"
 local chezmoi_path = utils.get_chezmoi_path()
 local temp_path = utils.get_temp_path()
 local code_path = utils.get_code_path()
-local code_path_2
+local carweb_path
 local obsidian_path = home .. "/OneDrive/Obsidian"
+local game_dev_path = utils.get_game_dev_path()
 
 if utils.is_home_computer_windows() then
-	code_path_2 = code_path .. "sentinel/commoncarweb"
+	carweb_path = code_path .. "sentinel/commoncarweb"
 else
-	code_path_2 = code_path .. "/commoncarweb"
+	carweb_path = code_path .. "/commoncarweb"
 end
 
 M.toggle = function(window, pane)
 	local projects = {}
 
-	local success, stdout, stderr = wezterm.run_child_process({
+	local fd_process = {
 		fd,
 		"-HI",
 		"-td",
@@ -31,11 +32,17 @@ M.toggle = function(window, pane)
 		"--prune",
 		temp_path,
 		code_path,
-		code_path_2,
+		carweb_path,
 		chezmoi_path,
 		obsidian_path,
 		-- add more paths here
-	})
+	}
+
+	if game_dev_path ~= nil then
+		table.insert(fd_process, game_dev_path)
+	end
+
+	local success, stdout, stderr = wezterm.run_child_process(fd_process)
 
 	if not success then
 		wezterm.log_error("Failed to run fd: " .. stderr)

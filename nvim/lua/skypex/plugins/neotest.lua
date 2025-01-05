@@ -1,14 +1,28 @@
-return {
-	-- "nvim-neotest/neotest",
-	-- -- "neotest",
-	-- -- dir = require("skypex.utils").get_code_path() .. "/neotest",
-	-- dependencies = {
-	-- 	"nvim-neotest/nvim-nio",
-	-- 	"nvim-lua/plenary.nvim",
-	-- 	"antoinemadec/FixCursorHold.nvim",
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	"Issafalcon/neotest-dotnet",
-	-- 	"rouge8/neotest-rust",
-	-- },
-	-- config = true,
-}
+-- return {
+-- 	"ruslanSorokin/neotest",
+-- 	branch = "hotfix/issue-468/configure-use-of-subprocesses-in-parse_positions",
+-- 	opts = { discovery = { use_subprocess = false } },
+-- 	dependencies = {
+-- 		"nvim-neotest/nvim-nio",
+-- 		"nvim-lua/plenary.nvim",
+-- 		"antoinemadec/FixCursorHold.nvim",
+-- 		"nvim-treesitter/nvim-treesitter",
+-- 		"Issafalcon/neotest-dotnet",
+-- 		"rouge8/neotest-rust",
+-- 	},
+-- }
+
+-- return {
+-- 	-- "nvim-neotest/neotest",
+-- 	-- -- "neotest",
+-- 	-- -- dir = require("skypex.utils").get_code_path() .. "/neotest",
+-- 	-- dependencies = {
+-- 	-- 	"nvim-neotest/nvim-nio",
+-- 	-- 	"nvim-lua/plenary.nvim",
+-- 	-- 	"antoinemadec/FixCursorHold.nvim",
+-- 	-- 	"nvim-treesitter/nvim-treesitter",
+-- 	-- 	"Issafalcon/neotest-dotnet",
+-- 	-- 	"rouge8/neotest-rust",
+-- 	-- },
+-- 	-- config = true,
+-- }
