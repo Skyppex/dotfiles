@@ -1,3 +1,5 @@
+return {}
+
 -- return {
 -- 	"ruslanSorokin/neotest",
 -- 	branch = "hotfix/issue-468/configure-use-of-subprocesses-in-parse_positions",
