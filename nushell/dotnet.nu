@@ -468,7 +468,7 @@ def "dn test" [
 
             let namespace = ($line | first | split row " " | get 1)
             let namespace = ($namespace | str replace -a ";" "")
-            $namespaces = ($namespaces ++ $namespace)
+            $namespaces = ($namespaces | append $namespace)
         }
 
         p
@@ -488,7 +488,7 @@ def "dn test" [
                 $namespace = ($namespace ++ "." ++ $part)
             }
 
-            $namespaces = ($namespaces ++ $namespace)
+            $namespaces = ($namespaces | append $namespace)
         }
 
         $namespaces

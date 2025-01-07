@@ -205,7 +205,7 @@ def gr [
                 })
 
                 for row in $remotes {
-                    $table = ($table ++ $row)
+                    $table = ($table | append $row)
                 }
 
                 let remotes = $table | each {|r|
@@ -232,7 +232,7 @@ def gr [
                     let modes = $group.items | get modes
                     let mode = $modes | str join "|"
                     let mode = $"\(($mode)\)"
-                    $remotes = ($remotes ++ $"($info) ($mode)")
+                    $remotes = ($remotes | append $"($info) ($mode)")
                 }
     
                 $remotes | to text
@@ -265,7 +265,7 @@ def gr [
             })
 
             for row in $rows {
-                $table = ($table ++ $row)
+                $table = ($table | append $row)
             }
             
             let groups = ($table | group-by --to-table name)
@@ -289,7 +289,7 @@ def gr [
                 })
 
                 let url = $urls_with_modes | str join " | "
-                $remotes = ($remotes ++ $"($name)\t($url)")
+                $remotes = ($remotes | append $"($name)\t($url)")
             }
 
             let target = $remotes 
