@@ -298,3 +298,23 @@ def "count-by-group" [] {
 }
 
 def void [] {}
+
+def distribute [
+    total: int
+    size: int
+]: any -> list<int> {
+    mut chunks = []
+
+    for _ in 1..$size {
+        $chunks = ($chunks | append 0)
+    }
+
+    mut current_chunk = 0
+
+    for _ in 1..$total {
+        $chunks = ($chunks | update $current_chunk (($chunks | get $current_chunk) + 1))
+        $current_chunk = ($current_chunk + 1) mod $size
+    }
+
+    return $chunks
+}
