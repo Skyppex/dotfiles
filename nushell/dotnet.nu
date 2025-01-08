@@ -45,7 +45,7 @@ def "dn run" [
         $paths
         | path relative-to $env.PWD
         | to text
-        | do -pis { fzf --height 40% --layout=reverse -0 -1 }
+        | do -i { fzf --height 40% --layout=reverse -0 -1 }
     }
 
     if ($launch_settings_path | is-empty) {

@@ -621,7 +621,7 @@ def gcm [
     --pull(-p) # Pull the latest changes
     --fetch(-f) # Fetch the latest changes
 ] {
-    do -ip { git checkout main --quiet }
+    do -i { git checkout main --quiet }
     let branch = git branch --show-current
     
     if ($branch == "main") {
@@ -640,7 +640,7 @@ def gcm [
         return;
     }
 
-    do -ip { git checkout master --quiet }
+    do -i { git checkout master --quiet }
     
     let branch = git branch --show-current
     

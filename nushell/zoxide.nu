@@ -36,7 +36,7 @@ def --env z [
             }
         }
 
-        do --env -pis { enter (zoxide query $path) }
+        do --env -i { enter (zoxide query $path) }
     }
 
     let new = $env.PWD
