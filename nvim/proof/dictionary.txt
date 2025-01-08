@@ -429,3 +429,6 @@ typename
 lsex
 interop
 keepjump
+githook
+xarg
+sharpier
