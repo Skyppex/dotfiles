@@ -432,3 +432,6 @@ keepjump
 githook
 xarg
 sharpier
+requeue
+ackmode
+amq
