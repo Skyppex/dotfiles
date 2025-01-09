@@ -12,12 +12,18 @@ local sources = {
 		name = "path",
 		max_item_count = 2,
 	},
-	lsp = { name = "nvim_lsp", max_item_count = 5 },
+	lsp = {
+		name = "nvim_lsp",
+		max_item_count = 5,
+	},
 	lsp_signature_help = {
 		name = "nvim_lsp_signature_help",
 		max_item_count = 2,
 	},
-	luasnip = { name = "luasnip", max_item_count = 2 },
+	luasnip = {
+		name = "luasnip",
+		max_item_count = 2,
+	},
 	dadbod = { name = "vim-dadbod-completion" },
 	buffer = {
 		name = "buffer",
@@ -35,6 +41,9 @@ local sources = {
 	},
 	crates = { name = "crates" },
 	copilot = { name = "copilot" },
+	obsidian = { name = "obsidian" },
+	obsidian_new = { name = "obsidian_new" },
+	obsidian_tag = { name = "obsidian_tag" },
 }
 
 ---@diagnostic disable-next-line: redundant-parameter
