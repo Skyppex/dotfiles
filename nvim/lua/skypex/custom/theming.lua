@@ -1,5 +1,3 @@
-local M = {}
-
 local if_nil = vim.F.if_nil
 local fnamemodify = vim.fn.fnamemodify
 local filereadable = vim.fn.filereadable
@@ -134,49 +132,36 @@ local function mru(start, cwd, items_number, opts)
 	}
 end
 
-M.alpha = function()
-	local alpha = require("alpha")
-	local ascii = require("ascii")
-	require("telescope").load_extension("ascii")
+local alpha = require("alpha")
+local ascii = require("ascii")
+require("telescope").load_extension("ascii")
 
-	local dashboard = require("alpha.themes.dashboard")
-	dashboard.section.header.val = ascii.art.text.neovim.sharp
+local dashboard = require("alpha.themes.dashboard")
+dashboard.section.header.val = ascii.art.text.neovim.sharp
 
-	dashboard.section.buttons.val = {}
+dashboard.section.buttons.val = {}
 
-	dashboard.section.mru = {
-		type = "group",
-		val = function()
-			return { mru(10) }
-		end,
-	}
+dashboard.section.mru = {
+	type = "group",
+	val = function()
+		return { mru(10) }
+	end,
+}
 
-	dashboard.section.header.opts.hl = "Include"
+dashboard.section.header.opts.hl = "Include"
 
-	dashboard.opts.opts.noautocmd = true
+dashboard.opts.opts.noautocmd = true
 
-	alpha.setup(dashboard.opts)
-end
+alpha.setup(dashboard.opts)
 
-M.smartcolumn = function()
-	local smartcolumn = require("smartcolumn")
-	smartcolumn.setup({
-		colorcolumn = "80",
-		disabled_filetypes = {
-			"help",
-			"dbout",
-			"qf",
-			"alpha",
-			"checkhealth",
-		},
-	})
-end
-
-M.all = function()
-	M.alpha()
-	M.smartcolumn()
-end
-
-M.all()
-
-return M
+local smartcolumn = require("smartcolumn")
+smartcolumn.setup({
+	colorcolumn = "80",
+	disabled_filetypes = {
+		"help",
+		"dbout",
+		"qf",
+		"alpha",
+		"checkhealth",
+	},
+})

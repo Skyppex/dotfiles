@@ -13,5 +13,8 @@ return {
 			"williamboman/mason.nvim",
 		},
 		event = { "BufWritePre", "BufNewFile" },
+		config = function()
+			require("skypex.custom.lint")
+		end,
 	},
 }

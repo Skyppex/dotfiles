@@ -19,4 +19,7 @@ return {
 		},
 	},
 	run = "make install_jsregexp",
+	config = function()
+		require("skypex.custom.snippets")
+	end,
 }

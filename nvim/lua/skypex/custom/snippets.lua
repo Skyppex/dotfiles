@@ -19,6 +19,13 @@ local function js_snippets()
 	})
 end
 
+local function cs_snippets()
+	ls.add_snippets("cs", {
+		s("sf", fmt("[SerializeField] private ${1} ${2};", { i(1, "Type"), i(2, "name") })),
+		s("sp", fmt("[field: SerializeField] public ${1} ${2} {{ get; set; }}", { i(1, "Type"), i(2, "name") })),
+	})
+end
+
 M.friendly_snippets = function()
 	require("luasnip.loaders.from_vscode").lazy_load()
 end
@@ -38,6 +45,7 @@ M.luasnip = function()
 
 	all_snippets()
 	js_snippets()
+	cs_snippets()
 
 	nmap("<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
 end

@@ -1,5 +1,7 @@
 return {
 	"folke/which-key.nvim",
 	event = "VimEnter",
-	opts = {},
+	config = function()
+		require("skypex.custom.which-key")
+	end,
 }

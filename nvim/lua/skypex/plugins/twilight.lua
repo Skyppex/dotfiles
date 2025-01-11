@@ -1,5 +1,7 @@
 return {
 	"folke/twilight.nvim",
 	event = { "BufReadPre", "BufNewFile" },
-	opts = {},
+	config = function()
+		require("skypex.custom.twilight")
+	end,
 }

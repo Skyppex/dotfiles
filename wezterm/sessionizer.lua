@@ -15,7 +15,7 @@ local obsidian_path = home .. "/OneDrive/Obsidian"
 local game_dev_path = utils.get_game_dev_path()
 
 if utils.is_home_computer_windows() then
-	carweb_path = code_path .. "sentinel/commoncarweb"
+	carweb_path = code_path .. "/sentinel/commoncarweb"
 else
 	carweb_path = code_path .. "/commoncarweb"
 end

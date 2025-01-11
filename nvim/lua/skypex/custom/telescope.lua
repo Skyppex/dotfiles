@@ -39,6 +39,14 @@ telescope.setup({
 	},
 })
 
+vim.g.telescope_ignore_enabled = true
+
+require("telescope.config").set_defaults({
+	file_ignore_patterns = {
+		"%.meta$",
+	},
+})
+
 -- Enable Telescope extensions if they are installed
 pcall(telescope.load_extension, "ui-select")
 pcall(telescope.load_extension, "fzf")

@@ -6,6 +6,9 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 		},
 		ft = { "cs", "rust", "go" },
+		config = function()
+			require("skypex.custom.dap")
+		end,
 	},
 	{
 		"rcarriga/nvim-dap-ui",

@@ -9,6 +9,18 @@ return {
 		lazy = true,
 		dependencies = {
 			"tjdevries/colorbuddy.nvim",
+			"m4xshen/smartcolumn.nvim",
+			{
+				"goolord/alpha-nvim",
+				event = "VimEnter",
+				dependencies = {
+					"echasnovski/mini.icons",
+					{
+						"MaximilianLloyd/ascii.nvim",
+						dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
+					},
+				},
+			},
 		},
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
@@ -30,19 +42,8 @@ return {
 			vim.cmd.hi("Visual guibg=#2e2e2e")
 			vim.cmd.hi("LspInlayHint guifg=#464959")
 		end,
-	},
-	{
-		"goolord/alpha-nvim",
-		event = "VimEnter",
-		dependencies = {
-			"echasnovski/mini.icons",
-			{
-				"MaximilianLloyd/ascii.nvim",
-				dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
-			},
-		},
-	},
-	{
-		"m4xshen/smartcolumn.nvim",
+		config = function()
+			require("skypex.custom.theming")
+		end,
 	},
 }

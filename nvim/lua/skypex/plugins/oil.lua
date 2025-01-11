@@ -10,5 +10,8 @@ return {
 		dependencies = {
 			"stevearc/oil.nvim",
 		},
+		config = function()
+			require("skypex.custom.oil")
+		end,
 	},
 }

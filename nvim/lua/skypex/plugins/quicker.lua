@@ -1,4 +1,6 @@
 return {
 	"stevearc/quicker.nvim",
-	opts = {},
+	config = function()
+		require("skypex.custom.quicker")
+	end,
 }
