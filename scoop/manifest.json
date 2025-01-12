@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1736425950000)\/",
+                "value": "\/Date(1736497870000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 13:32:30"
+                "DateTime": "fredag 10. januar 2025 09:31:10"
             },
             "Manifests": 1354
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1736426044000)\/",
+                "value": "\/Date(1736498012000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 13:34:04"
+                "DateTime": "fredag 10. januar 2025 09:33:32"
             },
             "Manifests": 2116
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1736427352000)\/",
+                "value": "\/Date(1736498307000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 13:55:52"
+                "DateTime": "fredag 10. januar 2025 09:38:27"
             },
             "Manifests": 475
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1736437978000)\/",
+                "value": "\/Date(1736483317000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 16:52:58"
+                "DateTime": "fredag 10. januar 2025 05:28:37"
             },
             "Manifests": 335
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1736381906000)\/",
+                "value": "\/Date(1736468167000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 01:18:26"
+                "DateTime": "fredag 10. januar 2025 01:16:07"
             },
             "Manifests": 255
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1736397345000)\/",
+                "value": "\/Date(1736483747000)\/",
                 "DisplayHint": 2,
-                "DateTime": "torsdag 9. januar 2025 05:35:45"
+                "DateTime": "fredag 10. januar 2025 05:35:47"
             },
-            "Manifests": 14060
+            "Manifests": 14063
         },
         {
             "Name": "okibcn",
