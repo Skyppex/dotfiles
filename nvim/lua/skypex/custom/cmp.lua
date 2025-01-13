@@ -175,6 +175,19 @@ cmp.setup.filetype({ "sql" }, {
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "Vaults/**/*.md",
+	callback = function()
+		cmp.setup.buffer({
+			sources = {
+				sources.obsidian,
+				sources.obsidian_new,
+				sources.obsidian_tag,
+			},
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "Cargo.toml",
 	callback = function()
 		cmp.setup.buffer({
