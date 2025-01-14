@@ -435,3 +435,4 @@ sharpier
 requeue
 ackmode
 amq
+dotenv
