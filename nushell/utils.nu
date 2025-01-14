@@ -318,3 +318,13 @@ def distribute [
 
     return $chunks
 }
+
+def "str strip-prefix" [prefix: string]: string -> string {
+    let input = $in
+
+    if ($input | str starts-with $prefix) {
+        return ($input | str substring ($prefix | str length)..)
+    }
+
+    return $input
+}
