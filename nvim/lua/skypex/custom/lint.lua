@@ -11,6 +11,8 @@ M.lint = function()
 		typescriptreact = { "eslint_d" },
 		json = { "jsonlint" },
 		yaml = { "yamllint" },
+		sh = { "shellcheck" },
+		bash = { "shellcheck" },
 	}
 
 	require("skypex.utils").nmap("<leader>l", function()

@@ -54,6 +54,8 @@ conform.setup({
 		xml = { "xmlformatter" },
 		yaml = { "yamlfix", "prettierd", "prettier", stop_after_first = true },
 		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
+		sh = { "beautysh" },
+		bash = { "beautysh" },
 		-- nu = { "nufmt" }, Disabled because it breaks the code
 	},
 })

@@ -163,5 +163,6 @@ smartcolumn.setup({
 		"qf",
 		"alpha",
 		"checkhealth",
+		"dotenv",
 	},
 })

@@ -143,11 +143,27 @@ local filetype_map = {
 	{
 		pattern = "*.http",
 		filetype = "http",
+		commentstring = "##%s",
+	},
+	{
+		pattern = "*.env",
+		filetype = "dotenv",
 		commentstring = "#%s",
+		parser = "bash",
 	},
 }
 
+local parsers = require("nvim-treesitter.parsers")
+
 for _, value in ipairs(filetype_map) do
+	if value.parser then
+		parsers.list[value.filetype] = parsers.list[value.parser]
+		parsers.list[value.filetype].filetype = value.filetype
+		parsers.list[value.filetype].maintainers = nil
+
+		vim.treesitter.language.register(value.parser, value.filetype)
+	end
+
 	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		pattern = value.pattern,
 		callback = function()
