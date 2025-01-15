@@ -269,6 +269,17 @@ end
 --- @param left string
 --- @param right string|function
 --- @param desc string?
+local nomap = function(left, right, desc)
+	vim.keymap.set({ "n", "o" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local ximap = function(left, right, desc)
 	vim.keymap.set({ "x", "i" }, left, right, {
 		desc = desc,
@@ -282,6 +293,17 @@ end
 --- @param desc string?
 local xsmap = function(left, right, desc)
 	vim.keymap.set({ "x", "s" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
+local xomap = function(left, right, desc)
+	vim.keymap.set({ "x", "o" }, left, right, {
 		desc = desc,
 		noremap = true,
 		silent = true,
@@ -313,8 +335,30 @@ end
 --- @param left string
 --- @param right string|function
 --- @param desc string?
+local nxomap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "o" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nismap = function(left, right, desc)
 	vim.keymap.set({ "n", "i", "s" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
+local niomap = function(left, right, desc)
+	vim.keymap.set({ "n", "i", "o" }, left, right, {
 		desc = desc,
 		noremap = true,
 		silent = true,
@@ -335,8 +379,41 @@ end
 --- @param left string
 --- @param right string|function
 --- @param desc string?
+local xiomap = function(left, right, desc)
+	vim.keymap.set({ "x", "i", "o" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
 local nxismap = function(left, right, desc)
 	vim.keymap.set({ "n", "x", "i", "s" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
+local nxiomap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "i", "o" }, left, right, {
+		desc = desc,
+		noremap = true,
+		silent = true,
+	})
+end
+
+--- @param left string
+--- @param right string|function
+--- @param desc string?
+local nxisomap = function(left, right, desc)
+	vim.keymap.set({ "n", "x", "i", "s", "o" }, left, right, {
 		desc = desc,
 		noremap = true,
 		silent = true,
@@ -366,11 +443,18 @@ return {
 	nxmap = nxmap,
 	nimap = nimap,
 	nsmap = nsmap,
+	nomap = nomap,
 	ximap = ximap,
 	xsmap = xsmap,
+	xomap = xomap,
 	nximap = nximap,
 	nxsmap = nxsmap,
+	nxomap = nxomap,
 	nismap = nismap,
+	niomap = niomap,
 	xismap = xismap,
+	xiomap = xiomap,
 	nxismap = nxismap,
+	nxiomap = nxiomap,
+	nxisomap = nxisomap,
 }
