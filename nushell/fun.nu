@@ -230,3 +230,5 @@ def lorem [] {
     let result = $lorem | str join ""
     echo $result
 }
+
+alias k = echo "ait, bro"
