@@ -57,71 +57,6 @@ local handlers = {
 	}),
 }
 
--- -- LOOK IN CURRENT DIRECTORY FOR csproj FILE using glob
--- -- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
--- local function find_closest_csproj(directory)
--- 	-- print("currentFileDirectory: " .. directory)
--- 	local csproj = vim.fn.glob(directory .. "/*.csproj", true, false)
---
--- 	if csproj == "" then
--- 		csproj = vim.fn.glob(directory .. "/*.vbproj", true, false)
--- 	end
---
--- 	if csproj == "" then
--- 		-- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
--- 		local parent_directory = vim.fn.fnamemodify(directory, ":h")
---
--- 		if parent_directory == directory then
--- 			return nil
--- 		end
---
--- 		return find_closest_csproj(parent_directory)
---
--- 	-- elseif there are multiple csproj files, then return the first one
--- 	elseif string.find(csproj, "\n") ~= nil then
--- 		local first_csproj = string.sub(csproj, 0, string.find(csproj, "\n") - 1)
--- 		print("Found multiple csproj files, using: " .. first_csproj)
--- 		return first_csproj
--- 	else
--- 		return csproj
--- 	end
--- end
---
--- -- CHECK CSPROJ FILE TO SEE IF ITS .NET CORE OR .NET FRAMEWORK
--- local function getFrameworkType()
--- 	local currentFileDirectory = vim.fn.expand("%:p:h")
---
--- 	-- print("currentFileDirectory file: " .. currentFileDirectory)
--- 	local csproj = find_closest_csproj(currentFileDirectory)
---
--- 	-- print("csproj file: " .. csproj)
--- 	if csproj == nil then
--- 		return false
--- 	end
---
--- 	local f = io.open(csproj, "rb")
--- 	local content = f:read("*all")
--- 	f:close()
---
--- 	-- return string.find(content, "<TargetFramework>netcoreapp") ~= nil
--- 	local frameworkType = ""
---
--- 	-- IF FILE CONTAINS <TargetFrameworkVersion> THEN IT'S .NET FRAMEWORK
--- 	if string.find(content, "<TargetFrameworkVersion>") ~= nil then
--- 		frameworkType = "netframework"
---
--- 	-- IF FILE CONTAINS <TargetFramework>net48 THEN IT'S .NET FRAMEWORK
--- 	elseif string.find(content, "<TargetFramework>net48") ~= nil then
--- 		frameworkType = "netframework"
---
--- 	-- ELSE IT'S .NET CORE
--- 	else
--- 		frameworkType = "netcore"
--- 	end
---
--- 	return frameworkType
--- end
-
 -- CREATE AUTOCMD FOR CSHARP FILES
 vim.api.nvim_create_autocmd("FileType", {
 	-- pattern = 'cs',
@@ -159,19 +94,6 @@ local cs_ls_ex = require("csharpls_extended")
 --  - settings (table): Override the default settings passed when initializing the server.
 --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 local servers = {
-	-- clangd = {},
-	-- gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-	-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-	--
-	-- Some languages (like typescript) have entire language plugins that can be useful:
-	--    https://github.com/pmizio/typescript-tools.nvim
-	--
-	-- But for many setups, the LSP (`tsserver`) will work just fine
-	-- tsserver = {},
-	--
-
 	lua_ls = {
 		filetypes = { "lua" },
 		settings = {
@@ -412,8 +334,6 @@ vim.list_extend(ensure_installed, {
 	"python-lsp-server",
 	"typescript-language-server",
 	"tailwindcss-language-server",
-	-- "omnisharp",
-	-- "omnisharp_mono",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
