@@ -76,4 +76,4 @@ nmap("<leader>tl", function()
 		:find()
 end, "Set fidget log level")
 
-nmap("<leader>mm", "<cmd>Fidget history<CR>", "Open messages")
+nmap("<leader>om", "<cmd>Fidget history<CR>", "Open messages")
