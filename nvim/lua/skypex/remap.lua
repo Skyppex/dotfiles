@@ -2,6 +2,7 @@ local utils = require("skypex.utils")
 local nmap = utils.nmap
 local xmap = utils.xmap
 local nxmap = utils.nxmap
+local nxomap = utils.nxomap
 local ximap = utils.ximap
 local xismap = utils.xismap
 
@@ -92,6 +93,9 @@ nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
 
 nmap("<C-w>,", "<C-w>s", "Split buffer below")
 nmap("<C-w>.", "<C-w>v", "Split buffer right")
+
+nxomap("gh", "^", "Go to start of line")
+nxomap("gl", "$", "Go to end of line")
 
 -- Resize buffers
 local change = 5
