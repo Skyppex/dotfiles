@@ -96,6 +96,9 @@ nmap("<C-w>.", "<C-w>v", "Split buffer right")
 
 nxomap("gh", "^", "Go to start of line")
 nxomap("gl", "$", "Go to end of line")
+nxomap("_", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
+nxomap("^", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
+nxomap("$", "<cmd>echo 'Use gl to go to end of line!!'<CR>")
 
 -- Resize buffers
 local change = 5
