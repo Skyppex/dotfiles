@@ -445,3 +445,7 @@ nxisomap
 nxiomap
 nxomap
 hybel
+df
+dh
+kh
+peekable
