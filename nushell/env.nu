@@ -114,6 +114,7 @@ starship init nu | save -f ~/.cache/starship/init.nu
 
 $env.CONFIG_PATH = $"($nu.home-path)/.config"
 $env.CHEZMOI_PATH = $"($nu.home-path)/.local/share/chezmoi"
+$env.SCRIPTS_PATH = $"($nu.home-path)/.local/share/scripts"
 $env.SCOOP = $"($nu.home-path)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
