@@ -116,11 +116,11 @@ $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
 $env.HOSTNAME = (sys host | get hostname)
 
 match ($env.HOSTNAME) {
-    "brage-pc" => { 
-        $env.CODE = ('~\code' | path expand)
+    "brage-pc" => {
+        $env.CODE = ('~/code' | path expand)
         $env.LANG = "en_US"
     },
-    "DESKTOP-RRC642H" => { 
+    "DESKTOP-RRC642H" => {
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
     },

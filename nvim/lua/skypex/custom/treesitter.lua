@@ -104,6 +104,12 @@ utils.nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playg
 -- Add local parser for arcana
 local arcana_parser_path = utils.get_code_path() .. "/arcana/tree-sitter-arcana/parser.so"
 
+local stat = vim.loop.fs_stat(arcana_parser_path)
+
+if not stat or not stat.type == "file" then
+	return
+end
+
 vim.treesitter.language.add("arcana", {
 	path = arcana_parser_path,
 })

@@ -119,11 +119,13 @@ def cheat [...doc] {
     curl $"cheat.sh/($doc | str join "/")"
 }
 
-# Elevate the current shell to admin
-alias sudo = gsudo
-
 # Elevate the current shell and execute the nu command in the closure
 def --env nudo [func: closure] {
+    if (which sudo | is-empty) {
+        gsudo nu --stdin --command $"do (view source $func)"
+        return
+    }
+
     sudo nu --stdin --command $"do (view source $func)"
 }
 
