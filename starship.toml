@@ -47,6 +47,7 @@ add_newline = false
 
 format = """
 $character\
+$os\
 $directory\
 $git_branch\
 $git_status\
@@ -56,8 +57,8 @@ $git_status\
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "fg:#7cb7ff bg:#23262E"
-format = "[$symbol ]($style)"
+style = "fg:#7cb7ff bg:prev_fg"
+format = "[$symbol]($style)"
 disabled = false # Disabled by default
 
 [os.symbols]
@@ -68,8 +69,8 @@ Ubuntu = " "
 Windows = " "
 
 [directory]
-style = "fg:#FFE66D bg:prev_fg"
-format = "[$path]($style)"
+style = "fg:#FFE66D bg:prev_bg"
+format = "[ $path]($style)"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
