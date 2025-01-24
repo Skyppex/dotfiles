@@ -40,7 +40,7 @@
 # }
 
 # Config
-command_timeout = 1000
+command_timeout = 3000
 
 # Disable the blank line at the start of the prompt
 add_newline = false
