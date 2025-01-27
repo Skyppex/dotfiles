@@ -291,7 +291,7 @@ def "andromeda" [] {
 }
 
 alias cm = chezmoi
-alias cma = chezmoi apply
+alias cma = chezmoi apply --force
 
 def "count-by-group" [] {
     $in
