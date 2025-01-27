@@ -44,7 +44,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 	})
 end
 
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("error")
 
 -- Alter hover style
 local handlers = {
