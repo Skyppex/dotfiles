@@ -231,4 +231,4 @@ def lorem [] {
     echo $result
 }
 
-alias k = echo "ait, bro"
+alias k = echo "gnarly speed, bruh"
