@@ -155,11 +155,16 @@ def bash [
 alias sh = bash
 
 # Copy from the clipboard
-alias clip = copyq copy -
+def clip [] {
+    copyq add $in
+    copyq copy $in
+}
 
 
 # Paste from the clipboard
-alias paste = copyq paste
+def paste [] {
+    copyq clipboard | complete | get stdout | to text
+}
 
 # Get current local time
 def "time now" [] { date now | format date "%H:%M:%S" }
