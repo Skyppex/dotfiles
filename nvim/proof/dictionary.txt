@@ -451,3 +451,6 @@ kh
 peekable
 splitjoin
 bruh
+copyq
+nvarchar
+hjklyuioasdfqwer

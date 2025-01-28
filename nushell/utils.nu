@@ -154,8 +154,12 @@ def bash [
 # Shorthand for bash
 alias sh = bash
 
+# Copy from the clipboard
+alias clip = copyq copy -
+
+
 # Paste from the clipboard
-alias paste = powershell -command "Get-Clipboard"
+alias paste = copyq paste
 
 # Get current local time
 def "time now" [] { date now | format date "%H:%M:%S" }

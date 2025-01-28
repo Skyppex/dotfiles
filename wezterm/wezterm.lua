@@ -13,7 +13,8 @@ local act = wezterm.action
 
 local config = {
 	max_fps = 165,
-	quick_select_alphabet = "hjklyuioasdqwe",
+	scrollback_lines = 10000,
+	quick_select_alphabet = "hjklyuioasdfqwer",
 	audible_bell = "Disabled",
 	check_for_updates = false,
 	color_scheme = "Andromeda",
@@ -96,6 +97,16 @@ local config = {
 					end
 					wezterm.open_with(url)
 				end),
+			}),
+		},
+		{
+			key = "/",
+			mods = "LEADER|SHIFT",
+			action = act.Search({
+				Regex = "",
+				CaseSensitive = "Smart",
+				Whole = false,
+				Pattern = "",
 			}),
 		},
 	},
@@ -324,7 +335,5 @@ else
 	config.default_prog = { "nu" }
 	table.insert(config.launch_menu, { label = "nu", args = { "nu" } })
 end
-
-config.scrollback_lines = 3500
 
 return config

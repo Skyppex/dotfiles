@@ -2,6 +2,7 @@ def --env dotenv [file: string] {
     let file = $file
     let content = open $file -r
     let lines = $content | lines
+    mut env_vars = {}
 
     for $line in $lines {
         if ($line | str starts-with "#") {
@@ -26,6 +27,9 @@ def --env dotenv [file: string] {
         }
 
         print $"$env.($name) = ($value)"
-        set-env $name $value
+
+        $env_vars = ($env_vars | merge { $name: $value })
     }
+
+    load-env $env_vars
 }
