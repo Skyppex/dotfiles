@@ -1,0 +1,25 @@
+{{- if eq .chezmoi.os "windows" }}
+
+# Pseudo alias to bash command from scoop which can parse \r\n line endings
+def bash [
+    --version(-v) # Print the version of bash
+    ...args: string
+] {
+    let cmd = $env.SCOOP_SHIMS + "/bash.exe"
+
+    if $version {
+        nu --commands $"($cmd) --version"
+        return
+    }
+    
+    if ($args | is-empty) {
+        nu --commands $cmd
+    } else {
+        nu --commands $"($cmd) ($args | str join "")"
+    }
+}
+
+# Shorthand for bash
+alias sh = bash
+
+{{- end }}

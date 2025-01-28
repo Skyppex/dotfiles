@@ -1,10 +1,11 @@
+source os-specific-utils.nu
+
 # Neovim
 
 # Open a file found using fzf in neovim
 def fim [...path] {
     fzp -1 --query ($path | str join " ") --bind "enter:become(nvim {})"
 }
-
 
 # Open neovim
 def vim [
@@ -132,29 +133,8 @@ def --env nudo [func: closure] {
 # Exit
 alias q = exit
 
-# Pseudo alias to gits bash command which can parse \r\n line endings
-def bash [
-    --version(-v) # Print the version of bash
-    ...args: string
-] {
-    let cmd = $env.SCOOP_SHIMS + "/bash.exe"
 
-    if $version {
-        nu --commands $"($cmd) --version"
-        return
-    }
-    
-    if ($args | is-empty) {
-        nu --commands $cmd
-    } else {
-        nu --commands $"($cmd) ($args | str join "")"
-    }
-}
-
-# Shorthand for bash
-alias sh = bash
-
-# Copy from the clipboard
+# Copy to the clipboard
 def clip [] {
     copyq add $in
     copyq copy $in
