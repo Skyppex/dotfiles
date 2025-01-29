@@ -104,9 +104,6 @@ local config = {
 			mods = "LEADER|SHIFT",
 			action = act.Search({
 				Regex = "",
-				CaseSensitive = "Smart",
-				Whole = false,
-				Pattern = "",
 			}),
 		},
 	},
