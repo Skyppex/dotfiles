@@ -454,3 +454,5 @@ bruh
 copyq
 nvarchar
 hjklyuioasdfqwer
+frontend
+searchability
