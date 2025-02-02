@@ -456,3 +456,14 @@ nvarchar
 hjklyuioasdfqwer
 frontend
 searchability
+sfx
+tooltip
+sirenix
+bpm
+scriptable
+raycast
+collider
+rolloff
+maf
+retrigger
+rigidbody
