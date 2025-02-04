@@ -21,8 +21,8 @@ end
 
 local function cs_snippets()
 	ls.add_snippets("cs", {
-		s("sf", fmt("[SerializeField] private ${1} ${2};", { i(1, "Type"), i(2, "name") })),
-		s("sp", fmt("[field: SerializeField] public ${1} ${2} {{ get; set; }}", { i(1, "Type"), i(2, "name") })),
+		s("sf", fmt("[SerializeField] private {1} {2};", { i(1, "Type"), i(2, "name") })),
+		s("sp", fmt("[field: SerializeField] public {1} {2} {{ get; set; }}", { i(1, "Type"), i(2, "name") })),
 	})
 end
 
