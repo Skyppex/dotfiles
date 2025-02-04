@@ -467,3 +467,4 @@ rolloff
 maf
 retrigger
 rigidbody
+cooldown
