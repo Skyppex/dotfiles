@@ -468,3 +468,4 @@ maf
 retrigger
 rigidbody
 cooldown
+tmpl
