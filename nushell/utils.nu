@@ -1,3 +1,4 @@
+### Generated from the os-specific-utils.nu.tmpl file by chezmoi
 source os-specific-utils.nu
 
 # Neovim

@@ -1,5 +1,7 @@
 source ~/.config/zoxide/.zoxide.nu
 
+alias cd-old = cd
+
 # Alias for __zoxide_zi
 alias cdi = __zoxide_zi;
 
