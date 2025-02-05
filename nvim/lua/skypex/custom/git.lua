@@ -77,10 +77,30 @@ M.gitsigns = function()
 	nmap("<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git Blame Line")
 end
 
+M.cmd = function()
+	vim.api.nvim_create_user_command("GitTrackAll", function()
+		vim.notify("Tracking all files", vim.log.levels.DEBUG)
+
+		require("skypex.utils").run_command("git", { "add", "--intent-to-add", "." }, false, function(_, exit_code)
+			if exit_code == 0 then
+				vim.notify("Tracked all files", vim.log.levels.INFO)
+			else
+				vim.notify("Failed to track all files", vim.log.levels.ERROR)
+			end
+		end)
+	end, {
+		desc = "Git Track All",
+		bang = false,
+	})
+
+	nmap("<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
+end
+
 M.all = function()
 	M.fugitive()
 	M.conflict()
 	M.gitsigns()
+	M.cmd()
 end
 
 M.all()

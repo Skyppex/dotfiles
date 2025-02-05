@@ -134,7 +134,8 @@ end
 --- @param command string
 --- @param args string[]?
 --- @param should_block boolean
-local function run_command(command, args, should_block)
+--- @param on_exit function? (data: string, exit_code: number)
+local function run_command(command, args, should_block, on_exit)
 	local Job = require("plenary.job")
 
 	local job = Job:new({
@@ -151,6 +152,13 @@ local function run_command(command, args, should_block)
 			if data then
 				vim.schedule(function()
 					vim.notify(data, vim.log.levels.ERROR)
+				end)
+			end
+		end,
+		on_exit = function(data, exit_code)
+			if on_exit then
+				vim.schedule(function()
+					on_exit(data, exit_code)
 				end)
 			end
 		end,
