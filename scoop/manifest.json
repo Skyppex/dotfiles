@@ -4,19 +4,19 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1738787303000)\/",
+                "value": "\/Date(1739046381000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 21:28:23"
+                "DateTime": "lordag 8. februar 2025 21:26:21"
             },
-            "Manifests": 1356
+            "Manifests": 1357
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1738790016000)\/",
+                "value": "\/Date(1739046517000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 22:13:36"
+                "DateTime": "lordag 8. februar 2025 21:28:37"
             },
             "Manifests": 2127
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1738788423000)\/",
+                "value": "\/Date(1739046668000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 21:47:03"
+                "DateTime": "lordag 8. februar 2025 21:31:08"
             },
             "Manifests": 477
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1738787270000)\/",
+                "value": "\/Date(1739046314000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 21:27:50"
+                "DateTime": "lordag 8. februar 2025 21:25:14"
             },
             "Manifests": 338
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1738772623000)\/",
+                "value": "\/Date(1738973695000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 17:23:43"
+                "DateTime": "lordag 8. februar 2025 01:14:55"
             },
             "Manifests": 257
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1738730148000)\/",
+                "value": "\/Date(1738989262000)\/",
                 "DisplayHint": 2,
-                "DateTime": "onsdag 5. februar 2025 05:35:48"
+                "DateTime": "lordag 8. februar 2025 05:34:22"
             },
-            "Manifests": 13505
+            "Manifests": 13510
         },
         {
             "Name": "okibcn",
@@ -90,7 +90,7 @@
             "Updated": "\/Date(1733153902306)\/"
         },
         {
-            "Info": "Install failed",
+            "Info": "",
             "Source": "extras",
             "Name": "altsnap",
             "Version": "1.64",
@@ -107,8 +107,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.23.14",
-            "Updated": "\/Date(1738794286798)\/"
+            "Version": "2.24.0",
+            "Updated": "\/Date(1739053010131)\/"
         },
         {
             "Info": "",
@@ -156,8 +156,8 @@
             "Info": "",
             "Source": "main",
             "Name": "chezmoi",
-            "Version": "2.59.0",
-            "Updated": "\/Date(1738099039428)\/"
+            "Version": "2.59.1",
+            "Updated": "\/Date(1739053016303)\/"
         },
         {
             "Info": "",
@@ -219,8 +219,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "dotPeek",
-            "Version": "2024.3.4",
-            "Updated": "\/Date(1737740055905)\/"
+            "Version": "2024.3.5",
+            "Updated": "\/Date(1739053036529)\/"
         },
         {
             "Info": "",
@@ -534,8 +534,8 @@
             "Info": "",
             "Source": "kkzzhizhou",
             "Name": "pgadmin4-np",
-            "Version": "8.14",
-            "Updated": "\/Date(1736259388680)\/"
+            "Version": "9.0",
+            "Updated": "\/Date(1739053141843)\/"
         },
         {
             "Info": "",
@@ -576,8 +576,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "rider",
-            "Version": "2024.3.4-243.23654.126",
-            "Updated": "\/Date(1738008454115)\/"
+            "Version": "2024.3.5-243.24978.27",
+            "Updated": "\/Date(1739053524437)\/"
         },
         {
             "Info": "",
@@ -758,8 +758,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "vscode",
-            "Version": "1.96.4",
-            "Updated": "\/Date(1737932310651)\/"
+            "Version": "1.97.0",
+            "Updated": "\/Date(1739053583231)\/"
         },
         {
             "Info": "",
@@ -807,8 +807,8 @@
             "Info": "",
             "Source": "main",
             "Name": "yazi",
-            "Version": "0.4.2",
-            "Updated": "\/Date(1736260376082)\/"
+            "Version": "25.2.7",
+            "Updated": "\/Date(1739053587397)\/"
         },
         {
             "Info": "",
