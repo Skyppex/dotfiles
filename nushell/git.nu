@@ -836,3 +836,31 @@ def "gh open" [
 
     start $link
 }
+
+# fzf powered search to find a commit sha
+def gf [
+    --multi(-m) # Allow multiple refs to be selected. Printed on separate lines
+    --long(-l) # Print the full ref instead of the short version
+] {
+    let refs = git reflog | lines | str replace "HEAD@" ""
+    print $refs
+
+    let selected = if not $multi {
+        $refs | to text | fzf --height 40% --layout=reverse -0 -1
+    } else {
+        $refs | to text | fzf --multi --height 40% --layout=reverse -0 -1
+    }
+
+    if ($selected | is-empty) {
+        print "No ref selected"
+        return
+    }
+
+    let shorts = $selected | lines | str substring 0..6
+
+    if $long {
+        return ($shorts | each { |it| git rev-parse $it } | to text | str trim)
+    } else {
+        return ($shorts | to text | str trim)
+    }
+}
