@@ -470,3 +470,4 @@ rigidbody
 cooldown
 tmpl
 powf
+gitattribute
