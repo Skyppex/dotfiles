@@ -21,6 +21,11 @@ require("nvim-treesitter.configs").setup({
 		"graphql",
 		"regex",
 		"bash",
+		"git_config",
+		"git_rebase",
+		"gitcommit",
+		"gitignore",
+		"gitattributes",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
