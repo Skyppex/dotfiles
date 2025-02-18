@@ -472,3 +472,5 @@ tmpl
 powf
 gitattribute
 gri
+ul
+textarea
