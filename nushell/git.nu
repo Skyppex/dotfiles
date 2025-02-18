@@ -21,9 +21,6 @@ alias gpf = git push --force-with-lease
 # Git add patch
 alias gap = git add --patch
 
-# Git squash
-alias "git squash" = git rebase -i
-
 # Git show with --ext-diff
 alias "git show" = git show --ext-diff
 
@@ -863,4 +860,10 @@ def gf [
     } else {
         return ($shorts | to text | str trim)
     }
+}
+
+# Git rebase interactive
+def gri [] {
+    let root = gf --long
+    git rebase --interactive $root
 }
