@@ -137,9 +137,7 @@ alias q = exit
 
 # Copy to the clipboard
 def clip [] {
-    print $"($in)"
     let input = $in | str replace -a "\\" "\\\\"
-    print $"($input)"
     copyq add $"($input)"
     copyq copy $"($input)"
 }

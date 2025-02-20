@@ -27,12 +27,10 @@ def "scripts cp" [
     let script = $scripts_path 
     | path join $selected 
     | path expand 
-    | path relative-to .
 
     let dest = $dest 
     | path join $selected
     | path expand 
-    | path relative-to .
 
     print $"copying ($script) to ($dest)"
     cp $script $dest
