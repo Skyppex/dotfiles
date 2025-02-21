@@ -114,6 +114,8 @@ $env.SCOOP = $"($nu.home-path)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
 $env.HOSTNAME = (sys host | get hostname)
+$env.OS = (sys host | get name | str downcase)
+$env.OS_VERSION = (sys host | get os_version)
 
 match ($env.HOSTNAME) {
     "brage-pc" => {
