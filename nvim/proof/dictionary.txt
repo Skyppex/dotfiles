@@ -474,3 +474,4 @@ gitattribute
 gri
 ul
 textarea
+chrono
