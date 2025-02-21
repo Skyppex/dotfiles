@@ -840,7 +840,6 @@ def gf [
     --long(-l) # Print the full ref instead of the short version
 ] {
     let refs = git reflog | lines | str replace "HEAD@" ""
-    print $refs
 
     let selected = if not $multi {
         $refs | to text | fzf --height 40% --layout=reverse -0 -1
