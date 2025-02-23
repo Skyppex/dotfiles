@@ -1,18 +1,6 @@
-local colors = {
-	gray = "#23262e",
-	light_gray = "#373941",
-	orange = "#f39c12",
-	pink = "#ff00aa",
-	blue = "#7cb7ff",
-	cyan = "#00e8c6",
-	yellow = "#ffe66d",
-	green = "#96e072",
-	white = "#d5ced9",
-	black = "#181a16",
-	purple = "#c74ded",
-}
+local colors = require("skypex.utils").andromeda
 
-local theme = {
+local andromeda_theme = {
 	normal = {
 		a = { bg = colors.light_gray, fg = colors.pink, gui = "bold" },
 		b = { bg = colors.gray, fg = colors.white },
@@ -47,7 +35,7 @@ local theme = {
 
 require("lualine").setup({
 	options = {
-		theme = theme,
+		theme = andromeda_theme,
 		component_separators = { left = "│", right = "" },
 	},
 	sections = {

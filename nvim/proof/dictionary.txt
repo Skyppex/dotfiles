@@ -475,3 +475,17 @@ gri
 ul
 textarea
 chrono
+narg
+scandir
+jobstop
+jobstart
+getpid
+progname
+hrtime
+chansend
+tokio
+rustl
+rcgen
+pem
+pki
+pkc
