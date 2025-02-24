@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1740400377000)\/",
+                "value": "\/Date(1740428918000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 24. februar 2025 13:32:57"
+                "DateTime": "mandag 24. februar 2025 21:28:38"
             },
             "Manifests": 1382
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1740400432000)\/",
+                "value": "\/Date(1740429094000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 24. februar 2025 13:33:52"
+                "DateTime": "mandag 24. februar 2025 21:31:34"
             },
             "Manifests": 2130
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1740402019000)\/",
+                "value": "\/Date(1740429360000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 24. februar 2025 14:00:19"
+                "DateTime": "mandag 24. februar 2025 21:36:00"
             },
             "Manifests": 477
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1740400275000)\/",
+                "value": "\/Date(1740428869000)\/",
                 "DisplayHint": 2,
-                "DateTime": "mandag 24. februar 2025 13:31:15"
+                "DateTime": "mandag 24. februar 2025 21:27:49"
             },
             "Manifests": 338
         },
