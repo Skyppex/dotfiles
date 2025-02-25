@@ -86,6 +86,7 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = false
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.fillchars = { eob = " " }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
