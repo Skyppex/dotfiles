@@ -4,7 +4,6 @@ local Path = require("plenary.path")
 local path = Path:new(graffiti_dir)
 
 if not path:is_dir() then
-	-- vim.notify("Graffiti not found at: " .. graffiti_dir, vim.log.levels.WARNING)
 	return {
 		"skyppex/graffiti.nvim",
 		name = "graffiti",
