@@ -72,12 +72,11 @@ def cc [
         return
     }
 
-
     let scope = if ($scope | is-empty) {
         let s = (gum input --placeholder "scope")
         if ($s | is-empty) { "" } else { $"\(($s)\)" }
     } else {
-        $"\(($scope)\)"
+        if $scope == "none" { "" } else { $"\(($scope)\)" }
     }
 
     let summary = if ($message | is-not-empty) {
