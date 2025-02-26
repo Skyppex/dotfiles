@@ -37,11 +37,26 @@ return {
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
-			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
 			vim.cmd.hi("CursorLine guibg=none")
 			vim.cmd.hi("CursorLineNr guibg=none")
 			vim.cmd.hi("Visual guibg=#2e2e2e")
 			vim.cmd.hi("LspInlayHint guifg=#464959")
+
+			-- gitsigns highlights
+			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
+			vim.cmd("hi link GitSignsStagedAdd GitSignsAdd")
+			vim.cmd("hi link GitSignsStagedChange GitSignsChange")
+			vim.cmd("hi link GitSignsStagedDelete GitSignsDelete")
+			vim.cmd("hi link GitSignsStagedChangedelete GitSignsChangedelete")
+			vim.cmd("hi link GitSignsStagedTopdelete GitSignsTopdelete")
+			vim.cmd("hi link GitSignsStagedAddNr GitSignsAddNr")
+			vim.cmd("hi link GitSignsStagedChangeNr GitSignsChangeNr")
+			vim.cmd("hi link GitSignsStagedDeleteNr GitSignsDeleteNr")
+			vim.cmd("hi link GitSignsStagedChangedeleteNr GitSignsChangedeleteNr")
+			vim.cmd("hi link GitSignsStagedTopdeleteNr GitSignsTopdeleteNr")
+			vim.cmd("hi link GitSignsStagedAddLn GitSignsAddLn")
+			vim.cmd("hi link GitSignsStagedChangeLn GitSignsChangeLn")
+			vim.cmd("hi link GitSignsStagedDeleteLn GitSignsDeleteLn")
 		end,
 		config = function()
 			require("skypex.custom.theming")

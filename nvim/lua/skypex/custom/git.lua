@@ -51,13 +51,22 @@ M.gitsigns = function()
 	local gitsigns = require("gitsigns")
 	gitsigns.setup({
 		signs = {
-			add = { text = "|" },
-			change = { text = "|" },
-			delete = { text = "|" },
-			topdelete = { text = "|" },
-			changedelete = { text = "|" },
+			add = { text = "│" },
+			change = { text = "│" },
+			delete = { text = "│" },
+			topdelete = { text = "│" },
+			changedelete = { text = "│" },
 			untracked = { test = "┆" },
 		},
+		signs_staged = {
+			add = { text = "┃" },
+			change = { text = "┃" },
+			delete = { text = "┃" },
+			topdelete = { text = "┃" },
+			changedelete = { text = "┃" },
+			untracked = { test = "┇" },
+		},
+		sign_priority = 100,
 		current_line_blame = false,
 		current_line_blame_opts = {
 			virt_text = true,
