@@ -206,5 +206,27 @@ nmap("<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
 
 -- Source config
 nmap("<leader><leader>c", function()
-	vim.notify("not implemented")
+	local files = vim.fn.glob("**/skypex/custom/*.lua", true, true)
+	vim.notify(vim.inspect(files))
+	local loaded = 0
+
+	for _, filename in ipairs(files) do
+		local base_filename = vim.fn.fnamemodify(filename, ":t")
+
+		if base_filename ~= vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":t") then
+			local module_name = base_filename:gsub("%.lua$", "")
+			module_name = "skypex.custom." .. module_name
+			package.loaded[module_name] = nil
+
+			local success = pcall(function()
+				require(module_name)
+			end)
+
+			if success then
+				loaded = loaded + 1
+			end
+		end
+	end
+
+	vim.notify("Reloaded " .. #loaded .. " modules", vim.log.levels.INFO)
 end, "Source config")
