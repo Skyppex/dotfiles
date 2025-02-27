@@ -6,11 +6,11 @@ M.fugitive = function()
 	nmap("<leader>gs", vim.cmd.Git, "Git Status")
 
 	nmap("<leader>gl", function()
-		vim.cmd()
+		vim.cmd("Git log")
 	end, "Git Log")
 
 	nmap("<leader>gB", function()
-		vim.cmd()
+		vim.cmd("Git blame")
 	end, "Git Blame")
 end
 
