@@ -496,3 +496,7 @@ recv
 debounce
 getinfo
 gfr
+fatalf
+radard
+serverstart
+serverstop
