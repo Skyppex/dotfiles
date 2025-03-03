@@ -228,5 +228,5 @@ nmap("<leader><leader>c", function()
 		end
 	end
 
-	vim.notify("Reloaded " .. #loaded .. " modules", vim.log.levels.INFO)
+	vim.notify("Reloaded " .. loaded .. " modules", vim.log.levels.INFO)
 end, "Source config")
