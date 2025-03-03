@@ -18,8 +18,8 @@ ximap("<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
 nmap("<C-s>", "<cmd>wa<CR>")
 
 -- Move lines of code in visual mode
-xmap("K", ":m '<-2<CR>gv=gv")
-xmap("J", ":m '>+1<CR>gv=gv")
+xmap("K", ":m '<-2<cr><cmd>normal! gv=gv<cr>")
+xmap("J", ":m '>+1<cr><cmd>normal! gv=gv<cr>")
 
 nmap("J", "mzJ`z")
 nmap("<C-d>", "<C-d>zz")
