@@ -500,3 +500,7 @@ fatalf
 radard
 serverstart
 serverstop
+nqd
+mqd
+bqd
+eqd
