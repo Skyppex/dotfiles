@@ -505,3 +505,5 @@ mqd
 bqd
 eqd
 tw
+hitbox
+hitboxe
