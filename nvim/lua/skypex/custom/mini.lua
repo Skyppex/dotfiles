@@ -6,16 +6,13 @@
 --  - ci'  - [C]hange [I]nside [']quote
 require("mini.ai").setup({ n_lines = 500 })
 
--- Commenting
-require("mini.comment").setup()
-
 -- Auto pairs
 require("mini.pairs").setup()
 
 -- Splits and joins
 require("mini.splitjoin").setup({
 	mappings = {
-		toggle = "gs",
+		toggle = "<leader>tw",
 	},
 	detect = {
 		brackets = {
