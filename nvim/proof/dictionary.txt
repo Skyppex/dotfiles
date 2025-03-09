@@ -507,3 +507,5 @@ eqd
 tw
 hitbox
 hitboxe
+damagable
+mathf
