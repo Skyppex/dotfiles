@@ -84,7 +84,47 @@ end, {
 	bang = true,
 })
 
-local nmap = require("skypex.utils").nmap
+local utils = require("skypex.utils")
+local nmap = utils.nmap
+local xmap = utils.xmap
 
 nmap("<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
 nmap("<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
+
+nmap("<leader>ff", function()
+	conform.format({ lsp_fallback = true, timeout = 1000 })
+end, "Format file")
+
+-- Set up the operator mapping
+xmap("<leader>f", function()
+	conform.format({ lsp_fallback = true, timeout = 1000 })
+end, "Format selection")
+
+-- Define your operator function
+local function format_operator(_)
+	local start_line, start_col, end_line, end_col
+
+	-- Get the marks set by the operator
+	local mark_start = vim.api.nvim_buf_get_mark(0, "[")
+	local mark_end = vim.api.nvim_buf_get_mark(0, "]")
+
+	start_line, start_col = mark_start[1], mark_start[2]
+	end_line, end_col = mark_end[1], mark_end[2]
+
+	-- Call conform.format with the range
+	require("conform").format({
+		range = {
+			["start"] = { start_line, start_col },
+			["end"] = { end_line, end_col },
+		},
+	})
+end
+
+-- Set up the operator mapping
+nmap("<leader>f", function()
+	vim.o.operatorfunc = "v:lua._G.format_operator"
+	return "g@"
+end, "Format file", true)
+
+-- Make the function available globally
+_G.format_operator = format_operator

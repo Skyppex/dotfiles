@@ -23,7 +23,7 @@ end
 require("cellular-automaton").register_animation(slide)
 
 local nmap = require("skypex.utils").nmap
-nmap("<leader>fmir", "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain")
-nmap("<leader>fgol", "<cmd>CellularAutomaton game_of_life<cr>", "Game of life")
-nmap("<leader>fscr", "<cmd>CellularAutomaton scramble<cr>", "Scramble")
-nmap("<leader>fsld", "<cmd>CellularAutomaton slide<cr>", "Slide")
+nmap("<leader>Fmir", "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain")
+nmap("<leader>Fgol", "<cmd>CellularAutomaton game_of_life<cr>", "Game of life")
+nmap("<leader>Fscr", "<cmd>CellularAutomaton scramble<cr>", "Scramble")
+nmap("<leader>Fsld", "<cmd>CellularAutomaton slide<cr>", "Slide")
