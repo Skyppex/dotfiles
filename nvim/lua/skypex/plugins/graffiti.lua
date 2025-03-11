@@ -38,12 +38,16 @@ if not path:is_dir() then
 				end,
 			}):start()
 		end,
-		config = true,
+		config = function()
+			require("skypex.custom.graffiti")
+		end,
 	}
 end
 
 return {
 	"graffiti",
 	dir = graffiti_dir,
-	config = true,
+	config = function()
+		require("skypex.custom.graffiti")
+	end,
 }
