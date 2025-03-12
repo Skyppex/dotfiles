@@ -34,3 +34,5 @@ nnoremap <leader>dj :action StepInto<cr>
 nnoremap <leader>ds :action Stop<cr>
 
 nnoremap <leader>nd :action RiderUnitTestContextAction<cr>
+
+nnoremap <leader>v :action ActivateProjectToolWindow<cr>

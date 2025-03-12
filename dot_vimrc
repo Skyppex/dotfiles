@@ -31,13 +31,3 @@ xnoremap gh ^
 xnoremap gl $
 onoremap gh ^
 onoremap gl $
-
-nnoremap ^ echo 'Use gh to go to start of line!!'
-nnoremap $ echo 'Use gl to go to end of line!!'
-nnoremap _ echo 'Use gh to go to start of line!!'
-xnoremap ^ echo 'Use gh to go to start of line!!'
-xnoremap $ echo 'Use gl to go to end of line!!'
-xnoremap _ echo 'Use gh to go to start of line!!'
-onoremap ^ echo 'Use gh to go to start of line!!'
-onoremap $ echo 'Use gl to go to end of line!!'
-onoremap _ echo 'Use gh to go to start of line!!'
