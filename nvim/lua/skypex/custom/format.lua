@@ -56,6 +56,8 @@ conform.setup({
 		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
 		sh = { "beautysh" },
 		bash = { "beautysh" },
+		http = { "kulala-fmt" },
+		rest = { "kulala-fmt" },
 		-- nu = { "nufmt" }, Disabled because it breaks the code
 	},
 })

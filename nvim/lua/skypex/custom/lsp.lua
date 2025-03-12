@@ -198,6 +198,9 @@ local servers = {
 			require("tailwindcss-colors").buf_attach(bufnr)
 		end,
 	},
+	kulala_ls = {
+		capabilities = capabilities,
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
