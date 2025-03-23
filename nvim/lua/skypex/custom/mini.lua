@@ -6,6 +6,9 @@
 --  - ci'  - [C]hange [I]nside [']quote
 require("mini.ai").setup({ n_lines = 500 })
 
+-- Use mini.comment to support commenting in injected languages with tree-sitter
+require("mini.comment").setup()
+
 -- Auto pairs
 require("mini.pairs").setup()
 
