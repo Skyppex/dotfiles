@@ -509,3 +509,7 @@ hitbox
 hitboxe
 damagable
 mathf
+difft
+diffexpt
+ev
+webpki
