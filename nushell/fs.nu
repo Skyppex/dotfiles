@@ -26,7 +26,7 @@ def rmdl [] {
 }
 
 # Reverse search for a glob pattern
-def rev-parse [glob: glob]: glob -> list<path> {
+def rev-parse [glob: glob]: nothing -> list<path> {
     mut results = glob $glob
     mut up = 0
 
