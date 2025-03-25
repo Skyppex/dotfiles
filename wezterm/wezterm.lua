@@ -39,7 +39,46 @@ local config = {
 	keys = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = act({ SendString = "\x01" }) },
-		{ key = "w", mods = "LEADER|CTRL", action = act.ActivateTabRelative(1) },
+		{
+			key = "w",
+			mods = "LEADER|CTRL",
+			action = wezterm.action_callback(function(window, pane)
+				window:perform_action(act.ActivateTabRelative(1), pane)
+				local win = window:mux_window()
+				local tabs = win:tabs()
+
+				if #tabs == 1 then
+					wezterm.log_info("Creating tab")
+					local tab = tabs[1]
+
+					if tab:get_title() == nil or tab:get_title() == "" then
+						tab:set_title("nu")
+					end
+
+					wezterm.log_info("Tab " .. tab:get_title())
+
+					local prog
+
+					if tab:get_title() == "nu" then
+						prog = "nvim"
+					else
+						prog = "nu"
+					end
+
+					wezterm.log_info(window:window_id())
+
+					window:perform_action(
+						act.SpawnCommandInNewTab({
+							label = prog,
+							args = { prog },
+						}),
+						pane
+					)
+
+					win:tabs()[2]:set_title(prog)
+				end
+			end),
+		},
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },

@@ -72,10 +72,13 @@ M.toggle = function(window, pane)
 					wezterm.log_info("Cancelled")
 				else
 					wezterm.log_info("Selected " .. label)
+					wezterm.log_info("Id " .. id)
+
 					win:perform_action(
 						act.SwitchToWorkspace({
 							name = id,
 							spawn = {
+								label = "nu",
 								cwd = label,
 								args = { "nu" },
 							},
@@ -102,16 +105,39 @@ M.toggle = function(window, pane)
 						return
 					end
 
-					if #target:tabs() <= 1 then
+					if #target:tabs() == 1 then
 						wezterm.log_info("Creating tab")
+
+						local tab = target:tabs()[1]
+
+						if tab:get_title() == nil or tab:get_title() == "" then
+							tab:set_title("nu")
+						end
+
+						wezterm.log_info("Tab " .. tab:get_title())
+
+						local prog
+
+						if tab:get_title() == "nu" then
+							prog = "nvim"
+						else
+							prog = "nu"
+						end
 
 						win:perform_action(
 							act.SpawnCommandInNewTab({
+								label = prog,
 								cwd = label,
-								args = { "nvim" },
+								args = { prog },
 							}),
 							pane
 						)
+
+						target:tabs()[2]:set_title(prog)
+
+						if prog == "nu" then
+							target:gui_window():perform_action(act.ActivateTabRelative(1), pane)
+						end
 					end
 				end
 			end),
