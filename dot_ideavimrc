@@ -19,6 +19,7 @@ nnoremap åd :action GotoPreviousError<cr>
 nnoremap æd :action GotoNextError<cr>
 
 nnoremap <leader>ca :action ShowIntentionActions<cr>
+xnoremap <leader>ca :action ShowIntentionActions<cr>
 
 nnoremap <leader>hj :action AceWordStartAction<cr>
 nnoremap <leader>hl :action AceLineAction<cr>
