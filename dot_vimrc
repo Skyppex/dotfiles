@@ -7,6 +7,10 @@ nnoremap <silent> <C-c> <Esc>
 inoremap <silent> <C-c> <Esc>
 vnoremap <silent> <C-c> <Esc>
 
+nnoremap <silent> <C-s> :wa<cr>
+inoremap <silent> <C-s> :wa<cr>
+vnoremap <silent> <C-s> :wa<cr>
+
 nnoremap <leader>. f.i<CR><Esc>l==
 nnoremap <leader>, f.a<CR><Esc>l==
 nnoremap <leader>| f.i<CR><Esc>l==
