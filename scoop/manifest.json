@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1743769882000)\/",
+                "value": "\/Date(1743956957000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 14:31:22"
+                "DateTime": "sondag 6. april 2025 18:29:17"
             },
             "Manifests": 1387
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1743769849000)\/",
+                "value": "\/Date(1743956920000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 14:30:49"
+                "DateTime": "sondag 6. april 2025 18:28:40"
             },
             "Manifests": 2149
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1743771629000)\/",
+                "value": "\/Date(1743958413000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 15:00:29"
+                "DateTime": "sondag 6. april 2025 18:53:33"
             },
             "Manifests": 487
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1743769869000)\/",
+                "value": "\/Date(1743957001000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 14:31:09"
+                "DateTime": "sondag 6. april 2025 18:30:01"
             },
             "Manifests": 342
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1743725879000)\/",
+                "value": "\/Date(1743898632000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 02:17:59"
+                "DateTime": "sondag 6. april 2025 02:17:12"
             },
             "Manifests": 257
         },
@@ -54,11 +54,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1743741472000)\/",
+                "value": "\/Date(1743914337000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 4. april 2025 06:37:52"
+                "DateTime": "sondag 6. april 2025 06:38:57"
             },
-            "Manifests": 13734
+            "Manifests": 13738
         },
         {
             "Name": "okibcn",
@@ -107,8 +107,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.25.10",
-            "Updated": "\/Date(1743778302470)\/"
+            "Version": "2.25.11",
+            "Updated": "\/Date(1743962847762)\/"
         },
         {
             "Info": "",
@@ -170,8 +170,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.8.7",
-            "Updated": "\/Date(1743778347218)\/"
+            "Version": "2.8.8",
+            "Updated": "\/Date(1743962892988)\/"
         },
         {
             "Info": "",
@@ -247,8 +247,8 @@
             "Info": "",
             "Source": "main",
             "Name": "fzf",
-            "Version": "0.61.0",
-            "Updated": "\/Date(1743455561510)\/"
+            "Version": "0.61.1",
+            "Updated": "\/Date(1743962899539)\/"
         },
         {
             "Info": "",
@@ -688,8 +688,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "thunderbird",
-            "Version": "137.0",
-            "Updated": "\/Date(1743605701723)\/"
+            "Version": "137.0.1",
+            "Updated": "\/Date(1743962923212)\/"
         },
         {
             "Info": "",
