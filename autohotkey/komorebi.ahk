@@ -63,6 +63,9 @@ Komorebic(cmd) {
     }
 }
 
+; Opens existing client if one exists by default
+#e::Run("thunderbird.exe")
+
 ; Move windows
 #+h::Komorebic("move left")
 #+j::Komorebic("move down")
