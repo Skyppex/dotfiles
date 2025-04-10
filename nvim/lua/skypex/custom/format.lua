@@ -1,7 +1,28 @@
 local conform = require("conform")
 
+---@param bufnr integer
+---@param ... string
+---@return string
+local function first(bufnr, ...)
+	for i = 1, select("#", ...) do
+		local formatter = select(i, ...)
+		if conform.get_formatter_info(formatter, bufnr).available then
+			return formatter
+		end
+	end
+	return select(1, ...)
+end
+
+local function first_then_injected(...)
+	local list = ...
+
+	return function(bufnr)
+		return { first(bufnr, list), "injected" }
+	end
+end
+
 conform.setup({
-	notify_on_error = false,
+	notify_on_error = true,
 	async = true,
 	format_on_save = function(bufnr)
 		-- Disable with a global or buffer-local variable
@@ -36,29 +57,29 @@ conform.setup({
 	},
 	formatters_by_ft = {
 		-- Runs the single formatter
-		lua = { "stylua" },
+		lua = { "stylua", "injected" },
 		-- Runs each formatter sequentially
-		python = { "isort", "black" },
+		python = { "isort", "black", "injected" },
 
 		-- Tries to run each formatter until one succeeds
-		javascript = { "prettierd", "prettier", stop_after_first = true },
-		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-		typescript = { "prettierd", "prettier", stop_after_first = true },
-		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-		css = { "prettierd", "prettier", stop_after_first = true },
-		scss = { "prettierd", "prettier", stop_after_first = true },
-		json = { "jq", "prettierd", "prettier", stop_after_first = true },
-		cs = { "csharpier" },
-		csx = { "csharpier" },
-		go = { "gofmt" },
-		xml = { "xmlformatter" },
-		yaml = { "yamlfix", "prettierd", "prettier", stop_after_first = true },
-		markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
-		sh = { "beautysh" },
-		bash = { "beautysh" },
-		http = { "kulala-fmt" },
-		rest = { "kulala-fmt" },
-		-- nu = { "nufmt" }, Disabled because it breaks the code
+		javascript = first_then_injected("prettierd", "prettier"),
+		javascriptreact = first_then_injected("prettierd", "prettier"),
+		typescript = first_then_injected("prettierd", "prettier"),
+		typescriptreact = first_then_injected("prettierd", "prettier"),
+		css = first_then_injected("prettierd", "prettier"),
+		scss = first_then_injected("prettierd", "prettier"),
+		json = first_then_injected("jq", "prettierd", "prettier"),
+		cs = { "csharpier", "injected" },
+		csx = { "csharpier", "injected" },
+		go = { "gofmt", "injected" },
+		xml = { "xmlformatter", "injected" },
+		yaml = first_then_injected("yamlfix", "prettierd", "prettier"),
+		markdown = first_then_injected("markdownlint", "prettierd", "prettier"),
+		sh = { "beautysh", "injected" },
+		bash = { "beautysh", "injected" },
+		http = { "kulala-fmt", "injected" },
+		rest = { "kulala-fmt", "injected" },
+		-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 	},
 })
 
