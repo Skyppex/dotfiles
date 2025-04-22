@@ -518,3 +518,5 @@ datastructure
 ffi
 graffitiignore
 chdir
+eprint
+dbeaver
