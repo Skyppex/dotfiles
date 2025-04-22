@@ -119,8 +119,6 @@ vim.treesitter.language.add("arcana", {
 	path = arcana_parser_path,
 })
 
-vim.treesitter.language.register("arcana", "arcana")
-
 -- -- Add generic parse
 -- local generic_parser_path = utils.get_code_path() .. "/tree-sitter-generic/parser.so"
 --
@@ -130,10 +128,31 @@ vim.treesitter.language.register("arcana", "arcana")
 --
 -- vim.treesitter.language.register("generic", "cake")
 
+local registry = {
+	{
+		lang = "arcana",
+		filetype = "arcana",
+	},
+}
+
+for _, value in ipairs(registry) do
+	vim.treesitter.language.register(value.lang, value.filetype)
+end
+
 local filetype_map = {
 	{
 		pattern = "*.ar",
 		filetype = "arcana",
+		commentstring = "//%s",
+	},
+	{
+		pattern = "*.ar",
+		filetype = "arcana",
+		commentstring = "//%s",
+	},
+	{
+		pattern = "csharp",
+		filetype = "cs",
 		commentstring = "//%s",
 	},
 	{
