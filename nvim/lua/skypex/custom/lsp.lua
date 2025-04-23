@@ -324,16 +324,11 @@ require("mason").setup()
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
 	"lua-language-server",
-	"stylua", -- Used to format Lua code
 	"rust-analyzer",
 	"csharp-language-server",
-	"black",
 	"codelldb",
-	"eslint_d",
 	"gopls",
 	"graphql-language-service-cli",
-	"isort",
-	"prettierd",
 	"python-lsp-server",
 	"typescript-language-server",
 	"tailwindcss-language-server",
