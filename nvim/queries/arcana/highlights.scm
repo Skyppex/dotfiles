@@ -172,9 +172,6 @@
       (parameter
         param_name: (identifier) @keyword @spell (#eq? @keyword "self")))))
 
-(closure_parameter
-  param_name: (identifier) @variable.parameter @spell)
-
 (trailing_closure
   function: (identifier) @function.call)
 
@@ -228,10 +225,14 @@
   "|" @punctuation.special)
 
 (wildcard) @character.special
+(rest) @operator
+
+(variable_pattern) @variable
 
 (constructor_field
-  field_pattern: (identifier) @property)
+  field_pattern: (variable_pattern) @property)
 
 (constructor_field
   field_name: (identifier) @property
   field_pattern: (_))
+
