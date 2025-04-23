@@ -150,7 +150,7 @@
 
 (function_type_identifier_name) @function @spell
 
-(named_field
+(field
   field_name: (identifier) @property @spell)
 
 (function_declaration
@@ -189,7 +189,16 @@
     member: (identifier) @function.call))
 
 (call
-  callee: (identifier) @function.builtin (#any-of? @function.builtin "print" "drop"))
+  callee: (identifier) @function.builtin
+  (#any-of? @function.builtin
+   "input"
+   "print"
+   "println"
+   "eprint"
+   "eprintln"
+   "drop"
+   "len"
+   ))
 
 (struct_field
   field_name: (identifier) @property @spell)
@@ -225,12 +234,12 @@
   "|" @punctuation.special)
 
 (wildcard) @character.special
-(rest) @operator
+; (rest) @operator
 
 (variable_pattern) @variable
 
 (constructor_field
-  field_pattern: (variable_pattern) @property)
+  field_pattern: (identifier) @property)
 
 (constructor_field
   field_name: (identifier) @property
