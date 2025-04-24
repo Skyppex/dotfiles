@@ -213,16 +213,13 @@
 
 (generic_identifier) @type @spell
 
-(enum_shared_field
-  field_name: (identifier) @property @spell
-  field_type: (type_annotation) @type)
-
 (enum_variant
   variant_name: (type_identifier_name) @constant @spell)
 
 (type_constructor
   member_type_name: (type_annotation
-    (type_identifier_name) @constant @spell))
+    (concrete_type_annotation
+      (type_identifier_name) @constant @spell)))
 
 (union_declaration
   name: (type_identifier_name) @type @spell)

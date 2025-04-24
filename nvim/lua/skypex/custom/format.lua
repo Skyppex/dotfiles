@@ -69,6 +69,7 @@ conform.setup({
 		css = first_then_injected("prettierd", "prettier"),
 		scss = first_then_injected("prettierd", "prettier"),
 		json = first_then_injected("jq", "prettierd", "prettier"),
+		graphql = first_then_injected("prettierd", "prettier"),
 		cs = { "csharpier", "injected" },
 		csx = { "csharpier", "injected" },
 		go = { "gofmt", "injected" },
