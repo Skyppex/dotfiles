@@ -1,6 +1,8 @@
 [core]
     editor = nvim
     pager = less -+F -+X -R
+    compression = 9
+    preloadindex = true
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
@@ -9,11 +11,14 @@
 [user]
     name = Brage Ingebrigtsen
     email = 84551201+Skyppex@users.noreply.github.com
-    signingKey = ""
+    signingKey = ''
 [init]
     defaultBranch = main
 [pull]
-    rebase = merges
+    rebase = true
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
 [fetch]
     prune = true
 [gpg]
@@ -25,11 +30,13 @@
     forceSignAnnotated = false
 [gpg "ssh"]
     program = ssh-keygen
-    allowedSignersFile = ""
+    allowedSignersFile = ''
 [credential "https://github.com"]
     useHttpPath = true
 [push]
     autoSetupRemote = true
+    default = current
+    followTags = true
 [credential]
     helper = store
 [credential "helperselector"]
@@ -41,3 +48,17 @@
     cmd = nvim -d $LOCAL $REMOTE
 [difftool]
     prompt = true
+[advice]
+    addEmptyPathspec = false
+    pushNonFastForward = false
+    statusHints = false
+[url "git@github.com:Skyppex/"]
+    insteadOf = "sky:"
+[url "git@github.com:"]
+    insteadOf = "gh:"
+[url "git@github.com:SentinelSoftware/"]
+    insteadOf = "sentinel:"
+[status]
+    branch = true
+    showStash = true
+    showUntrackedFiles = all
