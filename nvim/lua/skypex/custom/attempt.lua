@@ -41,8 +41,6 @@ local function get_win_aspect_ratio(win)
 	local width = vim.api.nvim_win_get_width(win) / 2 -- Divide by 2 to get the actual width
 	local height = vim.api.nvim_win_get_height(win)
 
-	vim.notify("Width: " .. width .. ", Height: " .. height)
-
 	-- Calculate the aspect ratio
 	local aspect_ratio = width / height
 
