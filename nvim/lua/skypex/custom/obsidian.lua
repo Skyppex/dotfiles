@@ -35,6 +35,9 @@ end
 local obsidian = require("obsidian")
 obsidian.setup({
 	workspaces = workspaces,
+	ui = {
+		enable = false,
+	},
 	completion = {
 		nvim_cmp = true,
 		min_chars = 2,

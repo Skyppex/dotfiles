@@ -44,6 +44,7 @@ local sources = {
 	obsidian = { name = "obsidian" },
 	obsidian_new = { name = "obsidian_new" },
 	obsidian_tag = { name = "obsidian_tag" },
+	markdown = { name = "render-markdown" },
 }
 
 ---@diagnostic disable-next-line: redundant-parameter
@@ -171,6 +172,13 @@ cmp.setup.filetype({ "sql" }, {
 	sources = {
 		sources.dadbod,
 		sources.buffer,
+	},
+})
+
+cmp.setup.filetype({ "markdown" }, {
+	sources = {
+		sources.buffer,
+		sources.markdown,
 	},
 })
 
