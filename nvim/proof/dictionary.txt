@@ -526,3 +526,5 @@ citrusy
 ylang
 palo
 agarwood
+wltp
+kwh
