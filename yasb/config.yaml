@@ -55,7 +55,7 @@ widgets:
       thumbnail_alpha: 80
       thumbnail_padding: 8
    # Set to 0 for square corners
-      thumbnail_corner_radius: 16
+      thumbnail_corner_radius: 11
       icons:
         prev_track: "\ue892"
         next_track: "\ue893"
