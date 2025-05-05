@@ -26,10 +26,10 @@
   },
   "stackbar": {
     "label": "Process",
-    "height": 20,
+    "height": -4,
     "mode": "OnStack",
     "tabs": {
-      "width": 150,
+      "width": 0,
       "font_family": "JetBrains Mono"
     }
   },

@@ -7,6 +7,7 @@
 .weather-widget {} -> Styles specific to the weather widget
 .komorebi-workspaces {} -> Styles specific to komorebi workspaces
 .komorebi-active-layout {} -> Styles specific to komorebi active layout
+.komorebi-stack {} -> Styles specific to komorebi stack
 .volume-widget {} -> Styles specific to the volume widget 
 .apps-widget {} -> Styles specific to the apps widget
 .power-menu-widget {} -> Styles for the power menu button widget
@@ -25,7 +26,7 @@
   font-size: 12px;
   color: #d5ced9;
   font-weight: 500;
-  font-family: "JetBrainsMono NFP";
+  font-family: JetBrainsMono Nerd Font;
   margin: 0;
   padding: 0;
 }
@@ -45,7 +46,7 @@
   padding: 1px 8px 1px 8px;
 }
 .active-window-widget {
-  border-radius: 18px;
+  border-radius: 12px;
   margin-left: 8px;
 }
 .container-left,
@@ -56,13 +57,15 @@
 }
 
 .clock-widget {
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .komorebi-active-layout {
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
   padding: 0 4px 0 0;
 }
 
@@ -71,48 +74,63 @@
   padding: 2px 0 0 0;
 }
 
+.komorebi-stack {
+  padding: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+.komorebi-stack .window,
+.komorebi-stack .window.active,
+.komorebi-stack .window.button-1,
+.komorebi-stack .window.button-2 {
+  text-transform: lowercase;
+  background-color: transparent;
+  border: none;
+  color: #d5ced9;
+  padding: 0 8px;
+  margin: 4px 0;
+  font-family: JetBrainsMono Nerd Font;
+}
+
+.komorebi-stack .window.active {
+  color: #96e072;
+}
+
+.komorebi-stack .window:hover,
+.komorebi-stack .window.active:hover,
+.komorebi-stack .window.button-1:hover,
+.komorebi-stack .window.button-2:hover {
+  color: #00e8c6;
+}
+
+.komorebi-stack .label {
+  font-weight: 600;
+  padding: 2px 0 0 0;
+}
+
 .wifi-widget {
   padding: 2 4px 0 4px;
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .apps-widget .widget-container,
-.komorebi-workspaces .widget-container,
 .wifi-widget .widget-container,
-.github-widget .widget-container,
-.komorebi-active-layout .widget-container {
-  background-color: #23262e;
+.komorebi-active-layout .widget-container,
+.komorebi-stack .widget-container {
+  background-color: transparent;
+  border: none;
   margin: 4px 0px 4px 0;
-  border-radius: 14px;
 }
 
 .apps-widget {
   padding: 0 4px 0 2px;
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
-}
-
-.komorebi-workspaces {
-  padding: 0 0 0 0;
-}
-
-.komorebi-workspaces .ws-btn {
-  font-size: 16px;
-  background-color: transparent;
-  margin: 0 4px 0 4px;
-  color: #857e89;
-}
-
-.komorebi-workspaces .ws-btn.populated,
-.komorebi-workspaces .ws-btn.active {
-  color: #d5ced9;
-}
-
-.komorebi-workspaces .ws-btn:hover,
-.komorebi-workspaces .ws-btn.populated:hover,
-.komorebi-workspaces {
-  color: #00e8c6;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .apps-widget .label {
@@ -137,14 +155,14 @@
 }
 .power-menu-popup {
   background-color: rgba(24, 24, 37, 0.9);
-  border-radius: 12px;
+  border-radius: 8px;
   border: 4px solid rgb(41, 42, 58);
 }
 .power-menu-popup .button {
   padding: 0;
   width: 240px;
   height: 120px;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: rgb(41, 42, 58);
   font-family: "SegoeUI";
   color: white;
@@ -278,7 +296,7 @@
   padding: 0;
   padding-left: 2px;
   margin: 0;
-  border-radius: 16px;
+  border-radius: 12px;
   margin-right: 8px;
 }
 .media-widget .label {
@@ -287,15 +305,15 @@
 .media-widget .btn {
   color: #d5ced9;
   padding: 0 3px;
-  margin: 4px 0;
+  margin: 4px 0px;
   font-family: Segoe Fluent Icons;
 }
 .media-widget .btn:hover {
   color: #00e8c6;
 }
 .media-widget .btn.play {
-  background-color: #373941;
-  border-radius: 14px;
+  background-color: transparent;
+  border-radius: 10px;
   font-size: 16px;
 }
 .media-widget .btn.disabled:hover,
@@ -303,22 +321,6 @@
   color: #857e89;
   font-size: 12px;
   background-color: rgba(0, 0, 0, 0);
-}
-
-/* GITHUB WIDGET */
-.github-widget {
-  padding: 0 12px 0 4px;
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
-}
-
-.github-widget .icon {
-  font-size: 14px;
-  color: #d5ced9;
-}
-
-.github-widget .icon.new-notification {
-  color: #ee5d43;
 }
 
 /* TASKBAR WIDGET */
