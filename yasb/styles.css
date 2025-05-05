@@ -46,7 +46,8 @@
   padding: 1px 8px 1px 8px;
 }
 .active-window-widget {
-  border-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   margin-left: 8px;
 }
 .container-left,
@@ -57,14 +58,11 @@
 }
 
 .clock-widget {
-  border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
 .komorebi-active-layout {
-  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 0 4px 0 0;
 }
@@ -79,7 +77,8 @@
   padding-left: 4px;
   padding-right: 4px;
   margin: 0;
-  border-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   margin-left: 8px;
 }
 
@@ -113,8 +112,7 @@
 }
 
 .wifi-widget {
-  padding: 2 4px 0 4px;
-  border-top-left-radius: 12px;
+  padding: 2px 4px 0 4px;
   border-bottom-left-radius: 12px;
 }
 
@@ -124,12 +122,11 @@
 .komorebi-stack .widget-container {
   background-color: transparent;
   border: none;
-  margin: 4px 0px 4px 0;
+  margin: 4px 0px;
 }
 
 .apps-widget {
   padding: 0 4px 0 2px;
-  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
@@ -155,14 +152,16 @@
 }
 .power-menu-popup {
   background-color: rgba(24, 24, 37, 0.9);
-  border-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   border: 4px solid rgb(41, 42, 58);
 }
 .power-menu-popup .button {
   padding: 0;
   width: 240px;
   height: 120px;
-  border-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   background-color: rgb(41, 42, 58);
   font-family: "SegoeUI";
   color: white;
@@ -221,6 +220,7 @@
 .memory-widget .icon {
   color: #7cb7ff;
 }
+
 .wifi-widget .icon {
   color: #cda4de;
   padding: 0 7px;
@@ -244,59 +244,13 @@
 }
 */
 
-/* Battery widget value colors. Uncomment if you want to color of the battery widget icon to change based on status */
-
-/*
-.battery-widget.status-charging .icon {
-  color: #7cb7ff;
-}
-.battery-widget.status-full .icon {
-  color: #00e8c6;
-}
-.battery-widget.status-high .icon {
-  color: #96e072;
-}
-.battery-widget.status-medium .icon {
-  color: #ffe66d;
-}
-.battery-widget.status-low .icon {
-  color: #f39c12;
-}
-.battery-widget.status-critical .icon {
-  color: #ee5d43;
-}
-*/
-
-/* WEATHER WIDGET */
-.weather-widget .icon {
-  font-size: 16px;
-  margin: 0 2px 1px 0;
-}
-.weather-widget .icon.sunnyDay {
-  color: rgb(221, 210, 107);
-}
-.weather-widget .icon.clearNight {
-  color: rgb(107, 189, 221);
-  font-size: 22px;
-  margin: 1px 2px 0px 0;
-}
-/* 
-.weather-widget .icon.cloudyDay {}
-.weather-widget .icon.cloudyNight {} 
-.weather-widget .icon.rainyDay {} 
-.weather-widget .icon.rainyNight {} 
-.weather-widget .icon.snowyIcyDay {} 
-.weather-widget .icon.snowyIcyNight {} 
-.weather-widget .icon.blizzard {} 
-.weather-widget .icon.default {}
-*/
-
 /* MEDIA WIDGET */
 .media-widget {
   padding: 0;
   padding-left: 2px;
   margin: 0;
-  border-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   margin-right: 8px;
 }
 .media-widget .label {
@@ -321,13 +275,4 @@
   color: #857e89;
   font-size: 12px;
   background-color: rgba(0, 0, 0, 0);
-}
-
-/* TASKBAR WIDGET */
-.taskbar-widget {
-  padding: 0;
-  margin: 0;
-}
-.taskbar-widget .app-icon {
-  padding: 0 6px;
 }

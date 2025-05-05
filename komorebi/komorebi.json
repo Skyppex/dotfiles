@@ -22,11 +22,11 @@
     "enabled": false,
     "duration": 100,
     "style": "EaseOutQuad",
-    "fps": 60
+    "fps": 165
   },
   "stackbar": {
     "label": "Process",
-    "height": -4,
+    "height": 0,
     "mode": "OnStack",
     "tabs": {
       "width": 0,
@@ -42,6 +42,12 @@
   },
   "monitors": [
     {
+      "work_area_offset": {
+        "left": 0,
+        "bottom": 0,
+        "top": -4,
+        "right": 0
+      },
       "workspaces": [
         {
           "name": "Horizontal Monitor",
@@ -67,6 +73,12 @@
       ]
     },
     {
+      "work_area_offset": {
+        "left": 0,
+        "bottom": 0,
+        "top": -4,
+        "right": 0
+      },
       "workspaces": [
         {
           "name": "VerticalMonitor",
@@ -107,6 +119,12 @@
       ]
     },
     {
+      "work_area_offset": {
+        "left": 0,
+        "bottom": 0,
+        "top": -4,
+        "right": 0
+      },
       "workspaces": [
         {
           "name": "Center Monitor",
@@ -132,6 +150,12 @@
       ]
     },
     {
+      "work_area_offset": {
+        "left": 0,
+        "bottom": 0,
+        "top": -4,
+        "right": 0
+      },
       "workspaces": [
         {
           "name": "Right Monitor",
@@ -147,6 +171,12 @@
       ]
     },
     {
+      "work_area_offset": {
+        "left": 0,
+        "bottom": 0,
+        "top": -4,
+        "right": 0
+      },
       "workspaces": [
         {
           "name": "Left Monitor",

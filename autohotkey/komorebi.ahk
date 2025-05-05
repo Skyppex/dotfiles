@@ -1,5 +1,6 @@
 #Requires AutoHotkey v2.0.2
 #SingleInstance Force
+DetectHiddenWindows(true)
 
 Komorebic(cmd) {
     RunWait(format("komorebic.exe {}", cmd), , "Hide")

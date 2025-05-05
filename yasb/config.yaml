@@ -10,7 +10,7 @@ komorebi:
   reload_command: komorebic reload-configuration
 # This is the main configuration file for Yet Another Status Bar (YASB)
 bars:
-  primary-bar:
+  status-bar:
     enabled: true
     # screens: ['DELL P2419H (1)']  #  If you want to show on specific screen
     screens: ['*']  # Somehow shows on the main screen
@@ -27,9 +27,9 @@ bars:
       width: 100%
       height: 24
     padding:
-      top: 4
+      top: -2
       left: 0
-      bottom: 4
+      bottom: 2
       right: 0
     widgets:
       left: [komorebi_active_layout, komorebi_stack]
@@ -54,7 +54,7 @@ widgets:
       hide_empty: true
       thumbnail_alpha: 80
       thumbnail_padding: 8
-   # Set to 0 for square corners
+      # Set to 0 for square corners
       thumbnail_corner_radius: 11
       icons:
         prev_track: "\ue892"
