@@ -295,7 +295,7 @@ def void [] {}
 def distribute [
     total: int
     size: int
-]: any -> list<int> {
+]: nothing -> list<int> {
     mut chunks = []
 
     for _ in 1..$size {
