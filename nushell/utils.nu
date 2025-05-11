@@ -321,3 +321,24 @@ def "str strip-prefix" [prefix: string]: string -> string {
 
     return $input
 }
+
+def --env con [cmd: closure]: any -> any {
+    let input = $in
+    mut result = null
+
+    enter $env.CONFIG_PATH
+
+    if ($input | is-empty) {
+        $result = (do $cmd)
+    } else {
+        $result = (do $cmd $input)
+    }
+
+    p
+
+    if ($result | is-empty) {
+        return
+    }
+
+    return $result
+}
