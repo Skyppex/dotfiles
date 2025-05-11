@@ -37,6 +37,7 @@
     autoSetupRemote = true
     default = current
     followTags = true
+	recurseSubmodules = on-demand
 [credential]
     helper = store
 [credential "helperselector"]
@@ -62,3 +63,5 @@
     branch = true
     showStash = true
     showUntrackedFiles = all
+[submodule]
+	recurse = true
