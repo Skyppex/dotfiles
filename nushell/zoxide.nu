@@ -27,6 +27,7 @@ def --env z [
     }
 
     let current = $env.PWD
+    let path_split = $path
     let path = ($path | str join " ")
 
     if not $fzf_only {
@@ -38,7 +39,7 @@ def --env z [
             }
         }
 
-        do --env -i { enter (zoxide query $path) }
+        do --env -i { enter (zoxide query ...$path_split) }
     }
 
     let new = $env.PWD
