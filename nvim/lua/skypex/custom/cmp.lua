@@ -14,7 +14,7 @@ local sources = {
 	},
 	lsp = {
 		name = "nvim_lsp",
-		max_item_count = 5,
+		max_item_count = 100,
 	},
 	lsp_signature_help = {
 		name = "nvim_lsp_signature_help",
