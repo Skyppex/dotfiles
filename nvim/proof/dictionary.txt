@@ -531,3 +531,4 @@ kwh
 debouncer
 debounced
 unwatch
+checkbox

@@ -3,14 +3,17 @@ local rmd = require("render-markdown")
 rmd.setup({
 	heading = {
 		icons = {
-			" # ",
-			" ## ",
-			" ### ",
-			" #### ",
-			" ##### ",
-			" ###### ",
+			"# ",
+			"## ",
+			"### ",
+			"#### ",
+			"##### ",
+			"###### ",
 		},
 		signs = {},
+	},
+	checkbox = {
+		bullet = true,
 	},
 })
 
