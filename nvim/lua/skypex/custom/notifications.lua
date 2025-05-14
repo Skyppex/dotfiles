@@ -1,5 +1,16 @@
 local fidget = require("fidget")
 
+-- reroute print to fidget
+function print(...)
+	local args = { ... }
+	local message = table.concat(vim.tbl_map(tostring, args), " | ")
+	fidget.notify(message, nil, {
+		key = "print",
+		group = "print",
+		annote = "MESSAGE",
+	})
+end
+
 fidget.setup({
 	notification = {
 		filter = vim.log.levels.INFO,
@@ -15,17 +26,6 @@ fidget.setup({
 		},
 	},
 })
-
--- reroute print to fidget
-function print(...)
-	local args = { ... }
-	local message = table.concat(vim.tbl_map(tostring, args), " | ")
-	fidget.notify(message, nil, {
-		key = "print",
-		group = "print",
-		annote = "MESSAGE",
-	})
-end
 
 local log_levels = {
 	"TRACE",

@@ -124,6 +124,16 @@ local servers = {
 		handlers = {
 			["textDocument/definition"] = cs_ls_ex.handler,
 			["textDocument/typeDefinition"] = cs_ls_ex.handler,
+			["window/showMessage"] = function(_, result, _, _)
+				local fidget = require("fidget")
+				vim.notify("1000000")
+				fidget.notify(result.message, result.type)
+			end,
+			["window/logMessage"] = function(_, result, _, _)
+				local fidget = require("fidget")
+				vim.notify("2000000")
+				fidget.notify(result.message, result.type)
+			end,
 		},
 		after_attach = function(client)
 			if client.server_capabilities.signatureHelpProvider then

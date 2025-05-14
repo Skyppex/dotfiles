@@ -7,7 +7,6 @@ vim.g.maplocalleader = " "
 local utils = require("skypex.utils")
 
 if not utils.is_home_computer_linux() then
-	print("setting lang directly")
 	vim.cmd("language en_US")
 end
 
