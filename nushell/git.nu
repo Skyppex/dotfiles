@@ -1,5 +1,11 @@
 source ~/.config/nushell/utils.nu
 
+# Alias for gix clone
+alias "git clone" = gix clone
+
+# Alias for gix fetch
+alias "git fetch" = gix fetch
+
 # Git status
 alias gs = git status
 
