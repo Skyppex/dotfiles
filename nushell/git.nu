@@ -18,11 +18,14 @@ alias gca = git commit --amend
 # Git push with force and lease
 alias gpf = git push --force-with-lease
 
+# Git add
+alias ga = git add
+
 # Git add patch
 alias gap = git add --patch
 
 # Git show with --ext-diff
-alias "git show" = git show --ext-diff
+alias "git show" = git show --ext-diff --all --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
 
 # Git diff with fzf
 alias gdf = git diff (git status --porcelain 
