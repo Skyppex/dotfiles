@@ -32,9 +32,18 @@ def --env z [
 
     if not $fzf_only {
         if (($path | str ends-with "/") or ($path | str ends-with "\\")) {
-            enter $path
+            enter $path 
+            return
+        } else {
+            let immediate = if ($path_split | length) <= 1 {
+                fd --type d --max-depth 1 $path
+            } else {
+                ""
+            }
 
-            if ($env.LAST_EXIT_CODE == 0) {
+            if ($immediate | is-not-empty) {
+                print $immediate
+                enter $immediate
                 return
             }
         }
@@ -52,6 +61,7 @@ def --env z [
         }
 
         let target = ls
+        | where type == dir
         | get name 
         | to text 
         | fzf --height 40% --layout=reverse -0 -1 --query $path
