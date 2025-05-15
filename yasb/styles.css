@@ -69,7 +69,7 @@
 
 .komorebi-active-layout .label {
   font-weight: 600;
-  padding: 2px 0 0 0;
+  padding: 0 0 0 0;
 }
 
 .komorebi-stack {
@@ -86,13 +86,21 @@
 .komorebi-stack .window.active,
 .komorebi-stack .window.button-1,
 .komorebi-stack .window.button-2 {
-  text-transform: lowercase;
   background-color: transparent;
   border: none;
   color: #d5ced9;
   padding: 0 8px;
   margin: 4px 0;
+}
+
+.komorebi-stack .offline-status,
+.komorebi-stack .no-window,
+.komorebi-stack .window .label,
+.komorebi-stack .window.active .label {
+  text-transform: lowercase;
   font-family: JetBrainsMono Nerd Font;
+  padding: 0 0 0 0;
+  font-weight: 600;
 }
 
 .komorebi-stack .window.active {
@@ -106,9 +114,9 @@
   color: #00e8c6;
 }
 
-.komorebi-stack .label {
-  font-weight: 600;
-  padding: 2px 0 0 0;
+.komorebi-stack .window .icon,
+.komorebi-stack .window.active .icon {
+  padding: 1px 3px 0 0;
 }
 
 .wifi-widget {

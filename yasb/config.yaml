@@ -46,8 +46,8 @@ widgets:
       label: "{title} - {artist}"
       label_alt: "{title}"
       max_field_size:
-        label: 20
-        label_alt: 30
+        label: 100
+        label_alt: 100
       show_thumbnail: true
       controls_only: false
       controls_left: true
@@ -67,7 +67,8 @@ widgets:
     options:
       label: "{%a %d, %b %H:%M}"
       label_alt: "{%A %d %B %Y, %H:%M}"
-      # locale: 'en_EN'  # Language for date, you can set your own, example fr_FR
+      # locale: 'en_EN'
+      # Language for date, you can set your own, example fr_FR
       # Looking up time zone info from registry
       timezones: ["Europe/Oslo"]
 
@@ -78,15 +79,15 @@ widgets:
       label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
       update_interval: 2000
       histogram_icons:
-        - '\u2581'  # 0%
-        - '\u2581'  # 10%
-        - '\u2582'  # 20%
-        - '\u2583'  # 30%
-        - '\u2584'  # 40%
-        - '\u2585'  # 50%
-        - '\u2586'  # 60%
-        - '\u2587'  # 70%
-        - '\u2588'  # 80%+
+      - '\u2581'  # 0%
+      - '\u2581'  # 10%
+      - '\u2582'  # 20%
+      - '\u2583'  # 30%
+      - '\u2584'  # 40%
+      - '\u2585'  # 50%
+      - '\u2586'  # 60%
+      - '\u2587'  # 70%
+      - '\u2588'  # 80%+
       histogram_num_columns: 8
       callbacks:
         on_right: "exec cmd /c Taskmgr"
@@ -149,33 +150,26 @@ widgets:
   komorebi_stack:
     type: "komorebi.stack.StackWidget"
     options:
-      label_offline: "Offline"
+      label_offline: "offline"
       label_window: "{process}"
       label_window_active: "{process}"
-      label_no_window: "No Window"
+      label_no_window: "no window"
       label_zero_index: false
       max_length: 30
       max_length_active: 30
       max_length_ellipsis: ".."
       hide_if_offline: true
       show_only_stack: false
+      show_icons: always
+      icon_size: 14
       animation: true
       enable_scroll_switching: false
       container_shadow:
         enabled: false
-        color: "#000000"
-        offset: [0, 1]
-        radius: 2
       btn_shadow:
         enabled: false
-        color: "#000000"
-        offset: [0, 1]
-        radius: 2
       label_shadow:
         enabled: false
-        color: "#000000"
-        offset: [0, 1]
-        radius: 2
 
   wifi:
     type: "yasb.wifi.WifiWidget"
@@ -187,4 +181,3 @@ widgets:
         on_left: "exec cmd.exe /c start ms-settings:network"
         on_middle: "do_nothing"
         on_right: "toggle_label"
-
