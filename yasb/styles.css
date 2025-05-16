@@ -88,9 +88,13 @@
 .komorebi-stack .window.button-2 {
   background-color: transparent;
   border: none;
-  color: #d5ced9;
   padding: 0 8px;
   margin: 4px 0;
+}
+
+.komorebi-stack .window.button-1 .label,
+.komorebi-stack .window.button-2 .label {
+  color: #d5ced9;
 }
 
 .komorebi-stack .offline-status,
@@ -103,14 +107,14 @@
   font-weight: 600;
 }
 
-.komorebi-stack .window.active {
+.komorebi-stack .window.active .label {
   color: #96e072;
 }
 
-.komorebi-stack .window:hover,
-.komorebi-stack .window.active:hover,
-.komorebi-stack .window.button-1:hover,
-.komorebi-stack .window.button-2:hover {
+.komorebi-stack .window .label:hover,
+.komorebi-stack .window.active .label:hover,
+.komorebi-stack .window.button-1 .label:hover,
+.komorebi-stack .window.button-2 .label:hover {
   color: #00e8c6;
 }
 
