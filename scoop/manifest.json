@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main.git",
             "Updated": {
-                "value": "\/Date(1747413002000)\/",
+                "value": "\/Date(1747556966000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 18:30:02"
+                "DateTime": "sondag 18. mai 2025 10:29:26"
             },
             "Manifests": 1385
         },
@@ -14,9 +14,9 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1747412971000)\/",
+                "value": "\/Date(1747556944000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 18:29:31"
+                "DateTime": "sondag 18. mai 2025 10:29:04"
             },
             "Manifests": 2165
         },
@@ -24,9 +24,9 @@
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": {
-                "value": "\/Date(1747413961000)\/",
+                "value": "\/Date(1747557631000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 18:46:01"
+                "DateTime": "sondag 18. mai 2025 10:40:31"
             },
             "Manifests": 492
         },
@@ -34,9 +34,9 @@
             "Name": "games",
             "Source": "https://github.com/Calinou/scoop-games",
             "Updated": {
-                "value": "\/Date(1747412966000)\/",
+                "value": "\/Date(1747556952000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 18:29:26"
+                "DateTime": "sondag 18. mai 2025 10:29:12"
             },
             "Manifests": 349
         },
@@ -44,9 +44,9 @@
             "Name": "dorado",
             "Source": "https://github.com/chawyehsu/dorado",
             "Updated": {
-                "value": "\/Date(1747354792000)\/",
+                "value": "\/Date(1747527506000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 02:19:52"
+                "DateTime": "sondag 18. mai 2025 02:18:26"
             },
             "Manifests": 263
         },
@@ -54,9 +54,9 @@
             "Name": "kazzarin",
             "Source": "https://github.com/kazzarin/bucket",
             "Updated": {
-                "value": "\/Date(1747412989000)\/",
+                "value": "\/Date(1747528935000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 18:29:49"
+                "DateTime": "sondag 18. mai 2025 02:42:15"
             },
             "Manifests": 87
         },
@@ -64,11 +64,11 @@
             "Name": "kkzzhizhou",
             "Source": "https://github.com/kkzzhizhou/scoop-apps",
             "Updated": {
-                "value": "\/Date(1747370415000)\/",
+                "value": "\/Date(1747543310000)\/",
                 "DisplayHint": 2,
-                "DateTime": "fredag 16. mai 2025 06:40:15"
+                "DateTime": "sondag 18. mai 2025 06:41:50"
             },
-            "Manifests": 13646
+            "Manifests": 13774
         },
         {
             "Name": "okibcn",
@@ -117,8 +117,8 @@
             "Info": "",
             "Source": "main",
             "Name": "aws",
-            "Version": "2.27.16",
-            "Updated": "\/Date(1747416269138)\/"
+            "Version": "2.27.17",
+            "Updated": "\/Date(1747569190987)\/"
         },
         {
             "Info": "",
@@ -537,8 +537,8 @@
             "Info": "",
             "Source": "main",
             "Name": "perl",
-            "Version": "5.40.0.1",
-            "Updated": "\/Date(1727210717366)\/"
+            "Version": "5.40.2.1",
+            "Updated": "\/Date(1747569355487)\/"
         },
         {
             "Info": "",
@@ -593,8 +593,8 @@
             "Info": "",
             "Source": "main",
             "Name": "ruby",
-            "Version": "3.4.3-1",
-            "Updated": "\/Date(1745433330573)\/"
+            "Version": "3.4.4-1",
+            "Updated": "\/Date(1747569575934)\/"
         },
         {
             "Info": "",
