@@ -80,6 +80,7 @@
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   margin-left: 8px;
+  margin-right: 8px;
 }
 
 .komorebi-stack .window,
@@ -264,6 +265,7 @@
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   margin-right: 8px;
+  margin-left: 8px;
 }
 .media-widget .label {
   background-color: rgba(0, 0, 0, 0);
