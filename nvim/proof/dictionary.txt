@@ -533,3 +533,6 @@ debounced
 unwatch
 checkbox
 gix
+xdg
+rmd
+mantine
