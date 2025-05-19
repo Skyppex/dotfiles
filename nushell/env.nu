@@ -108,6 +108,7 @@ mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
 $env.CONFIG_PATH = $"($nu.home-path)/.config"
+$env.XDG_CONFIG_HOME = $"($nu.home-path)/.config"
 $env.CHEZMOI_PATH = $"($nu.home-path)/.local/share/chezmoi"
 $env.SCRIPTS_PATH = $"($nu.home-path)/.local/share/scripts"
 $env.SCOOP = $"($nu.home-path)/scoop"

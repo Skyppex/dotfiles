@@ -24,7 +24,7 @@ end
 conform.setup({
 	notify_on_error = true,
 	async = true,
-	format_on_save = function(bufnr)
+	format_after_save = function(bufnr)
 		-- Disable with a global or buffer-local variable
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
@@ -115,15 +115,22 @@ local xmap = utils.xmap
 nmap("<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
 nmap("<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
 
-nmap("<leader>ff", function()
-	conform.format({ lsp_fallback = true, timeout = 1000 })
-end, "Format file")
+local function get_format_func(other)
+	local args = vim.tbl_extend("keep", {
+		lsp_fallback = true,
+		timeout = 1000,
+		async = true,
+	}, other or {})
+
+	return function()
+		conform.format(args)
+	end
+end
+
+nmap("<leader>ff", get_format_func(), "Format file")
 
 -- Set up the operator mapping
-xmap("<leader>f", function()
-	conform.format({ lsp_fallback = true, timeout = 1000 })
-end, "Format selection")
-
+xmap("<leader>f", get_format_func(), "Format selection")
 -- Define your operator function
 local function format_operator(_)
 	local start_line, start_col, end_line, end_col
@@ -136,12 +143,12 @@ local function format_operator(_)
 	end_line, end_col = mark_end[1], mark_end[2]
 
 	-- Call conform.format with the range
-	require("conform").format({
+	get_format_func({
 		range = {
 			["start"] = { start_line, start_col },
 			["end"] = { end_line, end_col },
 		},
-	})
+	})()
 end
 
 -- Set up the operator mapping
