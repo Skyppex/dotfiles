@@ -116,7 +116,7 @@ $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
 $env.HOSTNAME = (sys host | get hostname)
 $env.OS = (sys host | get name | str downcase)
-$env.OS_VERSION = (sys host | get os_version)
+$env.OS_VERSION = (sys host | get long_os_version)
 
 match ($env.HOSTNAME) {
     "brage-pc" => {
@@ -127,9 +127,9 @@ match ($env.HOSTNAME) {
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
     },
-    "brage-desktop" => {
+    "skypex" => {
         $env.CODE = ('~/dev/code' | path expand)
-        $env.Path = $"($env.Path):/home/brage/dev/code/links"
+        $env.Path = $env.Path | append $"($env.CODE)/links"
     }
     _ => {
         print "Unknown computer name"

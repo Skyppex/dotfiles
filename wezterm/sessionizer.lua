@@ -6,7 +6,6 @@ local mux = wezterm.mux
 local M = {}
 
 local home = utils.get_home()
-local fd = home .. "/scoop/apps/fd/current/fd.exe"
 local chezmoi_path = utils.get_chezmoi_path()
 local temp_path = utils.get_temp_path()
 local code_path = utils.get_code_path()
@@ -24,7 +23,7 @@ M.toggle = function(window, pane)
 	local projects = {}
 
 	local fd_process = {
-		fd,
+		"fd",
 		"-HI",
 		"-td",
 		"^.git$",
