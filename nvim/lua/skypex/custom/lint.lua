@@ -13,6 +13,7 @@ M.lint = function()
 		yaml = { "yamllint" },
 		sh = { "shellcheck" },
 		bash = { "shellcheck" },
+		kotlin = { "ktlint" },
 	}
 
 	require("skypex.utils").nmap("<leader>l", function()

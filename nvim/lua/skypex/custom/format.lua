@@ -80,6 +80,7 @@ conform.setup({
 		bash = { "beautysh", "injected" },
 		http = { "kulala-fmt", "injected" },
 		rest = { "kulala-fmt", "injected" },
+		kotlin = { "ktfmt", "injected" },
 		-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 	},
 })
