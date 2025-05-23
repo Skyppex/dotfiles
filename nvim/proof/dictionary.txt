@@ -536,3 +536,6 @@ gix
 xdg
 rmd
 mantine
+kotlin
+ktfmt
+ktlint
