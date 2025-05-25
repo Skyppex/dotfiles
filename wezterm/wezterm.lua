@@ -8,8 +8,17 @@ local wezterm = require("wezterm")
 local sessionizer = require("sessionizer")
 wezterm.log_info("Loaded sessionizer")
 local background = require("background")
+local utils = require("utils")
 
 local act = wezterm.action
+
+local window_decorations
+
+if utils.is_home_computer_linux() then
+	window_decorations = "NONE"
+else
+	window_decorations = "RESIZE"
+end
 
 local config = {
 	max_fps = 165,
@@ -19,7 +28,7 @@ local config = {
 	check_for_updates = false,
 	color_scheme = "Andromeda",
 	enable_tab_bar = false,
-	window_decorations = "RESIZE",
+	window_decorations = window_decorations,
 	background = background,
 	window_padding = {
 		left = 2,
@@ -102,7 +111,31 @@ local config = {
 		},
 		{ key = "X", mods = "SHIFT|CTRL", action = act({ CloseCurrentTab = { confirm = true } }) },
 		{ key = "x", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = true } }) },
-
+		-- { key = "v", mods = "LEADER|CTRL", action = wezterm.action_callback(
+		-- 	function(_, _)
+		-- 		if utils.is_home_computer_linux() then
+		-- 			wezterm.log_info("10000")
+		-- 			local success, stdout, stderr = wezterm.run_child_process({ "wl-paste" })
+		-- 			wezterm.log_info("10001")
+		-- 			wezterm.log_info(success)
+		--
+		-- 			if not success then
+		-- 				wezterm.log_info("10002")
+		-- 				wezterm.log_info(stderr)
+		-- 				wezterm.log_error("Failed to run wl-paste: " .. stderr)
+		-- 				return nil
+		-- 			end
+		--
+		-- 			stdout = stdout:gsub("%s+$", "")
+		-- 			wezterm.log_info("10003")
+		-- 			wezterm.log_info(stdout)
+		-- 			return act.SendString("Hello from Ctrl+V")
+		-- 		else
+		-- 			wezterm.log_info("10004")
+		-- 			return act.PasteFrom("Clipboard")
+		-- 		end
+		-- 	end)
+		-- },
 		{ key = "v", mods = "LEADER|CTRL", action = act.PasteFrom("Clipboard") },
 		{ key = "c", mods = "LEADER|CTRL", action = act.CopyTo("Clipboard") },
 		{ key = "c", mods = "CTRL", action = act.SendString("\x03") },

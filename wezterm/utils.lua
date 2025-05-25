@@ -33,7 +33,7 @@ end
 
 --- @return boolean
 local function is_home_computer_linux()
-	return get_home():find("/home/brage") ~= nil
+	return get_home():find("/home/skypex") ~= nil
 end
 
 --- @return boolean
