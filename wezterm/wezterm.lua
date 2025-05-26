@@ -88,6 +88,7 @@ local config = {
 				end
 			end),
 		},
+		{ key = "d", mods = "LEADER|CTRL", action = act.SendString("clear\r\n") },
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
@@ -129,7 +130,7 @@ local config = {
 		-- 			stdout = stdout:gsub("%s+$", "")
 		-- 			wezterm.log_info("10003")
 		-- 			wezterm.log_info(stdout)
-		-- 			return act.SendString("Hello from Ctrl+V")
+		-- 			return act.SendString(stdout)
 		-- 		else
 		-- 			wezterm.log_info("10004")
 		-- 			return act.PasteFrom("Clipboard")
