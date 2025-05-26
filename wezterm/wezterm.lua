@@ -12,14 +12,6 @@ local utils = require("utils")
 
 local act = wezterm.action
 
-local window_decorations
-
-if utils.is_home_computer_linux() then
-	window_decorations = "NONE"
-else
-	window_decorations = "RESIZE"
-end
-
 local config = {
 	max_fps = 165,
 	scrollback_lines = 10000,
@@ -28,7 +20,7 @@ local config = {
 	check_for_updates = false,
 	color_scheme = "Andromeda",
 	enable_tab_bar = false,
-	window_decorations = window_decorations,
+	window_decorations = utils.is_home_computer_linux() and "NONE" or "RESIZE",
 	background = background,
 	window_padding = {
 		left = 2,
@@ -41,6 +33,7 @@ local config = {
 		saturation = 1.0,
 		brightness = 1.0,
 	},
+	font = wezterm.font("JetBrains Mono Nerd Font"),
 	font_size = 10.0,
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
@@ -88,7 +81,7 @@ local config = {
 				end
 			end),
 		},
-		{ key = "d", mods = "LEADER|CTRL", action = act.SendString("clear\r\n") },
+		{ key = "d", mods = "LEADER|CTRL", action = act.SendString(utils.is_home_computer_linux() and "clear\n" or "clear\r\n") },
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },

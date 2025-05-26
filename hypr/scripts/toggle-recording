@@ -1,0 +1,25 @@
+#!/usr/bin/nu
+
+notify-send "hello"
+let pid_file = "/tmp/hypr/wf-recording.pid"
+let out = "/tmp/hypr/recording.mp4"
+notify-send $pid_file
+notify-send $out
+
+if ($pid_file | path exists) {
+    let pid = (open -r $pid_file | str trim)
+    do -i { job kill ($pid | into int) }
+    rm $pid_file
+    open $out | wl-copy --type "video/mp4"
+    notify-send "recording stopped"
+} else {
+    let region = slurp
+
+    rm $out
+    let last_pid = job spawn {
+        wf-recorder --audio-backend=pipewire --geometry $region --audio --file $out
+    }
+
+    $last_pid | save --force $pid_file
+    notify-send "recording started"
+}

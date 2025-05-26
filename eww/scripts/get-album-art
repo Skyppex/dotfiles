@@ -1,0 +1,16 @@
+#!/usr/bin/nu
+
+mut url = playerctl metadata mpris:artUrl
+let cache_path = "/tmp/eww/album-art.jpg"
+
+if ($url | str starts-with "https://") or ($url | str starts-with "http://") {
+    curl --silent --output $cache_path $url
+    echo $cache_path
+} else if ($url | str starts-with "file://") {
+    $url = ($url | str substring ("file://" | str length)..)
+    print "stripped"
+    print $url
+    echo $url
+} else {
+    echo ""
+}

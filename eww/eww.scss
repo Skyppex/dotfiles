@@ -1,13 +1,16 @@
 * {
   all: unset; // Unsets everything so you can style everything from scratch
-  font-family: "JetBrainsMono Nerd Font"
+  font-family: "JetBrainsMono Nerd Font", "Noto Color Emoji";
+  font-size: 14px;
+  font-weight: normal;
 }
 
 // Global Styles
 .bar {
   background-color: #3a3a3a;
   color: #b0b4bc;
-  padding: 10px;
+  padding: 6px 12px;
+  border-radius: 20px;
 }
 
 // Styles on classes (see eww.yuck for more information)
@@ -19,7 +22,7 @@
 
 .metric scale trough highlight {
   all: unset;
-  background-color: #D35D6E;
+  background-color: #d35d6e;
   color: #000000;
   border-radius: 10px;
 }
@@ -36,8 +39,4 @@
 
 .label-ram {
   font-size: large;
-}
-
-.workspaces button:hover {
-  color: #D35D6E;
 }

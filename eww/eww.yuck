@@ -1,76 +1,74 @@
 (defwidget bar []
   (centerbox :orientation "h"
-    (workspaces)
     (music)
+    time
     (sidestuff)))
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric :label "🔊"
-            :value volume
-            :onchange "amixer -D pulse sset Master {}%")
-    (metric :label ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    (metric :label "💾"
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
-    time))
-
-(defwidget workspaces []
-  (box :class "workspaces"
-       :orientation "h"
-       :space-evenly true
-       :halign "start"
-       :spacing 10
-    (button :onclick "wmctrl -s 0" 1)
-    (button :onclick "wmctrl -s 1" 2)
-    (button :onclick "wmctrl -s 2" 3)
-    (button :onclick "wmctrl -s 3" 4)
-    (button :onclick "wmctrl -s 4" 5)
-    (button :onclick "wmctrl -s 5" 6)
-    (button :onclick "wmctrl -s 6" 7)
-    (button :onclick "wmctrl -s 7" 8)
-    (button :onclick "wmctrl -s 8" 9)))
+    (metric
+      :label "${ volume > 30 ? " " : volume > 0 ? " " : " " }"
+      :value volume
+      :min 0
+      :max 100
+      :onchange "")
+    (metric
+      :label "󰍛"
+      :value {EWW_RAM.used_mem_perc}
+      :min 0
+      :max 100
+      :onchange "")
+    (metric
+      :label ""
+      :min 0
+      :max 100
+      :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+      :onchange "")))
 
 (defwidget music []
-  (box :class "music"
-       :orientation "h"
-       :space-evenly false
-       :halign "center"
-    {music != "" ? "🎵${music}" : ""}))
+  (box
+    :class "music"
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    {music != "" ? "${music}" : ""}))
 
 
-(defwidget metric [label value onchange]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
+(defwidget metric [label value min max onchange]
+  (box
+    :orientation "h"
+    :class "metric"
+    :space-evenly false
     (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
-
-
+    (scale
+      :min min
+      :max max
+      :active {onchange != ""}
+      :value value
+      :onchange onchange)))
 
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(defpoll volume :interval "1s"
-  "scripts/getvol")
+(deflisten album-art :initial ""
+  "playerctl --follow metadata --format '{{ mpris:artUrl }}' || true")
+
+(defpoll volume :interval "150ms"
+  "nu -c '(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk `{print $2}` | into float) * 100'")
 
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
   :monitor 0
-  :geometry (geometry :x "0%"
-                      :y "0%"
-                      :width "90%"
-                      :height "10px"
-                      :anchor "top center"
-                      )
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "10px"
+    :anchor "top center")
   :stacking "fg"
   :exclusive true
-  (bar))
+  (bar)
+)
+

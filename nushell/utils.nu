@@ -137,15 +137,23 @@ alias q = exit
 
 # Copy to the clipboard
 def clip [] {
-    let input = $in | str replace -a "\\" "\\\\"
-    copyq add $"($input)"
-    copyq copy $"($input)"
+    if (sys host | get long_os_version | str contains -i "linux") {
+        $in | wl-copy
+    } else {
+        let input = $in | str replace -a "\\" "\\\\"
+        copyq add $"($input)"
+        copyq copy $"($input)"
+    }
 }
 
 
 # Paste from the clipboard
 def paste [] {
-    copyq clipboard | complete | get stdout | to text
+    if (sys host | get long_os_version | str contains -i "linux") {
+        wl-paste
+    } else {
+        copyq clipboard | complete | get stdout | to text
+    }
 }
 
 # Get current local time
@@ -341,4 +349,14 @@ def --env con [cmd: closure]: any -> any {
     }
 
     return $result
+}
+
+def --wrapped detatch [...command]: nothing -> nothing {
+    let input = $in
+
+    if ($input | is-empty) {
+        $input | bash -c $"($command | str join ' ') &"
+    } else {
+        bash -c $"($command | str join ' ') &"
+    }
 }
