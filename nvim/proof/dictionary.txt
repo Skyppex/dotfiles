@@ -539,3 +539,4 @@ mantine
 kotlin
 ktfmt
 ktlint
+autosys
