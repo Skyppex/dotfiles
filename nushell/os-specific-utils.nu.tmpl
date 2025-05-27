@@ -1,7 +1,7 @@
 {{- if eq .chezmoi.os "windows" }}
 
 # Pseudo alias to bash command from scoop which can parse \r\n line endings
-def bash [
+def --wrapped bash [
     --version(-v) # Print the version of bash
     ...args: string
 ] {
@@ -15,7 +15,7 @@ def bash [
     if ($args | is-empty) {
         nu --commands $cmd
     } else {
-        nu --commands $"($cmd) ($args | str join "")"
+        nu --commands $"($cmd) ($args | str join ' ')"
     }
 }
 
