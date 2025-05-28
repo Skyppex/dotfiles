@@ -1,16 +1,46 @@
-#!/usr/bin/nu
+#!/usr/bin/env python3
 
-mut url = playerctl metadata mpris:artUrl
-let cache_path = "/tmp/eww/album-art.jpg"
+import subprocess
+import os
+import sys
+import urllib.request
 
-if ($url | str starts-with "https://") or ($url | str starts-with "http://") {
-    curl --silent --output $cache_path $url
-    echo $cache_path
-} else if ($url | str starts-with "file://") {
-    $url = ($url | str substring ("file://" | str length)..)
-    print "stripped"
-    print $url
-    echo $url
-} else {
-    echo ""
-}
+CACHE_PATHS = [
+    "/tmp/eww/album-art-a.jpg",
+    "/tmp/eww/album-art-b.jpg",
+]
+
+last_index = -1
+
+def download_and_print(url):
+    global last_index
+    last_index = (last_index + 1) % 2
+    cache_path = CACHE_PATHS[last_index]
+
+    if url.startswith("http://") or url.startswith("https://"):
+        try:
+            urllib.request.urlretrieve(url, cache_path)
+            print(cache_path, flush=True)
+        except Exception:
+            print("", flush=True)
+    elif url.startswith("file://"):
+        path = url[len("file://"):]
+        print(path, flush=True)
+    else:
+        print("", flush=True)
+
+def main():
+    process = subprocess.Popen(
+        ["playerctl", "--follow", "metadata", "mpris:artUrl"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+        bufsize=1,
+    )
+
+    for line in process.stdout:
+        url = line.strip()
+        download_and_print(url)
+
+if __name__ == "__main__":
+    main()
