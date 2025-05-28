@@ -47,6 +47,17 @@ local sources = {
 	markdown = { name = "render-markdown" },
 }
 
+local ft_sources = {
+	sql = {
+		sources.dadbod,
+		sources.buffer,
+	},
+	markdown = {
+		sources.buffer,
+		sources.markdown,
+	},
+}
+
 ---@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
 	sources = {
@@ -168,19 +179,11 @@ cmp.setup({
 	},
 })
 
-cmp.setup.filetype({ "sql" }, {
-	sources = {
-		sources.dadbod,
-		sources.buffer,
-	},
-})
-
-cmp.setup.filetype({ "markdown" }, {
-	sources = {
-		sources.buffer,
-		sources.markdown,
-	},
-})
+for ft, srcs in pairs(ft_sources) do
+	cmp.setup.filetype({ ft }, {
+		sources = srcs,
+	})
+end
 
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "Vaults/**/*.md",

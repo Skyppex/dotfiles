@@ -33,7 +33,6 @@ local config = {
 		saturation = 1.0,
 		brightness = 1.0,
 	},
-	font = wezterm.font("JetBrains Mono Nerd Font"),
 	font_size = 10.0,
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
@@ -81,7 +80,11 @@ local config = {
 				end
 			end),
 		},
-		{ key = "d", mods = "LEADER|CTRL", action = act.SendString(utils.is_home_computer_linux() and "clear\n" or "clear\r\n") },
+		{
+			key = "d",
+			mods = "LEADER|CTRL",
+			action = act.SendString(utils.is_home_computer_linux() and "clear\n" or "clear\r\n"),
+		},
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
