@@ -57,7 +57,10 @@ def select-projects []: table<type: string, opt: any> -> table<type: string, opt
 }
 
 # build a project in the current directory
-def build [--release(-r)] {
+def --wrapped build [
+    --release(-r)
+    ...rest: string
+] {
     let options = find-projects
     let selected = $options | select-projects
 
@@ -70,25 +73,20 @@ def build [--release(-r)] {
         match $s.type {
             "Rust" => {
                 if $release {
-                    cargo build --release
+                    cargo build --release ...$rest
                 } else {
-                    cargo build
+                    cargo build ...$rest
                 }
             }
-        
             "C#" => {
                 if $release {
-                    dotnet build --configuration Release
+                    dotnet build --configuration Release ...$rest
                 } else {
-                    dotnet build
+                    dotnet build ...$rest
                 }
             }
-
             "Go" => {
-
-                if ($s | str ends-with "go.mod") {
-                    go build
-                }
+                go build ...$rest
             }
         }
     }

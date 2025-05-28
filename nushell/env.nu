@@ -128,8 +128,10 @@ match ($env.HOSTNAME) {
         $env.LANG = "en_US"
     },
     "skypex" => {
+        $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
-        $env.Path = $env.Path | append $"($env.CODE)/links"
+        $env.DEV_BIN = ('~/dev/bin' | path expand)
+        $env.Path = $env.Path | append $env.DEV_BIN
     }
     _ => {
         print "Unknown computer name"
