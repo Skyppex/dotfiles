@@ -1,0 +1,37 @@
+#!/usr/bin/nu
+
+let processes = ps 
+| select name pid 
+| where {|it| not ($it.name | str contains "systemd")}
+
+let groups = $processes | group-by --to-table name
+
+let killalls = $groups 
+| where {|g| ($g.items | length) > 1 } 
+| each { |it| { name: $it.name, pids: $it.items.pid } }
+| each { |it| $"all: ($it.name) ($it.pids | str join ', ')" }
+
+let input = $processes 
+| to text 
+| awk '{print $2 " " $4}' 
+| lines 
+| str replace "," ""
+| append $killalls
+
+let selected = $input 
+| to text 
+| rofi -dmenu -p "kill"
+
+let parts = $selected | split row " "
+
+if ($parts | get 0) == "all:" {
+    for $pid in ($parts | get 2 | into int) {
+        kill --force --quiet $pid
+    }
+
+    notify-send $"killed all instances of ($parts | get 1)"
+} else {
+    kill --force --quiet ($parts | get 1 | into int)
+    notify-send $"killed ($parts | get 0) ($parts | get 1)"
+}
+
