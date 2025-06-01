@@ -1,0 +1,10 @@
+#!/usr/bin/nu
+
+def --wrapped main [focus: string, ...launch] {
+    let focused = hyprctl dispatch focuswindow $"class:($focus)"
+    if $focused == "ok" {
+        return;
+    }
+
+    exec ...$launch
+}
