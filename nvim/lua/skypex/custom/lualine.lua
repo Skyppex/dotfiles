@@ -39,10 +39,11 @@ require("lualine").setup({
 		component_separators = { left = "│", right = "" },
 	},
 	sections = {
-		lualine_c = { {
+		lualine_b = { {
 			"filename",
 			path = 1,
 		}, "filetype" },
+		lualine_c = {},
 		lualine_x = { "cdate", "ctime" },
 	},
 })
