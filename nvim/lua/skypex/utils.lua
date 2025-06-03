@@ -171,6 +171,37 @@ local function run_command(command, args, should_block, on_exit)
 	end
 end
 
+--- @param command string
+--- @param args string[]?
+--- @param on_exit function? (data: string, exit_code: number)
+--- @return table|nil, number (stdout, exit_code)
+local function run_command_ret(command, args, on_exit)
+	local Job = require("plenary.job")
+	local stdout_lines = {}
+
+	local job = Job:new({
+		command = command,
+		args = args,
+		enable_recording = true, -- Enable recording to capture output
+		on_stderr = function(_, data)
+			if data then
+				vim.schedule(function()
+					vim.notify(data, vim.log.levels.ERROR)
+				end)
+			end
+		end,
+		on_exit = function(_, exit_code)
+			if on_exit then
+				vim.schedule(function()
+					on_exit(table.concat(stdout_lines, "\n"), exit_code)
+				end)
+			end
+		end,
+	})
+
+	return job:sync() -- Blocks until done
+end
+
 local andromeda = {
 	gray = "#23262e",
 	light_gray = "#373941",
@@ -486,6 +517,7 @@ return {
 	local_keymap_exists = local_keymap_exists,
 	separate = separate,
 	run_command = run_command,
+	run_command_ret = run_command_ret,
 	andromeda = andromeda,
 	nmap = nmap,
 	xmap = xmap,
