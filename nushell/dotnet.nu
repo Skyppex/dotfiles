@@ -3,12 +3,22 @@ def "dn run" [
     --verbose(-V) # Print verbose output for the nushell script
     ...launch_profile: string
 ] {
-    let sln = ls
-    | where type == file
-    | where ($it.name | str ends-with ".sln")
-    | get name
-    | to text
-    | fzf --height 40% --layout=reverse -0 -1
+    print 0
+
+    let slns = ls 
+        | where type == file 
+        | where ($it.name | str ends-with ".sln") 
+
+    mut sln = ""
+
+    if ($slns | is-not-empty) {
+        $sln = ls 
+            | where type == file 
+            | where ($it.name | str ends-with ".sln") 
+            | get name 
+            | to text
+            | fzf --height 40% --layout=reverse -0 -1
+    }
 
     if $verbose {
         print $sln
