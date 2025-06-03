@@ -41,19 +41,25 @@ def find-projects []: nothing -> table<type: string, opt: any> {
 }
 
 # select a project from a list of discovered projects
-def select-projects []: table<type: string, opt: any> -> table<type: string, opt: any> {
+def select-project [
+    --multi(-m)
+]: table<type: string, opt: any> -> table<type: string, opt: any> {
     let options = $in
-    let selected = $options | get type | to text | fzf --multi -0 -1
+
+    let selected = if $multi {
+        $options | get type | to text | fzf --multi -0 -1
+    } else {
+        $options | get type | to text | fzf -0 -1
+    }
 
     if ($selected | is-empty) {
         print "No project type selected"
         return
     }
 
-    print $options
-    print $selected
+    let filtered_options = $options | where { |o| $selected | lines | any { |s| $s == $o.type } }
 
-    return $options | where { |o| $selected | lines | any { |s| $s == $o.type } }
+    return $filtered_options
 }
 
 # build a project in the current directory
@@ -62,7 +68,7 @@ def --wrapped build [
     ...rest: string
 ] {
     let options = find-projects
-    let selected = $options | select-projects
+    let selected = $options | select-project --multi
 
     if ($selected | is-empty) {
         print "No project type selected"
@@ -73,20 +79,20 @@ def --wrapped build [
         match $s.type {
             "Rust" => {
                 if $release {
-                    cargo build --release ...$rest
+                    do -i { cargo build --release ...$rest }
                 } else {
-                    cargo build ...$rest
+                    do -i { cargo build ...$rest }
                 }
             }
             "C#" => {
                 if $release {
-                    dotnet build --configuration Release ...$rest
+                    do -i { dotnet build --configuration Release ...$rest }
                 } else {
-                    dotnet build ...$rest
+                    do -i { dotnet build ...$rest }
                 }
             }
             "Go" => {
-                go build ...$rest
+                do -i { go build ...$rest }
             }
         }
     }
@@ -95,38 +101,24 @@ def --wrapped build [
 alias b = build
 
 def --wrapped run [...rest] {
-    let options = fd --type f --max-depth 1 --regex '^(Cargo\.toml|go\.mod|.*\.sln|.*\.csproj)$'
-
-    if ($options | is-empty) {
-        print 'Not a recognized project directory'
-        print 'Currently recognized project types are:'
-        print ' - Rust (^Cargo.toml$)'
-        print ' - Go (^go.mod$)'
-        print ' - C# (.*\.sln$, .*\.csproj$)'
-        return
-    }
-
-    let selected = $options | fzf -0 -1
+    let options = find-projects
+    let selected = $options | select-project | get 0
 
     if ($selected | is-empty) {
         print "No project type selected"
         return
     }
 
-    if ($selected | str ends-with "Cargo.toml") {
-        cargo run ...$rest
-    }
-    
-    if ($selected | str ends-with ".sln") {
-        dn run ...$rest
-    }
-
-    if ($selected | str ends-with ".csproj") {
-        dn run ...$rest
-    }
-
-    if ($selected | str ends-with "go.mod") {
-        go run ...$rest
+    match $selected.type {
+        "Rust" => {
+            cargo run ...$rest
+        }
+        "C#" => {
+            dn run ...$rest
+        }
+        "Go" => {
+            go run ...$rest
+        }
     }
 }
 
