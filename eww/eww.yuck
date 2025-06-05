@@ -29,16 +29,16 @@
   (box
     :class "music-box"
     :space-evenly false
+    :halign "start"
     (box
       :class "music"
       :hexpand false
-      :vexpand false
+      :vexpand true
       :style 'background-image: url("${album-art}")'
-      :space-evenly false
+      :space-evenly true
       (box
         :class "music-text"
         :halign "center"
-        ;:style "background-image: /tmp/eww/album-art.jpg"
         {music != "" ? "${music}" : ""}))
     (box :hexpand true)
   ))
@@ -69,7 +69,7 @@
   "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
-  :monitor 1
+  :monitor 0
   :geometry (geometry
     :x "0%"
     :y "0%"
@@ -80,4 +80,3 @@
   :exclusive true
   (bar)
 )
-

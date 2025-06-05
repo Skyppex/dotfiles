@@ -24,15 +24,17 @@
   background-position: 0% 30%;
   border-bottom-left-radius: 16px;
   border-top-left-radius: 16px;
+  min-width: 640px;
 }
 
 .music-text {
   padding: 6px 12px;
-}
-
-.music-btn {
-  margin: 0 2px;
-  font-size: large;
+  font-weight: bold;
+  // text-shadow:
+  //   -1px -1px 0 #555555,
+  //   1px -1px 0 #555555,
+  //   -1px 1px 0 #555555,
+  //   1px 1px 0 #555555;
 }
 
 .metric scale trough highlight {
