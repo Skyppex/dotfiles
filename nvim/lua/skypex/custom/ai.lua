@@ -1,0 +1,66 @@
+local cc = require("codecompanion")
+local cca = require("codecompanion.adapters")
+
+local adapters = {
+	codellama = function()
+		return cca.extend("ollama", {
+			name = "codellama",
+			schema = {
+				model = {
+					default = "codellama:7b-instruct",
+				},
+				num_ctx = {
+					default = 16384,
+				},
+				num_predict = {
+					default = -1,
+				},
+			},
+		})
+	end,
+}
+
+local openai_api_key = require("skypex.skate").get("openai-nvim", "secrets")
+
+if openai_api_key then
+	adapters["openai"] = function()
+		return cca.extend("openai", {
+			env = {
+				api_key = openai_api_key,
+			},
+		})
+	end
+end
+
+cc.setup({
+	adapters = adapters,
+	strategies = {
+		chat = {
+			adapter = "codellama",
+		},
+		inline = {
+			adapter = "codellama",
+		},
+	},
+	extensions = {
+		mcphub = {
+			callback = "mcphub.extensions.codecompanion",
+			opts = {
+				make_vars = true,
+				make_slash_commands = true,
+				show_result_in_chat = true,
+			},
+		},
+	},
+})
+
+local utils = require("skypex.utils")
+local nmap = utils.nmap
+
+nmap("<leader>ac", function()
+	cc.chat()
+end, "Start a new conversation with AI")
+
+nmap("<leader>ta", function()
+	cc.toggle()
+end, "Toggle AI panel")
