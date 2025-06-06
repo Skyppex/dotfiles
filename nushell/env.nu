@@ -120,6 +120,7 @@ $env.OS_VERSION = (sys host | get long_os_version)
 
 match ($env.HOSTNAME) {
     "brage-pc" => {
+        $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/code' | path expand)
         $env.LANG = "en_US"
     },
@@ -131,7 +132,6 @@ match ($env.HOSTNAME) {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
-        $env.Path = $env.Path | append $env.DEV_BIN
     }
     _ => {
         print "Unknown computer name"

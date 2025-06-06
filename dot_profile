@@ -1,0 +1,2 @@
+export PSTEST_PROFILE_LOAD='8ebf648c-e8a8-440f-81b4-933c8e5fb742'
+export PATH="$PATH:/home/skypex/dev/bin"
