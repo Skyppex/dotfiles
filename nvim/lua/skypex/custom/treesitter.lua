@@ -107,7 +107,13 @@ local utils = require("skypex.utils")
 utils.nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
-local arcana_parser_path = utils.get_code_path() .. "/arcana/tree-sitter-arcana/parser.so"
+local arcana_parser_path = nil
+
+if utils.is_home_computer_linux() then
+	arcana_parser_path = utils.get_code_path() .. "/tree-sitter-arcana/parser.so"
+else
+	arcana_parser_path = utils.get_code_path() .. "/arcana/tree-sitter-arcana/parser.so"
+end
 
 local stat = vim.loop.fs_stat(arcana_parser_path)
 
@@ -131,6 +137,10 @@ vim.treesitter.language.add("arcana", {
 local registry = {
 	{
 		lang = "arcana",
+		filetype = "arcana",
+	},
+	{
+		lang = "mage",
 		filetype = "arcana",
 	},
 }
