@@ -12,7 +12,14 @@ local function setup_proof(lspconfig, configs, capabilities)
 	local utils = require("skypex.utils")
 	local code_path = utils.get_code_path()
 	local proof_path = code_path .. "/proof"
-	local proof_exe = proof_path .. "/proof.exe"
+	local proof_exe = nil
+
+	if utils.is_home_computer_linux() then
+		proof_exe = proof_path .. "/proof"
+	else
+		proof_exe = proof_path .. "/proof.exe"
+	end
+
 	local log_file = proof_path .. "/log.txt"
 	local dictionary_file = utils.get_chezmoi_path() .. "/nvim/proof/dictionary.txt"
 
