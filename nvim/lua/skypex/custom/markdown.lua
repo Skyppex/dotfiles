@@ -14,6 +14,14 @@ rmd.setup({
 			"##### ",
 			"###### ",
 		},
+		backgrounds = {
+			"RenderMarkdownH1",
+			"RenderMarkdownH2Bg",
+			"RenderMarkdownH3Bg",
+			"RenderMarkdownH4Bg",
+			"RenderMarkdownH2Bg",
+			"RenderMarkdownH3Bg",
+		},
 		signs = {},
 	},
 	checkbox = {
