@@ -36,8 +36,13 @@ def --env z [
             return
         } else {
             let immediate = if ($path_split | length) <= 1 {
-                if ($path | str starts-with "/") {
-                    fd --type d --max-depth 1 --full-path $path
+                if ($path | str contains "/") or ($path | str contains "\\") {
+                    let dirname = $path | path dirname
+                    enter $dirname
+                    let basename = $path | path basename
+                    let x = fd --type d --max-depth 1 --full-path ($basename | path expand) --fixed-strings
+                    p
+                    $dirname | path join $x
                 } else {
                     fd --type d --max-depth 1 --glob $path
                 }
