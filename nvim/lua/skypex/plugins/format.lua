@@ -6,4 +6,10 @@ return {
 			require("skypex.custom.format")
 		end,
 	},
+	{
+		"zapling/mason-conform.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+		},
+	},
 }

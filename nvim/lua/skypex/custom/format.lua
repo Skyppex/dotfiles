@@ -1,9 +1,12 @@
 local conform = require("conform")
 
----@param bufnr integer
 ---@param ... string
----@return string
+---@return string | table<string>
 local function first(bufnr, ...)
+	if not bufnr then
+		return select(1, ...)
+	end
+
 	for i = 1, select("#", ...) do
 		local formatter = select(i, ...)
 		if conform.get_formatter_info(formatter, bufnr).available then
@@ -21,6 +24,90 @@ local function first_then_injected(...)
 	end
 end
 
+local formatters_by_ft = {
+	-- Runs the single formatter
+	lua = { "stylua", "injected" },
+	-- Runs each formatter sequentially
+	python = { "isort", "black", "injected" },
+
+	-- Tries to run each formatter until one succeeds
+	javascript = first_then_injected("prettierd", "prettier"),
+	javascriptreact = first_then_injected("prettierd", "prettier"),
+	typescript = first_then_injected("prettierd", "prettier"),
+	typescriptreact = first_then_injected("prettierd", "prettier"),
+	css = first_then_injected("prettierd", "prettier"),
+	scss = first_then_injected("prettierd", "prettier"),
+	json = first_then_injected("jq", "prettierd", "prettier"),
+	graphql = first_then_injected("prettierd", "prettier"),
+	cs = { "csharpier", "injected" },
+	csx = { "csharpier", "injected" },
+	go = { "gofmt", "injected" },
+	xml = { "xmlformatter", "injected" },
+	yaml = first_then_injected("yamlfix", "prettierd", "prettier"),
+	markdown = first_then_injected("markdownlint", "prettierd", "prettier"),
+	sh = { "beautysh", "injected" },
+	bash = { "beautysh", "injected" },
+	http = { "kulala-fmt", "injected" },
+	rest = { "kulala-fmt", "injected" },
+	kotlin = { "ktfmt", "injected" },
+	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
+}
+
+local formatters = {
+	csharpier = {
+		inherit = true,
+	},
+	gofmt = {
+		command = "gofmt",
+	},
+	jq = {
+		command = "jq",
+		args = { "--monochrome-output" },
+	},
+	-- nufmt is not ready to be used yet, it breaks the code
+	-- nufmt = {
+	-- 	command = "nufmt",
+	-- },
+}
+
+local function extract_formatters()
+	local formatters_to_install = {}
+
+	for _, formatters in pairs(formatters_by_ft) do
+		if type(formatters) == "function" then
+			formatters = formatters(nil)
+		end
+
+		for _, formatter in pairs(formatters) do
+			-- support case where the user has defined multiple formatters
+			-- for said filetype. E.g javascript = { { "prettierd", "prettier" } }
+			-- this only happens when using a function as the formatter
+			if type(formatter) == "table" then
+				for _, f in pairs(formatter) do
+					formatters_to_install[f] = 1
+				end
+			else
+				formatters_to_install[formatter] = 1
+			end
+		end
+	end
+
+	return formatters_to_install
+end
+
+local ensure_installed = extract_formatters()
+
+for formatter, _ in pairs(formatters) do
+	ensure_installed[formatter] = nil
+end
+
+vim.tbl_extend("keep", ensure_installed, {
+	"csharpier",
+})
+
+require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
+---@param bufnr integer
 conform.setup({
 	notify_on_error = true,
 	async = true,
@@ -39,50 +126,8 @@ conform.setup({
 			timeout = 5000,
 		}
 	end,
-	formatters = {
-		csharpier = {
-			inherit = true,
-		},
-		gofmt = {
-			command = "gofmt",
-		},
-		jq = {
-			command = "jq",
-			args = { "--monochrome-output" },
-		},
-		-- nufmt is not ready to be used yet, it breaks the code
-		-- nufmt = {
-		-- 	command = "nufmt",
-		-- },
-	},
-	formatters_by_ft = {
-		-- Runs the single formatter
-		lua = { "stylua", "injected" },
-		-- Runs each formatter sequentially
-		python = { "isort", "black", "injected" },
-
-		-- Tries to run each formatter until one succeeds
-		javascript = first_then_injected("prettierd", "prettier"),
-		javascriptreact = first_then_injected("prettierd", "prettier"),
-		typescript = first_then_injected("prettierd", "prettier"),
-		typescriptreact = first_then_injected("prettierd", "prettier"),
-		css = first_then_injected("prettierd", "prettier"),
-		scss = first_then_injected("prettierd", "prettier"),
-		json = first_then_injected("jq", "prettierd", "prettier"),
-		graphql = first_then_injected("prettierd", "prettier"),
-		cs = { "csharpier", "injected" },
-		csx = { "csharpier", "injected" },
-		go = { "gofmt", "injected" },
-		xml = { "xmlformatter", "injected" },
-		yaml = first_then_injected("yamlfix", "prettierd", "prettier"),
-		markdown = first_then_injected("markdownlint", "prettierd", "prettier"),
-		sh = { "beautysh", "injected" },
-		bash = { "beautysh", "injected" },
-		http = { "kulala-fmt", "injected" },
-		rest = { "kulala-fmt", "injected" },
-		kotlin = { "ktfmt", "injected" },
-		-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
-	},
+	formatters = formatters,
+	formatters_by_ft = formatters_by_ft,
 })
 
 vim.api.nvim_create_user_command("FormatToggle", function(args)
