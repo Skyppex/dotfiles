@@ -6,7 +6,7 @@ let processes = ps
 
 let groups = $processes | group-by --to-table name
 
-let killalls = $groups 
+let kill_alls = $groups 
 | where {|g| ($g.items | length) > 1 } 
 | each { |it| { name: $it.name, pids: $it.items.pid } }
 | each { |it| $"all: ($it.name) ($it.pids | str join ', ')" }
@@ -16,7 +16,7 @@ let input = $processes
 | awk '{print $2 " " $4}' 
 | lines 
 | str replace "," ""
-| append $killalls
+| append $kill_alls
 
 let selected = $input 
 | to text 
