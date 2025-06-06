@@ -37,7 +37,7 @@ local adapters = {
 	end,
 }
 
-local openai_api_key = skate.get("openai-nvim", "secrets")
+-- local openai_api_key = skate.get("openai-nvim", "secrets")
 
 if openai_api_key then
 	adapters["openai"] = function()
