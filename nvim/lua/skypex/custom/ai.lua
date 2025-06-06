@@ -1,5 +1,6 @@
 local cc = require("codecompanion")
 local cca = require("codecompanion.adapters")
+local mcphub = require("mcphub")
 
 local adapters = {
 	codellama = function()
@@ -8,6 +9,22 @@ local adapters = {
 			schema = {
 				model = {
 					default = "codellama:7b-instruct",
+				},
+				num_ctx = {
+					default = 16384,
+				},
+				num_predict = {
+					default = -1,
+				},
+			},
+		})
+	end,
+	codellama_code = function()
+		return cca.extend("ollama", {
+			name = "codellama_code",
+			schema = {
+				model = {
+					default = "codellama:7b-code",
 				},
 				num_ctx = {
 					default = 16384,
@@ -39,7 +56,8 @@ cc.setup({
 			adapter = "codellama",
 		},
 		inline = {
-			adapter = "codellama",
+			adapter = "codellama_code",
+			keymap = nil,
 		},
 	},
 	extensions = {
@@ -49,6 +67,19 @@ cc.setup({
 				make_vars = true,
 				make_slash_commands = true,
 				show_result_in_chat = true,
+			},
+		},
+	},
+})
+
+mcphub.setup({
+	extensions = {
+		mcphub = {
+			callback = "mcphub.extensions.codecompanion",
+			opts = {
+				show_result_in_chat = true,
+				make_vars = true,
+				make_slack_commands = true,
 			},
 		},
 	},
@@ -64,3 +95,11 @@ end, "Start a new conversation with AI")
 nmap("<leader>ta", function()
 	cc.toggle()
 end, "Toggle AI panel")
+
+nmap("<leader>ay", function()
+	cc.accept_change()
+end, "Accept AI suggestion")
+
+nmap("<leader>an", function()
+	cc.reject_change()
+end, "Reject AI suggestion")
