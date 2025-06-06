@@ -551,3 +551,8 @@ backtick
 codecompanion
 mcphub
 mcp
+operatorfunc
+btop
+systemd
+rofi
+dmenu
