@@ -1,6 +1,6 @@
 * {
   all: unset; // Unsets everything so you can style everything from scratch
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "JetBrainsMono";
   font-size: 14px;
   font-weight: normal;
 }
@@ -29,6 +29,7 @@
 
 .music-text {
   padding: 6px 12px;
+  color: white;
   font-weight: bold;
   // text-shadow:
   //   -1px -1px 0 #555555,
