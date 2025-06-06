@@ -15,7 +15,6 @@ return {
 		event = "VeryLazy",
 		build = ":TSUpdate",
 		dependencies = {
-			"nushell/tree-sitter-nu",
 			"tree-sitter/tree-sitter-c-sharp",
 		},
 		config = function()
