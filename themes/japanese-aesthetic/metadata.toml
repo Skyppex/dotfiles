@@ -1,0 +1,3 @@
+name = "japanese-aesthetic"
+display-name = "Japanese Aesthetic"
+variants = ["light", "dark"]
