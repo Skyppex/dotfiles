@@ -1,0 +1,29 @@
+#!/usr/bin/nu
+
+let themes = $env.CONFIG_PATH | path join "themes" | path expand
+let theme = $themes | path join "japanese-aesthetic"
+let config = open ($theme | path join "config.toml")
+let variant = $config.variant
+
+# setup colors for eww
+let colors = open ($theme | path join "colors.toml") | get $variant
+
+let keys = $colors | columns
+let values = $colors | values
+let kvps = $keys | zip $values
+
+let scss = $kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"$($key): ($value);"
+} | to text
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.scss")
+$scss | save -f $path
+
+let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
+let config_eww_path = ($env.CHEZMOI_PATH | path join "eww")
+cp --force $path ($chezmoi_eww_path | path join "colors.scss")
+cp --force $path ($config_eww_path | path join "colors.scss")
+
+chezmoi apply --force

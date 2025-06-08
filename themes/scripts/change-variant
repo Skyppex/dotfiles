@@ -1,0 +1,22 @@
+#!/usr/bin/nu
+
+let themes = "~/.config/themes" | path expand
+let current = open ($themes | path join "current.toml")
+let theme = $themes | path join $current.dir
+let config = open ($theme | path join "config.toml")
+let metadata = open ($theme | path join "metadata.toml")
+let variant = $config.variant
+
+let selected = $metadata.variants | to text | rofi -dmenu
+
+if $selected != $variant {
+    mut config = $config
+    $config.variant = $selected
+    $config | save -f ($env.CHEZMOI_PATH
+        | path join "themes"
+        | path join $current.dir
+        | path join "config.toml"
+    )
+    chezmoi apply --force $themes
+    nu ($env.CONFIG_PATH | path join "themes/scripts/apply-current")
+}

@@ -1,10 +1,7 @@
 #!/usr/bin/nu
 
-notify-send "hello"
 let pid_file = "/tmp/hypr/wf-recording.pid"
 let out = "/tmp/hypr/recording.mp4"
-notify-send $pid_file
-notify-send $out
 
 if ($pid_file | path exists) {
     let pid = (open -r $pid_file | str trim)

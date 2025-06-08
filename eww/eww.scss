@@ -1,35 +1,35 @@
+@import "colors";
+
 * {
   all: unset; // Unsets everything so you can style everything from scratch
-  font-family: "JetBrainsMono";
+  font-family: "Electroharmonix";
   font-size: 14px;
   font-weight: normal;
 }
 
 // Global Styles
 .bar {
-  background-color: #3a3a3a;
-  color: #b0b4bc;
-  border-radius: 16px;
+  background-color: $background1;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
 }
-
-// Styles on classes (see eww.yuck for more information)
 
 .music-box {
   all: unset;
-  border-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
 }
 
 .music {
   background-repeat: no-repeat;
   background-position: 0% 30%;
   border-bottom-left-radius: 16px;
-  border-top-left-radius: 16px;
   min-width: 640px;
 }
 
 .music-text {
   padding: 6px 12px;
-  color: white;
+  color: $primary;
   font-weight: bold;
   // text-shadow:
   //   -1px -1px 0 #555555,
@@ -38,17 +38,23 @@
   //   1px 1px 0 #555555;
 }
 
+.time {
+  color: $primary;
+}
+
+.sidestuff {
+  color: $primary;
+}
+
 .metric scale trough highlight {
   all: unset;
-  background-color: #d35d6e;
-  color: #000000;
+  background-color: $primary;
   border-radius: 10px;
 }
 
 .metric scale trough {
   all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
+  background-color: $background2;
   min-height: 3px;
   min-width: 50px;
   margin-left: 10px;

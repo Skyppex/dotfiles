@@ -1,3 +1,1 @@
-#!/usr/bin/nu
-
-swww img (nu $"($env.CHEZMOI_PATH)/hypr/scripts/get-theme-wallpaper")
+/home/skypex/.local/share/chezmoi/themes/scripts/set-wallpaper

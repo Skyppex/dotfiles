@@ -1,0 +1,3 @@
+#!/usr/bin/nu
+
+swww img (nu $"($env.CONFIG_PATH)/hypr/scripts/get-theme-wallpaper")

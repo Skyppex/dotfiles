@@ -19,6 +19,7 @@ else
 	if utils.is_home_computer_linux() then
 		-- find current.toml and read the dir value
 		local current_path = config_path .. "/themes/current.toml"
+		wezterm.add_to_config_reload_watch_list(current_path)
 		local current_file = io.open(current_path, "r")
 		local current_content = current_file:read("*a")
 		current_file:close()
@@ -26,6 +27,7 @@ else
 		wezterm.log_info(current.dir)
 
 		local theme_config_path = config_path .. "/themes/" .. current.dir .. "/config.toml"
+		wezterm.add_to_config_reload_watch_list(theme_config_path)
 		local theme_config_file = io.open(theme_config_path, "r")
 		local theme_config_content = theme_config_file:read("*a")
 		theme_config_file:close()

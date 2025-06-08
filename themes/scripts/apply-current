@@ -1,0 +1,16 @@
+#!/usr/bin/nu
+
+let themes = $env.CONFIG_PATH | path join "themes" | path expand
+let current = open ($themes | path join "current.toml")
+let theme = $themes | path join $current.dir
+let config = open ($theme | path join "config.toml")
+let variant = $config.variant
+
+let setup_path = ($theme | path join "setup")
+
+if ($setup_path | path exists) {
+    nu $setup_path
+}
+
+nu ($themes | path join "scripts/set-wallpaper")
+chezmoi apply --force $themes

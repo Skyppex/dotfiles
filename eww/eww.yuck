@@ -1,7 +1,7 @@
 (defwidget bar []
   (centerbox :orientation "h"
     (music)
-    time
+    (time-box)
     (sidestuff)))
 
 (defwidget sidestuff []
@@ -55,6 +55,11 @@
       :active {onchange != ""}
       :value value
       :onchange onchange)))
+
+(defwidget time-box []
+  (box
+  :class "time"
+  time))
 
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
