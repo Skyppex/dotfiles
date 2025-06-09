@@ -1,3 +1,4 @@
 #!/usr/bin/nu
 
-swww img (nu $"($env.CONFIG_PATH)/hypr/scripts/get-theme-wallpaper")
+swww img --outputs "DP-1" (nu $"($env.CONFIG_PATH)/hypr/scripts/get-horizontal-wallpaper")
+swww img --outputs "DP-2" (nu $"($env.CONFIG_PATH)/hypr/scripts/get-vertical-wallpaper")

@@ -13,4 +13,4 @@ if ($setup_path | path exists) {
 }
 
 nu ($themes | path join "scripts/set-wallpaper")
-chezmoi apply --force $themes
+chezmoi apply --force

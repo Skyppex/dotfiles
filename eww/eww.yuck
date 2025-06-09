@@ -74,7 +74,7 @@
   "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
-  :monitor 0
+  :monitor "VG27A"
   :geometry (geometry
     :x "0%"
     :y "0%"

@@ -44,6 +44,7 @@ else
 					.. current.dir
 					.. ":"
 					.. theme_config.variant
+					.. "-v"
 					.. "-term"
 					.. ".png",
 			},

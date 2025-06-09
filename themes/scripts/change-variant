@@ -17,6 +17,6 @@ if $selected != $variant {
         | path join $current.dir
         | path join "config.toml"
     )
-    chezmoi apply --force $themes
+    chezmoi apply --force
     nu ($env.CONFIG_PATH | path join "themes/scripts/apply-current")
 }

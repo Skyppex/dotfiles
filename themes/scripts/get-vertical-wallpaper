@@ -18,8 +18,12 @@ let file = ls $images
     | split row "-"
     { file: $it, tags: $tags }
 }
-| where (($it.tags | length) == 1)
-| where (($it.tags | first) == $variant)
+| where { |it| 
+    match $it.tags {
+        [$v, "v"] => ($v == $variant),
+        _ => false
+    }
+}
 | get file
 | first
 

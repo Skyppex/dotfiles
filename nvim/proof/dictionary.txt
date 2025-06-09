@@ -622,3 +622,4 @@ deflisten
 defpoll
 defwindow
 electroharmonix
+hyprctl
