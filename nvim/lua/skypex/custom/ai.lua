@@ -37,20 +37,39 @@ local adapters = {
 	end,
 }
 
--- local openai_api_key = skate.get("openai-nvim", "secrets")
+local utils = require("skypex.utils")
 
-if openai_api_key then
-	adapters["openai"] = function()
-		return cca.extend("openai", {
-			env = {
-				api_key = openai_api_key,
-			},
-		})
+local strategies = {}
+
+if utils.is_work_computer() then
+	local openai_api_key = skate.get("openai", "api")
+
+	if openai_api_key then
+		adapters["openai"] = function()
+			return cca.extend("openai", {
+				env = {
+					api_key = openai_api_key,
+				},
+			})
+		end
 	end
-end
 
-cc.setup({
-	adapters = adapters,
+	strategies = {
+		chat = {
+			adapter = {
+				name = "openai",
+				model = "gpt-4.1",
+			},
+		},
+		inline = {
+			adapter = {
+				name = "openai",
+				model = "gpt-4.1",
+			},
+			keymap = nil,
+		},
+	}
+else
 	strategies = {
 		chat = {
 			adapter = "codellama",
@@ -59,7 +78,12 @@ cc.setup({
 			adapter = "codellama_code",
 			keymap = nil,
 		},
-	},
+	}
+end
+
+cc.setup({
+	adapters = adapters,
+	strategies = strategies,
 	extensions = {
 		mcphub = {
 			callback = "mcphub.extensions.codecompanion",
