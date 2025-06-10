@@ -5,12 +5,14 @@ let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
 let variant = $config.variant
 
-# setup colors for eww
+# setup colors
 let colors = open ($theme | path join "colors.toml") | get $variant
 
 let keys = $colors | columns
 let values = $colors | values
 let kvps = $keys | zip $values
+
+## setup colors for eww
 
 let scss = $kvps | each { |it| 
     let key = $it | get 0
@@ -22,8 +24,20 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.scss
 $scss | save -f $path
 
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
-let config_eww_path = ($env.CHEZMOI_PATH | path join "eww")
 cp --force $path ($chezmoi_eww_path | path join "colors.scss")
-cp --force $path ($config_eww_path | path join "colors.scss")
+
+## setup colors for hyprland
+
+let conf = $kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"$($key) = ($value | str replace "#" "")"
+} | to text
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/hyprcolors.conf")
+$conf | save -f $path
+
+let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "hypr")
+cp --force $path ($chezmoi_eww_path | path join "hyprcolors.conf")
 
 chezmoi apply --force

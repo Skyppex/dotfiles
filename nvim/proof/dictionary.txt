@@ -624,3 +624,8 @@ defwindow
 electroharmonix
 hyprctl
 rustup
+hyprcolor
+dpm
+loginctl
+hyprlock
+pidof

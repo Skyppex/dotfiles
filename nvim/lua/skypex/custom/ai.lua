@@ -41,7 +41,7 @@ local utils = require("skypex.utils")
 
 local strategies = {}
 
-if utils.is_work_computer() then
+if utils.is_work_computer() or utils.is_home_computer_linux() then
 	local openai_api_key = skate.get("openai", "api")
 
 	if openai_api_key then

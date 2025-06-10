@@ -134,6 +134,7 @@ match ($env.HOSTNAME) {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
+        plugin add "~/.cargo/bin/nu_plugin_regex"
     }
     _ => {
         print "Unknown computer name"

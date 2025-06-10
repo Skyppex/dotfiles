@@ -1,7 +1,9 @@
 #!/usr/bin/nu
 
 # horizontal wallpaper
-swww img --outputs "DP-1" (nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper h")
+let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
+swww img --outputs "DP-1" $path
 
 # vertical wallpaper
-swww img --outputs "DP-2" (nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper v")
+let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
+swww img --outputs "DP-2" $path
