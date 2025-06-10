@@ -1,6 +1,6 @@
 ---
 # Default model (gpt-3.5-turbo, gpt-4, ggml-gpt4all-j...).
-default-model: codellama:7b-instruct
+default-model: gpt-4.1
 # Text to append when using the -f flag.
 format-text:
   markdown: Format the response as markdown without enclosing backticks.
@@ -58,47 +58,51 @@ max-input-chars: 12250
 # max-tokens: 100
 # Aliases and endpoints for OpenAI compatible REST API.
 apis:
-  # openai:
-  #   base-url: https://api.openai.com/v1
-  #   api-key:
-  #   api-key-env: OPENAI_API_KEY
-  #   models:  # https://platform.openai.com/docs/models
-  #     gpt-4o-mini:
-  #       aliases: [4o-mini]
-  #       max-input-chars: 392000
-  #       fallback: gpt-4o
-  #     gpt-4o:
-  #       aliases: [4o]
-  #       max-input-chars: 392000
-  #       fallback: gpt-4
-  #     gpt-4:
-  #       aliases: ['4']
-  #       max-input-chars: 24500
-  #       fallback: gpt-3.5-turbo
-  #     gpt-4-1106-preview:
-  #       aliases: [128k]
-  #       max-input-chars: 392000
-  #       fallback: gpt-4
-  #     gpt-4-32k:
-  #       aliases: [32k]
-  #       max-input-chars: 98000
-  #       fallback: gpt-4
-  #     gpt-3.5-turbo:
-  #       aliases: [35t]
-  #       max-input-chars: 12250
-  #       fallback: gpt-3.5
-  #     gpt-3.5-turbo-1106:
-  #       aliases: [35t-1106]
-  #       max-input-chars: 12250
-  #       fallback: gpt-3.5-turbo
-  #     gpt-3.5-turbo-16k:
-  #       aliases: [35t16k]
-  #       max-input-chars: 44500
-  #       fallback: gpt-3.5
-  #     gpt-3.5:
-  #       aliases: ['35']
-  #       max-input-chars: 12250
-  #       fallback:
+  openai:
+    base-url: https://api.openai.com/v1
+    api-key:
+    api-key-env: OPENAI_API_KEY
+    models:  # https://platform.openai.com/docs/models
+      gpt-4o-mini:
+        aliases: [4o-mini]
+        max-input-chars: 392000
+        fallback: gpt-4o
+      gpt-4o:
+        aliases: [4o]
+        max-input-chars: 392000
+        fallback: gpt-4
+      gpt-4.1:
+        aliases: ['4.1']
+        max-input-chars: 24500
+        fallback: gpt-4
+      gpt-4:
+        aliases: ['4']
+        max-input-chars: 24500
+        fallback: gpt-3.5-turbo
+      gpt-4-1106-preview:
+        aliases: [128k]
+        max-input-chars: 392000
+        fallback: gpt-4
+      gpt-4-32k:
+        aliases: [32k]
+        max-input-chars: 98000
+        fallback: gpt-4
+      gpt-3.5-turbo:
+        aliases: [35t]
+        max-input-chars: 12250
+        fallback: gpt-3.5
+      gpt-3.5-turbo-1106:
+        aliases: [35t-1106]
+        max-input-chars: 12250
+        fallback: gpt-3.5-turbo
+      gpt-3.5-turbo-16k:
+        aliases: [35t16k]
+        max-input-chars: 44500
+        fallback: gpt-3.5
+      gpt-3.5:
+        aliases: ['35']
+        max-input-chars: 12250
+        fallback:
   # anthropic:
   #   base-url: https://api.anthropic.com/v1
   #   api-key:
