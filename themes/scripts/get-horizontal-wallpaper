@@ -11,7 +11,7 @@ let file = ls $images
 | get name 
 | path basename 
 | each { |it|
-    let index_colon = $it | str index-of ":"
+    let index_colon = $it | str index-of "_"
     let index_dot = $it | str index-of "."
     let tags = $it 
     | str substring ($index_colon + 1)..($index_dot - 1) 
