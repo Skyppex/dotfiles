@@ -123,6 +123,8 @@ match ($env.HOSTNAME) {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/code' | path expand)
         $env.LANG = "en_US"
+        $env.NU_PLUGIN_DIRS = $env.NU_LIB_DIRS | append $"($env.SCOOP)/persist/rustup/.cargo/bin"
+        plugin add $"($env.SCOOP)/persist/rustup/.cargo/bin/nu_plugin_regex.exe"
     },
     "DESKTOP-RRC642H" => {
         $env.CODE = "D:/code"
