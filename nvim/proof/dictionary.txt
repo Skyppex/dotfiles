@@ -623,3 +623,4 @@ defpoll
 defwindow
 electroharmonix
 hyprctl
+rustup
