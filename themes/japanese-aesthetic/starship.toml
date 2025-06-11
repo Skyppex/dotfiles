@@ -85,3 +85,4 @@ success_symbol = "[](fg:#32302f)"
 error_symbol = "[](#c14a4a)"
 vimcmd_symbol = "[](#ebdbb2)"
 format = "$symbol"
+
