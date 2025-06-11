@@ -1,6 +1,9 @@
 #!/usr/bin/nu
 
-def main [direction: string] {
+def main [
+    direction: string
+    purpose?: string
+] {
     let themes = "~/.config/themes" | path expand
     let current = open ($themes | path join "current.toml")
     let theme = $themes | path join $current.dir
@@ -21,6 +24,7 @@ def main [direction: string] {
     }
     | where { |it| 
         match $it.tags {
+            [$v, $d, $p] => (($v == $variant) and ($d == $direction) and ($p == $purpose)),
             [$v, $d] => (($v == $variant) and ($d == $direction)),
             _ => false
         }

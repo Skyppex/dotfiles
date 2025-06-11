@@ -5,8 +5,10 @@ let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
 let variant = $config.variant
 
-# setup colors
 let colors = open ($theme | path join "colors.toml") | get $variant
+let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
+let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
+let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h greet
 
 let keys = $colors | columns
 let values = $colors | values
@@ -26,18 +28,21 @@ $scss | save -f $path
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
 cp --force $path ($chezmoi_eww_path | path join "colors.scss")
 
-## setup colors for hyprland
+## setup variables for hyprland
 
 let conf = $kvps | each { |it| 
     let key = $it | get 0
     let value = $it | get 1
     $"$($key) = ($value | str replace "#" "")"
-} | to text
+} 
+| append $"$background_h = ($background_h_path)"
+| append $"$background_v = ($background_v_path)"
+| append $"$background_h_greet = ($background_h_greet_path)"
 
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/hyprcolors.conf")
-$conf | save -f $path
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/variables.conf")
+$conf | to text | save -f $path
 
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "hypr")
-cp --force $path ($chezmoi_eww_path | path join "hyprcolors.conf")
+cp --force $path ($chezmoi_eww_path | path join "variables.conf")
 
 chezmoi apply --force
