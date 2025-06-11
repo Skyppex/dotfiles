@@ -59,6 +59,20 @@ $lua | to text | save -f $path
 let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nvim/lua/skypex")
 cp --force $path ($chezmoi_lua_path | path join "colors.lua")
 
+# setup nushell colors
+
+let nushell = "let colors = {" | append ($kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"\t($key): \"($value)\""
+}) | append "}" | to text
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.nu")
+$nushell | to text | save -f $path
+
+let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nushell")
+cp --force $path ($chezmoi_lua_path | path join "colors.nu")
+
 # setup starship
 # this ones annoying, i have to generate the entire file with the colors i want
 
