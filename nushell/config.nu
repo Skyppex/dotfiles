@@ -28,7 +28,7 @@ let andromeda_theme = {
     int: $andromeda_colors.orange
     filesize: $andromeda_colors.blue
     duration: $andromeda_colors.blue
-    date: $andromeda_colors.yellow
+    datetime: $andromeda_colors.orange
     range: $andromeda_colors.white
     float: $andromeda_colors.orange
     string: $andromeda_colors.green
@@ -86,16 +86,16 @@ let theme = {
     # color for nushell primitives
     separator: $colors.background1
     leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: { fg: $colors.pink, attr: b }
-    empty: $colors.blue
+    header: { fg: $colors.blue, attr: b }
+    empty: $colors.cyan
     # Closures can be used to choose colors for specific values.
     # The value (in this case, a bool) is piped into the closure.
     # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
-    bool: $colors.purple
+    bool: $colors.cyan
     int: $colors.orange
-    filesize: $colors.blue
-    duration: $colors.blue
-    date: $colors.yellow
+    filesize: $colors.purple
+    duration: $colors.purple
+    datetime: $colors.orange
     range: $colors.primary
     float: $colors.orange
     string: $colors.green
@@ -106,45 +106,42 @@ let theme = {
     record: $colors.primary
     list: $colors.primary
     block: $colors.primary
-    hints: $colors.background2
+    hints: $colors.background3
     search_result: $colors.primary
     # shapes are used to change the cli syntax highlighting
-    shape_and: $colors.purple
-    shape_binary: $colors.red
-    shape_block: $colors.primary
-    shape_bool: $colors.purple
-    shape_closure: $colors.pink
+    shape_and: $colors.cyan
+    shape_closure: $colors.blue
     shape_custom: $colors.yellow
     shape_datetime: $colors.orange
-    shape_directory: $colors.blue
-    shape_external: $colors.purple
-    shape_externalarg: $colors.pink
+    shape_directory: $colors.purple
+    shape_external: $colors.cyan
+    shape_externalarg: $colors.blue
     shape_external_resolved: $colors.yellow
     shape_filepath: $colors.green
-    shape_flag: $colors.pink
+    shape_flag: $colors.blue
     shape_float: $colors.orange
     shape_garbage: $colors.red
     shape_globpattern: $colors.green
     shape_int: $colors.orange
-    shape_internalcall: $colors.purple
-    shape_keyword: $colors.purple
+    shape_internalcall: $colors.cyan
+    shape_keyword: $colors.cyan
     shape_list: $colors.primary
     shape_literal: $colors.orange
-    shape_match_pattern: $colors.blue
+    shape_match_pattern: $colors.purple
     shape_matching_brackets: $colors.primary
     shape_nothing: $colors.background0
     shape_operator: $colors.red
-    shape_or: $colors.purple
+    shape_or: $colors.cyan
     shape_pipe: $colors.orange
     shape_range: $colors.primary
     shape_record: $colors.primary
     shape_redirection: $colors.yellow
-    shape_signature: $colors.blue
+    shape_signature: $colors.cyan
     shape_string: $colors.green
-    shape_string_interpolation: $colors.purple
+    shape_string_interpolation: $colors.cyan
     shape_table: $colors.primary
-    shape_variable: $colors.cyan
-    shape_vardecl: $colors.cyan
+    shape_variable: $colors.pink
+    shape_vardecl: $colors.pink
 }
 
 let theme = if (sys host).hostname == "skypex" { $theme } else { $andromeda_theme }
@@ -154,7 +151,7 @@ $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
 
     ls: {
-        use_ls_colors: true # use the LS_COLORS environment variable to colorize output
+        use_ls_colors: false # use the LS_COLORS environment variable to colorize output
         clickable_links: true # enable or disable clickable links. Your terminal has to support links.
     }
 

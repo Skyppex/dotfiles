@@ -13,7 +13,7 @@ if utils.is_work_computer() then
 		height = "100%",
 		vertical_align = "Bottom",
 		repeat_x = "NoRepeat",
-		hsb = { brightness = 0.02, saturation = 1 },
+		hsb = { brightness = 0., saturation = 1 },
 	}
 else
 	if utils.is_home_computer_linux() then
@@ -42,16 +42,15 @@ else
 					.. current.dir
 					.. "/images/"
 					.. current.dir
-					.. ":"
+					.. "_"
 					.. theme_config.variant
-					.. "-v"
-					.. "-term"
-					.. ".png",
+					.. "-term.png",
 			},
-			width = "100%",
-			vertical_align = "Bottom",
+			width = "Cover",
+			height = "Cover",
+			vertical_align = "Middle",
+			horizontal_align = "Center",
 			repeat_x = "NoRepeat",
-			hsb = { brightness = 0.01 },
 		}
 	else
 		background = {

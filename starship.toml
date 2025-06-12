@@ -19,7 +19,7 @@ $git_status\
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "fg:#ebdbb2 bg:prev_fg"
+style = "fg:#3c3836 bg:prev_fg"
 format = "[$symbol]($style)"
 disabled = false                # Disabled by default
 
@@ -31,7 +31,7 @@ Ubuntu = " "
 Windows = " "
 
 [directory]
-style = "fg:#ebdbb2 bg:prev_bg"
+style = "fg:#3c3836 bg:prev_bg"
 format = "[ $path]($style)"
 
 # Here is how you can shorten some long paths by text replacement
@@ -61,7 +61,7 @@ format = "[ $path]($style)"
 # VCS Branch
 [git_branch]
 symbol = " "
-style = "fg:#ebdbb2 bg:prev_bg"
+style = "fg:#3c3836 bg:prev_bg"
 format = '[ $symbol$branch]($style)'
 
 [git_state]
@@ -72,16 +72,16 @@ cherry_pick = " "
 bisect = "󰕝 "
 am = "󰛮 "
 am_or_rebase = "󰛮 / "
-style = "fg:#ebdbb2 bg:prev_bg"
+style = "fg:#3c3836 bg:prev_bg"
 format = ' \([$state($progress_current/$progress_total)]($style)\)'
 
 [git_status]
 disabled = false
-style = "fg:#ebdbb2 bg:prev_bg"
+style = "fg:#3c3836 bg:prev_bg"
 format = '[ $all_status$ahead_behind]($style)'
 
 [character]
-success_symbol = "[](fg:#32302f)"
+success_symbol = "[](fg:#fbf1c7)"
 error_symbol = "[](#c14a4a)"
-vimcmd_symbol = "[](#ebdbb2)"
+vimcmd_symbol = "[](#3c3836)"
 format = "$symbol"
