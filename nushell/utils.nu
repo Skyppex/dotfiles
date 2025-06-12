@@ -337,9 +337,9 @@ def --env con [cmd: closure]: any -> any {
     enter $env.CONFIG_PATH
 
     if ($input | is-empty) {
-        $result = (do $cmd)
+        $result = (do -i --env $cmd)
     } else {
-        $result = (do $cmd $input)
+        $result = (do -i --env $cmd $input)
     }
 
     p
@@ -358,5 +358,45 @@ def --wrapped detatch [...command]: nothing -> nothing {
         $input | bash -c $"($command | str join ' ') &"
     } else {
         bash -c $"($command | str join ' ') &"
+    }
+}
+
+def --wrapped shebang [
+    path: string
+    ...rest: string
+]: any -> any {
+    let input = $in
+    let rest = $rest | str join " "
+
+    let content = open -r $path
+
+    if ($content | is-empty) {
+        return ""
+    }
+
+    if ($content | lines | first | str starts-with "#!" | n) {
+        return ""
+    }
+
+    let shebang = $content | lines | first | str substring 2..
+
+    let known_shebangs = [
+        "/usr/bin/env ", # includes the space due to strip-prefix
+        "/usr/bin/",
+        "/bin/",
+    ]
+
+    mut program = ""
+    for $known in $known_shebangs {
+        if ($shebang | str starts-with $known) {
+            $program = ($shebang | str strip-prefix $known)
+            break
+        }
+    }
+
+    if ($in | is-empty) {
+        nu --commands $"($program) ($path) ($rest)"
+    } else {
+        $input | nu --stdin --commands $"($program) ($path) ($rest)"
     }
 }
