@@ -1,17 +1,26 @@
 #!/usr/bin/nu
 
-let themes = "~/.config/themes" | path expand
-let current = open ($themes | path join "current.toml")
-let theme = $themes | path join $current.dir
-let config = open ($theme | path join "config.toml")
-let metadata = open ($theme | path join "metadata.toml")
-let variant = $config.variant
+def main [
+    --config-option: string
+] {
+    let themes = "~/.config/themes" | path expand
+    let current = open ($themes | path join "current.toml")
+    let theme = $themes | path join $current.dir
+    let config = open ($theme | path join "config.toml")
+    let metadata = open ($theme | path join "metadata.toml")
+    let variant = if ($config_option | is-not-empty) {
+        $config | get $config_option
+    } else {
+        $config.variant
+    }
 
-let selected = $metadata.variants | to text | rofi -dmenu
+    let selected = $metadata.variants | to text | rofi -dmenu
 
-if $selected != $variant {
-    mut config = $config
-    $config.variant = $selected
+    let config = if ($config_option | is-not-empty) {
+        $config | update $config_option $selected
+    } else {
+        $config | update variant $selected
+    }
     $config | save -f ($env.CHEZMOI_PATH
         | path join "themes"
         | path join $current.dir

@@ -3,9 +3,8 @@
 let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
-let variant = $config.variant
 
-let colors = open ($theme | path join "colors.toml") | get $variant
+let colors = open ($theme | path join "colors.toml") | get $config.variant
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
 let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h greet
@@ -44,6 +43,32 @@ $conf | to text | save -f $path
 
 let chezmoi_hypr_path = ($env.CHEZMOI_PATH | path join "hypr")
 cp --force $path ($chezmoi_hypr_path | path join "variables.conf")
+
+# setup variables for hyprlock
+
+let colors_lock = open ($theme | path join "colors.toml") | get $config.lock_variant
+
+let keys = $colors_lock | columns
+let values = $colors_lock | values
+let kvps = $keys | zip $values
+
+let lock_background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant v
+let lock_background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant h greet
+
+let conf = $kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"$($key) = ($value | str replace "#" "")"
+} 
+| append $"$background_v = ($lock_background_v_path)"
+| append $"$background_h_greet = ($lock_background_h_greet_path)"
+
+let path = ($env.CHEZMOI_PATH | path join
+    "themes/japanese-aesthetic/variables_lock.conf")
+$conf | to text | save -f $path
+
+let chezmoi_hypr_path = ($env.CHEZMOI_PATH | path join "hypr")
+cp --force $path ($chezmoi_hypr_path | path join "variables_lock.conf")
 
 # setup lua colors
 

@@ -629,3 +629,7 @@ dpm
 loginctl
 hyprlock
 pidof
+wslayout
+hyprscrolling
+nogroup
+layoutopt

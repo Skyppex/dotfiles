@@ -1,2 +1,4 @@
 variant = "dark"
 term_variant = "dark"
+greet_variant = "light"
+lock_variant = "light"

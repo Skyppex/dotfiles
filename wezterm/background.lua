@@ -32,7 +32,7 @@ else
 		local theme_config_content = theme_config_file:read("*a")
 		theme_config_file:close()
 		local theme_config = toml.parse(theme_config_content)
-		wezterm.log_info(theme_config.variant)
+		wezterm.log_info(theme_config.term_variant)
 
 		-- find the correct background for current theme
 		background = {

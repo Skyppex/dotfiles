@@ -1,6 +1,7 @@
 #!/usr/bin/nu
 
 def main [
+    --config-option: string
     direction: string
     purpose?: string
 ] {
@@ -9,7 +10,11 @@ def main [
     let theme = $themes | path join $current.dir
     let images = $theme | path join "images"
     let config = open ($theme | path join "config.toml")
-    let variant = $config.variant
+    let variant = if ($config_option | is-not-empty) {
+        $config | get $config_option
+    } else {
+        $config.variant
+    }
 
     let file = ls $images 
     | get name 
