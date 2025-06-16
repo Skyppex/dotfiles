@@ -27,6 +27,21 @@ $scss | save -f $path
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
 cp --force $path ($chezmoi_eww_path | path join "colors.scss")
 
+# setup colors for browser
+
+let css = ":root {" | append ($kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"  --($key): ($value);"
+})
+| append "}"
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.css")
+$css | to text | save -f $path
+
+let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "zen-browser/chrome")
+cp --force $path ($chezmoi_eww_path | path join "colors.css")
+
 # setup variables for hyprland
 
 let conf = $kvps | each { |it| 
@@ -197,5 +212,34 @@ $starship | str join "\n" | to text | save -f $path
 let chezmoi_starship_path = $env.CHEZMOI_PATH
 cp --force $path ($chezmoi_starship_path | path join "starship.toml")
 
+# setup mako
+
+let mako = [
+    `# Style`,
+    `font=JetBrains`,
+    ``,
+    ([`background-color=`, $colors.background1] | str join ""),
+    ([`text-color=`, $colors.primary] | str join ""),
+    ([`border-color=`, $colors.secondary] | str join ""),
+    ([`progress-color=over `, $colors.background2] | str join ""),
+    ``,
+    `border-radius=12`,
+    ``,
+    `[urgency=high]`,
+    ([`border-color=`, $colors.orange] | str join ""),
+    ``,
+    `[app-name=Spotify]`,
+    `invisible=1`
+]
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/mako-config")
+$mako | str join "\n" | to text | save -f $path
+
+let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
+cp --force $path ($chezmoi_mako_path | path join "config")
+
 chezmoi apply --force
+
+# tell mako to refresh its config
+makoctl reload
 

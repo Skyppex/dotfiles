@@ -634,3 +634,4 @@ hyprscrolling
 nogroup
 layoutopt
 lte
+pkill
