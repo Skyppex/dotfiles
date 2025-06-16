@@ -633,3 +633,4 @@ wslayout
 hyprscrolling
 nogroup
 layoutopt
+lte
