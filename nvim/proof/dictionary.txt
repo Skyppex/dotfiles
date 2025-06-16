@@ -635,3 +635,4 @@ nogroup
 layoutopt
 lte
 pkill
+makoctl

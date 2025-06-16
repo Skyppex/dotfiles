@@ -4,6 +4,7 @@ let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let current = open ($themes | path join "current.toml")
 let theme = $themes | path join $current.dir
 let config = open ($theme | path join "config.toml")
+let metadata = open ($theme | path join "metadata.toml")
 let variant = $config.variant
 
 let setup_path = ($theme | path join "setup")
@@ -14,3 +15,14 @@ if ($setup_path | path exists) {
 
 nu ($themes | path join "scripts/set-wallpaper")
 chezmoi apply --force
+
+let display_name = $metadata.display-name
+let variant_display_name = $metadata.variant-display-names | get $config.variant
+let lock_variant_display_name = $metadata.variant-display-names | get $config.lock_variant
+let term_variant_display_name = $metadata.variant-display-names | get $config.term_variant
+let greet_variant_display_name = $metadata.variant-display-names | get $config.greet_variant
+
+notify-send --expire-time=3000 $"($display_name) - ($variant_display_name)
+Lock screen - ($lock_variant_display_name)
+Terminal - ($term_variant_display_name)
+Login - ($greet_variant_display_name)"
