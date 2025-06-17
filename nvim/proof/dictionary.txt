@@ -639,3 +639,5 @@ makoctl
 grsp
 grsi
 gai
+yolo
+sbyte
