@@ -46,6 +46,7 @@ local formatters_by_ft = {
 	yaml = first_then_injected("yamlfix", "prettierd", "prettier"),
 	toml = first_then_injected("taplo", "prettierd", "prettier"),
 	markdown = first_then_injected("markdownlint", "prettierd", "prettier"),
+	codecompanion = first_then_injected("markdownlint", "prettierd", "prettier"),
 	sh = { "beautysh", "injected" },
 	bash = { "beautysh", "injected" },
 	http = { "kulala-fmt", "injected" },
