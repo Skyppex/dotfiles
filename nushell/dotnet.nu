@@ -1,10 +1,8 @@
 # Dotnet run from sln using fzf to select project and launch profile
-def "dn run" [
+def --wrapped "dn run" [
     --verbose(-V) # Print verbose output for the nushell script
-    ...launch_profile: string
+    ...rest: string
 ] {
-    print 0
-
     let slns = ls 
         | where type == file 
         | where ($it.name | str ends-with ".sln") 
@@ -61,7 +59,7 @@ def "dn run" [
     if ($launch_settings_path | is-empty) {
         print "No launch settings found"
         gum confirm --default="Yes" "Run without launch settings?"
-        dotnet run
+        dotnet run ...$rest
         return
     }
 
@@ -71,13 +69,12 @@ def "dn run" [
         print $launch_settings
     }
 
-    let launch_profile = $launch_profile | str join " "
     let launch_profile = ($launch_settings
     | to json
     | jq ".profiles | keys[]" -r
-    | fzf --height 40% --layout=reverse -0 -1 --query $launch_profile)
+    | fzf --height 40% --layout=reverse -0 -1)
 
-    dotnet run --launch-profile $launch_profile
+    dotnet run --launch-profile $launch_profile ...$rest
 }
 
 def "dn us init" [
