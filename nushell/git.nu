@@ -30,6 +30,9 @@ alias ga = git add
 # Git add patch
 alias gap = git add --patch
 
+# Git restore patch
+alias grsp = git restore --patch
+
 # Git show with --ext-diff
 alias "git show" = git show --ext-diff --all --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
 
@@ -900,4 +903,79 @@ def gfr [
 def gri [] {
     let root = gf --long
     git rebase --interactive $root
+}
+
+# Git add interactive
+def --env --wrapped gai [...rest] {
+    let status = git status --porcelain
+    | lines
+    | where { |it|
+        ($it | str starts-with " ") or ($it | str starts-with "??")
+    }
+    | str substring 2..
+    | str trim
+    | each { |it|
+        let split = $it | split row " -> "
+        if ($split | length) == 2 {
+            let file = $split | get 0
+            let new_file = $split | get 1
+            [$file, $new_file]
+        } else {
+            $it
+        }
+    }
+    | flatten
+
+    let selected = $status 
+    | to text 
+    | fzf --multi --height 40% --layout=reverse -0
+    | lines
+
+    for $s in $selected {
+        git add ...$rest $s
+    }
+}
+
+# Git restore interactive
+def --env --wrapped grsi [
+    --staged(-s)
+    ...rest
+] {
+    let status = git status --porcelain
+    | lines
+    | where { |it|
+        let condition = ($it | str starts-with " ") or ($it | str starts-with "??")
+
+        if $staged {
+            not $condition
+        } else {
+            $condition
+        }
+    }
+    | str substring 2..
+    | str trim
+    | each { |it|
+        let split = $it | split row " -> "
+        if ($split | length) == 2 {
+            let file = $split | get 0
+            let new_file = $split | get 1
+            [$file, $new_file]
+        } else {
+            $it
+        }
+    }
+    | flatten
+
+    let selected = $status 
+    | to text 
+    | fzf --multi --height 40% --layout=reverse -0
+    | lines
+
+    for $s in $selected {
+        if $staged {
+            git restore --staged ...$rest $s
+        } else {
+            git restore ...$rest $s
+        }
+    }
 }
