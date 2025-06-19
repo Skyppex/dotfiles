@@ -72,7 +72,7 @@ def "manifest install" [] {
     
     let current = scoop bucket list 
     | lines 
-    | filter {|l| $l | str trim | is-not-empty} 
+    | where {|l| $l | str trim | is-not-empty} 
     | skip 2
 
     let current_names = $current | each {|l| $l | split row " " | get 0}
