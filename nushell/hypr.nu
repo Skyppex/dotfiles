@@ -2,6 +2,7 @@ def hypr-parse [
     --double-header(-d)
     header_regex?: string
 ]: string -> table {
+    plugin add "~/.cargo/bin/nu_plugin_regex"
     plugin use regex;
 
     let inputs = $in 
@@ -38,12 +39,12 @@ def hypr-parse [
 
         for entry in $rest { 
             let match = $entry 
-            | regex '\s*(.+?):\s*(.*)'
-            | select match
-            | skip 1
+            | each { |it|
+                $it | split row ": " | str trim
+            }
 
             $record = $record 
-            | insert ($match | get 0 | get match) ($match | get 1 | get match)
+            | insert ($match | get 0) ($match | get 1)
         }
 
         $table = $table | append $record

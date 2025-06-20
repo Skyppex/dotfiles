@@ -1,0 +1,135 @@
+@import "colors"
+
+window {
+    border: 2px;
+    border-radius: 10;
+    border-color: @secondary;
+    background-color: @background1;
+	font: "Electroharmonix 10";
+}
+
+inputbar {
+    text-color: @primary;
+}
+
+prompt-box {
+    background-color: transparent;
+}
+
+prompt {
+    background-color: transparent;
+    padding: 0px 4px;
+    text-color:       @primary;
+}
+
+listview {
+    padding:      2px 0px;
+    scrollbar:    false;
+    border-color: @background3;
+    spacing:      2px ;
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+}
+
+entry {
+    placeholder: "";
+    cursor: pointer;
+    background-color: @background1;
+    text-color: @primary;
+}
+
+num-filtered-rows {
+    expand:     false;
+    text-color: @quaternary;
+}
+
+num-rows {
+    expand:     false;
+    text-color: @quaternary;
+}
+
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: @quaternary;
+}
+
+overlay {
+    padding:          0px 0.2000em ;
+    background-color: @background1;
+    foreground-color: @background1;
+    margin:           0px 0.2000em ;
+    text-color:       @background1;
+}
+
+case-indicator {
+    spacing:    0;
+    text-color: @primary;
+}
+
+element {
+    border-radius: 8px;
+    orientation: horizontal;
+    background-color: @background1;
+    children: [ element-text ];
+    spacing: 5px;
+}
+
+element normal.normal {
+    background-color: @background1;
+    text-color:       @primary;
+}
+
+element normal.urgent {
+    background-color: @important;
+    text-color:       @primary;
+}
+
+element normal.active {
+    background-color: @background2;
+    text-color:       @primary;
+}
+
+element alternate.normal {
+    background-color: @background1;
+    text-color:       @primary;
+}
+
+element alternate.urgent {
+    background-color: @important;
+    text-color:       @primary;
+}
+
+element alternate.active {
+    background-color: @background2;
+    text-color:       @primary;
+}
+
+element selected.normal {
+    background-color: @cyan;
+    text-color:       @primary;
+}
+
+element selected.urgent {
+    background-color: @important;
+    text-color:       @primary;
+}
+
+element selected.active {
+    background-color: @cyan;
+    text-color:       @primary;
+}
+
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    highlight:        inherit;
+    vertical-align:   0.50;
+    text-color:       @primary;
+    padding: 0px 4px;
+    text-transform: lowercase;
+}
+
+element-icon {
+    size: 1em;
+}

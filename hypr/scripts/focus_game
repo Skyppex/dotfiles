@@ -1,0 +1,60 @@
+#!/usr/bin/nu
+
+def hypr-parse [
+    --double-header(-d)
+]: string -> table {
+    let inputs = $in 
+    | split row -r "\r?\n\r?\n" 
+    | each { |it| lines } 
+    | where ($it | is-not-empty)
+
+    mut table = []
+
+    for input in $inputs { 
+        mut record = {}
+        let rest = $input | skip (if $double_header { 2 } else { 1 })
+
+        for entry in $rest { 
+            let match = $entry 
+            | each { |it|
+                $it | split row ": " | str trim
+            }
+            # | regex '\s*(.+?):\s*(.*)'
+
+            $record = $record 
+            | insert ($match | get 0) ($match | get 1)
+        }
+
+        $table = $table | append $record
+    }
+
+    $table
+}
+
+def main [] {
+    let steam_apps = hyprctl clients 
+    | hypr-parse
+    | select initialClass initialTitle
+    | where ($it.initialClass | str starts-with "steam_app_")
+    | where ($it.initialTitle | is-not-empty)
+
+    if ($steam_apps | length) == 0 {
+        return
+    }
+
+    let focus = if ($steam_apps | length) == 1 {
+        $steam_apps | first | get initialClass
+    } else {
+        let selected = $steam_apps 
+        | get initialTitle
+        | to text
+        | rofi -dmenu -p "games"
+
+        $steam_apps 
+        | where ($it.initialTitle == $selected) 
+        | first 
+        | get initialClass
+    }
+
+    hyprctl dispatch focuswindow $"class:($focus)"
+}

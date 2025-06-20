@@ -642,3 +642,10 @@ gai
 yolo
 sbyte
 asc
+rasi
+mainbox
+inputbar
+listview
+scrollbar
+textbox
+focuswindow
