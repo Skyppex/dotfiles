@@ -650,3 +650,5 @@ scrollbar
 textbox
 focuswindow
 miow
+nixos
+nixpkg
