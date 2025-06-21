@@ -72,8 +72,6 @@
           slack
           spotify
           starship
-          steam
-          swww
           thunderbird
           tldr
           tree-sitter

@@ -1,4 +1,4 @@
-#!/usr/bin/nu
+#!/usr/bin/env nu
 
 let pid_file = "/tmp/hypr/wf-recording.pid"
 let out = "/tmp/hypr/recording.mp4"

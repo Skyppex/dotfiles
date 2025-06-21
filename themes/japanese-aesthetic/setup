@@ -1,4 +1,4 @@
-#!/usr/bin/nu
+#!/usr/bin/env nu
 
 let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let theme = $themes | path join "japanese-aesthetic"
@@ -53,6 +53,7 @@ let conf = $kvps | each { |it|
 | append $"$background_h = ($background_h_path)"
 | append $"$background_v = ($background_v_path)"
 | append $"$background_h_greet = ($background_h_greet_path)"
+| append $"$cursor_theme = japanese-aesthetic"
 
 let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/variables.conf")
 $conf | to text | save -f $path
@@ -259,6 +260,9 @@ $mako | str join "\n" | to text | save -f $path
 
 let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
 cp --force $path ($chezmoi_mako_path | path join "config")
+
+let cursor_theme_path = ($theme | path join "cursor/rose-pine-hyprcursor")
+cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 
 chezmoi apply --force
 

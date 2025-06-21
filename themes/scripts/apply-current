@@ -1,4 +1,4 @@
-#!/usr/bin/nu
+#!/usr/bin/env nu
 
 let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let current = open ($themes | path join "current.toml")

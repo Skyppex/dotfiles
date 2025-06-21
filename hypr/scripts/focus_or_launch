@@ -1,4 +1,4 @@
-#!/usr/bin/nu
+#!/usr/bin/env nu
 
 def --wrapped main [focus: string, ...launch] {
     let focused = hyprctl dispatch focuswindow $"class:($focus)"
