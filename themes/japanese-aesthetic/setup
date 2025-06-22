@@ -256,7 +256,7 @@ cp --force $path ($chezmoi_starship_path | path join "starship.toml")
 
 let mako = [
     `# Style`,
-    `font=JetBrains`,
+    ([`font=`, $metadata.fonts.primary-style] | str join ""),
     ``,
     ([`background-color=`, $colors.background1] | str join ""),
     ([`text-color=`, $colors.primary] | str join ""),
