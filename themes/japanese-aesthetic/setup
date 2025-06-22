@@ -5,6 +5,8 @@ let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
 
 let colors = open ($theme | path join "colors.toml") | get $config.variant
+let metadata = open ($theme | path join "metadata.toml")
+let fonts = $metadata | get fonts
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
 let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h greet
@@ -12,7 +14,10 @@ let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper
 let keys = $colors | columns
 let values = $colors | values
 let kvps = $keys | zip $values
-print 1
+
+let font_keys = $fonts | columns
+let font_values = $fonts | values
+let font_kvps = $font_keys | zip $font_values
 
 # setup colors for eww
 
@@ -77,6 +82,11 @@ let conf = $kvps_lock | each { |it|
     let value = $it | get 1
     $"$($key) = ($value | str replace "#" "")"
 } 
+| append ($font_kvps | each { |it|
+    let key = $it | get 0
+    let value = $it | get 1
+    $"$font_($key | str replace -a "-" "_") = ($value)"
+})
 | append $"$background_v = ($lock_background_v_path)"
 | append $"$background_h_greet = ($lock_background_h_greet_path)"
 
@@ -87,21 +97,28 @@ $conf | to text | save -f $path
 let chezmoi_hypr_path = ($env.CHEZMOI_PATH | path join "hypr")
 cp --force $path ($chezmoi_hypr_path | path join "variables_lock.conf")
 
-# setup rofi colors
+# setup rofi
 
 let rofi = "* {" | append ($kvps | each { |it| 
     let key = $it | get 0
     let value = $it | get 1
     $"\t($key): ($value);"
-} | append "}") | to text
+}
+| append ($font_kvps | each { |it|
+    let key = $it | get 0
+    let value = $it | get 1
+    $"\tfont-($key): \"($value) 10\";"
+})
+| append "}") 
+| to text
 
 let rofi_root = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/rofi")
 let rofi_config_path = $rofi_root | path join "config.rasi"
-let rofi_colors_path = $rofi_root | path join "colors.rasi"
-$rofi | to text | save -f $rofi_colors_path
+let rofi_variables_path = $rofi_root | path join "variables.rasi"
+$rofi | to text | save -f $rofi_variables_path
 
 let chezmoi_rofi_path = ($env.CHEZMOI_PATH | path join "rofi")
-cp --force $rofi_colors_path ($chezmoi_rofi_path | path join "colors.rasi")
+cp --force $rofi_variables_path ($chezmoi_rofi_path | path join "variables.rasi")
 
 if not ($chezmoi_rofi_path | path join "config.rasi" | path exists) {
     hook --force --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")

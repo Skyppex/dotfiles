@@ -1,0 +1,27 @@
+* {
+	primary: #fbf1c7;
+	secondary: #ebdbb2;
+	tertiary: #d5c4a1;
+	quaternary: #bdae93;
+	background0: #32302f;
+	background1: #3c3836;
+	background2: #504945;
+	background3: #665c54;
+	pink: #d3869b;
+	red: #c14a4a;
+	orange: #e5915a;
+	yellow: #d8a657;
+	green: #66ba83;
+	cyan: #83a598;
+	blue: #4786ab;
+	purple: #b16286;
+	active: #ebdbb2;
+	inactive: #3c3836;
+	error: #c14a4a;
+	warning: #d8a657;
+	success: #66ba83;
+	working: #076678;
+	important: #e5915a;
+	font-primary-style: "The Last Shuriken 10";
+	font-secondary-style: "Japan Daisuki 10";
+}

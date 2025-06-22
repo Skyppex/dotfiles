@@ -1,11 +1,11 @@
-@import "colors"
+@import "variables"
 
 window {
     border: 2px;
     border-radius: 10;
     border-color: @secondary;
     background-color: @background1;
-	font: "Electroharmonix 10";
+    font: @font-primary-style;
 }
 
 inputbar {
@@ -124,9 +124,9 @@ element-text {
     background-color: transparent;
     cursor:           inherit;
     highlight:        inherit;
-    vertical-align:   0.50;
+    vertical-align:   1; // just normalize it or something
+    padding: 2px 4px -2px 4px; // trickery to align the text in the center
     text-color:       @primary;
-    padding: 0px 4px;
     text-transform: lowercase;
 }
 
