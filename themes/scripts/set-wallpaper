@@ -5,13 +5,9 @@ while (swww query | complete | get exit_code) != 0 {
 }
 
 # horizontal wallpaper
-echo "aaaa" | save ~/.local/share/chezmoi/logs.txt -f
 let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-echo "bbbb" | save ~/.local/share/chezmoi/logs.txt -a
 swww img --outputs "DP-1" --transition-duration=1 $path
 
 # vertical wallpaper
-echo "cccc" | save ~/.local/share/chezmoi/logs.txt -a
 let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
-echo "dddd" | save ~/.local/share/chezmoi/logs.txt -a
 swww img --outputs "DP-2" --transition-duration=1 $path
