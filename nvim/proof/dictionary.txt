@@ -652,3 +652,4 @@ focuswindow
 miow
 nixos
 nixpkg
+shuriken
