@@ -12,26 +12,22 @@ scrolloff = 10
 wrap = "no"
 
 [opener]
-edit = [
-	{ run = "nvim %*",   block = true, for = "windows" },
-]
+edit = [{ run = "nvim %*", block = true, for = "windows" }]
 play = [
-	{ run = '"C:\Program Files\mpv.exe" %*', orphan = true, for = "windows" }
+  { run = '"C:\Program Files\mpv.exe" %*', orphan = true, for = "windows" },
 ]
-open = [
-	{ run = 'xdg-open "$@"', desc = "Open" },
-]
+open = [{ run = 'xdg-open "$@"', desc = "Open" }]
 
 [open]
 rules = [
-	{ mime = "text/*", use = "edit" },
-	{ mime = "video/*", use = "play" },
-	{ mime = "application/json", use = "edit" },
+  { mime = "text/*", use = "edit" },
+  { mime = "video/*", use = "play" },
+  { mime = "application/json", use = "edit" },
 
-	{ name = "*.json", use = "edit" },
+  { name = "*.json", use = "edit" },
 
-	# Multiple openers for a single rule
-	{ name = "*.html", use = [ "open", "edit" ] },
+  # Multiple openers for a single rule
+  { name = "*.html", use = ["open", "edit"] },
 ]
 
 [which]

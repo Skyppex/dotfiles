@@ -33,7 +33,9 @@
           dotnet-runtime
           dotnet-sdk
           eww
+          fastfetch
           fd
+          file
           fzf
           gimp
           git
@@ -56,6 +58,7 @@
           lens
           lua
           mako
+          man
           meson
           mods
           mpv
@@ -67,11 +70,14 @@
           ollama
           openssh
           pastel
+          powershell
+          ripgrep
           rustup
           skate
           slack
           spotify
           starship
+          surrealdb
           thunderbird
           tldr
           tree-sitter
@@ -79,10 +85,6 @@
           yazi
           zen-browser
           zoxide
-          powershell
-          fastfetch
-          man
-          surrealdb
         ];
       };
     };

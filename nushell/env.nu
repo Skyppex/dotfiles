@@ -124,11 +124,13 @@ match ($env.HOSTNAME) {
         $env.CODE = ('~/code' | path expand)
         $env.LANG = "en_US"
         $env.NU_PLUGIN_DIRS = $env.NU_LIB_DIRS | append $"($env.SCOOP)/persist/rustup/.cargo/bin"
+        $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
         plugin add $"($env.SCOOP)/persist/rustup/.cargo/bin/nu_plugin_regex.exe"
     },
     "DESKTOP-RRC642H" => {
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
+        $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
     },
     "skypex" => {
         $env.DEV = ('~/dev' | path expand)
@@ -174,7 +176,6 @@ $env.PROJECTS = $"($env.CODE)/projects"
 $env.EDITOR = "nvim"
 
 $env.AWS_PROFILE = "dev"
-$env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 $env.DOCKER_CONTEXT = "desktop-linux"
 

@@ -5,7 +5,7 @@ def --env y [...args] {
     let cwd = (open $tmp)
 
     if $cwd != "" and $cwd != $env.PWD {
-        cd $cwd
+        enter $cwd
     }
 
     rm -fp $tmp
