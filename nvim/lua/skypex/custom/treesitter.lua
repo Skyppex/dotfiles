@@ -191,6 +191,11 @@ local filetype_map = {
 		commentstring = "#%s",
 		parser = "bash",
 	},
+	{
+		pattern = "*.envrc",
+		filetype = "",
+		commentstring = "#%s",
+	},
 }
 
 local parsers = require("nvim-treesitter.parsers")

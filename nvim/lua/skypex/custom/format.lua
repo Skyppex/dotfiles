@@ -52,6 +52,7 @@ local formatters_by_ft = {
 	http = { "kulala-fmt", "injected" },
 	rest = { "kulala-fmt", "injected" },
 	kotlin = { "ktfmt", "injected" },
+	nix = { "nixfmt", "injected" },
 	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 }
 

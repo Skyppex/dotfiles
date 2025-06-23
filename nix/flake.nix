@@ -29,6 +29,7 @@
           chezmoi
           cliphist
           difftastic
+          direnv
           discord
           dotnet-runtime
           dotnet-sdk

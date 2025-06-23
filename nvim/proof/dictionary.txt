@@ -653,3 +653,6 @@ miow
 nixos
 nixpkg
 shuriken
+direnv
+nixfmt
+envrc
