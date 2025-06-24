@@ -262,6 +262,7 @@ let mako = [
     ([`text-color=`, $colors.primary] | str join ""),
     ([`border-color=`, $colors.secondary] | str join ""),
     ([`progress-color=over `, $colors.background2] | str join ""),
+    `output=DP-2`,
     ``,
     `border-radius=12`,
     ``,
