@@ -396,9 +396,9 @@ def "dn add" [
 }
 
 # Dotnet test with some help to find what file you wish to test
-def "dn test" [
+def --wrapped "dn test" [
     --verbose(-v) # Print verbose output
-    name?: string
+    ...rest
 ] {
     let test_folders = ls -f
     | get name
@@ -507,11 +507,9 @@ def "dn test" [
         print $"Namespaces: ($namespaces)"
     }
 
-    let name = if $name == null { "" } else { $name }
-
     let selected = $namespaces 
     | to text 
-    | fzf --height 40% --layout=reverse -0 -1 --query $name
+    | fzf --height 40% --layout=reverse -0 -1
 
     if $verbose {
         print $"Selected: ($selected)"
@@ -524,16 +522,16 @@ def "dn test" [
 
     if $selected == "Test All" {
         print $"Running all tests in WD: ($env.PWD)"
-        dotnet test
+        dotnet test ...$rest
         return
     }
 
     print $"Running tests for: ($selected) in WD: ($env.PWD)"
-    dotnet test --filter $"FullyQualifiedName~($selected)"
+    dotnet test --filter $"FullyQualifiedName~($selected)" ...$rest
 }
 
-def "dn test all" [] {
-    dotnet test
+def --wrapped "dn test all" [...rest] {
+    dotnet test ...$rest
 }
 
 def "dn ref add" [

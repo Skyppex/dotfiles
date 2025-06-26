@@ -3,12 +3,12 @@ def find-projects []: nothing -> table<type: string, opt: any> {
     let options = fd --type f --max-depth 1 --regex '^(Cargo\.toml|go\.mod|.*\.sln|.*\.csproj|.*\.kt|build\.gradle\.kts|gradlew(\.bat)?)$'
 
     if ($options | is-empty) {
-        print 'Not a recognized project directory'
-        print 'Currently recognized project types are:'
-        print ' - Rust (^Cargo.toml$)'
-        print ' - Go (^go.mod$)'
-        print ' - C# (.*\.sln$, .*\.csproj$)'
-        print ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
+        print --stderr 'Not a recognized project directory'
+        print --stderr 'Currently recognized project types are:'
+        print --stderr ' - Rust (^Cargo.toml$)'
+        print --stderr ' - Go (^go.mod$)'
+        print --stderr ' - C# (.*\.sln$, .*\.csproj$)'
+        # print --stderr ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
         return
     }
 
@@ -53,7 +53,7 @@ def select-project [
     }
 
     if ($selected | is-empty) {
-        print "No project type selected"
+        print --stderr "No project type selected"
         return
     }
 
@@ -68,10 +68,15 @@ def --wrapped build [
     ...rest: string
 ] {
     let options = find-projects
+
+    if ($options | is-empty) {
+        return
+    }
+
     let selected = $options | select-project --multi
 
     if ($selected | is-empty) {
-        print "No project type selected"
+        print --stderr "No project type selected"
         return
     }
 
@@ -102,10 +107,15 @@ alias b = build
 
 def --wrapped run [...rest] {
     let options = find-projects
+
+    if ($options | is-empty) {
+        return
+    }
+
     let selected = $options | select-project | get 0
 
     if ($selected | is-empty) {
-        print "No project type selected"
+        print --stderr "No project type selected"
         return
     }
 
@@ -122,3 +132,44 @@ def --wrapped run [...rest] {
     }
 }
 
+alias r = run
+
+def --wrapped test [
+    --all(-a)
+    ...rest
+] {
+    let options = find-projects
+
+    if ($options | is-empty) {
+        return
+    }
+
+    let selected = $options | select-project | get 0
+
+    if ($selected | is-empty) {
+        print --stderr "No project type selected"
+        return
+    }
+
+    match $selected.type {
+        "Rust" => {
+            if $all {
+                cargo test --workspace --all-targets ...$rest
+            } else {
+                cargo test ...$rest
+            }
+        }
+        "C#" => {
+            if $all {
+                dn test all ...$rest
+            } else {
+                dn test
+            }
+        }
+        "Go" => {
+            go test ...$rest
+        }
+    }
+}
+
+alias t = test
