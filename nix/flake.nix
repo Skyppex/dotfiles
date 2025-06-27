@@ -18,75 +18,89 @@
           allowUnfree = true;
         };
       };
+
+    isWSL = builtins.getEnv "WSL_DISTRO_NAME" != "";
+
+      commonTools = with pkgs; [
+        astroterm
+        btop
+        cava
+        chezmoi
+        difftastic
+        direnv
+        dotnet-runtime
+        dotnet-sdk
+        fastfetch
+        fd
+        file
+        fzf
+        git
+        github-cli
+        gitleaks
+        gitoxide
+        glow
+        go
+        gping
+        gum
+        hyperfine
+        imagemagick
+        jq
+        kubectl
+        lazydocker
+        lazygit
+        lua
+        man
+        meson
+        mods
+        neovim
+        nodejs
+        nushell
+        ollama
+        openssh
+        pastel
+        powershell
+        ripgrep
+        rustup
+        skate
+        starship
+        surrealdb
+        tldr
+        tree-sitter
+        unityhub
+        yazi
+        zoxide
+      ];
+
+      desktopOnlyTools = with pkgs; [
+        cliphist
+        discord
+        eww
+        gimp
+        grim
+        inkscape
+        jetbrains-toolbox
+        lens
+        mako
+        mpv
+        mpvpaper
+        neovim
+        noto-fonts-emoji
+        slack
+        spotify
+        thunderbird
+        unityhub
+        zen-browser
+      ];
+
+      finalTools = if isWSL then
+        commonTools
+      else
+        commonTools ++ desktopOnlyTools;
     in
       {
       packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.buildEnv {
         name = "skypex-tools";
-        paths = with pkgs; [
-          astroterm
-          btop
-          cava
-          chezmoi
-          cliphist
-          difftastic
-          direnv
-          discord
-          dotnet-runtime
-          dotnet-sdk
-          eww
-          fastfetch
-          fd
-          file
-          fzf
-          gimp
-          git
-          github-cli
-          gitleaks
-          gitoxide
-          glow
-          go
-          gping
-          grim
-          gum
-          hyperfine
-          imagemagick
-          inkscape
-          jetbrains-toolbox
-          jq
-          kubectl
-          lazydocker
-          lazygit
-          lens
-          lua
-          mako
-          man
-          meson
-          mods
-          mpv
-          mpvpaper
-          neovim
-          nodejs
-          noto-fonts-emoji
-          nushell
-          ollama
-          openssh
-          pastel
-          powershell
-          ripgrep
-          rustup
-          skate
-          slack
-          spotify
-          starship
-          surrealdb
-          thunderbird
-          tldr
-          tree-sitter
-          unityhub
-          yazi
-          zen-browser
-          zoxide
-        ];
+        paths = finalTools;
       };
     };
 }
