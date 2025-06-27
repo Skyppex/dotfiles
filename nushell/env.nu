@@ -118,8 +118,8 @@ $env.HOSTNAME = (sys host | get hostname)
 $env.OS = (sys host | get name | str downcase)
 $env.OS_VERSION = (sys host | get long_os_version)
 
-match ($env.HOSTNAME) {
-    "brage-pc" => {
+match [$env.HOSTNAME, $env.OS] {
+    ["brage-pc", "windows"] => {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/code' | path expand)
         $env.LANG = "en_US"
@@ -127,12 +127,45 @@ match ($env.HOSTNAME) {
         $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
         plugin add $"($env.SCOOP)/persist/rustup/.cargo/bin/nu_plugin_regex.exe"
     },
-    "DESKTOP-RRC642H" => {
+    ["DESKTOP-RRC642H", "windows"] => {
         $env.CODE = "D:/code"
         $env.LANG = "en_US"
         $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
     },
-    "skypex" => {
+    ["brage-pc", "arch linux"] => {
+        $env.DEV = ('~/dev' | path expand)
+        $env.CODE = ('~/dev/code' | path expand)
+        $env.DEV_BIN = ('~/dev/bin' | path expand)
+        plugin add "~/.cargo/bin/nu_plugin_regex"
+
+        let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+
+        if ($nix_path | path exists) {
+            let more_env = bash -c $"source ($nix_path) && env" | lines
+            mut env_vars = {}
+
+            let ignore = [
+                FILE_PWD
+                CURRENT_FILE
+                PWD
+            ]
+
+            for it in $more_env { 
+                let split = $it | split row --number 2 "="
+                let key = $split.0
+
+                if ($ignore | any { |it| $key == $it }) {
+                    continue
+                }
+
+                let value = $split.1
+                $env_vars = ($env_vars | merge { $key: $value })
+            }
+
+            load-env $env_vars
+        }
+    }
+    ["skypex", "arch linux"] => {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
