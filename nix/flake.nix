@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { nixpkgs, zen-browser, ... }: 
+  outputs = { self, nixpkgs, zen-browser, ... }:
     let 
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -18,8 +18,6 @@
           allowUnfree = true;
         };
       };
-
-    isWSL = builtins.getEnv "WSL_DISTRO_NAME" != "";
 
       commonTools = with pkgs; [
         astroterm
@@ -91,16 +89,20 @@
         unityhub
         zen-browser
       ];
-
-      finalTools = if isWSL then
-        commonTools
-      else
-        commonTools ++ desktopOnlyTools;
     in
-      {
-      packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.buildEnv {
-        name = "skypex-tools";
-        paths = finalTools;
+    {
+      packages.${system} = {
+        default = self.packages.${system}.desktop;
+
+        desktop = pkgs.buildEnv {
+          name = "skypex-tools";
+          paths = commonTools ++ desktopOnlyTools;
+        };
+
+        wsl = pkgs.buildEnv {
+          name = "skypex-tools-wsl";
+          paths = commonTools;
+        };
       };
     };
 }
