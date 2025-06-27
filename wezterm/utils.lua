@@ -41,6 +41,11 @@ local function is_work_computer()
 	return get_home():find("brage.ingebrigtsen") ~= nil
 end
 
+--- @return boolean
+local function is_work_computer_linux()
+	return get_home():find("/home/brage") ~= nil
+end
+
 --- @return string?
 local function get_game_dev_path()
 	if is_home_computer_windows() then
@@ -81,6 +86,7 @@ return {
 	is_home_computer_windows = is_home_computer_windows,
 	is_home_computer_linux = is_home_computer_linux,
 	is_work_computer = is_work_computer,
+	is_work_computer_linux = is_work_computer_linux,
 	get_code_path = get_code_path,
 	get_temp_path = get_temp_path,
 	get_game_dev_path = get_game_dev_path,
