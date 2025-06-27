@@ -1,3 +1,9 @@
+[style]
+border-outer-radius = "0"
+border-inner-radius = "0"
+border-size = "2"
+border-margin = "0"
+
 [light]
 primary = "#32302f"
 secondary = "#3c3836"

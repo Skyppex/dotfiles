@@ -4,15 +4,20 @@ let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
 
-let colors = open ($theme | path join "colors.toml") | get $config.variant
+let colors = open ($theme | path join "style.toml") | get $config.variant
+let style = open ($theme | path join "style.toml") | get style
 let metadata = open ($theme | path join "metadata.toml")
 let fonts = $metadata | get fonts
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
 let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h greet
 
-let keys = $colors | columns
-let values = $colors | values
+let color_keys = $colors | columns
+let style_keys = $style | columns
+let keys = $color_keys ++ $style_keys
+let color_values = $colors | values
+let style_values = $style | values
+let values = $color_values ++ $style_values
 let kvps = $keys | zip $values
 
 let font_keys = $fonts | columns
@@ -27,11 +32,11 @@ let scss = $kvps | each { |it|
     $"$($key): ($value);"
 } | to text
 
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.scss")
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/styles.scss")
 $scss | save -f $path
 
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
-cp --force $path ($chezmoi_eww_path | path join "colors.scss")
+cp --force $path ($chezmoi_eww_path | path join "styles.scss")
 
 # setup colors for browser
 
@@ -42,16 +47,17 @@ let css = ":root {" | append ($kvps | each { |it|
 })
 | append "}"
 
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.css")
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/styles.css")
 $css | to text | save -f $path
 
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "zen-browser/chrome")
-cp --force $path ($chezmoi_eww_path | path join "colors.css")
+cp --force $path ($chezmoi_eww_path | path join "styles.css")
 
 # setup variables for hyprland
 
 let conf = $kvps | each { |it| 
-    let key = $it | get 0
+    print $it
+    let key = $it | get 0 | str replace --all "-" "_"
     let value = $it | get 1
     $"$($key) = ($value | str replace "#" "")"
 } 
@@ -68,17 +74,17 @@ cp --force $path ($chezmoi_hypr_path | path join "variables.conf")
 
 # setup variables for hyprlock
 
-let colors_lock = open ($theme | path join "colors.toml") | get $config.lock_variant
+let colors_lock = open ($theme | path join "style.toml") | get $config.lock_variant
 
-let keys_lock = $colors_lock | columns
-let values_lock = $colors_lock | values
+let keys_lock = $colors_lock | columns | append $style_keys
+let values_lock = $colors_lock | values | append $style_values
 let kvps_lock = $keys_lock | zip $values_lock
 
 let lock_background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant v
 let lock_background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant h greet
 
 let conf = $kvps_lock | each { |it| 
-    let key = $it | get 0
+    let key = $it | get 0 | str replace --all "-" "_"
     let value = $it | get 1
     $"$($key) = ($value | str replace "#" "")"
 } 
@@ -101,7 +107,13 @@ cp --force $path ($chezmoi_hypr_path | path join "variables_lock.conf")
 
 let rofi = "* {" | append ($kvps | each { |it| 
     let key = $it | get 0
-    let value = $it | get 1
+    mut value = $it | get 1
+    print $value
+
+    if ($key | str contains "border") {
+        $value = $"($value)px"
+    }
+
     $"\t($key): ($value);"
 }
 | append ($font_kvps | each { |it|
@@ -127,7 +139,7 @@ if not ($chezmoi_rofi_path | path join "config.rasi" | path exists) {
 # setup lua colors
 
 let lua = "return {" | append ($kvps | each { |it| 
-    let key = $it | get 0
+    let key = $it | get 0 | str replace --all "-" "_"
     let value = $it | get 1
     $"\t($key) = \"($value)\","
 }) | append "}" | to text

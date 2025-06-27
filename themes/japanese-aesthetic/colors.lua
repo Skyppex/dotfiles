@@ -22,4 +22,8 @@ return {
 	success = "#66ba83",
 	working = "#076678",
 	important = "#e5915a",
+	border_outer_radius = "0",
+	border_inner_radius = "0",
+	border_size = "2",
+	border_margin = "0",
 }

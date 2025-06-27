@@ -22,6 +22,10 @@
 	success: #66ba83;
 	working: #076678;
 	important: #e5915a;
+	border-outer-radius: 0px;
+	border-inner-radius: 0px;
+	border-size: 2px;
+	border-margin: 0px;
 	font-primary-style: "The Last Shuriken 10";
 	font-secondary-style: "Japan Daisuki 10";
 }

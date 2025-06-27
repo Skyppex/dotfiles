@@ -22,4 +22,8 @@
   --success: #66ba83;
   --working: #076678;
   --important: #e5915a;
+  --border-outer-radius: 0;
+  --border-inner-radius: 0;
+  --border-size: 2;
+  --border-margin: 0;
 }
