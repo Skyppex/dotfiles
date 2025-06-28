@@ -56,7 +56,6 @@ cp --force $path ($chezmoi_eww_path | path join "styles.css")
 # setup variables for hyprland
 
 let conf = $kvps | each { |it| 
-    print $it
     let key = $it | get 0 | str replace --all "-" "_"
     let value = $it | get 1
     $"$($key) = ($value | str replace "#" "")"
@@ -108,7 +107,6 @@ cp --force $path ($chezmoi_hypr_path | path join "variables_lock.conf")
 let rofi = "* {" | append ($kvps | each { |it| 
     let key = $it | get 0
     mut value = $it | get 1
-    print $value
 
     if ($key | str contains "border") {
         $value = $"($value)px"
