@@ -658,3 +658,5 @@ nixfmt
 envrc
 valign
 wireplumber
+rustfmt
+toolchain
