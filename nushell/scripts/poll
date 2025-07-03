@@ -1,0 +1,34 @@
+#!/usr/bin/env nu
+
+def --wrapped main [
+    --sleep: duration
+    --help(-h)
+    ...rest
+] {
+    if $help {
+        help follow
+        return
+    }
+
+    let sleep = if ($sleep | is-empty) {
+        1sec
+    } else {
+        $sleep
+    }
+
+    let joined = $rest | str join ' '
+
+    if ($joined | is-empty) {
+        error make { msg: "no command to poll" }
+    }
+
+    loop {
+        let result = nu --commands $joined
+
+        if ($result | is-not-empty) {
+            print $result
+        }
+
+        sleep $sleep
+    }
+}
