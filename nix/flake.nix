@@ -21,6 +21,7 @@
 
       commonTools = with pkgs; [
         astroterm
+        bat
         btop
         cava
         chezmoi
@@ -66,6 +67,7 @@
         tree-sitter
         unityhub
         yazi
+        zip
         zoxide
       ];
 
