@@ -112,9 +112,18 @@ end
 attempt.setup({
 	ext_options = { "lua", "py", "cs", "js", "rs", "ar", "http", "" },
 	run = {
-		cs = { "w", "!dotnet script %" },
-		py = { "w !python" }, -- Either table of strings or lua functions
-		js = { "w !node" },
+		-- cs = { "w", "!dotnet script %" },
+		cs = function(_, bufnr)
+			run_attempt("dotnet script %", { vim.api.nvim_buf_get_name(bufnr) })
+		end,
+		-- py = { "w !python" }, -- Either table of strings or lua functions
+		py = function(_, bufnr)
+			run_attempt("python", { vim.api.nvim_buf_get_name(bufnr) })
+		end,
+		-- js = { "w !node" },
+		js = function(_, bufnr)
+			run_attempt("node", { vim.api.nvim_buf_get_name(bufnr) })
+		end,
 		lua = { "w", "luafile %" },
 		rs = { "w", "!rustc % && nu -c 'let ex = (echo %' | str replace '.rs' ''); exec $ex" },
 		ar = function(_, bufnr)
@@ -125,7 +134,9 @@ attempt.setup({
 
 require("telescope").load_extension("attempt")
 
-local nmap = require("skypex.utils").nmap
+local utils = require("skypex.utils")
+local nmap = utils.nmap
+local xmap = utils.xmap
 
 nmap("<leader>AN", attempt.new_select, "New Attempt")
 nmap("<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
@@ -133,3 +144,81 @@ nmap("<leader>AR", attempt.run, "Run Attempt")
 nmap("<leader>AD", attempt.delete_buf, "Delete Attempt")
 nmap("<leader>AC", attempt.rename_buf, "Rename Attempt")
 nmap("<leader>AS", "<cmd>Telescope attempt<CR>", "Search Attempts")
+
+local function get_keys(tbl)
+	local keys = {}
+	for key, _ in pairs(tbl) do
+		table.insert(keys, key)
+	end
+	return keys
+end
+
+local function get_visual_selection(start_pos, end_pos)
+	local lines = vim.fn.getline(start_pos[2], end_pos[2])
+
+	if not lines then
+		return {}
+	end
+
+	-- Adjust for partial lines
+	lines[#lines] = string.sub(lines[#lines], 1, end_pos[3])
+	lines[1] = string.sub(lines[1], start_pos[3], -1)
+
+	return lines
+end
+
+local attempt_config = require("attempt.config").opts
+
+xmap("<leader>AR", function()
+	if not attempt_config then
+		attempt_config = require("attempt.config").opts
+
+		if not attempt_config then
+			vim.notify("Attempt configuration not found", vim.log.levels.ERROR)
+			return
+		end
+	end
+
+	local current_buf = vim.api.nvim_get_current_buf()
+	vim.cmd("normal! gv")
+	local start_pos = vim.fn.getpos("'<")
+	local end_pos = vim.fn.getpos("'>")
+
+	if start_pos[2] == 0 or end_pos[2] == 0 then
+		vim.notify("No visual selection found", vim.log.levels.WARN)
+		return
+	end
+
+	local lines = get_visual_selection(start_pos, end_pos)
+	if #lines == 0 then
+		vim.notify("No lines selected", vim.log.levels.WARN)
+		return
+	end
+
+	local options = get_keys(attempt_config.run)
+
+	vim.ui.select(options, {}, function(choice)
+		if not choice then
+			return
+		end
+
+		local autoformat_disabled = vim.g.disable_autoformat or false
+		vim.g.disable_autoformat = true
+		attempt.new({
+			ext = choice,
+		}, function(file_entry)
+			local path = file_entry.path
+			local bufnr = vim.fn.bufnr(path, false)
+
+			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+			vim.api.nvim_buf_call(bufnr, function()
+				vim.cmd("write")
+			end)
+
+			attempt.run(bufnr)
+			vim.api.nvim_set_current_buf(current_buf)
+			attempt.delete_buf(true, bufnr)
+			vim.g.disable_autoformat = autoformat_disabled
+		end)
+	end)
+end, "Run Selection as Attempt")

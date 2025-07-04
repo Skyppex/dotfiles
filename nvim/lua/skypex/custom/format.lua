@@ -28,7 +28,7 @@ local formatters_by_ft = {
 	-- Runs the single formatter
 	lua = { "stylua", "injected" },
 	-- Runs each formatter sequentially
-	python = { "isort", "black", "injected" },
+	python = { "black", "injected" },
 
 	-- Tries to run each formatter until one succeeds
 	javascript = first_then_injected("prettierd", "prettier"),
@@ -125,7 +125,13 @@ conform.setup({
 		-- languages here or re-enable it for the disabled ones.
 		local disable_filetypes = { c = true, cpp = true }
 		return {
-			lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+			lsp_format = (function()
+				if not disable_filetypes[vim.bo[bufnr].filetype] then
+					return "fallback"
+				end
+
+				return "never"
+			end)(),
 			timeout = 5000,
 		}
 	end,
@@ -143,7 +149,6 @@ vim.api.nvim_create_user_command("FormatToggle", function(args)
 			print("Enabled autoformat on save for all buffers")
 		end
 	else
-		-- FormatDisable! will disable formatting just for this buffer
 		vim.b.disable_autoformat = not vim.b.disable_autoformat
 
 		if vim.b.disable_autoformat then
