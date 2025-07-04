@@ -109,11 +109,7 @@ utils.nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playg
 -- Add local parser for arcana
 local arcana_parser_path = nil
 
-if utils.is_home_computer_linux() then
-	arcana_parser_path = utils.get_code_path() .. "/tree-sitter-arcana/parser.so"
-else
-	arcana_parser_path = utils.get_code_path() .. "/arcana/tree-sitter-arcana/parser.so"
-end
+arcana_parser_path = utils.get_code_path() .. "/tree-sitter-arcana/parser.so"
 
 local stat = vim.loop.fs_stat(arcana_parser_path)
 
@@ -152,16 +148,13 @@ end
 local filetype_map = {
 	{
 		pattern = "*.ar",
-		filetype = "arcana",
-		commentstring = "//%s",
-	},
-	{
-		pattern = "*.ar",
+		ext = "ar",
 		filetype = "arcana",
 		commentstring = "//%s",
 	},
 	{
 		pattern = "csharp",
+		ext = "cs",
 		filetype = "cs",
 		commentstring = "//%s",
 	},
@@ -172,29 +165,44 @@ local filetype_map = {
 	},
 	{
 		pattern = ".dockerignore",
+		ext = "dockerignore",
+		filetype = "gitignore",
+		commentstring = "#%s",
+	},
+	{
+		pattern = ".chezmoiignore",
+		ext = "chezmoiignore",
 		filetype = "gitignore",
 		commentstring = "#%s",
 	},
 	{
 		pattern = "*.cake",
+		ext = "cake",
 		filetype = "cs",
 		commentstring = "//%s",
 	},
 	{
 		pattern = "*.http",
+		ext = "http",
 		filetype = "http",
 		commentstring = "##%s",
 	},
 	{
 		pattern = "*.env",
+		ext = "env",
 		filetype = "dotenv",
 		commentstring = "#%s",
 		parser = "bash",
 	},
 	{
 		pattern = "*.envrc",
+		ext = "envrc",
 		filetype = "",
 		commentstring = "#%s",
+	},
+	{
+		filetype = "template",
+		parser = "gotmpl",
 	},
 }
 
@@ -209,11 +217,27 @@ for _, value in ipairs(filetype_map) do
 		vim.treesitter.language.register(value.parser, value.filetype)
 	end
 
-	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-		pattern = value.pattern,
-		callback = function()
-			vim.bo.filetype = value.filetype
-			vim.bo.commentstring = value.commentstring
-		end,
-	})
+	if value.pattern then
+		vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+			pattern = value.pattern,
+			callback = function()
+				vim.bo.filetype = value.filetype
+				vim.bo.commentstring = value.commentstring
+			end,
+		})
+	end
 end
+
+vim.treesitter.query.add_directive("inject-go-tmpl!", function(_, _, bufnr, _, metadata)
+	local fname = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+	local _, _, ext, _ = string.find(fname, ".*%.(%a+)(%.%a+)")
+
+	for _, value in ipairs(filetype_map) do
+		if value.ext and value.ext == ext then
+			metadata["injection.language"] = value.parser or value.filetype
+			return
+		end
+	end
+
+	metadata["injection.language"] = ext
+end, {})

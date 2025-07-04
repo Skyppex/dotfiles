@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "windows" }}
+{{ if eq .chezmoi.os "windows" }}
 
 # Pseudo alias to bash command from scoop which can parse \r\n line endings
 def --wrapped bash [
@@ -22,6 +22,6 @@ def --wrapped bash [
 # Shorthand for bash
 alias sh = bash
 
-{{- end }}
+{{ end }}
 
 def _ [] {}
