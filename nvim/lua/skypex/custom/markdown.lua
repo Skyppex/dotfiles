@@ -1,6 +1,9 @@
 local rmd = require("render-markdown")
 
 rmd.setup({
+	sign = {
+		enabled = false,
+	},
 	code = {
 		disable_background = true,
 		highlight_border = false,
