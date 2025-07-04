@@ -660,3 +660,5 @@ valign
 wireplumber
 rustfmt
 toolchain
+gotmpl
+chezmoiignore
