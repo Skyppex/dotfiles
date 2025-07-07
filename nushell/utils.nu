@@ -381,6 +381,7 @@ def --wrapped shebang [
     let shebang = $content | lines | first | str substring 2..
 
     let known_shebangs = [
+        "/usr/bin/env -S ", # includes the space due to strip-prefix
         "/usr/bin/env ", # includes the space due to strip-prefix
         "/usr/bin/",
         "/bin/",
