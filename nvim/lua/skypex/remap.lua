@@ -216,6 +216,12 @@ nmap("<leader><leader>c", function()
 		if base_filename ~= vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":t") then
 			local module_name = base_filename:gsub("%.lua$", "")
 			module_name = "skypex.custom." .. module_name
+
+			if package.loaded[module_name] ~= true then
+				vim.notify("Module " .. module_name .. " is not loaded", vim.log.levels.INFO)
+				goto continue
+			end
+
 			package.loaded[module_name] = nil
 
 			local success = pcall(function()
@@ -226,6 +232,8 @@ nmap("<leader><leader>c", function()
 				loaded = loaded + 1
 			end
 		end
+
+		::continue::
 	end
 
 	vim.notify("Reloaded " .. loaded .. " modules", vim.log.levels.INFO)
