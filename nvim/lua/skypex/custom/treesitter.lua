@@ -137,8 +137,8 @@ local registry = {
 		filetype = "arcana",
 	},
 	{
-		lang = "mage",
-		filetype = "arcana",
+		lang = "arcana",
+		filetype = "mage",
 	},
 }
 

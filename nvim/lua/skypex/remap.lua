@@ -150,6 +150,15 @@ nmap("<leader>.", function()
 	end
 end)
 
+-- Newline before :
+nmap("<leader>:", function()
+	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
+	for _ = 1, count do
+		local keys = vim.api.nvim_replace_termcodes("f:i<CR><Esc>l==", true, true, true)
+		vim.api.nvim_feedkeys(keys, "n", false)
+	end
+end)
+
 -- Newline after ,
 nmap("<leader>,", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
@@ -206,8 +215,8 @@ nmap("<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
 
 -- Source config
 nmap("<leader><leader>c", function()
-	local files = vim.fn.glob("**/skypex/custom/*.lua", true, true)
-	vim.notify(vim.inspect(files))
+	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/custom/*.lua", true, true)
+
 	local loaded = 0
 
 	for _, filename in ipairs(files) do
