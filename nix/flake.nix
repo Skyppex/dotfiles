@@ -10,13 +10,11 @@
   };
 
   outputs = { self, nixpkgs, zen-browser, ... }:
-    let 
+    let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         system = system;
-        config = {
-          allowUnfree = true;
-        };
+        config = { allowUnfree = true; };
       };
 
       commonTools = with pkgs; [
@@ -91,8 +89,7 @@
         unityhub
         zen-browser
       ];
-    in
-    {
+    in {
       packages.${system} = {
         default = self.packages.${system}.desktop;
 

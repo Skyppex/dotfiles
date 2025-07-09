@@ -89,7 +89,6 @@ local config = {
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 		{ key = "z", mods = "LEADER|CTRL", action = "TogglePaneZoomState" },
-		{ key = "n", mods = "CTRL", action = act({ SpawnTab = "CurrentPaneDomain" }) },
 		{ key = "n", mods = "SHIFT|CTRL", action = act.ShowLauncher },
 		{ key = "h", mods = "CTRL", action = act({ ActivatePaneDirection = "Left" }) },
 		{ key = "j", mods = "CTRL", action = act({ ActivatePaneDirection = "Down" }) },

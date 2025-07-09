@@ -36,7 +36,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/styles.scss
 $scss | save -f $path
 
 let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
-cp --force $path ($chezmoi_eww_path | path join "styles.scss")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_eww_path | path join "styles.scss")
 
 # setup colors for browser
 
@@ -50,8 +50,8 @@ let css = ":root {" | append ($kvps | each { |it|
 let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/styles.css")
 $css | to text | save -f $path
 
-let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "zen-browser/chrome")
-cp --force $path ($chezmoi_eww_path | path join "styles.css")
+let chezmoi_browser_path = ($env.CHEZMOI_PATH | path join "zen-browser/chrome")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_browser_path | path join "styles.css")
 
 # setup variables for hyprland
 
@@ -69,7 +69,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/variables.c
 $conf | to text | save -f $path
 
 let chezmoi_hypr_path = ($env.CHEZMOI_PATH | path join "hypr")
-cp --force $path ($chezmoi_hypr_path | path join "variables.conf")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_hypr_path | path join "variables.conf")
 
 # setup variables for hyprlock
 
@@ -100,7 +100,7 @@ let path = ($env.CHEZMOI_PATH | path join
 $conf | to text | save -f $path
 
 let chezmoi_hypr_path = ($env.CHEZMOI_PATH | path join "hypr")
-cp --force $path ($chezmoi_hypr_path | path join "variables_lock.conf")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_hypr_path | path join "variables_lock.conf")
 
 # setup rofi
 
@@ -128,10 +128,10 @@ let rofi_variables_path = $rofi_root | path join "variables.rasi"
 $rofi | to text | save -f $rofi_variables_path
 
 let chezmoi_rofi_path = ($env.CHEZMOI_PATH | path join "rofi")
-cp --force $rofi_variables_path ($chezmoi_rofi_path | path join "variables.rasi")
+hook --force --relative $env.CHEZMOI_PATH --source $rofi_variables_path --destination ($chezmoi_rofi_path | path join "variables.rasi")
 
 if not ($chezmoi_rofi_path | path join "config.rasi" | path exists) {
-    hook --force --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")
+    hook --force --relative $env.CHEZMOI_PATH --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")
 }
 
 # setup lua colors
@@ -146,7 +146,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.lua"
 $lua | to text | save -f $path
 
 let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nvim/lua/skypex")
-cp --force $path ($chezmoi_lua_path | path join "colors.lua")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_lua_path | path join "colors.lua")
 
 # setup nushell colors
 
@@ -160,7 +160,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.nu")
 $nushell | to text | save -f $path
 
 let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nushell")
-cp --force $path ($chezmoi_lua_path | path join "colors.nu")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_lua_path | path join "colors.nu")
 
 
 # setup starship
@@ -260,7 +260,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/starship.to
 $starship | str join "\n" | to text | save -f $path
 
 let chezmoi_starship_path = $env.CHEZMOI_PATH
-cp --force $path ($chezmoi_starship_path | path join "starship.toml")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_starship_path | path join "starship.toml")
 
 # setup mako
 
@@ -287,7 +287,7 @@ let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/mako-config
 $mako | str join "\n" | to text | save -f $path
 
 let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
-cp --force $path ($chezmoi_mako_path | path join "config")
+hook --force --relative $env.CHEZMOI_PATH --source $path --destination ($chezmoi_mako_path | path join "config")
 
 let cursor_theme_path = ($theme | path join "cursor/rose-pine-hyprcursor")
 cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
