@@ -662,3 +662,7 @@ rustfmt
 toolchain
 gotmpl
 chezmoiignore
+rfind
+btree
+rsplit
+rstest
