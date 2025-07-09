@@ -354,7 +354,7 @@ def "gr add" [
 def "gr rm" [
     name?: string
 ] {
-    let target = if name == null { gr -fvc } else { gr -fvcq $name }
+    let target = if $name == null { gr -fvc } else { gr -fvcq $name }
 
     if $target == null {
         return
