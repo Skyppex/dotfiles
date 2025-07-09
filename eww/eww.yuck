@@ -71,7 +71,7 @@
   "nu -c '(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk `{print $2}` | into float) * 100'")
 
 (defpoll time :interval "10s"
-  "date '+%H:%M %b %d, %Y'")
+  "date '+%d - %H:%M'")
 
 (defwindow bar
   :monitor "VG27A"
