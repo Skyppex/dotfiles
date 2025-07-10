@@ -1,1 +1,1 @@
-themes/japanese-aesthetic/colors.nu
+../themes/japanese-aesthetic/colors.nu

@@ -1,1 +1,1 @@
-themes/japanese-aesthetic/colors.lua
+../../../themes/japanese-aesthetic/colors.lua
