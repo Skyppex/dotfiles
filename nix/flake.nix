@@ -25,7 +25,6 @@
         chezmoi
         difftastic
         direnv
-        dotnet-runtime
         dotnet-sdk
         fastfetch
         fd
