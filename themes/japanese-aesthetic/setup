@@ -129,10 +129,7 @@ $rofi | to text | save -f $rofi_variables_path
 
 let chezmoi_rofi_path = ($env.CHEZMOI_PATH | path join "rofi")
 hook --force --relative --source $rofi_variables_path --destination ($chezmoi_rofi_path | path join "variables.rasi")
-
-if not ($chezmoi_rofi_path | path join "config.rasi" | path exists) {
-    hook --force --relative --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")
-}
+hook --force --relative --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")
 
 # setup lua colors
 
