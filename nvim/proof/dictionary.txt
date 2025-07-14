@@ -667,3 +667,4 @@ btree
 rsplit
 rstest
 pathdiff
+lpt
