@@ -379,7 +379,7 @@ end)
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
 
-	config.default_prog = { "nu", "--execute", "wsl --cd '~'" }
+	config.default_prog = { "nu" }
 	config.default_cwd = "~"
 	table.insert(config.launch_menu, { label = "nu", args = { "nu" } })
 	table.insert(config.launch_menu, { label = "powershell", args = { "powershell.exe", "-NoLogo" } })

@@ -164,5 +164,6 @@ smartcolumn.setup({
 		"alpha",
 		"checkhealth",
 		"dotenv",
+		"codecompanion",
 	},
 })
