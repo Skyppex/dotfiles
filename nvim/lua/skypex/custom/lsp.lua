@@ -14,7 +14,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 	local proof_path = code_path .. "/proof"
 	local proof_exe = nil
 
-	if utils.is_home_computer_linux() then
+	if utils.is_linux() then
 		proof_exe = proof_path .. "/proof"
 	else
 		proof_exe = proof_path .. "/proof.exe"

@@ -73,16 +73,8 @@ M.toggle = function(window, pane)
 					wezterm.log_info("Selected " .. label)
 					wezterm.log_info("Id " .. id)
 
-					local nu_args
-					local nvim_args
-
-					if utils.is_home_computer_windows() or utils.is_work_computer_linux() then
-						nu_args = { "wsl" }
-						nvim_args = { "wsl", "--exec", "nvim" }
-					else
-						nu_args = { "nu" }
-						nvim_args = { "nvim" }
-					end
+					local nu_args = { "nu" }
+					local nvim_args = { "nvim" }
 
 					win:perform_action(
 						act.SwitchToWorkspace({

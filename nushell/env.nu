@@ -125,7 +125,6 @@ match [$env.HOSTNAME, $env.OS] {
         $env.LANG = "en_US"
         $env.NU_PLUGIN_DIRS = $env.NU_LIB_DIRS | append $"($env.SCOOP)/persist/rustup/.cargo/bin"
         $env.YAZI_FILE_ONE = $"($env.SCOOP_APPS)/git/current/usr/bin/file.exe"
-        plugin add $"($env.SCOOP)/persist/rustup/.cargo/bin/nu_plugin_regex.exe"
     },
     ["DESKTOP-RRC642H", "windows"] => {
         $env.CODE = "D:/code"
@@ -136,7 +135,38 @@ match [$env.HOSTNAME, $env.OS] {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
-        plugin add "~/.cargo/bin/nu_plugin_regex"
+
+        let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+
+        if ($nix_path | path exists) {
+            let more_env = bash -c $"source ($nix_path) && env" | lines
+            mut env_vars = {}
+
+            let ignore = [
+                FILE_PWD
+                CURRENT_FILE
+                PWD
+            ]
+
+            for it in $more_env { 
+                let split = $it | split row --number 2 "="
+                let key = $split.0
+
+                if ($ignore | any { |it| $key == $it }) {
+                    continue
+                }
+
+                let value = $split.1
+                $env_vars = ($env_vars | merge { $key: $value })
+            }
+
+            load-env $env_vars
+        }
+    }
+    ["brage-work-laptop", "endeavouros"] => {
+        $env.DEV = ('~/dev' | path expand)
+        $env.CODE = ('~/dev/code' | path expand)
+        $env.DEV_BIN = ('~/dev/bin' | path expand)
 
         let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 
@@ -169,7 +199,6 @@ match [$env.HOSTNAME, $env.OS] {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
-        plugin add "~/.cargo/bin/nu_plugin_regex"
 
         let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 
@@ -204,6 +233,10 @@ match [$env.HOSTNAME, $env.OS] {
 }
 
 $env.PROJECTS = $"($env.CODE)/projects"
+
+if ($env.DEV_BIN | is-not-empty) {
+    $env.PATH = ($env.PATH | split row (char esep) | prepend $env.DEV_BIN)
+}
 
 # My favorite editor
 $env.EDITOR = "nvim"

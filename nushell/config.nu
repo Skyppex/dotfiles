@@ -826,7 +826,6 @@ use ~/.config/nushell/task.nu
 source ~/.config/nushell/dotenv.nu
 source ~/.config/nushell/scripts.nu
 source ~/.config/nushell/scripts-tools.nu
-source ~/.config/nushell/hypr.nu
 source ~/.config/nushell/operations.nu
 source ~/.config/nushell/poll.nu
 

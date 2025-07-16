@@ -97,6 +97,7 @@ cc.setup({
 })
 
 mcphub.setup({
+	use_bundled_binary = true,
 	extensions = {
 		mcphub = {
 			callback = "mcphub.extensions.codecompanion",

@@ -7,7 +7,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			{
 				"ravitemer/mcphub.nvim",
-				build = "npm install -g mcp-hub@latest",
+				build = "bundled_build.lua",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
