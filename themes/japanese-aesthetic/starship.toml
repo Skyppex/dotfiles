@@ -25,7 +25,7 @@ disabled = false                # Disabled by default
 
 [os.symbols]
 Arch = "󰣇 "
-EndeavourOS = "󰣇 "
+EndeavourOS = " "
 Linux = " "
 NixOS = " "
 Ubuntu = " "
