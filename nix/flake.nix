@@ -19,6 +19,7 @@
 
       commonTools = with pkgs; [
         astroterm
+        aws
         bat
         btop
         cava
@@ -69,6 +70,7 @@
       ];
 
       desktopOnlyTools = with pkgs; [
+        bluetuith
         cliphist
         discord
         eww
