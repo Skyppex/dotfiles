@@ -668,3 +668,4 @@ rsplit
 rstest
 pathdiff
 lpt
+activewindow
