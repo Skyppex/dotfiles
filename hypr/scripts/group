@@ -1,0 +1,35 @@
+#!/usr/bin/env nu
+
+def main [direction: string] {
+    if not ([l, r, u, p] | any {
+        |it| $it == $direction
+    }) {
+        print -e $"invalid direction ($direction)"
+        return
+    }
+
+    let active = hyprctl activewindow -j | from json
+    let result = hyprctl dispatch movefocus $direction
+
+    if $result != ok {
+        return
+    }
+
+    let adjacent = hyprctl activewindow -j | from json
+
+    if ($adjacent.grouped | is-empty) {
+        let result = hyprctl dispatch togglegroup
+
+        if $result != ok {
+            return
+        }
+    }
+
+    let result = hyprctl dispatch focuswindow $"address:($active.address)"
+
+    if $result != ok {
+        return
+    }
+
+    let _ = hyprctl dispatch moveintogroup $direction
+}

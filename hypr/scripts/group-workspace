@@ -1,0 +1,51 @@
+#!/usr/bin/env nu
+
+def main [] {
+    let workspace = hyprctl activeworkspace -j | from json
+    let active = hyprctl activewindow -j | from json
+
+    let clients = hyprctl clients -j 
+    | from json 
+    | where { |it| $it.workspace.id == $workspace.id }
+    | sort-by { |it| $it.at.0 }
+
+    if ($clients | is-empty) {
+        return
+    }
+
+    let first = $clients | first
+
+    if ($first.grouped | is-empty) {
+        hyprctl dispatch focuswindow $"address:($first.address)"
+        hyprctl dispatch togglegroup
+    }
+
+    let group = $first.grouped
+
+    mut non_grouped_clients = []
+
+    for client in ($clients | skip 1)  { 
+
+        if ($group | any { |it|
+            $it == $client.address
+        }) {
+            continue
+        }
+
+        $non_grouped_clients = ($non_grouped_clients | append $client)
+    }
+
+    if ($non_grouped_clients | is-empty) {
+        hyprctl dispatch togglegroup
+        hyprctl dispatch focuswindow $"address:($active.address)"
+        return
+    }
+
+
+    for $client in $non_grouped_clients {
+        hyprctl dispatch focuswindow $"address:($client.address)"
+        hyprctl dispatch moveintogroup l
+    }
+
+    hyprctl dispatch focuswindow $"address:($active.address)"
+}
