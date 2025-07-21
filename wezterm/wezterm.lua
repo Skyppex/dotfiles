@@ -349,7 +349,7 @@ local config = {
 		},
 	},
 	set_environment_variables = {
-		PATH = "/home/linuxbrew/.linuxbrew/bin:" .. os.getenv("PATH"),
+		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
 	},
 }
 

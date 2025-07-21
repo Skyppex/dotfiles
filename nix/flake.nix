@@ -17,6 +17,13 @@
         config = { allowUnfree = true; };
       };
 
+      dotnet = pkgs.buildEnv {
+        name = "combined-dotnet-sdks";
+        paths = [
+          (with pkgs.dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ])
+        ];
+      };
+
       commonTools = with pkgs; [
         astroterm
         awscli2
@@ -26,7 +33,7 @@
         chezmoi
         difftastic
         direnv
-        dotnet-sdk
+        dotnet
         fastfetch
         fd
         file
