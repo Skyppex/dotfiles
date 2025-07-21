@@ -669,3 +669,4 @@ rstest
 pathdiff
 lpt
 activewindow
+passwd
