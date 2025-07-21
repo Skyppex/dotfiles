@@ -7,14 +7,14 @@ while (swww query | complete | get exit_code) != 0 {
 if (sys host).hostname == brage-work-laptop {
     # all wallpapers
     let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-    swww img --outputs "eDP-1,DP-6,DP-7" --transition-duration=1 $path
+    swww img --outputs "eDP-1,DP-6,DP-7" --transition-duration=1 ($path | path expand)
     return
 }
 
 # horizontal wallpaper
 let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-swww img --outputs "DP-1" --transition-duration=1 $path
+swww img --outputs "DP-1" --transition-duration=1 ($path | path expand)
 
 # vertical wallpaper
 let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
-swww img --outputs "DP-2" --transition-duration=1 $path
+swww img --outputs "DP-2" --transition-duration=1 ($path | path expand)

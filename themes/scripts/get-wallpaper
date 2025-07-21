@@ -37,5 +37,11 @@ def main [
     | get file
     | first
 
-    $images | path join $file | path expand
+    let full_path = $images | path join $file | path expand
+
+    if ($full_path | str starts-with $env.HOME) {
+        $full_path | str replace $env.HOME "~"
+    } else {
+        $full_path
+    }
 }
