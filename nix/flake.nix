@@ -19,7 +19,7 @@
 
       commonTools = with pkgs; [
         astroterm
-        aws
+        awscli2
         bat
         btop
         cava
@@ -38,6 +38,7 @@
         glow
         go
         gping
+        grim
         gum
         hyperfine
         imagemagick
@@ -59,6 +60,7 @@
         ripgrep
         rustup
         skate
+        slurp
         starship
         surrealdb
         tldr
