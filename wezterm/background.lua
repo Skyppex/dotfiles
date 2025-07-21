@@ -16,7 +16,7 @@ if utils.is_work_computer() then
 		hsb = { brightness = 0., saturation = 1 },
 	}
 else
-	if utils.is_home_computer_linux() then
+	if utils.is_linux_desktop() then
 		-- find current.toml and read the dir value
 		local current_path = config_path .. "/themes/current.toml"
 		wezterm.add_to_config_reload_watch_list(current_path)
