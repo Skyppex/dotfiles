@@ -72,7 +72,6 @@
         surrealdb
         tldr
         tree-sitter
-        unityhub
         yazi
         zip
         zoxide
@@ -81,6 +80,7 @@
       desktopOnlyTools = with pkgs; [
         bluetuith
         cliphist
+        dbeaver-bin
         discord
         eww
         gimp

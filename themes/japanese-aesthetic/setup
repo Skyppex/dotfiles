@@ -191,6 +191,7 @@ let starship = [
     ``,
     `[os.symbols]`,
     `Arch = "󰣇 "`,
+    `EndeavourOS = " "`,
     `Linux = " "`,
     `NixOS = " "`,
     `Ubuntu = " "`,
@@ -285,8 +286,9 @@ $mako | str join "\n" | to text | save -f $path
 
 let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
 hook --force --relative --source $path --destination ($chezmoi_mako_path | path join "config")
-
 let cursor_theme_path = ($theme | path join "cursor/rose-pine-hyprcursor")
+
+mkdir ~/.local/share/icons/japanese-aesthetic
 cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 
 chezmoi apply --force
