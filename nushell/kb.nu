@@ -55,8 +55,8 @@ def "kb containers" [--pod: string] {
         return
     }
 
-    let containers = kubectl get pod $pod -o jsonpath='{.spec.containers[*].name}'
-    let init_containers = kubectl get pod $pod -o jsonpath='{.spec.initContainers[*].name}'
+    let containers = kubectl get pod $pod --output jsonpath='{.spec.containers[*].name}'
+    let init_containers = kubectl get pod $pod --output jsonpath='{.spec.initContainers[*].name}'
     $containers | split row -r '\s' | append ($init_containers | split row -r '\s')
 }
 
