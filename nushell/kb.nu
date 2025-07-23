@@ -72,7 +72,7 @@ def "kb container" [--pod: string] {
 
 alias "kb ct" = kb container
 
-def "kb logs" [--pager(-p)] {
+def --wrapped "kb logs" [...rest] {
     let pod = kb pod
 
     if ($pod | is-empty) {
@@ -87,11 +87,7 @@ def "kb logs" [--pager(-p)] {
         return
     }
 
-    if $pager {
-        kubectl logs $pod -c $container | less
-    } else {
-        kubectl logs $pod -c $container
-    }
+    kubectl logs $pod --container $container ...$rest
 }
 
 alias "kb lg" = kb logs
