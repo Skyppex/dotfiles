@@ -242,7 +242,6 @@ if ($env.DEV_BIN | is-not-empty) {
 # My favorite editor
 $env.EDITOR = "nvim"
 
-$env.AWS_PROFILE = "dev"
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 $env.DOCKER_CONTEXT = "desktop-linux"
 
