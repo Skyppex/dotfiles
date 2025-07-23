@@ -83,7 +83,7 @@ local config = {
 		{
 			key = "d",
 			mods = "LEADER|CTRL",
-			action = act.SendString(utils.is_home_computer_linux() and "clear\n" or "clear\r\n"),
+			action = act.SendString(utils.is_linux_desktop() and "clear\n" or "clear\r\n"),
 		},
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
 		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
