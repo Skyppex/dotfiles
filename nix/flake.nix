@@ -111,8 +111,8 @@
           buildInputs = [ pkgs.libglvnd pkgs.mesa ];
           postBuild = ''
             wrapProgram $out/bin/wezterm \
-              --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
-              --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+                --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+                --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
           '';
         };
 
