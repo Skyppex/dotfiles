@@ -97,6 +97,7 @@
         spotify
         thunderbird
         unityhub
+        wezterm
         zen-browser
       ];
     in {
@@ -106,6 +107,13 @@
         desktop = pkgs.buildEnv {
           name = "skypex-tools";
           paths = commonTools ++ desktopOnlyTools;
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          buildInputs = [ pkgs.libglvnd pkgs.mesa ];
+          postBuild = ''
+            wrapProgram $out/bin/wezterm \
+              --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+              --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+          '';
         };
 
         wsl = pkgs.buildEnv {
