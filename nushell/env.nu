@@ -234,6 +234,7 @@ match [$env.HOSTNAME, $env.OS] {
 
 $env.PROJECTS = $"($env.CODE)/projects"
 
+$env.PATH = ($env.PATH | split row (char esep) | prepend $"($env.HOME)/.dotnet/tools")
 if ($env.DEV_BIN | is-not-empty) {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $env.DEV_BIN)
 }
