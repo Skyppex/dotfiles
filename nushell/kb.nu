@@ -1,3 +1,10 @@
+def "kb activate" [] {
+    $env.AWS_PROFILE = "dev"
+    aws sso login
+}
+
+alias "kb a" = kb activate
+
 def "kb switch" [] {
     let contexts = kubectl config get-contexts --no-headers
     | awk "{print $1}"
@@ -29,6 +36,14 @@ def "kb switch" [] {
 }
 
 alias "kb sw" = kb switch
+
+def "kb switch profile" [] {
+    let profiles = [dev, test, pre, pro];
+    let selected = $profiles | to text | fzf --height 40% --layout=reverse
+    $env.AWS_PROFILE = $selected
+}
+
+alias "kb sw pf" = kb switch profile
 
 def "kb pods" [] {
     kubectl get pods | lines
