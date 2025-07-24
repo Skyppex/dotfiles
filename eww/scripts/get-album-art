@@ -2,7 +2,6 @@
 
 import subprocess
 import os
-import sys
 import urllib.request
 
 CACHE_PATHS = [
@@ -12,7 +11,9 @@ CACHE_PATHS = [
 
 last_index = -1
 
+
 def download_and_print(url):
+    os.makedirs("/tmp/eww", exist_ok=True)
     global last_index
     last_index = (last_index + 1) % 2
     cache_path = CACHE_PATHS[last_index]
@@ -24,10 +25,11 @@ def download_and_print(url):
         except Exception:
             print("", flush=True)
     elif url.startswith("file://"):
-        path = url[len("file://"):]
+        path = url[len("file://") :]
         print(path, flush=True)
     else:
         print("", flush=True)
+
 
 def main():
     process = subprocess.Popen(
@@ -41,6 +43,7 @@ def main():
     for line in process.stdout:
         url = line.strip()
         download_and_print(url)
+
 
 if __name__ == "__main__":
     main()

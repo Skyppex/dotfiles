@@ -58,7 +58,9 @@ local formatters_by_ft = {
 
 local formatters = {
 	csharpier = {
-		inherit = true,
+		command = "csharpier",
+		args = { "format", "--write-stdout" },
+		stdin = true,
 	},
 	gofmt = {
 		command = "gofmt",

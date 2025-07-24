@@ -19,6 +19,12 @@
       :max 100
       :onchange "")
     (metric
+      :label "󰍛"
+      :value {EWW_CPU.avg}
+      :min 0
+      :max 100
+      :onchange "")
+    (metric
       :label ""
       :min 0
       :max 100
