@@ -675,3 +675,4 @@ awscli
 noto
 kubectl
 libglvnd
+sso
