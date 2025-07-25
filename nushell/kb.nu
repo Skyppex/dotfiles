@@ -95,6 +95,7 @@ def --wrapped "kb logs" [...rest] {
         return
     }
 
+
     let container = kb container --pod $pod
 
     if ($container | is-empty) {
@@ -102,6 +103,7 @@ def --wrapped "kb logs" [...rest] {
         return
     }
 
+    print -e $"($pod) - ($container)"
     kubectl logs $pod --container $container ...$rest
 }
 
