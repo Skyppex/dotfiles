@@ -2,9 +2,6 @@ source ~/.config/zoxide/.zoxide.nu
 
 alias cd-old = cd
 
-# Alias for __zoxide_zi
-alias cdi = __zoxide_zi;
-
 # The new 'cd' command using zoxide and fzf
 def --env z [
     --fzf-only(-f)
@@ -87,10 +84,6 @@ def --env z [
 alias cd = z
 alias cdf = cd (fzf | path dirname)
 
-# Zoxide query
-alias cdq = zoxide query
+# Alias for __zoxide_zi
+alias cdi = cd (zoxide query --interactive)
 
-def --env cv [...path: string] {
-    cd ...$path
-    vim .
-}
