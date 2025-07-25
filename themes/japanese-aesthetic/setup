@@ -9,6 +9,7 @@ let style = open ($theme | path join "style.toml") | get style
 let metadata = open ($theme | path join "metadata.toml")
 let fonts = $metadata | get fonts
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
+let background_w_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" w
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
 let background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h greet
 
@@ -64,6 +65,7 @@ let conf = $kvps | each { |it|
     $"$($key) = ($value | str replace "#" "")"
 } 
 | append $"$background_h = ($background_h_path)"
+| append $"$background_w = ($background_w_path)"
 | append $"$background_v = ($background_v_path)"
 | append $"$background_h_greet = ($background_h_greet_path)"
 | append $"$cursor_theme = japanese-aesthetic"
@@ -82,8 +84,11 @@ let keys_lock = $colors_lock | columns | append $style_keys
 let values_lock = $colors_lock | values | append $style_values
 let kvps_lock = $keys_lock | zip $values_lock
 
-let lock_background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant v
 let lock_background_h_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant h greet
+let lock_background_w_greet_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant w greet
+let lock_background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant h
+let lock_background_w_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant w
+let lock_background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" --config-option lock_variant v
 
 let conf = $kvps_lock | each { |it| 
     let key = $it | get 0 | str replace --all "-" "_"
@@ -95,8 +100,11 @@ let conf = $kvps_lock | each { |it|
     let value = $it | get 1
     $"$font_($key | str replace -a "-" "_") = ($value)"
 })
-| append $"$background_v = ($lock_background_v_path)"
 | append $"$background_h_greet = ($lock_background_h_greet_path)"
+| append $"$background_w_greet = ($lock_background_w_greet_path)"
+| append $"$background_h = ($lock_background_h_path)"
+| append $"$background_w = ($lock_background_w_path)"
+| append $"$background_v = ($lock_background_v_path)"
 
 let path = ($env.CHEZMOI_PATH | path join
     "themes/japanese-aesthetic/variables_lock.conf")
