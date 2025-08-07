@@ -1,13 +1,3 @@
-local function setup_nu_lsp(lspconfig, capabilities)
-	lspconfig.nushell.setup({
-		cmd = { "nu", "--lsp" },
-		filetypes = { "nu" },
-		single_file_support = true,
-		root_dir = lspconfig.util.find_git_ancestor,
-		capabilities = capabilities,
-	})
-end
-
 local function setup_proof(lspconfig, configs, capabilities)
 	local utils = require("skypex.utils")
 	local code_path = utils.get_code_path()
@@ -108,18 +98,18 @@ local servers = {
 				runtime = { version = "LuaJIT" },
 				workspace = {
 					checkThirdParty = false,
-					library = {
-						"${3rd}/luv/library",
-						unpack(vim.api.nvim_get_runtime_file("", true)),
-					},
+					library = vim.api.nvim_get_runtime_file("", true),
 				},
 				completion = {
 					callSnippet = "Replace",
 				},
 				-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 				diagnostics = {
-					disable = { "missing-fields", "undefined-fields" },
 					globals = { "vim" },
+					disable = { "missing-fields", "undefined-fields" },
+				},
+				telemetry = {
+					enable = false,
 				},
 			},
 		},
@@ -214,6 +204,9 @@ local servers = {
 		end,
 	},
 	kulala_ls = {
+		capabilities = capabilities,
+	},
+	nushell = {
 		capabilities = capabilities,
 	},
 }
@@ -323,7 +316,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local no_config_servers = { "rust_analyzer" }
 local configs = require("lspconfig.configs")
 
-setup_nu_lsp(lspconfig, capabilities)
 setup_proof(lspconfig, configs)
 
 -- Ensure the servers and tools above are installed
@@ -352,32 +344,34 @@ vim.list_extend(ensure_installed, {
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 require("mason-lspconfig").setup({
-	handlers = {
-		function(server_name)
-			local server = servers[server_name] or {}
-			-- if string.find(server_name, "omnisharp") then
-			-- 	return
-			-- end
-
-			if no_config_servers[server_name] then
-				return
-			end
-
-			-- vim.notify("Setting up LSP: " .. server_name, vim.log.levels.INFO)
-
-			-- This handles overriding only values explicitly passed
-			-- by the server configuration above. Useful when disabling
-			-- certain features of an LSP (for example, turning off formatting for tsserver)
-			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-
-			server.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, server.handlers or {})
-
-			lspconfig[server_name].setup(server)
-		end,
-	},
+	automatic_enable = true,
 })
 
+for server_name, config in pairs(servers) do
+	local server = config or {}
+
+	if no_config_servers[server_name] ~= nil then
+		return
+	end
+
+	-- This handles overriding only values explicitly passed
+	-- by the server configuration above. Useful when disabling
+	-- certain features of an LSP (for example, turning off formatting for tsserver)
+	server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+	server.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, server.handlers or {})
+
+	vim.lsp.config(server_name, server)
+	vim.lsp.enable(server_name)
+end
+
 vim.diagnostic.config({
+	virtual_text = {
+		source = true,
+		spacing = 2,
+		severity = {
+			min = vim.diagnostic.severity.INFO,
+		},
+	},
 	severity_sort = true,
 	update_in_insert = true,
 	float = {

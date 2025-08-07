@@ -29,7 +29,11 @@ M.lint = function()
 
 	local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-	vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+	vim.api.nvim_create_autocmd({
+		"BufEnter",
+		"BufWritePost",
+		"InsertLeave",
+	}, {
 		group = lint_augroup,
 		callback = function()
 			lint.try_lint()
@@ -52,10 +56,11 @@ M.mason = function()
 		end
 	end
 
-	require("mason-nvim-lint").setup({
+	require("mason-tool-installer").setup({
 		ensure_installed = ensure_installed,
-		automatic_installation = true,
 	})
+
+	require("mason-nvim-lint").setup()
 end
 
 M.all = function()
