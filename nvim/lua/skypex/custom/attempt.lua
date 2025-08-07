@@ -1,11 +1,11 @@
 local attempt = require("attempt")
 local Job = require("plenary.job")
+local is_inline = false
 
 local function get_or_create_attempt_buf()
 	local buf_name = "attempt://output"
 	local bufnr = nil
 
-	-- Iterate over all buffers to check if the buffer already exists
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		local bn = vim.api.nvim_buf_get_name(buf)
 
@@ -15,9 +15,8 @@ local function get_or_create_attempt_buf()
 		end
 	end
 
-	-- If the buffer doesn't exist, create it
 	if not bufnr then
-		bufnr = vim.api.nvim_create_buf(false, true) -- Create a scratch buffer
+		bufnr = vim.api.nvim_create_buf(false, true)
 		vim.api.nvim_buf_set_name(bufnr, buf_name)
 	end
 
@@ -25,7 +24,6 @@ local function get_or_create_attempt_buf()
 end
 
 local function overwrite_buffer_with_string(bufnr, data)
-	-- Split the content string into lines
 	local lines = {}
 
 	for line in data:gmatch("([^\n]*)\n?") do
@@ -37,18 +35,15 @@ local function overwrite_buffer_with_string(bufnr, data)
 end
 
 local function get_win_aspect_ratio(win)
-	-- Get the window's width and height
-	local width = vim.api.nvim_win_get_width(win) / 2 -- Divide by 2 to get the actual width
+	local width = vim.api.nvim_win_get_width(win) / 2
 	local height = vim.api.nvim_win_get_height(win)
 
-	-- Calculate the aspect ratio
 	local aspect_ratio = width / height
 
 	return aspect_ratio
 end
 
 local function open_buffer_in_split_no_focus(bufnr, split, filetype)
-	-- Check if the buffer is already visible in any window
 	local buffer_visible = false
 
 	for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -58,22 +53,16 @@ local function open_buffer_in_split_no_focus(bufnr, split, filetype)
 		end
 	end
 
-	-- If the buffer is not visible, open a vertical split
 	if not buffer_visible then
-		-- Save the current window
 		local current_win = vim.api.nvim_get_current_win()
 
-		-- Open a vertical split
 		vim.cmd(split)
 
-		-- Set the buffer in the new window
 		vim.api.nvim_set_current_buf(bufnr)
 
-		-- Return focus to the original window
 		vim.api.nvim_set_current_win(current_win)
 	end
 
-	-- Set the filetype for the buffer
 	vim.api.nvim_buf_set_option(bufnr, "filetype", filetype)
 end
 
@@ -102,14 +91,18 @@ local function run_attempt(cmd, args, filetype)
 					local attempt_buf = get_or_create_attempt_buf()
 					overwrite_buffer_with_string(attempt_buf, data_buffer)
 					local aspect_ratio = get_win_aspect_ratio(vim.api.nvim_get_current_win())
-					local split = aspect_ratio > 1.0 and "vsplit" or "split" -- Adjust the split type based on aspect ratio
+					local split = aspect_ratio > 1.0 and "vsplit" or "split"
 					open_buffer_in_split_no_focus(attempt_buf, split, filetype)
 				end)
 			end
 		end,
 	})
 
-	job:start() -- This will run the job asynchronously
+	if is_inline then
+		job:sync()
+	else
+		job:start()
+	end
 end
 
 attempt.setup({
@@ -159,7 +152,7 @@ local function get_visual_selection(start_pos, end_pos)
 		return {}
 	end
 
-	-- Adjust for partial lines
+	-- adjust for partial lines
 	lines[#lines] = string.sub(lines[#lines], 1, end_pos[3])
 	lines[1] = string.sub(lines[1], start_pos[3], -1)
 
@@ -183,16 +176,16 @@ local function trim_left_based_on_first_line(lines)
 	return trimmed
 end
 
-local function prepend_lines(file_entry, lines)
-	if file_entry.ext == "rs" then
+local function prepend_lines(ext, lines)
+	if ext == "rs" then
 		table.insert(lines, 1, "fn main() {")
 	end
 
 	return lines
 end
 
-local function append_lines(file_entry, lines)
-	if file_entry.ext == "rs" then
+local function append_lines(ext, lines)
+	if ext == "rs" then
 		table.insert(lines, "}")
 	end
 
@@ -211,7 +204,6 @@ local function run_inline_attempt()
 		end
 	end
 
-	local current_buf = vim.api.nvim_get_current_buf()
 	vim.cmd("normal! gv")
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
@@ -229,38 +221,20 @@ local function run_inline_attempt()
 	end
 
 	lines = trim_left_based_on_first_line(lines)
-
-	local options = attempt_config.ext_options
-
-	vim.ui.select(options, {}, function(choice)
+	attempt.open_extension_select(function(choice)
 		if not choice then
 			return
 		end
 
+		lines = prepend_lines(choice, lines)
+		lines = append_lines(choice, lines)
+
 		local autoformat_disabled = vim.g.disable_autoformat or false
 		vim.g.disable_autoformat = true
-		attempt.new({
-			ext = choice,
-		}, function(file_entry)
-			local path = file_entry.path
-			local bufnr = vim.fn.bufnr(path, false)
-
-			lines = prepend_lines(file_entry, lines)
-			lines = append_lines(file_entry, lines)
-
-			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-			vim.api.nvim_buf_call(bufnr, function()
-				vim.cmd("write")
-			end)
-
-			attempt.run(bufnr)
-			vim.api.nvim_set_current_buf(current_buf)
-
-			vim.defer_fn(function()
-				attempt.delete_buf(true, bufnr)
-			end, 3000)
-
+		is_inline = true
+		attempt.run_lines(lines, choice, function()
 			vim.g.disable_autoformat = autoformat_disabled
+			is_inline = false
 		end)
 	end)
 end

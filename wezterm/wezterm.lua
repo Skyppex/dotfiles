@@ -350,6 +350,7 @@ local config = {
 	},
 	set_environment_variables = {
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
+		PATH = os.getenv("PATH") .. ":/home/skypex/.dotnet/tools",
 	},
 }
 

@@ -20,7 +20,8 @@
       dotnet = pkgs.buildEnv {
         name = "combined-dotnet-sdks";
         paths = [
-          (with pkgs.dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ])
+          (with pkgs.dotnetCorePackages;
+            combinePackages [ sdk_8_0 sdk_9_0 sdk_10_0 ])
         ];
       };
 
@@ -78,6 +79,7 @@
       ];
 
       desktopOnlyTools = with pkgs; [
+        ani-cli
         bluetuith
         cliphist
         dbeaver-bin
