@@ -54,20 +54,6 @@ local handlers = {
 	}),
 }
 
--- CREATE AUTOCMD FOR CSHARP FILES
-vim.api.nvim_create_autocmd("FileType", {
-	-- pattern = 'cs',
-	pattern = { "cs", "cshtml", "vb" },
-	callback = function()
-		-- print("FileType: cs, cshtml, vb")
-		if vim.g.dotnetlsp then
-			-- print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
-			return
-		end
-	end,
-	group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true }),
-})
-
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
 --  By default, Neovim doesn't support everything that is in the LSP specification.
