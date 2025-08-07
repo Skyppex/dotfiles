@@ -112,7 +112,7 @@ attempt.setup({
 			run_attempt("mage", { vim.api.nvim_buf_get_name(bufnr) })
 		end,
 		cs = function(_, bufnr)
-			run_attempt("dotnet", { "script", vim.api.nvim_buf_get_name(bufnr) })
+			run_attempt("dotnet", { "run", vim.api.nvim_buf_get_name(bufnr) })
 		end,
 		js = function(_, bufnr)
 			run_attempt("node", { vim.api.nvim_buf_get_name(bufnr) })
