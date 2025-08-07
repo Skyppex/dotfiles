@@ -142,7 +142,7 @@ let chezmoi_rofi_path = ($env.CHEZMOI_PATH | path join "rofi")
 hook --force --relative --source $rofi_variables_path --destination ($chezmoi_rofi_path | path join "variables.rasi")
 hook --force --relative --source $rofi_config_path --destination ($chezmoi_rofi_path | path join "config.rasi")
 
-# setup lua colors
+# setup lua colors and colorbuddy
 
 let lua = "return {" | append ($kvps | each { |it| 
     let key = $it | get 0 | str replace --all "-" "_"
@@ -155,6 +155,11 @@ $lua | to text | save -f $path
 
 let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nvim/lua/skypex")
 hook --force --relative --source $path --destination ($chezmoi_lua_path | path join "colors.lua")
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colorbuddy.lua")
+
+let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nvim/lua/skypex")
+hook --force --relative --source $path --destination ($chezmoi_lua_path | path join "colorbuddy.lua")
 
 # setup nushell colors
 

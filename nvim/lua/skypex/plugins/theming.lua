@@ -32,31 +32,10 @@ return {
 			-- Load the colorscheme here.
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("andromeda")
-			local colors = require("skypex.colors")
+			require("skypex.colorbuddy")
 
 			-- You can configure highlights by doing something like:
-			vim.cmd.hi("Comment gui=none")
-			vim.cmd.hi("CursorLine guibg=none")
-			vim.cmd.hi("CursorLineNr guibg=none")
-			vim.cmd.hi("Visual guibg=#2e2e2e")
-			vim.cmd.hi("LspInlayHint guifg=#464959")
-
-			-- gitsigns highlights
-			vim.cmd.hi("gitsignscurrentlineblame guifg=#ff8800 guibg=none")
-			vim.cmd("hi link GitSignsStagedAdd GitSignsAdd")
-			vim.cmd("hi link GitSignsStagedChange GitSignsChange")
-			vim.cmd("hi link GitSignsStagedDelete GitSignsDelete")
-			vim.cmd("hi link GitSignsStagedChangedelete GitSignsChangedelete")
-			vim.cmd("hi link GitSignsStagedTopdelete GitSignsTopdelete")
-			vim.cmd("hi link GitSignsStagedAddNr GitSignsAddNr")
-			vim.cmd("hi link GitSignsStagedChangeNr GitSignsChangeNr")
-			vim.cmd("hi link GitSignsStagedDeleteNr GitSignsDeleteNr")
-			vim.cmd("hi link GitSignsStagedChangedeleteNr GitSignsChangedeleteNr")
-			vim.cmd("hi link GitSignsStagedTopdeleteNr GitSignsTopdeleteNr")
-			vim.cmd("hi link GitSignsStagedAddLn GitSignsAddLn")
-			vim.cmd("hi link GitSignsStagedChangeLn GitSignsChangeLn")
-			vim.cmd("hi link GitSignsStagedDeleteLn GitSignsDeleteLn")
+			-- vim.cmd.hi("LspInlayHint guifg=#464959")
 		end,
 		config = function()
 			require("skypex.custom.theming")

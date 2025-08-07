@@ -27,6 +27,7 @@ inactive = "#3c3836"  # secondary
 error = "#c14a4a"     # red
 warning = "#bb8125"   # yellow
 success = "#538e57"   # green
+info = "#46886f"      # cyan
 working = "#46886f"   # cyan
 important = "#a15725" # orange
 
@@ -53,5 +54,6 @@ inactive = "#3c3836"  # background1
 error = "#c14a4a"     # red
 warning = "#d8a657"   # yellow
 success = "#66ba83"   # green
-working = "#076678"   # cyan
+info = "#83a598"      # cyan
+working = "#83a598"   # cyan
 important = "#e5915a" # orange

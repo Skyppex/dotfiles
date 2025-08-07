@@ -70,7 +70,7 @@ local theme = {
 
 require("lualine").setup({
 	options = {
-		theme = andromeda_theme,
+		theme = theme,
 		component_separators = { left = "│", right = "" },
 	},
 	sections = {

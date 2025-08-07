@@ -148,7 +148,7 @@ dashboard.section.mru = {
 	end,
 }
 
-dashboard.section.header.opts.hl = "Include"
+dashboard.section.header.opts.hl = "Splash"
 
 dashboard.opts.opts.noautocmd = true
 
