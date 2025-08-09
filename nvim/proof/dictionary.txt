@@ -676,3 +676,5 @@ noto
 kubectl
 libglvnd
 sso
+reqwest
+ifconfig
