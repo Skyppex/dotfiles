@@ -26,6 +26,7 @@ Color.new("info", colors.info)
 Color.new("warning", colors.warning)
 Color.new("error", colors.error)
 
+local bg = colors.none
 Color.new("background0", colors.background0)
 Color.new("background1", colors.background1)
 Color.new("background2", colors.background2)
@@ -33,8 +34,8 @@ Color.new("background3", colors.background3)
 
 Group.new("Splash", c.yellow)
 
-Group.new("Normal", c.primary, c.background0)
-Group.new("InvNormal", c.tertiary, c.background0)
+Group.new("Normal", c.primary, bg)
+Group.new("InvNormal", c.tertiary, bg)
 Group.new("NormalFloat", c.primary)
 Group.new("FloatBorder", c.secondary)
 
