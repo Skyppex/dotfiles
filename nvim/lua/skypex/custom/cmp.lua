@@ -121,23 +121,23 @@ cmp.setup({
 		["<A-d>"] = cmp.mapping.scroll_docs(4),
 		["<TAB>"] = cmp.mapping.confirm({ select = true }),
 		["<C-e>"] = cmp.mapping.abort(),
-		["<S-A-l>"] = cmp.mapping.complete({}),
-		["<A-l>"] = cmp.mapping(function()
+		["<C-A-l>"] = cmp.mapping.complete({}),
+		["<C-l>"] = cmp.mapping(function()
 			if luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
 			end
 		end, { "i", "s" }),
-		["<A-h>"] = cmp.mapping(function()
+		["<C-h>"] = cmp.mapping(function()
 			if luasnip.locally_jumpable(-1) then
 				luasnip.jump(-1)
 			end
 		end, { "i", "s" }),
-		["<A-j>"] = cmp.mapping(function()
+		["<C-j>"] = cmp.mapping(function()
 			if luasnip.choice_active() then
 				luasnip.change_choice(1)
 			end
 		end, { "i", "s" }),
-		["<A-k>"] = cmp.mapping(function()
+		["<C-k>"] = cmp.mapping(function()
 			if luasnip.choice_active() then
 				luasnip.change_choice(-1)
 			end
