@@ -25,7 +25,7 @@
         ];
       };
 
-      commonTools = with pkgs; [
+      cliTools = with pkgs; [
         astroterm
         awscli2
         bat
@@ -78,8 +78,7 @@
         zoxide
       ];
 
-      desktopOnlyTools = with pkgs; [
-        ani-cli
+      commonDesktopTools = with pkgs; [
         bluetuith
         cliphist
         dbeaver-bin
@@ -98,17 +97,30 @@
         slack
         spotify
         thunderbird
-        unityhub
         wezterm
         zen-browser
       ];
+
+      homeDesktopTools = with pkgs; [ ani-cli ani-skip unityhub ];
     in {
       packages.${system} = {
-        default = self.packages.${system}.desktop;
+        default = self.packages.${system}.home;
 
-        desktop = pkgs.buildEnv {
+        home = pkgs.buildEnv {
           name = "skypex-tools";
-          paths = commonTools ++ desktopOnlyTools;
+          paths = cliTools ++ commonDesktopTools ++ homeDesktopTools;
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          buildInputs = [ pkgs.libglvnd pkgs.mesa ];
+          postBuild = ''
+            wrapProgram $out/bin/wezterm \
+                --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+                --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+          '';
+        };
+
+        work = pkgs.buildEnv {
+          name = "skypex-tools";
+          paths = cliTools ++ commonDesktopTools;
           nativeBuildInputs = [ pkgs.makeWrapper ];
           buildInputs = [ pkgs.libglvnd pkgs.mesa ];
           postBuild = ''
@@ -120,7 +132,7 @@
 
         wsl = pkgs.buildEnv {
           name = "skypex-tools-wsl";
-          paths = commonTools;
+          paths = cliTools;
         };
       };
     };
