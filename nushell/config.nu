@@ -144,7 +144,14 @@ let theme = {
     shape_vardecl: $colors.pink
 }
 
-let theme = if (sys host).hostname == "skypex" { $theme } else { $andromeda_theme }
+let theme = if (
+    (sys host).hostname == "skypex" or
+    (sys host).hostname == "brage-work-laptop"
+) {
+    $theme
+} else {
+    $andromeda_theme
+}
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
