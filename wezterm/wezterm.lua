@@ -116,8 +116,8 @@ local config = {
 
 		{ key = "i", mods = "LEADER|CTRL", action = act.ActivateCopyMode },
 		{
-			key = "h",
-			mods = "LEADER|CTRL",
+			key = "k",
+			mods = "LEADER|SHIFT",
 			action = act.QuickSelectArgs({
 				label = "open url",
 				patterns = {
