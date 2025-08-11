@@ -102,31 +102,6 @@ local config = {
 		},
 		{ key = "X", mods = "SHIFT|CTRL", action = act({ CloseCurrentTab = { confirm = true } }) },
 		{ key = "x", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = true } }) },
-		-- { key = "v", mods = "LEADER|CTRL", action = wezterm.action_callback(
-		-- 	function(_, _)
-		-- 		if utils.is_home_computer_linux() then
-		-- 			wezterm.log_info("10000")
-		-- 			local success, stdout, stderr = wezterm.run_child_process({ "wl-paste" })
-		-- 			wezterm.log_info("10001")
-		-- 			wezterm.log_info(success)
-		--
-		-- 			if not success then
-		-- 				wezterm.log_info("10002")
-		-- 				wezterm.log_info(stderr)
-		-- 				wezterm.log_error("Failed to run wl-paste: " .. stderr)
-		-- 				return nil
-		-- 			end
-		--
-		-- 			stdout = stdout:gsub("%s+$", "")
-		-- 			wezterm.log_info("10003")
-		-- 			wezterm.log_info(stdout)
-		-- 			return act.SendString(stdout)
-		-- 		else
-		-- 			wezterm.log_info("10004")
-		-- 			return act.PasteFrom("Clipboard")
-		-- 		end
-		-- 	end)
-		-- },
 		{ key = "v", mods = "LEADER|CTRL", action = act.PasteFrom("Clipboard") },
 		{ key = "c", mods = "LEADER|CTRL", action = act.CopyTo("Clipboard") },
 		{ key = "c", mods = "CTRL", action = act.SendString("\x03") },
@@ -348,29 +323,6 @@ local config = {
 		PATH = os.getenv("PATH") .. ":/home/skypex/.dotnet/tools",
 	},
 }
-
-wezterm.on("user-var-changed", function(window, pane, name, value)
-	local overrides = window:get_config_overrides() or {}
-	if name == "ZEN_MODE" then
-		local incremental = value:find("+")
-		local number_value = tonumber(value)
-		if incremental ~= nil then
-			while number_value > 0 do
-				window:perform_action(act.IncreaseFontSize, pane)
-				number_value = number_value - 1
-			end
-			overrides.enable_tab_bar = false
-		elseif number_value < 0 then
-			window:perform_action(act.ResetFontSize, pane)
-			overrides.font_size = nil
-			overrides.enable_tab_bar = false
-		else
-			overrides.font_size = number_value
-			overrides.enable_tab_bar = false
-		end
-	end
-	window:set_config_overrides(overrides)
-end)
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
