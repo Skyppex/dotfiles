@@ -32,7 +32,7 @@ def "kb switch" [] {
     }
 
     kubectl config use-context $selected
-    kubectl config set-context --current --namespace=$selected_ns
+    kubectl config set-context --current --namespace=($selected_ns)
 }
 
 alias "kb sw" = kb switch
