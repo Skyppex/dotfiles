@@ -86,6 +86,7 @@
         eww
         gimp
         grim
+        hyprpicker
         inkscape
         jetbrains-toolbox
         lens
