@@ -10,12 +10,26 @@ local kulala = require("kulala")
 
 kulala.setup({
 	default_env = "local",
+	ui = {
+		winbar = false,
+		show_request_summary = false,
+		disable_news_popup = true,
+	},
+	global_keymaps = false,
+	kulala_keymaps = false,
 })
 
+local ui = require("kulala.ui")
+
 nmap("<leader>rr", kulala.run, "Run http request")
-nmap("ær", kulala.jump_next, "Run http request")
-nmap("år", kulala.jump_prev, "Run http request")
-nmap("<leader>ri", kulala.inspect, "Inspect last request")
-nmap("<leader>rss", kulala.show_stats, "Show stats for last request")
-nmap("<leader>rse", kulala.set_selected_env, "Set selected environment")
-nmap("<leader>tr", kulala.toggle_view, "Toggle headers view")
+nmap("ær", ui.jump_next, "Run http request")
+nmap("år", ui.jump_prev, "Run http request")
+nmap("<leader>rb", ui.show_body, "Show response body")
+nmap("<leader>rv", ui.show_verbose, "Show verbose response body")
+nmap("<leader>rh", ui.show_headers_body, "Show headers")
+nmap("<leader>rj", ui.show_next, "Show next request")
+nmap("<leader>rk", ui.show_previous, "Show previous request")
+nmap("<leader>ri", ui.inspect, "Inspect last request")
+nmap("<leader>rs", ui.show_stats, "Show stats for last request")
+nmap("<leader>re", kulala.set_selected_env, "Set selected environment")
+nmap("<leader>tr", ui.toggle_headers, "Toggle headers view")
