@@ -33,6 +33,7 @@
         chezmoi
         difftastic
         direnv
+        docker
         dotnet
         fastfetch
         fd
