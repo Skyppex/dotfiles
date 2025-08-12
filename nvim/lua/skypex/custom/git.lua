@@ -75,6 +75,9 @@ M.gitsigns = function()
 			delay = 0,
 			ignore_whitespace = true,
 		},
+		preview_config = {
+			border = "rounded"
+		},
 	})
 
 	nmap("åg", "<cmd>Gitsigns nav_hunk prev<CR>zz", "Previous Git Hunk")
