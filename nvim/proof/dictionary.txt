@@ -679,3 +679,4 @@ sso
 reqwest
 ifconfig
 clickable
+pname
