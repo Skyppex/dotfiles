@@ -278,6 +278,12 @@ hook --force --relative --source $path --destination ($chezmoi_starship_path | p
 
 # setup mako
 
+let output = if (sys host).hostname == "brage-work-laptop" {
+    "DP-7"
+} else {
+    "DP-2"
+}
+
 let mako = [
     `# Style`,
     ([`font=`, $metadata.fonts.primary-style] | str join ""),
@@ -286,7 +292,7 @@ let mako = [
     ([`text-color=`, $colors.primary] | str join ""),
     ([`border-color=`, $colors.secondary] | str join ""),
     ([`progress-color=over `, $colors.background2] | str join ""),
-    `output=DP-2`,
+    ([`output=`, $output] | str join ""),
     ``,
     `border-radius=12`,
     ``,
