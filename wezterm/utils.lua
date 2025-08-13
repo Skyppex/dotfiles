@@ -89,6 +89,23 @@ local function get_temp_path()
 	end
 end
 
+--- @param a table
+--- @param b table
+--- @return table
+local function merge_tables(a, b)
+	local result = {}
+
+	for k, v in pairs(a) do
+		result[k] = v
+	end
+
+	for k, v in pairs(b) do
+		result[k] = v
+	end
+
+	return result
+end
+
 return {
 	get_home = get_home,
 	get_config_path = get_config_path,
@@ -102,4 +119,5 @@ return {
 	get_code_path = get_code_path,
 	get_temp_path = get_temp_path,
 	get_game_dev_path = get_game_dev_path,
+	merge_tables = merge_tables,
 }

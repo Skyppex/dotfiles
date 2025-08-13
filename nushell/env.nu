@@ -242,6 +242,5 @@ if ($env.DEV_BIN | is-not-empty) {
 $env.EDITOR = "nvim"
 
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
-$env.DOCKER_CONTEXT = "desktop-linux"
 
 $env.OPENAI_API_KEY = (do -i { skate get openai@api })

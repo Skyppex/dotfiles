@@ -202,10 +202,42 @@ local filetype_map = {
 		commentstring = "#%s",
 	},
 	{
+		pattern = ".*_profile",
+		ext = "sh",
+		filetype = "sh",
+		commentstring = "#%s",
+		parser = "bash",
+	},
+	{
 		filetype = "template",
 		parser = "gotmpl",
 	},
+	{
+		pattern = "dot_*",
+		replacement = {
+			"dot_",
+			".",
+		},
+	},
 }
+
+local function apply_real_name_filetype(fname, pattern, replacement, buf, filetype)
+	local real_name = replacement .. fname:sub(#pattern + 1)
+	local ft_detect = filetype or vim.filetype.match({ filename = real_name, buf = buf }) or ""
+
+	vim.notify(vim.inspect(fname))
+	vim.notify(vim.inspect(pattern))
+	vim.notify(vim.inspect(replacement))
+	vim.notify(vim.inspect(real_name))
+	vim.notify(vim.inspect(ft_detect))
+
+	if ft_detect ~= "" then
+		vim.bo.filetype = ft_detect
+		return true
+	end
+
+	return false
+end
 
 local parsers = require("nvim-treesitter.parsers")
 
@@ -221,7 +253,16 @@ for _, value in ipairs(filetype_map) do
 	if value.pattern then
 		vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 			pattern = value.pattern,
-			callback = function()
+			callback = function(args)
+				local fname = vim.fn.expand("%:t")
+
+				if
+					value.replacement
+					and apply_real_name_filetype(fname, value.replacement[1], value.replacement[2], args.buf)
+				then
+					return
+				end
+
 				vim.bo.filetype = value.filetype
 				vim.bo.commentstring = value.commentstring
 			end,

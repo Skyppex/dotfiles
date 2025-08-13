@@ -1,1 +1,2 @@
-export PATH="$PATH:/home/skypex/dev/bin"
+# shellcheck shell=sh disable=SC2148
+export PATH="$PATH:/home/skypex/dev/bin:/home/brage/.local/share/JetBrains/Toolbox/scripts"

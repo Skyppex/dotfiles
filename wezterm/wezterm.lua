@@ -318,10 +318,10 @@ local config = {
 			},
 		},
 	},
-	set_environment_variables = {
+	set_environment_variables = utils.merge_tables({
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
 		PATH = os.getenv("PATH") .. ":/home/skypex/.dotnet/tools",
-	},
+	}, require("env")),
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
