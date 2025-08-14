@@ -7,14 +7,19 @@
       url = "github:MarceColl/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, zen-browser, ... }:
+  outputs = { self, nixpkgs, zen-browser, rust-overlay, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         system = system;
         config = { allowUnfree = true; };
+        overlays = [ rust-overlay.overlays.default ];
       };
 
       dotnet = pkgs.buildEnv {
@@ -23,6 +28,8 @@
           (with pkgs.dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ])
         ];
       };
+
+      rust = pkgs.rust-bin.stable.latest.default;
 
       cliTools = with pkgs; [
         astroterm
@@ -66,7 +73,7 @@
         pastel
         powershell
         ripgrep
-        rustup
+        rust
         skate
         slurp
         starship
