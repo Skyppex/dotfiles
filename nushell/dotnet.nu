@@ -242,7 +242,7 @@ def "dn us rm" [
         print $selected_secrets
     }
 
-    for $secret in $selected_secrets {
+    for $secret in ($selected_secrets | lines) {
         let e = ($secret | str index-of ":") - 1
         let key = $secret | str substring ..$e
 
