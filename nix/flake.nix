@@ -95,6 +95,7 @@
         grim
         hyprpicker
         hypridle
+        hyprlock
         inkscape
         jetbrains-toolbox
         lens
@@ -115,20 +116,13 @@
       packages.${system} = {
         default = self.packages.${system}.home;
 
-        home = pkgs.buildEnv {
-          name = "skypex-tools";
-          paths = cliTools ++ commonDesktopTools ++ homeDesktopTools;
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-          buildInputs = [ pkgs.libglvnd pkgs.mesa ];
-          postBuild = ''
-            wrapProgram $out/bin/wezterm \
-                --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
-                --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
-          '';
+        shell = pkgs.buildEnv {
+          name = "skypex-shell";
+          paths = cliTools;
         };
 
         work = pkgs.buildEnv {
-          name = "skypex-tools";
+          name = "skypex-work";
           paths = cliTools ++ commonDesktopTools;
           nativeBuildInputs = [ pkgs.makeWrapper ];
           buildInputs = [ pkgs.libglvnd pkgs.mesa ];
@@ -139,9 +133,16 @@
           '';
         };
 
-        wsl = pkgs.buildEnv {
-          name = "skypex-tools-wsl";
-          paths = cliTools;
+        home = pkgs.buildEnv {
+          name = "skypex-home";
+          paths = cliTools ++ commonDesktopTools ++ homeDesktopTools;
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          buildInputs = [ pkgs.libglvnd pkgs.mesa ];
+          postBuild = ''
+            wrapProgram $out/bin/wezterm \
+                --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+                --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+          '';
         };
       };
     };
