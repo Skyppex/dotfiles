@@ -198,8 +198,9 @@ local filetype_map = {
 	{
 		pattern = "*.envrc",
 		ext = "envrc",
-		filetype = "",
+		filetype = "direnv",
 		commentstring = "#%s",
+		parser = "bash",
 	},
 	{
 		pattern = ".*_profile",
@@ -225,12 +226,6 @@ local function apply_real_name_filetype(fname, pattern, replacement, buf, filety
 	local real_name = replacement .. fname:sub(#pattern + 1)
 	local ft_detect = filetype or vim.filetype.match({ filename = real_name, buf = buf }) or ""
 
-	vim.notify(vim.inspect(fname))
-	vim.notify(vim.inspect(pattern))
-	vim.notify(vim.inspect(replacement))
-	vim.notify(vim.inspect(real_name))
-	vim.notify(vim.inspect(ft_detect))
-
 	if ft_detect ~= "" then
 		vim.bo.filetype = ft_detect
 		return true
@@ -239,14 +234,8 @@ local function apply_real_name_filetype(fname, pattern, replacement, buf, filety
 	return false
 end
 
-local parsers = require("nvim-treesitter.parsers")
-
 for _, value in ipairs(filetype_map) do
 	if value.parser then
-		parsers.list[value.filetype] = parsers.list[value.parser]
-		parsers.list[value.filetype].filetype = value.filetype
-		parsers.list[value.filetype].maintainers = nil
-
 		vim.treesitter.language.register(value.parser, value.filetype)
 	end
 
