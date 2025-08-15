@@ -681,3 +681,7 @@ ifconfig
 clickable
 pname
 naersk
+autoload
+statusline
+cdate
+ctime
