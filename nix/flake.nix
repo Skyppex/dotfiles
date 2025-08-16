@@ -111,7 +111,7 @@
         zen-browser
       ];
 
-      homeDesktopTools = with pkgs; [ ani-cli ani-skip unityhub ];
+      homeDesktopTools = with pkgs; [ ani-cli ani-skip ];
     in {
       packages.${system} = {
         default = self.packages.${system}.home;
