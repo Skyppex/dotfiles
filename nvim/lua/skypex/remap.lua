@@ -31,6 +31,7 @@ xmap("<leader>p", '"_dP')
 
 -- Just don't do this apparently'
 nmap("Q", "<nop>")
+nmap("q:", "<nop>")
 
 nmap("<leader>sp", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
 
