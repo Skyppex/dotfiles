@@ -58,7 +58,9 @@ local nmap = require("skypex.utils").nmap
 
 nmap("<leader>sh", builtin.help_tags, "Search Help")
 nmap("<leader>sk", builtin.keymaps, "Search Keymaps")
-nmap("<leader>sf", builtin.git_files, "Search Git Files")
+nmap("<leader>sf", function()
+	builtin.git_files({ show_untracked = true })
+end, "Search Git Files")
 nmap("<leader>sc", builtin.colorscheme, "Search Colorschemes")
 nmap("<leader>st", builtin.builtin, "Search Telescope builtin")
 nmap("<leader>sd", builtin.diagnostics, "Search Diagnostics")
