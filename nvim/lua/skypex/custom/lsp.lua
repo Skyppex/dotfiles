@@ -54,6 +54,32 @@ local handlers = {
 	}),
 }
 
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
+	callback = function()
+		local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+		local ts_ls = nil
+		for _, client in ipairs(clients) do
+			if client.name == "ts_ls" then
+				ts_ls = client
+				break
+			end
+		end
+
+		if not ts_ls then
+			return
+		end
+		ts_ls:exec_cmd(
+			{
+				command = "_typescript.organizeImports",
+				arguments = { vim.api.nvim_buf_get_name(0) },
+			},
+			{ bufnr = 0 }
+			-- Optionally, you may supply a handler function as the third argument
+		)
+	end,
+})
+
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
 --  By default, Neovim doesn't support everything that is in the LSP specification.
