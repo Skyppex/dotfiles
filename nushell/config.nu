@@ -845,21 +845,32 @@ def "pull" [] {
     git pull --rebase
     git submodule update --init --recursive
     chezmoi apply --force
-    print "---- updating scoop ----"
-    scoop update
-    print "---- installing scoop apps ----"
-    manifest install
-    print "---- updating scoop apps ----"
-    scoop update -a
+
+    if $env.OS == "windows" {
+        print "---- updating scoop ----"
+        scoop update
+        print "---- installing scoop apps ----"
+        manifest install
+        print "---- updating scoop apps ----"
+        scoop update -a
+    } else {
+        print "---- updating nix ----"
+        nix profile upgrade --all
+        print "---- updating nix ----"
+    }
 }
 
-# Push the dotfiles to the remote repository
-def "push" [] {
-    print "---- updating scoop manifest ----"
-    manifest update
-    enter $env.CHEZMOI_PATH
-    print "---- pushing config ----"
-    git add -A
-    git commit -m "chore(scoop): update manifest"
-    git push
+if $env.OS == "windows" {
+    # Push the dotfiles to the remote repository
+    def "push" [] {
+        print "---- updating scoop manifest ----"
+        manifest update
+        enter $env.CHEZMOI_PATH
+        print "---- pushing config ----"
+        git add -A
+        git commit -m "chore(scoop): update manifest"
+        git push
+    }
+} else {
+    def "push" [] {}
 }
