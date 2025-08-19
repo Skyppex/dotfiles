@@ -95,7 +95,6 @@
         grim
         hyprpicker
         hypridle
-        hyprlock
         inkscape
         jetbrains-toolbox
         lens
