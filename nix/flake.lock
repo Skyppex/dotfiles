@@ -1,0 +1,148 @@
+{
+  "nodes": {
+    "cli-tools": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "path": "cli-tools",
+        "type": "path"
+      },
+      "original": {
+        "path": "cli-tools",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "common-desktop-tools": {
+      "inputs": {
+        "cli-tools": [
+          "cli-tools"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "zen-browser": "zen-browser"
+      },
+      "locked": {
+        "path": "common-desktop-tools",
+        "type": "path"
+      },
+      "original": {
+        "path": "common-desktop-tools",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "home-desktop-tools": {
+      "inputs": {
+        "common-desktop-tools": [
+          "common-desktop-tools"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "home-desktop-tools",
+        "type": "path"
+      },
+      "original": {
+        "path": "home-desktop-tools",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1755922037,
+        "narHash": "sha256-wY1+2JPH0ZZC4BQefoZw/k+3+DowFyfOxv17CN/idKs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b1b3291469652d5a2edb0becc4ef0246fff97a7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "cli-tools": "cli-tools",
+        "common-desktop-tools": "common-desktop-tools",
+        "home-desktop-tools": "home-desktop-tools",
+        "nixpkgs": "nixpkgs",
+        "work-desktop-tools": "work-desktop-tools"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "cli-tools",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756089517,
+        "narHash": "sha256-KGinVKturJFPrRebgvyUB1BUNqf1y9FN+tSJaTPlnFE=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "44774c8c83cd392c50914f86e1ff75ef8619f1cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "work-desktop-tools": {
+      "inputs": {
+        "common-desktop-tools": [
+          "common-desktop-tools"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "work-desktop-tools",
+        "type": "path"
+      },
+      "original": {
+        "path": "work-desktop-tools",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "common-desktop-tools",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727721329,
+        "narHash": "sha256-QYlWZwUSwrM7BuO+dXclZIwoPvBIuJr6GpFKv9XKFPI=",
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
+        "rev": "e6ab73f405e9a2896cce5956c549a9cc359e5fcc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
