@@ -203,8 +203,8 @@ Group.new("SignifySignDelete", g.DiffDelete)
 
 Group.new("DiffText", c.tertiary, c.primary)
 Group.new("GitBlameMsg", g.DiffText, g.DiffText)
-Group.new("GitSignsCurrentLineBlame", g.DiffText, g.DiffText)
-Group.new("gitsignscurrentlineblame", g.DiffText, g.DiffText)
+Group.new("GitSignsCurrentLineBlame", c.orange, bg)
+Group.new("gitsignscurrentlineblame", c.orange, bg)
 
 Group.new("GitSignsAdd", g.DiffAdd, g.DiffAdd)
 Group.new("GitSignsChange", g.DiffChange, g.DiffChange)
