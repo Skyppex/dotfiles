@@ -175,7 +175,7 @@
 (trailing_closure
   function: (identifier) @function.call)
 
-(function_propagation
+(propagation
   function: (identifier) @function.call)
 
 (member
