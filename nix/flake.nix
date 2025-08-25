@@ -24,19 +24,25 @@
     };
   };
 
-  outputs = { self, cli-tools, work-desktop-tools, home-desktop-tools, ... }:
-    let system = "x86_64-linux";
-    in {
-      packages.${system} = {
-        default = self.packages.${system}.shell;
-        shell = cli-tools.packages.${system}.default;
-        work = work-desktop-tools.packages.${system}.default;
-        home = home-desktop-tools.packages.${system}.default;
-      };
-
-      devShells.${system} = {
-        default = cli-tools.devShells.${system}.default;
-        lite = cli-tools.devShells.${system}.lite;
-      };
+  outputs = {
+    self,
+    cli-tools,
+    work-desktop-tools,
+    home-desktop-tools,
+    ...
+  }: let
+    system = "x86_64-linux";
+  in {
+    packages.${system} = {
+      default = self.packages.${system}.shell;
+      shell = cli-tools.packages.${system}.default;
+      work = work-desktop-tools.packages.${system}.default;
+      home = home-desktop-tools.packages.${system}.default;
     };
+
+    devShells.${system} = {
+      default = cli-tools.devShells.${system}.default;
+      lite = cli-tools.devShells.${system}.lite;
+    };
+  };
 }

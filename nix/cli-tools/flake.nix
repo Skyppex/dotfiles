@@ -9,110 +9,114 @@
     };
   };
 
-  outputs = { self, nixpkgs, rust-overlay, ... }:
-    let
-      system = "x86_64-linux";
-      pkgsFree = import nixpkgs {
-        system = system;
-        config.allowUnfree = false;
-        overlays = [ rust-overlay.overlays.default ];
-      };
+  outputs = {
+    self,
+    nixpkgs,
+    rust-overlay,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgsFree = import nixpkgs {
+      system = system;
+      config.allowUnfree = false;
+      overlays = [rust-overlay.overlays.default];
+    };
 
-      pkgsUnfree = import nixpkgs {
-        system = system;
-        config.allowUnfree = true;
-        overlays = [ rust-overlay.overlays.default ];
-      };
+    pkgsUnfree = import nixpkgs {
+      system = system;
+      config.allowUnfree = true;
+      overlays = [rust-overlay.overlays.default];
+    };
 
-      dotnet = pkgsFree.buildEnv {
-        name = "combined-dotnet-sdks";
-        paths = [
-          (with pkgsFree.dotnetCorePackages;
-            combinePackages [ sdk_8_0 sdk_9_0 ])
-        ];
-      };
-
-      rust = pkgsFree.rust-bin.stable.latest.default;
-
-      cliPackages = with pkgsUnfree; [
-        astroterm
-        awscli2
-        cava
-        fastfetch
-        gitoxide
-        grim
-        ollama
-        powershell
-        slurp
-        starship
-        surrealdb
+    dotnet = pkgsFree.buildEnv {
+      name = "combined-dotnet-sdks";
+      paths = [
+        (with pkgsFree.dotnetCorePackages;
+            combinePackages [sdk_8_0 sdk_9_0])
       ];
+    };
 
-      cliPackagesLite = with pkgsFree; [
-        bat
-        btop
-        chezmoi
-        difftastic
-        direnv
-        docker
-        dotnet
-        fd
-        file
-        fzf
-        git
-        github-cli
-        gitleaks
-        glow
-        go
-        gping
-        gum
-        hyperfine
-        imagemagick
-        jq
-        kubectl
-        lazydocker
-        lazygit
-        lua
-        man
-        meson
-        mods
-        neovim
-        nodejs
-        nushell
-        openssh
-        pastel
-        ripgrep
-        rust
-        skate
-        tldr
-        tree-sitter
-        yazi
-        zip
-        zoxide
-      ];
-    in {
-      lib.${system} = {
-        packages = cliPackagesLite ++ cliPackages;
-        packages-lite = cliPackagesLite;
-      };
+    rust = pkgsFree.rust-bin.stable.latest.default;
 
-      packages.${system} = {
-        default = pkgsUnfree.buildEnv {
-          name = "skypex-shell-packages";
-          paths = self.lib.${system}.packages;
-        };
-      };
+    cliPackages = with pkgsUnfree; [
+      astroterm
+      awscli2
+      cava
+      fastfetch
+      gitoxide
+      grim
+      ollama
+      powershell
+      slurp
+      starship
+      surrealdb
+    ];
 
-      devShells.${system} = {
-        default = pkgsUnfree.mkShell {
-          name = "skypex-shell";
-          buildInputs = self.lib.${system}.packages;
-        };
+    cliPackagesLite = with pkgsFree; [
+      bat
+      btop
+      chezmoi
+      difftastic
+      direnv
+      docker
+      dotnet
+      fd
+      file
+      fzf
+      git
+      github-cli
+      gitleaks
+      glow
+      go
+      gping
+      gum
+      hyperfine
+      imagemagick
+      jq
+      kubectl
+      lazydocker
+      lazygit
+      lua
+      man
+      meson
+      mods
+      neovim
+      nodejs
+      nushell
+      openssh
+      pastel
+      ripgrep
+      rust
+      skate
+      tldr
+      tree-sitter
+      yazi
+      zip
+      zoxide
+    ];
+  in {
+    lib.${system} = {
+      packages = cliPackagesLite ++ cliPackages;
+      packages-lite = cliPackagesLite;
+    };
 
-        lite = pkgsFree.mkShell {
-          name = "skypex-shell-lite";
-          buildInputs = self.lib.${system}.packages-lite;
-        };
+    packages.${system} = {
+      default = pkgsUnfree.buildEnv {
+        name = "skypex-shell-packages";
+        paths = self.lib.${system}.packages;
       };
     };
+
+    devShells.${system} = {
+      default = pkgsUnfree.mkShell {
+        name = "skypex-shell";
+        buildInputs = self.lib.${system}.packages;
+      };
+
+      lite = pkgsFree.mkShell {
+        name = "skypex-shell-lite";
+        buildInputs = self.lib.${system}.packages-lite;
+      };
+    };
+  };
 }

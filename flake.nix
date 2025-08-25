@@ -8,6 +8,5 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
-  outputs = { inner, ... }: inner.outputs;
+  outputs = {inner, ...}: inner.outputs;
 }
