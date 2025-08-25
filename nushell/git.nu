@@ -672,9 +672,8 @@ def gcm [
     return;
 }
 
-# Git add all, amend, push --force-with-lease
+# Git amend commit and force push with lease
 def gcapf [] {
-    git add -A
     gca
     gpf
 }
