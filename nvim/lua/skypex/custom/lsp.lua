@@ -57,6 +57,10 @@ local handlers = {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
 	callback = function()
+		if vim.b.disable_autoformat or vim.g.disable_autoformat then
+			return
+		end
+
 		local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 		local ts_ls = nil
 		for _, client in ipairs(clients) do
