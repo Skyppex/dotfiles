@@ -18,9 +18,8 @@ def "kb switch" [] {
         return
     }
 
-    let namespaces = kubectl get namespaces 
+    let namespaces = kubectl get namespaces --no-headers
     | lines 
-    | skip 1 
     | to text 
     | awk "{print $1}"
 
@@ -52,9 +51,8 @@ def "kb pods" [] {
 alias "kb pds" = kb pods
 
 def "kb pod" [] {
-    kubectl get pods 
+    kubectl get pods --no-headers
     | lines 
-    | skip 1 
     | to text 
     | fzf --height 40% --layout=reverse 
     | awk "{print $1}"
