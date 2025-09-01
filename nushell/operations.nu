@@ -1,10 +1,11 @@
 # find a project below the current cwd
 def find-projects []: nothing -> table<type: string, opt: any> {
-    let options = fd --type f --max-depth 1 --regex '^(Cargo\.toml|go\.mod|.*\.sln|.*\.csproj|.*\.kt|build\.gradle\.kts|gradlew(\.bat)?)$'
+    let options = fd --type f --max-depth 1 --regex '^(flake\.nix|Cargo\.toml|go\.mod|.*\.sln|.*\.csproj|.*\.kt|build\.gradle\.kts|gradlew(\.bat)?)$'
 
     if ($options | is-empty) {
         print --stderr 'Not a recognized project directory'
         print --stderr 'Currently recognized project types are:'
+        print --stderr ' - Nix (^flake.nix$)'
         print --stderr ' - Rust (^Cargo.toml$)'
         print --stderr ' - Go (^go.mod$)'
         print --stderr ' - C# (.*\.sln$, .*\.csproj$)'
@@ -14,6 +15,10 @@ def find-projects []: nothing -> table<type: string, opt: any> {
 
     let options = $options | lines | each { |opt|
         mut o: record<type: string, opt: any> = {}
+
+        if ($opt | str contains "flake.nix") {
+            $o = { type: "Nix", opt: $opt }
+        }
 
         if ($opt | str contains "Cargo.toml") {
             $o = { type: "Rust", opt: $opt }
@@ -64,6 +69,7 @@ def select-project [
 
 # build a project in the current directory
 def --wrapped build [
+    --debug(-d)
     --release(-r)
     ...rest: string
 ] {
@@ -82,6 +88,15 @@ def --wrapped build [
 
     for $s in $selected {
         match $s.type {
+            "Nix" => {
+                if $release {
+                    nix build .#release
+                } else if $debug {
+                    nix build .#debug
+                } else {
+                    nix build
+                }
+            }
             "Rust" => {
                 if $release {
                     do -i { cargo build --release ...$rest }
