@@ -686,3 +686,4 @@ statusline
 cdate
 ctime
 alejandra
+fenix
