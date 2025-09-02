@@ -402,9 +402,12 @@ def --wrapped "dn test" [
 ] {
     let test_folders = ls -f
     | get name
-    | str downcase
-    | where ($it | str contains "test")
+    | where ($it | str downcase | str contains "test")
     | where ($it | path type | str contains "dir")
+
+    if $verbose {
+        print $"Test folders: ($test_folders)"
+    }
 
     let test_folder = $test_folders
     | to text
