@@ -330,6 +330,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local no_config_servers = { "rust_analyzer" }
+local no_install_servers = { "nushell", "kulala_ls" }
 local configs = require("lspconfig.configs")
 
 setup_proof(lspconfig, configs)
@@ -344,7 +345,17 @@ require("mason").setup()
 
 -- You can add other tools here that you want Mason to install
 -- for you, so that they are available from within Neovim.
-local ensure_installed = vim.tbl_keys(servers or {})
+local servers_to_install = servers
+
+for k, _ in pairs(servers) do
+	for _, v in ipairs(no_install_servers) do
+		if k == v then
+			servers_to_install[k] = nil
+		end
+	end
+end
+
+local ensure_installed = vim.tbl_keys(servers_to_install or {})
 vim.list_extend(ensure_installed, {
 	"lua-language-server",
 	"rust-analyzer",
@@ -364,7 +375,7 @@ require("mason-lspconfig").setup({
 })
 
 for server_name, config in pairs(servers) do
-	local server = config or {}
+	config = config or {}
 
 	if no_config_servers[server_name] ~= nil then
 		return
@@ -373,10 +384,10 @@ for server_name, config in pairs(servers) do
 	-- This handles overriding only values explicitly passed
 	-- by the server configuration above. Useful when disabling
 	-- certain features of an LSP (for example, turning off formatting for tsserver)
-	server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-	server.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, server.handlers or {})
+	config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, config.handlers or {})
 
-	vim.lsp.config(server_name, server)
+	vim.lsp.config(server_name, config)
 	vim.lsp.enable(server_name)
 end
 
