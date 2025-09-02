@@ -45,6 +45,7 @@
       mpvpaper
       neovim
       noto-fonts-emoji
+      obsidian
       slack
       spotify
       thunderbird
