@@ -33,6 +33,12 @@ alias ga = git add
 # Git add patch
 alias gap = git add --patch
 
+# Git restore
+alias grs = git restore
+
+# Git restore --staged
+alias grst = git restore --staged
+
 # Git restore patch
 alias grsp = git restore --patch
 
