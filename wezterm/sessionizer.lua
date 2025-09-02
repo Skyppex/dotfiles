@@ -10,13 +10,15 @@ local chezmoi_path = utils.get_chezmoi_path()
 local temp_path = utils.get_temp_path()
 local code_path = utils.get_code_path()
 local carweb_path
-local obsidian_path = home .. "/OneDrive/Obsidian"
+local obsidian_path
 local game_dev_path = utils.get_game_dev_path()
 
 if utils.is_home_computer_windows() then
 	carweb_path = code_path .. "/sentinel/commoncarweb"
+	obsidian_path = home .. "/OneDrive/Obsidian"
 else
 	carweb_path = code_path .. "/commoncarweb"
+	obsidian_path = home .. "/obsidian"
 end
 
 M.toggle = function(window, pane)

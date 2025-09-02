@@ -183,6 +183,10 @@ local filetype_map = {
 		commentstring = "//%s",
 	},
 	{
+		filetype = "statblock",
+		parser = "yaml",
+	},
+	{
 		pattern = "*.http",
 		ext = "http",
 		filetype = "http",

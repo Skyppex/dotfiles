@@ -19,12 +19,20 @@ local function list_directories(path)
 	return directories
 end
 
-local vaults_path = vim.fn.expand("~") .. "/OneDrive/Obsidian/Vaults/"
+local vaults_path
 
--- Replace '/your/directory/path' with the path you want to list directories from
+local utils = require("skypex.utils")
+
+if utils.is_home_computer_windows() then
+	vaults_path = utils.get_home() .. "/OneDrive/Obsidian/Vaults/"
+else
+	vaults_path = utils.get_home() .. "/obsidian/Vaults/"
+end
+
 local vaults = list_directories(vaults_path)
 
 local workspaces = {}
+
 for _, vault in ipairs(vaults) do
 	table.insert(workspaces, {
 		name = vault,
@@ -43,7 +51,7 @@ obsidian.setup({
 		min_chars = 2,
 	},
 	mappings = {
-		["gf"] = {
+		["<leader>K"] = {
 			action = function()
 				return obsidian.util.gf_passthrough()
 			end,
@@ -57,7 +65,7 @@ obsidian.setup({
 			opts = { noremap = true, silent = true, buffer = true },
 		},
 		-- Smart action depending on context, either follow link or toggle checkbox.
-		["<cr>"] = {
+		["K"] = {
 			action = function()
 				return require("obsidian").util.smart_action()
 			end,
@@ -74,4 +82,5 @@ obsidian.setup({
 			insert_tag = "<leader>it",
 		},
 	},
+	disable_frontmatter = true,
 })
