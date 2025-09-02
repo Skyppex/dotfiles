@@ -18,6 +18,9 @@ alias gl = git log --ext-diff --all --graph --pretty="format:%C(magenta)%h %Cres
 # Git diff
 alias gd = git diff
 
+# Git diff staged
+alias gds = git diff --staged
+
 # Git amend commit
 alias gca = git commit --amend
 
