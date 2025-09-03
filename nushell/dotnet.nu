@@ -254,6 +254,7 @@ def "dn us rm" [
     }
 }
 
+# add nuget package
 def "dn add" [
     --verbose(-v) # Print verbose output
     --dry-run(-d) # Print the command that would be run
@@ -537,6 +538,7 @@ def --wrapped "dn test all" [...rest] {
     dotnet test ...$rest
 }
 
+# add project reference
 def "dn ref add" [
     project?: string # The project to add the reference to
     reference?: string # The project to reference
