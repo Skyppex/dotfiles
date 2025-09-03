@@ -53,19 +53,24 @@
       zen-browser
     ];
   in {
-    lib.${system}.packages = cliPackages ++ commonPackages;
+    lib.${system} = {
+        packages = cliPackages ++ commonPackages;
+        nativeBuildInputs = [pkgs.makeWrapper];
+        buildInputs = [pkgs.libglvnd pkgs.mesa];
+        postBuild = ''
+          wrapProgram $out/bin/wezterm \
+              --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+              --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+        '';
+    };
 
     packages.${system} = {
       default = pkgs.buildEnv {
         name = "skypex-desktop-common";
         paths = self.lib.${system}.packages;
-        nativeBuildInputs = [pkgs.makeWrapper];
-        buildInputs = [pkgs.libglvnd pkgs.mesa];
-        postBuild = ''
-          wrapProgram $out/bin/wezterm \
-            --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
-            --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
-        '';
+        nativeBuildInputs = self.lib.${system}.nativeBuildInputs;
+        buildInputs = self.lib.${system}.buildInput;
+        postBuild = self.lib.${system}.postBuild;
       };
     };
 

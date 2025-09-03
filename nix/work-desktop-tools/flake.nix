@@ -20,18 +20,18 @@
       system = system;
       config = {allowUnfree = true;};
     };
-    commonPackages = common-desktop-tools.lib.${system}.packages;
+    common = common-desktop-tools.lib.${system};
     workPackages = with pkgs; [dbeaver-bin];
   in {
-    lib.${system}.packages = commonPackages ++ workPackages;
+    lib.${system}.packages = common.packages ++ workPackages;
 
     packages.${system} = {
       default = pkgs.buildEnv {
         name = "skypex-work";
         paths = self.lib.${system}.packages;
-        nativeBuildInputs = common-desktop-tools.packages.${system}.default.nativeBuildInputs;
-        buildInputs = common-desktop-tools.packages.${system}.default.buildInputs;
-        postBuild = common-desktop-tools.packages.${system}.default.postBuild;
+        nativeBuildInputs = common.nativeBuildInputs;
+        buildInputs = common.buildInputs;
+        postBuild = common.postBuild;
       };
     };
 

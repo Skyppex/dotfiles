@@ -20,18 +20,18 @@
       system = system;
       config = {allowUnfree = true;};
     };
-    commonPackages = common-desktop-tools.lib.${system}.packages;
+    common = common-desktop-tools.lib.${system};
     homePackages = with pkgs; [ani-cli ani-skip];
   in {
-    lib.${system}.packages = commonPackages ++ homePackages;
+    lib.${system}.packages = common.packages ++ homePackages;
 
     packages.${system} = {
       default = pkgs.buildEnv {
         name = "skypex-home";
         paths = self.lib.${system}.packages;
-        nativeBuildInputs = commonPackages.default.nativeBuildInputs;
-        buildInputs = commonPackages.default.buildInputs;
-        postBuild = commonPackages.default.postBuild;
+        nativeBuildInputs = common.nativeBuildInputs;
+        buildInputs = common.buildInputs;
+        postBuild = common.postBuild;
       };
     };
 
