@@ -153,6 +153,6 @@ require("lualine").setup({
 				end,
 			},
 		},
-		lualine_x = { "cdate", "ctime" },
+		lualine_x = {},
 	},
 })
