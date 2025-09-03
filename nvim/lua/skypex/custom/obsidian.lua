@@ -42,6 +42,7 @@ end
 
 local obsidian = require("obsidian")
 obsidian.setup({
+	legacy_commands = false,
 	workspaces = workspaces,
 	ui = {
 		enable = false,
@@ -49,28 +50,7 @@ obsidian.setup({
 	completion = {
 		nvim_cmp = true,
 		min_chars = 2,
-	},
-	mappings = {
-		["<leader>K"] = {
-			action = function()
-				return obsidian.util.gf_passthrough()
-			end,
-			opts = { noremap = true, silent = true },
-		},
-		-- Toggle check-boxes.
-		["<leader>ch"] = {
-			action = function()
-				return require("obsidian").util.toggle_checkbox()
-			end,
-			opts = { noremap = true, silent = true, buffer = true },
-		},
-		-- Smart action depending on context, either follow link or toggle checkbox.
-		["K"] = {
-			action = function()
-				return require("obsidian").util.smart_action()
-			end,
-			opts = { noremap = true, silent = true, buffer = true, expr = true },
-		},
+		create_new = false,
 	},
 	picker = {
 		name = "telescope.nvim",
@@ -83,4 +63,12 @@ obsidian.setup({
 		},
 	},
 	disable_frontmatter = true,
+})
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "ObsidianNoteEnter",
+	callback = function(ev)
+		utils.nmap("gd", "<cmd>Obsidian follow_link<cr>", "Open note under cursor", nil, ev.buf)
+		utils.nmap("<leader>tc", "<cmd>Obsidian toggle_checkbox<cr>", "Open note under cursor", nil, ev.buf)
+	end,
 })

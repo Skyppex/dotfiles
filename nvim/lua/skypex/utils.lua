@@ -231,10 +231,12 @@ local andromeda = {
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nmap = function(left, right, desc, expr)
+--- @param buf integer?
+local nmap = function(left, right, desc, expr, buf)
 	vim.keymap.set("n", left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -244,10 +246,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local xmap = function(left, right, desc, expr)
+--- @param buf integer?
+local xmap = function(left, right, desc, expr, buf)
 	vim.keymap.set("x", left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -257,10 +261,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local imap = function(left, right, desc, expr)
+--- @param buf integer?
+local imap = function(left, right, desc, expr, buf)
 	vim.keymap.set("i", left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -270,10 +276,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local smap = function(left, right, desc, expr)
+--- @param buf integer?
+local smap = function(left, right, desc, expr, buf)
 	vim.keymap.set("s", left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -283,10 +291,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local omap = function(left, right, desc, expr)
+--- @param buf integer?
+local omap = function(left, right, desc, expr, buf)
 	vim.keymap.set("o", left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -296,10 +306,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxmap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxmap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -309,10 +321,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nimap = function(left, right, desc, expr)
+--- @param buf integer?
+local nimap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "i" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -322,10 +336,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nsmap = function(left, right, desc, expr)
+--- @param buf integer?
+local nsmap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -335,10 +351,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nomap = function(left, right, desc, expr)
+--- @param buf integer?
+local nomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -348,10 +366,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local ximap = function(left, right, desc, expr)
+--- @param buf integer?
+local ximap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "x", "i" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -361,10 +381,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local xsmap = function(left, right, desc, expr)
+--- @param buf integer?
+local xsmap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "x", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -374,10 +396,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local xomap = function(left, right, desc, expr)
+--- @param buf integer?
+local xomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "x", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -387,10 +411,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nximap = function(left, right, desc, expr)
+--- @param buf integer?
+local nximap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "i" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -400,10 +426,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxsmap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxsmap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -413,10 +441,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxomap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -426,10 +456,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nismap = function(left, right, desc, expr)
+--- @param buf integer?
+local nismap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "i", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -439,10 +471,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local niomap = function(left, right, desc, expr)
+--- @param buf integer?
+local niomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "i", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -452,10 +486,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local xismap = function(left, right, desc, expr)
+--- @param buf integer?
+local xismap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "x", "i", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -465,10 +501,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local xiomap = function(left, right, desc, expr)
+--- @param buf integer?
+local xiomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "x", "i", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -478,10 +516,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxismap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxismap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "i", "s" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -491,10 +531,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxiomap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxiomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "i", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
@@ -504,10 +546,12 @@ end
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
-local nxisomap = function(left, right, desc, expr)
+--- @param buf integer?
+local nxisomap = function(left, right, desc, expr, buf)
 	vim.keymap.set({ "n", "x", "i", "s", "o" }, left, right, {
 		desc = desc,
 		expr = expr,
+		buffer = buf,
 		noremap = true,
 		silent = true,
 	})
