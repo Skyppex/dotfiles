@@ -689,3 +689,4 @@ alejandra
 fenix
 frontmatter
 wonderous
+yamlfmt
