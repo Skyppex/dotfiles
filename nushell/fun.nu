@@ -252,7 +252,6 @@ def hall [
 }
 
 # Echo the lorem ipsum text
-# proof: ignore
 def lorem [] {
     let lorem = [
         "Lorem ipsum dolor sit amet, erroribus constituam duo ut. Eum audiam disputando",
