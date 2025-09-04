@@ -127,6 +127,130 @@ alias disco = echo "Amazingly few discoteques provide jukeboxes"
 # Echo a sentence with all the letters of the alphabet
 alias waltz = echo "Waltz, bad nymph, for quick jigs vex"
 
+# Play the monty hall game
+def hall [
+    --quiet(-q)
+    --answer(-a): number # (1|2|3)
+    --switch(-s): string # (yes|no)
+] {
+    mut $result = ""
+
+    # make the first choice
+    if not $quiet {
+        print -e "there are three doors in front of you"
+        print -e "two have goats, and one has a new car"
+        $result = if ($answer | is-empty) {
+            (["left", "middle", "right"] | input list "pick one of the doors")
+        } else {
+            let answer = match $answer {
+                1 => "left",
+                2 => "middle",
+                3 => "right",
+            }
+
+            $answer
+        }
+    } else {
+        if ($answer | is-empty) {
+            print -e "please provide an answer with --answer when using --quiet"
+            return
+        }
+
+        if ($answer <= 0) or ($answer > 3) {
+            print -e "answer out of range. use --help for more info"
+            return
+        }
+
+        let answer = match $answer {
+            1 => "left",
+            2 => "middle",
+            3 => "right",
+        }
+
+        $result = $answer
+    }
+
+    if not $quiet {
+        print -e $"you picked the ($result) door"
+    }
+
+    # generate correct answer
+    let correct = gen int 1..3
+    mut given = gen int 1..3
+
+    let result_num = match $result {
+        "left" => "1"
+        "middle" => "2"
+        "right" => "3"
+    }
+
+    # generate wrong answer
+    while (($given == $correct) or ($given == $result_num)) {
+        $given = ^gen int 1..3
+    }
+
+    let given_text = match $given {
+        "1" => "left",
+        "2" => "middle",
+        "3" => "right",
+    }
+
+    mut switched = ""
+
+    # ask to change the original answer two the only other door not revealed
+    if not $quiet {
+        print -e $"the ($given_text) door is a goat"
+
+        if ($switch | is-empty) {
+            $switched = (["no", "yes"] | input list "would you like to change your answer?")
+        } else {
+            $switched = $switch
+        }
+    } else {
+        if ($switch | is-empty) {
+            print -e "please provide a mode for --switch when using --quiet"
+            return
+        }
+
+        if ($switch != "yes") and ($switch != "no") {
+            print -e "invalid mod for switch. use --help for more info"
+            return
+        }
+
+        $switched = $switch
+    }
+
+    if $switch == "yes" {
+        $result = (["left", "middle", "right"] 
+            | where { |it|
+                $it != $result and $it != $given_text
+            } 
+            | first
+        )
+    }
+
+    let result_num = match $result {
+        "left" => "1"
+        "middle" => "2"
+        "right" => "3"
+    }
+
+    # present results
+    if $result_num == $correct {
+        if not $quiet {
+            print -e "you won the new car"
+        }
+
+        echo 1
+    } else {
+        if not $quiet {
+            print -e "you won a goat"
+        }
+
+        echo 0
+    }
+}
+
 # Echo the lorem ipsum text
 # proof: ignore
 def lorem [] {
