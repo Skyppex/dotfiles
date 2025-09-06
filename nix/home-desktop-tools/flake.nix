@@ -21,7 +21,13 @@
       config = {allowUnfree = true;};
     };
     common = common-desktop-tools.lib.${system};
-    homePackages = with pkgs; [ani-cli ani-skip];
+    homePackages = with pkgs; [
+      ani-cli
+      ani-skip
+      blender
+      logmein-hamachi
+      r2modman
+    ];
   in {
     lib.${system}.packages = common.packages ++ homePackages;
 
