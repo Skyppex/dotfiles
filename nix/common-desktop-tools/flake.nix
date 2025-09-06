@@ -54,14 +54,14 @@
     ];
   in {
     lib.${system} = {
-        packages = cliPackages ++ commonPackages;
-        nativeBuildInputs = [pkgs.makeWrapper];
-        buildInputs = [pkgs.libglvnd pkgs.mesa];
-        postBuild = ''
-          wrapProgram $out/bin/wezterm \
-              --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
-              --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
-        '';
+      packages = cliPackages ++ commonPackages;
+      nativeBuildInputs = [pkgs.makeWrapper];
+      buildInputs = [pkgs.libglvnd pkgs.mesa];
+      postBuild = ''
+        wrapProgram $out/bin/wezterm \
+            --prefix LD_LIBRARY_PATH : ${pkgs.libglvnd}/lib \
+            --prefix LD_LIBRARY_PATH : ${pkgs.mesa}/lib
+      '';
     };
 
     packages.${system} = {
