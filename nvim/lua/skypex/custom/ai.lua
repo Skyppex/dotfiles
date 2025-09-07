@@ -2,7 +2,9 @@ local cc = require("codecompanion")
 local cca = require("codecompanion.adapters")
 local mcphub = require("mcphub")
 
-local adapters = {
+local adapters = {}
+
+adapters.http = {
 	codellama = function()
 		return cca.extend("ollama", {
 			name = "codellama",
@@ -45,7 +47,7 @@ if utils.is_work_computer() or utils.is_work_computer_linux() or utils.is_home_c
 	local openai_api_key = skate.get("openai", "api")
 
 	if openai_api_key then
-		adapters["openai"] = function()
+		adapters.http["openai"] = function()
 			return cca.extend("openai", {
 				env = {
 					api_key = openai_api_key,
