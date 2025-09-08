@@ -838,7 +838,7 @@ source ~/.config/nushell/poll.nu
 source ~/.config/nushell/kb.nu
 
 # Pull the dotfiles from the remote repository
-def "pull" [] {
+def pull [] {
     enter $env.CHEZMOI_PATH
     print "---- pulling config ----"
     git stash -u
@@ -858,19 +858,4 @@ def "pull" [] {
         nix profile upgrade --all
         print "---- updating nix ----"
     }
-}
-
-if $env.OS == "windows" {
-    # Push the dotfiles to the remote repository
-    def "push" [] {
-        print "---- updating scoop manifest ----"
-        manifest update
-        enter $env.CHEZMOI_PATH
-        print "---- pushing config ----"
-        git add -A
-        git commit -m "chore(scoop): update manifest"
-        git push
-    }
-} else {
-    def "push" [] {}
 }
