@@ -90,11 +90,11 @@ def --wrapped build [
         match $s.type {
             "Nix" => {
                 if $release {
-                    nix build .#release
+                    nix build .#release ...$rest
                 } else if $debug {
-                    nix build .#debug
+                    nix build .#debug ...$rest
                 } else {
-                    nix build
+                    nix build ...$rest
                 }
             }
             "Rust" => {
@@ -135,8 +135,11 @@ def --wrapped run [...rest] {
     }
 
     match $selected.type {
+        "Nix" => {
+            nix run . -- ...$rest
+        }
         "Rust" => {
-            cargo run ...$rest
+            cargo run -- ...$rest
         }
         "C#" => {
             dn run ...$rest
@@ -167,6 +170,13 @@ def --wrapped test [
     }
 
     match $selected.type {
+        "Nix" => {
+            if $all {
+                nix flake check --all-systems ...$rest
+            } else {
+                nix flake check ...$rest
+            }
+        }
         "Rust" => {
             if $all {
                 cargo test --workspace --all-targets ...$rest
