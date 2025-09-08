@@ -1,15 +1,4 @@
 return {
-	{
-		"nvim-treesitter/playground",
-		cmd = "TSPlaygroundToggle",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPre", "BufNewFile" },
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
@@ -20,6 +9,17 @@ return {
 		config = function()
 			require("skypex.custom.treesitter")
 		end,
+	},
+	{
+		"nvim-treesitter/playground",
+		cmd = "TSPlaygroundToggle",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{
 		"dariuscorvus/tree-sitter-surrealdb.nvim",

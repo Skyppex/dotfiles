@@ -214,6 +214,13 @@ local servers = {
 		},
 		capabilities = capabilities,
 	},
+	rust_analyzer = {
+		settings = {
+			checkOnSave = {
+				command = "clippy",
+			},
+		},
+	},
 	tailwindcss = {
 		on_attach = function(_, bufnr)
 			require("tailwindcss-colors").buf_attach(bufnr)
@@ -329,7 +336,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local no_config_servers = { "rust_analyzer" }
+local no_config_servers = {}
 local no_install_servers = { "nushell", "kulala_ls" }
 local configs = require("lspconfig.configs")
 

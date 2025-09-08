@@ -40,8 +40,4 @@ return {
 			require("skypex.custom.lsp")
 		end,
 	},
-	{
-		"mrcjkb/rustaceanvim",
-		lazy = false,
-	},
 }

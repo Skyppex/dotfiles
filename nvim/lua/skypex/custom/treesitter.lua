@@ -160,6 +160,12 @@ local filetype_map = {
 		commentstring = "//%s",
 	},
 	{
+		pattern = "*.razor",
+		ext = "razor",
+		filetype = "razor",
+		commentstring = "//%s",
+	},
+	{
 		pattern = "*Dockerfile*",
 		filetype = "dockerfile",
 		commentstring = "#%s",
