@@ -149,6 +149,10 @@ def "dn us ls" [
 
     mut map = {}
 
+    if $secrets == "No secrets configured for this application." {
+        return $map
+    }
+
     for $secret in ($secrets | lines) {
         let split = ($secret | split row " = ")
         let key = $split | get 0
