@@ -856,6 +856,5 @@ def pull [] {
     } else {
         print "---- updating nix ----"
         nix profile upgrade --all
-        print "---- updating nix ----"
     }
 }

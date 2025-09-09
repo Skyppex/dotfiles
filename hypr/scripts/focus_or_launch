@@ -18,15 +18,12 @@ def --wrapped main [focus: string, ...launch] {
 
         exec ...$launch
     } else {
-        notify-send "hello"
         let focused = hyprctl dispatch focuswindow $"class:($focus)"
-        notify-send $focused
 
         if $focused == "ok" {
             return;
         }
 
-        notify-send "launch"
         exec ...$launch
     }
 }
