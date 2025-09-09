@@ -1,10 +1,32 @@
 #!/usr/bin/env nu
 
 def --wrapped main [focus: string, ...launch] {
-    let focused = hyprctl dispatch focuswindow $"class:($focus)"
-    if $focused == "ok" {
-        return;
-    }
+    let choices = hyprctl clients -j | from json | where ($it.class == $focus)
+    let len = $choices | length
 
-    exec ...$launch
+    if $len > 1 {
+        let selected_title = $choices 
+        | get title 
+        | to text 
+        | rofi -dmenu -p $focus -i -window-title "rofi"
+
+        let focused = hyprctl dispatch focuswindow $"title:($selected_title)"
+
+        if $focused == "ok" {
+            return;
+        }
+
+        exec ...$launch
+    } else {
+        notify-send "hello"
+        let focused = hyprctl dispatch focuswindow $"class:($focus)"
+        notify-send $focused
+
+        if $focused == "ok" {
+            return;
+        }
+
+        notify-send "launch"
+        exec ...$launch
+    }
 }
