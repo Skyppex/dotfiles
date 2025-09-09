@@ -548,17 +548,10 @@ def "bisect start" [...query] {
     git checkout $commit
 }
 
-def "bisect good" [] {
-    git bisect good
-}
-
-def "bisect bad" [] {
-    git bisect bad
-}
-
-def "bisect reset" [] {
-    git bisect reset
-}
+alias "bisect good" = git bisect good
+alias "bisect bad" = git bisect bad
+alias "bisect reset" = git bisect reset
+alias "bisect stop" = git bisect reset
 
 # Get a link to the current github repository
 def ghlink [
