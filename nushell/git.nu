@@ -33,6 +33,9 @@ alias ga = git add
 # Git add patch
 alias gap = git add --patch
 
+# Git add --intent-to-add
+alias gat = git add --intent-to-add
+
 # Git restore
 alias grs = git restore
 
@@ -52,9 +55,6 @@ alias gdf = git diff (git status --porcelain
     | str trim 
     | to text 
     | fzf --height 40% --layout=reverse)
-
-# Start tracking files with git
-alias gt = git add --intent-to-add
 
 # Conventional commit
 def cc [
