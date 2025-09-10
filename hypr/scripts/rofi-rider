@@ -1,0 +1,17 @@
+#!/usr/bin/env nu
+
+let results = locate -r $"($env.CODE)/.*\\.sln$"
+
+if ($results | is-empty) {
+    notify-send "no solutions found"
+    return
+}
+
+let selected = $results | rofi -dmenu -p "select solution"
+
+if ($selected | is-empty) {
+    notify-send "no solution selected"
+    return
+}
+
+rider $selected
