@@ -14,6 +14,10 @@ kulala.setup({
 		winbar = false,
 		show_request_summary = false,
 		disable_news_popup = true,
+		win_opts = {
+			wo = { foldmethod = "none" },
+		},
+		max_response_size = 1048576,
 	},
 	global_keymaps = false,
 	kulala_keymaps = false,
