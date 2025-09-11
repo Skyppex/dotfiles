@@ -1,3 +1,5 @@
+alias ls = ls --all
+
 # Yazi with cwd
 def --env y [...args] {
     let tmp = (mktemp -t "yazi-cwd.XXXXXX")
