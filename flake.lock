@@ -3,79 +3,76 @@
     "cli-tools": {
       "inputs": {
         "nixpkgs": [
-          "inner",
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "path": "cli-tools",
+        "path": "nix/cli-tools",
         "type": "path"
       },
       "original": {
-        "path": "cli-tools",
+        "path": "nix/cli-tools",
         "type": "path"
       },
-      "parent": [
-        "inner"
-      ]
+      "parent": []
     },
     "common-desktop-tools": {
       "inputs": {
         "cli-tools": [
-          "inner",
           "cli-tools"
         ],
         "nixpkgs": [
-          "inner",
           "nixpkgs"
         ],
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "path": "common-desktop-tools",
+        "path": "nix/common-desktop-tools",
         "type": "path"
       },
       "original": {
-        "path": "common-desktop-tools",
+        "path": "nix/common-desktop-tools",
         "type": "path"
       },
-      "parent": [
-        "inner"
-      ]
+      "parent": []
     },
     "home-desktop-tools": {
       "inputs": {
         "common-desktop-tools": [
-          "inner",
           "common-desktop-tools"
         ],
         "nixpkgs": [
-          "inner",
           "nixpkgs"
         ]
       },
       "locked": {
-        "path": "home-desktop-tools",
+        "path": "nix/home-desktop-tools",
         "type": "path"
       },
       "original": {
-        "path": "home-desktop-tools",
+        "path": "nix/home-desktop-tools",
         "type": "path"
       },
-      "parent": [
-        "inner"
-      ]
+      "parent": []
     },
     "inner": {
       "inputs": {
-        "cli-tools": "cli-tools",
-        "common-desktop-tools": "common-desktop-tools",
-        "home-desktop-tools": "home-desktop-tools",
+        "cli-tools": [
+          "cli-tools"
+        ],
+        "common-desktop-tools": [
+          "common-desktop-tools"
+        ],
+        "home-desktop-tools": [
+          "home-desktop-tools"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
-        "work-desktop-tools": "work-desktop-tools"
+        "work-desktop-tools": [
+          "work-desktop-tools"
+        ]
       },
       "locked": {
         "path": "nix",
@@ -105,14 +102,17 @@
     },
     "root": {
       "inputs": {
+        "cli-tools": "cli-tools",
+        "common-desktop-tools": "common-desktop-tools",
+        "home-desktop-tools": "home-desktop-tools",
         "inner": "inner",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "work-desktop-tools": "work-desktop-tools"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "inner",
           "cli-tools",
           "nixpkgs"
         ]
@@ -134,30 +134,25 @@
     "work-desktop-tools": {
       "inputs": {
         "common-desktop-tools": [
-          "inner",
           "common-desktop-tools"
         ],
         "nixpkgs": [
-          "inner",
           "nixpkgs"
         ]
       },
       "locked": {
-        "path": "work-desktop-tools",
+        "path": "nix/work-desktop-tools",
         "type": "path"
       },
       "original": {
-        "path": "work-desktop-tools",
+        "path": "nix/work-desktop-tools",
         "type": "path"
       },
-      "parent": [
-        "inner"
-      ]
+      "parent": []
     },
     "zen-browser": {
       "inputs": {
         "nixpkgs": [
-          "inner",
           "common-desktop-tools",
           "nixpkgs"
         ]

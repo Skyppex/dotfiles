@@ -87,6 +87,7 @@
       pastel
       ripgrep
       rust
+      scc
       skate
       tldr
       tree-sitter
