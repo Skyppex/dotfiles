@@ -135,6 +135,19 @@ require("lualine").setup({
 		lualine_c = {
 			{
 				function()
+					local filetype = vim.bo.filetype
+
+					if filetype == "http" or filetype == "rest" then
+						return require("kulala").get_selected_env()
+					end
+
+					return ""
+				end,
+			},
+		},
+		lualine_x = {
+			{
+				function()
 					return direnv_status("󰌪", "󱋙", "󱋙", "")
 				end,
 				color = function()
@@ -153,6 +166,5 @@ require("lualine").setup({
 				end,
 			},
 		},
-		lualine_x = {},
 	},
 })
