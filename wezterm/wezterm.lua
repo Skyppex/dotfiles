@@ -14,7 +14,7 @@ local act = wezterm.action
 
 local config = {
 	max_fps = 165,
-	scrollback_lines = 10000,
+	scrollback_lines = 50000,
 	quick_select_alphabet = "hjklyuioasdfqwer",
 	audible_bell = "Disabled",
 	check_for_updates = false,
