@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.common-desktop-tools.follows = "common-desktop-tools";
     };
+    surface-laptop-tools = {
+      url = ./surface-laptop-tools;
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.cli-tools.follows = "cli-tools";
+    };
   };
 
   outputs = {
@@ -29,6 +34,7 @@
     cli-tools,
     work-desktop-tools,
     home-desktop-tools,
+    surface-laptop-tools,
     ...
   }: let
     system = "x86_64-linux";
@@ -38,6 +44,7 @@
       shell = cli-tools.packages.${system}.default;
       work = work-desktop-tools.packages.${system}.default;
       home = home-desktop-tools.packages.${system}.default;
+      surface = surface-laptop-tools.packages.${system}.default;
     };
 
     devShells.${system} = {

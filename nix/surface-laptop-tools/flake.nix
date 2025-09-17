@@ -1,5 +1,5 @@
 {
-  description = "skypex common desktop tools";
+  description = "skypex surface laptop tools";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -27,19 +27,18 @@
     };
     cliPackages = cli-tools.lib.${system}.packages;
 
-    commonPackages = with pkgs; [
+    surfacePackages = with pkgs; [
+      ani-cli
+      ani-skip
+      logmein-hamachi
       bluetuith
       cliphist
-      dbeaver-bin
       discord
       eww
       gimp
       grim
       hyprpicker
       hypridle
-      inkscape
-      jetbrains-toolbox
-      lens
       mako
       mpv
       mpvpaper
@@ -54,7 +53,7 @@
     ];
   in {
     lib.${system} = {
-      packages = cliPackages ++ commonPackages;
+      packages = cliPackages ++ surfacePackages;
       nativeBuildInputs = [pkgs.makeWrapper];
       buildInputs = [pkgs.libglvnd pkgs.mesa];
       postBuild = ''
@@ -66,7 +65,7 @@
 
     packages.${system} = {
       default = pkgs.buildEnv {
-        name = "skypex-desktop-common";
+        name = "skypex-surface";
         paths = self.lib.${system}.packages;
         nativeBuildInputs = self.lib.${system}.nativeBuildInputs;
         buildInputs = self.lib.${system}.buildInputs;
