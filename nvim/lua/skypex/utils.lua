@@ -38,7 +38,7 @@ end
 
 --- @return boolean
 local function is_home_laptop_linux()
-	return get_home():find("/home/pod-042") ~= nil
+	return get_home():find("/home/pod-042", 1, true) ~= nil
 end
 
 --- @return boolean
