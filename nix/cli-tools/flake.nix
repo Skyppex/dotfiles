@@ -52,7 +52,17 @@
       surrealdb
     ];
 
-    cliPackagesLite = with pkgsFree; [
+    cliPackagesLite = with pkgsUnfree; [
+      astroterm
+      cava
+      fastfetch
+      gitoxide
+      grim
+      slurp
+      starship
+    ];
+
+    cliPackagesFree = with pkgsFree; [
       bat
       btop
       chezmoi
@@ -97,8 +107,9 @@
     ];
   in {
     lib.${system} = {
-      packages = cliPackagesLite ++ cliPackages;
-      packages-lite = cliPackagesLite;
+      packages = cliPackagesFree ++ cliPackagesLite ++ cliPackages;
+      packages-lite = cliPackagesFree ++ cliPackagesLite;
+      packages-free = cliPackagesFree;
     };
 
     packages.${system} = {
@@ -114,9 +125,14 @@
         buildInputs = self.lib.${system}.packages;
       };
 
-      lite = pkgsFree.mkShell {
+      lite = pkgsUnfree.mkShell {
         name = "skypex-shell-lite";
         buildInputs = self.lib.${system}.packages-lite;
+      };
+
+      free = pkgsFree.mkShell {
+        name = "skypex-shell-free";
+        buildInputs = self.lib.${system}.packages-free;
       };
     };
   };

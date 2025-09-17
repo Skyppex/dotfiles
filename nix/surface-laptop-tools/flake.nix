@@ -25,7 +25,7 @@
       system = system;
       config = {allowUnfree = true;};
     };
-    cliPackages = cli-tools.lib.${system}.packages;
+    cliPackagesLite = cli-tools.lib.${system}.packages-lite;
 
     surfacePackages = with pkgs; [
       ani-cli
@@ -53,7 +53,7 @@
     ];
   in {
     lib.${system} = {
-      packages = cliPackages ++ surfacePackages;
+      packages = cliPackagesLite ++ surfacePackages;
       nativeBuildInputs = [pkgs.makeWrapper];
       buildInputs = [pkgs.libglvnd pkgs.mesa];
       postBuild = ''
