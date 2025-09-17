@@ -37,6 +37,11 @@ local function is_home_computer_linux()
 end
 
 --- @return boolean
+local function is_home_laptop_linux()
+	return get_home():find("/home/pod-042", 1, true) ~= nil
+end
+
+--- @return boolean
 local function is_work_computer()
 	return get_home():find("brage.ingebrigtsen") ~= nil
 end
@@ -52,8 +57,8 @@ local function is_work_computer_linux()
 end
 
 --- @return boolean
-local function is_linux_desktop()
-	return is_home_computer_linux() or is_work_computer_linux()
+local function is_linux()
+	return is_home_computer_linux() or is_work_computer_linux() or is_home_laptop_linux()
 end
 
 --- @return string?
@@ -115,7 +120,8 @@ return {
 	is_work_computer = is_work_computer,
 	is_work_computer_wsl = is_work_computer_wsl,
 	is_work_computer_linux = is_work_computer_linux,
-	is_linux_desktop = is_linux_desktop,
+	is_home_laptop_linux = is_home_laptop_linux,
+	is_linux = is_linux,
 	get_code_path = get_code_path,
 	get_temp_path = get_temp_path,
 	get_game_dev_path = get_game_dev_path,
