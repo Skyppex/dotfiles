@@ -225,6 +225,11 @@ local filetype_map = {
 			".",
 		},
 	},
+	{
+		ext = "conf",
+		filetype = "hyprlang",
+		parser = "hyprlang",
+	}
 }
 
 local function apply_real_name_filetype(fname, pattern, replacement, buf, filetype)

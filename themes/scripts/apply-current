@@ -13,7 +13,9 @@ if ($setup_path | path exists) {
     nu $setup_path
 }
 
+print -e "setting wallpaper"
 nu ($themes | path join "scripts/set-wallpaper")
+print -e "set wallpaper"
 chezmoi apply --force
 
 let display_name = $metadata.display-name

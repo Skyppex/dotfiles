@@ -33,7 +33,7 @@ local config = {
 		saturation = 1.0,
 		brightness = 1.0,
 	},
-	font_size = 10.0,
+	font_size = utils.is_home_laptop_linux() and 19.0 or 10.0,
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
 	disable_default_key_bindings = true,
