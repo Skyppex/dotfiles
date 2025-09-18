@@ -88,7 +88,6 @@ input-field {
 # INPUT FIELD
 input-field {
     monitor = eDP-1
-    size = 250, 60
     outline_thickness = 2
     dots_size = 0.2 # Scale of input-field height, 0.2 - 0.8
     dots_spacing = 0.2 # Scale of dots' absolute size, 0.0 - 1.0
@@ -102,7 +101,13 @@ input-field {
     font_family = $font_primary_style
     placeholder_text = <i><span foreground="##$background0">Enter Pass</span></i>
     hide_input = false
+    {{- if eq .chezmoi.hostname "pod" }}
+    position = -600, -400
+    size = 500, 120
+    {{- else }}
     position = -475, -225
+    size = 250, 60
+    {{- end }}
     halign = center
     valign = center
     rounding = $border_outer_radius
@@ -127,7 +132,13 @@ label {
     color = rgb($primary)
     font_size = 130
     font_family = $font_primary_style
+    {{- if eq .chezmoi.hostname "pod" }}
+    position = -600, 240
+    font_size = 260
+    {{- else }}
     position = -475, 240
+    font_size = 130
+    {{- end }}
     halign = center
     valign = center
 }
@@ -149,9 +160,14 @@ label {
     monitor = eDP-1
     text = cmd[update:1000] echo -e "$(date +"%d")"
     color = rgb($primary)
-    font_size = 30
     font_family = $font_primary_style
+    {{- if eq .chezmoi.hostname "pod" }}
+    position = -600, 50
+    font_size = 60
+    {{- else }}
     position = -475, 105
+    font_size = 30
+    {{- end }}
     halign = center
     valign = center
 }
@@ -173,9 +189,14 @@ label {
     monitor = eDP-1
     text = $USER
     color = rgb($primary)
-    font_size = 25
     font_family = $font_secondary_style
+    {{- if eq .chezmoi.hostname "pod" }}
+    position = -600, -280
+    font_size = 50
+    {{- else }}
     position = -475, -130
+    font_size = 25
+    {{- end }}
     halign = center
     valign = center
 }
