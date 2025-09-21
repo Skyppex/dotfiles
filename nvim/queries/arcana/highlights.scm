@@ -52,7 +52,7 @@
   "Int"
   "UInt"
   "Float"
-  "Char"
+  "Rune"
   "String"
 ] @type.builtin
 
@@ -123,7 +123,7 @@
 
 (float) @number.float
 
-(char) @character
+(rune) @character
 
 (identifier) @variable
 
