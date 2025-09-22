@@ -29,9 +29,6 @@ $musicPlayerClass = Spotify
 $gamesExec = steam
 $gamesName = steam
 $gamesClass = steam
-$emailExec = thunderbird
-$emailName = thunderbird
-$emailClass = thunderbird
 
 $focus_or_launch = ~/.config/hypr/scripts/focus_or_launch
 $focus_game = ~/.config/hypr/scripts/focus_game
@@ -274,7 +271,6 @@ bind = $mainMod SHIFT, B, exec, $browserExec
 bind = $mainMod, G, exec, nu $focus_or_launch $gamesClass $gamesExec
 bind = $mainMod SHIFT, G, exec, nu $focus_game
 bind = $mainMod, M, exec, nu $focus_or_launch $musicPlayerClass $musicPlayerExec
-bind = $mainMod, E, exec, nu $focus_or_launch $emailClass $emailExec
 bind = $mainMod, D, exec, nu $focus_or_launch discord discord
 bind = $mainMod, R, exec, nu $focus_or_launch jetbrains-rider nu --env-config $nu_env $rofi_rider
 bind = $mainMod SHIFT, R, exec, nu --env-config $nu_env $rofi_rider
