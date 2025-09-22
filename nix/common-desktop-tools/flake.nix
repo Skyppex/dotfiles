@@ -48,7 +48,6 @@
       obsidian
       slack
       spotify
-      thunderbird
       wezterm
       zen-browser
     ];
