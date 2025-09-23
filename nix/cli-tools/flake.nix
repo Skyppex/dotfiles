@@ -83,6 +83,7 @@
       hyperfine
       imagemagick
       jq
+      jujutsu
       kubectl
       lazydocker
       lazygit
