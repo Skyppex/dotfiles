@@ -65,3 +65,5 @@
     showUntrackedFiles = all
 [submodule]
 	recurse = true
+[worktree]
+	guessRemote = true
