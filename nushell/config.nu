@@ -825,6 +825,7 @@ source ~/.config/nushell/history.nu
 source ~/.config/nushell/zoxide.nu
 source ~/.config/nushell/dotnet.nu
 source ~/.config/nushell/git.nu
+source ~/.config/nushell/jj.nu
 source ~/.config/nushell/autohotkey.nu
 source ~/.config/nushell/scoop.nu
 source ~/.config/nushell/fun.nu

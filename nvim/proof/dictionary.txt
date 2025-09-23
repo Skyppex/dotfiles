@@ -695,3 +695,8 @@ memcmp
 rw
 suda
 githubusercontent
+jd
+jdf
+jcm
+jcc
+je
