@@ -275,5 +275,3 @@ local theme = {
 for name, color in pairs(andromeda_theme) do
 	vim.cmd.hi("CmpItemKind" .. name .. " guifg=" .. color)
 end
-
-require("skypex.utils").nmap("<leader>tc", "<cmd>Copilot toggle<cr>")
