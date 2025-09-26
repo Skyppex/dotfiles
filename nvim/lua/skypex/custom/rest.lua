@@ -26,8 +26,8 @@ kulala.setup({
 local ui = require("kulala.ui")
 
 nmap("<leader>rr", kulala.run, "Run http request")
-nmap("ær", ui.jump_next, "Run http request")
-nmap("år", ui.jump_prev, "Run http request")
+nmap("ær", ui.jump_next, "Goto the next request")
+nmap("år", ui.jump_prev, "Goto the previous request")
 nmap("<leader>rb", ui.show_body, "Show response body")
 nmap("<leader>rv", ui.show_verbose, "Show verbose response body")
 nmap("<leader>rh", ui.show_headers_body, "Show headers")
