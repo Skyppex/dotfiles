@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.common-desktop-tools.follows = "common-desktop-tools";
     };
+    surface-laptop-tools = {
+      url = ./surface-laptop-tools;
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.cli-tools.follows = "cli-tools";
+    };
     inner = {
       url = ./nix;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +34,7 @@
       inputs.common-desktop-tools.follows = "common-desktop-tools";
       inputs.work-desktop-tools.follows = "work-desktop-tools";
       inputs.home-desktop-tools.follows = "home-desktop-tools";
+      inputs.surface-laptop-tools.follows = "surface-laptop-tools";
     };
   };
   outputs = {inner, ...}: inner.outputs;
