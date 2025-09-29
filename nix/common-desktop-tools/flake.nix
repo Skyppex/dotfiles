@@ -44,6 +44,8 @@
       mpv
       mpvpaper
       neovim
+      noto-fonts
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       obsidian
       slack
