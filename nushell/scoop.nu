@@ -96,7 +96,7 @@ def "manifest install" [] {
 
     let apps = (manifest).apps
 
-    let current = scoop list | lines | filter {|l| $l | str trim | is-not-empty} | skip 3
+    let current = scoop list | lines | where {|it| $it | str trim | is-not-empty} | skip 3
     let current_names = $current | each {|l| $l | split row " " | get 0}
 
     for app in $current_names {
