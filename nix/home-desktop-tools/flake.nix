@@ -2,31 +2,36 @@
   description = "skypex home desktop tools";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     common-desktop-tools = {
       url = ../common-desktop-tools;
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
     common-desktop-tools,
     ...
   }: let
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       system = system;
       config = {allowUnfree = true;};
     };
+
     common = common-desktop-tools.lib.${system};
+
     homePackages = with pkgs; [
       ani-cli
       ani-skip
       blender
       logmein-hamachi
       r2modman
+      quickshell
     ];
   in {
     lib.${system}.packages = common.packages ++ homePackages;

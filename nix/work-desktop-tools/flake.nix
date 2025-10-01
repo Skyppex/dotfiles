@@ -2,7 +2,7 @@
   description = "skypex work desktop tools";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     common-desktop-tools = {
       url = ../common-desktop-tools;
       inputs.nixpkgs.follows = "nixpkgs";
