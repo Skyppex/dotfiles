@@ -20,6 +20,8 @@ let color_values = $colors | values
 let style_values = $style | values
 let values = $color_values ++ $style_values
 let kvps = $keys | zip $values
+let color_kvps = $color_keys | zip $color_values
+let style_kvps = $style_keys | zip $style_values
 
 let font_keys = $fonts | columns
 let font_values = $fonts | values
@@ -310,6 +312,35 @@ $mako | str join "\n" | to text | save -f $path
 let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
 hook --force --relative --source $path --destination ($chezmoi_mako_path | path join "config")
 let cursor_theme_path = ($theme | path join "cursor/rose-pine-hyprcursor")
+
+# setup quickshell
+
+let qml = "pragma Singleton\nimport QtQuick\n\nQtObject {" 
+| append (
+    $color_kvps | each { |it| 
+        let key = $it | get 0
+        let value = $it | get 1
+        $"  property color ($key | str replace -a "-" "_"): \"($value)\";"
+    } | to text)
+| append (
+    $style_kvps | each { |it| 
+        let key = $it | get 0
+        let value = $it | get 1
+        $"  property string ($key | str replace -a "-" "_"): \"($value)\";"
+    } | to text)
+| append (
+    $font_kvps | each { |it| 
+        let key = $it | get 0
+        let value = $it | get 1
+        $"  property string ($key | str replace -a "-" "_"): \"($value)\";"
+    } | to text)
+| append "}"
+
+let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/Theme.qml")
+$qml | save -f $path
+
+let chezmoi_quickshell_path = ($env.CHEZMOI_PATH | path join "quickshell")
+hook --force --relative --source $path --destination ($chezmoi_quickshell_path | path join "Theme.qml")
 
 mkdir ~/.local/share/icons/japanese-aesthetic
 cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
