@@ -1,7 +1,5 @@
 source ~/.config/zoxide/.zoxide.nu
 
-alias cd-old = cd
-
 # The new 'cd' command using zoxide and fzf
 def --env z [
     --fzf-only(-f)
@@ -79,6 +77,9 @@ def --env z [
         enter $target
     }
 }
+
+# Keep the old cd if i need it. Can also just use ^cd if needed though
+alias cd-old = cd
 
 # Alias for z making it into cd
 alias cd = z
