@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     common-desktop-tools,
@@ -31,7 +31,6 @@
       blender
       logmein-hamachi
       r2modman
-      quickshell
     ];
   in {
     lib.${system}.packages = common.packages ++ homePackages;

@@ -48,6 +48,7 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       obsidian
+      quickshell
       slack
       spotify
       wezterm
