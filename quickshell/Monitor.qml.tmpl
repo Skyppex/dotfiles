@@ -1,0 +1,15 @@
+pragma Singleton
+import QtQuick
+
+QtObject {
+    {{- if eq .chezmoi.hostname "skypex" }}
+    property string primary: "DP-1"
+    property string fallback: "DP-2"
+    {{- else if eq .chezmoi.hostname "brage-work-laptop" }}
+    property string primary: "DP-7"
+    property string fallback: "eDP-3"
+    {{- else if eq .chezmoi.hostname "pod-042" }}
+    property string primary: "eDP-1"
+    property string fallback: "eDP-1"
+    {{- end }}
+}

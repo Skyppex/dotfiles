@@ -2,36 +2,72 @@ import Quickshell
 import QtQuick
 
 Scope {
-  Variants {
-    model: Quickshell.screens
+    id: root
+    property var preferredScreen: Monitor.primary
+    property var activeScreen: {
+        const primary = Quickshell.screens.find(s => s.name === Monitor.primary);
+        const fallback = Quickshell.screens.find(s => s.name === Monitor.fallback);
+
+        // If primary is connected and not fullscreen, use it
+        if (primary) {
+            if (root.preferredScreen === primary.name) {
+                return primary;
+            }
+        }
+
+        // Otherwise fall back to secondary if connected
+        if (fallback) {
+            return fallback;
+        }
+
+        // Fallback
+        return Quickshell.screens[0];
+    }
 
     PanelWindow {
-      required property var modelData
-      screen: modelData
-      color: "#00000000"
+        id: bar
 
-      anchors {
-        top: true
-        left: true
-        right: true
-      }
+        required property var modelData
 
-      implicitHeight: 32
+        screen: activeScreen
+        color: "#00000000"
 
-      Album {
-        anchors.left: parent.left
-      }
+        anchors {
+            top: true
+            left: true
+            right: true
+        }
 
-      Clock {
-        anchors.centerIn: parent
-      }
+        implicitHeight: 32
 
-      Metrics {
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 12
-        anchors.rightMargin: 10
-      }
+        Album {
+            anchors.left: parent.left
+        }
+
+        Clock {
+            anchors.centerIn: parent
+        }
+
+        Metrics {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 12
+            anchors.rightMargin: 10
+        }
     }
-  }
+
+    Connections {
+        target: Quickshell
+        function onScreensChanged() {
+            bar.screen = activeScreen;
+        }
+    }
+
+    Connections {
+        target: PreferredBarMonitor
+        function onPreferredBarMonitorChanged(monitor) {
+            root.preferredScreen = monitor;
+            bar.screen = activeScreen;
+        }
+    }
 }

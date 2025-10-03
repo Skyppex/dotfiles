@@ -1,11 +1,10 @@
 import QtQuick
 
-
 Text {
-  text: Time.time
-  color: Theme.primary
-  font.pixelSize: 14
-  font.family: Theme.primary_style
-  anchors.verticalCenter: parent.verticalCenter
-  anchors.verticalCenterOffset: 1
+    text: Time.time
+    color: Theme.primary
+    font.pixelSize: 14
+    font.family: Theme.primary_style
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.verticalCenterOffset: 1
 }
