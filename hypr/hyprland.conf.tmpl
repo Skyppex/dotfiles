@@ -358,7 +358,7 @@ debug {
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = eww open bar --screen $primary_monitor
+exec-once = quickshell --daemonize --no-duplicate
 exec-once = mako --default-timeout 5000
 exec-once = wl-paste --watch cliphist store
 exec-once = hypridle
