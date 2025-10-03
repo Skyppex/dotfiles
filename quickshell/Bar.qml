@@ -18,10 +18,8 @@ Scope {
 
       implicitHeight: 32
 
-      Clock {
+      Album {
         anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: 14
       }
 
       Clock {
