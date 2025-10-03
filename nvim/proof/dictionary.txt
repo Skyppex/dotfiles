@@ -703,3 +703,12 @@ je
 quickshell
 outfoxxed
 qml
+daemonize
+hypridle
+resizewindow
+moveoutofgroup
+hjlk
+hyprgras
+longpres
+poweroff
+killactive
