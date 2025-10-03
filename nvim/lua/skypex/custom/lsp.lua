@@ -232,6 +232,22 @@ local servers = {
 	nushell = {
 		capabilities = capabilities,
 	},
+	qmlls = {
+		handlers = {
+			["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+				if result then
+					local filtered = {}
+					for _, d in ipairs(result.diagnostics) do
+						if d.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
+							table.insert(filtered, d)
+						end
+					end
+					result.diagnostics = filtered
+				end
+				vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx)
+			end,
+		},
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
