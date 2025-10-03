@@ -712,3 +712,4 @@ hyprgras
 longpres
 poweroff
 killactive
+hasfullscreen
