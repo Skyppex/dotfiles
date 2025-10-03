@@ -1,9 +1,0 @@
-#!/usr/bin/env nu
-
-let hostname = sys host | get hostname
-
-if $hostname == "brage-work-laptop" {
-    eww open bar-work
-} else {
-    eww open bar
-}
