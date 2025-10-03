@@ -5,4 +5,6 @@ Text {
   color: Theme.primary
   font.pixelSize: 14
   font.family: Theme.primary_style
+  anchors.verticalCenter: parent.verticalCenter
+  anchors.verticalCenterOffset: 1
 }
