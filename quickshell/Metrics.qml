@@ -5,6 +5,7 @@ Row {
     property int ramPercent: 67
     property int cpuPercent: 12
     property int diskPercent: 81
+    property int elementWidth: 65
 
     // Volume with ternary icon
     Metric {
@@ -12,6 +13,7 @@ Row {
         value: Volume.volume
         minimum: 0
         maximum: 100
+        width: elementWidth
     }
 
     Separator {
@@ -23,9 +25,10 @@ Row {
     // RAM
     Metric {
         label: ""
-        value: ramPercent
+        value: MemoryUsage.mem
         minimum: 0
         maximum: 100
+        width: elementWidth
     }
 
     Separator {
@@ -37,9 +40,10 @@ Row {
     // CPU
     Metric {
         label: ""
-        value: cpuPercent
+        value: CpuUsage.cpu
         minimum: 0
         maximum: 100
+        width: elementWidth
     }
 
     Separator {
@@ -51,8 +55,9 @@ Row {
     // Disk
     Metric {
         label: ""
-        value: diskPercent
+        value: DiskUsage.disk
         minimum: 0
         maximum: 100
+        width: elementWidth
     }
 }
