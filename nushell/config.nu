@@ -837,6 +837,7 @@ source ~/.config/nushell/scripts-tools.nu
 source ~/.config/nushell/operations.nu
 source ~/.config/nushell/poll.nu
 source ~/.config/nushell/kb.nu
+use ~/.config/nushell/nw.nu
 
 # Pull the dotfiles from the remote repository
 def pull [] {

@@ -131,15 +131,14 @@ def "parse table" [
     # Parse header if it exists
     if $header {
         let header = $lines | first
-        $header_col = ($lines 
-            | first 
+        $header_col = ($header 
             | to text 
             | split column -r $regex 
             | to text 
             | lines 
             | each {|l|
                 let s = ($l | str index-of ': ') + 2
-                $l | str substring $s..
+                $l | str substring $s.. | str trim
             }
         )
 
