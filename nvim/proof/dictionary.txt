@@ -713,3 +713,4 @@ longpres
 poweroff
 killactive
 hasfullscreen
+castnow
