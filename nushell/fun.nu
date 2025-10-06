@@ -1,3 +1,9 @@
+# Cast ani-cli media using catt
+def --wrapped ani-cast [...rest] {
+    $env.ANI_CLI_PLAYER = "catt"
+    ani-cli ...$rest
+}
+
 # Wrapper for wezterm imgcat using fzf to find images
 def img [
     --width(-W): int # Specify the display width; defaults to "auto" which automatically selects an appropriate size.  You may also use an integer value `N` to specify the number of cells, or `Npx` to specify the number of pixels, or `N%` to size relative to the terminal width
