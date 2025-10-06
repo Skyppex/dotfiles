@@ -714,3 +714,4 @@ poweroff
 killactive
 hasfullscreen
 castnow
+catt
