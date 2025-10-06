@@ -28,6 +28,7 @@
     homePackages = with pkgs; [
       ani-cli
       ani-skip
+      catt
       blender
       logmein-hamachi
       r2modman

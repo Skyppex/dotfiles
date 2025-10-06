@@ -30,6 +30,7 @@
     surfacePackages = with pkgs; [
       ani-cli
       ani-skip
+      catt
       logmein-hamachi
       bluetuith
       cliphist
