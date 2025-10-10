@@ -70,6 +70,7 @@ def find-devices [
 
     let devices = $devices
     | lines
+    | where ($it | str starts-with "Device")
     | str substring 7..
     | each { |it|
         let split = $it | split row --number 2 " ";
