@@ -715,3 +715,5 @@ killactive
 hasfullscreen
 castnow
 catt
+bluetoothctl
+bluetooth
