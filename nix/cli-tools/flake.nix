@@ -44,10 +44,8 @@
       cava
       fastfetch
       gitoxide
-      grim
       ollama
       powershell
-      slurp
       starship
       surrealdb
     ];
@@ -57,8 +55,6 @@
       cava
       fastfetch
       gitoxide
-      grim
-      slurp
       starship
     ];
 

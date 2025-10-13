@@ -35,8 +35,9 @@
       eww
       gimp
       grim
-      hyprpicker
+      grimblast
       hypridle
+      hyprpicker
       inkscape
       jetbrains-toolbox
       lens
@@ -50,6 +51,7 @@
       obsidian
       quickshell
       slack
+      slurp
       spotify
       wezterm
       zen-browser

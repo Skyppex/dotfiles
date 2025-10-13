@@ -38,6 +38,7 @@
       eww
       gimp
       grim
+      grimblast
       hyprpicker
       hypridle
       mako
@@ -47,6 +48,7 @@
       noto-fonts-emoji
       obsidian
       slack
+      slurp
       spotify
       thunderbird
       wezterm
