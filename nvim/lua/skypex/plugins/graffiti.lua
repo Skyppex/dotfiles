@@ -13,14 +13,24 @@ if path:is_dir() then
 	}
 end
 
+local bin_path = vim.fn.stdpath("data") .. "/graffiti-rs/target/release/graffiti-rs"
+
+if not bin_path:is_file() then
+	bin_path = vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs"
+
+	if not bin_path:is_file() then
+		return
+	end
+end
+
 return {
 	"skyppex/graffiti.nvim",
 	name = "graffiti",
 	opts = {
-		server_executable = vim.fn.stdpath("data") .. "/graffiti-rs/target/release/graffiti-rs.exe",
+		server_executable = bin_path,
 	},
 	build = function()
-		if vim.fn.executable(vim.fn.stdpath("data") .. "graffiti-rs/target/release/graffiti-rs.exe") ~= 0 then
+		if vim.fn.executable(bin_path) ~= 0 then
 			return
 		end
 
