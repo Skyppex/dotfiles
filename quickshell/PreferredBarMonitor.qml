@@ -5,6 +5,7 @@ import Quickshell.Io
 
 Singleton {
   id: root
+  property string value
 
   signal preferredBarMonitorChanged(string monitor)
 
@@ -15,16 +16,20 @@ Singleton {
       Qt.resolvedUrl("scripts/get-bar-monitor")
         .toString()
         .replace("file://", ""),
-      Monitor.primary,
-      Monitor.fallback,
+      Monitor.prioritized
     ]
     running: false
 
     stdout: StdioCollector {
       onStreamFinished: {
+        value = this.text.trim()
         preferredBarMonitorChanged(this.text.trim())
       }
     }
+  }
+
+  Component.onCompleted: {
+    getBarMonitorProc.running = true
   }
 
   Connections {

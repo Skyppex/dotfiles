@@ -3,21 +3,14 @@ import QtQuick
 
 Scope {
     id: root
-    property var preferredScreen: Monitor.primary
+    property var preferredScreen: PreferredBarMonitor.value
     property var activeScreen: {
-        const primary = Quickshell.screens.find(s => s.name === Monitor.primary);
-        const fallback = Quickshell.screens.find(s => s.name === Monitor.fallback);
+        for (const monitor of Monitor.prioritized) {
+            const screen = Quickshell.screens.find(s => s.name === monitor);
 
-        // If primary is connected and not fullscreen, use it
-        if (primary) {
-            if (root.preferredScreen === primary.name) {
-                return primary;
+            if (screen && root.preferredScreen === screen.name) {
+                return screen;
             }
-        }
-
-        // Otherwise fall back to secondary if connected
-        if (fallback) {
-            return fallback;
         }
 
         // Fallback

@@ -1,19 +1,39 @@
 #!/usr/bin/env nu
 
 def main [
-    primary: string # primary monitor to display the bar on
-    fallback: string # fallback monitor if primary is fullscreen
+    monitors: string
 ] {
+    let monitors = $monitors | split row ","
     let workspaces = hyprctl workspaces -j | from json | select monitor hasfullscreen
 
-    let primary_fullscreen = $workspaces 
-    | where {|it| $it.monitor == $primary }
-    | get hasfullscreen
-    | first
+    for monitor in $monitors { 
+        let fullscreen = $workspaces 
+        | where { |it|
+            $it.monitor == $monitor
+        }
+        | get hasfullscreen
 
-    if $primary_fullscreen {
-        print $fallback
-    } else {
-        print $primary
+        if ($fullscreen | is-empty) {
+            continue
+        }
+
+        if not ($fullscreen | first) {
+            return $monitor
+        }
     }
+
+    # let primary = $monitors.0
+    # let fallback = $monitors.1
+    # let workspaces = hyprctl workspaces -j | from json | select monitor hasfullscreen
+    #
+    # let primary_fullscreen = $workspaces 
+    # | where {|it| $it.monitor == $primary }
+    # | get hasfullscreen
+    # | first
+    #
+    # if $primary_fullscreen {
+    #     print $fallback
+    # } else {
+    #     print $primary
+    # }
 }
