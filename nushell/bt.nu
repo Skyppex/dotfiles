@@ -3,7 +3,12 @@
 # pair and connect an existing bluetooth device
 export def connect []: nothing -> nothing {
     let selected = find-devices | select-device
-    bluetoothctl pair $selected.mac
+    let paired = paired
+
+    if not ($paired | any {|it| $it.mac == $selected.mac}) {
+        bluetoothctl pair $selected.mac
+    }
+
     bluetoothctl connect $selected.mac
 }
 
