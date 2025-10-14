@@ -823,7 +823,8 @@ source ~/.config/nushell/fs.nu
 source ~/.config/nushell/utils.nu
 source ~/.config/nushell/history.nu
 source ~/.config/nushell/zoxide.nu
-source ~/.config/nushell/dotnet.nu
+use ~/.config/nushell/dn.nu
+# source ~/.config/nushell/dotnet.nu
 source ~/.config/nushell/git.nu
 source ~/.config/nushell/jj.nu
 source ~/.config/nushell/autohotkey.nu

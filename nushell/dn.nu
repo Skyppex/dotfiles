@@ -1,5 +1,5 @@
 # Dotnet run from sln using fzf to select project and launch profile
-def --wrapped "dn run" [
+export def --wrapped run [
     --verbose(-V) # Print verbose output for the nushell script
     ...rest: string
 ] {
@@ -77,7 +77,7 @@ def --wrapped "dn run" [
     dotnet run --launch-profile $launch_profile ...$rest
 }
 
-def "dn us init" [
+export def "us init" [
     --verbose(-v)
 ] {
     let sln = ls
@@ -112,7 +112,7 @@ def "dn us init" [
     dotnet user-secrets init
 }
 
-def "dn us ls" [
+export def "us ls" [
     --verbose(-v)
 ] {
     let sln = ls
@@ -163,7 +163,7 @@ def "dn us ls" [
     return $map
 }
 
-def "dn us set" [
+export def "us set" [
     --verbose(-v)
     key: string,
     value: string,
@@ -200,7 +200,7 @@ def "dn us set" [
     dotnet user-secrets set $key $value
 }
 
-def "dn us rm" [
+export def "us rm" [
     --verbose(-v)
 ] {
     let sln = ls
@@ -259,7 +259,7 @@ def "dn us rm" [
 }
 
 # add nuget package
-def "dn add" [
+export def add [
     --verbose(-v) # Print verbose output
     --dry-run(-d) # Print the command that would be run
     query: string
@@ -401,7 +401,7 @@ def "dn add" [
 }
 
 # Dotnet test with some help to find what file you wish to test
-def --wrapped "dn test" [
+export def --wrapped test [
     --verbose(-v) # Print verbose output
     ...rest
 ] {
@@ -538,12 +538,12 @@ def --wrapped "dn test" [
     dotnet test --filter $"FullyQualifiedName~($selected)" ...$rest
 }
 
-def --wrapped "dn test all" [...rest] {
+export def --wrapped "test all" [...rest] {
     dotnet test ...$rest
 }
 
 # add project reference
-def "dn ref add" [
+export def "ref add" [
     project?: string # The project to add the reference to
     reference?: string # The project to reference
 ] {
@@ -572,7 +572,7 @@ def "dn ref add" [
     dotnet add $project reference $reference
 }
 
-def "dn ref rm" [
+export def "ref rm" [
     project?: string # The project to add the reference to
     reference?: string # The project to reference
 ] {
