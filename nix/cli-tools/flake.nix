@@ -40,7 +40,7 @@
 
     cliPackages = with pkgsUnfree; [
       astroterm
-      # awscli2
+      awscli2
       cava
       fastfetch
       gitoxide
