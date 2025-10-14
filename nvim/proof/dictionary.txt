@@ -717,3 +717,4 @@ castnow
 catt
 bluetoothctl
 bluetooth
+nmcli
