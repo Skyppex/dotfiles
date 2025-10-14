@@ -40,3 +40,4 @@ export def wifi [] {
 }
 
 export alias connect = nmcli connection up
+export alias disconnect = nmcli connection down
