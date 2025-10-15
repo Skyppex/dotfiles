@@ -730,3 +730,5 @@ marce
 rmpc
 mpc
 mpri
+gst
+gstreamer
