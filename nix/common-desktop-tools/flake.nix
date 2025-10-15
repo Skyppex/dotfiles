@@ -27,35 +27,50 @@
     };
     cliPackages = cli-tools.lib.${system}.packages;
 
-    commonPackages = with pkgs; [
-      bluetuith
-      cliphist
-      dbeaver-bin
-      discord
-      eww
-      gimp
-      grim
-      grimblast
-      hypridle
-      hyprpicker
-      inkscape
-      jetbrains-toolbox
-      lens
-      mako
-      mpv
-      mpvpaper
-      neovim
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      obsidian
-      quickshell
-      slack
-      slurp
-      spotify
-      wezterm
-      zen-browser
+    mopidyToolSet = with pkgs; [
+      mopidy
+      mopidy-mpd
+      mopidy-spotify
+      mopidy-local
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-rs
     ];
+
+    commonPackages = with pkgs;
+      [
+        bluetuith
+        cliphist
+        dbeaver-bin
+        discord
+        eww
+        gimp
+        grim
+        grimblast
+        hypridle
+        hyprpicker
+        inkscape
+        jetbrains-toolbox
+        lens
+        mako
+        mpc
+        mpd
+        mpd-mpris
+        mpv
+        mpvpaper
+        neovim
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        obsidian
+        quickshell
+        rmpc
+        slack
+        slurp
+        spotify
+        wezterm
+        zen-browser
+      ]
+      ++ mopidyToolSet;
   in {
     lib.${system} = {
       packages = cliPackages ++ commonPackages;

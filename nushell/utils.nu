@@ -172,7 +172,14 @@ def "parse table" [
     if $header {
         for $name in ($header_col | enumerate) {
             let i = (($name.index + 1) | to text);
-            $rows = ($rows | rename -c {$i: $name.item})
+            print -e $i
+            print -e $rows
+            let rs = $rows
+            $rows = try {
+                $rs | rename -c {$i: $name.item}
+            } catch {
+                $rs | reject $name.item
+            }
         }
         
         if $verbose {

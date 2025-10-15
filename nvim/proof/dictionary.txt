@@ -718,3 +718,15 @@ catt
 bluetoothctl
 bluetooth
 nmcli
+mopidy
+mpd
+bluetuith
+grimblast
+inkscape
+mpv
+mpvpaper
+cjk
+marce
+rmpc
+mpc
+mpri

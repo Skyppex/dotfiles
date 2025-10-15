@@ -1,0 +1,10 @@
+[Unit]
+Description=Music Player Daemon
+After=sound.target
+
+[Service]
+ExecStart=/usr/bin/env -S mpd --no-daemon --verbose %h/.config/mpd/mpd.conf
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -39,5 +39,15 @@ export def wifi [] {
     nmcli device wifi connect $bssid --ask
 }
 
+# export def connect [] {
+#     let connections = nmcli connection show
+#     | parse table --header '\s\s+'
+#
+#     print $connections
+# }
+
 export alias connect = nmcli connection up
+export alias c = nmcli connection up
+
 export alias disconnect = nmcli connection down
+export alias d = nmcli connection down
