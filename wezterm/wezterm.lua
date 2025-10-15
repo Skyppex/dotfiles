@@ -321,8 +321,12 @@ local config = {
 	set_environment_variables = utils.merge_tables({
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
 		PATH = os.getenv("PATH")
-			.. ":" .. utils.get_home() .. "/.dotnet/tools"
-			.. ":" .. utils.get_home() .. "/dev/bin",
+			.. ":"
+			.. utils.get_home()
+			.. "/.dotnet/tools"
+			.. ":"
+			.. utils.get_home()
+			.. "/dev/bin",
 	}, require("env")),
 }
 
@@ -330,7 +334,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
 
 	config.default_prog = { "nu" }
-	config.default_cwd = "~"
+	config.default_cwd = wezterm.home_dir .. "/.local/share/chezmoi"
 	table.insert(config.launch_menu, { label = "nu", args = { "nu" } })
 	table.insert(config.launch_menu, { label = "powershell", args = { "powershell.exe", "-NoLogo" } })
 
@@ -349,7 +353,10 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	end
 else
 	config.default_prog = { "nu" }
+	config.default_cwd = wezterm.home_dir .. "/.local/share/chezmoi"
 	table.insert(config.launch_menu, { label = "nu", args = { "nu" } })
 end
+
+sessionizer.create_session_hook()
 
 return config

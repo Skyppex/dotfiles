@@ -153,4 +153,45 @@ M.toggle = function(window, pane)
 	)
 end
 
+M.create_session_hook = function()
+	wezterm.on("gui-attached", function()
+		local window = mux.all_windows()[1]
+
+		if not window then
+			wezterm.log_info("No initial window found")
+			return
+		end
+
+		local tab = window:tabs()[1]
+		local pane = tab:active_pane()
+
+		local cwd = pane:get_current_working_dir().file_path
+
+		wezterm.log_info(cwd)
+
+		if not cwd then
+			wezterm.log_info("No CWD detected for pane")
+			return
+		end
+
+		local id = utils.basename(cwd)
+
+		wezterm.log_info("Rebinding default tab to workspace " .. id)
+		window:set_workspace(id)
+
+		-- Update the workspace name
+		window:set_workspace(id)
+
+		-- Update the tab title to indicate Nu shell
+		tab:set_title("nu")
+
+		local nvim_tab, _, _ = window:spawn_tab({
+			args = { "nvim" },
+			cwd = cwd,
+		})
+
+		nvim_tab:set_title("nvim")
+	end)
+end
+
 return M

@@ -111,6 +111,16 @@ local function merge_tables(a, b)
 	return result
 end
 
+-- Equivalent to POSIX basename(3)
+-- Given "/foo/bar" returns "bar"
+-- Given "c:\\foo\\bar" returns "bar"
+--- @param path string
+--- @return string
+local function basename(path)
+	path = path:gsub("[/\\]+$", "")
+	return path:match("([^/]+)$")
+end
+
 return {
 	get_home = get_home,
 	get_config_path = get_config_path,
@@ -126,4 +136,5 @@ return {
 	get_temp_path = get_temp_path,
 	get_game_dev_path = get_game_dev_path,
 	merge_tables = merge_tables,
+	basename = basename,
 }
