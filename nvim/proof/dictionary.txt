@@ -732,3 +732,5 @@ mpc
 mpri
 gst
 gstreamer
+euo
+pipefail
