@@ -734,3 +734,16 @@ gst
 gstreamer
 euo
 pipefail
+regedit
+keytran
+getreg
+buftype
+acwrite
+bufhidden
+setreg
+lnum
+numhl
+texthl
+numberwidth
+nop
+sidescrolloff
