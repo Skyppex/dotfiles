@@ -35,7 +35,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 				allowImplicitPlurals = true,
 				ignoredWords = {},
 				excludedFilePatterns = { ".*package.json^", ".*.env^" },
-				excludedFileTypes = { "qf", "gitignore" },
+				excludedFileTypes = { "qf", "gitignore", "registers" },
 			},
 		},
 	})
