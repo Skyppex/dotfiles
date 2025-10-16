@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Ensure csharpier is installed
+dotnet tool restore
+
+# Get list of staged .cs files in the project directory
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep "^Assets/_Projects/.*\.cs$" || true)
+
+if [ -z "$STAGED_FILES" ]; then
+    echo "No C# files staged for commit"
+    exit 0
+fi
+
+# Run csharpier only on staged files
+echo "$STAGED_FILES" | xargs --no-run-if-empty dotnet csharpier --check
+if [ $? -ne 0 ]; then
+    echo "Code style issues found. Running formatter..."
+    echo "$STAGED_FILES" | xargs --no-run-if-empty dotnet csharpier
+
+    # Find which of the staged files were modified by the formatter
+    MODIFIED=$(echo "$STAGED_FILES" | xargs --no-run-if-empty git diff --name-only | grep "^Assets/_Projects/.*\.cs$" || true)
+
+    if [ -n "$MODIFIED" ]; then
+        echo "$MODIFIED" | xargs --no-run-if-empty git add
+        echo "Formatted and re-staged:"
+        echo "$MODIFIED"
+    fi
+
+    echo "Commit will continue."
+    exit 0
+fi
