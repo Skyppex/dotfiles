@@ -747,3 +747,5 @@ texthl
 numberwidth
 nop
 sidescrolloff
+yankbank
+keychain
