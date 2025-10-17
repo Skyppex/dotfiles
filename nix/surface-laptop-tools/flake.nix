@@ -35,7 +35,6 @@
       bluetuith
       cliphist
       discord
-      eww
       gimp
       grim
       grimblast

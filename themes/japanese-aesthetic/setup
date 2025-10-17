@@ -27,23 +27,6 @@ let font_keys = $fonts | columns
 let font_values = $fonts | values
 let font_kvps = $font_keys | zip $font_values
 
-# setup eww
-
-let scss = $kvps | each { |it| 
-    let key = $it | get 0
-    let value = $it | get 1
-    $"$($key): ($value);"
-} | to text
-
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/styles.scss")
-$scss | save -f $path
-
-let chezmoi_eww_path = ($env.CHEZMOI_PATH | path join "eww")
-hook --force --relative --source $path --destination ($chezmoi_eww_path | path join "styles.scss")
-let eww_icons_src = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/eww/icons")
-let eww_icons_dest = ($env.CHEZMOI_PATH | path join "eww/icons")
-hook --force --relative --source $eww_icons_src --destination $eww_icons_dest
-
 # setup colors for browser
 
 let css = ":root {" | append ($kvps | each { |it| 

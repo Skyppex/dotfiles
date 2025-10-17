@@ -32,7 +32,6 @@
       cliphist
       dbeaver-bin
       discord
-      eww
       gimp
       grim
       grimblast
