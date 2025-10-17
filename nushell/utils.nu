@@ -190,41 +190,6 @@ def "parse table" [
     $rows
 }
 
-alias "andromeda gray" = echo "#23262e"
-alias "andromeda light_gray" = echo "#373941"
-alias "andromeda lighter_gray" = echo "#857e89"
-alias "andromeda orange" = echo "#f39c12"
-alias "andromeda pink" = echo "#ff00aa"
-alias "andromeda pastel_pink" = echo "#ff99cc"
-alias "andromeda blue" = echo "#7cb7ff"
-alias "andromeda cyan" = echo "#00e8c6"
-alias "andromeda yellow" = echo "#ffe66d"
-alias "andromeda green" = echo "#96e072"
-alias "andromeda white" = echo "#d5ced9"
-alias "andromeda black" = echo "#181a16"
-alias "andromeda purple" = echo "#c74ded"
-alias "andromeda pastel purple" = echo "#cda4de"
-alias "andromeda red" = echo "#ee5d43"
-
-# list all the colors
-def "andromeda" [] {
-    mut str = ""
-    $str += $"gray: (andromeda gray)\n"
-    $str += $"light_gray: (andromeda light_gray)\n"
-    $str += $"lighter_gray: (andromeda lighter_gray)\n"
-    $str += $"orange: (andromeda orange)\n"
-    $str += $"pink: (andromeda pink)\n"
-    $str += $"blue: (andromeda blue)\n"
-    $str += $"cyan: (andromeda cyan)\n"
-    $str += $"yellow: (andromeda yellow)\n"
-    $str += $"green: (andromeda green)\n"
-    $str += $"white: (andromeda white)\n"
-    $str += $"black: (andromeda black)\n"
-    $str += $"purple: (andromeda purple)\n"
-    $str += $"red: (andromeda red)"
-    echo $str
-}
-
 alias cm = chezmoi
 alias cma = chezmoi apply --force
 

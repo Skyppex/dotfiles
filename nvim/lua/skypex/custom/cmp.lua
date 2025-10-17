@@ -210,37 +210,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
-local andromeda = require("skypex.utils").andromeda
-
-local andromeda_theme = {
-	Unit = andromeda.white,
-	Property = andromeda.pink,
-	Module = andromeda.purple,
-	Interface = andromeda.yellow,
-	Class = andromeda.yellow,
-	Value = andromeda.cyan,
-	Variable = andromeda.cyan,
-	Field = andromeda.pink,
-	Constructor = andromeda.yellow,
-	Function = andromeda.yellow,
-	Method = andromeda.yellow,
-	TypeParameter = andromeda.yellow,
-	Operator = andromeda.orange,
-	Event = andromeda.yellow,
-	Struct = andromeda.yellow,
-	Constant = andromeda.orange,
-	EnumMember = andromeda.orange,
-	File = andromeda.blue,
-	Enum = andromeda.yellow,
-	Keyword = andromeda.purple,
-	Text = andromeda.green,
-	Folder = andromeda.blue,
-	Color = andromeda.white,
-	Reference = andromeda.purple,
-	Snippet = andromeda.blue,
-	Copilot = andromeda.blue,
-}
-
 local colors = require("skypex.colors")
 
 local theme = {
@@ -272,6 +241,6 @@ local theme = {
 	Copilot = colors.blue,
 }
 
-for name, color in pairs(andromeda_theme) do
+for name, color in pairs(theme) do
 	vim.cmd.hi("CmpItemKind" .. name .. " guifg=" .. color)
 end

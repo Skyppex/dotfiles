@@ -1,85 +1,5 @@
 # Nushell Config File
 
-let andromeda_colors = {
-    gray: "#23262e"
-    light_gray: "#857e89" # Custom stuff for hints
-    orange: "#f39c12"
-    pink: "#ff00aa"
-    blue: "#7cb7ff"
-    cyan: "#00e8c6"
-    yellow: "#ffe66d"
-    green: "#96e072"
-    white: "#d5ced9"
-    black: "#181a16"
-    purple: "#c74ded"
-    red: "#a52a2a"
-}
-
-let andromeda_theme = {
-    # color for nushell primitives
-    separator: $andromeda_colors.gray
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: { fg: $andromeda_colors.pink, attr: b }
-    empty: $andromeda_colors.blue
-    # Closures can be used to choose colors for specific values.
-    # The value (in this case, a bool) is piped into the closure.
-    # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
-    bool: $andromeda_colors.purple
-    int: $andromeda_colors.orange
-    filesize: $andromeda_colors.blue
-    duration: $andromeda_colors.blue
-    datetime: $andromeda_colors.orange
-    range: $andromeda_colors.white
-    float: $andromeda_colors.orange
-    string: $andromeda_colors.green
-    nothing: $andromeda_colors.black
-    binary: $andromeda_colors.red
-    cell-path: $andromeda_colors.orange
-    row_index: $andromeda_colors.cyan
-    record: $andromeda_colors.white
-    list: $andromeda_colors.white
-    block: $andromeda_colors.white
-    hints: $andromeda_colors.light_gray
-    search_result: $andromeda_colors.white
-    # shapes are used to change the cli syntax highlighting
-    shape_and: $andromeda_colors.purple
-    shape_binary: $andromeda_colors.red
-    shape_block: $andromeda_colors.white
-    shape_bool: $andromeda_colors.purple
-    shape_closure: $andromeda_colors.pink
-    shape_custom: $andromeda_colors.yellow
-    shape_datetime: $andromeda_colors.orange
-    shape_directory: $andromeda_colors.blue
-    shape_external: $andromeda_colors.purple
-    shape_externalarg: $andromeda_colors.pink
-    shape_external_resolved: $andromeda_colors.yellow
-    shape_filepath: $andromeda_colors.green
-    shape_flag: $andromeda_colors.pink
-    shape_float: $andromeda_colors.orange
-    shape_garbage: $andromeda_colors.red
-    shape_globpattern: $andromeda_colors.green
-    shape_int: $andromeda_colors.orange
-    shape_internalcall: $andromeda_colors.purple
-    shape_keyword: $andromeda_colors.purple
-    shape_list: $andromeda_colors.white
-    shape_literal: $andromeda_colors.orange
-    shape_match_pattern: $andromeda_colors.blue
-    shape_matching_brackets: $andromeda_colors.white
-    shape_nothing: $andromeda_colors.black
-    shape_operator: $andromeda_colors.red
-    shape_or: $andromeda_colors.purple
-    shape_pipe: $andromeda_colors.orange
-    shape_range: $andromeda_colors.white
-    shape_record: $andromeda_colors.white
-    shape_redirection: $andromeda_colors.yellow
-    shape_signature: $andromeda_colors.blue
-    shape_string: $andromeda_colors.green
-    shape_string_interpolation: $andromeda_colors.purple
-    shape_table: $andromeda_colors.white
-    shape_variable: $andromeda_colors.cyan
-    shape_vardecl: $andromeda_colors.cyan
-}
-
 source ~/.config/nushell/colors.nu
 
 let theme = {
@@ -142,15 +62,6 @@ let theme = {
     shape_table: $colors.primary
     shape_variable: $colors.pink
     shape_vardecl: $colors.pink
-}
-
-let theme = if (
-    (sys host).hostname == "skypex" or
-    (sys host).hostname == "brage-work-laptop"
-) {
-    $theme
-} else {
-    $andromeda_theme
 }
 
 # The default config record. This is where much of your global configuration is setup.

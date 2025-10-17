@@ -217,21 +217,6 @@ local function run_command_ret(command, args, on_exit)
 	return job:sync() -- Blocks until done
 end
 
-local andromeda = {
-	gray = "#23262e",
-	light_gray = "#373941",
-	lighter_gray = "#857e89", -- Custom addition
-	orange = "#f39c12",
-	pink = "#ff00aa",
-	blue = "#7cb7ff",
-	cyan = "#00e8c6",
-	yellow = "#ffe66d",
-	green = "#96e072",
-	white = "#d5ced9",
-	black = "#181a16",
-	purple = "#c74ded",
-}
-
 --- @param left string
 --- @param right string|function
 --- @param desc string?
@@ -580,7 +565,6 @@ return {
 	separate = separate,
 	run_command = run_command,
 	run_command_ret = run_command_ret,
-	andromeda = andromeda,
 	nmap = nmap,
 	xmap = xmap,
 	imap = imap,
