@@ -1,9 +1,9 @@
 local nmap = require("skypex.utils").nmap
 
---- @type Keychain
-local keychain = require("keychain")
+--- @type PunchCard
+local punch_card = require("punch-card")
 
---- @type KeychainOpts
+--- @type PunchCardOpts
 local opts = {
 	hooks = {
 		after_win_open = function(buf, win)
@@ -40,12 +40,12 @@ local opts = {
 			end
 
 			-- add buf-local binds to save and close
-			nmap("q", keychain.save_and_close, "Save and close keychain editor", nil, buf)
-			nmap("<esc>", keychain.save_and_close, "Save and close keychain editor", nil, buf)
+			nmap("q", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
+			nmap("<esc>", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
 		end,
 	},
 }
 
-keychain.setup(opts)
+punch_card.setup(opts)
 
-nmap("<leader>R", keychain.open, "Open keychain editor")
+nmap("<leader>R", punch_card.open, "Open punch-card editor")
