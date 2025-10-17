@@ -23,5 +23,4 @@ return {
 		},
 		event = "BufReadPre",
 	},
-	"nvim-neotest/nvim-nio",
 }

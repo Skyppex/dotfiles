@@ -5,7 +5,7 @@ local path = Path:new(graffiti_dir)
 
 if path:is_dir() then
 	return {
-		"graffiti",
+		"graffiti.nvim",
 		dir = graffiti_dir,
 		config = function()
 			require("skypex.custom.graffiti")
@@ -25,7 +25,7 @@ end
 
 return {
 	"skyppex/graffiti.nvim",
-	name = "graffiti",
+	name = "graffiti.nvim",
 	opts = {
 		server_executable = bin_path,
 	},

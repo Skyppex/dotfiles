@@ -15,7 +15,10 @@ return {
 					"echasnovski/mini.icons",
 					{
 						"MaximilianLloyd/ascii.nvim",
-						dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
+						dependencies = {
+							"MunifTanjim/nui.nvim",
+							"nvim-telescope/telescope.nvim",
+						},
 					},
 				},
 			},

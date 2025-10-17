@@ -6,13 +6,12 @@ local path = Path:new(radar_dir)
 if not path:is_dir() then
 	return {
 		"skyppex/radar.nvim",
-		name = "radar",
 		config = true,
 	}
 end
 
 return {
-	"radar",
+	"radar.nvim",
 	dir = radar_dir,
 	config = true,
 }

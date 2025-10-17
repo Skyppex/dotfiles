@@ -41,13 +41,6 @@ return {
 				event = "InsertEnter",
 			},
 			{
-				"kristijanhusak/vim-dadbod-completion",
-				ft = "sql",
-				dependencies = {
-					"tpope/vim-dadbod",
-				},
-			},
-			{
 				"roobert/tailwindcss-colorizer-cmp.nvim",
 			},
 		},
