@@ -13,18 +13,45 @@ local colors = require("colors")
 
 local act = wezterm.action
 
+local theme = {
+	foreground = colors.primary,
+	background = colors.background0,
+	cursor_fg = colors.background0,
+	cursor_bg = colors.secondary,
+	cursor_border = colors.secondary,
+	selection_fg = colors.primary,
+	selection_bg = colors.background2,
+	split = colors.background1,
+	ansi = {
+		colors.background0,
+		colors.red,
+		colors.green,
+		colors.orange,
+		colors.blue,
+		colors.purple,
+		colors.cyan,
+		colors.tertiary,
+	},
+	brights = {
+		colors.background2,
+		colors.red,
+		colors.green,
+		colors.yellow,
+		colors.blue,
+		colors.purple,
+		colors.cyan,
+		colors.primary,
+	},
+	compose_cursor = colors.cyan,
+}
+
 local config = {
 	max_fps = 165,
 	scrollback_lines = 50000,
 	quick_select_alphabet = "hjklyuioasdfqwer",
 	audible_bell = "Disabled",
 	check_for_updates = false,
-	color_scheme = "Andromeda",
-	colors = {
-		cursor_fg = colors.background0,
-		cursor_bg = colors.secondary,
-		cursor_border = colors.secondary,
-	},
+	colors = theme,
 	enable_tab_bar = false,
 	window_decorations = utils.is_linux() and "NONE" or "RESIZE",
 	background = background,
