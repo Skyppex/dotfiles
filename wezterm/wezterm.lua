@@ -9,6 +9,7 @@ local sessionizer = require("sessionizer")
 wezterm.log_info("Loaded sessionizer")
 local background = require("background")
 local utils = require("utils")
+local colors = require("colors")
 
 local act = wezterm.action
 
@@ -19,6 +20,11 @@ local config = {
 	audible_bell = "Disabled",
 	check_for_updates = false,
 	color_scheme = "Andromeda",
+	colors = {
+		cursor_fg = colors.background0,
+		cursor_bg = colors.secondary,
+		cursor_border = colors.secondary,
+	},
 	enable_tab_bar = false,
 	window_decorations = utils.is_linux() and "NONE" or "RESIZE",
 	background = background,
