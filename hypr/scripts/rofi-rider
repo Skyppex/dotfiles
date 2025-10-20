@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-let results = locate -r $"($env.CODE)/.*\\.sln$"
+let results = fd -t f -e sln . $env.CODE
 
 if ($results | is-empty) {
     notify-send "no solutions found"
