@@ -165,5 +165,6 @@ smartcolumn.setup({
 		"checkhealth",
 		"dotenv",
 		"codecompanion",
+		"csv",
 	},
 })

@@ -40,6 +40,7 @@ require("nvim-treesitter.configs").setup({
 		--  If you are experiencing weird indenting issues, add the language to
 		--  the list of additional_vim_regex_highlighting and disabled languages for indent.
 		additional_vim_regex_highlighting = false,
+		disable = { "csv" },
 	},
 	indent = { enable = true },
 	injections = { enable = true },
@@ -229,7 +230,7 @@ local filetype_map = {
 		ext = "conf",
 		filetype = "hyprlang",
 		parser = "hyprlang",
-	}
+	},
 }
 
 local function apply_real_name_filetype(fname, pattern, replacement, buf, filetype)
