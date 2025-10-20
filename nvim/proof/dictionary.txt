@@ -750,3 +750,7 @@ sidescrolloff
 yankbank
 keychain
 getplaced
+statblock
+hyprlang
+tsv
+csvview
