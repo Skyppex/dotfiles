@@ -26,7 +26,7 @@ end
 
 local utils = require("utils")
 
-local env_file = utils.get_home() .. "/.local_env"
+local env_file = utils.get_home() .. "/.local.env"
 local local_env_vars = load_local_env(env_file)
 
 return local_env_vars

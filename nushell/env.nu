@@ -264,9 +264,6 @@ match [$env.HOSTNAME, $env.OS] {
     }
 }
 
-# this will fail if it doesn't exist no matter how much i check if it exists :|
-use "~/.env.local.nu"
-
 $env.PROJECTS = $"($env.CODE)/projects"
 
 if ($env.DEV_BIN | is-not-empty) {
