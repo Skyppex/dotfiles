@@ -7,11 +7,27 @@ if ($results | is-empty) {
     return
 }
 
-let selected = $results | rofi -dmenu -p "select solution"
+let prefix_length = $env.CODE | str length
+
+let map = $results
+| lines
+| each {|it|
+    {
+        full: $it,
+        stripped: ($it 
+            | str substring ($prefix_length + 1)..
+            | path dirname
+        )
+    }
+}
+
+let selected = $map | get stripped | to text | rofi -dmenu -p "select solution"
 
 if ($selected | is-empty) {
     notify-send "no solution selected"
     return
 }
 
-rider $selected
+let full = $map | where { |it| $it.stripped == $selected } | first | get full
+
+rider $full
