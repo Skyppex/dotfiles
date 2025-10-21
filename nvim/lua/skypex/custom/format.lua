@@ -110,7 +110,9 @@ vim.tbl_extend("keep", ensure_installed, {
 	"csharpier",
 })
 
-require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+require("mason-tool-installer").setup({
+	ensure_installed = ensure_installed,
+})
 
 ---@param bufnr integer
 conform.setup({

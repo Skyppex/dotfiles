@@ -14,60 +14,47 @@ local linters_by_ft = {
 	-- markdown = { "markdownlint" },
 }
 
+local lint = require("lint")
+
+lint.linters_by_ft = linters_by_ft
+
+require("skypex.utils").nmap("<leader>l", function()
+	lint.try_lint()
+end, "Lint current file")
+
+local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+vim.api.nvim_create_autocmd({
+	"BufEnter",
+	"BufWritePost",
+	"InsertLeave",
+}, {
+	group = lint_augroup,
+	callback = function()
+		lint.try_lint()
+	end,
+})
+
+local ensure_installed = {}
+
+for _, linters in pairs(linters_by_ft) do
+	for _, linter in pairs(linters) do
+		if type(linter) == "table" then
+			for _, l in pairs(linter) do
+				ensure_installed[l] = 1
+			end
+		else
+			ensure_installed[linter] = 1
+		end
+	end
+end
+
 local lint_to_mason = {
 	golangcilint = "golangci-lint",
 }
 
-M.lint = function()
-	local lint = require("lint")
-
-	lint.linters_by_ft = linters_by_ft
-
-	require("skypex.utils").nmap("<leader>l", function()
-		lint.try_lint()
-	end, "Lint current file")
-
-	local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-	vim.api.nvim_create_autocmd({
-		"BufEnter",
-		"BufWritePost",
-		"InsertLeave",
-	}, {
-		group = lint_augroup,
-		callback = function()
-			lint.try_lint()
-		end,
-	})
-end
-
-M.mason = function()
-	local ensure_installed = {}
-
-	for _, linters in pairs(linters_by_ft) do
-		for _, linter in pairs(linters) do
-			if type(linter) == "table" then
-				for _, l in pairs(linter) do
-					ensure_installed[l] = 1
-				end
-			else
-				ensure_installed[linter] = 1
-			end
-		end
-	end
-
-	require("mason-tool-installer").setup({
-		ensure_installed = ensure_installed,
-	})
-
-	require("mason-nvim-lint").setup()
-end
-
-M.all = function()
-	M.lint()
-	M.mason()
-end
-
-M.all()
+require("mason-tool-installer").setup({
+	ensure_installed = ensure_installed,
+})
 
 return M
