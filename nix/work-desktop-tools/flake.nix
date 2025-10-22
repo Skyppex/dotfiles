@@ -21,7 +21,10 @@
       config = {allowUnfree = true;};
     };
     common = common-desktop-tools.lib.${system};
-    workPackages = with pkgs; [dbeaver-bin];
+    workPackages = with pkgs; [
+      dbeaver-bin
+      appgate-sdp
+    ];
   in {
     lib.${system}.packages = common.packages ++ workPackages;
 
