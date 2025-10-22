@@ -617,6 +617,7 @@ shortsword
 shuriken
 sidescrolloff
 sidestuff
+signin
 simavg
 sirenix
 skrivebord
@@ -644,6 +645,8 @@ suda
 suppressevent
 surql
 surrealdb
+surrealkv
+surrealql
 svg
 swww
 sy
@@ -676,6 +679,7 @@ touchpad
 tpc
 tpope
 tpp
+trpc
 tsv
 tsx
 tw
