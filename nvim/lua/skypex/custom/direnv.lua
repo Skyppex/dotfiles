@@ -6,6 +6,7 @@ direnv.setup({
 		enabled = true,
 		icon = "",
 	},
+	keybindings = false,
 	notification = {
 		silent_autoload = true,
 	},
