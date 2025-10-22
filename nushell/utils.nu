@@ -309,7 +309,7 @@ def pfzf [] {
     let programs = $bin_locations
     | each { |it|
         if ($it | path exists) {
-            ls ($it | to text) | where type != dir | get name | path expand
+            ls ($it | to text) | where type != dir | get name
         } else {
             []
         }
@@ -326,5 +326,5 @@ def pfzf [] {
         print -e "No selection"
     }
 
-    return $programs
+    return ($programs | uniq | where (($it | path basename) == $selected))
 }
