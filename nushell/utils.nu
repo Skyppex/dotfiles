@@ -302,3 +302,29 @@ def --wrapped shebang [
         $input | nu --stdin --commands $"($program) ($path) ($rest)"
     }
 }
+
+def pfzf [] {
+    let bin_locations = $env.PATH | split row ":"
+
+    let programs = $bin_locations
+    | each { |it|
+        if ($it | path exists) {
+            ls ($it | to text) | where type != dir | get name | path expand
+        } else {
+            []
+        }
+    }
+    | flatten
+
+    let selected = $programs
+    | path basename
+    | uniq
+    | to text
+    | fzf --height 40% --layout reverse
+
+    if ($selected | is-empty) {
+        print -e "No selection"
+    }
+
+    return $programs
+}
