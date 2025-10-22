@@ -15,7 +15,7 @@ kulala.setup({
 		show_request_summary = false,
 		disable_news_popup = true,
 		win_opts = {
-			wo = { foldmethod = "none" },
+			wo = { foldmethod = "manual" },
 		},
 		max_response_size = 1048576,
 	},
