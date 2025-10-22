@@ -303,7 +303,7 @@ def --wrapped shebang [
     }
 }
 
-def pfzf [] {
+def bin [] {
     let bin_locations = $env.PATH | split row ":"
 
     let programs = $bin_locations
