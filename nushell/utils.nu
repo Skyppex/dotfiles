@@ -120,7 +120,7 @@ def "parse table" [
         print $"Skip:\n($skip)"
     }
 
-    mut lines = $input | lines | skip $skip
+    mut lines = $input | lines | skip $skip | str trim --right
 
     if $verbose {
         print $"Lines:\n($lines)"

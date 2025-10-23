@@ -25,7 +25,7 @@ export def wifi [] {
     | each {|it|
         let ssid_len = $it.SSID | str length
         let tabs = if $ssid_len < 4 { "\t\t" } else { "\t" }
-        $"($it.BSSID) - ($it.SSID)($tabs)($it.RATE)\t($it.SECURITY)"
+        $"($it.BSSID) - ($it.SSID)($tabs)($it.RATE)\t($it.SIGNAL)\t($it.SECURITY)"
     }
     | to text
     | fzf --height 40% --layout reverse
