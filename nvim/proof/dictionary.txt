@@ -761,3 +761,5 @@ yolo
 youtube
 zbirenbaum
 zsh
+ssid
+bssid
