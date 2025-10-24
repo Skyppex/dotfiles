@@ -748,7 +748,7 @@ source ~/.config/nushell/scripts.nu
 source ~/.config/nushell/scripts-tools.nu
 source ~/.config/nushell/operations.nu
 source ~/.config/nushell/poll.nu
-source ~/.config/nushell/kb.nu
+use ~/.config/nushell/kb.nu
 use ~/.config/nushell/nw.nu
 use ~/.config/nushell/bt.nu
 

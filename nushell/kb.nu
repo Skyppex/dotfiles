@@ -1,11 +1,11 @@
-def "kb activate" [] {
+export def activate [] {
     $env.AWS_PROFILE = "dev"
     aws sso login
 }
 
-alias "kb a" = kb activate
+export alias a = activate
 
-def "kb switch" [] {
+export def switch [] {
     let contexts = kubectl config get-contexts --no-headers
     | awk "{print $1}"
     | lines
@@ -34,23 +34,21 @@ def "kb switch" [] {
     kubectl config set-context --current --namespace=($selected_ns)
 }
 
-alias "kb sw" = kb switch
+export alias sw = switch
 
-def "kb switch profile" [] {
+export def "switch profile" [] {
     let profiles = [dev, test, pre, pro];
     let selected = $profiles | to text | fzf --height 40% --layout=reverse
     $env.AWS_PROFILE = $selected
 }
 
-alias "kb sw pf" = kb switch profile
+export alias "sw pf" = switch profile
 
-def "kb pods" [] {
+export def pods [] {
     kubectl get pods | lines
 }
 
-alias "kb pds" = kb pods
-
-def "kb pod" [] {
+export def pod [] {
     kubectl get pods --no-headers
     | lines 
     | to text 
@@ -58,10 +56,8 @@ def "kb pod" [] {
     | awk "{print $1}"
 }
 
-alias "kb pd" = kb pod
-
-def "kb containers" [--pod: string] {
-    let pod = if ($pod | is-empty) { kb pod } else { $pod }
+export def containers [--pod: string] {
+    let pod = if ($pod | is-empty) { pod } else { $pod }
 
     if ($pod | is-empty) {
         print -e "no pod selected"
@@ -73,20 +69,20 @@ def "kb containers" [--pod: string] {
     $containers | split row -r '\s' | append ($init_containers | split row -r '\s')
 }
 
-alias "kb cts" = kb containers
+export alias cts = containers
 
-def "kb container" [--pod: string] {
+export def container [--pod: string] {
     if ($pod | is-empty) {
-        kb containers | to text | fzf --height 40% --layout=reverse
+        containers | to text | fzf --height 40% --layout=reverse
     } else {
-        kb containers --pod $pod | to text | fzf --height 40% --layout=reverse
+        containers --pod $pod | to text | fzf --height 40% --layout=reverse
     }
 }
 
-alias "kb ct" = kb container
+export alias ct = container
 
-def --wrapped "kb logs" [...rest] {
-    let pod = kb pod
+export def --wrapped logs [...rest] {
+    let pod = pod
 
     if ($pod | is-empty) {
         print -e "no pod selected"
@@ -94,7 +90,7 @@ def --wrapped "kb logs" [...rest] {
     }
 
 
-    let container = kb container --pod $pod
+    let container = container --pod $pod
 
     if ($container | is-empty) {
         print -e "no container selected"
@@ -105,4 +101,4 @@ def --wrapped "kb logs" [...rest] {
     kubectl logs $pod --container $container ...$rest
 }
 
-alias "kb lg" = kb logs
+export alias lg = logs
