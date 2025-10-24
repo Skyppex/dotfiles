@@ -127,6 +127,10 @@ conform.setup({
 		local disable_filetypes = {
 			c = true,
 			cpp = true,
+			js = true,
+			jsx = true,
+			ts = true,
+			tsx = true,
 		}
 
 		return {
@@ -169,7 +173,7 @@ end, {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	desc = "Format before save",
-	pattern = "*",
+	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
 	group = vim.api.nvim_create_augroup("FormatConfig", { clear = true }),
 	callback = function(ev)
 		if vim.b.disable_autoformat or vim.g.disable_autoformat then
@@ -180,7 +184,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local client = vim.lsp.get_clients({ name = "ts_ls", bufnr = ev.buf })[1]
 
 		if not client then
-			require("conform").format(conform_opts)
+			conform.format(conform_opts)
 			return
 		end
 
@@ -194,7 +198,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			return
 		end
 
-		require("conform").format(conform_opts)
+		conform.format(conform_opts)
 	end,
 })
 
