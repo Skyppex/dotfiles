@@ -62,7 +62,7 @@ Group.new("Search", c.background0, c.blue)
 Group.new("IncSearch", c.background0, c.orange)
 
 -- Visual
-Group.new("Visual", nil, c.background2)
+Group.new("Visual", nil, c.background3)
 Group.new("VisualMode", g.Visual, g.Visual)
 Group.new("VisualLineMode", g.Visual, g.Visual)
 
