@@ -46,6 +46,7 @@
       neovim
       noto-fonts-emoji
       obsidian
+      quickshell
       slack
       slurp
       spotify
