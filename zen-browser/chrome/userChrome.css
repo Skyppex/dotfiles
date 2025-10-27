@@ -11,6 +11,9 @@
     --lwt-text-color: var(--quaternary) !important;
     --toolbar-field-color: var(--quaternary) !important;
     --tab-selected-textcolor: var(--primary) !important;
+    --toolbox-textcolor-inactive: var(--quaternary) !important;
+    --toolbox-textcolor: var(--quaternary) !important;
+    --toolbox-color: var(--quaternary) !important;
     --toolbar-field-focus-color: var(--quaternary) !important;
     --toolbar-color: var(--quaternary) !important;
     --newtab-text-primary-color: var(--quaternary) !important;
@@ -40,7 +43,16 @@
 
   #TabsToolbar {
     background-color: var(--background1) !important;
+    font-family: "The Last Shuriken" !important;
   }
+
+  /* #TabsToolbar .tabbrowser-tab:not([selected="true"]) { */
+  /*   color: var(--quaternary) !important; */
+  /* } */
+  /**/
+  /* #TabsToolbar .tabbrowser-tab[selected="true"] { */
+  /*   color: var(--primary) !important; */
+  /* } */
 
   #urlbar-background {
     background-color: var(--background2) !important;
