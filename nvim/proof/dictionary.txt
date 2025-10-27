@@ -769,3 +769,5 @@ mimetype
 autotag
 windwp
 keyof
+daisuki
+mononoki
