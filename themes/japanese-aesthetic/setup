@@ -6,8 +6,7 @@ let config = open ($theme | path join "config.toml")
 
 let colors = open ($theme | path join "style.toml") | get $config.variant
 let style = open ($theme | path join "style.toml") | get style
-let metadata = open ($theme | path join "metadata.toml")
-let fonts = $metadata | get fonts
+let fonts = open ($theme | path join "style.toml") | get fonts
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
 let background_w_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" w
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
@@ -33,6 +32,11 @@ let css = ":root {" | append ($kvps | each { |it|
     let key = $it | get 0
     let value = $it | get 1
     $"  --($key): ($value);"
+})
+| append ($font_kvps | each { |it| 
+    let key = $it | get 0
+    let value = $it | get 1
+    $"  --($key): \"($value)\";"
 })
 | append "}"
 
@@ -283,7 +287,7 @@ let output = if (sys host).hostname == "brage-work-laptop" {
 
 let mako = [
     `# Style`,
-    ([`font=`, $metadata.fonts.primary-style] | str join ""),
+    ([`font=`, $fonts.primary-style] | str join ""),
     ``,
     ([`background-color=`, $colors.background1] | str join ""),
     ([`text-color=`, $colors.primary] | str join ""),

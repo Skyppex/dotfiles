@@ -2,7 +2,3 @@ name = "japanese-aesthetic"
 display-name = "Japanese Aesthetic"
 variants = ["light", "dark"]
 variant-display-names = { light = "Light", dark = "Dark" }
-
-[fonts]
-primary-style = "The Last Shuriken"
-secondary-style = "Japan Daisuki"

@@ -34,5 +34,6 @@ QtObject {
 
   property string primary_style: "The Last Shuriken";
   property string secondary_style: "Japan Daisuki";
+  property string nerd_style: "JetBrainsMono Nerd Font";
 
 }

@@ -29,4 +29,5 @@
 	border-margin: 0px;
 	font-primary-style: "The Last Shuriken 10";
 	font-secondary-style: "Japan Daisuki 10";
+	font-nerd-style: "JetBrainsMono Nerd Font 10";
 }
