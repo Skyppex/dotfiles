@@ -96,7 +96,8 @@ M.oil = function()
 		},
 	})
 
-	require("skypex.utils").nmap("<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
+	local utils = require("skypex.utils")
+	utils.nmap("<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "OilActionsPost",
@@ -111,8 +112,12 @@ M.oil = function()
 				end
 
 				local path = action.url
-				path = path:gsub("oil:///", "")
-				path = path:sub(1, 1) .. ":" .. path:sub(2)
+				if utils.is_linux() then
+					path = path:gsub("oil://", "")
+				else
+					path = path:gsub("oil:///", "")
+					path = path:sub(1, 1) .. ":" .. path:sub(2)
+				end
 
 				if not path:match("%.cs$") then
 					goto continue
