@@ -152,3 +152,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 			:start()
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
+		"qf",
+	},
+	callback = function()
+		vim.opt_local.textwidth = 0
+		vim.opt_local.formatoptions:remove("t")
+	end,
+})
