@@ -51,3 +51,6 @@ export alias c = nmcli connection up
 
 export alias disconnect = nmcli connection down
 export alias d = nmcli connection down
+
+export alias modify = nmcli connection modify
+export alias m = nmcli connection modify
