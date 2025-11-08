@@ -13,16 +13,17 @@ source = ./variables.conf
 $menu = rofi -show combi -modi combi -combi-modi "window,drun,recursivebrowser"
 
 $terminalExec = wezterm start --always-new-process
-$terminalName = wezterm
 $terminalClass = org.wezfurlong.wezterm
+{{- if eq .chezmoi.hostname "nixos" }}
+$browserExec = firefox
+$browserClass = firefox
+{{- else }}
 $browserExec = zen-browser
-$browserName = zen
 $browserClass = zen
+{{- end }}
 $musicPlayerExec = spotify
-$musicPlayerName = spotify
 $musicPlayerClass = Spotify
 $gamesExec = steam
-$gamesName = steam
 $gamesClass = steam
 
 $focus_or_launch = ~/.config/hypr/scripts/focus_or_launch
