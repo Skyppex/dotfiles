@@ -348,16 +348,24 @@ for k, _ in pairs(servers) do
 	end
 end
 
+local function install_conditional(lsp, bin)
+	return {
+		lsp,
+		condition = function()
+			return vim.fn.executable(bin) == 1
+		end,
+	}
+end
+
 local ensure_installed = vim.tbl_keys(servers_to_install or {})
 vim.list_extend(ensure_installed, {
-	"lua-language-server",
-	"rust-analyzer",
-	"csharp-language-server",
-	"codelldb",
-	"gopls",
-	"graphql-language-service-cli",
-	"python-lsp-server",
+	install_conditional("lua-language-server", "lua"),
+	install_conditional("rust-analyzer", "cargo"),
+	install_conditional("csharp-language-server", "dotnet"),
+	install_conditional("gopls", "go"),
+	install_conditional("python-lsp-server", "python"),
 	"typescript-language-server",
+	"graphql-language-service-cli",
 	"tailwindcss-language-server",
 })
 
