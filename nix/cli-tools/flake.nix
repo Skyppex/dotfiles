@@ -36,7 +36,7 @@
       ];
     };
 
-    rust = pkgsFree.rust-bin.stable.latest.default;
+    #rust = pkgsFree.rust-bin.stable.latest.default;
 
     cliPackages = with pkgsUnfree; [
       astroterm
@@ -69,6 +69,7 @@
       fd
       file
       fzf
+      gcc
       git
       github-cli
       gitleaks
@@ -84,6 +85,7 @@
       lazydocker
       lazygit
       lua
+      gnumake
       man
       meson
       mods
@@ -93,7 +95,7 @@
       openssh
       pastel
       ripgrep
-      rust
+      #rust
       scc
       skate
       tldr

@@ -51,10 +51,11 @@
       neovim
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       obsidian
       quickshell
       rmpc
+      rofi
       slack
       slurp
       spotify
