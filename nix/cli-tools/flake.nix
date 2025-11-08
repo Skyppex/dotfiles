@@ -100,6 +100,7 @@
       skate
       tldr
       tree-sitter
+      unzip
       yazi
       zip
       zoxide
