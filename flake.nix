@@ -1,47 +1,33 @@
 {
-  description = "skypex' flake";
+  description = "flake for developing my dotfiles";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    cli-tools = {
-      url = ./nix/cli-tools;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    common-desktop-tools = {
-      url = ./nix/common-desktop-tools;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.cli-tools.follows = "cli-tools";
-    };
-
-    work-desktop-tools = {
-      url = ./nix/work-desktop-tools;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.common-desktop-tools.follows = "common-desktop-tools";
-    };
-
-    home-desktop-tools = {
-      url = ./nix/home-desktop-tools;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.common-desktop-tools.follows = "common-desktop-tools";
-    };
-
-    surface-laptop-tools = {
-      url = ./surface-laptop-tools;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.cli-tools.follows = "cli-tools";
-    };
-
-    inner = {
-      url = ./nix;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.cli-tools.follows = "cli-tools";
-      inputs.common-desktop-tools.follows = "common-desktop-tools";
-      inputs.work-desktop-tools.follows = "work-desktop-tools";
-      inputs.home-desktop-tools.follows = "home-desktop-tools";
-      inputs.surface-laptop-tools.follows = "surface-laptop-tools";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = {inner, ...}: inner.outputs;
+
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    ...
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      # system = "x86_64-linux";
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          lua-language-server
+          stylua
+          yamlfmt
+          taplo
+          jq
+          xmlformat
+          kdePackages.qtdeclarative
+          nil
+          nixfmt
+        ];
+      };
+    });
 }
