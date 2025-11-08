@@ -33,7 +33,7 @@ end
 
 --- @return boolean
 local function is_home_computer_linux()
-	return get_home():find("/home/skypex") ~= nil
+	return get_home():find("/home/tower") ~= nil
 end
 
 --- @return boolean
@@ -58,7 +58,7 @@ end
 
 --- @return boolean
 local function is_linux()
-	return is_home_computer_linux() or is_work_computer_linux() or is_home_laptop_linux()
+	return package.config:sub(1, 1) == '/'
 end
 
 --- @return string?
