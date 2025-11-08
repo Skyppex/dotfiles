@@ -35,7 +35,7 @@ end
 
 --- @return boolean
 function M.is_home_computer_linux()
-	return M.get_home():find("/home/skypex") ~= nil
+	return M.get_home():find("/home/tower") ~= nil
 end
 
 --- @return boolean
@@ -55,7 +55,7 @@ end
 
 --- @return boolean
 function M.is_linux()
-	return M.is_home_computer_linux() or M.is_work_computer_linux() or M.is_home_laptop_linux()
+	return vim.loop.os_uname().sysname == "Linux"
 end
 
 --- @return string
