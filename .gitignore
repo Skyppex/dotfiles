@@ -18,3 +18,4 @@ nushell/history.txt
 .netcoredbg_hist
 mopidy/mopidy.conf
 /.direnv
+/nixos/hardware-configuration.nix
