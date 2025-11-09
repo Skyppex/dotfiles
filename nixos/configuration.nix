@@ -59,7 +59,6 @@
     vim
     wget
     chezmoi
-    kitty
     rofi
     playerctl
     pavucontrol
