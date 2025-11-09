@@ -25,8 +25,9 @@
           jq
           xmlformat
           kdePackages.qtdeclarative
+          ruff
           nil
-          nixfmt
+          alejandra
         ];
       };
     });
