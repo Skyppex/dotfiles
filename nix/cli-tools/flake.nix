@@ -94,6 +94,7 @@
       nushell
       openssh
       pastel
+      python314
       ripgrep
       #rust
       scc

@@ -28,7 +28,7 @@ local formatters_by_ft = {
 	-- Runs the single formatter
 	lua = { "stylua", "injected" },
 	-- Runs each formatter sequentially
-	python = { "black", "injected" },
+	python = { "ruff", "injected" },
 
 	-- Tries to run each formatter until one succeeds
 	javascript = first_then_injected("prettierd", "prettier"),
@@ -68,6 +68,10 @@ local formatters = {
 	jq = {
 		command = "jq",
 		args = { "--monochrome-output" },
+	},
+	python = {
+		command = "ruff",
+		args = { "format" },
 	},
 	-- nufmt is not ready to be used yet, it breaks the code
 	-- nufmt = {

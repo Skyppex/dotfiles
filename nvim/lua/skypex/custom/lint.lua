@@ -11,6 +11,7 @@ local linters_by_ft = {
 	sh = { "shellcheck" },
 	bash = { "shellcheck" },
 	kotlin = { "ktlint" },
+	python = { "ruff" },
 	-- markdown = { "markdownlint" },
 }
 
