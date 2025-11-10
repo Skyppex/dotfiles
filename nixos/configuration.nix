@@ -66,6 +66,7 @@
     bluez
     bluez-tools
     hyprlock
+    swww
   ];
 
   programs.firefox.enable = true;
