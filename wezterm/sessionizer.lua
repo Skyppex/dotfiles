@@ -17,7 +17,7 @@ if utils.is_home_computer_windows() then
 	carweb_path = code_path .. "/sentinel/commoncarweb"
 	obsidian_path = home .. "/OneDrive/Obsidian"
 else
-	carweb_path = code_path .. "/commoncarweb"
+	carweb_path = code_path .. "/carweb"
 	obsidian_path = home .. "/obsidian"
 end
 
