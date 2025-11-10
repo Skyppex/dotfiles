@@ -355,6 +355,7 @@ vim.list_extend(ensure_installed, {
 	"csharp-language-server",
 	"gopls",
 	"ruff",
+	"pyright",
 	"typescript-language-server",
 	"graphql-language-service-cli",
 	"tailwindcss-language-server",
