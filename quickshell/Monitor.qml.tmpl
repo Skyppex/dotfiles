@@ -7,13 +7,17 @@ QtObject {
         "DP-1",
         "DP-2"
     ]
+    {{- else if eq .chezmoi.hostname "tower" }}
+    property list<string> prioritized: [
+        "DP-1",
+        "DP-2"
+    ]
     {{- else if eq .chezmoi.hostname "brage-work-laptop" }}
     property list<string> prioritized: [
         "DP-7",
         "DP-9",
         "eDP-1"
     ]
-
     {{- else if eq .chezmoi.hostname "pod-042" }}
     property list<string> prioritized: [
         "eDP-1"
