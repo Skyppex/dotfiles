@@ -785,3 +785,4 @@ devnull
 tombi
 nint
 nuint
+adwaita
