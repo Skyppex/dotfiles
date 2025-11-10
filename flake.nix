@@ -23,9 +23,9 @@
           yamllint
           tombi
           jq
-          jsonlint
+          nodePackages.jsonlint
           xmlformat
-          markdownlint
+          markdownlint-cli
           shellcheck
           kdePackages.qtdeclarative
           ruff
