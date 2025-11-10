@@ -8,6 +8,7 @@ local linters_by_ft = {
 	typescriptreact = { "eslint_d" },
 	json = { "jsonlint" },
 	yaml = { "yamllint" },
+	toml = { "tombi" },
 	sh = { "shellcheck" },
 	bash = { "shellcheck" },
 	kotlin = { "ktlint" },
