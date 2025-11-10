@@ -227,7 +227,7 @@ match [$env.HOSTNAME, $env.OS] {
             load-env $env_vars
         }
     }
-    ["nixos", "nixos"] => {
+    ["tower", "nixos"] => {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
         $env.DEV_BIN = ('~/dev/bin' | path expand)
