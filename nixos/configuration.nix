@@ -67,6 +67,8 @@
     bluez-tools
     hyprlock
     swww
+    protonup-ng
+    mangohud
   ];
 
   programs.firefox.enable = true;
