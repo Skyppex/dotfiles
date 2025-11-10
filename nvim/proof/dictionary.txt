@@ -786,3 +786,8 @@ tombi
 nint
 nuint
 adwaita
+gamemode
+gamescope
+modman
+hamachi
+bitwarden
