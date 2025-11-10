@@ -783,3 +783,5 @@ urllib
 urlretrieve
 devnull
 tombi
+nint
+nuint
