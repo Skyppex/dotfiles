@@ -772,3 +772,14 @@ keyof
 daisuki
 mononoki
 deserialization
+octokit
+basedpyright
+kde
+qtdeclarative
+bufsize
+magick
+makedir
+urllib
+urlretrieve
+devnull
+tombi
