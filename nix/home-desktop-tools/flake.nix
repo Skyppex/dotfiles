@@ -32,6 +32,7 @@
       blender
       logmein-hamachi
       r2modman
+      bitwarden-desktop
     ];
   in {
     lib.${system}.packages = common.packages ++ homePackages;
