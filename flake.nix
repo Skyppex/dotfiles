@@ -7,7 +7,6 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
     ...
@@ -21,11 +20,17 @@
           lua-language-server
           stylua
           yamlfmt
-          taplo
+          yamllint
+          tombi
           jq
+          jsonlint
           xmlformat
+          markdownlint
+          shellcheck
           kdePackages.qtdeclarative
           ruff
+          pyright
+          beautysh
           nil
           alejandra
         ];
