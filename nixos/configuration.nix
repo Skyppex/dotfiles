@@ -72,6 +72,20 @@
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
 
+  # gaming
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
+
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/tower/.steam/root/compatibilitytools.d";
+  };
+
+  services.xserver.videoDrivers = ["amdgpu"];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
