@@ -214,6 +214,11 @@ nxmap("<leader>d", '"+d', "Cut to system clipboard")
 nmap("<leader>Do", "<cmd>windo diffthis<CR>", "Diff buffers")
 nmap("<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
 
+-- inspect highlight
+nmap("<leader>ih", function()
+	vim.notify(vim.inspect(vim.treesitter.get_captures_at_cursor(0)))
+end)
+
 -- Source config
 nmap("<leader><leader>c", function()
 	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/custom/*.lua", true, true)
