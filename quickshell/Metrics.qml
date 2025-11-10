@@ -55,7 +55,7 @@ Row {
     // Disk
     Metric {
         label: ""
-        value: DiskUsage.disk
+        value: DiskUsage.averageDiskUsage
         minimum: 0
         maximum: 100
         width: elementWidth

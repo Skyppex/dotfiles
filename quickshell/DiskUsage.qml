@@ -6,14 +6,23 @@ import QtQuick
 
 Singleton {
     id: root
-    property real disk
+    property real averageDiskUsage
+    property var disks
 
     Process {
         id: diskProc
-        command: ["nu", "-c", "sys disks | uniq-by device | where mount != /boot | each {|it| ($it.free / $it.total) * 100 } | get 0"]
+        command: ["nu", "-c", "sys disks | uniq-by device | where mount != /boot | each {|it| { mount: $it.mount, usage: ((1 - $it.free / $it.total) * 100) } } | to json"]
         running: true
         stdout: StdioCollector {
-            onStreamFinished: root.disk = this.text
+            onStreamFinished: {
+                try {
+                    const parsed = JSON.parse(this.text);
+                    root.averageDiskUsage = parsed.reduce((sum, d) => sum + d.usage, 0) / parsed.length;
+                    root.disks = parsed;
+                } catch (e) {
+                    console.warn("Failed to parse disk JSON:", e);
+                }
+            }
         }
     }
 
