@@ -750,6 +750,7 @@ source ~/.config/nushell/poll.nu
 use ~/.config/nushell/kb.nu
 use ~/.config/nushell/nw.nu
 use ~/.config/nushell/bt.nu
+source ~/.config/nushell/nixos-utils.nu
 
 # Pull the dotfiles from the remote repository
 def pull [] {
