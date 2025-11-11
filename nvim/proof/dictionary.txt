@@ -791,3 +791,6 @@ gamescope
 modman
 hamachi
 bitwarden
+stackalloc
+efi
+vfat
