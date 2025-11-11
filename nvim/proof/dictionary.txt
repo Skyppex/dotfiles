@@ -815,3 +815,4 @@ yolo
 youtube
 zbirenbaum
 zsh
+speedtest
