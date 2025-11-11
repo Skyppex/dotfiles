@@ -359,6 +359,7 @@ vim.list_extend(ensure_installed, {
 	"typescript-language-server",
 	"graphql-language-service-cli",
 	"tailwindcss-language-server",
+	"nil",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
