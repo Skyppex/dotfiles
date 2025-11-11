@@ -1,8 +1,10 @@
 {
   description = "A flake giving access to fonts that I use, outside of nixpkgs.";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
 
   outputs = {
     self,
@@ -10,8 +12,6 @@
     flake-utils,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
-      system = "x86_64-linux";
-
       pkgs = import nixpkgs {
         system = system;
         config = {

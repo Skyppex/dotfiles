@@ -58,16 +58,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755922037,
-        "narHash": "sha256-wY1+2JPH0ZZC4BQefoZw/k+3+DowFyfOxv17CN/idKs=",
+        "lastModified": 1762596750,
+        "narHash": "sha256-rXXuz51Bq7DHBlfIjN7jO8Bu3du5TV+3DSADBX7/9YQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b1b3291469652d5a2edb0becc4ef0246fff97a7c",
+        "rev": "b6a8526db03f735b89dd5ff348f53f752e7ddc8e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-25.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -78,6 +78,7 @@
         "common-desktop-tools": "common-desktop-tools",
         "home-desktop-tools": "home-desktop-tools",
         "nixpkgs": "nixpkgs",
+        "surface-laptop-tools": "surface-laptop-tools",
         "work-desktop-tools": "work-desktop-tools"
       }
     },
@@ -101,6 +102,25 @@
         "repo": "rust-overlay",
         "type": "github"
       }
+    },
+    "surface-laptop-tools": {
+      "inputs": {
+        "cli-tools": [
+          "cli-tools"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "surface-laptop-tools",
+        "type": "path"
+      },
+      "original": {
+        "path": "surface-laptop-tools",
+        "type": "path"
+      },
+      "parent": []
     },
     "work-desktop-tools": {
       "inputs": {

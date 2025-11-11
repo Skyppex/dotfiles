@@ -71,7 +71,16 @@
     mangohud
   ];
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      "devtools.chrome.enabled" = true;
+      "devtools.debugger.remote-enabled" = true;
+      "layout.css.has-selector.enabled" = true;
+    };
+  };
+
   programs.hyprland.enable = true;
 
   # gaming
