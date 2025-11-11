@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    zen-browser = {
-      url = "github:MarceColl/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     cli-tools = {
       url = ../cli-tools;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +12,6 @@
   outputs = {
     self,
     nixpkgs,
-    zen-browser,
     cli-tools,
     ...
   }: let
@@ -61,7 +56,6 @@
       slurp
       spotify
       wezterm
-      zen-browser
     ];
   in {
     lib.${system} = {
