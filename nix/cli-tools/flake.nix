@@ -99,6 +99,7 @@
       #rust
       scc
       skate
+      speedtest-cli
       tldr
       tree-sitter
       unzip
