@@ -850,3 +850,5 @@ backtab
 menunext
 virsh
 qemu
+dominfo
+unpause
