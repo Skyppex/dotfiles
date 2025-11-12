@@ -1,11 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -14,6 +10,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = {
+    "kernel.panic" = "0";
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -47,7 +46,7 @@
     isNormalUser = true;
     description = "tower";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
+    packages = [];
   };
 
   # Allow unfree packages
@@ -69,6 +68,7 @@
     swww
     protonup-ng
     mangohud
+    wl-clipboard
   ];
 
   programs.firefox = {
