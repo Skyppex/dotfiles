@@ -37,6 +37,7 @@ export def devices []: nothing -> table<mac: string, name: string> {
     find-devices
 }
 
+export alias ds = devices
 export alias devs = devices
 
 # list all paired bluetooth devices
@@ -48,6 +49,9 @@ export def paired []: nothing -> table<mac: string, name: string> {
 export def connected []: nothing -> table<mac: string, name: string> {
     find-devices Connected
 }
+
+export alias cs = connected
+export alias cons = connected
 
 # list all trusted bluetooth devices
 export def trusted []: nothing -> table<mac: string, name: string> {
