@@ -1,15 +1,38 @@
 export def list []: nothing -> table<id: string, name: string, state: string, connection: string> {
-    let system = virsh -c qemu:///system list --all
-    | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
-    | skip
-    | insert connection "qemu:///system"
+    let candidates = [
+        "qemu:///system",
+        "qemu:///session",
+        "qemu+ssh://localhost/system",
+        "qemu+ssh://localhost/session",
+        "qemu+tcp://localhost/system",
+    ];
 
-    let session = virsh -c qemu:///session list --all
-    | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
-    | skip
-    | insert connection "qemu:///session"
+    mut vms = [];
 
-    $system | append $session
+    for url in $candidates {
+        let result = virsh -c $url list --all | complete
+        if ($result.exit_code != 0) {
+            continue;
+        }
+
+        let found = $result.stdout
+        | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
+        | skip
+        | insert connection $url
+
+        $vms = $vms | append $found
+    }
+
+    $vms = $vms | uniq-by id
+
+    return $vms
+
+    # let session = virsh -c qemu:///session list --all
+    # | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
+    # | skip
+    # | insert connection "qemu:///session"
+
+    # $system | append $session
 }
 
 export alias ls = list
