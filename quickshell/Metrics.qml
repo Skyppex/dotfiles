@@ -52,6 +52,21 @@ Row {
         fadePower: 0.4
     }
 
+    // GPU
+    Metric {
+        label: "󰍹"
+        value: GpuUsage.gpu
+        minimum: 0
+        maximum: 100
+        width: elementWidth
+    }
+
+    Separator {
+        thickness: 1
+        lineColor: Theme.quaternary
+        fadePower: 0.4
+    }
+
     // Disk
     Metric {
         label: ""
