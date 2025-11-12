@@ -110,6 +110,8 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.displayManager.ly.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
