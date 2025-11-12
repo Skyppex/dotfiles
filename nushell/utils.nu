@@ -102,7 +102,7 @@ def "parse table" [
     --header-spacer(-c) # The header row is separated by a spacer row
     --verbose(-v) # Print verbose output
     regex: string # Specify the regex to split the table
-] {
+]: string -> table {
     let input = $in;
 
     if $verbose {
@@ -157,11 +157,31 @@ def "parse table" [
         print $"Lines:\n($lines)"
     }
 
+    if ($lines | is-empty) {
+        mut tbl = [[]; []]
+
+        for $name in ($header_col | enumerate) {
+            $tbl = $tbl | insert $name.item ($name.index + 1)
+            let i = (($name.index + 1) | to text);
+            let t = $tbl
+
+            $tbl = try {
+                $t | rename -c {$i: $name.item}
+            } catch {
+                $t | reject $name.item
+            }
+        }
+
+        $tbl = $tbl | drop nth 0
+        return $tbl
+    }
+
     # Use regex to split each line into columns
-    mut rows = $lines | each { |line|
-        let cols = $line | to text | split column -r $regex
-        $cols
-    } | reduce {|row, acc| $acc | append $row} 
+    mut rows = $lines
+    | each { |line|
+        $line | to text | split column -r $regex
+    }
+    | reduce {|row, acc| $acc | append $row} 
     | rename --block { str replace --all 'column' ''}
 
     if $verbose {
@@ -172,9 +192,8 @@ def "parse table" [
     if $header {
         for $name in ($header_col | enumerate) {
             let i = (($name.index + 1) | to text);
-            print -e $i
-            print -e $rows
             let rs = $rows
+
             $rows = try {
                 $rs | rename -c {$i: $name.item}
             } catch {
