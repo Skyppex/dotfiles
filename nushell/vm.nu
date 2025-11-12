@@ -122,7 +122,18 @@ export def dominfo [name?: string] {
         ls | where ($it.name == $name) | first
     }
 
-    virsh --connect $vm.connection dominfo $vm.name | str trim --right
+    let info = virsh --connect $vm.connection dominfo $vm.name | str trim --right
+    let parsed = $info | parse --regex '(?<key>.+):\s+(?<value>.+)'
+
+    mut record = {}
+
+    for pair in $parsed {
+        let key = $pair.key | str trim | str downcase | str replace " " "-"
+        let value = $pair.value | str trim
+        $record = $record | insert $key $pair.value
+    }
+
+    $record
 }
 
 export alias info = dominfo
