@@ -16,8 +16,10 @@ export def list []: nothing -> table<id: string, name: string, state: string, co
         }
 
         let found = $result.stdout
-        | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
-        | skip
+        | lines
+        | skip 2
+        | to text
+        | parse --regex '^\s*(?P<id>.+?)\s{2,}(?P<name>.+?)\s{2,}(?P<state>.+?)\s*$'
         | insert connection $url
 
         $vms = $vms | append $found
