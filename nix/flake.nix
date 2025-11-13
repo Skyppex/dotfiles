@@ -44,6 +44,14 @@
   }: let
     system = "x86_64-linux";
   in {
+    lib.${system}.packages = {
+      default = self.lib.${system}.packages.shell;
+      shell = cli-tools.lib.${system}.packages;
+      work = work-desktop-tools.lib.${system}.packages;
+      home = home-desktop-tools.lib.${system}.packages;
+      surface = surface-laptop-tools.lib.${system}.packages;
+    };
+
     packages.${system} = {
       default = self.packages.${system}.shell;
       shell = cli-tools.packages.${system}.default;
