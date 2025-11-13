@@ -873,3 +873,7 @@ yolo
 youtube
 zbirenbaum
 zsh
+virtualisation
+journald
+libvirtd
+virtiofsd
