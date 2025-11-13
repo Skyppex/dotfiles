@@ -740,7 +740,6 @@ source ~/.config/nushell/jj.nu
 source ~/.config/nushell/autohotkey.nu
 source ~/.config/nushell/scoop.nu
 source ~/.config/nushell/fun.nu
-source ~/.config/nushell/docker.nu
 use ~/.config/nushell/task.nu
 source ~/.config/nushell/dotenv.nu
 source ~/.config/nushell/scripts.nu
