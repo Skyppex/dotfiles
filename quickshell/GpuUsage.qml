@@ -6,6 +6,7 @@ import QtQuick
 
 Singleton {
     id: root
+    property bool healthy
     property real gpu
 
     Process {
@@ -14,6 +15,9 @@ Singleton {
         running: true
         stdout: StdioCollector {
             onStreamFinished: root.gpu = this.text
+        }
+        onExited: function (exitCode, exitStatus) {
+            root.healthy = exitCode == 0;
         }
     }
 

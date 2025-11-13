@@ -59,12 +59,16 @@ Row {
         minimum: 0
         maximum: 100
         width: elementWidth
+        enabled: GpuUsage.healthy
+        visible: GpuUsage.healthy
     }
 
     Separator {
         thickness: 1
         lineColor: Theme.quaternary
         fadePower: 0.4
+        enabled: GpuUsage.healthy
+        visible: GpuUsage.healthy
     }
 
     // Disk
