@@ -6,14 +6,20 @@ import QtQuick
 
 Singleton {
     id: root
+    property bool healthy
     property real mem
 
     Process {
         id: memProc
         command: ["nu", "-c", "sys mem | each {|it| ($it.used / $it.total) * 100 }"]
         running: true
+
         stdout: StdioCollector {
             onStreamFinished: root.mem = this.text
+        }
+
+        onExited: function (exitCode, exitStatus) {
+            root.healthy = exitCode == 0;
         }
     }
 

@@ -1,82 +1,67 @@
 import QtQuick
 
 Row {
-    property int volume: 28
-    property int ramPercent: 67
-    property int cpuPercent: 12
-    property int diskPercent: 81
+    id: root
     property int elementWidth: 65
 
-    // Volume with ternary icon
-    Metric {
-        label: Volume.volume > 30 ? "" : Volume.volume > 0 ? "" : ""
-        value: Volume.volume
-        minimum: 0
-        maximum: 100
-        width: elementWidth
-    }
+    property var metrics: [({
+                label: () => Volume.volume > 30 ? "" : Volume.volume > 0 ? "" : "",
+                value: () => Volume.volume,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => Volume.healthy
+            }), ({
+                label: () => "",
+                value: () => MemoryUsage.mem,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => MemoryUsage.healthy
+            }), ({
+                label: () => "",
+                value: () => CpuUsage.cpu,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => CpuUsage.healthy
+            }), ({
+                label: () => "󰍹",
+                value: () => GpuUsage.gpu,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => GpuUsage.healthy
+            }), ({
+                label: () => "",
+                value: () => DiskUsage.averageDiskUsage,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => DiskUsage.healthy
+            })]
 
-    Separator {
-        thickness: 1
-        lineColor: Theme.quaternary
-        fadePower: 0.4
-    }
+    property var visibleMetrics: metrics.filter(m => m.healthy())
 
-    // RAM
-    Metric {
-        label: ""
-        value: MemoryUsage.mem
-        minimum: 0
-        maximum: 100
-        width: elementWidth
-    }
+    Repeater {
+        id: rep
+        model: visibleMetrics
 
-    Separator {
-        thickness: 1
-        lineColor: Theme.quaternary
-        fadePower: 0.4
-    }
+        delegate: Row {
+            spacing: 12
 
-    // CPU
-    Metric {
-        label: ""
-        value: CpuUsage.cpu
-        minimum: 0
-        maximum: 100
-        width: elementWidth
-    }
+            Separator {
+                thickness: 1
+                lineColor: Theme.quaternary
+                fadePower: 0.4
+                enabled: index > 0
+                visible: index > 0
+            }
 
-    Separator {
-        thickness: 1
-        lineColor: Theme.quaternary
-        fadePower: 0.4
-    }
-
-    // GPU
-    Metric {
-        label: "󰍹"
-        value: GpuUsage.gpu
-        minimum: 0
-        maximum: 100
-        width: elementWidth
-        enabled: GpuUsage.healthy
-        visible: GpuUsage.healthy
-    }
-
-    Separator {
-        thickness: 1
-        lineColor: Theme.quaternary
-        fadePower: 0.4
-        enabled: GpuUsage.healthy
-        visible: GpuUsage.healthy
-    }
-
-    // Disk
-    Metric {
-        label: ""
-        value: DiskUsage.averageDiskUsage
-        minimum: 0
-        maximum: 100
-        width: elementWidth
+            Metric {
+                label: modelData.label()
+                value: modelData.value()
+                minimum: modelData.minimum
+                maximum: modelData.maximum
+                width: root.elementWidth
+                enabled: modelData.healthy()
+                visible: modelData.healthy()
+            }
+        }
     }
 }

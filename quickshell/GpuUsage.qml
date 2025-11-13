@@ -13,9 +13,11 @@ Singleton {
         id: gpuProc
         command: ["nu", "-c", "fd 'card\\d$' '/sys/class/drm' | lines | each {|it| cat ($it | path join 'device/gpu_busy_percent') } | into float | math avg | math round"]
         running: true
+
         stdout: StdioCollector {
             onStreamFinished: root.gpu = this.text
         }
+
         onExited: function (exitCode, exitStatus) {
             root.healthy = exitCode == 0;
         }

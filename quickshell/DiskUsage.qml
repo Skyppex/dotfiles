@@ -6,6 +6,7 @@ import QtQuick
 
 Singleton {
     id: root
+    property bool healthy
     property real averageDiskUsage
     property var disks
 
@@ -13,6 +14,7 @@ Singleton {
         id: diskProc
         command: ["nu", "-c", "sys disks | uniq-by device | where type != vfat and total != 0B | each {|it| { mount: $it.mount, usage: ((1 - $it.free / $it.total) * 100) } } | to json"]
         running: true
+
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
@@ -23,6 +25,10 @@ Singleton {
                     console.warn("Failed to parse disk JSON:", e);
                 }
             }
+        }
+
+        onExited: function (exitCode, exitStatus) {
+            root.healthy = exitCode == 0;
         }
     }
 
