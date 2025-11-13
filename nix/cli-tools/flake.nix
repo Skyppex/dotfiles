@@ -47,7 +47,6 @@
       ollama
       powershell
       starship
-      surrealdb
     ];
 
     cliPackagesLite = with pkgsUnfree; [
@@ -79,6 +78,7 @@
       gum
       hyperfine
       imagemagick
+      inotify-tools
       jq
       jujutsu
       kubectl
