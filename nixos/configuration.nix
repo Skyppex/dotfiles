@@ -5,6 +5,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./virtualisation.nix
   ];
 
   # Bootloader.
@@ -45,7 +46,7 @@
   users.users.tower = {
     isNormalUser = true;
     description = "tower";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd"];
     packages = [];
   };
 
