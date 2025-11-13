@@ -28,13 +28,6 @@ export def list []: nothing -> table<id: string, name: string, state: string, co
     $vms = $vms | uniq-by id
 
     return $vms
-
-    # let session = virsh -c qemu:///session list --all
-    # | parse --regex '(?<id>\w+)\s\s+(?<name>\w+)\s\s+(?<state>\w+)'
-    # | skip
-    # | insert connection "qemu:///session"
-
-    # $system | append $session
 }
 
 export alias ls = list
