@@ -877,3 +877,4 @@ virtualisation
 journald
 libvirtd
 virtiofsd
+inotify
