@@ -145,7 +145,7 @@ export alias status = dominfo
 def select-vm []: table<id: string, name: string, state: string, connection: string> -> record<id: string, name: string, state: string, connection: string> {
     let vms = $in
     let selected = $vms | each { |it|
-        $"($it.id): ($it.name) ($it.state) - ($it.connection)"
+        $"($it.id): ($it.name) @ ($it.connection) - ($it.state)"
     } 
     | to text 
     | fzf --layout reverse --height 40%
