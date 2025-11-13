@@ -47,3 +47,10 @@ export alias d = nmcli connection down
 
 export alias modify = nmcli connection modify
 export alias m = nmcli connection modify
+
+export alias delete = nmcli connection delete
+export alias rm = nmcli connection delete
+
+export alias clone = nmcli connection clone
+export alias copy = nmcli connection clone
+export alias cp = nmcli connection clone

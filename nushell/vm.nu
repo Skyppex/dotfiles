@@ -2,8 +2,6 @@ export def list []: nothing -> table<id: string, name: string, state: string, co
     let candidates = [
         "qemu:///system",
         "qemu:///session",
-        "qemu+ssh://localhost/system",
-        "qemu+ssh://localhost/session",
         "qemu+tcp://localhost/system",
     ];
 
@@ -31,6 +29,37 @@ export def list []: nothing -> table<id: string, name: string, state: string, co
 }
 
 export alias ls = list
+
+export def "list ssh" []: nothing -> table<id: string, name: string, state: string, connection: string> {
+    let candidates = [
+        "qemu+ssh://localhost/system",
+        "qemu+ssh://localhost/session",
+    ];
+
+    mut vms = [];
+
+    for url in $candidates {
+        let result = virsh -c $url list --all | complete
+        if ($result.exit_code != 0) {
+            continue;
+        }
+
+        let found = $result.stdout
+        | lines
+        | skip 2
+        | to text
+        | parse --regex '^\s*(?P<id>.+?)\s{2,}(?P<name>.+?)\s{2,}(?P<state>.+?)\s*$'
+        | insert connection $url
+
+        $vms = $vms | append $found
+    }
+
+    $vms = $vms | uniq-by id
+
+    return $vms
+}
+
+export alias "ls ssh" = list ssh
 
 export def start [name?: string] {
     let vm = if ($name | is-empty) {
