@@ -1,12 +1,42 @@
 # bt — Bluetooth utilities for managing connections.
+export def main [] {
+    print (help modules bt)
+    print "\nAlso see bluetoothctl --help"
+}
 
-# pair and connect an existing bluetooth device
-export def connect []: nothing -> nothing {
+# discover devices. does not pair or connect
+export def discover [
+    timeout?: int
+]: nothing -> nothing {
+    let timeout = if ($timeout | is-not-empty) {
+        $timeout
+    } else {
+        3
+    }
+
+    bluetoothctl --timeout $timeout scan on
+}
+
+export alias find = discover
+export alias fd = discover
+
+# pair and connect a bluetooth device
+export def connect [
+    --discover(-d)
+    --trust(-t)
+]: nothing -> nothing {
+    if ($discover | is-not-empty) {
+        discover
+    }
+
     let selected = find-devices | select-device
-    let paired = paired
 
-    if not ($paired | any {|it| $it.mac == $selected.mac}) {
+    if not (paired | any {|it| $it.mac == $selected.mac}) {
         bluetoothctl pair $selected.mac
+    }
+
+    if $trust and not (trusted | any {|it| $it.mac == $selected.mac}) {
+        bluetoothctl trust $selected.mac
     }
 
     bluetoothctl connect $selected.mac
@@ -17,7 +47,7 @@ export alias c = connect
 
 # disconnect a connected bluetooth device
 export def disconnect []: nothing -> nothing {
-    let selected = find-devices Connected | select-device
+    let selected = connected | select-device
     bluetoothctl disconnect $selected.mac
 }
 
@@ -26,11 +56,19 @@ export alias d = disconnect
 
 # trust a paired bluetooth device
 export def trust []: nothing -> nothing {
-    let selected = find-devices Paired | select-device
+    let selected = paired | select-device
     bluetoothctl trust $selected.mac
 }
 
 export alias t = trust
+
+# untrust a trusted bluetooth device
+export def untrust []: nothing -> nothing {
+    let selected = trusted | select-device
+    bluetoothctl untrust $selected.mac
+}
+
+export alias u = untrust
 
 # list all existing bluetooth devices
 export def devices []: nothing -> table<mac: string, name: string> {
@@ -38,6 +76,7 @@ export def devices []: nothing -> table<mac: string, name: string> {
 }
 
 export alias ds = devices
+export alias ls = devices
 export alias devs = devices
 
 # list all paired bluetooth devices
@@ -56,16 +95,6 @@ export alias cons = connected
 # list all trusted bluetooth devices
 export def trusted []: nothing -> table<mac: string, name: string> {
     find-devices Trusted
-}
-
-# enable bluetooth scanning
-export def "scan on" []: nothing -> nothing {
-    bluetoothctl scan on
-}
-
-# disable bluetooth scanning
-export def "scan off" []: nothing -> nothing {
-    bluetoothctl scan off
 }
 
 def find-devices [
@@ -111,9 +140,8 @@ def select-device []: table<mac: string, name: string> -> record<mac: string, na
     } 
     | to text
     | fzf --height 40% --layout reverse -0
-    | extract-selected-data
 
-    $selected
+    $selected | extract-selected-data
 }
 
 def extract-selected-data []: string -> record<mac: string, name: string> {
