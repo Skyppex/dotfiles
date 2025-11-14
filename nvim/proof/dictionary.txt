@@ -878,3 +878,4 @@ journald
 libvirtd
 virtiofsd
 inotify
+libvirt
