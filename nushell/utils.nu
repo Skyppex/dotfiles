@@ -271,7 +271,7 @@ def --env con [cmd: closure]: any -> any {
     return $result
 }
 
-def --wrapped detatch [...command]: nothing -> nothing {
+def --wrapped detach [...command]: nothing -> nothing {
     let input = $in
 
     if ($input | is-empty) {
