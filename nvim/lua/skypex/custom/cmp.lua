@@ -115,8 +115,8 @@ cmp.setup({
 		},
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<S-A-j>"] = cmp.mapping.select_next_item(),
-		["<S-A-k>"] = cmp.mapping.select_prev_item(),
+		["<S-C-j>"] = cmp.mapping.select_next_item(),
+		["<S-C-k>"] = cmp.mapping.select_prev_item(),
 		["<A-u>"] = cmp.mapping.scroll_docs(-4),
 		["<A-d>"] = cmp.mapping.scroll_docs(4),
 		["<TAB>"] = cmp.mapping.confirm({ select = true }),

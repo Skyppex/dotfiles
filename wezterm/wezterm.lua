@@ -10,6 +10,7 @@ wezterm.log_info("Loaded sessionizer")
 local background = require("background")
 local utils = require("utils")
 local colors = require("colors")
+local ss = require("smart-splits")
 
 local act = wezterm.action
 
@@ -118,14 +119,14 @@ local config = {
 		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 		{ key = "z", mods = "LEADER|CTRL", action = "TogglePaneZoomState" },
 		{ key = "n", mods = "SHIFT|CTRL", action = act.ShowLauncher },
-		{ key = "h", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Left" }) },
-		{ key = "j", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Down" }) },
-		{ key = "k", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Up" }) },
-		{ key = "l", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Right" }) },
-		{ key = "H", mods = "CTRL|SHIFT", action = act({ AdjustPaneSize = { "Left", 5 } }) },
-		{ key = "J", mods = "CTRL|SHIFT", action = act({ AdjustPaneSize = { "Down", 5 } }) },
-		{ key = "K", mods = "CTRL|SHIFT", action = act({ AdjustPaneSize = { "Up", 5 } }) },
-		{ key = "L", mods = "CTRL|SHIFT", action = act({ AdjustPaneSize = { "Right", 5 } }) },
+		ss.move("h", "ALT"),
+		ss.move("j", "ALT"),
+		ss.move("k", "ALT"),
+		ss.move("l", "ALT"),
+		ss.resize("h", "SHIFT|ALT"),
+		ss.resize("j", "SHIFT|ALT"),
+		ss.resize("k", "SHIFT|ALT"),
+		ss.resize("l", "SHIFT|ALT"),
 		{
 			key = "h",
 			mods = "CTRL|ALT",

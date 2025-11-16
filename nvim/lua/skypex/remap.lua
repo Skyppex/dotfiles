@@ -33,16 +33,6 @@ xmap("<leader>p", '"_dP')
 nmap("Q", "<nop>")
 nmap("q:", "<nop>")
 
-nmap("<leader>sp", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
-
--- Buffer navigation
-nmap("åb", "<cmd>bprevious<CR>zz")
-nmap("æb", "<cmd>bnext<CR>zz")
-nmap("<leader>b", "<cmd>b#<CR>zz")
-
--- Set highlight on search, but clear on pressing <Esc> in normal mode
-nmap("<Esc>", "<cmd>nohlsearch<CR>")
-
 -- Alias ctrl+c to Esc
 xismap("<C-c>", "<Esc>")
 
@@ -78,17 +68,6 @@ nmap("æD", function()
 	vim.diagnostic.goto_next({ wrap = true })
 end, "Go to next diagnostic")
 
--- Disable arrow keys in normal mode
-nmap("<left>", '<cmd>echo "Use h to move!!"<CR>')
-nmap("<right>", '<cmd>echo "Use l to move!!"<CR>')
-nmap("<up>", '<cmd>echo "Use k to move!!"<CR>')
-nmap("<down>", '<cmd>echo "Use j to move!!"<CR>')
-
-nmap("<C-w>h", "<C-w><C-h>", "Move focus to the left buffer")
-nmap("<C-w>j", "<C-w><C-j>", "Move focus to the lower buffer")
-nmap("<C-w>k", "<C-w><C-k>", "Move focus to the upper buffer")
-nmap("<C-w>l", "<C-w><C-l>", "Move focus to the right buffer")
-
 nmap("<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
 nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
 
@@ -100,33 +79,6 @@ nxomap("gl", "$", "Go to end of line")
 nxomap("_", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
 nxomap("^", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
 nxomap("$", "<cmd>echo 'Use gl to go to end of line!!'<CR>")
-
--- Resize buffers
-local change = 5
-
-nmap("<C-w>+", function()
-	local count = vim.v.count1
-	local current_width = vim.api.nvim_win_get_width(0)
-	vim.api.nvim_win_set_width(0, current_width + change * count)
-end, "Grow buffer horizontal")
-
-nmap("<C-w>-", function()
-	local count = vim.v.count1
-	local current_width = vim.api.nvim_win_get_width(0)
-	vim.api.nvim_win_set_width(0, current_width - change * count)
-end, "Shrink buffer horizontal")
-
-nmap("<C-w>?", function()
-	local count = vim.v.count1
-	local current_height = vim.api.nvim_win_get_height(0)
-	vim.api.nvim_win_set_height(0, current_height + change * count)
-end, "Grow buffer vertical")
-
-nmap("<C-w>_", function()
-	local count = vim.v.count1
-	local current_height = vim.api.nvim_win_get_height(0)
-	vim.api.nvim_win_set_height(0, current_height - change * count)
-end, "Shrink buffer vertical")
 
 -- Macros
 nmap("ø", "@")
