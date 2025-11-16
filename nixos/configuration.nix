@@ -121,6 +121,11 @@
     pulse.enable = true;
   };
 
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
