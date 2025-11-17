@@ -883,3 +883,4 @@ plocate
 mrjone
 samsung
 phl
+tailscale
