@@ -884,3 +884,5 @@ mrjone
 samsung
 phl
 tailscale
+asus
+tek
