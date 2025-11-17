@@ -1,4 +1,5 @@
 (access_modifier) @keyword.modifier
+(shebang) @keyword.directive
 
 [
   "mod"

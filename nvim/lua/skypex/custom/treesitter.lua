@@ -150,6 +150,11 @@ local filetype_map = {
 		commentstring = "//%s",
 	},
 	{
+		shebang = "mage",
+		filetype = "arcana",
+		commentstring = "//%s",
+	},
+	{
 		pattern = "csharp",
 		ext = "cs",
 		filetype = "cs",
@@ -265,6 +270,20 @@ for _, value in ipairs(filetype_map) do
 
 				vim.bo.filetype = value.filetype
 				vim.bo.commentstring = value.commentstring
+			end,
+		})
+	elseif value.shebang then
+		vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+			pattern = "*",
+			callback = function(args)
+				local first_line = vim.api.nvim_buf_get_lines(args.buf, 0, 1, false)[1] or ""
+				if
+					first_line:match("^#!.*[/ ]" .. value.shebang .. "%s*$")
+					or first_line:match("^#!.*[/ ]" .. value.shebang .. '[ %"]')
+				then
+					vim.bo.filetype = value.filetype
+					vim.bo.commentstring = value.commentstring
+				end
 			end,
 		})
 	end
