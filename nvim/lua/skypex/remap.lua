@@ -14,6 +14,12 @@ ximap("<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
 ximap("<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
 ximap("<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
 
+-- Disable arrow keys in normal mode
+nmap("<left>", '<cmd>echo "Use h to move!!"<CR>')
+nmap("<right>", '<cmd>echo "Use l to move!!"<CR>')
+nmap("<up>", '<cmd>echo "Use k to move!!"<CR>')
+nmap("<down>", '<cmd>echo "Use j to move!!"<CR>')
+
 -- Save file
 nmap("<C-s>", "<cmd>wa<CR>")
 
