@@ -238,8 +238,8 @@ local filetype_map = {
 	},
 }
 
-local function apply_real_name_filetype(fname, pattern, replacement, buf, filetype)
-	local real_name = replacement .. fname:sub(#pattern + 1)
+local function apply_real_name_filetype(fname, from, to, buf, filetype)
+	local real_name = to .. fname:sub(#from + 1)
 	local ft_detect = filetype or vim.filetype.match({ filename = real_name, buf = buf }) or ""
 
 	if ft_detect ~= "" then
