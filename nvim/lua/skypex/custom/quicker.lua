@@ -5,13 +5,9 @@ local quicker = require("quicker")
 quicker.setup({})
 
 -- Quickfix list navigation
-nmap("<S-A-k>", "<cmd>cprev<CR>zz")
-nmap("<S-A-j>", "<cmd>cnext<CR>zz")
+nmap("<leader>qk", "<cmd>cprev<CR>zz")
+nmap("<leader>qj", "<cmd>cnext<CR>zz")
 
-nmap("<S-A-t>", function()
+nmap("<leader>tq", function()
 	quicker.toggle()
 end, "Toggle Quickfix List")
-
-nmap("<S-A-q>", function()
-	quicker.close()
-end, "Close Quickfix List")
