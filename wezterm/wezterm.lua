@@ -22,7 +22,7 @@ local theme = {
 	cursor_border = colors.secondary,
 	selection_fg = colors.primary,
 	selection_bg = colors.background2,
-	split = colors.background1,
+	split = colors.primary,
 	ansi = {
 		colors.background0,
 		colors.red,
