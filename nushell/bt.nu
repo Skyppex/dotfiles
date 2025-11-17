@@ -25,7 +25,7 @@ export def connect [
     --discover(-d)
     --trust(-t)
 ]: nothing -> nothing {
-    if ($discover | is-not-empty) {
+    if $discover {
         discover
     }
 
