@@ -21,10 +21,8 @@
       config = {allowUnfree = true;};
     };
     common = common-desktop-tools.lib.${system};
-    appgate = pkgs.callPackage ./appgate.nix {};
     workPackages = with pkgs; [
       dbeaver-bin
-      appgate
     ];
   in {
     lib.${system}.packages = common.packages ++ workPackages;
