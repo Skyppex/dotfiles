@@ -3,8 +3,8 @@
 
 # Things to keep on windows
 {{- if eq .chezmoi.os "windows" }}
-!configstore/
 !autohotkey/
+!configstore/
 !flow-launcher/
 !komorebi/
 !scoop/
@@ -16,26 +16,26 @@
 # Things to keep on linux
 {{- if eq .chezmoi.os "linux" }}
 !.profile
+!flake.nix
 !gh/
 !hypr/
 !mako/
 !mopidy/
 !mpd/
+!nix/
 !quickshell/
 !rofi/
 !set-keyboard-layout.sh
 !systemd/
 !themes/
-!zen-browser/
-!flake.nix
-!nix/
-!nixos/
 !wireplumber/
+!zen-browser/
+!nixos/
 {{- end }}
 
 # Things to keep everywhere
-!.csharpierrc.json
 !.config
+!.csharpierrc.json
 !.gitconfig
 !.ideavimrc
 !.vimrc
