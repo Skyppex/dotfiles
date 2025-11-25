@@ -888,3 +888,5 @@ asus
 tek
 slnx
 nc
+ipv
+eno
