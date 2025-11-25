@@ -5,6 +5,15 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.interfaces.eno1 = {
+    ipv4.addresses = [
+      {
+        address = "169.254.10.1";
+        prefixLength = 16;
+      }
+    ];
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
