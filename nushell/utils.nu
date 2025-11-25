@@ -275,9 +275,9 @@ def --wrapped detach [...command]: nothing -> nothing {
     let input = $in
 
     if ($input | is-empty) {
-        $input | bash -c $"($command | str join ' ') &"
+        $input | bash -c $"($command | str join ' ') >/dev/null 2>&1 &"
     } else {
-        bash -c $"($command | str join ' ') &"
+        bash -c $"($command | str join ' ') >/dev/null 2>&1 &"
     }
 }
 
