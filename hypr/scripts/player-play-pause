@@ -1,0 +1,76 @@
+#!/usr/bin/env nu
+
+const last_played_player = "/tmp/hypr/last-played-player"
+const last_active_player = "/tmp/hypr/last-active-player"
+
+const player_map = [
+    [class player];
+    [zen firefox]
+    [firefox firefox]
+    [Spotify spotify]
+]
+
+const player_map = [
+    [class player];
+    [zen firefox]
+    [firefox firefox]
+    [Spotify spotify]
+]
+
+mkdir /tmp/hypr
+
+let players = playerctl --list-all | lines
+
+let players = $players 
+| each {|it|
+    {
+        name: $it
+        status: (playerctl --player $it status)
+    }
+}
+
+if ($players | get status | any {|it| $it == Playing}) {
+    for $player in ($players | reverse) {
+        if $player.status == Playing {
+            playerctl --player $player.name pause
+            $player.name | save $last_played_player -f
+        }
+    }
+} else {
+    if not ($last_played_player | path exists) {
+        let players = playerctl --list-all
+
+        if ($players | length) == 0 {
+            notify-send "no players available"
+            return
+        }
+
+        if ($players | length) == 1 {
+            playerctl play
+            return
+        }
+
+        if not ($last_active_player | path exists) {
+            playerctl play
+        }
+
+        let last_active_player = open $last_active_player
+        playerctl --player $last_active_player play
+        return
+    }
+
+    mut player = open $last_played_player
+
+    let active_window = hyprctl activewindow -j | from json
+    let active_class = $active_window | get initialClass
+
+    if ($player_map | get class | any {|it| $it == $active_class }) {
+        $player = $player_map 
+        | where class == $active_class 
+        | first 
+        | get player 
+    }
+
+
+    playerctl --player $player play
+}
