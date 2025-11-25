@@ -887,3 +887,4 @@ tailscale
 asus
 tek
 slnx
+nc
