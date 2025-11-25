@@ -16,17 +16,23 @@ nc -U $"($env.XDG_RUNTIME_DIR)/hypr/($env.HYPRLAND_INSTANCE_SIGNATURE)/.socket2.
 | where ($it | str starts-with "activewindowv2")
 | each { |it|
     let active_window = hyprctl activewindow -j | from json
+
+    if ($active_window | is-empty) {
+        return
+    }
+
     let active_class = $active_window | get initialClass
 
     if not ($player_map | get class | any {|it| $it == $active_class }) {
         return
     }
 
-    $player_map 
+    let player = $player_map 
     | where class == $active_class 
     | first 
     | get player 
-    | save $last_active_player_path -f
+
+    $player | save $last_active_player_path -f
 
     return
 }

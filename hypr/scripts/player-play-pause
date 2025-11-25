@@ -38,7 +38,7 @@ if ($players | get status | any {|it| $it == Playing}) {
     }
 } else {
     if not ($last_played_player | path exists) {
-        let players = playerctl --list-all
+        let players = playerctl --list-all | lines
 
         if ($players | length) == 0 {
             notify-send "no players available"
