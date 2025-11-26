@@ -38,8 +38,6 @@ if ($players | get status | any {|it| $it == Playing}) {
     }
 } else {
     if not ($last_played_player | path exists) {
-        let players = playerctl --list-all | lines
-
         if ($players | length) == 0 {
             notify-send "no players available"
             return
@@ -65,12 +63,16 @@ if ($players | get status | any {|it| $it == Playing}) {
     let active_class = $active_window | get initialClass
 
     if ($player_map | get class | any {|it| $it == $active_class }) {
-        $player = $player_map 
+        let mapped_player = $player_map 
         | where class == $active_class 
         | first 
-        | get player 
+        | get player
+
+        if ($players | any {|it| $it.name | str contains $mapped_player}) {
+            $player = $mapped_player
+        }
     }
 
-
+    print -e $player
     playerctl --player $player play
 }
