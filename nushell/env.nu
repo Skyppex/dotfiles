@@ -296,8 +296,6 @@ match [$env.HOSTNAME, $env.OS] {
     }
 }
 
-$env.PROJECTS = $"($env.CODE)/projects"
-
 if ($env.DEV_BIN | is-not-empty) {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $env.DEV_BIN)
 }
@@ -307,4 +305,8 @@ $env.EDITOR = "nvim"
 
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 
-$env.OPENAI_API_KEY = (do -i { skate get openai@api })
+let api_key = (do -i { skate get openai@api | complete })
+
+if $api_key.exit_code == 0 {
+    $env.OPENAI_API_KEY = $api_key.stdout
+}
