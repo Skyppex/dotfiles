@@ -296,7 +296,7 @@ match [$env.HOSTNAME, $env.OS] {
     }
 }
 
-if ($env.DEV_BIN | is-not-empty) {
+if ($env.DEV_BIN? | is-not-empty) {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $env.DEV_BIN)
 }
 
