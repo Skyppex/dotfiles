@@ -10,6 +10,8 @@ add_newline = false
 format = """
 $character\
 $os\
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -30,6 +32,17 @@ Linux = " "
 NixOS = " "
 Ubuntu = " "
 Windows = " "
+
+[username]
+style_user = "fg:#3c3836 bg:prev_bg"
+style_root = "fg:#3c3836 bg:prev_bg"
+format = "[ $user]($style)"
+aliases = { "root" = "command" }
+
+[hostname]
+style = "fg:#3c3836 bg:prev_bg"
+ssh_only = true
+format = "[@$hostname]($style)"
 
 [directory]
 style = "fg:#3c3836 bg:prev_bg"

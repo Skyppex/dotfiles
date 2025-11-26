@@ -38,6 +38,7 @@
       jetbrains-toolbox
       lens
       mako
+      libnotify
       mpc
       mpd
       mpd-mpris
