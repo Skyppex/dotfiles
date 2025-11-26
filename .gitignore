@@ -19,3 +19,4 @@ nushell/history.txt
 mopidy/mopidy.conf
 /.direnv
 /nixos/hardware-configuration.nix
+/nixos/local-*.nix
