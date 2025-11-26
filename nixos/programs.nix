@@ -5,19 +5,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    chezmoi
-    rofi
-    playerctl
-    pavucontrol
-    pamixer
     bluez
     bluez-tools
+    chezmoi
     hyprlock
-    swww
-    protonup-ng
     mangohud
+    pamixer
+    pavucontrol
+    playerctl
+    protonup-ng
+    rofi
+    swww
+    vim
+    wakeonlan
+    wget
     wl-clipboard
   ];
 
