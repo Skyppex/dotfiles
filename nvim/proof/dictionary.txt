@@ -890,3 +890,4 @@ slnx
 nc
 ipv
 eno
+wakeonlan
