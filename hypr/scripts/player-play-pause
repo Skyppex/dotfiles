@@ -10,16 +10,14 @@ const player_map = [
     [Spotify spotify]
 ]
 
-const player_map = [
-    [class player];
-    [zen firefox]
-    [firefox firefox]
-    [Spotify spotify]
-]
-
 mkdir /tmp/hypr
 
 let players = playerctl --list-all | lines
+
+if ($players | length) == 0 {
+    notify-send "no players available"
+    return
+}
 
 let players = $players 
 | each {|it|
@@ -38,11 +36,6 @@ if ($players | get status | any {|it| $it == Playing}) {
     }
 } else {
     if not ($last_played_player | path exists) {
-        if ($players | length) == 0 {
-            notify-send "no players available"
-            return
-        }
-
         if ($players | length) == 1 {
             playerctl play
             return
@@ -73,6 +66,5 @@ if ($players | get status | any {|it| $it == Playing}) {
         }
     }
 
-    print -e $player
     playerctl --player $player play
 }
