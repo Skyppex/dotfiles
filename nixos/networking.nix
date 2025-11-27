@@ -16,7 +16,7 @@
 
   networking.hosts = {
     "169.254.10.2" = ["bunker"];
-    "100.110.67.79" = ["bunker"];
+    "100.110.67.79" = ["bunker-tail"];
   };
 
   # Configure network proxy if necessary

@@ -28,11 +28,12 @@
     homePackages = with pkgs; [
       ani-cli
       ani-skip
-      catt
-      blender
-      logmein-hamachi
-      r2modman
       bitwarden-desktop
+      blender
+      catt
+      logmein-hamachi
+      prismlauncher
+      r2modman
     ];
   in {
     lib.${system}.packages = common.packages ++ homePackages;
