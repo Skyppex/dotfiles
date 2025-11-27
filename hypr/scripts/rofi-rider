@@ -21,7 +21,7 @@ let map = $results
     }
 }
 
-let selected = $map | get stripped | to text | rofi -dmenu -p "select solution"
+let selected = $map | get stripped | to text | rofi -case-smart -dmenu -p "select solution"
 
 if ($selected | is-empty) {
     notify-send "no solution selected"

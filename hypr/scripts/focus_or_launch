@@ -8,7 +8,7 @@ def --wrapped main [focus: string, ...launch] {
         let selected_title = $choices 
         | get title 
         | to text 
-        | rofi -dmenu -p $focus -i -window-title "rofi"
+        | rofi -case-smart -dmenu -p $focus -i -window-title "rofi"
 
         let focused = hyprctl dispatch focuswindow $"title:($selected_title)"
 

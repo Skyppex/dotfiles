@@ -48,7 +48,7 @@ def main [] {
         let selected = $steam_apps 
         | get initialTitle
         | to text
-        | rofi -dmenu -p "games"
+        | rofi -case-smart -dmenu -p "games"
 
         $steam_apps 
         | where ($it.initialTitle == $selected) 

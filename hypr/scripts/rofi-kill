@@ -20,7 +20,7 @@ let input = $processes
 
 let selected = $input 
 | to text 
-| rofi -dmenu -p "kill"
+| rofi -case-smart -dmenu -p "kill"
 
 let parts = $selected | split row " "
 

@@ -14,7 +14,7 @@ def main [
         $config.variant
     }
 
-    let selected = $metadata.variants | to text | rofi -dmenu
+    let selected = $metadata.variants | to text | rofi -case-smart -dmenu
 
     let config = if ($config_option | is-not-empty) {
         $config | update $config_option $selected
