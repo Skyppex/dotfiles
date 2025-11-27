@@ -207,11 +207,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 local utils = require("skypex.utils")
-local nmap = utils.nmap
-local xmap = utils.xmap
+local map = utils.map
 
-nmap("<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
-nmap("<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
+map("n", "<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
+map("n", "<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
 
 local function get_format_func(other)
 	local args = vim.tbl_extend("keep", {
@@ -225,10 +224,10 @@ local function get_format_func(other)
 	end
 end
 
-nmap("<leader>ff", get_format_func(), "Format file")
+map("n", "<leader>ff", get_format_func(), "Format file")
 
 -- Set up the operator mapping
-xmap("<leader>f", get_format_func(), "Format selection")
+map("x", "<leader>f", get_format_func(), "Format selection")
 -- Define your operator function
 local function format_operator(_)
 	local start_line, start_col, end_line, end_col
@@ -250,7 +249,7 @@ local function format_operator(_)
 end
 
 -- Set up the operator mapping
-nmap("<leader>f", function()
+map("n", "<leader>f", function()
 	vim.o.operatorfunc = "v:lua._G.format_operator"
 	return "g@"
 end, "Format file", true)

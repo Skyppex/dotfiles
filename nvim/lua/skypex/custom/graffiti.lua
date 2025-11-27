@@ -1,7 +1,7 @@
 require("graffiti").setup()
 
-local nmap = require("skypex.utils").nmap
-nmap("<leader>Gh", "<cmd>GraffitiHost<cr>", "Host graffiti session")
-nmap("<leader>Gj", "<cmd>GraffitiJoin<cr>", "Join graffiti session")
-nmap("<leader>Gq", "<cmd>GraffitiStop<cr>", "Stop graffiti session")
-nmap("<leader>GQ", "<cmd>GraffitiKill<cr>", "Kill graffiti server")
+local map = require("skypex.utils").map
+map("n", "<leader>Gh", "<cmd>GraffitiHost<cr>", "Host graffiti session")
+map("n", "<leader>Gj", "<cmd>GraffitiJoin<cr>", "Join graffiti session")
+map("n", "<leader>Gq", "<cmd>GraffitiStop<cr>", "Stop graffiti session")
+map("n", "<leader>GQ", "<cmd>GraffitiKill<cr>", "Kill graffiti server")

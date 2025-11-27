@@ -12,9 +12,9 @@ direnv.setup({
 	},
 })
 
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
-nmap("<leader>er", function()
+map("n", "<leader>er", function()
 	local status = direnv.statusline()
 
 	if status == " active" then
@@ -29,7 +29,7 @@ nmap("<leader>er", function()
 	direnv.allow_direnv()
 end, "Load or reload direnv in cwd")
 
-nmap("<leader>ed", function()
+map("n", "<leader>ed", function()
 	direnv.deny_direnv()
 end, "Deny direnv from running in cwd")
 

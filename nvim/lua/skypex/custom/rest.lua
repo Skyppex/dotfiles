@@ -1,4 +1,4 @@
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
 vim.filetype.add({
 	extension = {
@@ -25,15 +25,15 @@ kulala.setup({
 
 local ui = require("kulala.ui")
 
-nmap("<leader>rr", kulala.run, "Run http request")
-nmap("ær", ui.jump_next, "Goto the next request")
-nmap("år", ui.jump_prev, "Goto the previous request")
-nmap("<leader>rb", ui.show_body, "Show response body")
-nmap("<leader>rv", ui.show_verbose, "Show verbose response body")
-nmap("<leader>rh", ui.show_headers_body, "Show headers")
-nmap("<leader>rj", ui.show_next, "Show next request")
-nmap("<leader>rk", ui.show_previous, "Show previous request")
-nmap("<leader>ri", ui.inspect, "Inspect last request")
-nmap("<leader>rs", ui.show_stats, "Show stats for last request")
-nmap("<leader>re", kulala.set_selected_env, "Set selected environment")
-nmap("<leader>tr", ui.toggle_headers, "Toggle headers view")
+map("n", "<leader>rr", kulala.run, "Run http request")
+map("n", "ær", ui.jump_next, "Goto the next request")
+map("n", "år", ui.jump_prev, "Goto the previous request")
+map("n", "<leader>rb", ui.show_body, "Show response body")
+map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
+map("n", "<leader>rh", ui.show_headers_body, "Show headers")
+map("n", "<leader>rj", ui.show_next, "Show next request")
+map("n", "<leader>rk", ui.show_previous, "Show previous request")
+map("n", "<leader>ri", ui.inspect, "Inspect last request")
+map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
+map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
+map("n", "<leader>tr", ui.toggle_headers, "Toggle headers view")

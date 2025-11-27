@@ -20,7 +20,7 @@ local lint = require("lint")
 
 lint.linters_by_ft = linters_by_ft
 
-require("skypex.utils").nmap("<leader>l", function()
+require("skypex.utils").map("n", "<leader>l", function()
 	lint.try_lint()
 end, "Lint current file")
 

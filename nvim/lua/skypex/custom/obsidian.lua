@@ -68,7 +68,7 @@ obsidian.setup({
 vim.api.nvim_create_autocmd("User", {
 	pattern = "ObsidianNoteEnter",
 	callback = function(ev)
-		utils.nmap("gd", "<cmd>Obsidian follow_link<cr>", "Open note under cursor", nil, ev.buf)
-		utils.nmap("<leader>tc", "<cmd>Obsidian toggle_checkbox<cr>", "Open note under cursor", nil, ev.buf)
+		utils.map("n", "gd", "<cmd>Obsidian follow_link<cr>", "Open note under cursor", nil, ev.buf)
+		utils.map("n", "<leader>tc", "<cmd>Obsidian toggle_checkbox<cr>", "Open note under cursor", nil, ev.buf)
 	end,
 })

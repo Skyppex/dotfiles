@@ -54,24 +54,24 @@ pcall(telescope.load_extension, "fzf")
 -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
 
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
-nmap("<leader>sh", builtin.help_tags, "Search Help")
-nmap("<leader>sk", builtin.keymaps, "Search Keymaps")
-nmap("<leader>sf", function()
+map("n", "<leader>sh", builtin.help_tags, "Search Help")
+map("n", "<leader>sk", builtin.keymaps, "Search Keymaps")
+map("n", "<leader>sf", function()
 	builtin.git_files({ show_untracked = true })
 end, "Search Git Files")
-nmap("<leader>sc", builtin.colorscheme, "Search Colorschemes")
-nmap("<leader>st", builtin.builtin, "Search Telescope builtin")
-nmap("<leader>sd", builtin.diagnostics, "Search Diagnostics")
-nmap("<leader>sr", builtin.resume, "Search Resume")
-nmap("<leader>sb", builtin.buffers, "Search existing Buffers")
+map("n", "<leader>sc", builtin.colorscheme, "Search Colorschemes")
+map("n", "<leader>st", builtin.builtin, "Search Telescope builtin")
+map("n", "<leader>sd", builtin.diagnostics, "Search Diagnostics")
+map("n", "<leader>sr", builtin.resume, "Search Resume")
+map("n", "<leader>sb", builtin.buffers, "Search existing Buffers")
 
-nmap("<C-p>", function()
+map("n", "<C-p>", function()
 	builtin.find_files({ path_display = { "absolute" } })
 end, "Search Files")
 
-nmap("<leader>sg", function()
+map("n", "<leader>sg", function()
 	local git_dir = vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
 	git_dir = string.gsub(git_dir, "\n", "") -- remove newline character from git_dir
 
@@ -83,7 +83,7 @@ nmap("<leader>sg", function()
 end, "Search Git files by grep")
 
 -- Slightly advanced example of overriding default behavior and theme
-nmap("<leader>/", function()
+map("n", "<leader>/", function()
 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 		winblend = 10,
@@ -93,7 +93,7 @@ end, "[/] Fuzzily search in current buffer")
 
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
-nmap("<leader>s/", function()
+map("n", "<leader>s/", function()
 	builtin.live_grep({
 		grep_open_files = true,
 		prompt_title = "Live Grep in Open Files",

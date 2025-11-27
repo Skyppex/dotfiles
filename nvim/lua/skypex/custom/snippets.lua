@@ -1,4 +1,4 @@
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 local ls = require("luasnip")
 local s, t, i, c = ls.snippet, ls.text_node, ls.insert_node, ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -128,7 +128,7 @@ end
 M.telescope = function()
 	require("telescope").load_extension("luasnip")
 
-	nmap("<leader>sn", "<cmd>Telescope luasnip<CR>", "Search Snippets")
+	map("n", "<leader>sn", "<cmd>Telescope luasnip<CR>", "Search Snippets")
 end
 
 M.luasnip = function()
@@ -143,7 +143,7 @@ M.luasnip = function()
 	cs_snippets()
 	nix_snippets()
 
-	nmap("<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
+	map("n", "<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
 end
 
 M.all = function()

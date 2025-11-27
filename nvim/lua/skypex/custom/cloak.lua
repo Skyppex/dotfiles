@@ -35,9 +35,9 @@ cloak.setup({
 	},
 })
 
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
-nmap("<leader>tc", "<cmd>CloakToggle<cr>", "Toggle cloak")
+map("n", "<leader>tc", "<cmd>CloakToggle<cr>", "Toggle cloak")
 
 local function disable_cloak_preview_line(buf)
 	-- turn off; delete autocmd group and unset flag
@@ -81,4 +81,4 @@ local function toggle_cloak_preview_line()
 	end
 end
 
-nmap("<leader>tC", toggle_cloak_preview_line, "Toggle cloak line-follow preview")
+map("n", "<leader>tC", toggle_cloak_preview_line, "Toggle cloak line-follow preview")

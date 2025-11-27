@@ -4,48 +4,48 @@ M.dap = function()
 	local dap = require("dap")
 	dap.set_log_level("TRACE")
 
-	local nmap = require("skypex.utils").nmap
-	nmap("<leader>dr", function()
+	local map = require("skypex.utils").map
+	map("n", "<leader>dr", function()
 		dap.continue()
 	end, "Continue")
 
-	nmap("<leader>dl", function()
+	map("n", "<leader>dl", function()
 		dap.step_over()
 	end, "Step Over")
 
-	nmap("<leader>dj", function()
+	map("n", "<leader>dj", function()
 		dap.step_into()
 	end, "Step Into")
 
-	nmap("<leader>dk", function()
+	map("n", "<leader>dk", function()
 		dap.step_out()
 	end, "Step Out")
 
-	nmap("<leader>db", function()
+	map("n", "<leader>db", function()
 		dap.toggle_breakpoint()
 	end, "Toggle Breakpoint")
 
-	nmap("<leader>dB", function()
+	map("n", "<leader>dB", function()
 		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 	end, "Set Breakpoint")
 
-	nmap("<leader>dp", function()
+	map("n", "<leader>dp", function()
 		dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 	end, "Log Point")
 
-	nmap("<leader>ds", function()
+	map("n", "<leader>ds", function()
 		dap.terminate()
 	end, "Terminate")
 
-	nmap("<leader>do", function()
+	map("n", "<leader>do", function()
 		dap.repl.open()
 	end, "Open REPL")
 
-	nmap("<leader>dh", function()
+	map("n", "<leader>dh", function()
 		dap.run_last()
 	end, "Run Last")
 
-	nmap("<leader>dt", function()
+	map("n", "<leader>dt", function()
 		vim.cmd("RustLsp testables")
 	end, "Test")
 end

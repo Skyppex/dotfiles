@@ -97,7 +97,7 @@ M.oil = function()
 	})
 
 	local utils = require("skypex.utils")
-	utils.nmap("<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
+	utils.map("n", "<leader>v", "<cmd>Oil<CR>", "Toggle file explorer")
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "OilActionsPost",

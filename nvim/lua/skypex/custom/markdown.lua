@@ -32,4 +32,4 @@ rmd.setup({
 	},
 })
 
-require("skypex.utils").nmap("<leader>mp", rmd.toggle, "Preview Markdown")
+require("skypex.utils").map("n", "<leader>mp", rmd.toggle, "Preview Markdown")

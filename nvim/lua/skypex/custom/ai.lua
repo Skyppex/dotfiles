@@ -112,21 +112,20 @@ mcphub.setup({
 	},
 })
 
-local utils = require("skypex.utils")
-local nmap = utils.nmap
+local map = utils.map
 
-nmap("<leader>ac", function()
+map("n", "<leader>ac", function()
 	cc.chat()
 end, "Start a new conversation with AI")
 
-nmap("<leader>ta", function()
+map("n", "<leader>ta", function()
 	cc.toggle()
 end, "Toggle AI panel")
 
-nmap("<leader>ay", function()
+map("n", "<leader>ay", function()
 	cc.accept_change()
 end, "Accept AI suggestion")
 
-nmap("<leader>an", function()
+map("n", "<leader>an", function()
 	cc.reject_change()
 end, "Reject AI suggestion")

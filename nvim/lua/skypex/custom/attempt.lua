@@ -135,15 +135,14 @@ attempt.setup({
 require("telescope").load_extension("attempt")
 
 local utils = require("skypex.utils")
-local nmap = utils.nmap
-local xmap = utils.xmap
+local map = utils.map
 
-nmap("<leader>AN", attempt.new_select, "New Attempt")
-nmap("<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
-nmap("<leader>AR", attempt.run, "Run Attempt")
-nmap("<leader>AD", attempt.delete_buf, "Delete Attempt")
-nmap("<leader>AC", attempt.rename_buf, "Rename Attempt")
-nmap("<leader>AS", "<cmd>Telescope attempt<CR>", "Search Attempts")
+map("n", "<leader>AN", attempt.new_select, "New Attempt")
+map("n", "<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
+map("n", "<leader>AR", attempt.run, "Run Attempt")
+map("n", "<leader>AD", attempt.delete_buf, "Delete Attempt")
+map("n", "<leader>AC", attempt.rename_buf, "Rename Attempt")
+map("n", "<leader>AS", "<cmd>Telescope attempt<CR>", "Search Attempts")
 
 local function get_visual_selection(start_pos, end_pos)
 	local lines = vim.fn.getline(start_pos[2], end_pos[2])
@@ -240,4 +239,4 @@ local function run_inline_attempt()
 	end)
 end
 
-xmap("<leader>AR", run_inline_attempt, "Run Selection as Attempt")
+map("x", "<leader>AR", run_inline_attempt, "Run Selection as Attempt")

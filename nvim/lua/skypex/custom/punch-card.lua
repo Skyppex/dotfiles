@@ -1,4 +1,4 @@
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
 --- @type PunchCard
 local punch_card = require("punch-card")
@@ -40,12 +40,12 @@ local opts = {
 			end
 
 			-- add buf-local binds to save and close
-			nmap("q", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
-			nmap("<esc>", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
+			map("n", "q", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
+			map("n", "<esc>", punch_card.save_and_close, "Save and close punch-card editor", nil, buf)
 		end,
 	},
 }
 
 punch_card.setup(opts)
 
-nmap("<leader>R", punch_card.open, "Open punch-card editor")
+map("n", "<leader>R", punch_card.open, "Open punch-card editor")

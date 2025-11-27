@@ -54,9 +54,9 @@ local function set_fidget_log_level(level)
 	vim.notify("Set log level to " .. level, vim.log.levels.INFO .. " for fidget and LSP")
 end
 
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
-nmap("<leader>tl", function()
+map("n", "<leader>tl", function()
 	pickers
 		.new({}, {
 			prompt_title = "Select Fidget Log Level",
@@ -76,4 +76,4 @@ nmap("<leader>tl", function()
 		:find()
 end, "Set fidget log level")
 
-nmap("<leader>om", "<cmd>Fidget history<CR>", "Open messages")
+map("n", "<leader>om", "<cmd>Fidget history<CR>", "Open messages")

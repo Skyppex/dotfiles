@@ -106,7 +106,7 @@ require("nvim-treesitter.configs").setup({
 --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 local utils = require("skypex.utils")
-utils.nmap("<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
+utils.map("n", "<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
 local function add_arcana()

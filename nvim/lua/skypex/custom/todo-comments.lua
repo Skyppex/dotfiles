@@ -1,7 +1,7 @@
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
 require("todo-comments").setup({
 	signs = false,
 })
 
-nmap("<leader>sl", "<cmd>TodoTelescope<CR>", "Search Todo Comments")
+map("n", "<leader>sl", "<cmd>TodoTelescope<CR>", "Search Todo Comments")

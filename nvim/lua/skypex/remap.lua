@@ -1,46 +1,41 @@
 local utils = require("skypex.utils")
-local nmap = utils.nmap
-local xmap = utils.xmap
-local nxmap = utils.nxmap
-local nxomap = utils.nxomap
-local ximap = utils.ximap
-local xismap = utils.xismap
+local map = utils.map
 
-nmap("<leader>v", vim.cmd.Ex)
+map("n", "<leader>v", vim.cmd.Ex)
 
 -- TIP: Disable arrow keys in insert mode and x mode
-ximap("<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
-ximap("<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
-ximap("<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
-ximap("<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
+map("xi", "<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
+map("xi", "<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
+map("xi", "<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
+map("xi", "<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
 
 -- Disable arrow keys in normal mode
-nmap("<left>", '<cmd>echo "Use h to move!!"<CR>')
-nmap("<right>", '<cmd>echo "Use l to move!!"<CR>')
-nmap("<up>", '<cmd>echo "Use k to move!!"<CR>')
-nmap("<down>", '<cmd>echo "Use j to move!!"<CR>')
+map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Save file
-nmap("<C-s>", "<cmd>wa<CR>")
+map("n", "<C-s>", "<cmd>wa<CR>")
 
 -- Move lines of code in visual mode
-xmap("K", ":m '<-2<cr><cmd>normal! gv=gv<cr>")
-xmap("J", ":m '>+1<cr><cmd>normal! gv=gv<cr>")
+map("x", "K", ":m '<-2<cr><cmd>normal! gv=gv<cr>")
+map("x", "J", ":m '>+1<cr><cmd>normal! gv=gv<cr>")
 
-nmap("J", "mzJ`z")
-nmap("<C-d>", "<C-d>zz")
-nmap("<C-u>", "<C-u>zz")
-nmap("n", "nzz")
-nmap("N", "Nzz")
+map("n", "J", "mzJ`z")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzz")
+map("n", "N", "Nzz")
 
-xmap("<leader>p", '"_dP')
+map("x", "<leader>p", '"_dP')
 
 -- Just don't do this apparently'
-nmap("Q", "<nop>")
-nmap("q:", "<nop>")
+map("n", "Q", "<nop>")
+map("n", "q:", "<nop>")
 
 -- Alias ctrl+c to Esc
-xismap("<C-c>", "<Esc>")
+map("xis", "<C-c>", "<Esc>")
 
 -- Diagnostic keymaps
 local function jump_to_diagnostic(direction)
@@ -58,50 +53,50 @@ local function jump_to_diagnostic(direction)
 	direction({ severity = diagnostics[1].severity })
 end
 
-nmap("åd", function()
+map("n", "åd", function()
 	jump_to_diagnostic(vim.diagnostic.goto_prev)
 end, "Go to previous diagnostic by severity")
 
-nmap("æd", function()
+map("n", "æd", function()
 	jump_to_diagnostic(vim.diagnostic.goto_next)
 end, "Go to next diagnostic by severity")
 
-nmap("åD", function()
+map("n", "åD", function()
 	vim.diagnostic.goto_prev({ wrap = true })
 end, "Go to previous diagnostic")
 
-nmap("æD", function()
+map("n", "æD", function()
 	vim.diagnostic.goto_next({ wrap = true })
 end, "Go to next diagnostic")
 
-nmap("<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
-nmap("<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
+map("n", "<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
+map("n", "<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
 
-nmap("<C-w>,", "<C-w>s", "Split buffer below")
-nmap("<C-w>.", "<C-w>v", "Split buffer right")
+map("n", "<C-w>,", "<C-w>s", "Split buffer below")
+map("n", "<C-w>.", "<C-w>v", "Split buffer right")
 
-nxomap("gh", "^", "Go to start of line")
-nxomap("gl", "$", "Go to end of line")
-nxomap("_", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
-nxomap("^", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
-nxomap("$", "<cmd>echo 'Use gl to go to end of line!!'<CR>")
+map("nxo", "gh", "^", "Go to start of line")
+map("nxo", "gl", "$", "Go to end of line")
+map("nxo", "_", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
+map("nxo", "^", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
+map("nxo", "$", "<cmd>echo 'Use gl to go to end of line!!'<CR>")
 
 -- Macros
-nmap("ø", "@")
-nmap("øø", "@@")
+map("n", "ø", "@")
+map("n", "øø", "@@")
 
 -- Registers
-nxmap("'", '"')
+map("nx", "'", '"')
 
 -- Indent in visual mode stays in visual mode
-xmap("<", "<gv")
-xmap(">", ">gv")
+map("x", "<", "<gv")
+map("x", ">", ">gv")
 
 -- Redo
-nmap("U", "<C-r>", "Redo")
+map("n", "U", "<C-r>", "Redo")
 
 -- Newline before .
-nmap("<leader>.", function()
+map("n", "<leader>.", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
 		local keys = vim.api.nvim_replace_termcodes("f.i<CR><Esc>l==", true, true, true)
@@ -110,7 +105,7 @@ nmap("<leader>.", function()
 end)
 
 -- Newline before :
-nmap("<leader>:", function()
+map("n", "<leader>:", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
 		local keys = vim.api.nvim_replace_termcodes("f:i<CR><Esc>l==", true, true, true)
@@ -119,7 +114,7 @@ nmap("<leader>:", function()
 end)
 
 -- Newline after ,
-nmap("<leader>,", function()
+map("n", "<leader>,", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
 		local keys = vim.api.nvim_replace_termcodes("f,a<CR><Esc>l==", true, true, true)
@@ -128,7 +123,7 @@ nmap("<leader>,", function()
 end)
 
 -- Newline before |
-nmap("<leader>|", function()
+map("n", "<leader>|", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
 		local keys = vim.api.nvim_replace_termcodes("f|i<CR><Esc>l==", true, true, true)
@@ -137,48 +132,48 @@ nmap("<leader>|", function()
 end)
 
 -- Disable jump list for some motions
-nxmap("{", function()
+map("nx", "{", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "{"')
 end)
 
-nxmap("}", function()
+map("nx", "}", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "}"')
 end)
 
-nxmap("(", function()
+map("nx", "(", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. "("')
 end)
 
-nxmap(")", function()
+map("nx", ")", function()
 	vim.cmd('execute "keepjumps norm! " .. v:count1 .. ")"')
 end)
 
 vim.opt.relativenumber = true
 
-nxmap("<leader>tr", function()
+map("nx", "<leader>tr", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end, "Toggle relative line numbers")
 
 -- Increment and decrement numbers
-nxmap("+", "<C-a>", "Increment number")
-nxmap("-", "<C-x>", "Decrement number")
+map("nx", "+", "<C-a>", "Increment number")
+map("nx", "-", "<C-x>", "Decrement number")
 
 -- System clipboard
-nxmap("<leader>y", '"+y', "Yank to system clipboard")
-nxmap("<leader>p", '"+p', "Paste from system clipboard")
-nxmap("<leader>d", '"+d', "Cut to system clipboard")
+map("nx", "<leader>y", '"+y', "Yank to system clipboard")
+map("nx", "<leader>p", '"+p', "Paste from system clipboard")
+map("nx", "<leader>d", '"+d', "Cut to system clipboard")
 
 -- Diff mode
-nmap("<leader>Do", "<cmd>windo diffthis<CR>", "Diff buffers")
-nmap("<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
+map("n", "<leader>Do", "<cmd>windo diffthis<CR>", "Diff buffers")
+map("n", "<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
 
 -- inspect highlight
-nmap("<leader>ih", function()
+map("n", "<leader>ih", function()
 	vim.notify(vim.inspect(vim.treesitter.get_captures_at_cursor(0)))
 end)
 
 -- Source config
-nmap("<leader><leader>c", function()
+map("n", "<leader><leader>c", function()
 	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/custom/*.lua", true, true)
 
 	local loaded = 0

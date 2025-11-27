@@ -5,4 +5,4 @@ else
 	vim.g.undotree_DiffCommand = "diff"
 end
 
-utils.nmap("<leader>u", vim.cmd.UndotreeToggle, "Toggle Undo Tree")
+utils.map("n", "<leader>u", vim.cmd.UndotreeToggle, "Toggle Undo Tree")

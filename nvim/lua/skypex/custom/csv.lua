@@ -38,6 +38,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
-nmap("<leader>tv", "<cmd>CsvViewToggle<cr>", "Toggle columnar view")
+map("n", "<leader>tv", "<cmd>CsvViewToggle<cr>", "Toggle columnar view")

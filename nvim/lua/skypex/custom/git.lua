@@ -1,15 +1,15 @@
-local nmap = require("skypex.utils").nmap
+local map = require("skypex.utils").map
 
 local M = {}
 
 M.fugitive = function()
-	nmap("<leader>gs", vim.cmd.Git, "Git Status")
+	map("n", "<leader>gs", vim.cmd.Git, "Git Status")
 
-	nmap("<leader>gl", function()
+	map("n", "<leader>gl", function()
 		vim.cmd("Git log")
 	end, "Git Log")
 
-	nmap("<leader>gB", function()
+	map("n", "<leader>gB", function()
 		vim.cmd("Git blame")
 	end, "Git Blame")
 end
@@ -26,10 +26,10 @@ M.conflict = function()
 		},
 	})
 
-	nmap("<leader>gc", "<cmd>GitConflictRefresh<CR>", "Git Conflict Refresh")
-	nmap("<leader>gq", "<cmd>GitConflictListQf<CR>", "Git Conflict Quickfix")
-	nmap("åG", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
-	nmap("æG", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
+	map("n", "<leader>gc", "<cmd>GitConflictRefresh<CR>", "Git Conflict Refresh")
+	map("n", "<leader>gq", "<cmd>GitConflictListQf<CR>", "Git Conflict Quickfix")
+	map("n", "åG", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
+	map("n", "æG", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "GitConflictDetected",
@@ -76,17 +76,17 @@ M.gitsigns = function()
 			ignore_whitespace = true,
 		},
 		preview_config = {
-			border = "rounded"
+			border = "rounded",
 		},
 	})
 
-	nmap("åg", "<cmd>Gitsigns nav_hunk prev<CR>zz", "Previous Git Hunk")
-	nmap("æg", "<cmd>Gitsigns nav_hunk next<CR>zz", "Next Git Hunk")
-	nmap("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset Hunk")
-	nmap("<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
-	nmap("<leader>gg", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage Hunk")
-	nmap("<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", "Git Undo Staged Hunk")
-	nmap("<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git Blame Line")
+	map("n", "åg", "<cmd>Gitsigns nav_hunk prev<CR>zz", "Previous Git Hunk")
+	map("n", "æg", "<cmd>Gitsigns nav_hunk next<CR>zz", "Next Git Hunk")
+	map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset Hunk")
+	map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
+	map("n", "<leader>gg", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage Hunk")
+	map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", "Git Undo Staged Hunk")
+	map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git Blame Line")
 end
 
 M.cmd = function()
@@ -105,7 +105,7 @@ M.cmd = function()
 		bang = false,
 	})
 
-	nmap("<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
+	map("n", "<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
 end
 
 M.all = function()

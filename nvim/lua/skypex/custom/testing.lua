@@ -29,28 +29,28 @@
 -- 	},
 -- })
 --
--- local nmap = require("skypex.utils").nmap
+-- local map = require("skypex.utils").map
 --
--- nmap("<leader>nr", function()
+-- map("n", "<leader>nr", function()
 -- 	nt.run.run()
 -- end, "Run the nearest test")
 --
--- nmap("<leader>nl", function()
+-- map("n", "<leader>nl", function()
 -- 	nt.run.run_last()
 -- end, "Run the last test")
 --
--- nmap("<leader>nf", function()
+-- map("n", "<leader>nf", function()
 -- 	nt.run.run(vim.fn.expand("%"))
 -- end, "Run all tests in the file")
 --
--- nmap("<leader>nd", function()
+-- map("n", "<leader>nd", function()
 -- 	nt.run.run({ strategy = "dap" })
 -- end, "Debug current test")
 --
--- nmap("<leader>nq", function()
+-- map("n", "<leader>nq", function()
 -- 	nt.run.stop()
 -- end, "Terminate tests")
 --
--- nmap("<leader>tn", function()
+-- map("n", "<leader>tn", function()
 -- 	nt.summary.toggle()
 -- end, "Toggle tests summary")
