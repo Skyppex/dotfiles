@@ -894,3 +894,4 @@ wakeonlan
 nxsomap
 minecraft
 prismlauncher
+nxiso
