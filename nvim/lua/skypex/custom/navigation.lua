@@ -7,17 +7,6 @@ ss.setup({
 
 local map = require("skypex.utils").map
 
--- Disable arrow keys in normal mode
-map("nxso", "<c-w>h", '<cmd>echo "Use alt-h to move!!"<CR>')
-map("nxso", "<c-w>j", '<cmd>echo "Use alt-j to move!!"<CR>')
-map("nxso", "<c-w>k", '<cmd>echo "Use alt-k to move!!"<CR>')
-map("nxso", "<c-w>l", '<cmd>echo "Use alt-l to move!!"<CR>')
-
-map("nxso", "<c-w><c-h>", '<cmd>echo "Use alt-h to move!!"<CR>')
-map("nxso", "<c-w><c-j>", '<cmd>echo "Use alt-j to move!!"<CR>')
-map("nxso", "<c-w><c-k>", '<cmd>echo "Use alt-k to move!!"<CR>')
-map("nxso", "<c-w><c-l>", '<cmd>echo "Use alt-l to move!!"<CR>')
-
 map("nxiso", "<a-h>", ss.move_cursor_left, "Move focus to the left buffer")
 map("nxiso", "<a-j>", ss.move_cursor_down, "Move focus to the lower buffer")
 map("nxiso", "<a-k>", ss.move_cursor_up, "Move focus to the upper buffer")
