@@ -52,9 +52,9 @@ def select-project [
     let options = $in
 
     let selected = if $multi {
-        $options | get type | to text | fzf --multi -0 -1
+        $options | get type | to text | fzf --multi --height 40% --layout reverse -0 -1
     } else {
-        $options | get type | to text | fzf -0 -1
+        $options | get type | to text | fzf --height 40% --layout reverse -0 -1
     }
 
     if ($selected | is-empty) {
