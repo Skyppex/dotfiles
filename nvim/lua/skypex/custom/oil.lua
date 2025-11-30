@@ -42,20 +42,84 @@ local function get_root_namespace(filename)
 	end
 end
 
-local function insert_namespace_in_cs_file(filename)
+local function insert_namespace_and_class_in_cs_file(filename)
 	local namespace = get_root_namespace(filename)
 
 	if namespace == "" then
 		return
 	end
 
+	local basename = vim.fn.fnamemodify(filename, ":t:r")
+
 	local file = io.open(filename, "w")
 
 	if file then
-		file:write("namespace " .. namespace:gsub("/", ".") .. ";\n\n")
+		file:write(
+			"namespace " .. namespace:gsub("/", ".") .. ";\n\n" .. "public sealed class " .. basename .. "\n{\n\n}\n"
+		)
 		file:close()
 	end
 end
+
+local function insert_flake(filepath)
+	local file = io.open(filepath, "w")
+
+	if file then
+		file:write([[
+{
+  description = "";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    ...
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      devShells.default = pkgs.mkShell {
+        packages = [];
+      };
+    });
+}
+]])
+		file:close()
+	end
+end
+
+local function insert_nix_function(filepath)
+	local file = io.open(filepath, "w")
+
+	if file then
+		file:write([[
+{ pkgs, ... }: {
+
+}
+]])
+		file:close()
+	end
+end
+
+local on_create = {
+	{
+		pattern = "%.cs$",
+		action = insert_namespace_and_class_in_cs_file,
+	},
+	{
+		pattern = "flake%.nix$",
+		action = insert_flake,
+	},
+	{
+		pattern = "%.nix$",
+		action = insert_nix_function,
+	},
+}
 
 M.oil = function()
 	require("oil").setup({
@@ -119,11 +183,13 @@ M.oil = function()
 					path = path:sub(1, 1) .. ":" .. path:sub(2)
 				end
 
-				if not path:match("%.cs$") then
-					goto continue
+				for _, v in ipairs(on_create) do
+					if path:match(v.pattern) then
+						v.action(path)
+						goto continue
+					end
 				end
 
-				insert_namespace_in_cs_file(path)
 				::continue::
 			end
 		end,
