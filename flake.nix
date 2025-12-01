@@ -44,7 +44,7 @@
           yamllint
           tombi
           jq
-          nodePackages.jsonlint
+          vscode-json-languageserver
           xmlformat
           markdownlint-cli
           shellcheck

@@ -218,6 +218,36 @@ local servers = {
 			end,
 		},
 	},
+	json_ls = {
+		cmd = { "vscode-json-languageserver", "--stdio" },
+		filetypes = { "json", "jsonc" },
+		capabilities = capabilities,
+		settings = {
+			json = {
+				-- Enable/disable JSON validation (default: true)
+				validate = { enable = true },
+				-- Enable/disable JSON formatting (default: true)
+				format = { enable = false },
+				-- Allow schema fetching from http/https locations (default: true)
+				schemaDownload = { enable = true },
+				-- Define specific schemas for files (e.g., your project's package.json)
+				schemas = {
+					-- Example of associating a schema from SchemaStore.org
+					{
+						fileMatch = { "package.json" },
+						url = "json.schemastore.org",
+					},
+					-- You can also use a local path to a schema file
+					-- {
+					--   fileMatch = {"my-config.json"},
+					--   url = "file:///path/to/your/schema.json"
+					-- },
+				},
+				-- Set trace level ("off", "messages", "verbose")
+				trace = { server = "off" },
+			},
+		},
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -323,7 +353,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local no_config_servers = {}
-local no_install_servers = { "nushell", "kulala_ls" }
+local no_install_servers = { "nushell", "kulala_ls", "json_ls" }
 local configs = require("lspconfig.configs")
 
 setup_proof(lspconfig, configs)
@@ -379,7 +409,7 @@ for server_name, config in pairs(servers) do
 	-- by the server configuration above. Useful when disabling
 	-- certain features of an LSP (for example, turning off formatting for tsserver)
 	config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
-	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, handlers, config.handlers or {})
+	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, config.handlers or {})
 
 	vim.lsp.config(server_name, config)
 	vim.lsp.enable(server_name)
