@@ -43,17 +43,6 @@ end
 
 vim.lsp.set_log_level("OFF")
 
--- Alter hover style
-local handlers = {
-	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
-	}),
-
-	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "rounded",
-	}),
-}
-
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
 --  By default, Neovim doesn't support everything that is in the LSP specification.
