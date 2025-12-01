@@ -12,7 +12,7 @@ local linters_by_ft = {
 	bash = { "shellcheck" },
 	kotlin = { "ktlint" },
 	python = { "ruff" },
-	-- markdown = { "markdownlint" },
+	markdown = { "markdownlint" },
 }
 
 local lint = require("lint")
