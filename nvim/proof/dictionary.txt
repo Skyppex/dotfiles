@@ -897,3 +897,8 @@ prismlauncher
 nxiso
 rl
 skyloom
+languageserver
+qmll
+gcl
+winborder
+panicf
