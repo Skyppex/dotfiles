@@ -193,7 +193,7 @@ local servers = {
 	},
 	qmlls = {
 		handlers = {
-			["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+			["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
 				if result then
 					local filtered = {}
 					for _, d in ipairs(result.diagnostics) do
@@ -288,7 +288,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		if client then
 			local server = servers[client.name]
-			local gd_exists, rhs = require("skypex.utils").local_keymap_exists(event.buf, "n", "gd")
+			local gd_exists, _ = require("skypex.utils").local_keymap_exists(event.buf, "n", "gd")
 
 			if server and server.override_gd then
 				server.override_gd(event.buf)

@@ -118,7 +118,6 @@ require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })
 
----@param bufnr integer
 conform.setup({
 	notify_on_error = true,
 	async = true,
