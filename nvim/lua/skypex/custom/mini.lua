@@ -58,3 +58,7 @@ require("mini.surround").setup({
 		update_n_lines = "",
 	},
 })
+
+local map = require("skypex.utils").map
+
+map("n", "gcc", '<cmd>echo "use gcl to comment out a line"<cr>')
