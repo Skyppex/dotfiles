@@ -84,7 +84,7 @@ local function insert_flake(filepath)
       pkgs = import nixpkgs {inherit system;};
     in {
       devShells.default = pkgs.mkShell {
-        packages = [];
+        packages = with pkgs; [];
       };
     });
 }

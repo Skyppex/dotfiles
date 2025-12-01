@@ -77,7 +77,7 @@ local flake_snippet = t({
 	"      #};",
 	"",
 	"      devShells.default = pkgs.mkShell {",
-	"        packages = [",
+	"        packages = with pkgs; [",
 	"          #toolchain",
 	"        ];",
 	'        #env.RUST_SRC_PATH = "${toolchain}/lib/rustlib/src/rust/library";',
