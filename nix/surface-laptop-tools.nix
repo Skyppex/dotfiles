@@ -1,0 +1,27 @@
+{pkgsUnfree}:
+with pkgsUnfree; [
+  ani-cli
+  ani-skip
+  catt
+  logmein-hamachi
+  bluetuith
+  cliphist
+  discord
+  gimp
+  grim
+  grimblast
+  hyprpicker
+  hypridle
+  mako
+  mpv
+  mpvpaper
+  neovim
+  noto-fonts-emoji
+  obsidian
+  quickshell
+  slack
+  slurp
+  spotify
+  thunderbird
+  wezterm
+]

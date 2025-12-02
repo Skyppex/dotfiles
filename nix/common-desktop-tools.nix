@@ -1,0 +1,37 @@
+{pkgsUnfree}:
+with pkgsUnfree; [
+  bluetuith
+  cliphist
+  dbeaver-bin
+  discord
+  gimp
+  grim
+  grimblast
+  gst_all_1.gst-plugins-rs
+  gst_all_1.gstreamer
+  hypridle
+  hyprpicker
+  inkscape
+  jetbrains-toolbox
+  lens
+  mako
+  libnotify
+  mpc
+  mpd
+  mpd-mpris
+  mpv
+  mpvpaper
+  neovim
+  noto-fonts
+  noto-fonts-cjk-sans
+  noto-fonts-color-emoji
+  nerd-fonts.jetbrains-mono
+  obsidian
+  quickshell
+  rmpc
+  rofi
+  slack
+  slurp
+  spotify
+  wezterm
+]
