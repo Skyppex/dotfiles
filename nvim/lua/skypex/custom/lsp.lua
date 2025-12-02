@@ -341,7 +341,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local no_config_servers = {}
+local no_config_servers = { "rust-analyzer" }
 local no_install_servers = { "nushell", "kulala_ls", "json_ls" }
 local configs = require("lspconfig.configs")
 
