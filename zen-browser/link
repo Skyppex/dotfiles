@@ -1,0 +1,31 @@
+#!/usr/bin/env nu
+
+def main [
+    --dry-run(-d)
+    profile: string
+] {
+    if (which hook | is-empty) {
+        print -e "hook not found"
+        return
+    }
+
+    let base_config_path = $env.CHEZMOI_PATH 
+    | path join "zen-browser"
+
+    let base_profile_path = $env.HOME 
+    | path join ".zen"
+    | path join $profile
+
+    let names = ls $base_config_path | get name | path basename | where ($it != link)
+
+    for name in $names {
+        let source = ($base_config_path | path join $name)
+        let destination = ($base_profile_path | path join $name)
+
+        if $dry_run {
+            print $"hook --source ($source) --destination ($destination) --force"
+        } else {
+            hook --source $source --destination $destination --force
+        }
+    }
+}
