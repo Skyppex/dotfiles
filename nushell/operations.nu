@@ -192,7 +192,11 @@ def --wrapped test [
             }
         }
         "Go" => {
-            go test ...$rest
+            if $all {
+                go test "./..." ...$rest
+            } else {
+                go test ...$rest
+            }
         }
     }
 }
