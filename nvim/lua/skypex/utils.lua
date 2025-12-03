@@ -262,4 +262,47 @@ M.map = function(modes, left, right, desc, expr, buf)
 	})
 end
 
+--- @return "none"|"blocked"|"pending"|"active"
+M.direnv_status = function()
+	local lines = M.run_command_ret("direnv", { "status", "--json" })
+
+	if not lines then
+		return "none"
+	end
+
+	local json = ""
+
+	for _, line in ipairs(lines) do
+		json = json .. line
+	end
+
+	local ok, result = pcall(vim.json.decode, json)
+
+	if not ok then
+		return "none"
+	end
+
+	local foundRC = result.state.foundRC
+
+	if not foundRC or foundRC == vim.NIL then
+		return "none"
+	end
+
+	local status = foundRC.allowed
+
+	if status == 0 then
+		return "active"
+	end
+
+	if status == 1 then
+		return "pending"
+	end
+
+	if status == 2 then
+		return "blocked"
+	end
+
+	return "none"
+end
+
 return M

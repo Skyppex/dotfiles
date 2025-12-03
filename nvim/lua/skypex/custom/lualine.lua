@@ -40,46 +40,24 @@ local theme = {
 --- @param blocked T
 --- @param none? T
 --- @return T?
-local function direnv_status(active, pending, blocked, none)
-	local lines = utils.run_command_ret("direnv", { "status", "--json" })
+local function get_direnv_statusline(active, pending, blocked, none)
+	local status = utils.direnv_status()
 
-	if not lines then
+	if status == "none" then
 		return none
 	end
 
-	local json = ""
-
-	for _, line in ipairs(lines) do
-		json = json .. line
-	end
-
-	local ok, result = pcall(vim.json.decode, json)
-
-	if not ok then
-		return none
-	end
-
-	local foundRC = result.state.foundRC
-
-	if not foundRC or foundRC == vim.NIL then
-		return none
-	end
-
-	local status = foundRC.allowed
-
-	if status == 0 then
-		return active
-	end
-
-	if status == 1 then
-		return pending
-	end
-
-	if status == 2 then
+	if status == "blocked" then
 		return blocked
 	end
 
-	return none
+	if status == "pending" then
+		return pending
+	end
+
+	if status == "active" then
+		return active
+	end
 end
 
 require("lualine").setup({
@@ -108,7 +86,7 @@ require("lualine").setup({
 		lualine_x = {
 			{
 				function()
-					return direnv_status("󰌪", "󱋙", "󱋙", "")
+					return get_direnv_statusline("󰌪", "󱋙", "󱋙", "")
 				end,
 				color = function()
 					if not utils.is_linux() then
@@ -116,7 +94,7 @@ require("lualine").setup({
 					end
 
 					local colors = require("skypex.colors")
-					return direnv_status({
+					return get_direnv_statusline({
 						fg = colors.success,
 					}, {
 						fg = colors.working,

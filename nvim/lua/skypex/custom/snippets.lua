@@ -144,6 +144,28 @@ M.luasnip = function()
 	nix_snippets()
 
 	map("n", "<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
+
+	map("is", "<C-l>", function()
+		if ls.expand_or_locally_jumpable() then
+			ls.expand_or_jump()
+		end
+	end, "snippet: jump next")
+
+	map("is", "<C-h>", function()
+		ls.jump(-1)
+	end, "snippet: jump previous")
+
+	map("is", "<C-j>", function()
+		if ls.choice_active() then
+			ls.change_choice(1)
+		end
+	end, "snippet: next choice")
+
+	map("i", "<c-k>", function()
+		if ls.choice_active() then
+			ls.change_choice(-1)
+		end
+	end, "snippet: previous choice")
 end
 
 M.all = function()

@@ -37,6 +37,14 @@ return {
 			},
 		},
 		config = function()
+			local direnv_status = require("skypex.utils").direnv_status
+
+			while true do
+				if direnv_status() ~= "pending" then
+					break
+				end
+			end
+
 			require("skypex.custom.lsp")
 		end,
 	},

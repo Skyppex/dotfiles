@@ -1,12 +1,13 @@
+local Path = require("plenary.path")
 local function config()
 	require("skypex.custom.graffiti")
 end
 
 return require("skypex.utils").local_plugin("graffiti.nvim", config, function()
-	local bin_path = vim.fn.stdpath("data") .. "/graffiti-rs/target/release/graffiti-rs"
+	local bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/target/release/graffiti-rs")
 
 	if not bin_path:is_file() then
-		bin_path = vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs"
+		bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs")
 
 		if not bin_path:is_file() then
 			return

@@ -41,7 +41,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 	})
 end
 
-vim.lsp.set_log_level("OFF")
+vim.lsp.set_log_level("DEBUG")
 
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
@@ -237,6 +237,17 @@ local servers = {
 			},
 		},
 	},
+	-- nixd = {
+	-- 	cmd = { "nixd", "--inlay-hints=true", "--semantic-tokens=true" },
+	-- 	capabilities = capabilities,
+	-- 	filetypes = { "nix" },
+	-- 	root_markers = { "flake.nix", ".git" },
+	-- 	settings = {
+	-- 		nixpkgs = {
+	-- 			expr = "import <nixpkgs> {}",
+	-- 		},
+	-- 	},
+	-- },
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -401,7 +412,11 @@ for server_name, config in pairs(servers) do
 	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, config.handlers or {})
 
 	vim.lsp.config(server_name, config)
-	vim.lsp.enable(server_name)
+
+	if server_name ~= "nil" or vim.fn.executable("nixd") == 0 then
+		-- enable all servers, except for nil if nixd exists on path
+		vim.lsp.enable(server_name)
+	end
 end
 
 vim.diagnostic.config({
