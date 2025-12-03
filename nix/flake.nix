@@ -42,11 +42,19 @@
       inherit fenix;
     };
 
+    cli-tools-work = import ./cli-tools.nix {
+      inherit pkgsFree;
+      inherit pkgsUnfree;
+      inherit fenix;
+      dotnetSdks = with pkgsFree.dotnetCorePackages; [sdk_8_0 sdk_9_0];
+    };
+
     common-desktop-tools = import ./common-desktop-tools.nix {
       inherit pkgsUnfree;
     };
 
     work-desktop-tools = import ./work-desktop-tools.nix {
+      inherit pkgsFree;
       inherit pkgsUnfree;
     };
 
@@ -63,23 +71,22 @@
     lib.${system}.packages = {
       default = self.lib.${system}.packages.shell;
       shell = cli-tools.packages;
-      work = cli-tools.packages ++ common-desktop-tools ++ work-desktop-tools;
+      work = cli-tools-work.packages ++ common-desktop-tools ++ work-desktop-tools;
       home = cli-tools.packages ++ common-desktop-tools ++ home-desktop-tools;
       surface = cli-tools.packages ++ surface-laptop-tools;
     };
 
     packages.${system} = {
       default = self.packages.${system}.shell;
+
       shell = pkgsUnfree.buildEnv {
         name = "cli-tools";
-        paths =
-          cli-tools.packages;
+        paths = self.lib.${system}.packages.shell;
       };
+
       work = pkgsUnfree.buildEnv {
         name = "work-tools";
-        paths =
-          cli-tools.packages
-          ++ common-desktop-tools ++ work-desktop-tools;
+        paths = self.lib.${system}.packages.work;
         nativeBuildInputs = [pkgsUnfree.makeWrapper];
         buildInputs = [pkgsUnfree.libglvnd pkgsUnfree.mesa];
         postBuild = ''
@@ -88,11 +95,10 @@
               --prefix LD_LIBRARY_PATH : ${pkgsUnfree.mesa}/lib
         '';
       };
+
       home = pkgsUnfree.buildEnv {
         name = "home-tools";
-        paths =
-          cli-tools.packages
-          ++ common-desktop-tools ++ home-desktop-tools;
+        paths = self.lib.${system}.packages.home;
         nativeBuildInputs = [pkgsUnfree.makeWrapper];
         buildInputs = [pkgsUnfree.libglvnd pkgsUnfree.mesa];
         postBuild = ''
@@ -101,11 +107,10 @@
               --prefix LD_LIBRARY_PATH : ${pkgsUnfree.mesa}/lib
         '';
       };
+
       surface = pkgsUnfree.buildEnv {
         name = "surface-tools";
-        paths =
-          cli-tools.packages
-          ++ surface-laptop-tools;
+        paths = self.lib.${system}.packages.surface;
         nativeBuildInputs = [pkgsUnfree.makeWrapper];
         buildInputs = [pkgsUnfree.libglvnd pkgsUnfree.mesa];
         postBuild = ''

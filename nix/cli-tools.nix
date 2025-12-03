@@ -2,13 +2,11 @@
   pkgsFree,
   pkgsUnfree,
   fenix,
+  dotnetSdks ? with pkgsFree.dotnetCorePackages; [sdk_8_0 sdk_9_0 sdk_10_0],
 }: let
   dotnet = pkgsFree.buildEnv {
     name = "combined-dotnet-sdks";
-    paths = [
-      (with pkgsFree.dotnetCorePackages;
-          combinePackages [sdk_8_0 sdk_9_0 sdk_10_0])
-    ];
+    paths = [(pkgsFree.dotnetCorePackages.combinePackages dotnetSdks)];
   };
 
   rust = with fenix;
