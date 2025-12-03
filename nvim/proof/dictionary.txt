@@ -902,3 +902,11 @@ qmll
 gcl
 winborder
 panicf
+yarnrc
+codegen
+npx
+nx
+autotester
+typecheck
+npm
+nixd
