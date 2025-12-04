@@ -26,6 +26,7 @@ nt.setup({
 			--       to locate all test projects in the solution more reliably (if a .sln file is present) then 'solution' is better.
 			discovery_root = "solution", -- Default
 		}),
+		require("rustaceanvim.neotest"),
 	},
 })
 

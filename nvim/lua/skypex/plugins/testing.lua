@@ -6,6 +6,7 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"Issafalcon/neotest-dotnet",
+		"mrcjkb/rustaceanvim",
 	},
 	config = function()
 		require("skypex.custom.testing")
