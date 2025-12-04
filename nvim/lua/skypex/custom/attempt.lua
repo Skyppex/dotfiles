@@ -66,7 +66,7 @@ local function open_buffer_in_split_no_focus(bufnr, split, filetype)
 	vim.api.nvim_buf_set_option(bufnr, "filetype", filetype)
 end
 
-local function run_attempt(cmd, args, filetype)
+local function run_attempt(cmd, args, filetype, stdin)
 	vim.cmd("w")
 	local data_buffer = ""
 
@@ -98,10 +98,14 @@ local function run_attempt(cmd, args, filetype)
 		end,
 	})
 
+	job:start()
+
+	if stdin then
+		job:send(stdin)
+	end
+
 	if is_inline then
-		job:sync()
-	else
-		job:start()
+		job:wait()
 	end
 end
 
