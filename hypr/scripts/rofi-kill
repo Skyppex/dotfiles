@@ -25,7 +25,9 @@ let selected = $input
 let parts = $selected | split row " "
 
 if ($parts | get 0) == "all:" {
-    for $pid in ($parts | get 2 | into int) {
+    let pids = ($parts | skip 2 | str replace "," "" | into int)
+
+    for $pid in $pids {
         kill --force --quiet $pid
     }
 
