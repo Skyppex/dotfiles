@@ -52,6 +52,7 @@
     github-cli
     gitleaks
     glow
+    gnumake
     go
     gping
     gum
@@ -64,13 +65,14 @@
     lazydocker
     lazygit
     lua
-    gnumake
     man
     meson
     mods
     neovim
+    nix-output-monitor
     nodejs
     nushell
+    nvd
     openssh
     pastel
     ripgrep
