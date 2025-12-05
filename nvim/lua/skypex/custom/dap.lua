@@ -2,7 +2,9 @@ local M = {}
 
 M.dap = function()
 	local dap = require("dap")
-	dap.set_log_level("TRACE")
+	dap.set_log_level("INFO")
+
+	require("nvim-dap-virtual-text").setup()
 
 	local map = require("skypex.utils").map
 	map("n", "<leader>dr", function()
