@@ -10,7 +10,7 @@ return require("skypex.utils").local_plugin("graffiti.nvim", config, function()
 		bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs")
 
 		if not bin_path:is_file() then
-			return
+			return {}
 		end
 	end
 
