@@ -1,16 +1,22 @@
 # find a project below the current cwd
-def find-projects []: nothing -> table<type: string, opt: any> {
+def --env find-projects []: nothing -> table<type: string, opt: any> {
     let options = fd --type f --max-depth 1 --regex '^(flake\.nix|Cargo\.toml|go\.mod|.*\.slnx?|.*\.csproj|.*\.kt|build\.gradle\.kts|gradlew(\.bat)?)$'
 
     if ($options | is-empty) {
-        print --stderr 'Not a recognized project directory'
-        print --stderr 'Currently recognized project types are:'
-        print --stderr ' - Nix (^flake.nix$)'
-        print --stderr ' - Rust (^Cargo.toml$)'
-        print --stderr ' - Go (^go.mod$)'
-        print --stderr ' - C# (.*\.slnx?$, .*\.csproj$)'
-        # print --stderr ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
-        return
+        if (pwd) == "/" {
+            print --stderr 'Not a recognized project directory'
+            print --stderr 'Currently recognized project types are:'
+            print --stderr ' - Nix (^flake.nix$)'
+            print --stderr ' - Rust (^Cargo.toml$)'
+            print --stderr ' - Go (^go.mod$)'
+            print --stderr ' - C# (.*\.slnx?$, .*\.csproj$)'
+            # print --stderr ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
+            return
+        }
+
+        enter ..
+        let options = find-projects
+        return $options
     }
 
     let options = $options | lines | each { |opt|
