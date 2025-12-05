@@ -198,6 +198,13 @@ M.mason = function()
 				}
 				require("mason-nvim-dap").default_setup(config)
 			end,
+			codelldb = function(config)
+				config.adapters = {
+					render = {
+						max_type_length = 0,
+					},
+				}
+			end,
 		},
 	})
 end
