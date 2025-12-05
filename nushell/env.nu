@@ -292,7 +292,9 @@ match [$env.HOSTNAME, $env.OS] {
         }
     }
     _ => {
-        print "Unknown computer name"
+        if (which notify-send | is-not-empty) {
+            notify-send "unknown computer"
+        }
     }
 }
 
