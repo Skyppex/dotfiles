@@ -28,12 +28,7 @@ let players = $players
 }
 
 if ($players | get status | any {|it| $it == Playing}) {
-    for $player in ($players | reverse) {
-        if $player.status == Playing {
-            playerctl --player $player.name pause
-            $player.name | save $last_played_player -f
-        }
-    }
+    playerctl --all-players pause
 } else {
     if not ($last_played_player | path exists) {
         if ($players | length) == 1 {
