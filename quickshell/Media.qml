@@ -44,7 +44,11 @@ Singleton {
 
         stdout: SplitParser {
             onRead: data => {
-                root._nextText = data;
+                if (data.length > 40) {
+                    root._nextText = data.substring(0, 40) + "...";
+                } else {
+                    root._nextText = data;
+                }
 
                 if (root._nextArt !== "") {
                     root.albumArt = root._nextArt;
