@@ -3,15 +3,26 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import "utils"
 
 Singleton {
     id: root
     property bool healthy
     property real gpu
 
-    Process {
+    Nu {
         id: gpuProc
-        command: ["nu", "-c", "fd 'card\\d$' '/sys/class/drm' | lines | each {|it| cat ($it | path join 'device/gpu_busy_percent') } | into float | math avg | math round"]
+
+        code: "
+        fd 'card\\d$' '/sys/class/drm'
+        | lines
+        | each { |it|
+            open --raw ($it | path join 'device/gpu_busy_percent')
+        }
+        | into float
+        | math avg
+        | math round"
+
         running: true
 
         stdout: StdioCollector {

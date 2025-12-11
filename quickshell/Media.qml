@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
+import "utils"
 
 Singleton {
     id: root
@@ -35,11 +36,9 @@ Singleton {
         }
     }
 
-    Process {
+    Nu {
         id: mediaProc
-
-        command: ["playerctl", "--follow", "metadata", "--format", "{{ artist }} - {{ title }}"]
-
+        code: "playerctl --follow metadata --format {{ artist }} - {{ title }}"
         running: true
 
         stdout: SplitParser {

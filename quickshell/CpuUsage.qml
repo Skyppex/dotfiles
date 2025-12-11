@@ -4,14 +4,16 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import "utils"
+
 Singleton {
     id: root
     property bool healthy
     property real cpu
 
-    Process {
+    Nu {
         id: cpuProc
-        command: ["nu", "-c", "sys cpu -l | get cpu_usage | math avg"]
+        code: "sys cpu --long | get cpu_usage | math avg"
         running: true
 
         stdout: StdioCollector {

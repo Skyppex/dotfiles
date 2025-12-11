@@ -3,6 +3,7 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import "utils"
 
 Singleton {
     id: root
@@ -10,9 +11,21 @@ Singleton {
     property real averageDiskUsage
     property var disks
 
-    Process {
+    Nu {
         id: diskProc
-        command: ["nu", "-c", "sys disks | uniq-by device | where type != vfat and total != 0B | each {|it| { mount: $it.mount, usage: ((1 - $it.free / $it.total) * 100) } } | to json"]
+
+        code: "
+        sys disks
+        | uniq-by device
+        | where type != vfat and total != 0B
+        | each { |it|
+            {
+                mount: $it.mount,
+                usage: ((1 - $it.free / $it.total) * 100)
+            }
+        }
+        | to json"
+
         running: true
 
         stdout: StdioCollector {

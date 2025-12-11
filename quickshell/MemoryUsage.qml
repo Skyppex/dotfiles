@@ -4,14 +4,22 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import "utils"
+
 Singleton {
     id: root
     property bool healthy
     property real mem
 
-    Process {
+    Nu {
         id: memProc
-        command: ["nu", "-c", "sys mem | each {|it| ($it.used / $it.total) * 100 }"]
+
+        code: "
+        sys mem
+        | each { |it|
+            ($it.used / $it.total) * 100
+        }"
+
         running: true
 
         stdout: StdioCollector {

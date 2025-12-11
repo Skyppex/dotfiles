@@ -3,15 +3,22 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import "utils"
 
 Singleton {
     id: root
     property bool healthy
     property real volume
 
-    Process {
+    Nu {
         id: volumeProc
-        command: ["nu", "-c", "(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}' | into float) * 100"]
+
+        code: "
+        wpctl get-volume @DEFAULT_AUDIO_SINK@
+        | awk '{print $2}'
+        | into float
+        | $in * 100"
+
         running: true
 
         stdout: StdioCollector {
