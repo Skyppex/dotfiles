@@ -12,54 +12,77 @@ const player_map = [
 
 mkdir /tmp/hypr
 
-let players = playerctl --list-all | lines
+def get-players []: nothing -> table<name: string, status: string> {
+    let players = playerctl --list-all | lines
 
-if ($players | length) == 0 {
-    notify-send "no players available"
-    return
-}
-
-let players = $players 
-| each {|it|
-    {
-        name: $it
-        status: (playerctl --player $it status)
-    }
-}
-
-if ($players | get status | any {|it| $it == Playing}) {
-    playerctl --all-players pause
-} else {
-    if not ($last_played_player | path exists) {
-        if ($players | length) == 1 {
-            playerctl play
-            return
-        }
-
-        if not ($last_active_player | path exists) {
-            playerctl play
-        }
-
-        let last_active_player = open $last_active_player
-        playerctl --player $last_active_player play
+    if ($players | length) == 0 {
+        notify-send "no players available"
         return
     }
 
-    mut player = open $last_played_player
-
-    let active_window = hyprctl activewindow -j | from json
-    let active_class = $active_window | get initialClass
-
-    if ($player_map | get class | any {|it| $it == $active_class }) {
-        let mapped_player = $player_map 
-        | where class == $active_class 
-        | first 
-        | get player
-
-        if ($players | any {|it| $it.name | str contains $mapped_player}) {
-            $player = $mapped_player
+    let players = $players 
+    | each {|it|
+        {
+            name: $it
+            status: (playerctl --player $it status)
         }
     }
 
-    playerctl --player $player play
+    $players
+}
+
+def main [] {
+    let players = get-players
+
+    if ($players | get status | any {|it| $it == Playing}) {
+        playerctl --all-players pause
+    } else {
+        if not ($last_played_player | path exists) {
+            if ($players | length) == 1 {
+                let player = $players | first | get name
+                $player | save --force $last_played_player
+                playerctl --player $player play
+                return
+            }
+
+            if not ($last_active_player | path exists) {
+                playerctl play
+
+                let players = get-players
+                $players | first | get name | save --force $last_played_player
+                return
+            }
+
+            let last_active_player = open $last_active_player
+            playerctl --player $last_active_player play
+            $last_active_player | save --force $last_played_player
+            return
+        }
+
+        mut player = open $last_played_player
+
+        let active_window = hyprctl activewindow -j | from json
+        let active_class = $active_window | get initialClass
+
+        if ($player_map | get class | any {|it| $it == $active_class }) {
+            let mapped_player = $player_map 
+            | where class == $active_class 
+            | first 
+            | get player
+
+            if ($players | any {|it| $it.name | str contains $mapped_player}) {
+                $player = $mapped_player
+            }
+        }
+
+        let player = $player
+
+        if not ($players | any {|it| $it.name == $player}) {
+            rm $last_played_player
+            main
+            return
+        }
+
+        playerctl --player $player play
+    }
 }
