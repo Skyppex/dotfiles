@@ -7,7 +7,6 @@ Scope {
     property var activeScreen: {
         for (const monitor of Monitor.prioritized) {
             const screen = Quickshell.screens.find(s => s.name === monitor);
-
             if (screen && root.preferredScreen === screen.name) {
                 return screen;
             }
@@ -46,13 +45,6 @@ Scope {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 12
             anchors.rightMargin: 10
-        }
-    }
-
-    Connections {
-        target: Quickshell
-        function onScreensChanged() {
-            bar.screen = activeScreen;
         }
     }
 

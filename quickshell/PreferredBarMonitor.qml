@@ -27,6 +27,13 @@ Singleton {
     }
 
     Connections {
+        target: Quickshell
+        function onScreensChanged() {
+            getBarMonitorProc.running = true;
+        }
+    }
+
+    Connections {
         target: Fullscreen
         function onFullscreenChanged() {
             getBarMonitorProc.running = true;
