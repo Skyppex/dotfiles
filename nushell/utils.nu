@@ -347,3 +347,54 @@ def bin [] {
 
     return ($programs | uniq | where (($it | path basename) == $selected))
 }
+
+def dotted [
+    --short(-s)
+]: any -> list<string> {
+    mut results = []
+    let values = $in
+    let keys = $values | columns
+
+    for $k in $keys {
+        mut path = $k
+
+        let value = $values | get $k
+        let desc = $value | describe
+
+        if not $short and ($desc | str starts-with "record") {
+            let result = $value | dotted
+
+            for $r in $result {
+                $results = $results | append ($"($path).($r)")
+            }
+
+            continue
+        }
+
+        $results = $results | append $path
+    }
+
+    $results
+}
+
+def envs [] {
+    let selected = $env 
+    | dotted
+    | to text 
+    | str trim 
+    | fzf --height 40% --layout reverse -0 
+
+    if ($selected | is-empty) {
+        print -e "nothing selected"
+        return
+    }
+
+    mut value = $env
+    let navs = $selected | split row "."
+
+    for $n in $navs {
+        $value = $value | get $n
+    }
+
+    $value
+}
