@@ -2,15 +2,20 @@
   pkgsUnfree,
   system,
   zen-browser,
-}:
-with pkgsUnfree; [
-  ani-cli
-  ani-skip
-  bitwarden-desktop
-  blender
-  catt
-  logmein-hamachi
-  prismlauncher
-  r2modman
-  zen-browser.packages.${system}.default
-]
+}: let
+  bottles = pkgsUnfree.bottles.override {
+    removeWarningPopup = true;
+  };
+in
+  with pkgsUnfree; [
+    ani-cli
+    ani-skip
+    bitwarden-desktop
+    blender
+    bottles
+    catt
+    logmein-hamachi
+    prismlauncher
+    r2modman
+    zen-browser.packages.${system}.default
+  ]
