@@ -105,6 +105,7 @@ end
 local function js_snippets()
 	ls.add_snippets("js", {
 		s("jsdoc", t("/**\n * ${1}\n */")),
+		s("tmp", { t({ "function tmp() {", "\t" }), i(0), t({ "", "}" }) }),
 	})
 end
 
@@ -112,6 +113,13 @@ local function cs_snippets()
 	ls.add_snippets("cs", {
 		s("sf", fmt("[SerializeField] private {1} {2};", { i(1, "Type"), i(2, "name") })),
 		s("sp", fmt("[field: SerializeField] public {1} {2} {{ get; set; }}", { i(1, "Type"), i(2, "name") })),
+		s("tmp", { t({ "private void Tmp()", "{", "\t" }), i(0), t({ "", "}" }) }),
+	})
+end
+
+local function rs_snippets()
+	ls.add_snippets("rust", {
+		s("tmp", { t({ "fn tmp() {", "\t" }), i(0), t({ "", "}" }) }),
 	})
 end
 
@@ -141,6 +149,7 @@ M.luasnip = function()
 	all_snippets()
 	js_snippets()
 	cs_snippets()
+	rs_snippets()
 	nix_snippets()
 
 	map("n", "<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
