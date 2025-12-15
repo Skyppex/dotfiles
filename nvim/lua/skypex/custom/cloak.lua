@@ -6,7 +6,8 @@ cloak.setup({
 	patterns = {
 		{
 			file_pattern = {
-				"*.env*",
+				"*.env",
+				"*.env.*",
 			},
 			cloak_pattern = {
 				"=.+",
@@ -21,7 +22,7 @@ cloak.setup({
 		},
 		{
 			file_pattern = {
-				"*id_ed25519*",
+				"*id_*",
 			},
 			cloak_pattern = {
 				".+",
