@@ -914,3 +914,8 @@ nvd
 wpf
 tfunc
 tmpf
+openssl
+rustlib
+oneof
+cowsay
+lolcat
