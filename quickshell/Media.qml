@@ -38,7 +38,7 @@ Singleton {
 
     Nu {
         id: mediaProc
-        code: "playerctl --follow metadata --format {{ artist }} - {{ title }}"
+        code: "playerctl --follow metadata --format '{{ artist }} - {{ title }}'"
         running: true
 
         stdout: SplitParser {
