@@ -40,12 +40,14 @@
     bat
     btop
     chezmoi
+    cowsay
     difftastic
     direnv
     docker
     dotnet
     fd
     file
+    fortune
     fzf
     gcc
     git
@@ -64,6 +66,7 @@
     kubectl
     lazydocker
     lazygit
+    lolcat
     lua
     man
     meson
