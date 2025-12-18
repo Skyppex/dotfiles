@@ -10,7 +10,7 @@ misc {
 
 source = ./variables.conf
 
-$menu = rofi -case-smart -show combi -modi combi -combi-modi "window,drun,recursivebrowser"
+$menu = rofi -display-combi open -case-smart -combi-display-format "{text}" -window-format "{t}" -show combi -modi combi -combi-modi "window,drun,recursivebrowser"
 
 $terminalExec = wezterm start --always-new-process
 $terminalClass = org.wezfurlong.wezterm
