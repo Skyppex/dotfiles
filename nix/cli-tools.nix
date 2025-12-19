@@ -26,6 +26,7 @@
   cliPackages = with pkgsUnfree; [
     awscli2
     powershell
+    google-cloud-sdk
   ];
 
   cliPackagesLite = with pkgsUnfree; [
