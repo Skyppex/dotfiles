@@ -928,3 +928,4 @@ podman
 motd
 oneshot
 onstop
+hetzner
