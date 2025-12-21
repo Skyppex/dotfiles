@@ -929,3 +929,7 @@ motd
 oneshot
 onstop
 hetzner
+hcloud
+hc
+datacenter
+poweron
