@@ -753,6 +753,7 @@ source ~/.config/nushell/nixos-utils.nu
 use ~/.config/nushell/vm.nu
 use ~/.config/nushell/skate.nu
 use ~/.config/nushell/sc.nu
+use ~/.config/nushell/hc.nu
 
 # Pull the dotfiles from the remote repository
 def pull [] {
