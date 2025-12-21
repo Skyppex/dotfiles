@@ -127,7 +127,7 @@ export def shutdown [name?: string] {
 export alias down = shutdown
 export alias d = shutdown
 
-export def destroy [name?: string] {
+export def kill [name?: string] {
     let vm = if ($name | is-empty) {
         ls | select-vm
     } else {
@@ -136,8 +136,6 @@ export def destroy [name?: string] {
 
     virsh --connect $vm.connection destroy $vm.name
 }
-
-export alias kill = destroy
 
 export def dominfo [name?: string] {
     let vm = if ($name | is-empty) {
