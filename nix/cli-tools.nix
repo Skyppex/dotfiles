@@ -59,6 +59,7 @@
     go
     gping
     gum
+    hcloud
     hyperfine
     imagemagick
     inotify-tools
