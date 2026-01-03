@@ -933,3 +933,4 @@ hcloud
 hc
 datacenter
 poweron
+upower
