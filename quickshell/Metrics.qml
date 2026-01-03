@@ -34,6 +34,12 @@ Row {
                 minimum: 0,
                 maximum: 100,
                 healthy: () => DiskUsage.healthy
+            }), ({
+                label: () => Battery.percent > 90 ? "" : Battery.percent > 50 ? "" : Battery.percent > 25 ? "" : Battery.percent > 10 ? "" : "",
+                value: () => Battery.percent,
+                minimum: 0,
+                maximum: 100,
+                healthy: () => Battery.healthy
             })]
 
     property var visibleMetrics: metrics.filter(m => m.healthy())
