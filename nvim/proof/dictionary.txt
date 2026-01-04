@@ -934,3 +934,9 @@ hc
 datacenter
 poweron
 upower
+modpack
+hasturian
+dfu
+modrinth
+fetchurl
+unescape
