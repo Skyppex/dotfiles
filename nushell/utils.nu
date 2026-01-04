@@ -89,12 +89,6 @@ def paste [] {
 # Get current local time
 def "time now" [] { date now | format date "%H:%M:%S" }
 
-# Open the starship config file in vscode
-alias sc = start ~/.config/starship.toml
-
-# Open the starship schema file in vscode
-alias ss = start ~/.config/starship-schema.json
-
 # Parse text into a table using regex
 def "parse table" [
     --skip(-s): int # Specify the number of rows to skip
