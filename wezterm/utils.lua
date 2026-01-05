@@ -1,5 +1,7 @@
+local M = {}
+
 --- @return string, integer
-local function get_home()
+function M.get_home()
 	local home_drive = os.getenv("HOMEDRIVE")
 	local home
 
@@ -17,53 +19,53 @@ local function get_home()
 end
 
 --- @return string
-local function get_config_path()
-	return get_home() .. "/.config"
+function M.get_config_path()
+	return M.get_home() .. "/.config"
 end
 
 --- @return string
-local function get_chezmoi_path()
-	return get_home() .. "/.local/share/chezmoi"
+function M.get_chezmoi_path()
+	return M.get_home() .. "/.local/share/chezmoi"
 end
 
 --- @return boolean
-local function is_home_computer_windows()
-	return get_home():find("C:/Users/Brage") ~= nil
+function M.is_home_computer_windows()
+	return M.get_home():find("C:/Users/Brage") ~= nil
 end
 
 --- @return boolean
-local function is_home_computer_linux()
-	return get_home():find("/home/tower") ~= nil
+function M.is_home_computer_linux()
+	return M.get_home():find("/home/tower") ~= nil
 end
 
 --- @return boolean
-local function is_home_laptop_linux()
-	return get_home():find("/home/pod-042", 1, true) ~= nil
+function M.is_home_laptop_linux()
+	return M.get_home():find("/home/pod-042", 1, true) ~= nil
 end
 
 --- @return boolean
-local function is_work_computer()
-	return get_home():find("brage.ingebrigtsen") ~= nil
+function M.is_work_computer()
+	return M.get_home():find("brage.ingebrigtsen") ~= nil
 end
 
 --- @return boolean
-local function is_work_computer_wsl()
-	return get_home():find("/home/brage") ~= nil
+function M.is_work_computer_wsl()
+	return M.get_home():find("/home/brage") ~= nil
 end
 
 --- @return boolean
-local function is_work_computer_linux()
-	return get_home():find("/home/brage") ~= nil
+function M.is_work_computer_linux()
+	return M.get_home():find("/home/brage") ~= nil
 end
 
 --- @return boolean
-local function is_linux()
+function M.is_linux()
 	return package.config:sub(1, 1) == "/"
 end
 
 --- @return string?
-local function get_game_dev_path()
-	if is_home_computer_windows() then
+function M.get_game_dev_path()
+	if M.is_home_computer_windows() then
 		return "D:/Game Dev/Unity Projects"
 	end
 
@@ -71,11 +73,11 @@ local function get_game_dev_path()
 end
 
 --- @return string
-local function get_code_path()
-	local home = get_home()
-	if is_work_computer() then
+function M.get_code_path()
+	local home = M.get_home()
+	if M.is_work_computer() then
 		return home .. "/dev/code"
-	elseif is_home_computer_windows() then
+	elseif M.is_home_computer_windows() then
 		return "D:/code"
 	else
 		return home .. "/dev/code"
@@ -83,11 +85,11 @@ local function get_code_path()
 end
 
 --- @return string
-local function get_temp_path()
-	local home = get_home()
-	if is_work_computer() then
+function M.get_temp_path()
+	local home = M.get_home()
+	if M.is_work_computer() then
 		return home .. "/dev/temp"
-	elseif is_home_computer_linux() then
+	elseif M.is_home_computer_linux() then
 		return home .. "/dev/temp"
 	else
 		return "D:/code/temp"
@@ -97,7 +99,7 @@ end
 --- @param a table
 --- @param b table
 --- @return table
-local function merge_tables(a, b)
+function M.merge_tables(a, b)
 	local result = {}
 
 	for k, v in pairs(a) do
@@ -116,7 +118,7 @@ end
 -- Given "c:\\foo\\bar" returns "bar"
 --- @param path string
 --- @return string
-local function basename(path)
+function M.basename(path)
 	path = path:gsub("[/\\]+$", "")
 	return path:match("([^/]+)$")
 end
@@ -124,7 +126,7 @@ end
 --- @param str string
 --- @param suffix string
 --- @return boolean
-local function ends_with(str, suffix)
+function M.ends_with(str, suffix)
 	if suffix == "" then
 		return true
 	end
@@ -135,7 +137,7 @@ end
 --- @param str string
 --- @param suffix string
 --- @return string
-local function strip_suffix(str, suffix)
+function M.strip_suffix(str, suffix)
 	if suffix == "" then
 		return str
 	end
@@ -147,22 +149,4 @@ local function strip_suffix(str, suffix)
 	return str
 end
 
-return {
-	get_home = get_home,
-	get_config_path = get_config_path,
-	get_chezmoi_path = get_chezmoi_path,
-	is_home_computer_windows = is_home_computer_windows,
-	is_home_computer_linux = is_home_computer_linux,
-	is_work_computer = is_work_computer,
-	is_work_computer_wsl = is_work_computer_wsl,
-	is_work_computer_linux = is_work_computer_linux,
-	is_home_laptop_linux = is_home_laptop_linux,
-	is_linux = is_linux,
-	get_code_path = get_code_path,
-	get_temp_path = get_temp_path,
-	get_game_dev_path = get_game_dev_path,
-	merge_tables = merge_tables,
-	basename = basename,
-	ends_with = ends_with,
-	strip_suffix = strip_suffix,
-}
+return M
