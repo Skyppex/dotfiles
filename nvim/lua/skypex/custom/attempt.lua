@@ -207,6 +207,9 @@ local function run_inline_attempt()
 		end
 	end
 
+	local key = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+	vim.api.nvim_feedkeys(key, "x", false)
+
 	vim.cmd("normal! gv")
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
