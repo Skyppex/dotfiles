@@ -197,9 +197,9 @@ end
 
 M.toggle_ssh = function(window, pane)
 	local servers = {
-		"bunker",
 		"moon",
-		"brage-work-laptop",
+		"bunker",
+		"localhost",
 	}
 
 	local choices = {}
