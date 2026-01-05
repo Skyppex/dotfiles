@@ -58,7 +58,7 @@ end
 
 --- @return boolean
 local function is_linux()
-	return package.config:sub(1, 1) == '/'
+	return package.config:sub(1, 1) == "/"
 end
 
 --- @return string?
@@ -121,6 +121,32 @@ local function basename(path)
 	return path:match("([^/]+)$")
 end
 
+--- @param str string
+--- @param suffix string
+--- @return boolean
+local function ends_with(str, suffix)
+	if suffix == "" then
+		return true
+	end
+
+	return str:sub(-#suffix) == suffix
+end
+
+--- @param str string
+--- @param suffix string
+--- @return string
+local function strip_suffix(str, suffix)
+	if suffix == "" then
+		return str
+	end
+
+	if str:sub(-#suffix) == suffix then
+		return str:sub(1, #str - #suffix)
+	end
+
+	return str
+end
+
 return {
 	get_home = get_home,
 	get_config_path = get_config_path,
@@ -137,4 +163,6 @@ return {
 	get_game_dev_path = get_game_dev_path,
 	merge_tables = merge_tables,
 	basename = basename,
+	ends_with = ends_with,
+	strip_suffix = strip_suffix,
 }

@@ -86,37 +86,98 @@ local config = {
 					wezterm.log_info("Creating tab")
 					local tab = tabs[1]
 
+					wezterm.log_info("Tab title: " .. tab:get_title())
+					wezterm.log_info("Window id : " .. win:window_id())
+					wezterm.log_info("Window title : " .. win:get_title())
+					wezterm.log_info("Window workspace : " .. win:get_workspace())
+
+					local workspace = win:get_workspace()
+					local is_ssh = utils.ends_with(workspace, "_ssh")
+
 					if tab:get_title() == nil or tab:get_title() == "" then
-						tab:set_title("nu")
+						if is_ssh then
+							tab:set_title("ssh")
+						else
+							tab:set_title("nu")
+						end
 					end
 
 					wezterm.log_info("Tab " .. tab:get_title())
 
-					local prog
+					local prog_label
+					local prog_args
 
 					if tab:get_title() == "nu" then
-						prog = "nvim"
+						prog_label = "nvim"
+						prog_args = { "nvim" }
+					elseif tab:get_title() == "ssh" then
+						local server = utils.strip_suffix(workspace, "_ssh")
+						prog_label = "nvim_ssh"
+						prog_args = { "ssh", "-t", server, "bash -l -c nvim" }
+					elseif tab:get_title() == "nvim_ssh" then
+						local server = utils.strip_suffix(workspace, "_ssh")
+						prog_label = "ssh"
+						prog_args = { "ssh", server }
 					else
-						prog = "nu"
+						prog_label = "nu"
+						prog_args = { "nu" }
 					end
 
 					wezterm.log_info(window:window_id())
 
 					window:perform_action(
 						act.SpawnCommandInNewTab({
-							label = prog,
-							args = { prog },
+							label = prog_label,
+							args = prog_args,
 						}),
 						pane
 					)
 
-					win:tabs()[2]:set_title(prog)
+					win:tabs()[2]:set_title(prog_label)
 				end
 			end),
 		},
 		{ key = " ", mods = "CTRL", action = act({ SendString = "\x00" }) },
-		{ key = ",", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-		{ key = ".", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+		{
+			key = ",",
+			mods = "CTRL",
+			action = wezterm.action_callback(function(window, pane)
+				local win = window:mux_window()
+				local workspace = win:get_workspace()
+				local is_ssh = utils.ends_with(workspace, "_ssh")
+
+				if not is_ssh then
+					window:perform_action(act.SplitVertical({ domain = "CurrentPaneDomain" }), pane)
+				else
+					local server = utils.strip_suffix(workspace, "_ssh")
+
+					window:perform_action(
+						act.SplitVertical({ domain = "CurrentPaneDomain", args = { "ssh", server } }),
+						pane
+					)
+				end
+			end),
+		},
+		{
+			key = ".",
+			mods = "CTRL",
+			action = wezterm.action_callback(function(window, pane)
+				local win = window:mux_window()
+				local workspace = win:get_workspace()
+				local is_ssh = utils.ends_with(workspace, "_ssh")
+
+				if not is_ssh then
+					window:perform_action(act.SplitHorizontal({ domain = "CurrentPaneDomain" }), pane)
+				else
+					local server = utils.strip_suffix(workspace, "_ssh")
+
+					window:perform_action(
+						act.SplitHorizontal({ domain = "CurrentPaneDomain", args = { "ssh", server } }),
+						pane
+					)
+				end
+			end),
+		},
 		{ key = "z", mods = "LEADER|CTRL", action = "TogglePaneZoomState" },
 		{ key = "n", mods = "SHIFT|CTRL", action = act.ShowLauncher },
 		ss.move("h", "ALT"),
@@ -148,6 +209,7 @@ local config = {
 		{ key = "PageUp", mods = "SHIFT", action = act.ScrollByLine(-1) },
 		{ key = "PageDown", mods = "SHIFT", action = act.ScrollByLine(1) },
 		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
+		{ key = "g", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle_ssh) },
 
 		{ key = "i", mods = "LEADER|CTRL", action = act.ActivateCopyMode },
 		{

@@ -67,6 +67,7 @@ M.toggle = function(window, pane)
 		act.InputSelector({
 			fuzzy = true,
 			title = "Select project",
+			fuzzy_description = "Select project: ",
 			choices = choices,
 			action = wezterm.action_callback(function(win, _, id, label)
 				if not id and not label then
@@ -192,6 +193,54 @@ M.create_session_hook = function()
 
 		nvim_tab:set_title("nvim")
 	end)
+end
+
+M.toggle_ssh = function(window, pane)
+	local servers = {
+		"bunker",
+		"moon",
+		"brage-work-laptop",
+	}
+
+	local choices = {}
+
+	for _, v in ipairs(servers) do
+		table.insert(choices, { label = v, id = v .. "_ssh" })
+	end
+
+	window:perform_action(
+		act.InputSelector({
+			fuzzy = true,
+			title = "Select server",
+			fuzzy_description = "Select server: ",
+			choices = choices,
+			action = wezterm.action_callback(function(win, _, id, label)
+				if not id and not label then
+					wezterm.log_info("Cancelled")
+				else
+					wezterm.log_info("Selected " .. label)
+					wezterm.log_info("Id " .. id)
+
+					local ssh_args = { "ssh", label }
+
+					win:perform_action(
+						act.SwitchToWorkspace({
+							name = id,
+							spawn = {
+								label = label .. "_ssh",
+								cwd = os.getenv("HOME"),
+								args = ssh_args,
+							},
+						}),
+						pane
+					)
+
+					wezterm.log_info("Switched to server workspace " .. id)
+				end
+			end),
+		}),
+		pane
+	)
 end
 
 return M
