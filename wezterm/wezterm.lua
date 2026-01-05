@@ -195,6 +195,7 @@ local config = {
 				mode = "SwapWithActive",
 			}),
 		},
+		{ key = "L", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
 		{ key = "X", mods = "SHIFT|CTRL", action = act({ CloseCurrentTab = { confirm = true } }) },
 		{ key = "x", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = true } }) },
 		{ key = "x", mods = "LEADER|CTRL", action = act({ SendString = "\x18" }) },
