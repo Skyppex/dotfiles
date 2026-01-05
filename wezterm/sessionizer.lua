@@ -195,12 +195,42 @@ M.create_session_hook = function()
 	end)
 end
 
+local function get_ssh_hosts()
+	local config_path = os.getenv("HOME") .. "/.ssh/config"
+	local hosts = {}
+
+	local file = io.open(config_path, "r")
+
+	if not file then
+		return hosts
+	end
+
+	for line in file:lines() do
+		local trimmed = line:match("^%s*(.-)%s*$")
+
+		if trimmed ~= "" and not trimmed:match("^#") then
+			local rest = trimmed:match("^Host%s+(.+)$")
+
+			if rest then
+				for host in rest:gmatch("%S+") do
+					table.insert(hosts, host)
+				end
+			end
+		end
+	end
+
+	file:close()
+	return hosts
+end
+
 M.toggle_ssh = function(window, pane)
-	local servers = {
-		"moon",
-		"bunker",
-		"localhost",
-	}
+	local servers = {}
+
+	for _, host in ipairs(get_ssh_hosts()) do
+		table.insert(servers, host)
+	end
+
+	table.insert(servers, "localhost")
 
 	local choices = {}
 
