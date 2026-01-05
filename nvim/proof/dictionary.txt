@@ -940,3 +940,4 @@ dfu
 modrinth
 fetchurl
 unescape
+sqlserver
