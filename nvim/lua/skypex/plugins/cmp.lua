@@ -26,16 +26,6 @@ return {
 				event = "InsertEnter",
 			},
 			{
-				"zbirenbaum/copilot-cmp",
-				config = true,
-			},
-			{
-				"zbirenbaum/copilot.lua",
-				lazy = true,
-				cmd = "Copilot",
-				event = "InsertEnter",
-			},
-			{
 				"onsails/lspkind.nvim",
 				lazy = true,
 				event = "InsertEnter",

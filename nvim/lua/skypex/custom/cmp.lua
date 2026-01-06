@@ -1,8 +1,3 @@
-require("copilot").setup({
-	suggestion = { enabled = false },
-	panel = { enabled = false },
-})
-
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
@@ -40,7 +35,6 @@ local sources = {
 		max_item_count = 1,
 	},
 	crates = { name = "crates" },
-	copilot = { name = "copilot" },
 	obsidian = { name = "obsidian" },
 	obsidian_new = { name = "obsidian_new" },
 	obsidian_tag = { name = "obsidian_tag" },
@@ -66,7 +60,6 @@ cmp.setup({
 		sources.lsp_signature_help,
 		sources.luasnip,
 		sources.buffer,
-		sources.copilot,
 	},
 	sorting = {
 		comparators = {
@@ -131,10 +124,6 @@ cmp.setup({
 				-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
 				ellipsis_char = "..", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 				show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-				symbol_map = {
-					Copilot = "",
-				},
-
 				-- The function below will be called before any actual modifications from lspkind
 				-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 				-- before = function (entry, vim_item)
@@ -216,7 +205,6 @@ local theme = {
 	Color = colors.primary,
 	Reference = colors.purple,
 	Snippet = colors.blue,
-	Copilot = colors.blue,
 }
 
 for name, color in pairs(theme) do
