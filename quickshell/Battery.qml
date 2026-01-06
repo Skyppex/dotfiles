@@ -14,5 +14,5 @@ Singleton {
         return ready && isLaptopBattery;
     }
 
-    property real percent: UPower.displayDevice.isLaptopBattery ? UPower.displayDevice.percentage : 100
+    property real percent: UPower.displayDevice.isLaptopBattery ? UPower.displayDevice.percentage * 100 : 100
 }
