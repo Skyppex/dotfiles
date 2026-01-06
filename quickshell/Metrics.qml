@@ -35,7 +35,7 @@ Row {
                 maximum: 100,
                 healthy: () => DiskUsage.healthy
             }), ({
-                label: () => Battery.percent > 90 ? "" : Battery.percent > 50 ? "" : Battery.percent > 25 ? "" : Battery.percent > 10 ? "" : "",
+                label: () => Battery.percent > 90 ? "" : Battery.percent > 60 ? "" : Battery.percent > 25 ? "" : Battery.percent > 10 ? "" : "",
                 value: () => Battery.percent,
                 minimum: 0,
                 maximum: 100,
