@@ -161,7 +161,7 @@ export def fzf [
         return $selected_db
     }
 
-    let keys = list all | format
+    let keys = list all | format pattern '{key}{db}' | to text
     let selected = $keys | ^fzf --height 40% --layout reverse -0
 
     if ($selected | is-empty) {
