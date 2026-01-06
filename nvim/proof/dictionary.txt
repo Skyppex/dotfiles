@@ -941,3 +941,4 @@ modrinth
 fetchurl
 unescape
 sqlserver
+dsl
