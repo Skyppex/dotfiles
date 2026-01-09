@@ -84,6 +84,11 @@ export def start [] {
     systemctl start $unit.unit
 }
 
+export def restart [] {
+    let unit = unit
+    systemctl restart $unit.unit
+}
+
 export def stop [] {
     let unit = unit
     systemctl stop $unit.unit
