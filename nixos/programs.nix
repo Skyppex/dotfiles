@@ -8,6 +8,7 @@
     bluez
     bluez-tools
     chezmoi
+    kdePackages.dolphin
     hyprlock
     mangohud
     pamixer
