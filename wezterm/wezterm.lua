@@ -75,13 +75,6 @@ local config = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = act({ SendString = "\x01" }) },
 		{
-			key = "q",
-			mods = "CTRL",
-			action = wezterm.action_callback(function(window, pane)
-				act.SendString(pane:get_current_working_dir())
-			end),
-		},
-		{
 			key = "w",
 			mods = "LEADER|CTRL",
 			action = wezterm.action_callback(function(window, pane)
@@ -113,24 +106,41 @@ local config = {
 
 					local prog_label
 					local prog_args
+					local remote_cwd
 
 					if tab:get_title() == "nu" then
+						wezterm.log_info("creating nvim")
 						prog_label = "nvim"
 						prog_args = { "nvim" }
 					elseif tab:get_title() == "ssh" then
+						wezterm.log_info("creating nvim_ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
+						local cwd = pane:get_current_working_dir().file_path
 						prog_label = "nvim_ssh"
-						prog_args = { "ssh", "-t", server, "bash -l -c nvim" }
+						prog_args = {
+							"ssh",
+							"-t",
+							server,
+							"cd " .. cwd .. " && bash -l -c nvim",
+						}
+						remote_cwd = cwd
 					elseif tab:get_title() == "nvim_ssh" then
+						wezterm.log_info("creating ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
+						local cwd = wezterm.GLOBAL.ssh_cwd_by_pane[tostring(pane:pane_id())]
 						prog_label = "ssh"
-						prog_args = { "ssh", server }
+						prog_args = {
+							"ssh",
+							"-t",
+							server,
+							"cd " .. cwd .. " && bash -l -c nu",
+						}
+						remote_cwd = cwd
 					else
+						wezterm.log_info("creating nu")
 						prog_label = "nu"
 						prog_args = { "nu" }
 					end
-
-					wezterm.log_info(window:window_id())
 
 					window:perform_action(
 						act.SpawnCommandInNewTab({
@@ -140,7 +150,11 @@ local config = {
 						pane
 					)
 
-					win:tabs()[2]:set_title(prog_label)
+					local new_tab = win:tabs()[2]
+					new_tab:set_title(prog_label)
+					local new_pane_id = new_tab:active_pane():pane_id()
+					wezterm.GLOBAL.ssh_cwd_by_pane = wezterm.GLOBAL.ssh_cwd_by_pane or {}
+					wezterm.GLOBAL.ssh_cwd_by_pane[tostring(new_pane_id)] = remote_cwd
 				end
 			end),
 		},
