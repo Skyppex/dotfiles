@@ -1,3 +1,7 @@
+export def main [] {
+    units | explore
+}
+
 export def units [] {
     systemctl list-units --output json | from json
 }
