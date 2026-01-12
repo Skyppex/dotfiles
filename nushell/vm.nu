@@ -136,6 +136,8 @@ export def kill [name?: string] {
     virsh --connect $vm.connection destroy $vm.name
 }
 
+export alias rm = kill
+
 export def dominfo [name?: string] {
     let vm = if ($name | is-empty) {
         ls | select-vm
