@@ -64,6 +64,14 @@ let theme = {
     shape_vardecl: $colors.pink
 }
 
+def emit-osc7 [] {
+    let host = (sys host | get hostname | str trim)
+    let pwd = $env.PWD
+
+    # OSC 7 ; file://host/path ST
+    print (ansi --osc $"7;file://($host)($pwd)") + (ansi string_terminator)
+}
+
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
@@ -196,12 +204,11 @@ $env.config = {
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
             PWD: [{ ||
-                if (which direnv | is-empty) {
-                    print "direnv not found"
-                    return
+                if (which direnv | is-not-empty) {
+                    direnv export json | from json | default {} | load-env
                 }
 
-                direnv export json | from json | default {} | load-env
+                emit-osc7
             }] 
         }
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
