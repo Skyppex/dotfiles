@@ -75,6 +75,13 @@ local config = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = act({ SendString = "\x01" }) },
 		{
+			key = "q",
+			mods = "CTRL",
+			action = wezterm.action_callback(function(window, pane)
+				act.SendString(pane:get_current_working_dir())
+			end),
+		},
+		{
 			key = "w",
 			mods = "LEADER|CTRL",
 			action = wezterm.action_callback(function(window, pane)
