@@ -73,7 +73,6 @@ export def start [name?: string] {
 
 export alias up = start
 export alias u = start
-export alias s = start
 
 export def suspend [name?: string] {
     let vm = if ($name | is-empty) {
@@ -161,6 +160,7 @@ export def dominfo [name?: string] {
 export alias info = dominfo
 export alias i = dominfo
 export alias status = dominfo
+export alias s = dominfo
 
 def select-vm []: table<id: string, name: string, state: string, connection: string> -> record<id: string, name: string, state: string, connection: string> {
     let vms = $in
