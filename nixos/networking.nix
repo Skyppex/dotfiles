@@ -2,7 +2,6 @@
   networking.hostName = "tower"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
   networking.networkmanager.enable = true;
 
   networking.interfaces.eno1 = {
@@ -29,7 +28,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   hardware.bluetooth = {
