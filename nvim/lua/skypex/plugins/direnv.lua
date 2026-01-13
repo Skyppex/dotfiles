@@ -3,5 +3,5 @@ local function config()
 end
 
 return require("skypex.utils").local_plugin("direnv.nvim", config, function()
-	return { "skyppex/direnv.nvim", config = config }
+	return { "NotAShelf/direnv.nvim", config = config }
 end)
