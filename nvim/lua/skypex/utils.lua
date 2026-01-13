@@ -1,5 +1,18 @@
 local M = {}
 
+function M.get_hostname()
+	local f = io.popen("hostname")
+
+	if not f then
+		return nil
+	end
+
+	local hostname = f:read("*l")
+	f:close()
+
+	return hostname
+end
+
 --- @return string, integer
 function M.get_home()
 	local home_drive = os.getenv("HOMEDRIVE")
@@ -76,7 +89,7 @@ function M.get_game_dev_path()
 		return "D:/Game Dev/Unity Projects"
 	end
 
-	return nil
+	return M.get_code_path()
 end
 
 --- @return string

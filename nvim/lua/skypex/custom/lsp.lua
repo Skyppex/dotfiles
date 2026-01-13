@@ -1,5 +1,6 @@
+local utils = require("skypex.utils")
+
 local function setup_proof(lspconfig, configs, capabilities)
-	local utils = require("skypex.utils")
 	local code_path = utils.get_code_path()
 	local proof_path = code_path .. "/proof"
 	local proof_exe = nil
@@ -237,17 +238,29 @@ local servers = {
 			},
 		},
 	},
-	-- nixd = {
-	-- 	cmd = { "nixd", "--inlay-hints=true", "--semantic-tokens=true" },
-	-- 	capabilities = capabilities,
-	-- 	filetypes = { "nix" },
-	-- 	root_markers = { "flake.nix", ".git" },
-	-- 	settings = {
-	-- 		nixpkgs = {
-	-- 			expr = "import <nixpkgs> {}",
-	-- 		},
-	-- 	},
-	-- },
+	nixd = {
+		cmd = { "nixd", "--inlay-hints=true" },
+		capabilities = capabilities,
+		filetypes = { "nix" },
+		root_markers = { "flake.nix", ".git" },
+		settings = {
+			nixpkgs = {
+				expr = "import <nixpkgs> {}",
+			},
+			options = {
+				nixos = {
+					expr = '(builtins.getFlake "'
+						.. os.getenv("HOME")
+						.. '/.config/nixos").nixosConfigurations.'
+						.. utils.get_hostname()
+						.. ".options",
+				},
+				-- home_manager = {
+				-- 	expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."ruixi@k-on".options',
+				-- },
+			},
+		},
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
