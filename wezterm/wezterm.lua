@@ -107,11 +107,13 @@ local config = {
 					local prog_label
 					local prog_args
 					local remote_cwd
+					local cwd
 
 					if tab:get_title() == "nu" then
 						wezterm.log_info("creating nvim")
 						prog_label = "nvim"
 						prog_args = { "nvim" }
+						cwd = pane:get_current_working_dir().file_path
 					elseif tab:get_title() == "ssh" then
 						wezterm.log_info("creating nvim_ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
@@ -140,12 +142,17 @@ local config = {
 						wezterm.log_info("creating nu")
 						prog_label = "nu"
 						prog_args = { "nu" }
+						cwd = pane:get_current_working_dir().file_path
 					end
+
+					-- strip trailing + if it exists
+					cwd = cwd:gsub("%+$", "")
 
 					window:perform_action(
 						act.SpawnCommandInNewTab({
 							label = prog_label,
 							args = prog_args,
+							cwd = cwd,
 						}),
 						pane
 					)
