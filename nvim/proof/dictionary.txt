@@ -942,3 +942,4 @@ fetchurl
 unescape
 sqlserver
 dsl
+sysname
