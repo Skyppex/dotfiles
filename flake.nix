@@ -52,7 +52,7 @@
           ruff
           pyright
           beautysh
-          nil
+          nixd
           alejandra
         ];
       };
