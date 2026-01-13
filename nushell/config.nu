@@ -65,11 +65,11 @@ let theme = {
 }
 
 def emit-osc7 [] {
-    let host = (sys host | get hostname | str trim)
-    let pwd = $env.PWD
+    let host = sys host | get hostname | str trim
+    let pwd = $env.PWD | url encode
 
     # OSC 7 ; file://host/path ST
-    print (ansi --osc $"7;file://($host)($pwd)") + (ansi string_terminator)
+    print --no-newline (ansi --osc $"7;file://($host)($pwd)") + (ansi string_terminator)
 }
 
 # The default config record. This is where much of your global configuration is setup.
