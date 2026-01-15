@@ -117,27 +117,29 @@ local config = {
 					elseif tab:get_title() == "ssh" then
 						wezterm.log_info("creating nvim_ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
-						local cwd = pane:get_current_working_dir().file_path
+						local local_cwd = pane:get_current_working_dir().file_path:gsub("%+$", "")
+
 						prog_label = "nvim_ssh"
 						prog_args = {
 							"ssh",
 							"-t",
 							server,
-							"cd " .. cwd .. " && bash -l -c nvim",
+							"cd " .. local_cwd .. " && bash -l -c nvim",
 						}
-						remote_cwd = cwd
+						remote_cwd = local_cwd
 					elseif tab:get_title() == "nvim_ssh" then
 						wezterm.log_info("creating ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
-						local cwd = wezterm.GLOBAL.ssh_cwd_by_pane[tostring(pane:pane_id())]
+						local local_cwd = wezterm.GLOBAL.ssh_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "")
+
 						prog_label = "ssh"
 						prog_args = {
 							"ssh",
 							"-t",
 							server,
-							"cd " .. cwd .. " && bash -l -c nu",
+							"cd " .. local_cwd .. " && bash -l -c nu",
 						}
-						remote_cwd = cwd
+						remote_cwd = local_cwd
 					else
 						wezterm.log_info("creating nu")
 						prog_label = "nu"
@@ -145,8 +147,13 @@ local config = {
 						cwd = pane:get_current_working_dir().file_path
 					end
 
-					-- strip trailing + if it exists
-					cwd = cwd:gsub("%+$", "")
+					wezterm.log_info("cwd: " .. tostring(cwd))
+
+					if cwd then
+						-- strip trailing + if it exists
+						cwd = cwd:gsub("%+$", "")
+						wezterm.log_info("cwd-fixed: " .. tostring(cwd))
+					end
 
 					window:perform_action(
 						act.SpawnCommandInNewTab({
