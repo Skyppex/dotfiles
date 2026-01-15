@@ -11,6 +11,7 @@ local background = require("background")
 local utils = require("utils")
 local colors = require("colors")
 local ss = require("smart-splits")
+local ssh = require("ssh")
 
 local act = wezterm.action
 
@@ -120,12 +121,7 @@ local config = {
 						local local_cwd = pane:get_current_working_dir().file_path:gsub("%+$", "")
 
 						prog_label = "nvim_ssh"
-						prog_args = {
-							"ssh",
-							"-t",
-							server,
-							"cd " .. local_cwd .. " && bash -l -c nvim",
-						}
+						prog_args = ssh.nvim_ssh_args(server, local_cwd)
 						remote_cwd = local_cwd
 					elseif tab:get_title() == "nvim_ssh" then
 						wezterm.log_info("creating ssh")
@@ -133,12 +129,7 @@ local config = {
 						local local_cwd = wezterm.GLOBAL.ssh_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "")
 
 						prog_label = "ssh"
-						prog_args = {
-							"ssh",
-							"-t",
-							server,
-							"cd " .. local_cwd .. " && bash -l -c nu",
-						}
+						prog_args = ssh.nu_ssh_args(server, local_cwd)
 						remote_cwd = local_cwd
 					else
 						wezterm.log_info("creating nu")
@@ -187,7 +178,10 @@ local config = {
 					local server = utils.strip_suffix(workspace, "_ssh")
 
 					window:perform_action(
-						act.SplitVertical({ domain = "CurrentPaneDomain", args = { "ssh", server } }),
+						act.SplitVertical({
+							domain = "CurrentPaneDomain",
+							args = ssh.ssh_args(server),
+						}),
 						pane
 					)
 				end
@@ -207,7 +201,10 @@ local config = {
 					local server = utils.strip_suffix(workspace, "_ssh")
 
 					window:perform_action(
-						act.SplitHorizontal({ domain = "CurrentPaneDomain", args = { "ssh", server } }),
+						act.SplitHorizontal({
+							domain = "CurrentPaneDomain",
+							args = ssh.ssh_args(server),
+						}),
 						pane
 					)
 				end

@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local utils = require("utils")
 local act = wezterm.action
 local mux = wezterm.mux
+local ssh = require("ssh")
 
 local M = {}
 
@@ -195,38 +196,10 @@ M.create_session_hook = function()
 	end)
 end
 
-local function get_ssh_hosts()
-	local config_path = os.getenv("HOME") .. "/.ssh/config"
-	local hosts = {}
-
-	local file = io.open(config_path, "r")
-
-	if not file then
-		return hosts
-	end
-
-	for line in file:lines() do
-		local trimmed = line:match("^%s*(.-)%s*$")
-
-		if trimmed ~= "" and not trimmed:match("^#") then
-			local rest = trimmed:match("^Host%s+(.+)$")
-
-			if rest then
-				for host in rest:gmatch("%S+") do
-					table.insert(hosts, host)
-				end
-			end
-		end
-	end
-
-	file:close()
-	return hosts
-end
-
 M.toggle_ssh = function(window, pane)
 	local servers = {}
 
-	for _, host in ipairs(get_ssh_hosts()) do
+	for _, host in ipairs(ssh.hosts()) do
 		table.insert(servers, host)
 	end
 
@@ -251,15 +224,13 @@ M.toggle_ssh = function(window, pane)
 					wezterm.log_info("Selected " .. label)
 					wezterm.log_info("Id " .. id)
 
-					local ssh_args = { "ssh", label }
-
 					win:perform_action(
 						act.SwitchToWorkspace({
 							name = id,
 							spawn = {
 								label = label .. "_ssh",
 								cwd = os.getenv("HOME"),
-								args = ssh_args,
+								args = ssh.ssh_args(label),
 							},
 						}),
 						pane
