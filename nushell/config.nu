@@ -204,11 +204,11 @@ $env.config = {
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
             PWD: [{ ||
+                emit-osc7
+
                 if (which direnv | is-not-empty) {
                     direnv export json | from json | default {} | load-env
                 }
-
-                emit-osc7
             }] 
         }
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
