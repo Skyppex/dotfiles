@@ -34,9 +34,24 @@ local opts = {
 			}
 
 			for _, v in ipairs(scrolling_inputs) do
-				vim.keymap.set({ "n", "v", "i", "x", "o" }, v, function()
-					return "<nop>"
-				end, { buffer = buf, noremap = true, silent = true, expr = false })
+				map("nvixo", v, "<nop>", nil, false, buf)
+			end
+
+			local newline_inputs_normal = {
+				"o",
+				"O",
+			}
+
+			local newline_inputs_insert = {
+				"<cr>",
+			}
+
+			for _, v in ipairs(newline_inputs_normal) do
+				map("n", v, "<nop>", nil, false, buf)
+			end
+
+			for _, v in ipairs(newline_inputs_insert) do
+				map("i", v, "<nop>", nil, false, buf)
 			end
 
 			-- add buf-local binds to save and close
