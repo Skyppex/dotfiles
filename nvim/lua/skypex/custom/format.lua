@@ -56,7 +56,7 @@ local formatters_by_ft = {
 	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 }
 
-local formatters = {
+local external_formatters = {
 	csharpier = {
 		command = "csharpier",
 		args = { "format", "--write-stdout" },
@@ -106,7 +106,7 @@ end
 
 local ensure_installed = extract_formatters()
 
-for formatter, _ in pairs(formatters) do
+for formatter, _ in pairs(external_formatters) do
 	ensure_installed[formatter] = nil
 end
 
@@ -147,7 +147,7 @@ conform.setup({
 			timeout = 5000,
 		}
 	end,
-	formatters = formatters,
+	formatters = external_formatters,
 	formatters_by_ft = formatters_by_ft,
 })
 
