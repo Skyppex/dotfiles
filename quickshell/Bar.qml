@@ -30,7 +30,7 @@ Scope {
             right: true
         }
 
-        implicitHeight: 32
+        implicitHeight: Math.max(Math.round(activeScreen.height * 0.022), 32)
 
         Album {
             anchors.left: parent.left
