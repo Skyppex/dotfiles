@@ -69,6 +69,13 @@ map("n", "æD", function()
 	vim.diagnostic.goto_next({ wrap = true })
 end, "Go to next diagnostic")
 
+map("n", "<leader>od", function()
+	vim.diagnostic.open_float(nil, {
+		focusable = true,
+		scope = "cursor",
+	})
+end, "Focus diagnostic window")
+
 map("n", "<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
 map("n", "<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
 
