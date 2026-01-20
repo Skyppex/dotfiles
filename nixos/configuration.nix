@@ -12,6 +12,8 @@
     ./virtualisation.nix
     ./language.nix
     ./services.nix
+    ./security.nix
+    ./ssh.nix
     ./audio.nix
     ./gaming.nix
   ];
