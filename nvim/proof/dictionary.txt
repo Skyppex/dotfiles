@@ -944,3 +944,8 @@ sqlserver
 dsl
 sysname
 janky
+multiattack
+xp
+truesight
+blindsight
+weavewing
