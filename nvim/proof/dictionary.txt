@@ -949,3 +949,10 @@ xp
 truesight
 blindsight
 weavewing
+yubikey
+yubioath
+pcscd
+udev
+yubico
+gitlab
+bw
