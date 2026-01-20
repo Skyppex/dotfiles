@@ -10,6 +10,7 @@ in
   with pkgsUnfree; [
     ani-cli
     ani-skip
+    bitwarden-cli
     bitwarden-desktop
     blender
     bottles
