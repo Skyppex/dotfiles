@@ -761,6 +761,7 @@ use ~/.config/nushell/vm.nu
 use ~/.config/nushell/skate.nu
 use ~/.config/nushell/sc.nu
 use ~/.config/nushell/hc.nu
+use ~/.config/nushell/pass.nu
 
 # Pull the dotfiles from the remote repository
 def pull [] {
