@@ -20,3 +20,6 @@ mopidy/mopidy.conf
 /.direnv
 /nixos/hardware-configuration.nix
 /nixos/local-*.nix
+/nixos/ssh/*
+!/nixos/ssh/
+!/nixos/ssh/*.pub
