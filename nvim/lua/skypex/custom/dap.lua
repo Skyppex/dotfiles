@@ -94,7 +94,7 @@ M.dap = function()
 		dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 	end, "Log Point")
 
-	map("n", "<leader>ds", function()
+	map("n", "<leader>dq", function()
 		dap.terminate()
 	end, "Terminate")
 
