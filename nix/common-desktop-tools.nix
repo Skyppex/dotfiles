@@ -1,6 +1,8 @@
 {pkgsUnfree}:
 with pkgsUnfree; [
   bluetuith
+  bitwarden-cli
+  bitwarden-desktop
   cliphist
   dbeaver-bin
   discord
