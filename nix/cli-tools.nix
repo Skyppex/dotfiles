@@ -78,6 +78,7 @@
     nodejs
     nushell
     nvd
+    opencode
     openssh
     pastel
     ripgrep
