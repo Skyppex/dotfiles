@@ -7,7 +7,7 @@ def --env y [...args] {
     let cwd = (open $tmp)
 
     if $cwd != "" and $cwd != $env.PWD {
-        enter $cwd
+        cd-old $cwd
     }
 
     rm -fp $tmp
@@ -34,7 +34,7 @@ def rev-parse [glob: glob]: nothing -> list<path> {
 
     while ($results | is-empty) {
         let pwd = pwd
-        enter ..
+        cd-old ..
 
         if (pwd) == $pwd {
             print "No results found"

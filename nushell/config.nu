@@ -1,4 +1,5 @@
 # Nushell Config File
+use std/dirs
 
 source ~/.config/nushell/colors.nu
 
@@ -203,8 +204,16 @@ $env.config = {
         pre_prompt: [{ null }] # run before the prompt is shown
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
-            PWD: [{ ||
+            PWD: [{ |before, after|
                 emit-osc7
+
+                let dirs = dirs
+
+                if ($before | is-not-empty) and not ($dirs | any {|d| $before == $d.path}) {
+                    dirs drop
+                    dirs add $before
+                    dirs add $after
+                }
 
                 if (which direnv | is-not-empty) {
                     direnv export json | from json | default {} | load-env
@@ -735,6 +744,9 @@ $env.PROMPT_MULTILINE_INDICATOR = ""
 
 use std/dirs shells-aliases *
 zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
+
+# Keep the old cd if i need it. Can also just use ^cd if needed though
+alias cd-old = cd
 
 use ~/.cache/starship/init.nu
 source ~/.config/nushell/fs.nu

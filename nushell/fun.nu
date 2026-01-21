@@ -91,7 +91,7 @@ def img [
         $query = $".png$ | .jpg$ | .jpeg$ | .gif$ | .bmp$ | .tiff$ | .webp$ | .ico$ | .svg$"
     }
 
-    enter $search_root
+    cd-old $search_root
 
     let file_name = fzf --height 40% --layout=reverse -0 -1 --query $query
 

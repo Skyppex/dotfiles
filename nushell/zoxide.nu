@@ -13,11 +13,11 @@ def --env z [
                 | to text
                 | fzf --preview='dir {}')
 
-            enter $target
+            cd-old $target
             return
         }
 
-        enter $env.HOME
+        cd-old $env.HOME
         return
     }
 
@@ -27,13 +27,13 @@ def --env z [
 
     if not $fzf_only {
         if (($path | str ends-with "/") or ($path | str ends-with "\\")) {
-            enter $path 
+            cd-old $path 
             return
         } else {
             let immediate = if ($path_split | length) <= 1 {
                 if ($path | str contains "/") or ($path | str contains "\\") {
                     let dirname = $path | path dirname
-                    enter $dirname
+                    cd-old $dirname
                     let basename = $path | path basename
                     let x = fd --type d --max-depth 1 --full-path ($basename | path expand) --fixed-strings
                     p
@@ -46,12 +46,12 @@ def --env z [
             }
 
             if ($immediate | is-not-empty) {
-                enter $immediate
+                cd-old $immediate
                 return
             }
         }
 
-        do --env -i { enter (zoxide query ...$path_split) }
+        do --env -i { cd-old (zoxide query ...$path_split) }
     }
 
     let new = $env.PWD
@@ -74,12 +74,9 @@ def --env z [
             return
         }
 
-        enter $target
+        cd-old $target
     }
 }
-
-# Keep the old cd if i need it. Can also just use ^cd if needed though
-alias cd-old = cd
 
 # Alias for z making it into cd
 alias cd = z

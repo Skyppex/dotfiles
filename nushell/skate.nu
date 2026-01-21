@@ -27,7 +27,7 @@ export def --wrapped main [
         return
     }
 
-    print (^skate ...$rest)
+    ^skate ...$rest
 }
 
 export def help [] {
