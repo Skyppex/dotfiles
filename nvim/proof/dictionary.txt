@@ -956,3 +956,5 @@ udev
 yubico
 gitlab
 bw
+opencode
+dq
