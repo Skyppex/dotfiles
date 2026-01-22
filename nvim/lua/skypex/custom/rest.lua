@@ -26,8 +26,8 @@ kulala.setup({
 local ui = require("kulala.ui")
 
 map("n", "<leader>rr", kulala.run, "Run http request")
-map("n", "ær", ui.jump_next, "Goto the next request")
-map("n", "år", ui.jump_prev, "Goto the previous request")
+map("n", "ær", kulala.jump_next, "Goto the next request")
+map("n", "år", kulala.jump_prev, "Goto the previous request")
 map("n", "<leader>rb", ui.show_body, "Show response body")
 map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
 map("n", "<leader>rh", ui.show_headers_body, "Show headers")
