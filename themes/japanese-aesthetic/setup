@@ -354,6 +354,15 @@ $qml | save -f $path
 let chezmoi_quickshell_path = ($env.CHEZMOI_PATH | path join "quickshell")
 hook --force --relative --source $path --destination ($chezmoi_quickshell_path | path join "Theme.qml")
 
+# setup opencode
+
+let opencode_path = $theme | path join "opencode.json"
+mut opencode = open $opencode_path
+let defs = $colors
+$opencode.defs = $defs
+mkdir ($env.CHEZMOI_PATH | path join "opencode/themes")
+$opencode | save ($env.CHEZMOI_PATH | path join "opencode/themes/japanese-aesthetic.json") --force
+
 mkdir ~/.local/share/icons/japanese-aesthetic
 cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 
