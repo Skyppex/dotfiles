@@ -960,3 +960,5 @@ opencode
 dq
 multifield
 subfilter
+websocat
+grpcurl
