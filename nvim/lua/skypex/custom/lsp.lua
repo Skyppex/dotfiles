@@ -42,7 +42,7 @@ local function setup_proof(lspconfig, configs, capabilities)
 	})
 end
 
-vim.lsp.set_log_level("DEBUG")
+vim.lsp.set_log_level("OFF")
 
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
