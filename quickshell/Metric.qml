@@ -10,13 +10,14 @@ Item {
     property int maximum: 100
     property bool editable: false
     property int labelLeftMargin: 0
+    property real size: 1
 
     height: Math.max(label.implicitHeight, metric.implicitHeight)
 
     Text {
         id: label
         font.family: Theme.primary_style
-        font.pixelSize: 14
+        font.pixelSize: 14 * size
         color: Theme.primary
         anchors.left: parent.left
         anchors.leftMargin: root.labelLeftMargin
@@ -34,12 +35,12 @@ Item {
             id: metric
             text: root.value + "%"
             font.family: Theme.primary_style
-            font.pixelSize: 14
+            font.pixelSize: 14 * size
             color: Theme.primary
             anchors.horizontalCenter: metricArea.horizontalCenter
-            anchors.horizontalCenterOffset: 4
+            anchors.horizontalCenterOffset: 4 * size
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 1
+            anchors.verticalCenterOffset: 1 * size
         }
     }
 }

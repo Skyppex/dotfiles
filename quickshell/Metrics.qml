@@ -3,6 +3,7 @@ import QtQuick
 Row {
     id: root
     property int elementWidth: 65
+    property real size: 1
 
     property var metrics: [({
                 label: () => Volume.volume > 30 ? "" : Volume.volume > 0 ? "" : "",
@@ -49,10 +50,10 @@ Row {
         model: visibleMetrics
 
         delegate: Row {
-            spacing: 12
+            spacing: 12 * size
 
             Separator {
-                thickness: 1
+                thickness: 1 * size
                 lineColor: Theme.quaternary
                 fadePower: 0.4
                 enabled: index > 0
@@ -64,9 +65,10 @@ Row {
                 value: modelData.value()
                 minimum: modelData.minimum
                 maximum: modelData.maximum
-                width: root.elementWidth
+                width: root.elementWidth * size
                 enabled: modelData.healthy()
                 visible: modelData.healthy()
+                size: root.size
             }
         }
     }

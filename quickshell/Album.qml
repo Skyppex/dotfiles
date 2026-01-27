@@ -9,6 +9,7 @@ Item {
 
     anchors.top: parent.top
     anchors.bottom: parent.bottom
+    property real size: 1
 
     Image {
         id: art
@@ -18,7 +19,7 @@ Item {
         cache: false
         sourceSize: Qt.size(640, 640)
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: height * 0.190625
+        anchors.verticalCenterOffset: height * 0.190625 * size
     }
 
     Text {
@@ -26,8 +27,8 @@ Item {
         text: Media.mediaText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 1
-        font.pixelSize: 14
+        anchors.verticalCenterOffset: 1 * size
+        font.pixelSize: 14 * size
         font.family: Theme.primary_style
         color: Theme.primary
     }

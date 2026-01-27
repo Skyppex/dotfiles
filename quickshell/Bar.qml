@@ -16,6 +16,8 @@ Scope {
         return Quickshell.screens[0];
     }
 
+    property real size: activeScreen.physicalPixelDensity / 4.250980392156863
+
     PanelWindow {
         id: bar
 
@@ -30,29 +32,24 @@ Scope {
             right: true
         }
 
-        implicitHeight: Math.max(Math.round(activeScreen.height * 0.022), 32)
+        implicitHeight: Math.round(activeScreen.height * size * 0.022)
 
         Album {
             anchors.left: parent.left
+            size: root.size
         }
 
         Clock {
             anchors.centerIn: parent
+            size: root.size
         }
 
         Metrics {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            spacing: 12
-            anchors.rightMargin: 10
-        }
-    }
-
-    Connections {
-        target: PreferredBarMonitor
-        function onPreferredBarMonitorChanged(monitor) {
-            root.preferredScreen = monitor;
-            bar.screen = activeScreen;
+            spacing: 12 * root.size
+            anchors.rightMargin: 10 * root.size
+            size: root.size
         }
     }
 }
