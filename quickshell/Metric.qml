@@ -27,9 +27,9 @@ Item {
     Item {
         id: metricArea
         anchors.left: label.right
-        anchors.right: root.right
-        anchors.top: root.top
-        anchors.bottom: root.bottom
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
         Text {
             id: metric
@@ -40,7 +40,7 @@ Item {
             anchors.horizontalCenter: metricArea.horizontalCenter
             anchors.horizontalCenterOffset: 4 * size
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 1 * size
+            anchors.verticalCenterOffset: size
         }
     }
 }

@@ -52,6 +52,8 @@ Row {
         delegate: Row {
             spacing: 12 * size
 
+            anchors.verticalCenter: parent.verticalCenter
+
             Separator {
                 thickness: 1 * size
                 lineColor: Theme.quaternary
@@ -69,6 +71,7 @@ Row {
                 enabled: modelData.healthy()
                 visible: modelData.healthy()
                 size: root.size
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
     }
