@@ -47,6 +47,7 @@
     docker
     dotnet
     fd
+    figlet
     file
     fortune
     fzf
