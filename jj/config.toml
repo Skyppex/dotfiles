@@ -2,5 +2,8 @@
 name = "Brage Ingebrigtsen"
 email = "84551201+Skyppex@users.noreply.github.com"
 
-[ui.diff]
-tool = ["difft", "--width=200", "--color=always", "$left", "$right"]
+[ui]
+diff-formatter = ["difft", "--width=200", "--color=always", "$left", "$right"]
+pager = "less"
+paginate = "never"
+editor = "nvim"
