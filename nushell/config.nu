@@ -749,6 +749,7 @@ zoxide init --no-cmd nushell | save -f ~/.config/zoxide/.zoxide.nu
 alias cd-old = cd
 
 use ~/.cache/starship/init.nu
+source ~/.config/nushell/str-utils.nu
 source ~/.config/nushell/fs.nu
 source ~/.config/nushell/utils.nu
 source ~/.config/nushell/history.nu

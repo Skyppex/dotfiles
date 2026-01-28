@@ -13,7 +13,7 @@ alias gs = git status
 alias gsp = git status --porcelain
 
 # Git log
-alias gl = git log --ext-diff --all --graph --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
+alias gl = git log --ext-diff --graph --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
 
 # Git diff
 alias gd = git diff

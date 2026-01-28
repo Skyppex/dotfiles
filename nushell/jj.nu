@@ -230,14 +230,14 @@ def jb [
     }
 
     # if $show_current {
-    #     return (git bookmark --show-current)
+    #     return (git branch --show-current)
     # }
 
     jj bookmark list
 }
 
 # Jujutsu rename bookmark using fzf
-def "jb mv" [] {
+def "jb rn" [] {
     let bookmarks = jj bookmark list
     | lines
     | each { |it|
@@ -270,6 +270,34 @@ def "jb mv" [] {
     jj bookmark rename $selected $new_name
 }
 
+# Jujutsu move bookmark using fzf
+def "jb mv" [
+    to?: string
+] {
+    let bookmarks = jj bookmark list
+    | lines
+    | each { |it|
+        $it | str before ":"
+    }
+    | to text
+
+    let selected = $bookmarks | fzf --height 40% --layout=reverse -0 -1
+
+    if ($selected | is-empty) {
+        print "No bookmark selected"
+        return
+    }
+
+    mut to = $to
+
+    if ($to | is-empty) {
+        $to = "@"
+    }
+
+    print $"Moving ($selected) to ($to)"
+    jj bookmark move $selected
+}
+
 # Jujutsu bookmark delete using fzf
 def "jb rm" [] {
     let bookmarks = jj bookmark list
@@ -290,7 +318,6 @@ def "jb rm" [] {
     print $"Removing bookmarks: ($selected)"
     jj bookmark delete ...($selected | split row "\n")
 }
-
 
 # Jujutsu new on main or master
 def jcm [] {
