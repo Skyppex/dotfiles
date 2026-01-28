@@ -170,7 +170,7 @@ def jr [
     return $remotes
 }
 
-# Git remote add
+# Jujutsu remote add
 def "jr add" [
     name: string
     url: string
@@ -178,7 +178,7 @@ def "jr add" [
     jj git remote add $name $url
 }
 
-# Git remote remove using fzf
+# Jujutsu remote remove using fzf
 def "jr rm" [] {
     let target = jr -fn
 
@@ -192,7 +192,7 @@ def "jr rm" [] {
     jj git remote remove $name
 }
 
-# Git remote rename using fzf
+# Jujutsu remote rename using fzf
 def "jr mv" [
     --old(-o): string,
     --new(-n): string
@@ -219,7 +219,7 @@ def "jr mv" [
     jj git remote rename --quiet $old $new
 }
 
-# Git branch alias
+# Jujutsu branch alias
 def jb [
     --all(-a)
     # --show-current(-s)
@@ -270,7 +270,7 @@ def "jb mv" [] {
     jj bookmark rename $selected $new_name
 }
 
-# Git branch delete using fzf
+# Jujutsu bookmarks delete using fzf
 def "jb rm" [] {
     let bookmarks = jj bookmark list
     | lines
