@@ -90,29 +90,29 @@ def jcc [
     jj describe --message $"($summary)\n\n($details)"
 }
 
-# Jujutsu checkout but with fzf for branch selection
+# Jujutsu checkout but with fzf for bookmark selection
 def jc [
-    --branch(-b): string # Create and checkout a new branch
+    --bookmark(-b): string # Create and checkout a new bookmark
 ] {
-    let branch = if ($branch | is-not-empty) {
-        ($branch | str join "-")
+    let bookmark = if ($bookmark | is-not-empty) {
+        ($bookmark | str join "-")
     } else {
         ""
     }
 
-    if ($branch | is-not-empty) {
+    if ($bookmark | is-not-empty) {
         jj new
-        jj bookmark set $branch
+        jj bookmark set $bookmark
         return
     }
 
-    mut branch = $branch;
+    mut bookmark = $bookmark;
 
-    if ($branch | is-empty) {
-        $branch = "";
+    if ($bookmark | is-empty) {
+        $bookmark = "";
     }
 
-    let branches = jj bookmark list --all-remotes 
+    let bookmarks = jj bookmark list --all-remotes 
     | lines 
     | where ($it | str starts-with " " | n)
     | each {|it|
@@ -120,17 +120,17 @@ def jc [
         $it | str substring ..($colon - 1)
     }
 
-    let $branch = $branches
+    let $bookmark = $bookmarks
     | uniq 
     | to text 
-    | fzf --height 40% --layout=reverse -1 -0 --query $branch
+    | fzf --height 40% --layout=reverse -1 -0 --query $bookmark
 
-    if ($branch | is-empty) {
-        print "No branch selected"
+    if ($bookmark | is-empty) {
+        print "No bookmark selected"
         return
     }
 
-    jj new $branch
+    jj new $bookmark
 }
 
 def jr [
@@ -219,7 +219,7 @@ def "jr mv" [
     jj git remote rename --quiet $old $new
 }
 
-# Jujutsu branch alias
+# Jujutsu bookmark alias
 def jb [
     --all(-a)
     # --show-current(-s)
@@ -230,7 +230,7 @@ def jb [
     }
 
     # if $show_current {
-    #     return (git branch --show-current)
+    #     return (git bookmark --show-current)
     # }
 
     jj bookmark list
@@ -270,7 +270,7 @@ def "jb mv" [] {
     jj bookmark rename $selected $new_name
 }
 
-# Jujutsu bookmarks delete using fzf
+# Jujutsu bookmark delete using fzf
 def "jb rm" [] {
     let bookmarks = jj bookmark list
     | lines
