@@ -365,7 +365,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local no_config_servers = { "rust-analyzer" }
+local no_config_servers = { "rust_analyzer", "rust-analyzer" }
 local no_install_servers = { "nushell", "kulala_ls", "json_ls" }
 local configs = require("lspconfig.configs")
 
@@ -411,10 +411,20 @@ require("mason-lspconfig").setup({
 	automatic_enable = true,
 })
 
+local function should_not_configure(server_name)
+	for _, v in ipairs(no_config_servers) do
+		if server_name == v then
+			return true
+		end
+
+		return false
+	end
+end
+
 for server_name, config in pairs(servers) do
 	config = config or {}
 
-	if no_config_servers[server_name] ~= nil then
+	if should_not_configure(server_name) then
 		return
 	end
 
