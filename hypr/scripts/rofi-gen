@@ -1,0 +1,31 @@
+#!/usr/bin/env nu
+
+const modes = { 
+    int: [int]
+    float: [float]
+    uuid: [uuid]
+    url: [url]
+    ascii: ["ascii" "--size" "128B" "--printable-only"]
+    text: ["ascii" "--size" "128B" "--charset" " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"]
+    utf-8: ["unicode" "utf-8" "--size" "128B"]
+    utf-16: ["unicode" "utf-16" "--size" "128B"]
+    utf-32: ["unicode" "utf-32" "--size" "128B"]
+}
+
+let selected = $modes | columns | to text | rofi -dmenu -p mode
+
+let result = gen ...($modes | get $selected)
+
+let message = if $selected == ascii {
+    $"copied 128 bytes of ascii to clipboard"
+} else if $selected == text {
+    $"copied 128 bytes of text to clipboard"
+} else if $selected =~ utf {
+    $"copied 128 bytes of ($selected) unicode to clipboard"
+} else {
+    $"($result)\n\ncopied to clipboard"
+}
+
+$result | wl-copy
+
+notify-send "rofi-gen" $message
