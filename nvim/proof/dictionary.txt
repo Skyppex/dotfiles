@@ -963,3 +963,4 @@ subfilter
 websocat
 grpcurl
 figlet
+ffmpeg
