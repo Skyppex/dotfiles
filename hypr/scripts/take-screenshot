@@ -1,0 +1,10 @@
+#!/usr/bin/env nu
+
+const screenshot_tmp_file = "/tmp/hypr/screenshot.png"
+
+let region = slurp
+let image = grim -g $region -
+$image | save $screenshot_tmp_file --force
+
+notify-send --icon $screenshot_tmp_file "screenshot saved"
+$image | wl-copy
