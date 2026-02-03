@@ -238,6 +238,10 @@ local servers = {
 			},
 		},
 	},
+	vue_language_server = {
+		cmd = { "vue-language-server" },
+		capabilities = capabilities,
+	},
 	nixd = {
 		cmd = { "nixd", "--inlay-hints=true" },
 		capabilities = capabilities,
