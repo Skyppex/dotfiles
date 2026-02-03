@@ -369,5 +369,7 @@ cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 chezmoi apply --force
 
 # tell mako to refresh its config
-makoctl reload
+if (which makoctl | is-not-empty) {
+    makoctl reload
+}
 

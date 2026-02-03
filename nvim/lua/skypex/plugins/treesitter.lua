@@ -21,9 +21,9 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{
-		"dariuscorvus/tree-sitter-surrealdb.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = true,
-	},
+	-- {
+	-- 	"dariuscorvus/tree-sitter-surrealdb.nvim",
+	-- 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	-- 	config = true,
+	-- },
 }

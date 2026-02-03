@@ -1,5 +1,10 @@
 #!/usr/bin/env nu
 
+if (which swww | is-empty) {
+    print -e "swww not found"
+    return
+}
+
 while (swww query | complete | get exit_code) != 0 {
     sleep 0.2sec
 }

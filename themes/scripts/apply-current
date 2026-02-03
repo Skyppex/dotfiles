@@ -24,6 +24,11 @@ let lock_variant_display_name = $metadata.variant-display-names | get $config.lo
 let term_variant_display_name = $metadata.variant-display-names | get $config.term_variant
 let greet_variant_display_name = $metadata.variant-display-names | get $config.greet_variant
 
+if (which notify-send | is-empty) {
+    print -e "notify-send not found"
+    return
+}
+
 notify-send --expire-time=3000 Variants $"($display_name) - ($variant_display_name)
 Lock screen - ($lock_variant_display_name)
 Terminal - ($term_variant_display_name)
