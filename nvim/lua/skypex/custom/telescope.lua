@@ -59,7 +59,10 @@ local map = require("skypex.utils").map
 map("n", "<leader>sh", builtin.help_tags, "Search Help")
 map("n", "<leader>sk", builtin.keymaps, "Search Keymaps")
 map("n", "<leader>sf", function()
-	builtin.git_files({ show_untracked = true })
+	builtin.git_files({
+		show_untracked = true,
+		previewer = false,
+	})
 end, "Search Git Files")
 map("n", "<leader>sc", builtin.colorscheme, "Search Colorschemes")
 map("n", "<leader>st", builtin.builtin, "Search Telescope builtin")
@@ -77,6 +80,7 @@ map("n", "<leader>sg", function()
 
 	local opts = {
 		cwd = git_dir,
+		previewer = false,
 	}
 
 	builtin.live_grep(opts)
