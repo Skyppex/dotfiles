@@ -8,40 +8,55 @@ local M = {}
 
 local home = utils.get_home()
 local chezmoi_path = utils.get_chezmoi_path()
-local temp_path = utils.get_temp_path()
 local code_path = utils.get_code_path()
-local carweb_path
 local obsidian_path
-local game_dev_path = utils.get_game_dev_path()
+
+if utils.is_windows() then
+	home = "/home/brage"
+	chezmoi_path = home .. "/.local/share/chezmoi"
+	code_path = home .. "/dev/code"
+	obsidian_path = home .. "/obsidian"
+end
 
 if utils.is_home_computer_windows() then
-	carweb_path = code_path .. "/sentinel/commoncarweb"
 	obsidian_path = home .. "/OneDrive/Obsidian"
 else
-	carweb_path = code_path .. "/carweb"
 	obsidian_path = home .. "/obsidian"
 end
 
 M.toggle = function(window, pane)
 	local projects = {}
 
-	local fd_process = {
-		"fd",
-		"-HI",
-		"-td",
-		"^.git$",
-		"--max-depth=4",
-		"--prune",
-		temp_path,
-		code_path,
-		carweb_path,
-		chezmoi_path,
-		obsidian_path,
-		-- add more paths here
-	}
-
-	if game_dev_path ~= nil then
-		table.insert(fd_process, game_dev_path)
+	local fd_process
+	if utils.is_windows() then
+		fd_process = {
+			"wsl",
+			"--shell-type",
+			"login",
+			"fd",
+			"-HI",
+			"-td",
+			"^.git$",
+			"--max-depth=4",
+			"--prune",
+			code_path,
+			chezmoi_path,
+			obsidian_path,
+			-- add more paths here
+		}
+	else
+		fd_process = {
+			"fd",
+			"-HI",
+			"-td",
+			"^.git$",
+			"--max-depth=4",
+			"--prune",
+			code_path,
+			chezmoi_path,
+			obsidian_path,
+			-- add more paths here
+		}
 	end
 
 	local success, stdout, stderr = wezterm.run_child_process(fd_process)
@@ -77,8 +92,15 @@ M.toggle = function(window, pane)
 					wezterm.log_info("Selected " .. label)
 					wezterm.log_info("Id " .. id)
 
-					local nu_args = { "nu" }
-					local nvim_args = { "nvim" }
+					local nu_args
+					local nvim_args
+					if utils.is_windows() then
+						nu_args = { "wsl", "--shell-type", "login", "--cd", label, "nu" }
+						nvim_args = { "wsl", "--shell-type", "login", "--cd", label, "nvim" }
+					else
+						nu_args = { "nu" }
+						nvim_args = { "nvim" }
+					end
 
 					win:perform_action(
 						act.SwitchToWorkspace({
@@ -169,6 +191,12 @@ M.create_session_hook = function()
 
 		local cwd = pane:get_current_working_dir().file_path
 
+		if utils.is_windows() then
+			cwd = "/home/brage/.local/share/chezmoi"
+			wezterm.GLOBAL.wsl_cwd_by_pane = wezterm.GLOBAL.wsl_cwd_by_pane or {}
+			wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())] = cwd
+		end
+
 		wezterm.log_info(cwd)
 
 		if not cwd then
@@ -187,8 +215,14 @@ M.create_session_hook = function()
 		-- Update the tab title to indicate Nu shell
 		tab:set_title("nu")
 
+		local nvim_args = { "nvim" }
+
+		if utils.is_windows() then
+			nvim_args = { "wsl", "--shell-type", "login", "--cd", cwd, "nvim" }
+		end
+
 		local nvim_tab, _, _ = window:spawn_tab({
-			args = { "nvim" },
+			args = nvim_args,
 			cwd = cwd,
 		})
 

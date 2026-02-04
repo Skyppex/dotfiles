@@ -13,6 +13,8 @@ local colors = require("colors")
 local ss = require("smart-splits")
 local ssh = require("ssh")
 
+local is_windows = utils.is_windows()
+
 local act = wezterm.action
 
 local theme = {
@@ -113,8 +115,24 @@ local config = {
 					if tab:get_title() == "nu" then
 						wezterm.log_info("creating nvim")
 						prog_label = "nvim"
-						prog_args = { "nvim" }
 						cwd = pane:get_current_working_dir().file_path
+
+						if utils.is_windows() then
+							if wezterm.GLOBAL.wsl_cwd_by_pane then
+								cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "") or pane:get_current_working_dir().file_path
+							else
+								cwd = pane:get_current_working_dir().file_path
+							end
+
+							-- strip trailing + if it exists
+							cwd = cwd:gsub("%+$", "")
+
+							wezterm.log_info("wsl_cwd: " .. cwd)
+							prog_args = { "wsl", "--shell-type", "login", "--cd", cwd, "nvim" }
+						else
+							prog_args = { "nvim" }
+							cwd = pane:get_current_working_dir().file_path
+						end
 					elseif tab:get_title() == "ssh" then
 						wezterm.log_info("creating nvim_ssh")
 						local server = utils.strip_suffix(workspace, "_ssh")
@@ -134,8 +152,23 @@ local config = {
 					else
 						wezterm.log_info("creating nu")
 						prog_label = "nu"
-						prog_args = { "nu" }
 						cwd = pane:get_current_working_dir().file_path
+
+						if utils.is_windows() then
+							if wezterm.GLOBAL.wsl_cwd_by_pane then
+								cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "") or pane:get_current_working_dir().file_path
+							else
+								cwd = pane:get_current_working_dir().file_path
+							end
+
+							-- strip trailing + if it exists
+							cwd = cwd:gsub("%+$", "")
+							wezterm.log_info("cwd-fixed: " .. tostring(cwd))
+
+							prog_args = { "wsl", "--shell-type", "login", "--cd", cwd, "nu" }
+						else
+							prog_args = { "nu" }
+						end
 					end
 
 					wezterm.log_info("cwd: " .. tostring(cwd))
@@ -146,20 +179,33 @@ local config = {
 						wezterm.log_info("cwd-fixed: " .. tostring(cwd))
 					end
 
-					window:perform_action(
-						act.SpawnCommandInNewTab({
-							label = prog_label,
-							args = prog_args,
-							cwd = cwd,
-						}),
-						pane
-					)
+					if utils.is_windows() then
+						window:perform_action(
+							act.SpawnCommandInNewTab({
+								label = prog_label,
+								args = prog_args,
+								cwd = cwd,
+							}),
+							pane
+						)
+					else
+						window:perform_action(
+							act.SpawnCommandInNewTab({
+								label = prog_label,
+								args = prog_args,
+								cwd = cwd,
+							}),
+							pane
+						)
+					end
 
 					local new_tab = win:tabs()[2]
 					new_tab:set_title(prog_label)
 					local new_pane_id = new_tab:active_pane():pane_id()
 					wezterm.GLOBAL.ssh_cwd_by_pane = wezterm.GLOBAL.ssh_cwd_by_pane or {}
 					wezterm.GLOBAL.ssh_cwd_by_pane[tostring(new_pane_id)] = remote_cwd
+					wezterm.GLOBAL.wsl_cwd_by_pane = wezterm.GLOBAL.wsl_cwd_by_pane or {}
+					wezterm.GLOBAL.wsl_cwd_by_pane[tostring(new_pane_id)] = cwd
 				end
 			end),
 		},
@@ -463,9 +509,9 @@ local config = {
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
 
-	config.default_prog = { "nu" }
-	config.default_cwd = wezterm.home_dir .. "/.local/share/chezmoi"
-	table.insert(config.launch_menu, { label = "nu", args = { "nu" } })
+	wezterm.log_info("starting wsl")
+	config.default_prog = { "wsl", "--shell-type", "login", "--cd", "~/.local/share/chezmoi", "nu" }
+	table.insert(config.launch_menu, { label = "nu", args = { "wsl", "--shell-type", "login", "nu" } })
 	table.insert(config.launch_menu, { label = "powershell", args = { "powershell.exe", "-NoLogo" } })
 
 	-- Find installed visual studio version(s) and add their compilation

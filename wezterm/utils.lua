@@ -34,6 +34,11 @@ function M.is_home_computer_windows()
 end
 
 --- @return boolean
+function M.is_work_computer_windows()
+	return M.get_home():find("C:/Users/BrageRønneIngebrigts") ~= nil
+end
+
+--- @return boolean
 function M.is_home_computer_linux()
 	return M.get_home():find("/home/tower") ~= nil
 end
@@ -45,7 +50,7 @@ end
 
 --- @return boolean
 function M.is_work_computer()
-	return M.get_home():find("brage.ingebrigtsen") ~= nil
+	return M.get_home():find("BrageRønneIngebrigts") ~= nil
 end
 
 --- @return boolean
@@ -60,16 +65,15 @@ end
 
 --- @return boolean
 function M.is_linux()
-	return package.config:sub(1, 1) == "/"
+	return M.is_home_computer_linux() or
+		M.is_home_laptop_linux() or
+		M.is_work_computer_wsl() or
+		M.is_work_computer_linux()
 end
 
---- @return string?
-function M.get_game_dev_path()
-	if M.is_home_computer_windows() then
-		return "D:/Game Dev/Unity Projects"
-	end
-
-	return nil
+--- @return boolean
+function M.is_windows()
+	return not M.is_linux()
 end
 
 --- @return string
@@ -81,18 +85,6 @@ function M.get_code_path()
 		return "D:/code"
 	else
 		return home .. "/dev/code"
-	end
-end
-
---- @return string
-function M.get_temp_path()
-	local home = M.get_home()
-	if M.is_work_computer() then
-		return home .. "/dev/temp"
-	elseif M.is_home_computer_linux() then
-		return home .. "/dev/temp"
-	else
-		return "D:/code/temp"
 	end
 end
 
