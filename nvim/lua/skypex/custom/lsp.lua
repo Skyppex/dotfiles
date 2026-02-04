@@ -181,11 +181,6 @@ local servers = {
 			},
 		},
 	},
-	tailwindcss = {
-		on_attach = function(_, bufnr)
-			require("tailwindcss-colors").buf_attach(bufnr)
-		end,
-	},
 	kulala_ls = {
 		capabilities = capabilities,
 	},
@@ -238,10 +233,6 @@ local servers = {
 			},
 		},
 	},
-	vue_language_server = {
-		cmd = { "vue-language-server" },
-		capabilities = capabilities,
-	},
 	nixd = {
 		cmd = { "nixd", "--inlay-hints=true" },
 		capabilities = capabilities,
@@ -264,6 +255,29 @@ local servers = {
 				-- },
 			},
 		},
+	},
+	ts_ls = {
+		cmd = { "typescript-language-server", "--stdio" },
+		capabilities = capabilities,
+		filetypes = {
+			"typescriptreact",
+			"typescript",
+			"javascriptreact",
+			"javascript",
+		},
+		root_markers = { "package.json", ".git" },
+	},
+	vue_ls = {
+		cmd = { "vue-language-server", "--stdio" },
+		capabilities = capabilities,
+		filetypes = {
+			"vue",
+			"typescriptreact",
+			"typescript",
+			"javascriptreact",
+			"javascript",
+		},
+		root_markers = { "package.json", ".git" },
 	},
 }
 
@@ -405,7 +419,6 @@ vim.list_extend(ensure_installed, {
 	"pyright",
 	"typescript-language-server",
 	"graphql-language-service-cli",
-	"tailwindcss-language-server",
 	"nil",
 })
 
@@ -441,6 +454,7 @@ for server_name, config in pairs(servers) do
 	vim.lsp.config(server_name, config)
 
 	if server_name ~= "nil" or vim.fn.executable("nixd") == 0 then
+		vim.notify(server_name)
 		-- enable all servers, except for nil if nixd exists on path
 		vim.lsp.enable(server_name)
 	end

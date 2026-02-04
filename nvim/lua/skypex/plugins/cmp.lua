@@ -30,9 +30,6 @@ return {
 				lazy = true,
 				event = "InsertEnter",
 			},
-			{
-				"roobert/tailwindcss-colorizer-cmp.nvim",
-			},
 		},
 		config = function()
 			require("skypex.custom.cmp")

@@ -132,10 +132,7 @@ cmp.setup({
 				-- end
 			})
 
-			local tailwind = require("tailwindcss-colorizer-cmp").formatter
-
 			vim_item = kind(entry, vim_item)
-			vim_item = tailwind(entry, vim_item)
 			vim_item.dup = 0
 
 			return vim_item
