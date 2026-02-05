@@ -99,6 +99,12 @@ require("nvim-treesitter.config").setup({
 	},
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		pcall(vim.treesitter.start, args.buf)
+	end,
+})
+
 local utils = require("skypex.utils")
 -- utils.map("n", "<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
 
