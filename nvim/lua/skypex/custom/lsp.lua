@@ -454,7 +454,6 @@ for server_name, config in pairs(servers) do
 	vim.lsp.config(server_name, config)
 
 	if server_name ~= "nil" or vim.fn.executable("nixd") == 0 then
-		vim.notify(server_name)
 		-- enable all servers, except for nil if nixd exists on path
 		vim.lsp.enable(server_name)
 	end
