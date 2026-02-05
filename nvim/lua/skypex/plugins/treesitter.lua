@@ -10,12 +10,6 @@ return {
 			require("skypex.custom.treesitter")
 		end,
 	},
-	-- {
-	-- 	"nvim-treesitter/playground",
-	-- 	cmd = "TSPlaygroundToggle",
-	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- },
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = { "BufReadPre", "BufNewFile" },

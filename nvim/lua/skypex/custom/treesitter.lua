@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local utils = require("skypex.utils")
--- utils.map("n", "<leader>tt", "<cmd>TSPlaygroundToggle<CR>", "Toggle Treesitter Playground")
+utils.map("n", "<leader>tt", ":InspectTree<cr>:EditQuery<cr><esc>", "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
 local function add_arcana()
