@@ -1,23 +1,28 @@
 local conform = require("conform")
 
----@param ... string
+---@param list string[]
 ---@return string | table<string>
-local function first(bufnr, ...)
+local function first(bufnr, list)
 	if not bufnr then
-		return select(1, ...)
+		return list[1]
 	end
 
-	for i = 1, select("#", ...) do
-		local formatter = select(i, ...)
-		if conform.get_formatter_info(formatter, bufnr).available then
+	for i = 1, #list do
+		local formatter = list[i]
+		local info = conform.get_formatter_info(formatter, bufnr)
+
+		vim.notify(vim.inspect(info))
+
+		if info.available then
 			return formatter
 		end
 	end
-	return select(1, ...)
+
+	return list[1]
 end
 
 local function first_then_injected(...)
-	local list = ...
+	local list = { ... }
 
 	return function(bufnr)
 		return { first(bufnr, list), "injected" }
@@ -31,22 +36,22 @@ local formatters_by_ft = {
 	python = { "ruff", "injected" },
 
 	-- Tries to run each formatter until one succeeds
-	javascript = first_then_injected("prettierd", "prettier"),
-	javascriptreact = first_then_injected("prettierd", "prettier"),
-	typescript = first_then_injected("prettierd", "prettier"),
-	typescriptreact = first_then_injected("prettierd", "prettier"),
-	css = first_then_injected("prettierd", "prettier"),
-	scss = first_then_injected("prettierd", "prettier"),
-	json = first_then_injected("jq", "prettierd", "prettier"),
-	graphql = first_then_injected("prettierd", "prettier"),
+	javascript = first_then_injected("prettierd", "eslint_d"),
+	javascriptreact = first_then_injected("prettierd", "eslint_d"),
+	typescript = first_then_injected("prettierd", "eslint_d"),
+	typescriptreact = first_then_injected("prettierd", "eslint_d"),
+	css = first_then_injected("prettierd"),
+	scss = first_then_injected("prettierd", "stylelint"),
+	json = first_then_injected("jq", "prettierd"),
+	graphql = first_then_injected("prettierd"),
 	cs = { "csharpier", "injected" },
 	csx = { "csharpier", "injected" },
 	go = { "gofmt", "injected" },
 	xml = { "xmlformatter", "injected" },
-	yaml = first_then_injected("yamlfmt", "prettierd", "prettier"),
-	toml = first_then_injected("tombi", "prettierd", "prettier"),
-	markdown = first_then_injected("markdownlint", "prettierd", "prettier"),
-	codecompanion = first_then_injected("markdownlint", "prettierd", "prettier"),
+	yaml = first_then_injected("yamlfmt", "prettierd"),
+	toml = first_then_injected("tombi", "prettierd"),
+	markdown = first_then_injected("markdownlint", "prettierd"),
+	codecompanion = first_then_injected("markdownlint", "prettierd"),
 	sh = { "beautysh", "injected" },
 	bash = { "beautysh", "injected" },
 	http = { "kulala-fmt", "injected" },
@@ -130,10 +135,10 @@ conform.setup({
 		local disable_filetypes = {
 			c = true,
 			cpp = true,
-			js = true,
-			jsx = true,
-			ts = true,
-			tsx = true,
+			javascript = true,
+			javascriptreact = true,
+			typescript = true,
+			typescriptreact = true,
 		}
 
 		return {
@@ -174,36 +179,36 @@ end, {
 	bang = true,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	desc = "Format before save",
-	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-	group = vim.api.nvim_create_augroup("FormatConfig", { clear = true }),
-	callback = function(ev)
-		if vim.b.disable_autoformat or vim.g.disable_autoformat then
-			return
-		end
-
-		local conform_opts = { bufnr = ev.buf, lsp_format = "fallback", timeout_ms = 2000 }
-		local client = vim.lsp.get_clients({ name = "ts_ls", bufnr = ev.buf })[1]
-
-		if not client then
-			conform.format(conform_opts)
-			return
-		end
-
-		local request_result = client:request_sync("workspace/executeCommand", {
-			command = "_typescript.organizeImports",
-			arguments = { vim.api.nvim_buf_get_name(ev.buf) },
-		})
-
-		if request_result and request_result.err then
-			vim.notify(request_result.err.message, vim.log.levels.ERROR)
-			return
-		end
-
-		conform.format(conform_opts)
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	desc = "Format before save",
+-- 	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+-- 	group = vim.api.nvim_create_augroup("FormatConfig", { clear = true }),
+-- 	callback = function(ev)
+-- 		if vim.b.disable_autoformat or vim.g.disable_autoformat then
+-- 			return
+-- 		end
+--
+-- 		local conform_opts = { bufnr = ev.buf, lsp_format = "fallback", timeout_ms = 2000 }
+-- 		local client = vim.lsp.get_clients({ name = "ts_ls", bufnr = ev.buf })[1]
+--
+-- 		if not client then
+-- 			conform.format(conform_opts)
+-- 			return
+-- 		end
+--
+-- 		local request_result = client:request_sync("workspace/executeCommand", {
+-- 			command = "_typescript.organizeImports",
+-- 			arguments = { vim.api.nvim_buf_get_name(ev.buf) },
+-- 		})
+--
+-- 		if request_result and request_result.err then
+-- 			vim.notify(request_result.err.message, vim.log.levels.ERROR)
+-- 			return
+-- 		end
+--
+-- 		conform.format(conform_opts)
+-- 	end,
+-- })
 
 local utils = require("skypex.utils")
 local map = utils.map
