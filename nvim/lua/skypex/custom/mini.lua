@@ -68,6 +68,7 @@ require("mini.surround").setup({
 -- Pick
 local pick = require("mini.pick")
 local extra = require("mini.extra")
+
 pick.setup({
 	mappings = {
 		quickfix = {
@@ -78,6 +79,27 @@ pick.setup({
 				vim.api.nvim_feedkeys(keys, "n", false)
 			end,
 		},
+	},
+
+	window = {
+		-- see :help nvim_open_win()
+		config = function()
+			local height_factor = 0.4
+			local width_factor = 0.6
+			local vertical_alignment = 0.5
+			local horizontal_alignment = 0.5
+
+			local height = math.floor(height_factor * vim.o.lines)
+			local width = math.floor(width_factor * vim.o.columns)
+
+			return {
+				anchor = "NW",
+				height = height,
+				width = width,
+				row = math.floor(vertical_alignment * (vim.o.lines - height)),
+				col = math.floor(horizontal_alignment * (vim.o.columns - width)),
+			}
+		end,
 	},
 })
 
