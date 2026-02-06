@@ -8,12 +8,14 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    profiles.url = ./nix;
   };
 
   outputs = {
     nixpkgs,
     flake-utils,
     fenix,
+    profiles,
     ...
   }:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -35,6 +37,8 @@
           ])
         ];
     in {
+      packages = profiles.packages.${system};
+
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           rust-toolchain
