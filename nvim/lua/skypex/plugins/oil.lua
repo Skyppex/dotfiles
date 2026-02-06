@@ -2,7 +2,7 @@ return {
 	{
 		"stevearc/oil.nvim",
 		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons", "j-hui/fidget.nvim" },
+		dependencies = { "j-hui/fidget.nvim" },
 	},
 	{
 		"SirZenith/oil-vcs-status",

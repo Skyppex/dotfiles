@@ -39,7 +39,7 @@ local file_icons = {
 	highlight = true,
 	-- available: devicons, mini, to use nvim-web-devicons or mini.icons
 	-- if provider not loaded and enabled is true, it will try to use another provider
-	provider = "devicons",
+	provider = "mini",
 }
 
 local function icon(fn)

@@ -1,3 +1,9 @@
+local utils = require("skypex.utils")
+
+local icons = require("mini.icons")
+icons.setup({})
+icons.mock_nvim_web_devicons()
+
 -- Better Around/Inside textobjects
 --
 -- Examples:
@@ -59,6 +65,42 @@ require("mini.surround").setup({
 	},
 })
 
-local map = require("skypex.utils").map
+-- Pick
+local pick = require("mini.pick")
+local extra = require("mini.extra")
+pick.setup({
+	mappings = {
+		quickfix = {
+			char = "<c-q>",
+			func = function()
+				local keys = "<c-a><m-cr>"
+				keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+				vim.api.nvim_feedkeys(keys, "n", false)
+			end,
+		},
+	},
+})
 
+local map = utils.map
+
+map("n", "<leader>sf", function()
+	pick.builtin.files({ tool = "fd", globs = { "*", "!.meta" } })
+end, "search files")
+
+map("n", "<leader>sg", function()
+	pick.builtin.grep_live({ tool = "rg" })
+end, "grep files")
+
+map("n", "<leader>/", function()
+	extra.pickers.buf_lines({ scope = "current" })
+end, "search lines")
+
+map("n", "<leader>sh", pick.builtin.help, "search help")
+map("n", "<leader>sk", extra.pickers.keymaps, "search keymaps")
+map("n", "<leader>sc", extra.pickers.colorschemes, "search colorschemes")
+map("n", "<leader>sd", extra.pickers.diagnostic, "search diagnostics")
+map("n", "<leader>sr", pick.builtin.resume, "resume search")
+map("n", "<leader>sb", pick.builtin.buffers, "search buffers")
+
+-- discourage use of gcc over gcl
 map("n", "gcc", '<cmd>echo "use gcl to comment out a line"<cr>')
