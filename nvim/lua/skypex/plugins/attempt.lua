@@ -8,7 +8,6 @@ if path:is_dir() then
 		"attempt.nvim",
 		dir = attempt_dir,
 		event = "VeryLazy",
-		dependencies = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("skypex.custom.attempt")
 		end,
@@ -18,7 +17,6 @@ end
 return {
 	"m-demare/attempt.nvim",
 	event = "VeryLazy",
-	dependencies = "nvim-telescope/telescope.nvim",
 	config = function()
 		require("skypex.custom.attempt")
 	end,

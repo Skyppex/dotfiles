@@ -134,7 +134,6 @@ end
 
 local alpha = require("alpha")
 local ascii = require("ascii")
-require("telescope").load_extension("ascii")
 
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = ascii.art.text.neovim.sharp

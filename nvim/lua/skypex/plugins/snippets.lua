@@ -14,9 +14,6 @@ return {
 			lazy = true,
 			event = "InsertEnter",
 		},
-		{
-			"benfowler/telescope-luasnip.nvim",
-		},
 	},
 	run = "make install_jsregexp",
 	config = function()

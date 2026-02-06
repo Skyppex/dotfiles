@@ -53,7 +53,7 @@ obsidian.setup({
 		create_new = false,
 	},
 	picker = {
-		name = "telescope.nvim",
+		name = "mini.pick",
 		note_mappings = {
 			insert_link = "<leader>il",
 		},

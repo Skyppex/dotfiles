@@ -17,7 +17,6 @@ return {
 						"MaximilianLloyd/ascii.nvim",
 						dependencies = {
 							"MunifTanjim/nui.nvim",
-							"nvim-telescope/telescope.nvim",
 						},
 					},
 				},

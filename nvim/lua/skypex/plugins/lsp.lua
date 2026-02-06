@@ -27,7 +27,6 @@ return {
 				},
 			},
 			"Issafalcon/lsp-overloads.nvim",
-			"nvim-telescope/telescope.nvim",
 		},
 		opts = {
 			setup = {

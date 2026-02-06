@@ -119,19 +119,17 @@ local servers = {
 				})
 			end
 		end,
-		override_gd = function(bufnr)
-			require("telescope").load_extension("csharpls_definition")
-
-			vim.keymap.set("n", "gd", function()
-				vim.cmd("Telescope csharpls_definition")
-				--[[ cs_ls_ex.lsp_definitions() ]]
-			end, {
-				buffer = bufnr,
-				desc = "csharpls: Go to Definition",
-				noremap = true,
-				silent = true,
-			})
-		end,
+		-- override_gd = function(bufnr)
+		-- 	vim.keymap.set("n", "gd", function()
+		-- 		vim.cmd("Telescope csharpls_definition")
+		-- 		--[[ cs_ls_ex.lsp_definitions() ]]
+		-- 	end, {
+		-- 		buffer = bufnr,
+		-- 		desc = "csharpls: Go to Definition",
+		-- 		noremap = true,
+		-- 		silent = true,
+		-- 	})
+		-- end,
 		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
 		settings = {
 			FormattingOptions = {
@@ -302,12 +300,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end
 
-		local builtin = require("telescope.builtin")
+		local pick = require("mini.extra").pickers
 
-		nmap("gr", builtin.lsp_references, "Go to References")
-		nmap("gi", builtin.lsp_implementations, "Go to Implementation")
-		nmap("gt", builtin.lsp_type_definitions, "Go to Type Definition")
-		nmap("<leader>ss", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
+		nmap("gr", function()
+			pick.lsp({ scope = "references" })
+		end, "Go to References")
+
+		nmap("gi", function()
+			pick.lsp({ scope = "implementation" })
+		end, "Go to Implementation")
+
+		nmap("gt", function()
+			pick.lsp({ scope = "type_definition" })
+		end, "Go to Type Definition")
+
+		nmap("<leader>ss", function()
+			pick.lsp({ scope = "workspace_symbol_live" })
+		end, "Workspace Symbols")
 
 		nmap("<leader>rn", function()
 			vim.lsp.buf.rename()
@@ -324,7 +333,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set("i", "<C-M-H>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
 
-		nmap("gD", vim.lsp.buf.declaration, "Go to Declaration")
+		nmap("gD", function()
+			pick.lsp({ scope = "declaration" })
+		end, "Go to Declaration")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -335,7 +346,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			if server and server.override_gd then
 				server.override_gd(event.buf)
 			elseif not gd_exists then
-				nmap("gd", builtin.lsp_definitions, "Go to Definition")
+				nmap("gd", function()
+					pick.lsp({ scope = "definition" })
+				end, "Go to Definition")
 			end
 		end
 

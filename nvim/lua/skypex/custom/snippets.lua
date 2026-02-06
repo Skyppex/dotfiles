@@ -133,12 +133,6 @@ M.friendly_snippets = function()
 	require("luasnip.loaders.from_vscode").lazy_load()
 end
 
-M.telescope = function()
-	require("telescope").load_extension("luasnip")
-
-	map("n", "<leader>sn", "<cmd>Telescope luasnip<CR>", "Search Snippets")
-end
-
 M.luasnip = function()
 	ls.setup({
 		history = true,

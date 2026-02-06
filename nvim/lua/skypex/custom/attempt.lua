@@ -136,8 +136,6 @@ attempt.setup({
 	},
 })
 
-require("telescope").load_extension("attempt")
-
 local utils = require("skypex.utils")
 local map = utils.map
 
