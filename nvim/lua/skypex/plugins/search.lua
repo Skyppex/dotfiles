@@ -11,6 +11,6 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = function()
-		require("skypex.custom.telescope")
+		require("skypex.custom.search")
 	end,
 }
