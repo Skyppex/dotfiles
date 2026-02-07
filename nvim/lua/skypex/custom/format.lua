@@ -11,8 +11,6 @@ local function first(bufnr, list)
 		local formatter = list[i]
 		local info = conform.get_formatter_info(formatter, bufnr)
 
-		vim.notify(vim.inspect(info))
-
 		if info.available then
 			return formatter
 		end
