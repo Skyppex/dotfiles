@@ -138,13 +138,18 @@ attempt.setup({
 
 local utils = require("skypex.utils")
 local map = utils.map
+local pick = require("mini.pick")
+local attempt_config = require("attempt.config").opts
 
 map("n", "<leader>AN", attempt.new_select, "New Attempt")
 map("n", "<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
 map("n", "<leader>AR", attempt.run, "Run Attempt")
 map("n", "<leader>AD", attempt.delete_buf, "Delete Attempt")
 map("n", "<leader>AC", attempt.rename_buf, "Rename Attempt")
-map("n", "<leader>AS", "<cmd>Telescope attempt<CR>", "Search Attempts")
+
+map("n", "<leader>AS", function()
+	attempt.open_select()
+end, "Search Attempts")
 
 local function get_visual_selection(start_pos, end_pos)
 	local lines = vim.fn.getline(start_pos[2], end_pos[2])
@@ -192,8 +197,6 @@ local function append_lines(ext, lines)
 
 	return lines
 end
-
-local attempt_config = require("attempt.config").opts
 
 local function run_inline_attempt()
 	if not attempt_config then
