@@ -969,3 +969,8 @@ gdpr
 vue
 pnpm
 infisical
+foldend
+foldstart
+foldtext
+getline
+foldclosed
