@@ -173,7 +173,6 @@ end
 
 M.all = function()
 	M.friendly_snippets()
-	M.telescope()
 	M.luasnip()
 end
 
