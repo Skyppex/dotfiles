@@ -1,8 +1,6 @@
 local bellows = require("bellows")
 bellows.setup()
 
-vim.notify("hello from bellows")
-
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	pattern = "*.json",
 	callback = function(args)
@@ -16,7 +14,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 			end
 		end
 
-		vim.notify("setting keymaps for bellows")
 		local map = require("skypex.utils").map
 
 		map(
