@@ -974,3 +974,4 @@ foldstart
 foldtext
 getline
 foldclosed
+foldclosedend
