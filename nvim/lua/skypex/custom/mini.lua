@@ -7,9 +7,9 @@ icons.mock_nvim_web_devicons()
 -- Better Around/Inside textobjects
 --
 -- Examples:
---  - va)  - [V]isually select [A]round [)]paren
---  - yinq - [Y]ank [I]nside [N]ext [']quote
---  - ci'  - [C]hange [I]nside [']quote
+--  - va)  - Visually select Around )paren
+--  - yinq - Yank Inside Next 'quote
+--  - ci'  - Change Inside 'quote
 require("mini.ai").setup({ n_lines = 500 })
 
 -- Use mini.comment to support commenting in injected languages with tree-sitter
