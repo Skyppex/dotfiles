@@ -975,3 +975,9 @@ foldtext
 getline
 foldclosed
 foldclosedend
+hse
+isnull
+timeline
+tabpage
+vsplit
+mva
