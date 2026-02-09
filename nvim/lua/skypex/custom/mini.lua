@@ -79,6 +79,9 @@ pick.setup({
 				vim.api.nvim_feedkeys(keys, "n", false)
 			end,
 		},
+		choose_in_split = "",
+		choose_in_tabpage = "",
+		choose_in_vsplit = "",
 	},
 
 	window = {
