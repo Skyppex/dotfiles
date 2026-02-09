@@ -37,3 +37,11 @@ map("n", "<leader>ri", ui.inspect, "Inspect last request")
 map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
 map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
 map("n", "<leader>tr", ui.toggle_headers, "Toggle headers view")
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*.kulala_ui",
+	callback = function(args)
+		local filetype = args.match:gsub("%.kulala_ui$", "")
+		vim.api.nvim_set_option_value("filetype", filetype, { buf = args.buf })
+	end,
+})

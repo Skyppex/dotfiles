@@ -5,7 +5,6 @@ end
 return require("skypex.utils").local_plugin("bellows.nvim", config, function()
 	return {
 		"skyppex/bellows.nvim",
-		filetype = "json",
 		config = config,
 	}
 end)

@@ -2,7 +2,6 @@ local bellows = require("bellows")
 bellows.setup()
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-	pattern = "*.json",
 	callback = function(args)
 		local function toggle(fold, unfold)
 			return function()
