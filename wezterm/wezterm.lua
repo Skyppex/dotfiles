@@ -118,12 +118,6 @@ local config = {
 						cwd = pane:get_current_working_dir().file_path
 
 						if utils.is_windows() then
-							if wezterm.GLOBAL.wsl_cwd_by_pane then
-								cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "") or pane:get_current_working_dir().file_path
-							else
-								cwd = pane:get_current_working_dir().file_path
-							end
-
 							-- strip trailing + if it exists
 							cwd = cwd:gsub("%+$", "")
 
@@ -156,7 +150,8 @@ local config = {
 
 						if utils.is_windows() then
 							if wezterm.GLOBAL.wsl_cwd_by_pane then
-								cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "") or pane:get_current_working_dir().file_path
+								cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]:gsub("%+$", "")
+									or pane:get_current_working_dir().file_path
 							else
 								cwd = pane:get_current_working_dir().file_path
 							end
