@@ -39,14 +39,6 @@ def n [] {
     not $in
 }
 
-# Surround the input with the provided strings
-def "str surround" [
-    start: string,
-    end: string
-] {
-   $"($start)($in)($end)"
-}
-
 def cheat [...doc] {
     curl $"cheat.sh/($doc | str join "/")"
 }

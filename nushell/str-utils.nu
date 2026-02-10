@@ -1,3 +1,4 @@
+# take anything after the first occurrence of the pattern
 def "str before" [
     --inclusive(-i)
     pattern: string
@@ -61,6 +62,7 @@ def "str before" [
     }
 }
 
+# take anything after the first occurrence of the pattern
 def "str after" [
     --inclusive(-i)
     pattern: string
@@ -76,3 +78,12 @@ def "str after" [
 
     $input | str substring $index..
 }
+
+# surround the input with the provided strings
+def "str surround" [
+    start: string,
+    end: string
+] {
+   $"($start)($in)($end)"
+}
+
