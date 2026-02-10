@@ -30,7 +30,7 @@ map("n", "N", "Nzz")
 
 map("x", "<leader>p", '"_dP')
 
--- Just don't do this apparently'
+-- Just don't do this apparently
 map("n", "Q", "<nop>")
 map("n", "q:", "<nop>")
 
