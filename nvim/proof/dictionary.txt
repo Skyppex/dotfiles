@@ -983,3 +983,7 @@ vsplit
 mva
 hmsk
 sharepoint
+todowrite
+todoread
+webfetch
+websearch
