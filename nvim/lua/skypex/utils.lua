@@ -276,7 +276,7 @@ M.map = function(modes, left, right, desc, expr, buf)
 end
 
 --- @return "none"|"blocked"|"pending"|"active"
-M.direnv_status = function()
+function M.direnv_status()
 	local lines = M.run_command_ret("direnv", { "status", "--json" })
 
 	if not lines then
@@ -316,6 +316,28 @@ M.direnv_status = function()
 	end
 
 	return "none"
+end
+
+function M.bufs_by_name(target)
+	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+		local name = vim.api.nvim_buf_get_name(bufnr)
+
+		if name ~= "" and vim.fn.fnamemodify(name, ":t") == target then
+			return bufnr
+		end
+	end
+
+	return nil
+end
+
+function M.is_buf_visible(bufnr)
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		if vim.api.nvim_win_get_buf(win) == bufnr then
+			return true
+		end
+	end
+
+	return false
 end
 
 return M
