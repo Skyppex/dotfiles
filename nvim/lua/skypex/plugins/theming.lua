@@ -12,7 +12,7 @@ return {
 				"goolord/alpha-nvim",
 				event = "VimEnter",
 				dependencies = {
-					"echasnovski/mini.icons",
+					"echasnovski/mini.nvim",
 					{
 						"MaximilianLloyd/ascii.nvim",
 						dependencies = {

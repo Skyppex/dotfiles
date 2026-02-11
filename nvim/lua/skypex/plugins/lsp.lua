@@ -8,24 +8,6 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"j-hui/fidget.nvim",
 			"Decodetalkers/csharpls-extended-lsp.nvim",
-			{
-				"aznhe21/actions-preview.nvim",
-				opts = {
-					telescope = {
-						sorting_strategy = "ascending",
-						layout_strategy = "vertical",
-						layout_config = {
-							width = 0.3,
-							height = 0.4,
-							prompt_position = "top",
-							preview_cutoff = 20,
-							preview_height = function(_, _, max_lines)
-								return max_lines - 15
-							end,
-						},
-					},
-				},
-			},
 			"Issafalcon/lsp-overloads.nvim",
 		},
 		opts = {

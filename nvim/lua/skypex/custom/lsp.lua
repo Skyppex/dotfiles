@@ -325,9 +325,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end)
 		end, "[R]e[n]ame")
 
-		local ap = require("actions-preview")
-
-		nvmap("<leader>ca", ap.code_actions, "Code Action")
+		nvmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 		nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 		nmap("H", vim.lsp.buf.signature_help, "Signature Help")
 
