@@ -48,13 +48,7 @@ Komorebic(cmd) {
 
 #+t::Run("wezterm-gui.exe")
 
-#c::{
-    if !WinExist("ahk_exe slack-app.exe") {
-        Run("slack-app.exe")
-    } else {
-        WinActivate("ahk_exe slack-app.exe")
-    }
-}
+#c::Run("ms-teams.exe")
 
 #m::{
     if !WinExist("ahk_exe spotify.exe") {
