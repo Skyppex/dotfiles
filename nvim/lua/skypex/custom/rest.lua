@@ -41,6 +41,7 @@ map("n", "<leader>tr", ui.toggle_headers, "Toggle headers view")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*.kulala_ui",
 	callback = function(args)
+		vim.cmd("normal! zE")
 		local filetype = args.match:gsub("%.kulala_ui$", "")
 		vim.api.nvim_set_option_value("filetype", filetype, { buf = args.buf })
 	end,
