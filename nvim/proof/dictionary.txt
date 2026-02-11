@@ -987,3 +987,5 @@ todowrite
 todoread
 webfetch
 websearch
+inputbuf
+jqplayground
