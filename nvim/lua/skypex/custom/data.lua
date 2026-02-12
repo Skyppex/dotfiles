@@ -22,7 +22,6 @@ jq.setup({
 		filetype = "jq",
 		name = jq_query_name,
 	},
-	disable_default_keymap = true,
 })
 
 local utils = require("skypex.utils")
@@ -51,7 +50,7 @@ map("n", "<leader>tj", function()
 	end
 
 	if not visible then
-		vim.cmd("JqPlayground")
+		jq.open()
 	end
 end, "toggle jq playground")
 
@@ -61,9 +60,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			return
 		end
 
-		local buf = args.buf
-
-		vim.api.nvim_buf_set_lines(buf, 0, 0, false, { "." })
+		vim.api.nvim_buf_set_lines(args.buf, 0, 0, false, { "." })
 	end,
 })
 
@@ -73,7 +70,6 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 			return
 		end
 
-		local keys = vim.api.nvim_replace_termcodes("<Plug>(JqPlaygroundRunQuery)", true, false, true)
-		vim.api.nvim_feedkeys(keys, "m", false)
+		jq.run_query()
 	end,
 })
