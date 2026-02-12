@@ -991,3 +991,4 @@ inputbuf
 jqplayground
 resizable
 tabnew
+passthrough
