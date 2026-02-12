@@ -111,12 +111,10 @@ local function toggle_rest_client_tab()
 	end
 end
 
-map("n", { "<c-w><c-r>", "<c-w>r" }, function()
-	-- if the tab doesn't exist. make it.
-	-- if the tab isn't the active tab, switch to it.
-	-- if the tab is the active tab, switch to the first tab.
-	toggle_rest_client_tab()
-end, "toggle rest client")
+map("n", {
+	"<c-w><c-r>",
+	"<c-w>r",
+}, toggle_rest_client_tab, "toggle rest client")
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*.kulala_ui",
