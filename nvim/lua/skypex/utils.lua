@@ -249,6 +249,8 @@ function M.local_plugin(name, config, else_config)
 	end
 end
 
+--- @param str string
+--- @return table<string>
 function M.to_chars(str)
 	local chars = {}
 
@@ -259,20 +261,30 @@ function M.to_chars(str)
 	return chars
 end
 
---- @param modes string
---- @param left string
+--- @param modes string|table<string>
+--- @param left string|table<string>
 --- @param right string|function
 --- @param desc string?
 --- @param expr boolean?
 --- @param buf integer?
-M.map = function(modes, left, right, desc, expr, buf)
-	vim.keymap.set(M.to_chars(modes), left, right, {
-		desc = desc,
-		expr = expr,
-		buffer = buf,
-		noremap = true,
-		silent = true,
-	})
+function M.map(modes, left, right, desc, expr, buf)
+	if type(left) == "string" then
+		left = { left }
+	end
+
+	if type(modes) == "string" then
+		modes = M.to_chars(modes)
+	end
+
+	for _, l in ipairs(left) do
+		vim.keymap.set(modes, l, right, {
+			desc = desc,
+			expr = expr,
+			buffer = buf,
+			noremap = true,
+			silent = true,
+		})
+	end
 end
 
 --- @return "none"|"blocked"|"pending"|"active"

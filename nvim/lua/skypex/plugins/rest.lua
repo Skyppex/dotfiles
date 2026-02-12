@@ -1,6 +1,6 @@
 return {
 	"mistweaverco/kulala.nvim",
-	ft = { "http", "rest" },
+	event = "VeryLazy",
 	config = function()
 		require("skypex.custom.rest")
 	end,
