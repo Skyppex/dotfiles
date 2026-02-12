@@ -990,3 +990,4 @@ websearch
 inputbuf
 jqplayground
 resizable
+tabnew
