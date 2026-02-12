@@ -133,4 +133,7 @@ db.setup({
 
 local map = require("skypex.utils").map
 
-map("n", "<leader>tb", db.toggle)
+map("n", {
+	"<c-w><c-b>",
+	"<c-w>b",
+}, db.toggle, "toggle db client")
