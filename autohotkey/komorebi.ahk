@@ -29,10 +29,10 @@ Komorebic(cmd) {
 #l::Komorebic("focus right")
 
 #b::{
-    if !WinExist("ahk_exe opera.exe") {
-        Run("opera.exe")
+    if !WinExist("ahk_exe brave.exe") {
+        Run("brave.exe")
     } else {
-        WinActivate("ahk_exe opera.exe")
+        WinActivate("ahk_exe brave.exe")
     }
 }
 
