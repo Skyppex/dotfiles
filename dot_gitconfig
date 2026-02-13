@@ -57,8 +57,6 @@
     insteadOf = "sky:"
 [url "git@github.com:"]
     insteadOf = "gh:"
-[url "git@github.com:SentinelSoftware/"]
-    insteadOf = "sentinel:"
 [status]
     branch = true
     showStash = true
