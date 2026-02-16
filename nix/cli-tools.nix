@@ -65,6 +65,7 @@
     imagemagick
     inotify-tools
     jq
+    jqfmt
     jujutsu
     kubectl
     lazydocker
