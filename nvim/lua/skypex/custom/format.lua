@@ -56,6 +56,7 @@ local formatters_by_ft = {
 	rest = { "kulala-fmt", "injected" },
 	kotlin = { "ktfmt", "injected" },
 	nix = { "alejandra", "injected" },
+	jq = { "jqfmt", "injected" },
 	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 }
 
@@ -75,6 +76,10 @@ local external_formatters = {
 	python = {
 		command = "ruff",
 		args = { "format" },
+	},
+	jqfmt = {
+		command = "jqfmt",
+		args = { "-ar", "-ob", "-op", "pipe" },
 	},
 	-- nufmt is not ready to be used yet, it breaks the code
 	-- nufmt = {
