@@ -85,3 +85,14 @@ alias cdf = cd (fzf | path dirname)
 # Alias for __zoxide_zi
 alias cdi = cd (zoxide query --interactive)
 
+# add the folders in the current directory to zoxide
+def cdadd [] {
+    ls 
+    | where type == dir 
+    | get name 
+    | where not ($it | str starts-with ".") 
+    | zoxide add ...$in
+}
+
+# add the folders in the current directory to zoxide
+alias cda = cdadd
