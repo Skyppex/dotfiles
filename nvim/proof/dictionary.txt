@@ -992,3 +992,7 @@ jqplayground
 resizable
 tabnew
 passthrough
+dedupe
+jqfmt
+cda
+cdadd
