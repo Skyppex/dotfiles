@@ -282,6 +282,7 @@ local config = {
 		{ key = "PageDown", mods = "SHIFT|ALT", action = act.ScrollByPage(0.1) },
 		{ key = "PageUp", mods = "SHIFT", action = act.ScrollByLine(-1) },
 		{ key = "PageDown", mods = "SHIFT", action = act.ScrollByLine(1) },
+		{ key = "f", mods = "LEADER|CTRL", action = act.SendString("\x06") },
 		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
 		{ key = "g", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle_ssh) },
 
