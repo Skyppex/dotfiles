@@ -91,6 +91,7 @@
     tldr
     tree-sitter
     unzip
+    wezterm
     yazi
     zip
     zoxide

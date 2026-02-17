@@ -23,5 +23,4 @@ with pkgsUnfree; [
   slurp
   spotify
   thunderbird
-  wezterm
 ]

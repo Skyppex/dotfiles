@@ -35,5 +35,4 @@ with pkgsUnfree; [
   slack
   slurp
   spotify
-  wezterm
 ]
