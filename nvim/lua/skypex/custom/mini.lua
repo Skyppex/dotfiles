@@ -106,14 +106,52 @@ pick.setup({
 	},
 })
 
+local function default_show(opts)
+	return function(buf, items, query)
+		pick.default_show(buf, items, query, opts)
+	end
+end
+
 local map = utils.map
 
 map("n", "<leader>sf", function()
-	pick.builtin.files({ tool = "fd", globs = { "*", "!.meta" } })
+	pick.builtin.cli({
+		command = {
+			"fd",
+			"--hidden",
+			"--no-ignore",
+			"--type=file",
+			"--exclude=.git",
+			"--exclude=.jj",
+			"--exclude=.direnv",
+			"--exclude=.vscode",
+			"--exclude=.idea",
+			"--exclude=node_modules",
+			"--exclude=*.meta",
+		},
+	}, {
+		source = {
+			show = default_show({
+				show_icons = true,
+			}),
+		},
+	})
 end, "search files")
 
 map("n", "<leader>sg", function()
-	pick.builtin.grep_live({ tool = "rg" })
+	pick.builtin.grep_live({
+		tool = "rg",
+		globs = {
+			"*",
+			"!.git",
+			"!.jj",
+			"!.direnv",
+			"!.vscode",
+			"!.idea",
+			"!node_modules",
+			"!*.meta",
+		},
+	})
 end, "grep files")
 
 map("n", "<leader>/", function()
