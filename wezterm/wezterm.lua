@@ -214,7 +214,37 @@ local config = {
 				local is_ssh = utils.ends_with(workspace, "_ssh")
 
 				if not is_ssh then
-					window:perform_action(act.SplitVertical({ domain = "CurrentPaneDomain" }), pane)
+					if utils.is_windows() then
+						local cwd
+
+						if wezterm.GLOBAL.wsl_cwd_by_pane then
+							cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]
+								or pane:get_current_working_dir().file_path
+						else
+							cwd = pane:get_current_working_dir().file_path
+						end
+
+						-- strip trailing + if it exists
+						cwd = cwd:gsub("%+$", "")
+						wezterm.log_info("cwd-fixed: " .. tostring(cwd))
+
+						local args = { "wsl", "--shell-type", "login", "--cd", cwd, "nu" }
+
+						window:perform_action(
+							act.SplitVertical({
+								domain = "CurrentPaneDomain",
+								args = args,
+							}),
+							pane
+						)
+					else
+						window:perform_action(
+							act.SplitVertical({
+								domain = "CurrentPaneDomain",
+							}),
+							pane
+						)
+					end
 				else
 					local server = utils.strip_suffix(workspace, "_ssh")
 
@@ -237,7 +267,37 @@ local config = {
 				local is_ssh = utils.ends_with(workspace, "_ssh")
 
 				if not is_ssh then
-					window:perform_action(act.SplitHorizontal({ domain = "CurrentPaneDomain" }), pane)
+					if utils.is_windows() then
+						local cwd
+
+						if wezterm.GLOBAL.wsl_cwd_by_pane then
+							cwd = wezterm.GLOBAL.wsl_cwd_by_pane[tostring(pane:pane_id())]
+								or pane:get_current_working_dir().file_path
+						else
+							cwd = pane:get_current_working_dir().file_path
+						end
+
+						-- strip trailing + if it exists
+						cwd = cwd:gsub("%+$", "")
+						wezterm.log_info("cwd-fixed: " .. tostring(cwd))
+
+						local args = { "wsl", "--shell-type", "login", "--cd", cwd, "nu" }
+
+						window:perform_action(
+							act.SplitHorizontal({
+								domain = "CurrentPaneDomain",
+								args = args,
+							}),
+							pane
+						)
+					else
+						window:perform_action(
+							act.SplitHorizontal({
+								domain = "CurrentPaneDomain",
+							}),
+							pane
+						)
+					end
 				else
 					local server = utils.strip_suffix(workspace, "_ssh")
 
