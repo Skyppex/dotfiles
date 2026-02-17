@@ -62,7 +62,9 @@ obsidian.setup({
 			insert_tag = "<leader>it",
 		},
 	},
-	disable_frontmatter = true,
+	frontmatter = {
+		enabled = false,
+	},
 })
 
 vim.api.nvim_create_autocmd("User", {
