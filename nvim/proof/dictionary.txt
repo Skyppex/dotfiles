@@ -998,3 +998,4 @@ cda
 cdadd
 instanceof
 mnt
+smarttable
