@@ -6,10 +6,10 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
         if (pwd) == "/" {
             print --stderr 'Not a recognized project directory'
             print --stderr 'Currently recognized project types are:'
-            print --stderr ' - Nix (^flake.nix$)'
-            print --stderr ' - Rust (^Cargo.toml$)'
-            print --stderr ' - Go (^go.mod$)'
-            print --stderr ' - C# (.*\.slnx?$, .*\.csproj$)'
+            print --stderr ' - nix (^flake.nix$)'
+            print --stderr ' - cargo (^Cargo.toml$)'
+            print --stderr ' - go (^go.mod$)'
+            print --stderr ' - dotnet (.*\.slnx?$, .*\.csproj$)'
             # print --stderr ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
             return
         }
@@ -23,26 +23,26 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
         mut o: record<type: string, opt: any> = {}
 
         if ($opt | str contains "flake.nix") {
-            $o = { type: "Nix", opt: $opt }
+            $o = { type: "nix", opt: $opt }
         }
 
         if ($opt | str contains "Cargo.toml") {
-            $o = { type: "Rust", opt: $opt }
+            $o = { type: "cargo", opt: $opt }
         }
 
         if ($opt | str contains "go.mod") {
-            $o = { type: "Go", opt: $opt }
+            $o = { type: "go", opt: $opt }
         }
 
         if (($opt | str contains ".sln")
             or ($opt | str contains ".csproj")) {
-            $o = { type: "C#", opt: $opt }
+            $o = { type: "dotnet", opt: $opt }
         }
 
         if (($opt | str contains ".kt")
             or ($opt | str contains "build.gradle.kts")
             or ($opt | str contains "gradlew")) {
-            $o = { type: "Kotlin", opt: $opt }
+            $o = { type: "kotlin", opt: $opt }
         }
 
         $o
@@ -56,6 +56,11 @@ def select-project [
     --multi(-m)
 ]: table<type: string, opt: any> -> table<type: string, opt: any> {
     let options = $in
+
+    if ($options | any { |o| $o.type == "nix" }) and (which nix | is-not-empty) {
+        let nix = $options | where { |o| $o.type == "nix" }
+        return $nix
+    }
 
     let selected = if $multi {
         $options | get type | to text | fzf --multi --height 40% --layout reverse -0 -1
@@ -94,7 +99,7 @@ def --wrapped build [
 
     for $s in $selected {
         match $s.type {
-            "Nix" => {
+            "nix" => {
                 if $release {
                     nix build .#release ...$rest
                 } else if $debug {
@@ -103,21 +108,21 @@ def --wrapped build [
                     nix build ...$rest
                 }
             }
-            "Rust" => {
+            "cargo" => {
                 if $release {
                     do -i { cargo build --release ...$rest }
                 } else {
                     do -i { cargo build ...$rest }
                 }
             }
-            "C#" => {
+            "dotnet" => {
                 if $release {
                     do -i { dotnet build --configuration Release ...$rest }
                 } else {
                     do -i { dotnet build ...$rest }
                 }
             }
-            "Go" => {
+            "go" => {
                 do -i { go build ...$rest }
             }
         }
@@ -141,16 +146,16 @@ def --wrapped run [...rest] {
     }
 
     match $selected.type {
-        "Nix" => {
+        "nix" => {
             nix run . -- ...$rest
         }
-        "Rust" => {
+        "cargo" => {
             cargo run -- ...$rest
         }
-        "C#" => {
+        "dotnet" => {
             dn run ...$rest
         }
-        "Go" => {
+        "go" => {
             go run ...$rest
         }
     }
@@ -176,28 +181,28 @@ def --wrapped test [
     }
 
     match $selected.type {
-        "Nix" => {
+        "nix" => {
             if $all {
                 nix flake check --all-systems ...$rest
             } else {
                 nix flake check ...$rest
             }
         }
-        "Rust" => {
+        "cargo" => {
             if $all {
                 cargo test --workspace --all-targets ...$rest
             } else {
                 cargo test ...$rest
             }
         }
-        "C#" => {
+        "dotnet" => {
             if $all {
                 dn test all ...$rest
             } else {
                 dn test
             }
         }
-        "Go" => {
+        "go" => {
             if $all {
                 go test "./..." ...$rest
             } else {
