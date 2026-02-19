@@ -1,8 +1,10 @@
+local utils = require("utils")
+
 local M = {}
 
 --- @return table<string>
 function M.hosts()
-	local config_path = os.getenv("HOME") .. "/.ssh/config"
+	local config_path = utils.get_home() .. "/.ssh/config"
 	local hosts = {}
 
 	local file = io.open(config_path, "r")
