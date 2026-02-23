@@ -204,16 +204,22 @@ end
 --- @param command string
 --- @param args string[]?
 --- @param on_exit function? (data: string, exit_code: number)
+--- @param opts table
 --- @return table|nil, number (stdout, exit_code)
-function M.run_command_ret(command, args, on_exit)
+function M.run_command_ret(command, args, on_exit, opts)
 	local Job = require("plenary.job")
 	local stdout_lines = {}
 
 	local job = Job:new({
 		command = command,
 		args = args,
+		cwd = opts and opts.cwd,
 		enable_recording = true, -- Enable recording to capture output
 		on_stderr = function(_, data)
+			if opts and opts.disable_stderr then
+				return
+			end
+
 			if data then
 				vim.schedule(function()
 					vim.notify(data, vim.log.levels.ERROR)
