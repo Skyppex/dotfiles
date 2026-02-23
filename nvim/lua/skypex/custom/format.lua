@@ -1,29 +1,32 @@
 local conform = require("conform")
 
----@param list string[]
----@return string | table<string>
-local function first(bufnr, list)
-	if not bufnr then
-		return list[1]
-	end
+---@return function<string | table<string>>
+local function first(...)
+	local list = { ... }
 
-	for i = 1, #list do
-		local formatter = list[i]
-		local info = conform.get_formatter_info(formatter, bufnr)
-
-		if info.available then
-			return formatter
+	return function(bufnr)
+		if not bufnr then
+			return { list[1] }
 		end
-	end
 
-	return list[1]
+		for i = 1, #list do
+			local formatter = list[i]
+			local info = conform.get_formatter_info(formatter, bufnr)
+
+			if info.available then
+				return { formatter }
+			end
+		end
+
+		return { list[1] }
+	end
 end
 
 local function first_then_injected(...)
 	local list = { ... }
 
 	return function(bufnr)
-		return { first(bufnr, list), "injected" }
+		return { unpack(first(unpack(list))(bufnr)), "injected" }
 	end
 end
 
@@ -38,6 +41,7 @@ local formatters_by_ft = {
 	javascriptreact = first_then_injected("prettierd", "eslint_d"),
 	typescript = first_then_injected("prettierd", "eslint_d"),
 	typescriptreact = first_then_injected("prettierd", "eslint_d"),
+	vue = first("prettierd", "eslint_d"),
 	css = first_then_injected("prettierd"),
 	scss = first_then_injected("prettierd", "stylelint"),
 	json = first_then_injected("jq", "prettierd"),
@@ -95,6 +99,7 @@ local function extract_formatters()
 			formatters = formatters(nil)
 		end
 
+		-- formatters MUST be a table at this point
 		for _, formatter in pairs(formatters) do
 			-- support case where the user has defined multiple formatters
 			-- for said filetype. E.g javascript = { { "prettierd", "prettier" } }
@@ -142,6 +147,7 @@ conform.setup({
 			javascriptreact = true,
 			typescript = true,
 			typescriptreact = true,
+			vue = true,
 		}
 
 		return {
@@ -152,6 +158,7 @@ conform.setup({
 
 				return "never"
 			end)(),
+
 			timeout = 5000,
 		}
 	end,
