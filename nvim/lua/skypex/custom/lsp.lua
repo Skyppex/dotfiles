@@ -1,4 +1,7 @@
 local utils = require("skypex.utils")
+local Path = require("plenary.path")
+
+local M = {}
 
 local function setup_proof(lspconfig, configs, capabilities)
 	local code_path = utils.get_code_path()
@@ -7,6 +10,11 @@ local function setup_proof(lspconfig, configs, capabilities)
 
 	if utils.is_linux() then
 		proof_exe = proof_path .. "/proof"
+
+		if not Path:new(proof_exe):exists() then
+			-- use nix generate binary instead maybe :|
+			proof_exe = proof_path .. "/result/bin/proof"
+		end
 	else
 		proof_exe = proof_path .. "/proof.exe"
 	end
@@ -66,7 +74,7 @@ local cs_ls_ex = require("csharpls_extended")
 --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 --  - settings (table): Override the default settings passed when initializing the server.
 --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-local servers = {
+M.servers = {
 	lua_ls = {
 		filetypes = { "lua" },
 		settings = {
@@ -201,10 +209,7 @@ local servers = {
 			end,
 		},
 	},
-	json_ls = {
-		cmd = { "vscode-json-languageserver", "--stdio" },
-		filetypes = { "json", "jsonc" },
-		capabilities = capabilities,
+	jsonls = {
 		settings = {
 			json = {
 				-- Enable/disable JSON validation (default: true)
@@ -254,29 +259,7 @@ local servers = {
 			},
 		},
 	},
-	ts_ls = {
-		cmd = { "typescript-language-server", "--stdio" },
-		capabilities = capabilities,
-		filetypes = {
-			"typescriptreact",
-			"typescript",
-			"javascriptreact",
-			"javascript",
-		},
-		root_markers = { "package.json", ".git" },
-	},
-	vue_ls = {
-		cmd = { "vue-language-server", "--stdio" },
-		capabilities = capabilities,
-		filetypes = {
-			"vue",
-			"typescriptreact",
-			"typescript",
-			"javascriptreact",
-			"javascript",
-		},
-		root_markers = { "package.json", ".git" },
-	},
+	gopls = {},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -338,7 +321,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
 		if client then
-			local server = servers[client.name]
+			local server = M.servers[client.name]
 			local gd_exists, _ = require("skypex.utils").local_keymap_exists(event.buf, "n", "gd")
 
 			if server and server.override_gd then
@@ -350,29 +333,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end
 		end
 
-		if client and client.server_capabilities.documentHighlightProvider then
-			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
-
-			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-				buffer = event.buf,
-				group = highlight_augroup,
-				callback = vim.lsp.buf.document_highlight,
-			})
-
-			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-				buffer = event.buf,
-				group = highlight_augroup,
-				callback = vim.lsp.buf.clear_references,
-			})
-
-			vim.api.nvim_create_autocmd("LspDetach", {
-				group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-				callback = function(event2)
-					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
-				end,
-			})
-		end
+		nmap("gd", function()
+			pick.lsp({ scope = "definition" })
+		end, "Go to Definition")
 
 		-- The following autocommand is used to enable inlay hints in your
 		-- code, if the language server you are using supports them
@@ -385,7 +348,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		if client then
-			local server = servers[client.name]
+			local server = M.servers[client.name]
 
 			if server and server.after_attach then
 				server.after_attach(client)
@@ -395,7 +358,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local no_config_servers = { "rust_analyzer", "rust-analyzer" }
-local no_install_servers = { "nushell", "kulala_ls", "json_ls" }
+local no_install_servers = { "nushell", "kulala_ls", "json_ls", "nixd" }
 local configs = require("lspconfig.configs")
 
 setup_proof(lspconfig, configs)
@@ -410,9 +373,9 @@ require("mason").setup()
 
 -- You can add other tools here that you want Mason to install
 -- for you, so that they are available from within Neovim.
-local servers_to_install = servers
+local servers_to_install = M.servers
 
-for k, _ in pairs(servers) do
+for k, _ in pairs(M.servers) do
 	for _, v in ipairs(no_install_servers) do
 		if k == v then
 			servers_to_install[k] = nil
@@ -429,8 +392,8 @@ vim.list_extend(ensure_installed, {
 	"ruff",
 	"pyright",
 	"typescript-language-server",
+	"vue-language-server",
 	"graphql-language-service-cli",
-	"nil",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -449,11 +412,11 @@ local function should_not_configure(server_name)
 	end
 end
 
-for server_name, config in pairs(servers) do
+for server_name, config in pairs(M.servers) do
 	config = config or {}
 
 	if should_not_configure(server_name) then
-		return
+		goto continue
 	end
 
 	-- This handles overriding only values explicitly passed
@@ -463,11 +426,9 @@ for server_name, config in pairs(servers) do
 	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, config.handlers or {})
 
 	vim.lsp.config(server_name, config)
+	vim.lsp.enable(server_name)
 
-	if server_name ~= "nil" or vim.fn.executable("nixd") == 0 then
-		-- enable all servers, except for nil if nixd exists on path
-		vim.lsp.enable(server_name)
-	end
+	::continue::
 end
 
 vim.diagnostic.config({
@@ -489,3 +450,5 @@ vim.diagnostic.config({
 		prefix = "",
 	},
 })
+
+return M
