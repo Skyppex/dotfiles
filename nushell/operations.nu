@@ -156,7 +156,7 @@ def --wrapped run [...rest] {
             dn run ...$rest
         }
         "go" => {
-            go run ...$rest
+            go run . ...$rest
         }
     }
 }
