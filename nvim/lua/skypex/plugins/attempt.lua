@@ -15,7 +15,7 @@ if path:is_dir() then
 end
 
 return {
-	"m-demare/attempt.nvim",
+	"skyppex/attempt.nvim",
 	event = "VeryLazy",
 	config = function()
 		require("skypex.custom.attempt")
