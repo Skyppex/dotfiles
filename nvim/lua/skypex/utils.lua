@@ -204,7 +204,7 @@ end
 --- @param command string
 --- @param args string[]?
 --- @param on_exit function? (data: string, exit_code: number)
---- @param opts table
+--- @param opts table?
 --- @return table|nil, number (stdout, exit_code)
 function M.run_command_ret(command, args, on_exit, opts)
 	local Job = require("plenary.job")
