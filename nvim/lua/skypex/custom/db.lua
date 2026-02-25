@@ -131,9 +131,59 @@ db.setup({
 	},
 })
 
+local function get_db_client_tab()
+	for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+		local ok, value = pcall(vim.api.nvim_tabpage_get_var, tab, "db_client_workspace")
+
+		if ok and value then
+			return tab
+		end
+	end
+
+	return nil
+end
+
+local function open_db_client_tab()
+	local tab = get_db_client_tab()
+
+	if tab and vim.api.nvim_tabpage_is_valid(tab) then
+		vim.api.nvim_set_current_tabpage(tab)
+		return tab
+	end
+
+	vim.api.nvim_command("tabnew")
+	vim.t.db_client_workspace = true
+
+	db.open()
+
+	return vim.api.nvim_get_current_tabpage()
+end
+
+local function toggle_db_client_tab()
+	local tab = get_db_client_tab()
+
+	if not tab or not vim.api.nvim_tabpage_is_valid(tab) then
+		return open_db_client_tab()
+	end
+
+	local current_tab = vim.api.nvim_get_current_tabpage()
+
+	if current_tab == tab then
+		local first = vim.api.nvim_list_tabpages()[1]
+
+		if first and vim.api.nvim_tabpage_is_valid(first) then
+			vim.api.nvim_set_current_tabpage(first)
+		end
+	else
+		vim.api.nvim_set_current_tabpage(tab)
+	end
+end
+
 local map = require("skypex.utils").map
 
 map("n", {
 	"<c-w><c-b>",
 	"<c-w>b",
-}, db.toggle, "toggle db client")
+}, function()
+	toggle_db_client_tab()
+end, "toggle db client")
