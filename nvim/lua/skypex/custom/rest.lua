@@ -34,7 +34,7 @@ map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
 map("n", "<leader>rh", ui.show_headers_body, "Show headers")
 map("n", "<leader>rj", ui.show_next, "Show next request")
 map("n", "<leader>rk", ui.show_previous, "Show previous request")
-map("n", "<leader>ri", ui.inspect, "Inspect last request")
+map("n", "<leader>ri", ui.inspect, "Inspect request")
 map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
 map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
 
