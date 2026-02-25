@@ -1002,3 +1002,5 @@ smarttable
 joinpath
 jsonl
 addon
+ilen
+kysely
