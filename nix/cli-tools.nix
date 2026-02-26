@@ -38,6 +38,7 @@
   ];
 
   cliPackagesFree = with pkgsFree; [
+    azure-cli
     bat
     btop
     chezmoi
