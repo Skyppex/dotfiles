@@ -1,15 +1,13 @@
-return {
-	"kndndrj/nvim-dbee",
-	dependencies = {
-		"MunifTanjim/nui.nvim",
-	},
-	build = function()
-		-- Install tries to automatically detect the install method.
-		-- if it fails, try calling it with one of these parameters:
-		--    "curl", "wget", "bitsadmin", "go"
-		require("dbee").install()
-	end,
-	config = function()
-		require("skypex.custom.db")
-	end,
-}
+local function config()
+	require("skypex.custom.db")
+end
+
+return require("skypex.utils").local_plugin("nvim-dbee", config, function()
+	return {
+		"skyppex/nvim-dbee",
+		build = function()
+			require("dbee").install()
+		end,
+		config = config,
+	}
+end)

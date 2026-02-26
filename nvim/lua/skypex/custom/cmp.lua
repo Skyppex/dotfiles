@@ -15,11 +15,14 @@ local sources = {
 		name = "nvim_lsp_signature_help",
 		max_item_count = 2,
 	},
+	dbee = {
+		name = "cmp-dbee",
+		max_item_count = 100,
+	},
 	luasnip = {
 		name = "luasnip",
 		max_item_count = 2,
 	},
-	dadbod = { name = "vim-dadbod-completion" },
 	buffer = {
 		name = "buffer",
 		option = {
@@ -43,7 +46,7 @@ local sources = {
 
 local ft_sources = {
 	sql = {
-		sources.dadbod,
+		sources.dbee,
 		sources.buffer,
 	},
 	markdown = {

@@ -30,6 +30,16 @@ return {
 				lazy = true,
 				event = "InsertEnter",
 			},
+			{
+				{
+					"MattiasMTS/cmp-dbee",
+					dependencies = {
+						{ "nvim-dbee" },
+					},
+					ft = "sql", -- optional but good to have
+					opts = {}, -- needed
+				},
+			},
 		},
 		config = function()
 			require("skypex.custom.cmp")
