@@ -323,7 +323,7 @@ local config = {
 		ss.resize("l", "SHIFT|ALT"),
 		{
 			key = "h",
-			mods = "CTRL|ALT",
+			mods = "LEADER|CTRL",
 			action = act.PaneSelect({
 				mode = "SwapWithActive",
 			}),
