@@ -2,18 +2,6 @@ local map = require("skypex.utils").map
 
 local M = {}
 
-M.fugitive = function()
-	map("n", "<leader>gs", vim.cmd.Git, "Git Status")
-
-	map("n", "<leader>gl", function()
-		vim.cmd("Git log")
-	end, "Git Log")
-
-	map("n", "<leader>gB", function()
-		vim.cmd("Git blame")
-	end, "Git Blame")
-end
-
 M.conflict = function()
 	require("git-conflict").setup({
 		default_mappings = true,
@@ -80,13 +68,14 @@ M.gitsigns = function()
 		},
 	})
 
-	map("n", "åg", "<cmd>Gitsigns nav_hunk prev<CR>zz", "Previous Git Hunk")
-	map("n", "æg", "<cmd>Gitsigns nav_hunk next<CR>zz", "Next Git Hunk")
-	map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset Hunk")
-	map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
-	map("n", "<leader>gg", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage Hunk")
-	map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", "Git Undo Staged Hunk")
-	map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git Blame Line")
+	map("n", "åg", "<cmd>Gitsigns nav_hunk prev<cr>zz", "Previous Git Hunk")
+	map("n", "æg", "<cmd>Gitsigns nav_hunk next<cr>zz", "Next Git Hunk")
+	map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", "Git Reset Hunk")
+	map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", "Git Preview hunk")
+	map("n", "<leader>gg", "<cmd>Gitsigns stage_hunk<cr>", "Git Stage Hunk")
+	map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", "Git Undo Staged Hunk")
+	map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Git Blame Line")
+	map("n", "<leader>gB", "<cmd>Gitsigns blame<cr>", "Git Blame")
 end
 
 M.cmd = function()
@@ -109,12 +98,9 @@ M.cmd = function()
 end
 
 M.all = function()
-	M.fugitive()
 	M.conflict()
 	M.gitsigns()
 	M.cmd()
 end
-
-M.all()
 
 return M

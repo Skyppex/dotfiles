@@ -1,20 +1,18 @@
 return {
 	{
-		"tpope/vim-fugitive",
+		"akinsho/git-conflict.nvim",
 		event = "VeryLazy",
-		dependencies = {
-			{
-				"akinsho/git-conflict.nvim",
-				event = "VeryLazy",
-				version = "*",
-			},
-			{ -- Adds git related signs to the gutter, as well as utilities for managing changes
-				"lewis6991/gitsigns.nvim",
-				event = "BufReadPre",
-			},
-		},
+		version = "*",
 		config = function()
-			require("skypex.custom.git")
+			require("skypex.custom.git").conflict()
+			require("skypex.custom.git").cmd()
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("skypex.custom.git").gitsigns()
 		end,
 	},
 }
