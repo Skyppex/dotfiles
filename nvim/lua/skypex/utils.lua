@@ -245,11 +245,10 @@ function M.local_plugin(name, config, else_config)
 	local path = Path:new(local_dir)
 
 	if path:is_dir() then
-		return {
+		return vim.tbl_deep_extend("force", {
 			name = name,
 			dir = local_dir,
-			config = config,
-		}
+		}, config)
 	else
 		return else_config()
 	end

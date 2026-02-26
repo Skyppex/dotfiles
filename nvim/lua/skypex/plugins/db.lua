@@ -1,13 +1,14 @@
-local function config()
-	require("skypex.custom.db")
-end
+local config = {
+	build = function()
+		require("dbee").install()
+	end,
+	config = function()
+		require("skypex.custom.db")
+	end,
+}
 
 return require("skypex.utils").local_plugin("nvim-dbee", config, function()
-	return {
+	return vim.tbl_deep_extend("keep", {
 		"skyppex/nvim-dbee",
-		build = function()
-			require("dbee").install()
-		end,
-		config = config,
-	}
+	}, config)
 end)
