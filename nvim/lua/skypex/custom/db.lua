@@ -187,3 +187,6 @@ map("n", {
 }, function()
 	toggle_db_client_tab()
 end, "toggle db client")
+
+map("n", "<leader>bl", db.api.ui.next_result_set, "next result set")
+map("n", "<leader>bh", db.api.ui.prev_result_set, "previous result set")
