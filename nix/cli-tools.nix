@@ -41,6 +41,7 @@
     azure-cli
     bat
     btop
+    cbonsai
     chezmoi
     cowsay
     difftastic
