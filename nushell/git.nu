@@ -61,6 +61,7 @@ def cc [
     --type(-t): string # Specify the type of the commit
     --scope(-s): string # Specify the scope of the commit
     --no-details(-n) # Do not prompt for a description
+    --breaking(-b) # This is a breaking change
     ...message: string
 ] {
     let types = [
@@ -101,9 +102,9 @@ def cc [
     }
 
     let summary = if ($message | is-not-empty) {
-        $"($type + $scope): ($message | str join ' ')"
+        $"($type + $scope)(if $breaking { "!" } else { "" }): ($message | str join ' ')"
     } else {
-        gum input --value $"($type + $scope): " --placeholder "Summary of this change"
+        gum input --value $"($type + $scope)(if $breaking { "!" } else { "" }): " --placeholder "Summary of this change"
     }
 
     if ($summary | is-empty) {
