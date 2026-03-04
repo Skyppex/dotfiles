@@ -1005,3 +1005,4 @@ yubikey
 yubioath
 zbirenbaum
 zsh
+pgettext
