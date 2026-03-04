@@ -180,13 +180,6 @@ M.servers = {
 		},
 		capabilities = capabilities,
 	},
-	rust_analyzer = {
-		settings = {
-			checkOnSave = {
-				command = "clippy",
-			},
-		},
-	},
 	kulala_ls = {
 		capabilities = capabilities,
 	},
@@ -386,7 +379,6 @@ end
 local ensure_installed = vim.tbl_keys(servers_to_install or {})
 vim.list_extend(ensure_installed, {
 	"lua-language-server",
-	"rust-analyzer",
 	"csharp-language-server",
 	"gopls",
 	"ruff",
