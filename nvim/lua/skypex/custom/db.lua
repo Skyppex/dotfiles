@@ -115,19 +115,30 @@ db.setup({
 				text_highlight = "",
 			},
 		},
+		window_options = {
+			number = true,
+			relativenumber = true,
+		},
 	},
 	editor = {
-		mappings = {
-			-- run what's currently selected on the active connection
-			{ key = "<c-r>", mode = "v", action = "run_selection" },
-			-- run the whole file on the active connection
-			{ key = "<c-r>", mode = "n", action = "run_file" },
-			-- run what's under the cursor to the next newline
-			{ key = "<s-r>", mode = "n", action = "run_under_cursor" },
+		mappings = {},
+		window_options = {
+			number = true,
+			relativenumber = true,
+		},
+	},
+	call_log = {
+		window_options = {
+			number = true,
+			relativenumber = true,
 		},
 	},
 	result = {
 		focus_result = false,
+		window_options = {
+			number = true,
+			relativenumber = true,
+		},
 	},
 })
 
@@ -163,7 +174,8 @@ local function toggle_db_client_tab()
 	local tab = get_db_client_tab()
 
 	if not tab or not vim.api.nvim_tabpage_is_valid(tab) then
-		return open_db_client_tab()
+		open_db_client_tab()
+		return
 	end
 
 	local current_tab = vim.api.nvim_get_current_tabpage()
@@ -190,3 +202,25 @@ end, "toggle db client")
 
 map("n", "<leader>bl", db.api.ui.next_result_set, "next result set")
 map("n", "<leader>bh", db.api.ui.prev_result_set, "previous result set")
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "DbeeNoteOpened",
+	callback = function(data)
+		local buf = data.buf
+
+		vim.notify(vim.inspect(buf))
+		vim.notify(vim.inspect(vim.api.nvim_buf_get_name(buf)))
+
+		map("n", "<c-cr>", function()
+			db.api.ui.editor_do_action("run_file")
+		end, "run file", nil, buf)
+
+		map("x", "<cr>", function()
+			db.api.ui.editor_do_action("run_selection")
+		end, "run selection", nil, buf)
+
+		map("n", "<cr>", function()
+			db.api.ui.editor_do_action("run_under_cursor")
+		end, "run under cursor", nil, buf)
+	end,
+})

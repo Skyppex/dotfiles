@@ -26,18 +26,6 @@ local ui = require("kulala.ui")
 local utils = require("skypex.utils")
 local map = utils.map
 
-map("n", "<leader>rr", kulala.run, "Run http request")
-map("n", "ær", kulala.jump_next, "Goto the next request")
-map("n", "år", kulala.jump_prev, "Goto the previous request")
-map("n", "<leader>rb", ui.show_body, "Show response body")
-map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
-map("n", "<leader>rh", ui.show_headers_body, "Show headers")
-map("n", "<leader>rj", ui.show_next, "Show next request")
-map("n", "<leader>rk", ui.show_previous, "Show previous request")
-map("n", "<leader>ri", ui.inspect, "Inspect request")
-map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
-map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
-
 local function get_rest_client_tab()
 	for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
 		local ok, value = pcall(vim.api.nvim_tabpage_get_var, tab, "rest_client_workspace")
@@ -125,5 +113,22 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.api.nvim_set_option_value("buftype", "nofile", { buf = args.buf })
 		vim.api.nvim_set_option_value("bufhidden", "hide", { buf = args.buf })
 		vim.api.nvim_set_option_value("swapfile", false, { buf = args.buf })
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "http",
+	callback = function()
+		map("n", "<cr>", kulala.run, "Run http request")
+		map("n", "ær", kulala.jump_next, "Goto the next request")
+		map("n", "år", kulala.jump_prev, "Goto the previous request")
+		map("n", "<leader>rb", ui.show_body, "Show response body")
+		map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
+		map("n", "<leader>rh", ui.show_headers_body, "Show headers")
+		map("n", "<leader>rj", ui.show_next, "Show next request")
+		map("n", "<leader>rk", ui.show_previous, "Show previous request")
+		map("n", "<leader>ri", ui.inspect, "Inspect request")
+		map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
+		map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
 	end,
 })

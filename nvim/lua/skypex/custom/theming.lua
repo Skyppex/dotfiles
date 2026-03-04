@@ -165,5 +165,6 @@ smartcolumn.setup({
 		"dotenv",
 		"codecompanion",
 		"csv",
+		"dbee",
 	},
 })

@@ -281,6 +281,13 @@ function M.map(modes, left, right, desc, expr, buf)
 		modes = M.to_chars(modes)
 	end
 
+	for i, l in ipairs(left) do
+		local new_l = l:gsub("<[sS]%-[cC][rR]>", "<f13>")
+		new_l = new_l:gsub("<[cC]%-[cC][rR]>", "<f14>")
+		new_l = new_l:gsub("<[aAmM]%-[cC][rR]>", "<f15>")
+		left[i] = new_l
+	end
+
 	for _, l in ipairs(left) do
 		vim.keymap.set(modes, l, right, {
 			desc = desc,
