@@ -375,6 +375,9 @@ local config = {
 				Regex = "",
 			}),
 		},
+		{ key = "Enter", mods = "SHIFT", action = act.SendKey({ key = "F13" }) },
+		{ key = "Enter", mods = "CTRL", action = act.SendKey({ key = "F14" }) },
+		{ key = "Enter", mods = "ALT", action = act.SendKey({ key = "F15" }) },
 	},
 	key_tables = {
 		copy_mode = {
