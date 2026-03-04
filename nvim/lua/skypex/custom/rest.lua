@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "http",
 	callback = function()
-		map("n", "<cr>", kulala.run, "Run http request")
+		map("n", "<c-r>", kulala.run, "Run http request")
 		map("n", "ær", kulala.jump_next, "Goto the next request")
 		map("n", "år", kulala.jump_prev, "Goto the previous request")
 		map("n", "<leader>rb", ui.show_body, "Show response body")

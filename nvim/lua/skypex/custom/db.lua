@@ -211,15 +211,15 @@ vim.api.nvim_create_autocmd("User", {
 		vim.notify(vim.inspect(buf))
 		vim.notify(vim.inspect(vim.api.nvim_buf_get_name(buf)))
 
-		map("n", "<c-cr>", function()
+		map("n", "<s-c-r>", function()
 			db.api.ui.editor_do_action("run_file")
 		end, "run file", nil, buf)
 
-		map("x", "<cr>", function()
+		map("x", "<c-r>", function()
 			db.api.ui.editor_do_action("run_selection")
 		end, "run selection", nil, buf)
 
-		map("n", "<cr>", function()
+		map("n", "<c-r>", function()
 			db.api.ui.editor_do_action("run_under_cursor")
 		end, "run under cursor", nil, buf)
 	end,
