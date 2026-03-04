@@ -13,8 +13,6 @@ local colors = require("colors")
 local ss = require("smart-splits")
 local ssh = require("ssh")
 
-local is_windows = utils.is_windows()
-
 local act = wezterm.action
 
 local theme = {
@@ -73,6 +71,7 @@ local config = {
 	font_size = utils.is_home_laptop_linux() and 19.0 or 10.0,
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
+	enable_csi_u_key_encoding = true,
 	disable_default_key_bindings = true,
 	keys = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
