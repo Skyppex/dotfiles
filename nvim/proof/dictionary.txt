@@ -1006,3 +1006,5 @@ yubioath
 zbirenbaum
 zsh
 pgettext
+getutcdate
+handover
