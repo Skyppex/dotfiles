@@ -71,7 +71,6 @@ local config = {
 	font_size = utils.is_home_laptop_linux() and 19.0 or 10.0,
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
-	enable_csi_u_key_encoding = true,
 	disable_default_key_bindings = true,
 	keys = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
@@ -375,9 +374,6 @@ local config = {
 				Regex = "",
 			}),
 		},
-		{ key = "Enter", mods = "SHIFT", action = act.SendKey({ key = "F13" }) },
-		{ key = "Enter", mods = "CTRL", action = act.SendKey({ key = "F14" }) },
-		{ key = "Enter", mods = "ALT", action = act.SendKey({ key = "F15" }) },
 	},
 	key_tables = {
 		copy_mode = {
