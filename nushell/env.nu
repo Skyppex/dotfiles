@@ -3,7 +3,7 @@
 # version = "0.88.1"
 
 def create_left_prompt [] {
-    let home =  $nu.home-path
+    let home =  $nu.home-dir
 
     # Perform tilde substitution on dir
     # To determine if the prefix of the path matches the home dir, we split the current path into
@@ -107,11 +107,11 @@ if $env.HOMEPATH? != null {
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
-$env.CONFIG_PATH = $"($nu.home-path)/.config"
-$env.XDG_CONFIG_HOME = $"($nu.home-path)/.config"
-$env.CHEZMOI_PATH = $"($nu.home-path)/.local/share/chezmoi"
-$env.SCRIPTS_PATH = $"($nu.home-path)/.local/share/scripts"
-$env.SCOOP = $"($nu.home-path)/scoop"
+$env.CONFIG_PATH = $"($nu.home-dir)/.config"
+$env.XDG_CONFIG_HOME = $"($nu.home-dir)/.config"
+$env.CHEZMOI_PATH = $"($nu.home-dir)/.local/share/chezmoi"
+$env.SCRIPTS_PATH = $"($nu.home-dir)/.local/share/scripts"
+$env.SCOOP = $"($nu.home-dir)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
 $env.HOSTNAME = (sys host | get hostname)
