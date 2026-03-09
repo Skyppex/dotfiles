@@ -25,6 +25,7 @@ local ui = require("kulala.ui")
 
 local utils = require("skypex.utils")
 local map = utils.map
+local pick = require("mini.pick")
 
 local function get_rest_client_tab()
 	for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
@@ -39,28 +40,23 @@ local function get_rest_client_tab()
 end
 
 local function pick_rest_file_and_open()
-	local files, exit_code = utils.run_command_ret("fd", {
-		"--type=file",
-		"--extension=http",
-		"--extension=rest",
-		"--prune",
+	pick.builtin.cli({
+		command = {
+			"fd",
+			"--no-ignore",
+			"--type=file",
+			"--prune",
+			"(http-client(.private)?.env.json$)|(.(http|rest)$)",
+		},
+	}, {
+		source = {
+			show = function(bufnr, items, query)
+				pick.default_show(bufnr, items, query, {
+					show_icons = true,
+				})
+			end,
+		},
 	})
-
-	if exit_code ~= 0 or #files == 0 then
-		vim.schedule(function()
-			vim.bo.filetype = "http"
-		end)
-
-		return
-	end
-
-	vim.ui.select(files, {
-		prompt = "rest client – select request file",
-	}, function(choice)
-		if choice then
-			vim.cmd.edit(vim.fn.fnameescape(choice))
-		end
-	end)
 end
 
 local function open_rest_client_tab()
@@ -118,17 +114,39 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "http",
-	callback = function()
-		map("n", "<c-r>", kulala.run, "Run http request")
-		map("n", "ær", kulala.jump_next, "Goto the next request")
-		map("n", "år", kulala.jump_prev, "Goto the previous request")
-		map("n", "<leader>rb", ui.show_body, "Show response body")
-		map("n", "<leader>rv", ui.show_verbose, "Show verbose response body")
-		map("n", "<leader>rh", ui.show_headers_body, "Show headers")
-		map("n", "<leader>rj", ui.show_next, "Show next request")
-		map("n", "<leader>rk", ui.show_previous, "Show previous request")
-		map("n", "<leader>ri", ui.inspect, "Inspect request")
-		map("n", "<leader>rs", ui.show_stats, "Show stats for last request")
-		map("n", "<leader>re", kulala.set_selected_env, "Set selected environment")
+	callback = function(args)
+		vim.notify(vim.inspect(args))
+		local buf = args.buf
+		map("n", "<c-r>", kulala.run, "Run http request", nil, buf)
+		map("n", "ær", kulala.jump_next, "Goto the next request", nil, buf)
+		map("n", "år", kulala.jump_prev, "Goto the previous request", nil, buf)
+		map("n", "<leader>rb", ui.show_body, "Show response body", nil, buf)
+		map("n", "<leader>rv", ui.show_verbose, "Show verbose response body", nil, buf)
+		map("n", "<leader>rh", ui.show_headers_body, "Show headers", nil, buf)
+		map("n", "<leader>rj", ui.show_next, "Show next request", nil, buf)
+		map("n", "<leader>rk", ui.show_previous, "Show previous request", nil, buf)
+		map("n", "<leader>ri", ui.inspect, "Inspect request", nil, buf)
+		map("n", "<leader>rs", ui.show_stats, "Show stats for last request", nil, buf)
+		map("n", "<leader>re", kulala.set_selected_env, "Set selected environment", nil, buf)
+
+		map("n", "<leader>sf", function()
+			pick.builtin.cli({
+				command = {
+					"fd",
+					"--no-ignore",
+					"--type=file",
+					"--prune",
+					"(http-client(.private)?.env.json$)|(.(http|rest)$)",
+				},
+			}, {
+				source = {
+					show = function(bufnr, items, query)
+						pick.default_show(bufnr, items, query, {
+							show_icons = true,
+						})
+					end,
+				},
+			})
+		end, "search http files", nil, buf)
 	end,
 })
