@@ -191,7 +191,9 @@ local function toggle_db_client_tab()
 	end
 end
 
-local map = require("skypex.utils").map
+local utils = require("skypex.utils")
+local map = utils.map
+local pick = require("mini.pick")
 
 map("n", {
 	"<c-w><c-b>",
@@ -208,9 +210,6 @@ vim.api.nvim_create_autocmd("User", {
 	callback = function(data)
 		local buf = data.buf
 
-		vim.notify(vim.inspect(buf))
-		vim.notify(vim.inspect(vim.api.nvim_buf_get_name(buf)))
-
 		map("n", "<s-c-r>", function()
 			db.api.ui.editor_do_action("run_file")
 		end, "run file", nil, buf)
@@ -222,5 +221,24 @@ vim.api.nvim_create_autocmd("User", {
 		map("n", "<c-r>", function()
 			db.api.ui.editor_do_action("run_under_cursor")
 		end, "run under cursor", nil, buf)
+
+		map("n", "<leader>sf", function()
+			pick.builtin.cli({
+				command = {
+					"fd",
+					"--type=file",
+					"--extension=sql",
+					"--prune",
+				},
+			}, {
+				source = {
+					show = function(bufnr, items, query)
+						pick.default_show(bufnr, items, query, {
+							show_icons = true,
+						})
+					end,
+				},
+			})
+		end, "search sql scripts", nil, buf)
 	end,
 })
