@@ -1008,3 +1008,5 @@ zsh
 pgettext
 getutcdate
 handover
+koro
+chronomancer
