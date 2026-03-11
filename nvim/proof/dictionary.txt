@@ -1010,3 +1010,4 @@ getutcdate
 handover
 koro
 chronomancer
+linting
