@@ -981,3 +981,79 @@ def --env --wrapped grsi [
         }
     }
 }
+
+# Git status structured
+def "git list" [
+    --ignored(-i)
+] {
+    let status = if $ignored {
+        git status --porcelain=v2 --ignored
+    } else {
+        git status --porcelain=v2
+    }
+
+    def get_state_name [state: string] {
+        let map = {
+            ".": null,
+            "A": "added",
+            "M": "modified",
+            "D": "deleted",
+            "R": "renamed",
+            "?": "untracked",
+            "!": "ignored",
+        }
+
+        $map | get $state
+    }
+
+    $status
+    | lines
+    | where $it != ""
+    | each { |line|
+        let columns = $line | split row " "
+        let type = $columns | get 0
+        let state_chars = $columns | get 1 | split chars
+
+        if $type == "1" {
+            # new/modify/delete
+            {
+                file: ($columns | last),
+                staged: ($state_chars | get 0 | get_state_name $in)
+                unstaged: ($state_chars | get 1 | get_state_name $in)
+            }
+        } else if $type == "2" {
+            # rename/copy
+            {
+                file: ($columns | last | split row "\t" | get 0),
+                staged: ($state_chars | get 0 | get_state_name $in)
+                unstaged: ($state_chars | get 1 | get_state_name $in)
+                old_file: ($columns | last | split row "\t" | get 1)
+            }
+        } else if $type == "u" {
+            # conflict
+            {
+                file: ($columns | last),
+                staged: ($state_chars | get 0 | get_state_name $in)
+                unstaged: ($state_chars | get 1 | get_state_name $in)
+            }
+        } else if $type == "?" {
+            # untracked
+            {
+                file: ($columns | last),
+                staged: (get_state_name "?")
+                unstaged: (get_state_name "?")
+            }
+        } else if $type == "!" {
+            # ignored (only visible with --ignored)
+            {
+                file: ($columns | last),
+                staged: (get_state_name "!")
+                unstaged: (get_state_name "!")
+            }
+        }
+    }
+    | compact
+}
+
+alias "gs ls" = git list
+alias "gls" = git list
