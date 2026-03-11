@@ -62,7 +62,6 @@
   "::"
   ";"
   ","
-  ".."
 ] @punctuation.delimiter
 
 [
@@ -107,6 +106,7 @@
   "|="
   "^="
   "->" 
+  ".."
 ] @operator
 
 (line_comment) @comment @spell
