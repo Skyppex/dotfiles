@@ -115,7 +115,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "http",
 	callback = function(args)
-		vim.notify(vim.inspect(args))
 		local buf = args.buf
 		map("n", "<c-r>", kulala.run, "Run http request", nil, buf)
 		map("n", "ær", kulala.jump_next, "Goto the next request", nil, buf)
