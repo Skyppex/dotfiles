@@ -208,18 +208,12 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-(concrete_type_parameters
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
-
-(generic_identifier) @type @spell
-
 (enum_variant
   variant_name: (type_identifier_name) @constant @spell)
 
 (type_constructor
   member_type_name: (type_annotation
-    (concrete_type_annotation
+    (generic_type_annotation
       (type_identifier_name) @constant @spell)))
 
 (union_declaration
