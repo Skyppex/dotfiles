@@ -354,16 +354,24 @@ local config = {
 					"https?://\\S+",
 					"github\\.com:.*\\.git",
 					'".*/.*"',
+					"opencode -s .*",
 				},
 				action = wezterm.action_callback(function(window, pane)
-					local url = window:get_selection_text_for_pane(pane)
+					local selection = window:get_selection_text_for_pane(pane)
 
-					if url:starts_with("github.com") then
-						url = url:gsub("github.com:", "")
-						url = url:gsub(".git", "")
-						url = "https://github.com/" .. url
+					if selection:starts_with("opencode") then
+						wezterm.log_info(selection)
+						window:perform_action(act.SendString(selection .. "\n"), pane)
+						return
 					end
-					wezterm.open_with(url)
+
+					if selection:starts_with("github.com") then
+						selection = selection:gsub("github.com:", "")
+						selection = selection:gsub(".git", "")
+						selection = "https://github.com/" .. selection
+					end
+
+					wezterm.open_with(selection)
 				end),
 			}),
 		},
