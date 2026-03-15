@@ -13,7 +13,6 @@ in
     blender
     bottles
     catt
-    logmein-hamachi
     prismlauncher
     r2modman
     zen-browser.packages.${system}.default

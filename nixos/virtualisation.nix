@@ -1,4 +1,11 @@
 {pkgs, ...}: {
+  virtualisation.oci-containers.backend = "podman";
+
+  imports = [
+    (import ./minecraft-server.nix {
+      })
+  ];
+
   virtualisation.docker = {
     enable = true;
     daemon.settings = {
