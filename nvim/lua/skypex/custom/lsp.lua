@@ -366,7 +366,7 @@ require("mason").setup()
 
 -- You can add other tools here that you want Mason to install
 -- for you, so that they are available from within Neovim.
-local servers_to_install = M.servers
+local servers_to_install = vim.tbl_deep_extend("keep", M.servers, {})
 
 for k, _ in pairs(M.servers) do
 	for _, v in ipairs(no_install_servers) do
