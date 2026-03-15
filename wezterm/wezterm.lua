@@ -355,12 +355,12 @@ local config = {
 					"github\\.com:.*\\.git",
 					'".*/.*"',
 					"opencode -s .*",
+					"nix log .*",
 				},
 				action = wezterm.action_callback(function(window, pane)
 					local selection = window:get_selection_text_for_pane(pane)
 
-					if selection:starts_with("opencode") then
-						wezterm.log_info(selection)
+					if selection:starts_with("opencode -s ") or selection:starts_with("nix log ") then
 						window:perform_action(act.SendString(selection .. "\n"), pane)
 						return
 					end

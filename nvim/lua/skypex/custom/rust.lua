@@ -6,12 +6,6 @@ vim.g.rustaceanvim = {
 	---@type rustaceanvim.lsp.ClientOpts
 	server = {
 		on_attach = function(client, bufnr)
-			-- Set keybindings, etc. here.
-			map("n", "<leader>ca", function()
-				vim.cmd.RustLsp("codeAction") -- supports rust-analyzer's grouping
-				-- or vim.lsp.buf.codeAction() if you don't want grouping.
-			end, "rust-analyzer: code actions", nil, bufnr)
-
 			map("n", "K", function()
 				vim.cmd.RustLsp({ "hover", "actions" })
 			end, "rust-analyzer: hover", nil, bufnr)

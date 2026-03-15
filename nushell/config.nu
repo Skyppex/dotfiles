@@ -207,7 +207,7 @@ $env.config = {
             PWD: [{ |before, after|
                 emit-osc7
 
-                let dirs = dirs
+                let dirs = dirs | where ($it.path | path exists)
 
                 if ($before | is-not-empty) and not ($dirs | any {|d| $before == $d.path}) {
                     dirs drop

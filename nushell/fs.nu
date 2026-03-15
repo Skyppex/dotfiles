@@ -14,7 +14,7 @@ def --env y [...args] {
 }
 
 # Fzf with preview
-alias fzp = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
+alias fzf = fzf --preview="bat --color=always --wrap=never --number --line-range=:200 {}"
 
 # Make directory
 alias md = mkdir

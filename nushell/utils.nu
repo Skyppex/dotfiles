@@ -5,10 +5,11 @@ source os-specific-utils.nu
 
 # Open a file found using fzf in neovim
 def fim [...path] {
-    fzp -1 --query ($path | str join " ") --bind "enter:become(nvim {})"
+    fzf -1 --query ($path | str join " ") --bind "enter:become(nvim {})"
 }
 
 # Open neovim
+alias vi = nvim
 alias vim = nvim
 
 # Fix the shada file stuff. You have to be in the shada directory
