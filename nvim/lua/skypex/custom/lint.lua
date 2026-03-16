@@ -50,10 +50,6 @@ for _, linters in pairs(linters_by_ft) do
 	end
 end
 
-local lint_to_mason = {
-	golangcilint = "golangci-lint",
-}
-
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })
