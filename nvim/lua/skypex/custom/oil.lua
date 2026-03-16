@@ -102,8 +102,20 @@ local function insert_nix_function(filepath)
 
 }
 ]])
-		file:close()
 	end
+
+	file:close()
+end
+
+local function insert_header(filepath)
+	local file = io.open(filepath, "w")
+	local filename = vim.fn.fnamemodify(filename, ":t")
+
+	if file then
+		file:write("# " .. filename)
+	end
+
+	file:close()
 end
 
 local on_create = {
@@ -118,6 +130,10 @@ local on_create = {
 	{
 		pattern = "%.nix$",
 		action = insert_nix_function,
+	},
+	{
+		pattern = "%.md$",
+		action = insert_header,
 	},
 }
 
