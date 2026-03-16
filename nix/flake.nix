@@ -67,6 +67,8 @@
 
       surface-laptop-tools = import ./home-desktop-tools.nix {
         inherit pkgsUnfree;
+        inherit system;
+        inherit zen-browser;
       };
 
       profiles = {
