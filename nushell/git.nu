@@ -164,13 +164,16 @@ def gc [
         $name
     })
 
-    mut $branch = $branch_names 
-    | uniq 
-    | to text 
-    | fzf --height 40% --layout=reverse -1 -0 --query $branch
+    let input_branch = $branch
+    mut $branch = $branch_names
+    | uniq
+    | to text
+    | fzf --height 40% --layout=reverse -1 -0 --query $input_branch
+    | complete
+    | get stdout
 
     if ($branch | is-empty) {
-        print "No branch selected"
+        git checkout $input_branch
         return
     }
 
