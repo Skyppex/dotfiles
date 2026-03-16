@@ -16,7 +16,7 @@ with pkgsUnfree; [
   mpv
   mpvpaper
   neovim
-  noto-fonts-emoji
+  noto-fonts-color-emoji
   obsidian
   quickshell
   slack
