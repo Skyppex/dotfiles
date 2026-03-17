@@ -164,3 +164,13 @@ def "str surround" [
    $"($start)($in)($end)"
 }
 
+# remove string from the start of the input
+def "str strip-prefix" [prefix: string]: string -> string {
+    str replace --regex $"^($prefix)" ""
+}
+
+# remove string from the end of the input
+def "str strip-suffix" [suffix: string]: string -> string {
+    str replace --regex $"($suffix)$" ""
+}
+
