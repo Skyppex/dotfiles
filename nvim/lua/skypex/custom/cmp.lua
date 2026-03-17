@@ -8,6 +8,7 @@ local sources = {
 		max_item_count = 2,
 	},
 	lsp = {
+		keyword_length = 1,
 		name = "nvim_lsp",
 		max_item_count = 100,
 	},
@@ -111,11 +112,11 @@ cmp.setup({
 		},
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<A-u>"] = cmp.mapping.scroll_docs(-4),
-		["<A-d>"] = cmp.mapping.scroll_docs(4),
-		["<TAB>"] = cmp.mapping.confirm({ select = true }),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<C-A-l>"] = cmp.mapping.complete({}),
+		["<a-u>"] = cmp.mapping.scroll_docs(-4),
+		["<a-d>"] = cmp.mapping.scroll_docs(4),
+		["<tab>"] = cmp.mapping.confirm({ select = true }),
+		["<c-e>"] = cmp.mapping.abort(),
+		["<c-space>"] = cmp.mapping.complete({}),
 	}),
 	formatting = {
 		expandable_indicator = true,
