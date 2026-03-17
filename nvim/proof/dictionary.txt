@@ -1011,3 +1011,9 @@ handover
 koro
 chronomancer
 linting
+ttl
+pttl
+hget
+pexpire
+strlen
+maxmemory
