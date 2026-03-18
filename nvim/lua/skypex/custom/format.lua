@@ -34,7 +34,7 @@ local formatters_by_ft = {
 	-- Runs the single formatter
 	lua = { "stylua", "injected" },
 	-- Runs each formatter sequentially
-	python = { "ruff", "injected" },
+	python = { "ruff_format", "injected" },
 
 	-- Tries to run each formatter until one succeeds
 	javascript = first_then_injected("prettierd", "eslint_d"),
@@ -61,40 +61,15 @@ local formatters_by_ft = {
 	kotlin = { "ktfmt", "injected" },
 	nix = { "alejandra", "injected" },
 	jq = { "jqfmt", "injected" },
-	terraform = { "terraform" },
-	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
+	terraform = { "terraform_fmt", "injected" },
+	nu = { "nufmt", "injected" },
 }
 
 local external_formatters = {
-	csharpier = {
-		command = "csharpier",
-		args = { "format", "--write-stdout" },
-		stdin = true,
-	},
-	gofmt = {
-		command = "gofmt",
-	},
-	jq = {
-		command = "jq",
-		args = { "--monochrome-output" },
-	},
-	python = {
-		command = "ruff",
-		args = { "format" },
-	},
 	jqfmt = {
 		command = "jqfmt",
 		args = { "-ar", "-ob", "-op", "pipe" },
 	},
-	terraform = {
-		command = "terraform",
-		args = { "fmt", "-" },
-		stdin = true,
-	},
-	-- nufmt is not ready to be used yet, it breaks the code
-	-- nufmt = {
-	-- 	command = "nufmt",
-	-- },
 }
 
 local function extract_formatters()
@@ -195,43 +170,6 @@ end, {
 	bang = true,
 })
 
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	desc = "Format before save",
--- 	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
--- 	group = vim.api.nvim_create_augroup("FormatConfig", { clear = true }),
--- 	callback = function(ev)
--- 		if vim.b.disable_autoformat or vim.g.disable_autoformat then
--- 			return
--- 		end
---
--- 		local conform_opts = { bufnr = ev.buf, lsp_format = "fallback", timeout_ms = 2000 }
--- 		local client = vim.lsp.get_clients({ name = "ts_ls", bufnr = ev.buf })[1]
---
--- 		if not client then
--- 			conform.format(conform_opts)
--- 			return
--- 		end
---
--- 		local request_result = client:request_sync("workspace/executeCommand", {
--- 			command = "_typescript.organizeImports",
--- 			arguments = { vim.api.nvim_buf_get_name(ev.buf) },
--- 		})
---
--- 		if request_result and request_result.err then
--- 			vim.notify(request_result.err.message, vim.log.levels.ERROR)
--- 			return
--- 		end
---
--- 		conform.format(conform_opts)
--- 	end,
--- })
-
-local utils = require("skypex.utils")
-local map = utils.map
-
-map("n", "<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
-map("n", "<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
-
 local function get_format_func(other)
 	local args = vim.tbl_extend("keep", {
 		lsp_fallback = true,
@@ -244,10 +182,6 @@ local function get_format_func(other)
 	end
 end
 
-map("n", "<leader>ff", get_format_func(), "Format file")
-
--- Set up the operator mapping
-map("x", "<leader>f", get_format_func(), "Format selection")
 -- Define your operator function
 local function format_operator(_)
 	local start_line, start_col, end_line, end_col
@@ -268,11 +202,19 @@ local function format_operator(_)
 	})()
 end
 
+-- Make the function available globally
+_G.format_operator = format_operator
+
+local map = require("skypex.utils").map
+
+map("n", "<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
+map("n", "<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
+map("n", "<leader>ff", get_format_func(), "Format file")
+map("x", "<leader>f", get_format_func(), "Format selection")
+
 -- Set up the operator mapping
 map("n", "<leader>f", function()
 	vim.o.operatorfunc = "v:lua._G.format_operator"
 	return "g@"
 end, "Format file", true)
 
--- Make the function available globally
-_G.format_operator = format_operator
