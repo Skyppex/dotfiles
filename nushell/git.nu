@@ -171,6 +171,8 @@ def gc [
     | fzf --height 40% --layout=reverse -1 -0 --query $input_branch
     | complete
     | get stdout
+    | str trim
+
 
     if ($branch | is-empty) {
         git checkout $input_branch
@@ -181,7 +183,7 @@ def gc [
         $branch = "HEAD"
     }
 
-    git checkout $"($branch)"
+    git checkout $branch
 }
 
 # Git remote using fzf
