@@ -247,7 +247,7 @@ Group.new("DiagnosticSignInfo", c.info)
 Group.new("DiagnosticSignWarn", c.warning)
 
 -- Lsp
-Group.new("LspInlayHint", c.secondary)
+Group.new("LspInlayHint", g.Comment)
 Group.new("LspCodeLens", g.NonText, g.NonText)
 Group.new("LspCodeLensSeparator", g.LspCodeLens, g.LspCodeLens)
 Group.new("LspReferenceRead", nil, c.background0)
