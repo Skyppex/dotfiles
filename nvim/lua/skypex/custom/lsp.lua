@@ -3,7 +3,7 @@ local Path = require("plenary.path")
 
 local M = {}
 
-local function setup_proof(lspconfig, configs, capabilities)
+local function setup_proof(capabilities)
 	local code_path = utils.get_code_path()
 	local proof_path = code_path .. "/proof"
 	local proof_exe = nil
@@ -22,20 +22,10 @@ local function setup_proof(lspconfig, configs, capabilities)
 	local log_file = proof_path .. "/log.txt"
 	local dictionary_file = utils.get_chezmoi_path() .. "/nvim/proof/dictionary.txt"
 
-	if not configs.proof then
-		configs.proof = {
-			default_config = {
-				cmd = { proof_exe, log_file },
-				filetypes = { "*" },
-				single_file_support = true,
-				root_dir = lspconfig.util.find_git_ancestor,
-				settings = {},
-				capabilities = capabilities,
-			},
-		}
-	end
-
-	lspconfig.proof.setup({
+	vim.lsp.config("proof", {
+		cmd = { proof_exe, log_file },
+		single_file_support = true,
+		capabilities = capabilities,
 		settings = {
 			proof = {
 				dictionaryPath = string.gsub(dictionary_file, "\\", "/"),
@@ -48,9 +38,11 @@ local function setup_proof(lspconfig, configs, capabilities)
 			},
 		},
 	})
+
+	vim.lsp.enable("proof")
 end
 
-vim.lsp.set_log_level("OFF")
+vim.lsp.set_log_level("DEBUG")
 
 local cmp_lsp = require("cmp_nvim_lsp")
 -- LSP servers and clients are able to communicate to each other what features they support.
@@ -351,10 +343,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local no_config_servers = { "rust_analyzer", "rust-analyzer" }
-local no_install_servers = { "nushell", "kulala_ls", "json_ls", "nixd" }
-local configs = require("lspconfig.configs")
+local no_install_servers = { "nushell", "kulala_ls", "json_ls", "nixd", "terraform-ls" }
 
-setup_proof(lspconfig, configs)
+setup_proof(capabilities)
 
 -- Ensure the servers and tools above are installed
 --  To check the current status of installed tools and/or manually install

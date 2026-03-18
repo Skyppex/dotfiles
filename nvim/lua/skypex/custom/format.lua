@@ -61,6 +61,7 @@ local formatters_by_ft = {
 	kotlin = { "ktfmt", "injected" },
 	nix = { "alejandra", "injected" },
 	jq = { "jqfmt", "injected" },
+	terraform = { "terraform" },
 	-- nu = { "nufmt", "injected" }, Disabled because it breaks the code
 }
 
@@ -84,6 +85,11 @@ local external_formatters = {
 	jqfmt = {
 		command = "jqfmt",
 		args = { "-ar", "-ob", "-op", "pipe" },
+	},
+	terraform = {
+		command = "terraform",
+		args = { "fmt", "-" },
+		stdin = true,
 	},
 	-- nufmt is not ready to be used yet, it breaks the code
 	-- nufmt = {
