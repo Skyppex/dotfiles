@@ -45,6 +45,9 @@ alias grst = git restore --staged
 # Git restore patch
 alias grsp = git restore --patch
 
+# Git restore patch --staged
+alias grstp = git restore --staged --patch
+
 # Git show with --ext-diff
 alias "git show" = git show --ext-diff --all --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
 
