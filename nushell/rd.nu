@@ -1,35 +1,63 @@
-alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT
+alias "builtin get" = get
 
-export def --env connect [url: string] {
-    let url = if ($url | str contains "://" | n) {
-        $"redis://($url)"
+export alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT -a $env.REDIS_PASSWORD (if ($env.REDIS_URL.params | where key == ssl | first) == "true" { "--tls" } else {""})
+
+export def --wrapped main [...rest] {
+    redis ...$rest
+}
+
+export def --env connect [connection: string] {
+    let url = if ($connection | str contains "://" | n) {
+        # assume its a connection string
+        let host = $connection | cut -d: -f1
+        let port = $connection | cut -d: -f2 | cut -d, -f1
+        let params = $connection | split row "," | skip 1 | each { |part|
+            print -e $part
+            let split = $part | split row --number 2 "="
+            print -e $split
+            print -e ($split | builtin get 0)
+            { key: ($split | builtin get 0), value: ($split | builtin get 1) }
+        } | transpose --header-row --as-record
+
+        let password = $params.password
+        print -e $params
+        print -e $password
+
+        {
+            scheme: "redis"
+            host: $host
+            port: $port
+            username: "default"
+            password: $password
+            params: ($params | reject password)
+        } | url join | url parse
     } else {
-        $url
+        $connection | url parse
     }
-
-    let url = $url | url parse
 
     if $url.scheme != "redis" {
         print -e $"invalid scheme: ($url.scheme)"
     }
 
+    $env.REDIS_URL = $url
     $env.REDIS_HOST = $url.host
     $env.REDIS_PORT = $url.port
+    $env.REDIS_PASSWORD = $url.password
 }
+
+export alias c = connect
 
 export def --env disconnect [] {
+    $env.REDIS_URL = null
     $env.REDIS_HOST = null
     $env.REDIS_PORT = null
+    $env.REDIS_PASSWORD = null
 }
 
-export alias u = connect
+export alias d = disconnect
 
 export def status [] {
-    {
-        scheme: "redis"
-        host: $env.REDIS_HOST
-        port: $env.REDIS_PORT
-    }
+    $env.REDIS_URL
 }
 
 export alias st = status
@@ -54,14 +82,21 @@ export def list [
 export alias ls = list
 export alias keys = list --no-ttl
 
-alias "builtin get" = get
 
-
-export def find [] {
-    keys 
-    | builtin get key 
-    | to text 
-    | ^fzf --height 40% --layout reverse
+export def find [--multi] {
+    if $multi {
+        keys 
+        | builtin get key 
+        | to text 
+        | ^fzf --height 40% --layout reverse --multi
+        | lines
+    } else {
+        keys 
+        | builtin get key 
+        | to text 
+        | ^fzf --height 40% --layout reverse
+        | lines
+    }
 }
 
 export alias fd = find
@@ -109,14 +144,19 @@ export def length [] {
 export alias len = length
 
 export def size [] {
-    let selection = find
+    let selection = find --multi
 
     if ($selection | is-empty) {
         print -e "no key selected"
         return
     }
 
-    redis MEMORY USAGE $selection
+    $selection | each { |key| 
+        {
+            key: $key,
+            memory_usage: (redis MEMORY USAGE $key | $in + "b" | into filesize)
+        }
+    }
 }
 
 def update-type [key: string, type: string] {
@@ -202,20 +242,22 @@ export alias clients = redis INFO clients
 export alias replication = redis INFO replication
 
 export def type [] {
-    let selection = find
+    let selection = find --multi
 
     if ($selection | is-empty) {
         print -e "no key selected"
         return
     }
 
-    redis TYPE $selection
+    $selection | each { |key|
+        { key: $key, type: (redis TYPE $key) }
+    }
 }
 
 export alias set = redis SET
 
 export def expire [duration: duration] {
-    let selection = find
+    let selection = find --multi
 
     if ($selection | is-empty) {
         print -e "no key selected"
@@ -223,18 +265,23 @@ export def expire [duration: duration] {
     }
 
     let milliseconds = $duration | format duration ms | str strip-suffix " ms"
-    redis PEXPIRE $selection $milliseconds
+
+    for $key in $selection {
+        redis PEXPIRE $key $milliseconds
+    }
 }
 
 export def delete [] {
-    let selection = find
+    let selection = find --multi
 
     if ($selection | is-empty) {
         print -e "no key selected"
         return
     }
 
-    redis DEL $selection
+    for $key in $selection { 
+        redis DEL $key
+    }
 }
 
 export alias del = delete
