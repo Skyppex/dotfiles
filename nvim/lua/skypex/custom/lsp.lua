@@ -54,7 +54,6 @@ capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabi
 capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 -- Define variables used in the server configuration below
-local lspconfig = require("lspconfig")
 local cs_ls_ex = require("csharpls_extended")
 
 -- Enable the following language servers

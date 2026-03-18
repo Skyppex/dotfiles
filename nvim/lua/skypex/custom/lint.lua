@@ -1,5 +1,3 @@
-local M = {}
-
 local linters_by_ft = {
 	go = { "golangcilint" },
 	javascript = { "eslint_d" },
@@ -53,5 +51,3 @@ end
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })
-
-return M
