@@ -12,7 +12,6 @@ local function setup_proof(capabilities)
 		proof_exe = proof_path .. "/proof"
 
 		if not Path:new(proof_exe):exists() then
-			-- use nix generate binary instead maybe :|
 			proof_exe = proof_path .. "/result/bin/proof"
 		end
 	else
@@ -45,26 +44,12 @@ end
 vim.lsp.set_log_level("DEBUG")
 
 local cmp_lsp = require("cmp_nvim_lsp")
--- LSP servers and clients are able to communicate to each other what features they support.
---  By default, Neovim doesn't support everything that is in the LSP specification.
---  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
---  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
 capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
--- Define variables used in the server configuration below
 local cs_ls_ex = require("csharpls_extended")
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. Available keys are:
---  - cmd (table): Override the default command used to start the server
---  - filetypes (table): Override the default list of associated filetypes for the server
---  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
---  - settings (table): Override the default settings passed when initializing the server.
---        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 M.servers = {
 	lua_ls = {
 		filetypes = { "lua" },
@@ -78,7 +63,6 @@ M.servers = {
 				completion = {
 					callSnippet = "Replace",
 				},
-				-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 				diagnostics = {
 					globals = { "vim" },
 					disable = { "missing-fields", "undefined-fields" },
@@ -118,54 +102,21 @@ M.servers = {
 				})
 			end
 		end,
-		-- override_gd = function(bufnr)
-		-- 	vim.keymap.set("n", "gd", function()
-		-- 		vim.cmd("Telescope csharpls_definition")
-		-- 		--[[ cs_ls_ex.lsp_definitions() ]]
-		-- 	end, {
-		-- 		buffer = bufnr,
-		-- 		desc = "csharpls: Go to Definition",
-		-- 		noremap = true,
-		-- 		silent = true,
-		-- 	})
-		-- end,
-		-- SEE: https://github.com/omnisharp/omnisharp-roslyn
 		settings = {
 			FormattingOptions = {
-				-- Enables support for reading code style, naming convention and analyzer
-				-- settings from .editorconfig.
 				EnableEditorConfigSupport = true,
-				-- Specifies whether 'using' directives should be grouped and sorted during
-				-- document formatting.
 				OrganizeImports = true,
 			},
 			MsBuild = {
-				-- If true, MSBuild project system will only load projects for files that
-				-- were opened in the editor. This setting is useful for big C# codebases
-				-- and allows for faster initialization of code navigation features only
-				-- for projects that are relevant to code that is being edited. With this
-				-- setting enabled OmniSharp may load fewer projects and may thus display
-				-- incomplete reference lists for symbols.
 				LoadProjectsOnDemand = nil,
 			},
 			RoslynExtensionsOptions = {
-				-- Enables support for roslyn analyzers, code fixes and rulesets.
 				EnableAnalyzersSupport = true,
-				-- Enables support for showing unimported types and unimported extension
-				-- methods in completion lists. When committed, the appropriate using
-				-- directive will be added at the top of the current file. This option can
-				-- have a negative impact on initial completion responsiveness,
-				-- particularly for the first few completion sessions after opening a
-				-- solution.
 				EnableImportCompletion = nil,
-				-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-				-- true
 				AnalyzeOpenDocumentsOnly = nil,
 				enableDecompilationSupport = true,
 			},
 			Sdk = {
-				-- Specifies whether to include preview versions of the .NET SDK when
-				-- determining which version to use for project loading.
 				IncludePrereleases = true,
 			},
 		},
@@ -196,26 +147,15 @@ M.servers = {
 	jsonls = {
 		settings = {
 			json = {
-				-- Enable/disable JSON validation (default: true)
 				validate = { enable = true },
-				-- Enable/disable JSON formatting (default: true)
 				format = { enable = false },
-				-- Allow schema fetching from http/https locations (default: true)
 				schemaDownload = { enable = true },
-				-- Define specific schemas for files (e.g., your project's package.json)
 				schemas = {
-					-- Example of associating a schema from SchemaStore.org
 					{
 						fileMatch = { "package.json" },
 						url = "json.schemastore.org",
 					},
-					-- You can also use a local path to a schema file
-					-- {
-					--   fileMatch = {"my-config.json"},
-					--   url = "file:///path/to/your/schema.json"
-					-- },
 				},
-				-- Set trace level ("off", "messages", "verbose")
 				trace = { server = "off" },
 			},
 		},
@@ -249,58 +189,47 @@ M.servers = {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
-		local nmap = function(keys, func, desc)
-			vim.keymap.set("n", keys, func, {
-				noremap = true,
-				silent = true,
-				buffer = event.buf,
-				desc = "LSP: " .. desc,
-			})
-		end
-
-		local nvmap = function(keys, func, desc)
-			vim.keymap.set({ "n", "v" }, keys, func, {
-				noremap = true,
-				silent = true,
-				buffer = event.buf,
-				desc = "LSP: " .. desc,
-			})
+		local map = function(modes, left, right, desc)
+			utils.map(modes, left, right, "lsp: " .. desc, nil, event.buf)
 		end
 
 		local pick = require("mini.extra").pickers
 
-		nmap("gr", function()
+		map("n", "gr", function()
 			pick.lsp({ scope = "references" })
 		end, "Go to References")
 
-		nmap("gi", function()
+		map("n", "gi", function()
 			pick.lsp({ scope = "implementation" })
 		end, "Go to Implementation")
 
-		nmap("gt", function()
+		map("n", "gt", function()
 			pick.lsp({ scope = "type_definition" })
 		end, "Go to Type Definition")
 
-		nmap("<leader>ss", function()
+		map("n", "<leader>ss", function()
 			pick.lsp({ scope = "workspace_symbol_live" })
 		end, "Workspace Symbols")
 
-		nmap("<leader>rn", function()
+		map("n", "<leader>rn", function()
 			vim.lsp.buf.rename()
 			vim.schedule(function()
 				vim.api.nvim_cmd({ cmd = "wa" }, {})
 			end)
 		end, "[R]e[n]ame")
 
-		nvmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-		nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-		nmap("H", vim.lsp.buf.signature_help, "Signature Help")
-
-		vim.keymap.set("i", "<C-M-H>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
-
-		nmap("gD", function()
+		map("n", "gD", function()
 			pick.lsp({ scope = "declaration" })
 		end, "Go to Declaration")
+
+		map("n", "gd", function()
+			pick.lsp({ scope = "definition" })
+		end, "Go to Definition")
+
+		map("nx", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+		map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+		map("n", "H", vim.lsp.buf.signature_help, "Signature Help")
+		map("i", "<c-h>", vim.lsp.buf.signature_help, "Signature Help")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -311,22 +240,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			if server and server.override_gd then
 				server.override_gd(event.buf)
 			elseif not gd_exists then
-				nmap("gd", function()
+				map("n", "gd", function()
 					pick.lsp({ scope = "definition" })
 				end, "Go to Definition")
 			end
 		end
 
-		nmap("gd", function()
-			pick.lsp({ scope = "definition" })
-		end, "Go to Definition")
-
-		-- The following autocommand is used to enable inlay hints in your
-		-- code, if the language server you are using supports them
-		--
-		-- This may be unwanted, since they displace some of your code
 		if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-			nmap("<leader>th", function()
+			map("n", "<leader>th", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			end, "Toggle Inlay Hints")
 		end
@@ -341,21 +262,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local no_config_servers = { "rust_analyzer", "rust-analyzer" }
-local no_install_servers = { "nushell", "kulala_ls", "json_ls", "nixd", "terraform-ls" }
+local no_config_servers = {
+	"rust_analyzer",
+	"rust-analyzer",
+}
+
+local no_install_servers = {
+	"nushell",
+	"kulala_ls",
+	"json_ls",
+	"nixd",
+	"terraform-ls",
+}
 
 setup_proof(capabilities)
 
--- Ensure the servers and tools above are installed
---  To check the current status of installed tools and/or manually install
---  other tools, you can run
---    :Mason
---
---  You can press `g?` for help in this menu.
 require("mason").setup()
 
--- You can add other tools here that you want Mason to install
--- for you, so that they are available from within Neovim.
 local servers_to_install = vim.tbl_deep_extend("keep", M.servers, {})
 
 for k, _ in pairs(M.servers) do
@@ -401,9 +324,6 @@ for server_name, config in pairs(M.servers) do
 		goto continue
 	end
 
-	-- This handles overriding only values explicitly passed
-	-- by the server configuration above. Useful when disabling
-	-- certain features of an LSP (for example, turning off formatting for tsserver)
 	config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
 	config.handlers = vim.tbl_deep_extend("force", {}, vim.lsp.handlers, config.handlers or {})
 
