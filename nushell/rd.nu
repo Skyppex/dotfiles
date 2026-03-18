@@ -1,11 +1,38 @@
 alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT
 
-export def --env switch [] {
-    $env.REDIS_HOST = "localhost"
-    $env.REDIS_PORT = "6379"
+export def --env connect [url: string] {
+    let url = if ($url | str contains "://" | n) {
+        $"redis://($url)"
+    } else {
+        $url
+    }
+
+    let url = $url | url parse
+
+    if $url.scheme != "redis" {
+        print -e $"invalid scheme: ($url.scheme)"
+    }
+
+    $env.REDIS_HOST = $url.host
+    $env.REDIS_PORT = $url.port
 }
 
-export alias sw = switch
+export def --env disconnect [] {
+    $env.REDIS_HOST = null
+    $env.REDIS_PORT = null
+}
+
+export alias u = connect
+
+export def status [] {
+    {
+        scheme: "redis"
+        host: $env.REDIS_HOST
+        port: $env.REDIS_PORT
+    }
+}
+
+export alias st = status
 
 export def list [
     --no-ttl
