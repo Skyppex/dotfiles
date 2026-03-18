@@ -152,19 +152,3 @@ dashboard.section.header.opts.hl = "Splash"
 dashboard.opts.opts.noautocmd = true
 
 alpha.setup(dashboard.opts)
-
-local smartcolumn = require("smartcolumn")
-smartcolumn.setup({
-	colorcolumn = "80",
-	disabled_filetypes = {
-		"help",
-		"dbout",
-		"qf",
-		"alpha",
-		"checkhealth",
-		"dotenv",
-		"codecompanion",
-		"csv",
-		"dbee",
-	},
-})

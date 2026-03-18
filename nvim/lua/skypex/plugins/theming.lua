@@ -7,7 +7,6 @@ return {
 		"tjdevries/colorbuddy.nvim",
 		event = "VimEnter",
 		dependencies = {
-			"m4xshen/smartcolumn.nvim",
 			{
 				"goolord/alpha-nvim",
 				event = "VimEnter",
