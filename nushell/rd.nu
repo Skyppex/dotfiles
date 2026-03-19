@@ -1,39 +1,13 @@
 alias "builtin get" = get
 
-export alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT -a $env.REDIS_PASSWORD (if ($env.REDIS_URL.params | where key == ssl | first) == "true" { "--tls" } else {""})
+export alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT
 
 export def --wrapped main [...rest] {
     redis ...$rest
 }
 
 export def --env connect [connection: string] {
-    let url = if ($connection | str contains "://" | n) {
-        # assume its a connection string
-        let host = $connection | cut -d: -f1
-        let port = $connection | cut -d: -f2 | cut -d, -f1
-        let params = $connection | split row "," | skip 1 | each { |part|
-            print -e $part
-            let split = $part | split row --number 2 "="
-            print -e $split
-            print -e ($split | builtin get 0)
-            { key: ($split | builtin get 0), value: ($split | builtin get 1) }
-        } | transpose --header-row --as-record
-
-        let password = $params.password
-        print -e $params
-        print -e $password
-
-        {
-            scheme: "redis"
-            host: $host
-            port: $port
-            username: "default"
-            password: $password
-            params: ($params | reject password)
-        } | url join | url parse
-    } else {
-        $connection | url parse
-    }
+    let url = $connection | url parse
 
     if $url.scheme != "redis" {
         print -e $"invalid scheme: ($url.scheme)"
@@ -42,7 +16,6 @@ export def --env connect [connection: string] {
     $env.REDIS_URL = $url
     $env.REDIS_HOST = $url.host
     $env.REDIS_PORT = $url.port
-    $env.REDIS_PASSWORD = $url.password
 }
 
 export alias c = connect
@@ -51,7 +24,6 @@ export def --env disconnect [] {
     $env.REDIS_URL = null
     $env.REDIS_HOST = null
     $env.REDIS_PORT = null
-    $env.REDIS_PASSWORD = null
 }
 
 export alias d = disconnect
@@ -102,7 +74,7 @@ export def find [--multi] {
 export alias fd = find
 
 export def get [] {
-    let selection = find
+    let selection = find | first
 
     if ($selection | is-empty) {
         print -e "no key selected"
