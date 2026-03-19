@@ -48,6 +48,43 @@ alias grsp = git restore --patch
 # Git restore patch --staged
 alias grstp = git restore --staged --patch
 
+# Git continue rebase
+alias grbc = git rebase --continue
+
+# Git abort rebase
+alias grba = git rebase --abort
+
+# Git rebase with fzf
+def grb [
+    query?: string
+] {
+    let query = if ($query | is-empty) { "" } else { $query }
+
+    let branches = git branch -a | lines
+
+    let branch_names = ($branches | each { |b|
+        mut name = ($b | str substring 2..);
+
+        if ($name | str starts-with "remotes/") {
+            $name = ($name | str substring 8..);
+            let slash = ($name | str index-of '/');
+            $name = ($name | str substring ($slash + 1)..);
+        }
+
+        $name
+    })
+
+    let $branch = $branch_names
+    | uniq
+    | to text
+    | fzf --height 40% --layout=reverse -1 -0 --query $query
+    | complete
+    | get stdout
+    | str trim
+
+    git rebase $branch
+}
+
 # Git show with --ext-diff
 alias "git show" = git show --ext-diff --all --pretty="format:%C(magenta)%h %Creset(%C(cyan)%p%Creset) %C(white)%an %ar%C(auto) %D%n%n%s%n"
 
