@@ -1,6 +1,6 @@
 alias "builtin get" = get
 
-export alias redis = redis-cli -h $env.REDIS_HOST -p $env.REDIS_PORT
+export alias redis = redis-cli -u ($env.REDIS_URL | url join)
 
 export def --wrapped main [...rest] {
     redis ...$rest
@@ -9,21 +9,17 @@ export def --wrapped main [...rest] {
 export def --env connect [connection: string] {
     let url = $connection | url parse
 
-    if $url.scheme != "redis" {
+    if $url.scheme != "redis" and $url.scheme != "rediss" {
         print -e $"invalid scheme: ($url.scheme)"
     }
 
     $env.REDIS_URL = $url
-    $env.REDIS_HOST = $url.host
-    $env.REDIS_PORT = $url.port
 }
 
 export alias c = connect
 
 export def --env disconnect [] {
     $env.REDIS_URL = null
-    $env.REDIS_HOST = null
-    $env.REDIS_PORT = null
 }
 
 export alias d = disconnect
