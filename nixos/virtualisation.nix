@@ -2,8 +2,7 @@
   virtualisation.oci-containers.backend = "podman";
 
   imports = [
-    (import ./minecraft-server.nix {
-      })
+    (import ./minecraft-server.nix {})
   ];
 
   virtualisation.docker = {

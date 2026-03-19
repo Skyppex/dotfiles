@@ -7,6 +7,8 @@ in {
     "d ${dir}/${profile} 0755 1000 1000 -"
   ];
 
+  systemd.services.podman-minecraft-server.enable = false;
+
   virtualisation.oci-containers.containers.minecraft-server = {
     image = "itzg/minecraft-server";
     autoStart = false;
