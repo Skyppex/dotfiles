@@ -368,4 +368,10 @@ function M.find_git_ancestor(startpath)
 	return vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
 end
 
+--- @param predicate fun(buf: number): boolean
+function M.each_buf_where(predicate)
+	local bufs = vim.api.nvim_list_bufs()
+	return table.filter(bufs, predicate)
+end
+
 return M

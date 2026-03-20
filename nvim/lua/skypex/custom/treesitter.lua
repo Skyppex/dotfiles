@@ -110,7 +110,24 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local utils = require("skypex.utils")
-utils.map("n", "<leader>tt", ":InspectTree<cr>:EditQuery<cr><esc>", "Toggle Treesitter Playground")
+utils.map("n", "<leader>tt", function()
+	local query_bufs = utils.each_buf_where(function(buf)
+		local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+		return filetype == "query"
+	end)
+
+	if #query_bufs > 0 then
+		for _, buf in ipairs(query_bufs) do
+			vim.api.nvim_buf_delete(buf, {
+				force = true,
+			})
+		end
+	else
+		vim.cmd("InspectTree")
+		vim.treesitter.query.edit()
+		vim.cmd("stopinsert")
+	end
+end, "Toggle Treesitter Playground")
 
 -- Add local parser for arcana
 local function add_arcana()
