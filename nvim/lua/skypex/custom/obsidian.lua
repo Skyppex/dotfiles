@@ -9,7 +9,7 @@ utils.run_command(
 		"--no-ignore",
 		"--absolute-path",
 		"--max-depth=4",
-		".obsidian",
+		"\\.obsidian",
 		utils.get_home(),
 		utils.get_code_path(),
 	},

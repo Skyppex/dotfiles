@@ -109,7 +109,7 @@ end
 
 local function insert_header(filepath)
 	local file = io.open(filepath, "w")
-	local filename = vim.fn.fnamemodify(filename, ":t")
+	local filename = vim.fn.fnamemodify(filepath, ":t")
 
 	if file then
 		file:write("# " .. filename)
