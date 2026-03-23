@@ -1027,3 +1027,5 @@ grb
 getmetatable
 setmetatable
 stopinsert
+deduplicate
+hono
