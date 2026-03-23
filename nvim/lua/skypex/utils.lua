@@ -164,7 +164,7 @@ end
 --- @param command string
 --- @param args string[]?
 --- @param should_block boolean
---- @param on_exit function? (data: string, exit_code: number)
+--- @param on_exit fun(data: table<string>, exit_code: number)?
 function M.run_command(command, args, should_block, on_exit)
 	local Job = require("plenary.job")
 
@@ -174,7 +174,7 @@ function M.run_command(command, args, should_block, on_exit)
 		on_stdout = function(_, data)
 			if data then
 				vim.schedule(function()
-					vim.notify(data, vim.log.levels.OFF)
+					vim.notify(data, vim.log.levels.DEBUG)
 				end)
 			end
 		end,
@@ -188,7 +188,7 @@ function M.run_command(command, args, should_block, on_exit)
 		on_exit = function(data, exit_code)
 			if on_exit then
 				vim.schedule(function()
-					on_exit(data, exit_code)
+					on_exit(data:result(), exit_code)
 				end)
 			end
 		end,
@@ -203,7 +203,7 @@ end
 
 --- @param command string
 --- @param args string[]?
---- @param on_exit function? (data: string, exit_code: number)
+--- @param on_exit fun(data: string, exit_code: number)?
 --- @param opts table?
 --- @return table|nil, number (stdout, exit_code)
 function M.run_command_ret(command, args, on_exit, opts)
@@ -372,6 +372,58 @@ end
 function M.each_buf_where(predicate)
 	local bufs = vim.api.nvim_list_bufs()
 	return table.filter(bufs, predicate)
+end
+
+--- @param path string
+--- @return string
+function M.dirname(path)
+	if path == nil or path == "" then
+		return "."
+	end
+
+	path = path:gsub("[/\\]+$", "")
+
+	local dir = path:match("^(.+)[/\\][^/\\]*$")
+
+	if dir then
+		return dir
+	else
+		return "."
+	end
+end
+
+--- @param path string
+--- @return string|nil
+function M.basename(path)
+	if path == nil or path == "" then
+		return nil
+	end
+
+	path = path:gsub("[/\\]+$", "")
+
+	local filename = path:match("[^/\\]*$")
+
+	return filename
+end
+
+--- @param tbl table
+--- @return table|nil
+function M.deduplicate(tbl)
+	if tbl == nil or #tbl == 0 then
+		return tbl
+	end
+
+	local seen = {}
+	local result = {}
+
+	for _, str in ipairs(tbl) do
+		if not seen[str] then
+			seen[str] = true
+			table.insert(result, str)
+		end
+	end
+
+	return result
 end
 
 return M
