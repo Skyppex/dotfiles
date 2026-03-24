@@ -751,6 +751,7 @@ def gcp [
         [false, true, true] => (cc --scope $scope --no-details ...$message)
         [true, true, true] => (cc --type $type --scope $scope --no-details ...$message)
     }
+
     gum confirm "Push changes?"
     git push
 }
