@@ -558,13 +558,13 @@ local config = {
 	},
 	set_environment_variables = utils.merge_tables({
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
-		PATH = os.getenv("PATH")
-			.. ":"
-			.. utils.get_home()
+		PATH = utils.get_home()
 			.. "/.dotnet/tools"
 			.. ":"
 			.. utils.get_home()
-			.. "/dev/bin",
+			.. "/dev/bin"
+			.. ":"
+			.. os.getenv("PATH"),
 	}, require("env")),
 }
 
