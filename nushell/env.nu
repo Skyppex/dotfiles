@@ -104,9 +104,6 @@ if $env.HOMEPATH? != null {
     $env.HOME = ($env.HOMEDRIVE ++ $env.HOMEPATH | str replace "\\" "/")
 }
 
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
-
 $env.CONFIG_PATH = $"($nu.home-dir)/.config"
 $env.XDG_CONFIG_HOME = $"($nu.home-dir)/.config"
 $env.CHEZMOI_PATH = $"($nu.home-dir)/.local/share/chezmoi"
@@ -291,6 +288,43 @@ match [$env.HOSTNAME, $env.OS] {
             load-env $env_vars
         }
     }
+    ["AAD-BYSVZ94", "ubuntu"] => {
+        $env.DEV = ('~/dev' | path expand)
+        $env.CODE = ('~/dev/code' | path expand)
+        $env.DEV_BIN = ('~/dev/bin' | path expand)
+
+        let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+
+        if ($nix_path | path exists) {
+            let more_env = bash -c $"source ($nix_path) && env" | lines
+            mut env_vars = {}
+
+            let ignore = [
+                FILE_PWD
+                CURRENT_FILE
+                PWD
+            ]
+
+            for it in $more_env { 
+                let split = $it | split row --number 2 "="
+
+                if ($split | length) != 2 {
+                    continue
+                }
+
+                let key = $split.0
+
+                if ($ignore | any { |it| $key == $it }) {
+                    continue
+                }
+
+                let value = $split.1
+                $env_vars = ($env_vars | merge { $key: $value })
+            }
+
+            load-env $env_vars
+        }
+    }
     _ => {
         if (which notify-send | is-not-empty) {
             notify-send "unknown computer"
@@ -312,3 +346,8 @@ let api_key = (do -i { skate get openai@api | complete })
 if $api_key.exit_code == 0 {
     $env.OPENAI_API_KEY = $api_key.stdout
 }
+
+which starship
+
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu

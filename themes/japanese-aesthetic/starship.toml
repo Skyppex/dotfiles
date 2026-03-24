@@ -1,12 +1,9 @@
 # Get editor completions based on the config schema
-"$schema" = 'https://starship.rs/config-schema.json'
-
+"$schema" = "https://starship.rs/config-schema.json"
 # Config
 command_timeout = 3000
-
 # Disable the blank line at the start of the prompt
 add_newline = false
-
 format = """
 $character\
 $os\
@@ -23,7 +20,7 @@ $git_status\
 [os]
 style = "fg:#3c3836 bg:prev_fg"
 format = "[$symbol]($style)"
-disabled = false                # Disabled by default
+disabled = false  # Disabled by default
 
 [os.symbols]
 Arch = "󰣇 "
@@ -72,11 +69,15 @@ format = "[ $path]($style)"
 # So either put "Important Documents" before "Documents" or use the substituted version:
 # "Important 󰈙 " = " 󰈙 "
 
+[vcs]
+order = ["jujutsu", "git"]
+jujutsu_modules = "$jujutsu_state"
+
 # VCS Branch
 [git_branch]
 symbol = " "
 style = "fg:#3c3836 bg:prev_bg"
-format = '[ $symbol$branch]($style)'
+format = "[ $symbol$branch]($style)"
 
 [git_state]
 rebase = " "
@@ -92,10 +93,15 @@ format = ' \([$state($progress_current/$progress_total)]($style)\)'
 [git_status]
 disabled = false
 style = "fg:#3c3836 bg:prev_bg"
-format = '[ $all_status$ahead_behind]($style)'
+format = "[ $all_status$ahead_behind]($style)"
+
+[jujutsu_state]
+disabled = false
+style = "fg:#3c3836 bg:prev_bg"
 
 [character]
 success_symbol = "[](fg:#fbf1c7)"
 error_symbol = "[](#c14a4a)"
 vimcmd_symbol = "[](#3c3836)"
 format = "$symbol"
+
