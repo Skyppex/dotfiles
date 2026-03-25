@@ -23,7 +23,8 @@ export def --wrapped redis [...rest] {
         $args = $args | append "--pass" | append $password
     }
 
-    redis-cli -h $host -p $port ...$args ...$rest
+    let output = redis-cli -h $host -p $port ...$args ...$rest | complete
+    return ($output.stdout | str trim)
 }
 
 export def --wrapped main [...rest] {
