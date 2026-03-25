@@ -1,6 +1,30 @@
 alias "builtin get" = get
 
-export alias redis = redis-cli -u ($env.REDIS_URL | url join)
+export def --wrapped redis [...rest] {
+    let url = $env.REDIS_URL
+    let scheme = $url.scheme
+    let tls = $scheme == "rediss"
+    let username = $url.username
+    let password = $url.password | url decode
+    let host = $url.host
+    let port = $url.port
+
+    mut args = []
+
+    if $tls {
+        $args = $args | append "--tls"
+    }
+
+    if ($username | is-not-empty) {
+        $args = $args | append "--user" | append $username
+    }
+
+    if ($password | is-not-empty) {
+        $args = $args | append "--pass" | append $password
+    }
+
+    redis-cli -h $host -p $port ...$args ...$rest
+}
 
 export def --wrapped main [...rest] {
     redis ...$rest
