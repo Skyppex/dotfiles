@@ -1031,3 +1031,4 @@ deduplicate
 hono
 railgun
 monorepo
+hashicorp
