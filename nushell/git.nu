@@ -113,6 +113,7 @@ def cc [
         "test",
         "chore",
         "revert",
+        "infra",
         "wip"
     ]
 
