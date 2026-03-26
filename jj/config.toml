@@ -7,3 +7,4 @@ diff-formatter = ["difft", "--width=200", "--color=always", "$left", "$right"]
 pager = "less --quit-if-one-screen --raw-control-chars --no-init"
 paginate = "auto"
 editor = "nvim"
+default-command = "log"
