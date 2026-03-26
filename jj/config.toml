@@ -8,3 +8,7 @@ pager = "less --quit-if-one-screen --raw-control-chars --no-init"
 paginate = "auto"
 editor = "nvim"
 default-command = "log"
+
+[template-aliases]
+'format_timestamp(timestamp)' = "timestamp.ago()"
+'format_short_signature(signature)' = "signature.name()"
