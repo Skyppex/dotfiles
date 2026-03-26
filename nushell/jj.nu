@@ -19,13 +19,13 @@ alias jdf = jj diff (jj diff --name-only | fzf --height 40% --layout=reverse)
 # Jujutsu edit
 alias je = jj edit
 
-# Conventional describe
-def jcc [
+# Conventional message
+def jj-conventional-message [
     --type(-t): string # Specify the type of the commit
     --scope(-s): string # Specify the scope of the commit
     --no-details(-n) # Do not prompt for a description
     ...message: string
-] {
+]: nothing -> string {
     let types = [
         "fix",
         "feat",
@@ -81,13 +81,42 @@ def jcc [
     }
 
     if ($details | is-empty) {
-        gum confirm "Commit changes?"
-        jj describe --message $summary
-        return
+        return $summary
     }
 
-    gum confirm "Commit changes?"
-    jj describe --message $"($summary)\n\n($details)"
+    return $"($summary)\n\n($details)"
+}
+
+# Conventional describe
+def jcc [
+    --type(-t): string # Specify the type of the commit
+    --scope(-s): string # Specify the scope of the commit
+    --no-details(-n) # Do not prompt for a description
+    --message(-m): string # Optionally pass the entire message
+    revsets?: string # Revsets to apply the description to
+] {
+    let revsets = if ($revsets | is-not-empty) { $revsets } else '@'
+    mut args = []
+
+    if ($type | is-not-empty) {
+        $args = $args | append "--type" | append $type
+    }
+
+    if ($scope | is-not-empty) {
+        $args = $args | append "--scope" | append $scope
+    }
+
+    if ($no_details) {
+        $args = $args | append "--no-details"
+    }
+
+    if ($message | is-not-empty) {
+        $args = $args | append $message
+    }
+
+    let message = jj-conventional-message ...$args
+
+    jj describe --message $message $revsets
 }
 
 # Jujutsu checkout but with fzf for bookmark selection
@@ -334,4 +363,62 @@ def jcm [] {
     }
 
     print -e "No main or master bookmarks found"
+}
+
+def jj-get-description [] {
+    jj log --revisions '@' --template 'description'
+    | lines
+    | str substring 3..
+    | str join "\n"
+    | str trim
+}
+
+## Jujutsu commit and push
+def jcp [
+    --type(-t): string # Specify the type of the commit
+    --scope(-s): string # Specify the scope of the commit
+    --no-details(-n) # Do not prompt for a description
+    --message(-m): string # Optionally pass the entire message
+] {
+    let has_type = $type | is-not-empty
+    let has_scope = $scope | is-not-empty
+    let has_no_details = $no_details | is-not-empty
+    let has_message = $message | is-not-empty
+
+    let has_description = jj log --revisions '@' --template 'if(description == "", "false", "true")'
+    | lines
+    | first
+    | str trim
+    | str ends-with "true"
+    
+    match [$has_type, $has_scope, $has_no_details, $has_message, $has_description] {
+        [false, false, false, false, true] => {}
+        [false, false, false, false, false] => (jcc)
+        [true, false, false, false, _] => (jcc --type $type)
+        [false, true, false, false, _] => (jcc --scope $scope)
+        [true, true, false, false, _] => (jcc --type $type --scope $scope)
+        [false, false, true, false, _] => (jcc --no-details)
+        [true, false, true, false, _] => (jcc --type $type --no-details)
+        [false, true, true, false, _] => (jcc --scope $scope --no-details)
+        [true, true, true, false, _] => (jcc --type $type --scope $scope --no-details)
+        [false, false, false, true, _] => (jcc --message $message)
+        [true, false, false, true, _] => (jcc --type $type --message $message)
+        [false, true, false, true, _] => (jcc --scope $scope --message $message)
+        [true, true, false, true, _] => (jcc --type $type --scope $scope --message $message)
+        [false, false, true, true, _] => (jcc --no-details --message $message)
+        [true, false, true, true, _] => (jcc --type $type --no-details --message $message)
+        [false, true, true, true, _] => (jcc --scope $scope --no-details --message $message)
+        [true, true, true, true, _] => (jcc --type $type --scope $scope --no-details --message $message)
+    }
+
+    jb mv
+    gum confirm "Push changes?"
+    jj git push
+}
+
+## Jujutsu split
+def jsp [] {
+    let current_description = jj-get-description
+    jj split --interactive --message $current_description
+    jcc @-
 }
