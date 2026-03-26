@@ -424,8 +424,6 @@ def jcp [
     | str substring 3..
     | str trim
 
-    jj bookmark track $bookmarks --remote origin
-
     gum confirm "Push changes?"
     jj git push
 }
