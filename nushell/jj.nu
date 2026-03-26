@@ -96,25 +96,30 @@ def jcc [
     revsets?: string # Revsets to apply the description to
 ] {
     let revsets = if ($revsets | is-not-empty) { $revsets } else '@'
-    mut args = []
 
-    if ($type | is-not-empty) {
-        $args = $args | append "--type" | append $type
+    let has_type = $type | is-not-empty
+    let has_scope = $scope | is-not-empty
+    let has_no_details = $no_details | is-not-empty
+    let has_message = $message | is-not-empty
+
+    let message = match [$has_type, $has_scope, $has_no_details, $has_message] {
+        [false, false, false, false] => (jj-conventional-message)
+        [true, false, false, false] => (jj-conventional-message --type $type)
+        [false, true, false, false] => (jj-conventional-message --scope $scope)
+        [true, true, false, false] => (jj-conventional-message --type $type --scope $scope)
+        [false, false, true, false] => (jj-conventional-message --no-details)
+        [true, false, true, false] => (jj-conventional-message --type $type --no-details)
+        [false, true, true, false] => (jj-conventional-message --scope $scope --no-details)
+        [true, true, true, false] => (jj-conventional-message --type $type --scope $scope --no-details)
+        [false, false, false, true] => (jj-conventional-message $message)
+        [true, false, false, true] => (jj-conventional-message --type $type $message)
+        [false, true, false, true] => (jj-conventional-message --scope $scope $message)
+        [true, true, false, true] => (jj-conventional-message --type $type --scope $scope $message)
+        [false, false, true, true] => (jj-conventional-message --no-details $message)
+        [true, false, true, true] => (jj-conventional-message --type $type --no-details $message)
+        [false, true, true, true] => (jj-conventional-message --scope $scope --no-details $message)
+        [true, true, true, true] => (jj-conventional-message --type $type --scope $scope --no-details $message)
     }
-
-    if ($scope | is-not-empty) {
-        $args = $args | append "--scope" | append $scope
-    }
-
-    if ($no_details) {
-        $args = $args | append "--no-details"
-    }
-
-    if ($message | is-not-empty) {
-        $args = $args | append $message
-    }
-
-    let message = jj-conventional-message ...$args
 
     jj describe --message $message $revsets
 }
@@ -390,7 +395,7 @@ def jcp [
     | first
     | str trim
     | str ends-with "true"
-    
+
     match [$has_type, $has_scope, $has_no_details, $has_message, $has_description] {
         [false, false, false, false, true] => {}
         [false, false, false, false, false] => (jcc)
