@@ -1032,3 +1032,7 @@ hono
 railgun
 monorepo
 hashicorp
+jb
+jsp
+jcp
+revset
