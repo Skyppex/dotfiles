@@ -4,6 +4,9 @@ alias js = jj status
 # Jujutsu log
 alias jl = jj log
 
+# Jujutsu log all
+alias jla = jj log --revisions 'all()'
+
 # Jujutsu diff
 alias jd = jj diff
 
