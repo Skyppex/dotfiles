@@ -736,8 +736,6 @@ def gcp [
 ] {
     git add -A
 
-    mut args = []
-
     let has_type = $type | is-not-empty
     let has_scope = $scope | is-not-empty
     let has_no_details = $no_details | is-not-empty
