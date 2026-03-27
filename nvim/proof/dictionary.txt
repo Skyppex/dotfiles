@@ -427,13 +427,16 @@ itzg
 ixx
 janky
 jb
+jc
 jcc
 jcm
 jcp
 jd
 jdf
 je
-jetbrain
+jetbrains
+jl
+jla
 jobstart
 jobstop
 joinpath
