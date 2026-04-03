@@ -2,6 +2,27 @@
 $mainMod = SUPER # Sets "Windows" key as main modifier
 $altGr = 108
 
+$menu = rofi -display-combi open -case-smart -combi-display-format "{text}" -window-format "{t}" -show combi -modi combi -combi-modi "window,drun,recursivebrowser"
+
+$terminalExec = wezterm start --always-new-process
+$terminalClass = org.wezfurlong.wezterm
+{{- if eq .chezmoi.hostname "tower" }}
+$browserExec = zen
+$browserClass = zen
+{{- else }}
+$browserExec = zen-browser
+$browserClass = zen
+{{- end }}
+$musicPlayerExec = spotify
+$musicPlayerClass = spotify
+$gamesExec = steam
+$gamesClass = steam
+
+$focus_or_launch = ~/.config/hypr/scripts/focus_or_launch
+$focus_game = ~/.config/hypr/scripts/focus_game
+$nu_env = ~/.config/nushell/env.nu
+$rofi_rider = ~/.config/hypr/scripts/rofi-rider
+
 # system
 bind = $mainMod, Delete, exec, systemctl poweroff
 bind = $mainMod CTRL, Delete, exec, systemctl hybrid-sleep
