@@ -1,17 +1,19 @@
 # Get editor completions based on the config schema
-"$schema" = "https://starship.rs/config-schema.json"
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # Config
 command_timeout = 3000
+
 # Disable the blank line at the start of the prompt
 add_newline = false
+
 format = """
 $character\
 $os\
 $username\
 $hostname\
 $directory\
-$git_branch\
-$git_status\
+$vcs\
 [ ](prev_bg)
 """
 
@@ -20,7 +22,7 @@ $git_status\
 [os]
 style = "fg:#3c3836 bg:prev_fg"
 format = "[$symbol]($style)"
-disabled = false  # Disabled by default
+disabled = false                # Disabled by default
 
 [os.symbols]
 Arch = "󰣇 "
@@ -71,13 +73,14 @@ format = "[ $path]($style)"
 
 [vcs]
 order = ["jujutsu", "git"]
-jujutsu_modules = "$jujutsu_state"
+jujutsu_modules="$jujutsu_closest_bookmarks$jujutsu_state"
+git_modules="$git_branch$git_status"
 
 # VCS Branch
 [git_branch]
 symbol = " "
 style = "fg:#3c3836 bg:prev_bg"
-format = "[ $symbol$branch]($style)"
+format = '[ $symbol$branch]($style)'
 
 [git_state]
 rebase = " "
@@ -93,15 +96,45 @@ format = ' \([$state($progress_current/$progress_total)]($style)\)'
 [git_status]
 disabled = false
 style = "fg:#3c3836 bg:prev_bg"
-format = "[ $all_status$ahead_behind]($style)"
+format = '[ $all_status$ahead_behind]($style)'
+
+[jujutsu_bookmark]
+disabled = false
+symbol = " "
+style = "fg:#3c3836 bg:prev_bg"
+format = '[$symbol$bookmarks]($style)'
+
+[jujutsu_change]
+disabled = false
+style = "fg:#3c3836 bg:prev_bg"
+format = '[ $symbol$change_id]($style)'
+
+[jujutsu_closest_bookmarks]
+disabled = false
+symbol = " "
+style = "fg:#3c3836 bg:prev_bg"
+format = '[ $symbol$bookmarks ]($style)'
+
+[jujutsu_commit]
+disabled = false
+style = "fg:#3c3836 bg:prev_bg"
+format = '[ $symbol$commit]($style)'
 
 [jujutsu_state]
 disabled = false
 style = "fg:#3c3836 bg:prev_bg"
+conflicted = "⚠ "
+conflicted_style = "fg:#3c3836 bg:prev_bg"
+divergent = "󰓁 "
+divergent_style = "fg:#3c3836 bg:prev_bg"
+hidden = "󰘓 "
+hidden_style = "fg:#3c3836 bg:prev_bg"
+immutable = " "
+immutable_style = "fg:#3c3836 bg:prev_bg"
+format = '[$conflicted]($conflicted_style)[$divergent]($divergent_style)[$hidden]($hidden_style)[$immutable]($immutable_style)[ ]($style)'
 
 [character]
 success_symbol = "[](fg:#fbf1c7)"
 error_symbol = "[](#c14a4a)"
 vimcmd_symbol = "[](#3c3836)"
 format = "$symbol"
-
