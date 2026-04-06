@@ -123,7 +123,7 @@ format = '[ $symbol$commit]($style)'
 [jujutsu_state]
 disabled = false
 style = "fg:#3c3836 bg:prev_bg"
-conflicted = "⚠ "
+conflicted = " "
 conflicted_style = "fg:#3c3836 bg:prev_bg"
 divergent = "󰓁 "
 divergent_style = "fg:#3c3836 bg:prev_bg"
