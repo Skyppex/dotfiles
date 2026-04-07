@@ -73,7 +73,7 @@ format = "[ $path]($style)"
 
 [vcs]
 order = ["jujutsu", "git"]
-jujutsu_modules="$jujutsu_closest_bookmarks$jujutsu_state"
+jujutsu_modules="$jujutsu_closest_bookmarks$jujutsu_state$jujutsu_status"
 git_modules="$git_branch$git_status"
 
 # VCS Branch
@@ -132,6 +132,11 @@ hidden_style = "fg:#3c3836 bg:prev_bg"
 immutable = " "
 immutable_style = "fg:#3c3836 bg:prev_bg"
 format = '[$conflicted]($conflicted_style)[$divergent]($divergent_style)[$hidden]($hidden_style)[$immutable]($immutable_style)[ ]($style)'
+
+[jujutsu_status]
+disabled = false
+style = "fg:#3c3836 bg:prev_bg"
+format = '[$all_status]($style)'
 
 [character]
 success_symbol = "[](fg:#fbf1c7)"
