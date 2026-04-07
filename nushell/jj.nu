@@ -79,6 +79,8 @@ def jj-conventional-message [
 
     mut details = ""
 
+    print -e $no_details
+
     if not $no_details {
         $details = (gum write --placeholder "Details of this change")
     }
@@ -102,7 +104,7 @@ def jcc [
 
     let has_type = $type | is-not-empty
     let has_scope = $scope | is-not-empty
-    let has_no_details = $no_details | is-not-empty
+    let has_no_details = $no_details
     let has_message = $message | is-not-empty
 
     let message = match [$has_type, $has_scope, $has_no_details, $has_message] {
