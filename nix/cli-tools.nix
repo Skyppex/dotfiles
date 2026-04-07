@@ -60,6 +60,7 @@
     glow
     gnumake
     go
+    gomplate
     gping
     gum
     hcloud
