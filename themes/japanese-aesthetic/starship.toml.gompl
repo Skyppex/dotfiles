@@ -1,3 +1,6 @@
+{{- $colors := (datasource "vars").colors -}}
+{{- $fonts := (datasource "vars").fonts -}}
+{{- $style := (datasource "vars").style -}}
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
@@ -20,7 +23,7 @@ $vcs\
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "fg:#3c3836 bg:prev_fg"
+style = "fg:{{ $colors.background1 }} bg:prev_fg"
 format = "[$symbol]($style)"
 disabled = false                # Disabled by default
 
@@ -33,18 +36,18 @@ Ubuntu = " "
 Windows = " "
 
 [username]
-style_user = "fg:#3c3836 bg:prev_bg"
-style_root = "fg:#3c3836 bg:prev_bg"
+style_user = "fg:{{ $colors.background1 }} bg:prev_bg"
+style_root = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = "[ $user]($style)"
 aliases = { "root" = "command" }
 
 [hostname]
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 ssh_only = true
 format = "[@$hostname]($style)"
 
 [directory]
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = "[ $path]($style)"
 
 # Here is how you can shorten some long paths by text replacement
@@ -79,7 +82,7 @@ git_modules="$git_branch$git_status"
 # VCS Branch
 [git_branch]
 symbol = " "
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[ $symbol$branch]($style)'
 
 [git_state]
@@ -90,56 +93,56 @@ cherry_pick = " "
 bisect = "󰕝 "
 am = "󰛮 "
 am_or_rebase = "󰛮 / "
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = ' \([$state($progress_current/$progress_total)]($style)\)'
 
 [git_status]
 disabled = false
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[ $all_status$ahead_behind]($style)'
 
 [jujutsu_bookmark]
 disabled = false
 symbol = " "
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[$symbol$bookmarks]($style)'
 
 [jujutsu_change]
 disabled = false
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[ $symbol$change_id]($style)'
 
 [jujutsu_closest_bookmarks]
 disabled = false
 symbol = " "
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[ $symbol$bookmarks ]($style)'
 
 [jujutsu_commit]
 disabled = false
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[ $symbol$commit]($style)'
 
 [jujutsu_state]
 disabled = false
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 conflicted = " "
-conflicted_style = "fg:#3c3836 bg:prev_bg"
+conflicted_style = "fg:{{ $colors.background1 }} bg:prev_bg"
 divergent = "󰓁 "
-divergent_style = "fg:#3c3836 bg:prev_bg"
+divergent_style = "fg:{{ $colors.background1 }} bg:prev_bg"
 hidden = "󰘓 "
-hidden_style = "fg:#3c3836 bg:prev_bg"
+hidden_style = "fg:{{ $colors.background1 }} bg:prev_bg"
 immutable = " "
-immutable_style = "fg:#3c3836 bg:prev_bg"
+immutable_style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[$conflicted]($conflicted_style)[$divergent]($divergent_style)[$hidden]($hidden_style)[$immutable]($immutable_style)[ ]($style)'
 
 [jujutsu_status]
 disabled = false
-style = "fg:#3c3836 bg:prev_bg"
+style = "fg:{{ $colors.background1 }} bg:prev_bg"
 format = '[$all_status]($style)'
 
 [character]
-success_symbol = "[](fg:#fbf1c7)"
-error_symbol = "[](#c14a4a)"
-vimcmd_symbol = "[](#3c3836)"
+success_symbol = "[](fg:{{ $colors.primary }})"
+error_symbol = "[]({{ $colors.error }})"
+vimcmd_symbol = "[]({{ $colors.background1 }})"
 format = "$symbol"

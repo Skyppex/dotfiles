@@ -1,0 +1,20 @@
+{{- $colors := (datasource "vars").colors -}}
+{{- $fonts := (datasource "vars").fonts -}}
+{{- $style := (datasource "vars").style -}}
+# Style
+font={{ $fonts.primary }}
+
+background-color={{ $colors.background1 }}
+text-color={{ $colors.primary }}
+border-color={{ $colors.secondary }}
+progress-color=over {{ $colors.background2 }}
+output=DP-2
+
+border-radius={{ index $style "border-outer-radius" }}
+border-size={{ index $style "border-size" }}
+
+[urgency=high]
+border-color={{ $colors.orange }}
+
+[app-name=Spotify]
+invisible=1

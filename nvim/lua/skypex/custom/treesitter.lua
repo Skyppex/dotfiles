@@ -246,6 +246,12 @@ local filetype_map = {
 		parser = "gotmpl",
 	},
 	{
+		pattern = "*.gompl",
+		ext = "gompl", -- custom format for gomplate tool used for themes
+		filetype = "template",
+		parser = "gotmpl",
+	},
+	{
 		pattern = "dot_*",
 		replacement = {
 			"dot_",

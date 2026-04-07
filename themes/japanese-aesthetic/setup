@@ -1,12 +1,24 @@
 #!/usr/bin/env nu
 
+source ~/.config/themes/utils.nu
+
 let themes = $env.CONFIG_PATH | path join "themes" | path expand
 let theme = $themes | path join "japanese-aesthetic"
 let config = open ($theme | path join "config.toml")
 
-let colors = open ($theme | path join "style.toml") | get $config.variant
-let style = open ($theme | path join "style.toml") | get style
-let fonts = open ($theme | path join "style.toml") | get fonts
+let theme_data = open ($theme | path join "theme.toml")
+let colors = $theme_data | get colors | get $config.variant
+let style = $theme_data | get style
+let fonts = $theme_data | get fonts
+let variant_data = {
+    colors: $colors
+} 
+| insert style $style 
+| insert fonts $fonts
+
+let variant_file = $"($theme)/variant.yaml"
+$variant_data | save --force $variant_file
+
 let background_h_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
 let background_w_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" w
 let background_v_path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
@@ -67,7 +79,7 @@ hook --force --relative --source $path --destination ($chezmoi_hypr_path | path 
 
 # setup variables for hyprlock
 
-let colors_lock = open ($theme | path join "style.toml") | get $config.lock_variant
+let colors_lock = $theme_data | get colors | get $config.lock_variant
 
 let keys_lock = $colors_lock | columns | append $style_keys
 let values_lock = $colors_lock | values | append $style_values
@@ -170,204 +182,25 @@ let nushell = "let colors = {" | append ($kvps | each { |it|
     $"\t($key): \"($value)\""
 }) | append "}" | to text
 
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.nu")
-$nushell | to text | save -f $path
+let nu_colors_path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/colors.nu")
+$nushell | to text | save -f $nu_colors_path
 
 let chezmoi_lua_path = ($env.CHEZMOI_PATH | path join "nushell")
-hook --force --relative --source $path --destination ($chezmoi_lua_path | path join "colors.nu")
-
+hook --force --relative --source $nu_colors_path --destination ($chezmoi_lua_path | path join "colors.nu")
 
 # setup starship
-# this ones annoying, i have to generate the entire file with the colors i want
-
-let starship = [
-    `# Get editor completions based on the config schema`,
-    `"$schema" = 'https://starship.rs/config-schema.json'`,
-    ``,
-    `# Config`,
-    `command_timeout = 3000`,
-    ``,
-    `# Disable the blank line at the start of the prompt`,
-    `add_newline = false`,
-    ``,
-    `format = """`,
-    `$character\`,
-    `$os\`,
-    `$username\`,
-    `$hostname\`,
-    `$directory\`,
-    `$vcs\`,
-    `[ ](prev_bg)`,
-    `"""`,
-    ``,
-    `# An alternative to the username module which displays a symbol that`,
-    `# represents the current operating system`,
-    `[os]`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_fg"`] | str join ""),
-    `format = "[$symbol]($style)"`,
-    `disabled = false                # Disabled by default`,
-    ``,
-    `[os.symbols]`,
-    `Arch = "󰣇 "`,
-    `EndeavourOS = " "`,
-    `Linux = " "`,
-    `NixOS = " "`,
-    `Ubuntu = " "`,
-    `Windows = " "`,
-    ``,
-    `[username]`,
-    ([`style_user = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    ([`style_root = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = "[ $user]($style)"`,
-    `aliases = { "root" = "command" }`,
-    ``,
-    `[hostname]`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `ssh_only = true`,
-    `format = "[@$hostname]($style)"`,
-    ``,
-    `[directory]`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = "[ $path]($style)"`,
-    ``,
-    `# Here is how you can shorten some long paths by text replacement`,
-    `# similar to mapped_locations in Oh My Posh:`,
-    `[directory.substitutions]`,
-    `"Contacts" = " "`,
-    `"Kontakter" = " "`,
-    `"Desktop" = " "`,
-    `"Skrivebord" = " "`,
-    `"Documents" = "󰈙 "`,
-    `"Dokumenter" = "󰈙 "`,
-    `"Downloads" = " "`,
-    `"Nedlastinger" = " "`,
-    `"Movies" = " "`,
-    `"Filmer" = " "`,
-    `"Music" = " "`,
-    `"Musikk" = " "`,
-    `"OneDrive" = " "`,
-    `"Pictures" = " "`,
-    `"Bilder" = " "`,
-    `# Keep in mind that the order matters. For example:`,
-    `# "Important Documents" = " 󰈙 "`,
-    `# will not be replaced, because "Documents" was already substituted before.`,
-    `# So either put "Important Documents" before "Documents" or use the substituted version:`,
-    `# "Important 󰈙 " = " 󰈙 "`,
-    ``,
-    `[vcs]`,
-    `order = ["jujutsu", "git"]`,
-    `jujutsu_modules="$jujutsu_closest_bookmarks$jujutsu_state$jujutsu_status"`,
-    `git_modules="$git_branch$git_status"`,
-    ``,
-    `# VCS Branch`,
-    `[git_branch]`,
-    `symbol = " "`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[ $symbol$branch]($style)'`,
-    ``,
-    `[git_state]`,
-    `rebase = " "`,
-    `merge = " "`,
-    `revert = "󰕍 "`,
-    `cherry_pick = " "`,
-    `bisect = "󰕝 "`,
-    `am = "󰛮 "`,
-    `am_or_rebase = "󰛮 / "`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = ' \([$state($progress_current/$progress_total)]($style)\)'`,
-    ``,
-    `[git_status]`,
-    `disabled = false`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[ $all_status$ahead_behind]($style)'`,
-    ``,
-    `[jujutsu_bookmark]`,
-    `disabled = false`,
-    `symbol = " "`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[$symbol$bookmarks]($style)'`,
-    ``,
-    `[jujutsu_change]`,
-    `disabled = false`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[ $symbol$change_id]($style)'`,
-    ``,
-    `[jujutsu_closest_bookmarks]`,
-    `disabled = false`,
-    `symbol = " "`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[ $symbol$bookmarks ]($style)'`,
-    ``,
-    `[jujutsu_commit]`,
-    `disabled = false`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[ $symbol$commit]($style)'`,
-    ``,
-    `[jujutsu_state]`,
-    `disabled = false`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `conflicted = " "`,
-    ([`conflicted_style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `divergent = "󰓁 "`,
-    ([`divergent_style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `hidden = "󰘓 "`,
-    ([`hidden_style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `immutable = " "`,
-    ([`immutable_style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[$conflicted]($conflicted_style)[$divergent]($divergent_style)[$hidden]($hidden_style)[$immutable]($immutable_style)[ ]($style)'`,
-    ``,
-    `[jujutsu_status]`,
-    `disabled = false`,
-    ([`style = "fg:`, $colors.background1, ` bg:prev_bg"`] | str join ""),
-    `format = '[$all_status]($style)'`,
-    ``,
-    `[character]`,
-    ([`success_symbol = "[](fg:`, $colors.primary, `)"`] | str join ""),
-    ([`error_symbol = "[](`, $colors.error, `)"`] | str join ""),
-    ([`vimcmd_symbol = "[](`, $colors.background1 `)"`] | str join ""),
-    `format = "$symbol"`
-]
-
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/starship.toml")
-$starship | str join "\n" | to text | save -f $path
-
-let chezmoi_starship_path = $env.CHEZMOI_PATH
-hook --force --relative --source $path --destination ($chezmoi_starship_path | path join "starship.toml")
+let template = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/starship.toml.gompl")
+let out = ($env.CONFIG_PATH | path join "starship.toml")
+[{ name: vars, url: $variant_file }] | gompl $template $out
 
 # setup mako
+let template = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/mako-config.gompl")
+let out = ($env.CONFIG_PATH | path join "mako/config")
+[{ name: vars, url: $variant_file }] | gompl $template $out
 
-let output = if (sys host).hostname == "brage-work-laptop" {
-    "DP-7"
-} else {
-    "DP-2"
-}
-
-let mako = [
-    `# Style`,
-    ([`font=`, $fonts.primary-style] | str join ""),
-    ``,
-    ([`background-color=`, $colors.background1] | str join ""),
-    ([`text-color=`, $colors.primary] | str join ""),
-    ([`border-color=`, $colors.secondary] | str join ""),
-    ([`progress-color=over `, $colors.background2] | str join ""),
-    ([`output=`, $output] | str join ""),
-    ``,
-    ([`border-radius=`, $style.border-outer-radius] | str join ""),
-    ([`border-size=`, $style.border-size] | str join ""),
-    ``,
-    `[urgency=high]`,
-    ([`border-color=`, $colors.orange] | str join ""),
-    ``,
-    `[app-name=Spotify]`,
-    `invisible=1`
-]
-
-let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/mako-config")
-$mako | str join "\n" | to text | save -f $path
-
-let chezmoi_mako_path = $env.CHEZMOI_PATH | path join "mako"
-hook --force --relative --source $path --destination ($chezmoi_mako_path | path join "config")
 let cursor_theme_path = ($theme | path join "cursor/rose-pine-hyprcursor")
+mkdir ~/.local/share/icons/japanese-aesthetic
+cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 
 # setup quickshell
 
@@ -406,9 +239,6 @@ let defs = $colors
 $opencode.defs = $defs
 mkdir ($env.CHEZMOI_PATH | path join "opencode/themes")
 $opencode | save ($env.CHEZMOI_PATH | path join "opencode/themes/japanese-aesthetic.json") --force
-
-mkdir ~/.local/share/icons/japanese-aesthetic
-cp --recursive $cursor_theme_path ~/.local/share/icons/japanese-aesthetic
 
 chezmoi apply --force
 

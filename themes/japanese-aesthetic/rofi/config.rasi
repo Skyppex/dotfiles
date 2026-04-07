@@ -5,7 +5,7 @@ window {
     border-radius: @border-outer-radius;
     border-color: @secondary;
     background-color: @background1;
-    font: @font-primary-style;
+    font: @font-primary;
 }
 
 inputbar {
