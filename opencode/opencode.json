@@ -1,20 +1,81 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "permission": {
-    "bash": "allow",
-    "edit": "allow",
-    "write": "allow",
-    "read": "allow",
-    "grep": "allow",
-    "glob": "allow",
-    "list": "allow",
-    "lsp": "allow",
-    "patch": "allow",
-    "skill": "allow",
-    "todowrite": "allow",
-    "todoread": "allow",
-    "webfetch": "ask",
-    "websearch": "allow",
-    "question": "allow",
+    "*": "allow",
+    "webfetch": "ask"
+  },
+  "mode": {
+    "plan": {
+      "tools": {
+        "bash": true,
+        "edit": false,
+        "write": false,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "list": true,
+        "lsp": true,
+        "patch": false,
+        "skill": true,
+        "todowrite": true,
+        "todoread": true,
+        "webfetch": true,
+        "websearch": true,
+        "question": true
+      }
+    },
+    "build": {
+      "tools": {
+        "bash": true,
+        "edit": true,
+        "write": true,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "list": true,
+        "lsp": true,
+        "patch": true,
+        "skill": true,
+        "todowrite": true,
+        "todoread": true,
+        "webfetch": true,
+        "websearch": true,
+        "question": true
+      }
+    }
+  },
+  "formatter": {
+    "eslint": {
+      "command": [
+        "eslint",
+        "--fix-to-stdout",
+        "--stdin",
+        "--stdin-filename",
+        "$FILE"
+      ],
+      "extensions": [
+        ".js",
+        ".ts",
+        ".jsx",
+        ".tsx",
+        ".vue"
+      ]
+    },
+    "jq": {
+      "command": [
+        "jq"
+      ],
+      "extensions": [
+        ".json"
+      ]
+    },
+    "alejandra": {
+      "command": [
+        "alejandra"
+      ],
+      "extensions": [
+        ".nix"
+      ]
+    }
   }
 }
