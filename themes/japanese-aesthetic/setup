@@ -217,12 +217,14 @@ let qml = "pragma Singleton\nimport QtQuick\n\nQtObject {"
         let value = $it | get 1
         $"  property string ($key | str replace -a "-" "_"): \"($value)\";"
     } | to text)
+| append "  property QtObject fonts: QtObject {"
 | append (
     $font_kvps | each { |it| 
         let key = $it | get 0
         let value = $it | get 1
-        $"  property string ($key | str replace -a "-" "_"): \"($value)\";"
+        $"    property string ($key | str replace -a "-" "_"): \"($value)\";"
     } | to text)
+| append "  }"
 | append "}"
 
 let path = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/Theme.qml")

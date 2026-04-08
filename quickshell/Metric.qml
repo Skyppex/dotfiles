@@ -16,7 +16,7 @@ Item {
 
     Text {
         id: label
-        font.family: Theme.primary_style
+        font.family: Theme.fonts.primary
         font.pixelSize: 14 * size
         color: Theme.primary
         anchors.left: parent.left
@@ -34,7 +34,7 @@ Item {
         Text {
             id: metric
             text: root.value + "%"
-            font.family: Theme.primary_style
+            font.family: Theme.fonts.primary
             font.pixelSize: 14 * size
             color: Theme.primary
             anchors.horizontalCenter: metricArea.horizontalCenter

@@ -32,8 +32,10 @@ QtObject {
   property string border_size: "2";
   property string border_margin: "0";
 
-  property string primary: "The Last Shuriken";
-  property string secondary: "Japan Daisuki";
-  property string nerd: "JetBrainsMono Nerd Font";
+  property QtObject fonts: QtObject {
+    property string primary: "The Last Shuriken";
+    property string secondary: "Japan Daisuki";
+    property string nerd: "JetBrainsMono Nerd Font";
 
+  }
 }

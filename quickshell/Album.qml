@@ -29,7 +29,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 1 * size
         font.pixelSize: 14 * size
-        font.family: Theme.primary_style
+        font.family: Theme.fonts.primary
         color: Theme.primary
     }
 }
