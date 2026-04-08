@@ -79,8 +79,6 @@ def jj-conventional-message [
 
     mut details = ""
 
-    print -e $no_details
-
     if not $no_details {
         $details = (gum write --placeholder "Details of this change")
     }
@@ -140,8 +138,8 @@ def jc [
     }
 
     if ($bookmark | is-not-empty) {
-        jj new
         jj bookmark set $bookmark
+        jj bookmark track $bookmark --remote origin # assume origin is the correct remote since it is in 99% of cases
         return
     }
 
@@ -334,7 +332,7 @@ def "jb mv" [
     }
 
     print $"Moving ($selected) to ($to)"
-    jj bookmark move $selected
+    jj bookmark move $selected --allow-backwards --to $to
 }
 
 # Jujutsu bookmark delete using fzf
