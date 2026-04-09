@@ -19,6 +19,9 @@ alias jds = jj describe
 # Jujutsu diff with fzf
 alias jdf = jj diff (jj diff --name-only | fzf --height 40% --layout=reverse)
 
+# Jujutsu new
+alias jn = jj new
+
 # Jujutsu edit
 alias je = jj edit
 
