@@ -435,8 +435,16 @@ def jcp [
 }
 
 ## Jujutsu split
-def jsp [] {
+def --wrapped jsp [
+    ...filesets: string
+] {
     let current_description = jj-get-description
-    jj split --interactive --message $current_description
+
+    if ($filesets | is-empty) {
+        jj split --interactive --message $current_description
+    } else {
+        jj split --message $current_description ...$filesets
+    }
+
     jcc @-
 }
