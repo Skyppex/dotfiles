@@ -10,30 +10,6 @@ while (swww query | complete | get exit_code) != 0 {
 }
 
 match (sys host).hostname {
-    brage-work-laptop => {
-        # all wallpapers
-        let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-
-        do -i {
-            swww img --outputs "eDP-1,DP-6" --transition-duration=1 ($path | path expand)
-        }
-
-        do -i {
-            swww img --outputs "DP-8" --transition-duration=1 ($path | path expand)
-        }
-
-        let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" w
-
-        do -i {
-            swww img --outputs "DP-7" --transition-duration=1 ($path | path expand)
-        }
-
-        do -i {
-            swww img --outputs "DP-9" --transition-duration=1 ($path | path expand)
-        }
-
-        return
-    }
     pod => {
         # all wallpapers
         let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
