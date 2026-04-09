@@ -48,7 +48,7 @@ format = "[@$hostname]($style)"
 
 [directory]
 style = "fg:{{ $colors.background1 }} bg:prev_bg"
-format = "[ $path]($style)"
+format = "[ $path ]($style)"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
@@ -83,7 +83,7 @@ git_modules="$git_branch$git_status"
 [git_branch]
 symbol = " "
 style = "fg:{{ $colors.background1 }} bg:prev_bg"
-format = '[ $symbol$branch]($style)'
+format = '[$symbol$branch]($style)'
 
 [git_state]
 rebase = " "
@@ -116,7 +116,7 @@ format = '[ $symbol$change_id]($style)'
 disabled = false
 symbol = " "
 style = "fg:{{ $colors.background1 }} bg:prev_bg"
-format = '[ $symbol$bookmarks ]($style)'
+format = '[$symbol$bookmarks ]($style)'
 
 [jujutsu_commit]
 disabled = false
