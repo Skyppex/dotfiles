@@ -163,6 +163,7 @@ daisuki
 damagable
 dariuscorvu
 datacenter
+datasource
 datastructure
 datetime
 dbeaver
@@ -188,6 +189,7 @@ deleteword
 demare
 demoservice
 deserialization
+deserializer
 deserializing
 devnull
 devtool
@@ -324,6 +326,8 @@ gnumake
 gnupg
 golang
 golangcilint
+gompl
+gomplate
 google
 goolord
 gotmpl
@@ -437,6 +441,7 @@ je
 jetbrains
 jl
 jla
+jn
 jobstart
 jobstop
 joinpath
@@ -1040,7 +1045,3 @@ yubikey
 yubioath
 zbirenbaum
 zsh
-deserializer
-datasource
-gomplate
-gompl
