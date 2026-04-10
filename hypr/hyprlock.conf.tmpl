@@ -76,7 +76,7 @@ input-field {
     check_color = rgb($working)
     fail_color = rgb($error)
     fade_on_empty = false
-    font_family = $font_primary_style
+    font_family = $font_primary
     placeholder_text = <i><span foreground="##$background0">Enter Pass</span></i>
     hide_input = false
     position = -575, -225
@@ -98,7 +98,7 @@ input-field {
     check_color = rgb($working)
     fail_color = rgb($error)
     fade_on_empty = false
-    font_family = $font_primary_style
+    font_family = $font_primary
     placeholder_text = <i><span foreground="##$background0">Enter Pass</span></i>
     hide_input = false
     {{- if eq .chezmoi.hostname "pod" }}
@@ -119,7 +119,7 @@ label {
     text = cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"
     color = rgb($primary)
     font_size = 130
-    font_family = $font_primary_style
+    font_family = $font_primary
     position = -575, 240
     halign = center
     valign = center
@@ -131,7 +131,7 @@ label {
     text = cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"
     color = rgb($primary)
     font_size = 130
-    font_family = $font_primary_style
+    font_family = $font_primary
     {{- if eq .chezmoi.hostname "pod" }}
     position = -600, 240
     font_size = 260
@@ -149,7 +149,7 @@ label {
     text = cmd[update:1000] echo -e "$(date +"%d")"
     color = rgb($primary)
     font_size = 30
-    font_family = $font_primary_style
+    font_family = $font_primary
     position = -575, 105
     halign = center
     valign = center
@@ -160,7 +160,7 @@ label {
     monitor = eDP-1
     text = cmd[update:1000] echo -e "$(date +"%d")"
     color = rgb($primary)
-    font_family = $font_primary_style
+    font_family = $font_primary
     {{- if eq .chezmoi.hostname "pod" }}
     position = -600, 50
     font_size = 60
@@ -178,7 +178,7 @@ label {
     text = $USER
     color = rgb($primary)
     font_size = 25
-    font_family = $font_secondary_style
+    font_family = $font_secondary
     position = -575, -130
     halign = center
     valign = center
@@ -189,7 +189,7 @@ label {
     monitor = eDP-1
     text = $USER
     color = rgb($primary)
-    font_family = $font_secondary_style
+    font_family = $font_secondary
     {{- if eq .chezmoi.hostname "pod" }}
     position = -600, -280
     font_size = 50
