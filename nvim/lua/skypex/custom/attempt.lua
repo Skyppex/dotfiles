@@ -138,17 +138,33 @@ attempt.setup({
 
 local utils = require("skypex.utils")
 local map = utils.map
-local pick = require("mini.pick")
 local attempt_config = require("attempt.config").opts
 
-map("n", "<leader>AN", attempt.new_select, "New Attempt")
-map("n", "<leader>AI", attempt.new_input_ext, "New Attempt By Extension")
-map("n", "<leader>AR", attempt.run, "Run Attempt")
+local attempt_ws = require("skypex.workspaces").register({
+	name = "attempt",
+	on_init = function()
+		attempt.open_select()
+	end,
+})
+
+map("n", { "<c-w><c-s>", "<c-w>s" }, function()
+	attempt_ws:toggle()
+end, "toggle scratch pad")
+
+map("n", "<leader>AN", function()
+	attempt_ws:open(attempt.new_select)
+end, "New Attempt")
+
+map("n", "<leader>AI", function()
+	attempt_ws:open(attempt.new_input_ext)
+end, "New Attempt By Extension")
+
+map("n", "<c-r>", attempt.run, "Run Attempt")
 map("n", "<leader>AD", attempt.delete_buf, "Delete Attempt")
 map("n", "<leader>AC", attempt.rename_buf, "Rename Attempt")
 
 map("n", "<leader>AS", function()
-	attempt.open_select()
+	attempt_ws:open(attempt.open_select)
 end, "Search Attempts")
 
 local function get_visual_selection(start_pos, end_pos)
