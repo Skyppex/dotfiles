@@ -135,7 +135,7 @@ def jc [
     --bookmark(-b): string # Create and checkout a new bookmark
 ] {
     let bookmark = if ($bookmark | is-not-empty) {
-        ($bookmark | str join "-")
+        ($bookmark | split row " " | str join "-")
     } else {
         ""
     }
