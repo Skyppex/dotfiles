@@ -28,6 +28,9 @@ alias je = jj edit
 # Jujutsu fetch
 alias jf = jj git fetch
 
+# Jujutsu push
+alias jp = jj git push
+
 # Jujutsu rebase
 alias jrb = jj rebase
 
