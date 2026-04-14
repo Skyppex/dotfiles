@@ -25,6 +25,15 @@ alias jn = jj new
 # Jujutsu edit
 alias je = jj edit
 
+# Jujutsu fetch
+alias jf = jj git fetch
+
+# Jujutsu rebase
+alias jrb = jj rebase
+
+# Jujutsu rebase onto
+alias jrbo = jj rebase --onto
+
 # Conventional message
 def jj-conventional-message [
     --type(-t): string # Specify the type of the commit
