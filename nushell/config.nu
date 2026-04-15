@@ -422,15 +422,14 @@ $env.config = {
             }
         }
         {
-            name: take_history_hint
+            name: move_to_end_and_take_history_hint
             modifier: none
             keycode: tab
             mode: [emacs, vi_normal, vi_insert]
-            event: {
-                until: [
-                    {send: historyhintcomplete}
-                ]
-            }
+            event: [
+                {edit: movetolineend}
+                {send: historyhintcomplete}
+            ]
         }
         {
             name: move_one_word_left
