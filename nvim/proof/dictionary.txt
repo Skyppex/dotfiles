@@ -188,6 +188,7 @@ defwindow
 deleteword
 demare
 demoservice
+deque
 deserialization
 deserializer
 deserializing
@@ -254,6 +255,7 @@ ffmpeg
 fgol
 fgp
 figlet
+fileset
 filesize
 filetime
 fillchar
@@ -439,6 +441,7 @@ jd
 jdf
 je
 jetbrains
+jf
 jl
 jla
 jn
@@ -446,9 +449,12 @@ jobstart
 jobstop
 joinpath
 journald
+jp
 jpeg
 jqfmt
 jqplayground
+jrb
+jrbo
 jsb
 jsdoc
 jsonc
@@ -667,6 +673,7 @@ opencode
 openeditor
 openssh
 openssl
+opentelemetry
 opentype
 operatorfunc
 orgrepo
@@ -1045,9 +1052,3 @@ yubikey
 yubioath
 zbirenbaum
 zsh
-fileset
-jf
-jrb
-jrbo
-jp
-deque
