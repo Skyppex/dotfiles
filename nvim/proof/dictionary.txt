@@ -1052,3 +1052,4 @@ yubikey
 yubioath
 zbirenbaum
 zsh
+grafana
