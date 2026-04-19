@@ -110,10 +110,13 @@ local function run_attempt(cmd, args, filetype, stdin)
 end
 
 attempt.setup({
-	ext_options = { "ar", "cs", "http", "js", "json", "lua", "py", "rs", "" },
+	ext_options = { "ar", "lambda", "cs", "http", "js", "json", "lua", "py", "rs", "" },
 	run = {
 		ar = function(_, bufnr)
 			run_attempt("mage", { vim.api.nvim_buf_get_name(bufnr) })
+		end,
+		lambda = function(_, bufnr)
+			run_attempt("lambda", { vim.api.nvim_buf_get_name(bufnr) })
 		end,
 		cs = function(_, bufnr)
 			run_attempt("dotnet", { vim.api.nvim_buf_get_name(bufnr) })
