@@ -148,33 +148,23 @@ end
 
 add_arcana()
 
-vim.notify("1")
-
 -- Add local parser for arcana
 local function add_lambda()
 	local lambda_parser_path = nil
 
-	vim.notify("2")
 	lambda_parser_path = utils.get_code_path() .. "/lambda/tree-sitter-lambda/parser.so"
 
-	vim.notify("3")
-	vim.notify(vim.inspect(lambda_parser_path))
 	local stat = vim.loop.fs_stat(lambda_parser_path)
 
-	vim.notify("4")
-	vim.notify(vim.inspect(stat))
 	if not stat or not stat.type == "file" then
-		vim.notify("5")
 		return
 	end
 
-	vim.notify("6")
 	vim.treesitter.language.add("lambda", {
 		path = lambda_parser_path,
 	})
 end
 
-vim.notify("7")
 add_lambda()
 
 local registry = {
