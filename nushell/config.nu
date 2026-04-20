@@ -280,14 +280,19 @@ $env.config = {
     keybindings: [
         {
             name: completion_menu
-            modifier: control
+            modifier: none
             keycode: tab
             mode: [emacs vi_normal vi_insert]
             event: {
                 until: [
+                    { send: historyhintcomplete }
                     { send: menu name: completion_menu }
                     { send: menunext }
                     { edit: complete }
+                    [
+                        {edit: movetolineend}
+                        {send: historyhintcomplete}
+                    ]
                 ]
             }
         }
@@ -421,16 +426,7 @@ $env.config = {
                 ]
             }
         }
-        {
-            name: move_to_end_and_take_history_hint
-            modifier: none
-            keycode: tab
-            mode: [emacs, vi_normal, vi_insert]
-            event: [
-                {edit: movetolineend}
-                {send: historyhintcomplete}
-            ]
-        }
+        
         {
             name: move_one_word_left
             modifier: control

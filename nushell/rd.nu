@@ -95,14 +95,14 @@ export def find [--multi] {
 export alias fd = find
 
 export def get [] {
-    let selection = find | first
+    let selection = find --multi
 
     if ($selection | is-empty) {
         print -e "no key selected"
         return
     }
 
-    redis GET $selection
+    $selection | each {|key| { key: $key, value: (redis GET $key) } }
 }
 
 export def hget [] {
@@ -155,20 +155,24 @@ export def size [] {
 def update-type [key: string, type: string] {
     let input = $in
 
-    $input | update $key (
-        $input | builtin get $key | match $type {
-            "filesize" => ($in | into filesize),
-            "duration" => ($in | into duration),
-            "float" => ($in | into float),
-            "int" => ($in | into int),
-        }
-    )
+    if $key in $input {
+        $input | update $key (
+            $input | builtin get $key | match $type {
+                "filesize" => ($in | into filesize),
+                "duration" => ($in | into duration),
+                "float" => ($in | into float),
+                "int" => ($in | into int),
+            }
+        )
+    } else {
+        $input
+    }
 }
 
 export def memory [] {
     let memory = redis INFO memory
     | lines
-    | skip 1
+    | where not ($it | str starts-with "#")
     | parse --regex "^(?P<key>.*):(?P<value>.*)"
     | transpose --header-row --as-record
 
@@ -219,14 +223,14 @@ export def memory [] {
     | update-type "active_defrag_running" "float"
     | update-type "lazyfree_pending_objects" "float"
     | update-type "lazyfreed_objects" "float"
-    | reject "used_memory_human"
-    | reject "used_memory_rss_human"
-    | reject "used_memory_peak_human"
-    | reject "used_memory_lua_human"
-    | reject "total_system_memory_human"
-    | reject "used_memory_vm_total_human"
-    | reject "used_memory_scripts_human"
-    | reject "maxmemory_human"
+    | reject --optional "used_memory_human"
+    | reject --optional "used_memory_rss_human"
+    | reject --optional "used_memory_peak_human"
+    | reject --optional "used_memory_lua_human"
+    | reject --optional "total_system_memory_human"
+    | reject --optional "used_memory_vm_total_human"
+    | reject --optional "used_memory_scripts_human"
+    | reject --optional "maxmemory_human"
 
 }
 

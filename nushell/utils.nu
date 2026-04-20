@@ -375,3 +375,22 @@ def envs [] {
 
     $value
 }
+
+def pick [path: cell-path] {
+    let input = $in
+
+    let choices = $input | get $path
+
+    let selection = $choices 
+    | to text 
+    | fzf --height 40% --layout reverse -0 -1 --multi
+    | lines
+
+    if ($selection | is-empty) {
+        print -e "no selection"
+        return
+    }
+
+    $input | where ($it.key in $selection)
+}
+
