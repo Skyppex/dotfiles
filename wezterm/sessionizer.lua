@@ -36,7 +36,7 @@ M.toggle = function(window, pane)
 			"fd",
 			"-HI",
 			"-td",
-			"^.git$",
+			"^\\.(git|jj)$",
 			"--max-depth=3",
 			"--prune",
 			code_path,
@@ -49,7 +49,7 @@ M.toggle = function(window, pane)
 			"fd",
 			"-HI",
 			"-td",
-			"^.git$",
+			"^\\.(git|jj)$",
 			"--max-depth=3",
 			"--prune",
 			code_path,
@@ -67,7 +67,8 @@ M.toggle = function(window, pane)
 	end
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
-		local project = line:gsub("[\\/].git[\\/]", ""):gsub("\\", "/")
+		local project = line:gsub("[\\/].git[\\/]", "")
+		project = project:gsub("[\\/].jj[\\/]", ""):gsub("\\", "/")
 		local label = project
 		local id = project:gsub(".*/", "")
 		projects[tostring(label)] = tostring(id)
