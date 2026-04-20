@@ -25,8 +25,6 @@ else
 end
 
 M.toggle = function(window, pane)
-	local projects = {}
-
 	local fd_process
 	if utils.is_windows() then
 		fd_process = {
@@ -65,6 +63,8 @@ M.toggle = function(window, pane)
 		wezterm.log_error("Failed to run fd: " .. stderr)
 		return
 	end
+
+	local projects = {}
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
 		local project = line:gsub("[\\/].git[\\/]", "")
