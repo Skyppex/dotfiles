@@ -174,3 +174,16 @@ def "str strip-suffix" [suffix: string]: string -> string {
     str replace --regex $"($suffix)$" ""
 }
 
+# find extras in two lists of strings
+def diff-lines [
+    left: list<string>
+    right: list<string>
+] {
+    let left_only = ($left | where { |l| $l not-in $right })
+    let right_only = ($right | where { |r| $r not-in $left })
+
+    {
+        left: $left_only
+        right: $right_only
+    }
+}
