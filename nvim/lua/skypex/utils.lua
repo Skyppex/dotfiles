@@ -201,10 +201,14 @@ function M.run_command(command, args, should_block, on_exit)
 	end
 end
 
+--- @class RunCommandOpts
+--- @field cwd? string
+--- @field disable_stderr? boolean
+
 --- @param command string
 --- @param args string[]?
 --- @param on_exit fun(data: string, exit_code: number)?
---- @param opts table?
+--- @param opts RunCommandOpts?
 --- @return table|nil, number (stdout, exit_code)
 function M.run_command_ret(command, args, on_exit, opts)
 	local Job = require("plenary.job")

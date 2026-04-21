@@ -1,6 +1,29 @@
-local map = require("skypex.utils").map
+local utils = require("skypex.utils")
+local map = utils.map
 
 local M = {}
+
+function M.is_git_repo()
+	local _, _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" })
+	return exit_code == 0
+end
+
+function M.is_jj_repo()
+	local _, _, exit_code = utils.run_command_ret("jj", { "root" })
+	return exit_code == 0
+end
+
+function M.jj_then_git()
+	if M.is_jj_repo() then
+		return "jj"
+	end
+
+	if M.is_git_repo() then
+		return "git"
+	end
+
+	return nil
+end
 
 M.conflict = function()
 	require("git-conflict").setup({
@@ -95,12 +118,6 @@ M.cmd = function()
 	})
 
 	map("n", "<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
-end
-
-M.all = function()
-	M.conflict()
-	M.gitsigns()
-	M.cmd()
 end
 
 return M
