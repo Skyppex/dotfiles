@@ -36,6 +36,25 @@ export def unit [] {
     }
 }
 
+export def find [] {
+    let unit_files = unit files
+
+    let selected = $unit_files
+    | get unit_file
+    | to text
+    | fzf --height 40% --layout reverse -0 -1 --multi
+
+    let units = units | where unit in $selected
+
+    if ($units | length) == 0 {
+        $unit_files 
+        | where unit_file == $selected 
+        | rename --column { unit_file: unit }
+    } else {
+        $units
+    }
+}
+
 export def timers [] {
     systemctl list-timers --output json 
     | from json
@@ -107,38 +126,48 @@ export def status [] {
 export alias s = status
 
 export def start [] {
-    let unit = unit
-    systemctl start $unit.unit
+    let units = find
+    $units | { |unit|
+        systemctl start $unit.unit
+    }
 }
 
 export alias u = start
 export alias up = start
 
 export def restart [] {
-    let unit = unit
-    systemctl restart $unit.unit
+    let units = find
+    $units | each { |unit|
+        systemctl restart $unit.unit
+    }
 }
 
 export alias r = restart
 
 export def stop [] {
-    let unit = unit
-    systemctl stop $unit.unit
+    let units = find
+    $units | each { |unit|
+        systemctl stop $unit.unit
+    }
 }
 
 export alias d = stop
 export alias down = stop
 
 export def enable [] {
-    let unit = unit
-    systemctl enable $unit.unit
+    let units = find
+    $units | each { |unit|
+        systemctl enable $unit.unit
+    }
 }
 
 export alias on = enable
 
 export def disable [] {
-    let unit = unit
-    systemctl disable $unit.unit
+    let units = find
+    $units | each { |unit|
+        systemctl disable $unit.unit
+    }
 }
 
 export alias off = disable
