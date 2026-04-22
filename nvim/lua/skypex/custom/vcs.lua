@@ -4,12 +4,12 @@ local map = utils.map
 local M = {}
 
 function M.is_git_repo()
-	local _, _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" })
+	local _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" })
 	return exit_code == 0
 end
 
 function M.is_jj_repo()
-	local _, _, exit_code = utils.run_command_ret("jj", { "root" })
+	local _, exit_code = utils.run_command_ret("jj", { "root" })
 	return exit_code == 0
 end
 
@@ -59,6 +59,10 @@ M.conflict = function()
 end
 
 M.gitsigns = function()
+	if M.jj_then_git() ~= "git" then
+		return
+	end
+
 	local gitsigns = require("gitsigns")
 	gitsigns.setup({
 		signs = {
@@ -118,6 +122,14 @@ M.cmd = function()
 	})
 
 	map("n", "<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
+end
+
+M.kanji = function()
+	if M.jj_then_git() ~= "jj" then
+		return
+	end
+
+	require("kanji").setup()
 end
 
 return M
