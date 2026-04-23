@@ -129,7 +129,13 @@ M.kanji = function()
 		return
 	end
 
-	require("kanji").setup()
+	require("kanji").setup({
+		signs = {
+			add = { text = "│" },
+			change = { text = "│" },
+			delete = { text = "│" },
+		},
+	})
 end
 
 return M
