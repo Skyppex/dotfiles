@@ -37,10 +37,10 @@ M.conflict = function()
 		},
 	})
 
-	map("n", "<leader>gc", "<cmd>GitConflictRefresh<CR>", "Git Conflict Refresh")
-	map("n", "<leader>gq", "<cmd>GitConflictListQf<CR>", "Git Conflict Quickfix")
-	map("n", "åG", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
-	map("n", "æG", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
+	map("n", "<leader>vc", "<cmd>GitConflictRefresh<CR>", "Git Conflict Refresh")
+	map("n", "<leader>vq", "<cmd>GitConflictListQf<CR>", "Git Conflict Quickfix")
+	map("n", "åV", "<cmd>GitConflictPrevConflict<CR>", "Previous Conflict")
+	map("n", "æV", "<cmd>GitConflictNextConflict<CR>", "Next Conflict")
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "GitConflictDetected",
@@ -95,14 +95,14 @@ M.gitsigns = function()
 		},
 	})
 
-	map("n", "åg", "<cmd>Gitsigns nav_hunk prev<cr>zz", "Previous Git Hunk")
-	map("n", "æg", "<cmd>Gitsigns nav_hunk next<cr>zz", "Next Git Hunk")
-	map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", "Git Reset Hunk")
-	map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", "Git Preview hunk")
-	map("n", "<leader>gg", "<cmd>Gitsigns stage_hunk<cr>", "Git Stage Hunk")
-	map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", "Git Undo Staged Hunk")
-	map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Git Blame Line")
-	map("n", "<leader>gB", "<cmd>Gitsigns blame<cr>", "Git Blame")
+	map("n", "åv", "<cmd>Gitsigns nav_hunk prev<cr>zz", "Previous Git Hunk")
+	map("n", "æv", "<cmd>Gitsigns nav_hunk next<cr>zz", "Next Git Hunk")
+	map("n", "<leader>vr", "<cmd>Gitsigns reset_hunk<cr>", "Git Reset Hunk")
+	map("n", "<leader>vp", "<cmd>Gitsigns preview_hunk<cr>", "Git Preview hunk")
+	map("n", "<leader>vg", "<cmd>Gitsigns stage_hunk<cr>", "Git Stage Hunk")
+	map("n", "<leader>vu", "<cmd>Gitsigns undo_stage_hunk<cr>", "Git Undo Staged Hunk")
+	map("n", "<leader>vb", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Git Blame Line")
+	map("n", "<leader>vB", "<cmd>Gitsigns blame<cr>", "Git Blame")
 end
 
 M.cmd = function()
