@@ -1053,3 +1053,4 @@ yubioath
 zbirenbaum
 zsh
 grafana
+tsgo
