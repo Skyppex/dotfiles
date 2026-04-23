@@ -1,7 +1,7 @@
 local utils = require("skypex.utils")
 local map = utils.map
 
-map("n", "<leader>v", "<cmd>echo Use <leader>x for file explorer!!<cr")
+map("n", "<leader>v", '<cmd>echo "Use \\<leader\\>x for file explorer!!"<cr>')
 
 -- TIP: Disable arrow keys in insert mode and x mode
 map("xi", "<left>", '<cmd>echo "Use normal mode to move!!"<cr>')
