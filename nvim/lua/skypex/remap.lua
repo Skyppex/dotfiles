@@ -1,30 +1,30 @@
 local utils = require("skypex.utils")
 local map = utils.map
 
-map("n", "<leader>v", vim.cmd.Ex)
+map("n", "<leader>v", "<cmd>echo Use <leader>x for file explorer!!<cr")
 
 -- TIP: Disable arrow keys in insert mode and x mode
-map("xi", "<left>", '<cmd>echo "Use normal mode to move!!"<CR>')
-map("xi", "<right>", '<cmd>echo "Use normal mode to move!!"<CR>')
-map("xi", "<up>", '<cmd>echo "Use normal mode to move!!"<CR>')
-map("xi", "<down>", '<cmd>echo "Use normal mode to move!!"<CR>')
+map("xi", "<left>", '<cmd>echo "Use normal mode to move!!"<cr>')
+map("xi", "<right>", '<cmd>echo "Use normal mode to move!!"<cr>')
+map("xi", "<up>", '<cmd>echo "Use normal mode to move!!"<cr>')
+map("xi", "<down>", '<cmd>echo "Use normal mode to move!!"<cr>')
 
 -- Disable arrow keys in normal mode
-map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+map("n", "<left>", '<cmd>echo "Use h to move!!"<cr>')
+map("n", "<right>", '<cmd>echo "Use l to move!!"<cr>')
+map("n", "<up>", '<cmd>echo "Use k to move!!"<cr>')
+map("n", "<down>", '<cmd>echo "Use j to move!!"<cr>')
 
 -- Save file
-map("n", "<C-s>", "<cmd>wa<CR>")
+map("n", "<c-s>", "<cmd>wa<cr>")
 
 -- Move lines of code in visual mode
 map("x", "K", ":m '<-2<cr><cmd>normal! gv=gv<cr>")
 map("x", "J", ":m '>+1<cr><cmd>normal! gv=gv<cr>")
 
 map("n", "J", "mzJ`z")
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
+map("n", "<c-d>", "<c-d>zz")
+map("n", "<c-u>", "<c-u>zz")
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
 
@@ -35,7 +35,7 @@ map("n", "Q", "<nop>")
 map("n", "q:", "<nop>")
 
 -- Alias ctrl+c to Esc
-map("xis", "<C-c>", "<Esc>")
+map("xis", "<c-c>", "<esc>")
 
 -- Diagnostic keymaps
 local function jump_to_diagnostic(direction)
@@ -76,21 +76,20 @@ map("n", "<leader>od", function()
 	})
 end, "Focus diagnostic window")
 
-map("n", "<C-w>-", '<cmd>echo "Use <C-w>, to split buffer below!!"<CR>')
-map("n", "<C-w>|", '<cmd>echo "Use <C-w>. to split buffer right!!"<CR>')
+map("n", "<c-w>-", '<cmd>echo "Use <c-w>, to split buffer below!!"<cr>')
+map("n", "<c-w>|", '<cmd>echo "Use <c-w>. to split buffer right!!"<cr>')
 
-map("n", "<C-w>,", "<C-w>s", "Split buffer below")
-map("n", "<C-w>.", "<C-w>v", "Split buffer right")
+map("n", "<c-w>,", "<c-w>s", "Split buffer below")
+map("n", "<c-w>.", "<c-w>v", "Split buffer right")
 
 map("nxo", "gh", "^", "Go to start of line")
 map("nxo", "gl", "$", "Go to end of line")
-map("nxo", "_", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
-map("nxo", "^", "<cmd>echo 'Use gh to go to start of line!!'<CR>")
-map("nxo", "$", "<cmd>echo 'Use gl to go to end of line!!'<CR>")
+map("nxo", "_", "<cmd>echo 'Use gh to go to start of line!!'<cr>")
+map("nxo", "^", "<cmd>echo 'Use gh to go to start of line!!'<cr>")
+map("nxo", "$", "<cmd>echo 'Use gl to go to end of line!!'<cr>")
 
 -- Macros
 map("n", "ø", "@")
-map("n", "øø", "@@")
 
 -- Registers
 map("nx", "'", '"')
@@ -100,13 +99,13 @@ map("x", "<", "<gv")
 map("x", ">", ">gv")
 
 -- Redo
-map("n", "U", "<C-r>", "Redo")
+map("n", "U", "<c-r>", "Redo")
 
 -- Newline before .
 map("n", "<leader>.", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		local keys = vim.api.nvim_replace_termcodes("f.i<CR><Esc>l==", true, true, true)
+		local keys = vim.api.nvim_replace_termcodes("f.i<cr><esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
@@ -115,7 +114,7 @@ end)
 map("n", "<leader>:", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		local keys = vim.api.nvim_replace_termcodes("f:i<CR><Esc>l==", true, true, true)
+		local keys = vim.api.nvim_replace_termcodes("f:i<cr><esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
@@ -124,7 +123,7 @@ end)
 map("n", "<leader>,", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		local keys = vim.api.nvim_replace_termcodes("f,a<CR><Esc>l==", true, true, true)
+		local keys = vim.api.nvim_replace_termcodes("f,a<cr><esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
@@ -133,7 +132,7 @@ end)
 map("n", "<leader>|", function()
 	local count = vim.v.count1 -- Get the count prefix, default to 1 if none is provided
 	for _ = 1, count do
-		local keys = vim.api.nvim_replace_termcodes("f|i<CR><Esc>l==", true, true, true)
+		local keys = vim.api.nvim_replace_termcodes("f|i<cr><esc>l==", true, true, true)
 		vim.api.nvim_feedkeys(keys, "n", false)
 	end
 end)
@@ -162,8 +161,8 @@ map("nx", "<leader>tr", function()
 end, "Toggle relative line numbers")
 
 -- Increment and decrement numbers
-map("nx", "+", "<C-a>", "Increment number")
-map("nx", "-", "<C-x>", "Decrement number")
+map("nx", "+", "<c-a>", "Increment number")
+map("nx", "-", "<c-x>", "Decrement number")
 
 -- System clipboard
 map("nx", "<leader>y", '"+y', "Yank to system clipboard")
@@ -171,8 +170,8 @@ map("nx", "<leader>p", '"+p', "Paste from system clipboard")
 map("nx", "<leader>d", '"+d', "Cut to system clipboard")
 
 -- Diff mode
-map("n", "<leader>Do", "<cmd>windo diffthis<CR>", "Diff buffers")
-map("n", "<leader>Dc", "<cmd>windo diffoff<CR>", "Diff buffers")
+map("n", "<leader>Do", "<cmd>windo diffthis<cr>", "Diff buffers")
+map("n", "<leader>Dc", "<cmd>windo diffoff<cr>", "Diff buffers")
 
 -- inspect highlight
 map("n", "<leader>ih", function()
