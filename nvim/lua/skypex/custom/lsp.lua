@@ -184,6 +184,12 @@ M.servers = {
 		},
 	},
 	gopls = {},
+	tsgo = {
+		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	},
+	ts_ls = {
+		filetypes = { "vue" },
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -297,6 +303,7 @@ vim.list_extend(ensure_installed, {
 	"ruff",
 	"pyright",
 	"typescript-language-server",
+	"tsgo",
 	"vue-language-server",
 	"graphql-language-service-cli",
 })
@@ -334,6 +341,7 @@ for server_name, config in pairs(M.servers) do
 end
 
 vim.diagnostic.config({
+	signs = false,
 	virtual_text = {
 		source = true,
 		spacing = 2,
