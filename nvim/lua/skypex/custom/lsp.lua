@@ -41,7 +41,7 @@ local function setup_proof(capabilities)
 	vim.lsp.enable("proof")
 end
 
-vim.lsp.set_log_level("OFF")
+vim.lsp.log.set_level("OFF")
 
 local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities = vim.lsp.protocol.make_client_capabilities()

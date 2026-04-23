@@ -28,12 +28,12 @@ fidget.setup({
 })
 
 local log_levels = {
-	"TRACE",
-	"DEBUG",
-	"INFO",
-	"WARN",
-	"ERROR",
-	"OFF",
+	"trace",
+	"debug",
+	"info",
+	"warn",
+	"error",
+	"off",
 }
 
 local function set_fidget_log_level(level)
@@ -44,30 +44,16 @@ local function set_fidget_log_level(level)
 		},
 	})
 
-	vim.lsp.set_log_level(level)
+	vim.lsp.log.set_level(level)
 	vim.notify("Set log level to " .. level, vim.log.levels.INFO .. " for fidget and LSP")
 end
 
 local map = require("skypex.utils").map
 
--- map("n", "<leader>tl", function()
--- 	pickers
--- 		.new({}, {
--- 			prompt_title = "Select Fidget Log Level",
--- 			finder = finders.new_table({
--- 				results = log_levels,
--- 			}),
--- 			sorter = conf.generic_sorter({}),
--- 			attach_mappings = function(prompt_bufnr, map)
--- 				map("i", "<CR>", function()
--- 					local selection = action_state.get_selected_entry()
--- 					actions.close(prompt_bufnr)
--- 					set_fidget_log_level(selection[1])
--- 				end)
--- 				return true
--- 			end,
--- 		})
--- 		:find()
--- end, "Set fidget log level")
+map("n", "<leader>tl", function()
+	vim.ui.select(log_levels, {}, function(selected)
+		set_fidget_log_level(selected)
+	end)
+end, "Set fidget log level")
 
 map("n", "<leader>om", "<cmd>Fidget history<CR>", "Open messages")

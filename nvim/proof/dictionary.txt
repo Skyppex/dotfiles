@@ -1054,3 +1054,7 @@ zbirenbaum
 zsh
 grafana
 tsgo
+winid
+winopt
+strdisplaywidth
+writefile

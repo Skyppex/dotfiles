@@ -6,7 +6,6 @@ local Color = colorbuddy.Color
 local Group = colorbuddy.Group
 local c = colorbuddy.colors
 local g = colorbuddy.groups
-local s = colorbuddy.styles
 
 Color.new("primary", colors.primary)
 Color.new("secondary", colors.secondary)

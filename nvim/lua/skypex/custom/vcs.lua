@@ -130,16 +130,24 @@ M.kanji = function()
 	end
 
 	local kanji = require("kanji")
+
 	kanji.setup({
 		signs = {
 			add = { text = "│" },
 			change = { text = "│" },
 			delete = { text = "│" },
 		},
+		hooks = {
+			on_preview_show = function(buf)
+				map("n", { "q", "<esc>" }, kanji.close_preview, "close preview", nil, buf)
+			end,
+		},
 	})
 
 	map("n", "åv", kanji.prev_hunk, "Previous JJ Hunk")
 	map("n", "æv", kanji.next_hunk, "Next JJ Hunk")
+	map("n", "<leader>vp", kanji.preview_hunk, "Preview JJ Hunk")
+	map("n", "<leader>vb", kanji.blame_toggle, "Toggle Inline JJ Blame")
 end
 
 return M

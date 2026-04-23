@@ -1,8 +1,6 @@
 local utils = require("skypex.utils")
 local map = utils.map
 
-map("n", "<leader>v", '<cmd>echo "Use \\<leader\\>x for file explorer!!"<cr>')
-
 -- TIP: Disable arrow keys in insert mode and x mode
 map("xi", "<left>", '<cmd>echo "Use normal mode to move!!"<cr>')
 map("xi", "<right>", '<cmd>echo "Use normal mode to move!!"<cr>')
@@ -54,19 +52,23 @@ local function jump_to_diagnostic(direction)
 end
 
 map("n", "åd", function()
-	jump_to_diagnostic(vim.diagnostic.goto_prev)
+	jump_to_diagnostic(function(opts)
+		vim.diagnostic.jump(vim.tbl_deep_extend("keep", { count = -1, float = true }, opts))
+	end)
 end, "Go to previous diagnostic by severity")
 
 map("n", "æd", function()
-	jump_to_diagnostic(vim.diagnostic.goto_next)
+	jump_to_diagnostic(function(opts)
+		vim.diagnostic.jump(vim.tbl_deep_extend("keep", { count = 1, float = true }, opts))
+	end)
 end, "Go to next diagnostic by severity")
 
 map("n", "åD", function()
-	vim.diagnostic.goto_prev({ wrap = true })
+	vim.diagnostic.jump({ count = -1, float = true, wrap = true })
 end, "Go to previous diagnostic")
 
 map("n", "æD", function()
-	vim.diagnostic.goto_next({ wrap = true })
+	vim.diagnostic.jump({ count = 1, float = true, wrap = true })
 end, "Go to next diagnostic")
 
 map("n", "<leader>od", function()
