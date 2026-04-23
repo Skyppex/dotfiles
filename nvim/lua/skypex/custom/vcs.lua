@@ -129,13 +129,17 @@ M.kanji = function()
 		return
 	end
 
-	require("kanji").setup({
+	local kanji = require("kanji")
+	kanji.setup({
 		signs = {
 			add = { text = "│" },
 			change = { text = "│" },
 			delete = { text = "│" },
 		},
 	})
+
+	map("n", "åv", kanji.prev_hunk, "Previous JJ Hunk")
+	map("n", "æv", kanji.next_hunk, "Next JJ Hunk")
 end
 
 return M

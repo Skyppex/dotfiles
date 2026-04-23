@@ -11,7 +11,7 @@ function table.map(tbl, fn)
 		result[i] = fn(v)
 	end
 
-	return T(result)
+	return result
 end
 
 --- filter a table's value
@@ -30,7 +30,7 @@ function table.filter(tbl, predicate)
 		end
 	end
 
-	return T(result)
+	return result
 end
 
 --- aggregate a table to a single value
@@ -60,7 +60,7 @@ function table.enumerate(tbl)
 		result[i] = { i, v }
 	end
 
-	return T(result)
+	return result
 end
 
 --- find a value matching a predicate in a table
@@ -76,11 +76,4 @@ function table.find(tbl, predicate)
 	end
 
 	return nil
-end
-
---- count the tables elements
---- @param tbl table
---- @return integer
-function table.len(tbl)
-	return #tbl
 end

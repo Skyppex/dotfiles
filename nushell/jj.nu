@@ -328,9 +328,8 @@ def "jb mv" [
 ] {
     let bookmarks = jj bookmark list
     | lines
-    | each { |it|
-        $it | str before ":"
-    }
+    | str before ":"
+    | where not ($it | str starts-with " ")
     | to text
 
     let selected = $bookmarks | fzf --height 40% --layout=reverse -0 -1

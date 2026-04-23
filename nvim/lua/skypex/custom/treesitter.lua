@@ -1,72 +1,90 @@
 -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
--- Prefer git instead of curl in order to improve connectivity in some environments
-require("nvim-treesitter.install").prefer_git = true
----@diagnostic disable-next-line: missing-fields
+require("nvim-treesitter").install({
+	"bash",
+	"diff",
+	"git_config",
+	"git_rebase",
+	"gitattributes",
+	"gitcommit",
+	"gitignore",
+	"gotmpl",
+	"graphql",
+	"http",
+	"json",
+	"javascript",
+	"jsx",
+	"typescript",
+	"tsx",
+	"lua",
+	"luadoc",
+	"markdown",
+	"markdown_inline",
+	"nu",
+	"query",
+	"regex",
+	"rust",
+	"vim",
+	"vimdoc",
+	"xml",
+})
+
+local utils = require("skypex.utils")
+local map = utils.map
+
+local select = require("nvim-treesitter-textobjects.select")
+
+map("xo", "if", function()
+	select.select_textobject("@function.inner", "textobjects")
+end, "inside function")
+
+map("xo", "af", function()
+	select.select_textobject("@function.outer", "textobjects")
+end, "around function")
+
+map("xo", "ic", function()
+	select.select_textobject("@comment.inner", "textobjects")
+end, "inside comment")
+
+map("xo", "ac", function()
+	select.select_textobject("@comment.outer", "textobjects")
+end, "around comment")
+
+local move = require("nvim-treesitter-textobjects.move")
+
+map("nxo", "æf", function()
+	move.goto_next_start("@function.outer", "textobjects")
+end)
+
+map("nxo", "åf", function()
+	move.goto_previous_start("@function.outer", "textobjects")
+end)
+
+map("nxo", "æF", function()
+	move.goto_next_end("@function.outer", "textobjects")
+end)
+
+map("nxo", "åF", function()
+	move.goto_previous_start("@function.outer", "textobjects")
+end)
+
+local repeatable_move = require("nvim-treesitter-textobjects.repeatable_move")
+
+map("nxo", ";", repeatable_move.repeat_last_move_next)
+map("nxo", ",", repeatable_move.repeat_last_move_previous)
+
+local swap = require("nvim-treesitter-textobjects.swap")
+
+map("n", "æa", function()
+	swap.swap_next("@parameter.inner")
+end)
+
+map("n", "åa", function()
+	swap.swap_previous("@parameter.inner")
+end)
+
 require("nvim-treesitter.config").setup({
-	ensure_installed = {
-		"bash",
-		"diff",
-		"git_config",
-		"git_rebase",
-		"gitattributes",
-		"gitcommit",
-		"gitignore",
-		"gotmpl",
-		"graphql",
-		"http",
-		"json",
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"lua",
-		"luadoc",
-		"markdown",
-		"markdown_inline",
-		"nu",
-		"query",
-		"regex",
-		"rust",
-		"vim",
-		"vimdoc",
-		"xml",
-	},
-
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
-
-	-- Auto-install languages that are not installed
-	auto_install = true,
-	highlight = {
-		enable = true,
-		-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-		--  If you are experiencing weird indenting issues, add the language to
-		--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-		additional_vim_regex_highlighting = false,
-		disable = { "csv" },
-	},
-	indent = { enable = true },
-	injections = { enable = true },
 	textobjects = {
-		select = {
-			enable = true,
-
-			-- Automatically jump forward to textobject, similar to targets.vim
-			lookahead = true,
-
-			keymaps = {
-				["if"] = "@function.inner",
-				["af"] = "@function.outer",
-				["it"] = "@class.inner",
-				["at"] = "@class.outer",
-				["il"] = "@loop.inner",
-				["al"] = "@loop.outer",
-				["ic"] = "@comment.inner",
-				["ac"] = "@comment.outer",
-			},
-			include_surrounding_whitespace = true,
-		},
 		move = {
 			enable = true,
 			set_jumps = true,
@@ -109,7 +127,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-local utils = require("skypex.utils")
 utils.map("n", "<leader>tt", function()
 	local query_bufs = utils.each_buf_where(function(buf)
 		local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
@@ -281,16 +298,16 @@ local filetype_map = {
 		parser = "gotmpl",
 	},
 	{
+		ext = "conf",
+		filetype = "hyprlang",
+		parser = "hyprlang",
+	},
+	{
 		pattern = "dot_*",
 		replacement = {
 			"dot_",
 			".",
 		},
-	},
-	{
-		ext = "conf",
-		filetype = "hyprlang",
-		parser = "hyprlang",
 	},
 }
 
