@@ -1058,3 +1058,6 @@ winid
 winopt
 strdisplaywidth
 writefile
+winfixwidth
+scrollbind
+syncbind
