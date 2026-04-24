@@ -148,6 +148,7 @@ M.kanji = function()
 	map("n", "æv", kanji.next_hunk, "Next JJ Hunk")
 	map("n", "<leader>vp", kanji.preview_hunk, "Preview JJ Hunk")
 	map("n", "<leader>vb", kanji.blame_toggle, "Toggle Inline JJ Blame")
+	map("n", "<leader>vB", kanji.buffer_blame_toggle, "Toggle JJ Blame Buffer")
 end
 
 return M
