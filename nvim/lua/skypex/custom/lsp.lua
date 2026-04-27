@@ -190,6 +190,9 @@ M.servers = {
 	ts_ls = {
 		filetypes = { "vue" },
 	},
+	["rust-analyzer"] = {
+		single_file_support = false,
+	},
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {

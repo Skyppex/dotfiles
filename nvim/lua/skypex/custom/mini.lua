@@ -150,6 +150,9 @@ map("n", "<leader>sg", function()
 			"!.idea",
 			"!node_modules",
 			"!*.meta",
+			"!**/assets/**",
+			"!**/locales/**",
+			"!**/*.map",
 		},
 	})
 end, "grep files")
