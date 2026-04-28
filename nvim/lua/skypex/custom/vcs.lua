@@ -147,9 +147,11 @@ M.kanji = function()
 	map("n", "åv", kanji.prev_hunk, "Previous JJ Hunk")
 	map("n", "æv", kanji.next_hunk, "Next JJ Hunk")
 	map("n", "<leader>vp", kanji.preview_hunk, "Preview JJ Hunk")
+	map("n", "<leader>vP", kanji.show_commit_info, "Show Commit Info")
 	map("n", "<leader>vb", kanji.blame_toggle, "Toggle Inline JJ Blame")
 	map("n", "<leader>vB", kanji.blame_buffer_toggle, "Toggle JJ Blame Buffer")
-	map("n", "<leader>vr", kanji.reset_hunk, "Reset Hunk")
+	map("n", "<leader>vr", kanji.restore_hunk, "Restore Hunk")
+	map("n", "<leader>vR", kanji.restore_file, "Restore Hunk")
 end
 
 return M
