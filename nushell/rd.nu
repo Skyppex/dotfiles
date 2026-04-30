@@ -27,6 +27,7 @@ export def --wrapped redis [...rest] {
     return ($output.stdout | str trim)
 }
 
+# uses eedisd for known commands, otherwise falls to redis-cli
 export def --wrapped main [...rest] {
     redis ...$rest
 }
@@ -39,12 +40,14 @@ export def --env connect [connection: string] {
     }
 
     $env.REDIS_URL = $url
+    redisd connect $connection
 }
 
 export alias c = connect
 
 export def --env disconnect [] {
     $env.REDIS_URL = null
+    redisd disconnect
 }
 
 export alias d = disconnect
@@ -58,23 +61,28 @@ export alias st = status
 export def list [
     --no-ttl
 ] {
-    redis --scan
-    | lines
-    | str replace --all '"' ""
-    | each { |key| 
-        if $no_ttl {
+    if $no_ttl {
+        redisd keys
+        | lines
+        | each { |key|
             { key: $key }
-        } else {
-            let ttl = ((redis PTTL $key) + "ms") | into duration
+        }
+        | sort-by key
+    } else {
+        redisd keys-with-pttl
+        | lines
+        | each { |kvp|
+            let parts = $kvp | split row "\t";
+            let key = $parts.0
+            let ttl = $parts.1 + "ms" | into duration
             { key: $key, ttl: $ttl }
         }
+        | sort-by key
     }
-    | sort-by key
 }
 
 export alias ls = list
 export alias keys = list --no-ttl
-
 
 export def find [--multi] {
     if $multi {
@@ -102,7 +110,9 @@ export def get [] {
         return
     }
 
-    $selection | each {|key| { key: $key, value: (redis GET $key) } }
+    $selection | each { |key|
+        { key: $key, value: (redisd get $key) }
+    }
 }
 
 export def hget [] {
@@ -251,7 +261,7 @@ export def type [] {
     }
 }
 
-export alias set = redis SET
+export alias set = redisd set
 
 export def expire [duration: duration] {
     let selection = find --multi
@@ -264,7 +274,20 @@ export def expire [duration: duration] {
     let milliseconds = $duration | format duration ms | str strip-suffix " ms"
 
     for $key in $selection {
-        redis PEXPIRE $key $milliseconds
+        { key: $key, result: (redisd pexpire $key $milliseconds) }
+    }
+}
+
+export def exists [] {
+    let selection = find --multi
+
+    if ($selection | is-empty) {
+        print -e "no key selected"
+        return
+    }
+
+    for $key in $selection {
+        { key: $key, result: ((redisd exists $key) == "true") }
     }
 }
 
@@ -277,7 +300,7 @@ export def delete [] {
     }
 
     for $key in $selection { 
-        redis DEL $key
+        { key: $key, result: (redisd delete $key) }
     }
 }
 
