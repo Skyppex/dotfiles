@@ -288,6 +288,17 @@ def jb [
     jj bookmark list
 }
 
+def "jb add" [
+    bookmark: string # name of bookmark to create
+    revision?: string # optionally pick which revision to create the bookmark on
+] {
+    if ($revision | is-empty) {
+        jj bookmark create $bookmark
+    } else {
+        jj bookmark create $bookmark --revision $revision
+    }
+}
+
 # Jujutsu rename bookmark using fzf
 def "jb rn" [] {
     let bookmarks = jj bookmark list
