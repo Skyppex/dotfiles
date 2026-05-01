@@ -153,7 +153,7 @@ M.servers = {
 				schemas = {
 					{
 						fileMatch = { "package.json" },
-						url = "json.schemastore.org",
+						url = "https://json.schemastore.org/package.json",
 					},
 				},
 				trace = { server = "off" },
