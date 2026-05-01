@@ -5,6 +5,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local utils = require("skypex.utils")
+require("vim._core.ui2").enable({})
 
 if not utils.is_linux() then
 	vim.cmd("language en_US")
