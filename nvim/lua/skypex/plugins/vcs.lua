@@ -1,12 +1,18 @@
 local utils = require("skypex.utils")
 
 local function is_git_repo()
-	local _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" })
+	local _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" }, nil, {
+		disable_stderr = true,
+	})
+
 	return exit_code == 0
 end
 
 local function is_jj_repo()
-	local _, exit_code = utils.run_command_ret("jj", { "root" })
+	local _, exit_code = utils.run_command_ret("jj", { "root" }, nil, {
+		disable_stderr = true,
+	})
+
 	return exit_code == 0
 end
 
