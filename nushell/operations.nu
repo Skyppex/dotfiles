@@ -101,11 +101,11 @@ def --wrapped build [
         match $s.type {
             "nix" => {
                 if $release {
-                    nix build .#release ...$rest
+                    nix build --print-build-logs .#release ...$rest
                 } else if $debug {
-                    nix build .#debug ...$rest
+                    nix build --print-build-logs .#debug ...$rest
                 } else {
-                    nix build ...$rest
+                    nix build --print-build-logs ...$rest
                 }
             }
             "cargo" => {
@@ -147,7 +147,7 @@ def --wrapped run [...rest] {
 
     match $selected.type {
         "nix" => {
-            nix run . -- ...$rest
+            nix run --print-build-logs . -- ...$rest
         }
         "cargo" => {
             cargo run -- ...$rest
