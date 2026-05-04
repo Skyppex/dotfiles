@@ -128,6 +128,8 @@ map("n", "<leader>sf", function()
 			"--exclude=.idea",
 			"--exclude=node_modules",
 			"--exclude=*.meta",
+			"--exclude=**/target/**",
+			"--exclude=**/result/**",
 		},
 	}, {
 		source = {
@@ -153,6 +155,8 @@ map("n", "<leader>sg", function()
 			"!**/assets/**",
 			"!**/locales/**",
 			"!**/*.map",
+			"!**/target/**",
+			"!**/result/**",
 		},
 	})
 end, "grep files")

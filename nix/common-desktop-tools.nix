@@ -23,7 +23,6 @@ with pkgsUnfree; [
   mpd-mpris
   mpv
   mpvpaper
-  neovim
   noto-fonts
   noto-fonts-cjk-sans
   noto-fonts-color-emoji
