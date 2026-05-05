@@ -1065,3 +1065,4 @@ virtualedit
 checktime
 redisd
 redisd
+russh
