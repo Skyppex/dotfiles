@@ -154,7 +154,8 @@ M.kanji = function()
 	map("n", "<leader>vb", kanji.blame_toggle, "Toggle Inline JJ Blame")
 	map("n", "<leader>vB", kanji.blame_buffer_toggle, "Toggle JJ Blame Buffer")
 	map("n", "<leader>vr", kanji.restore_hunk, "Restore Hunk")
-	map("n", "<leader>vR", kanji.restore_file, "Restore Hunk")
+	map("n", "<leader>vR", kanji.restore_file, "Restore File")
+	map("n", "<leader>vq", kanji.conflicts_to_qf, "Conflicts to Quickfix List")
 end
 
 return M
