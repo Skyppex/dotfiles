@@ -66,10 +66,36 @@ require("lualine").setup({
 		component_separators = { left = "│", right = "" },
 	},
 	sections = {
-		lualine_b = { {
-			"filename",
-			path = 1,
-		}, "filetype" },
+		lualine_b = {
+			{ "filename", path = 1 },
+			"filetype",
+			{
+				"diagnostics",
+
+				-- Table of diagnostic sources, available sources are:
+				--   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+				-- or a function that returns a table as such:
+				--   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+				sources = { "nvim_diagnostic" },
+
+				-- Displays diagnostics for the defined severity types
+				sections = { "error", "warn" },
+
+				diagnostics_color = {
+					-- Same values as the general color option can be used here.
+					error = require("colorbuddy").colors.error,
+					warn = require("colorbuddy").colors.warn,
+				},
+
+				symbols = {
+					error = " ",
+					warn = " ",
+				},
+				colored = true, -- Displays diagnostics status in color if set to true.
+				update_in_insert = true, -- Update diagnostics in insert mode.
+				always_visible = false, -- Show diagnostics even if there are none.
+			},
+		},
 		lualine_c = {
 			{
 				function()

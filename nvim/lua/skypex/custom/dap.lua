@@ -60,6 +60,19 @@ M.dap = function()
 	dap.set_log_level("INFO")
 
 	require("nvim-dap-virtual-text").setup()
+	local signcolumn = require("skypex.signcolumn")
+
+	signcolumn.add_reason("breakpoints", function()
+		local breakpoints = require("dap.breakpoints").get()
+
+		local count = 0
+
+		for _ in pairs(breakpoints) do
+			count = count + 1
+		end
+
+		return count > 0
+	end)
 
 	local map = require("skypex.utils").map
 	map("n", "<leader>dr", function()
@@ -80,18 +93,22 @@ M.dap = function()
 
 	map("n", "<leader>db", function()
 		dap.toggle_breakpoint()
+		signcolumn.update_signcolumn()
 	end, "Toggle Breakpoint")
 
 	map("n", "<leader>dc", function()
 		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+		signcolumn.update_signcolumn()
 	end, "Set Conditional Breakpoint")
 
 	map("n", "<leader>dB", function()
 		dap.clear_breakpoints()
+		signcolumn.update_signcolumn()
 	end, "Clear Breakpoints")
 
 	map("n", "<leader>dp", function()
 		dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+		signcolumn.update_signcolumn()
 	end, "Log Point")
 
 	map("n", "<leader>dq", function()

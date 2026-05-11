@@ -1,4 +1,5 @@
 require("skypex.table-utils")
 require("skypex.config")
 require("skypex.remap")
+require("skypex.signcolumn")
 skate = require("skypex.skate")

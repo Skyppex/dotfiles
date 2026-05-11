@@ -70,9 +70,6 @@ vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
--- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
-
 -- Decrease update time
 vim.opt.updatetime = 50
 
