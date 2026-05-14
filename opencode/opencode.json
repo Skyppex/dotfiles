@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "default_agent": "spar",
   "permission": {
     "*": "allow",
     "webfetch": "ask"
@@ -45,6 +46,16 @@
     }
   },
   "formatter": {
+    "csharpier": {
+      "command": [
+        "csharpier",
+        "format",
+        "$FILE"
+      ],
+      "extensions": [
+        ".cs"
+      ]
+    },
     "eslint": {
       "command": [
         "eslint",
