@@ -558,18 +558,14 @@ local config = {
 	},
 	set_environment_variables = utils.merge_tables({
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
-		PATH = utils.get_home()
-			.. "/.dotnet/tools"
-			.. ":"
-			.. utils.get_home()
-			.. "/dev/bin"
-			.. ":"
-			.. os.getenv("PATH"),
+		PATH = utils.get_home() .. "/.dotnet/tools" .. ":" .. utils.get_home() .. "/dev/bin" .. ":" .. os.getenv(
+			"PATH"
+		),
 	}, require("env")),
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- config.front_end = "Software" -- OpenGL doesn't work quite well with RDP.
+	config.front_end = "WebGpu" -- OpenGL doesn't work quite well with RDP.
 
 	wezterm.log_info("starting wsl")
 	config.default_prog = { "wsl", "--shell-type", "login", "--cd", "~/.local/share/chezmoi", "nu" }
