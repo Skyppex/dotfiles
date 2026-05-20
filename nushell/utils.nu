@@ -199,10 +199,10 @@ def "parse table" [
 alias cm = chezmoi
 alias cma = chezmoi apply --force
 
-def "count-by-group" [] {
+def "count-by-group" [key: cell-path] {
     $in
-    | group-by --to-table
-    | each { |g| { group: $g.group, count: ($g.items | length) } }
+    | group-by --to-table $key
+    | each { |g| { group: ($g | get $key), count: ($g.items | length) } }
 }
 
 def void [] {}
