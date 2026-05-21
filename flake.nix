@@ -49,7 +49,6 @@
           jq
           vscode-json-languageserver
           xmlformat
-          markdownlint-cli
           shellcheck
           kdePackages.qtdeclarative
           ruff
