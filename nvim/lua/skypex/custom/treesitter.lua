@@ -187,11 +187,7 @@ add_lambda()
 local registry = {
 	{
 		lang = "arcana",
-		filetype = "arcana",
-	},
-	{
-		lang = "arcana",
-		filetype = "mage",
+		filetype = { "arcana", "mage" },
 	},
 	{
 		lang = "lambda",
