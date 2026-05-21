@@ -1,3 +1,11 @@
+local function enable_csv_view(buf)
+	vim.bo[buf].textwidth = 0
+
+	vim.api.nvim_buf_call(buf, function()
+		vim.cmd("CsvViewEnable")
+	end)
+end
+
 local csvview = require("csvview")
 csvview.setup({
 	parser = { comments = { "#", "//" } },
@@ -18,17 +26,6 @@ csvview.setup({
 		display_mode = "border",
 	},
 })
-
-local function enable_csv_view(buf)
-	vim.bo[buf].textwidth = 0
-
-	vim.api.nvim_buf_call(buf, function()
-		vim.cmd("CsvViewEnable")
-	end)
-end
-
--- enable columnar view on the initially opened csv file
-enable_csv_view(vim.api.nvim_get_current_buf())
 
 -- enable columnar view on the subsequently opened csv files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

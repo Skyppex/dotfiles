@@ -182,7 +182,7 @@ end)
 
 -- Source config
 map("n", "<leader><leader>c", function()
-	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/custom/*.lua", true, true)
+	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/configs/*.lua", true, true)
 
 	local loaded = 0
 
@@ -191,9 +191,11 @@ map("n", "<leader><leader>c", function()
 
 		if base_filename ~= vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":t") then
 			local module_name = base_filename:gsub("%.lua$", "")
-			module_name = "skypex.custom." .. module_name
+			module_name = "skypex.configs." .. module_name
 
-			if package.loaded[module_name] ~= true then
+			local module = package.loaded[module_name]
+
+			if module == nil then
 				vim.notify("Module " .. module_name .. " is not loaded", vim.log.levels.INFO)
 				goto continue
 			end
@@ -201,7 +203,8 @@ map("n", "<leader><leader>c", function()
 			package.loaded[module_name] = nil
 
 			local success = pcall(function()
-				require(module_name)
+				local mod = require(module_name)
+				return mod
 			end)
 
 			if success then

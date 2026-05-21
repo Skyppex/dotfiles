@@ -217,4 +217,3 @@ map("n", "<leader>f", function()
 	vim.o.operatorfunc = "v:lua._G.format_operator"
 	return "g@"
 end, "Format file", true)
-

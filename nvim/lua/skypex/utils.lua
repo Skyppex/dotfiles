@@ -242,19 +242,16 @@ function M.run_command_ret(command, args, on_exit, opts)
 	return job:sync() -- Blocks until done
 end
 
-function M.local_plugin(name, config, else_config)
+function M.local_plugin(name, remote)
 	local local_dir = M.get_code_path() .. "/" .. name
 
 	local Path = require("plenary.path")
 	local path = Path:new(local_dir)
 
 	if path:is_dir() then
-		return vim.tbl_deep_extend("force", {
-			name = name,
-			dir = local_dir,
-		}, config)
+		return "file://" .. local_dir
 	else
-		return else_config()
+		return remote
 	end
 end
 

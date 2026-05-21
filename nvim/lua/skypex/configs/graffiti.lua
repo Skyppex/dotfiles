@@ -1,4 +1,17 @@
+local Path = require("plenary.path")
+
+local bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/target/release/graffiti-rs")
+
+if not bin_path:is_file() then
+	bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs")
+
+	if not bin_path:is_file() then
+		return
+	end
+end
+
 require("graffiti").setup({
+	server_executable = bin_path,
 	authorized_keys = "~/.ssh/authorized_keys",
 	client_key = "~/.ssh/id_25519-self",
 })

@@ -146,7 +146,7 @@ M.luasnip = function()
 	rs_snippets()
 	nix_snippets()
 
-	map("n", "<leader><leader>s", "<cmd>lua require('skypex.custom.snippets').all()<cr>", "Source snippets")
+	map("n", "<leader><leader>s", "<cmd>lua require('skypex.configs.snippets').all()<cr>", "Source snippets")
 
 	map("is", "<C-l>", function()
 		if ls.expand_or_locally_jumpable() then

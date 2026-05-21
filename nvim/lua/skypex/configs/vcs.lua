@@ -1,31 +1,29 @@
 local utils = require("skypex.utils")
 local map = utils.map
 
-local M = {}
-
-function M.is_git_repo()
+local function is_git_repo()
 	local _, exit_code = utils.run_command_ret("git", { "rev-parse", "--is-inside-work-tree" })
 	return exit_code == 0
 end
 
-function M.is_jj_repo()
+local function is_jj_repo()
 	local _, exit_code = utils.run_command_ret("jj", { "root" })
 	return exit_code == 0
 end
 
-function M.jj_then_git()
-	if M.is_jj_repo() then
+local function jj_then_git()
+	if is_jj_repo() then
 		return "jj"
 	end
 
-	if M.is_git_repo() then
+	if is_git_repo() then
 		return "git"
 	end
 
 	return nil
 end
 
-M.conflict = function()
+local function setup_conflict()
 	require("git-conflict").setup({
 		default_mappings = true,
 		default_commands = true,
@@ -58,13 +56,8 @@ M.conflict = function()
 	})
 end
 
-M.gitsigns = function()
-	if M.jj_then_git() ~= "git" then
-		return
-	end
-
-	local gitsigns = require("gitsigns")
-	gitsigns.setup({
+local function setup_gitsigns()
+	require("gitsigns").setup({
 		signs = {
 			add = { text = "│" },
 			change = { text = "│" },
@@ -105,7 +98,7 @@ M.gitsigns = function()
 	map("n", "<leader>vB", "<cmd>Gitsigns blame<cr>", "Git Blame")
 end
 
-M.cmd = function()
+local function setup_cmd()
 	vim.api.nvim_create_user_command("GitTrackAll", function()
 		vim.notify("Tracking all files", vim.log.levels.DEBUG)
 
@@ -124,11 +117,7 @@ M.cmd = function()
 	map("n", "<leader>gt", "<cmd>GitTrackAll<CR>", "Git Track All")
 end
 
-M.kanji = function()
-	if M.jj_then_git() ~= "jj" then
-		return
-	end
-
+local function setup_kanji()
 	local kanji = require("kanji")
 
 	kanji.setup({
@@ -158,4 +147,14 @@ M.kanji = function()
 	map("n", "<leader>vq", kanji.conflicts_to_qf, "Conflicts to Quickfix List")
 end
 
-return M
+local repo_type = jj_then_git()
+
+if repo_type == "jj" then
+	setup_kanji()
+end
+
+if repo_type == "git" then
+	setup_conflict()
+	setup_gitsigns()
+	setup_cmd()
+end

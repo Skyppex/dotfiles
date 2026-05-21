@@ -1,4 +1,11 @@
 local utils = require("skypex.utils")
+
+while true do
+	if utils.direnv_status() ~= "pending" then
+		break
+	end
+end
+
 local Path = require("plenary.path")
 
 local M = {}
@@ -41,7 +48,7 @@ local function setup_proof(capabilities)
 	vim.lsp.enable("proof")
 end
 
-vim.lsp.log.set_level("OFF")
+vim.lsp.log.set_level("DEBUG")
 
 local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -89,19 +96,7 @@ M.servers = {
 				fidget.notify(result.message, result.type)
 			end,
 		},
-		after_attach = function(client)
-			if client.server_capabilities.signatureHelpProvider then
-				require("lsp-overloads").setup(client, {
-					keymaps = {
-						previous_signature = "<S-up>",
-						next_signature = "<S-down>",
-						previous_parameter = "<S-left>",
-						next_parameter = "<S-right>",
-						close_signature = "<C-e>",
-					},
-				})
-			end
-		end,
+		after_attach = function(client) end,
 		settings = {
 			FormattingOptions = {
 				EnableEditorConfigSupport = true,
