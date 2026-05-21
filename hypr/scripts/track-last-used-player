@@ -6,7 +6,7 @@ const player_map = [
     [class player];
     [zen firefox]
     [firefox firefox]
-    [Spotify spotify]
+    [spotify spotify]
 ]
 
 mkdir /tmp/hypr
