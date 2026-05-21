@@ -470,3 +470,36 @@ def --wrapped jsp [
 
     jcc @-
 }
+
+def "jw ls" [] {
+    jj workspace list --template 'name ++ "\n"'
+    | lines
+    | each { |it|
+        let path = jj workspace root --name $it
+        { name: $it, path: $path }
+    }
+}
+
+def "jw add" [
+    path: path
+] {
+    let basename = $path | path basename
+    jj workspace add --name $basename $path
+}
+
+def "jw rm" [] {
+    let workspaces = jw ls
+    let selected = $workspaces | get name | to text | fzf --height 40% --layout reverse -0 --multi | lines
+
+    if ($selected | is-empty) {
+        print -e "no workspaces selected"
+        return
+    }
+
+    let workspace = $workspaces 
+    | where ($selected | any { |s| $s == $it.name })
+    | first
+
+    jj workspace forget $workspace.name
+    rm -rf $workspace.path
+}
