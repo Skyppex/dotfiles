@@ -20,7 +20,7 @@ let theme = {
     range: $colors.primary
     float: $colors.orange
     string: $colors.green
-    nothing: $colors.background0
+    nothing: $colors.red
     binary: $colors.red
     cell-path: $colors.orange
     row_index: $colors.cyan
@@ -50,7 +50,7 @@ let theme = {
     shape_literal: $colors.orange
     shape_match_pattern: $colors.purple
     shape_matching_brackets: $colors.primary
-    shape_nothing: $colors.background0
+    shape_nothing: $colors.red
     shape_operator: $colors.red
     shape_or: $colors.cyan
     shape_pipe: $colors.orange
