@@ -11,5 +11,6 @@ in
     catt
     prismlauncher
     r2modman
+    signal-desktop
     zen-browser.packages.${system}.default
   ]
