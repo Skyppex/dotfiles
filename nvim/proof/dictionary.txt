@@ -105,7 +105,9 @@ charset
 chdir
 checkbox
 checkhealth
+checktime
 chezmoi
+chezmoiexact
 chezmoiignore
 chillicream
 chmod
@@ -244,6 +246,7 @@ eww
 exepath
 externalarg
 extmark
+factorio
 fastfetch
 fatalf
 fenix
@@ -277,6 +280,7 @@ folke
 fontconfig
 formattable
 fprintf
+frecency
 frontend
 frontmatter
 fscr
@@ -326,6 +330,7 @@ globpath
 globpattern
 gnumake
 gnupg
+goimport
 golang
 golangcilint
 gompl
@@ -336,6 +341,7 @@ gotmpl
 gpf
 gping
 gpu
+grafana
 graffitiignore
 graphqlconfig
 graphqlrc
@@ -353,6 +359,7 @@ grstp
 gsp
 gst
 gstreamer
+gw
 halign
 hamachi
 hamsta
@@ -365,6 +372,7 @@ hc
 hcloud
 hetzner
 hexpand
+heyo
 hget
 historyhintcomplete
 historyhintwordcomplete
@@ -406,6 +414,7 @@ hyprscrolling
 iamcco
 icc
 ifconfig
+ifcopenshell
 iguanacucumber
 ilen
 imagemagick
@@ -463,6 +472,7 @@ jsonlint
 jsonpath
 jsp
 jsx
+jw
 kda
 kde
 keepjump
@@ -552,10 +562,12 @@ menupagepreviou
 menupreviou
 menuright
 menuup
+meshoptimizer
 mfussenegger
 mic
 milli
 mimetype
+mindset
 minecraft
 mingw
 miow
@@ -671,6 +683,7 @@ onworkspace
 opam
 opencode
 openeditor
+openldap
 openssh
 openssl
 opentelemetry
@@ -681,6 +694,7 @@ orguser
 otf
 otlp
 outfoxxed
+overengineering
 palo
 pamixer
 paml
@@ -711,6 +725,7 @@ pki
 pkill
 playerctl
 plocate
+plsql
 pmizio
 pname
 png
@@ -733,7 +748,10 @@ protonup
 pseudotile
 pseudotiling
 pttl
+publickey
 purchaseservice
+pushback
+pwait
 pwntester
 pwsh
 px
@@ -761,10 +779,12 @@ rcon
 rcrc
 rdp
 reactj
+readline
 readme
 receivalservice
 recursivebrowser
 recv
+redisd
 refactor
 refactoring
 refinementservice
@@ -801,6 +821,7 @@ rshkarin
 rsplit
 rstest
 rtkit
+russh
 rustc
 rustfmt
 rustl
@@ -822,6 +843,7 @@ screencopy
 screenshot
 scriptable
 scrollbar
+scrollbind
 scrollofffraction
 scs
 sdp
@@ -844,6 +866,7 @@ sidescrolloff
 sidestuff
 signin
 simavg
+sindri
 sirenix
 skrivebord
 skyloom
@@ -872,6 +895,7 @@ stdenv
 stevearc
 stopinsert
 strconv
+strdisplaywidth
 strlen
 stublib
 stylelintrc
@@ -888,6 +912,7 @@ swapgrapheme
 swr
 swww
 sy
+syncbind
 sysctl
 sysname
 systemctl
@@ -935,11 +960,13 @@ tpp
 trpc
 truesight
 truetype
+tsgo
 tsv
 tsx
 ttf
 ttl
 tw
+twox
 txn
 typecheck
 typedef
@@ -978,6 +1005,7 @@ vimap
 vimcmd
 virsh
 virtiofsd
+virtualedit
 virtualisation
 virtualtext
 vm
@@ -1007,6 +1035,9 @@ winbar
 winborder
 windowrule
 windwp
+winfixwidth
+winid
+winopt
 wip
 wireplumber
 wltp
@@ -1015,6 +1046,7 @@ workdir
 wpa
 wpctl
 wpf
+writefile
 wshell
 wsl
 wslayout
@@ -1052,34 +1084,3 @@ yubikey
 yubioath
 zbirenbaum
 zsh
-grafana
-tsgo
-winid
-winopt
-strdisplaywidth
-writefile
-winfixwidth
-scrollbind
-syncbind
-virtualedit
-checktime
-redisd
-redisd
-russh
-twox
-publickey
-readline
-overengineering
-pushback
-mindset
-openldap
-heyo
-chezmoiexact
-jw
-factorio
-sindri
-pwait
-goimport
-frecency
-gw
-plsql
