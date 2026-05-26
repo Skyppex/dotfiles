@@ -488,7 +488,30 @@ def "jw add" [
 }
 
 def "jw rm" [] {
-    let workspaces = jw ls
+    let current_workspaces = jj log --no-graph --revisions @ --template 'working_copies' 
+
+    if ($current_workspaces | is-empty) {
+        print -e "no workspaces"
+        return
+    }
+
+    let all_workspaces = jw ls
+
+    let current_workspaces = $current_workspaces 
+    | split row " "
+    let current_workspaces = $current_workspaces 
+    | str trim --right --char '@'
+
+    let current_workspaces = $current_workspaces | each { |workspace|
+        $all_workspaces | where ($it.name == $workspace) | first
+    }
+
+    let $current_workspace = $current_workspaces 
+    | where (jj workspace root | $in == $it.path)
+    | first
+
+    let workspaces = jw ls | where not ($it.name == $current_workspace.name)
+
     let selected = $workspaces | get name | to text | fzf --height 40% --layout reverse -0 --multi | lines
 
     if ($selected | is-empty) {
