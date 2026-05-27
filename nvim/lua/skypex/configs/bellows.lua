@@ -3,9 +3,24 @@ bellows.setup()
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function(args)
-		local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+		local buf = args.buf
+		local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
 
 		if filetype ~= "json" then
+			return
+		end
+
+		local path = vim.api.nvim_buf_get_name(buf)
+
+		local stats, err, err_name = vim.uv.fs_stat(path)
+
+		if err ~= nil then
+			vim.notify(err, vim.log.levels.ERROR)
+			return
+		end
+
+		if stats.size > 1048576 then
+			vim.notify("json file larger than 1MiB. bellows disabled.")
 			return
 		end
 

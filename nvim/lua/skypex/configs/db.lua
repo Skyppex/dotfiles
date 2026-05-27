@@ -170,15 +170,15 @@ vim.api.nvim_create_autocmd("User", {
 
 		map("n", "<s-c-r>", function()
 			db.api.ui.editor_do_action("run_file")
-		end, "run file", nil, buf)
+		end, "run query file", nil, buf)
 
 		map("x", "<c-r>", function()
 			db.api.ui.editor_do_action("run_selection")
-		end, "run selection", nil, buf)
+		end, "run selected query", nil, buf)
 
 		map("n", "<c-r>", function()
 			db.api.ui.editor_do_action("run_under_cursor")
-		end, "run under cursor", nil, buf)
+		end, "run query under cursor", nil, buf)
 
 		map("n", "<leader>sf", function()
 			pick.builtin.cli({
