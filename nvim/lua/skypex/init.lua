@@ -38,9 +38,7 @@ vim.pack.add({
 
 require("skypex.configs.navigation")
 
-vim.pack.add({
-	utils.local_plugin("direnv.nvim", "https://github.com/skyppex/direnv.nvim"),
-})
+utils.local_plugin("direnv.nvim", "https://github.com/skyppex/direnv.nvim")
 
 require("skypex.configs.direnv")
 
@@ -57,8 +55,9 @@ vim.pack.add({
 	-- vcs
 	"https://github.com/akinsho/git-conflict.nvim",
 	"https://github.com/lewis6991/gitsigns.nvim",
-	utils.local_plugin("kanji.nvim", "https://github.com/skyppex/kanji.nvim"),
 })
+
+utils.local_plugin("kanji.nvim", "https://github.com/skyppex/kanji.nvim")
 
 require("skypex.configs.vcs")
 
@@ -106,9 +105,10 @@ require("skypex.configs.lsp")
 vim.pack.add({
 	-- clients
 	"https://github.com/mistweaverco/kulala.nvim",
-	utils.local_plugin("nvim-dbee", "https://github.com/skyppex/nvim-dbee"),
-	utils.local_plugin("attempt.nvim", "https://github.com/skyppex/attempt.nvim"),
 })
+
+utils.local_plugin("nvim-dbee", "https://github.com/skyppex/nvim-dbee")
+utils.local_plugin("attempt.nvim", "https://github.com/skyppex/attempt.nvim")
 
 require("skypex.configs.rest")
 require("skypex.configs.db")
@@ -124,10 +124,11 @@ vim.pack.add({
 
 require("skypex.configs.dap")
 
+-- data
+utils.local_plugin("bellows.nvim", "https://github.com/skyppex/bellows.nvim")
+utils.local_plugin("jq-playground.nvim", "https://github.com/skyppex/jq-playground.nvim")
+
 vim.pack.add({
-	-- data
-	utils.local_plugin("bellows.nvim", "https://github.com/skyppex/bellows.nvim"),
-	utils.local_plugin("jq-playground.nvim", "https://github.com/skyppex/jq-playground.nvim"),
 
 	-- testing
 	"https://github.com/nvim-neotest/neotest",
@@ -151,10 +152,10 @@ vim.pack.add({
 	"https://github.com/folke/todo-comments.nvim",
 	"https://github.com/tpope/vim-sleuth",
 	"https://github.com/folke/which-key.nvim",
-
-	utils.local_plugin("graffiti.nvim", "https://github.com/skyppex/graffiti.nvim"),
-	utils.local_plugin("punch-card.nvim", "https://github.com/skyppex/punch-card.nvim"),
 })
+
+utils.local_plugin("graffiti.nvim", "https://github.com/skyppex/graffiti.nvim")
+utils.local_plugin("punch-card.nvim", "https://github.com/skyppex/punch-card.nvim")
 
 require("skypex.configs.bellows")
 require("skypex.configs.cloak")
