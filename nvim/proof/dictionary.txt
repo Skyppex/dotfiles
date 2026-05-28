@@ -1077,3 +1077,4 @@ heyo
 chezmoiexact
 jw
 factorio
+sindri
