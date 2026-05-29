@@ -58,7 +58,7 @@ map("n", {
 	"<c-w><c-r>",
 	"<c-w>r",
 }, function()
-	rest_ws:toggle()
+	rest_ws:activate()
 end, "toggle rest client")
 
 vim.api.nvim_create_autocmd("FileType", {

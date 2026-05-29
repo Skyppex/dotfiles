@@ -110,9 +110,20 @@ vim.pack.add({
 utils.local_plugin("nvim-dbee", "https://github.com/skyppex/nvim-dbee")
 utils.local_plugin("attempt.nvim", "https://github.com/skyppex/attempt.nvim")
 
-require("skypex.configs.rest")
-require("skypex.configs.db")
-require("skypex.configs.attempt")
+local code_ws = require("skypex.workspaces").setup() -- sets up the initial tab as a workspace
+
+if code_ws then
+	utils.map("n", {
+		"<c-w><c-w>",
+		"<c-w>w",
+	}, function()
+		code_ws:activate()
+	end, "toggle coding workspace")
+
+	require("skypex.configs.rest")
+	require("skypex.configs.db")
+	require("skypex.configs.attempt")
+end
 
 vim.pack.add({
 	-- dap

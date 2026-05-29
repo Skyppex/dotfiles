@@ -2,7 +2,7 @@ local M = {}
 
 ---@class WorkspaceConfig
 ---@field name string
----@field on_init fun(ws: Workspace)
+---@field on_init? fun(ws: Workspace)
 
 ---@class Workspace
 ---@field name string
@@ -20,11 +20,11 @@ M.configs = {}
 ---@param name string
 ---@return number|nil
 function M.get_workspace_tab(name)
-	local var_name = "workspace_" .. name
+	local var_name = "workspace"
 
 	for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
 		local ok, value = pcall(vim.api.nvim_tabpage_get_var, tab, var_name)
-		if ok and value then
+		if ok and value and value == name then
 			return tab
 		end
 	end
@@ -37,8 +37,8 @@ end
 ---@return number
 function M.create_workspace(name)
 	vim.api.nvim_command("tabnew")
-	vim.t["workspace_" .. name] = true
 	local tab = vim.api.nvim_get_current_tabpage()
+	vim.api.nvim_tabpage_set_var(tab, "workspace", name)
 
 	for _, ws in ipairs(M.workspaces) do
 		if ws.name == name then
@@ -48,6 +48,15 @@ function M.create_workspace(name)
 	end
 
 	return tab
+end
+
+function M.initialize_workspace(name, tab)
+	for _, ws in ipairs(M.workspaces) do
+		if ws.name == name then
+			ws.tab = tab
+			break
+		end
+	end
 end
 
 ---@param self Workspace
@@ -98,13 +107,18 @@ end
 
 ---@param self Workspace
 function M.Workspace:activate()
-	self:_navigate(false)
+	local tab = M.get_workspace_tab(self.name)
+	local is_first_open = not tab or not vim.api.nvim_tabpage_is_valid(tab)
+	self:_navigate(is_first_open)
 end
 
 ---@param self Workspace
 ---@param callback fun()?
 function M.Workspace:open(callback)
-	self:_navigate(false)
+	local tab = M.get_workspace_tab(self.name)
+	local is_first_open = not tab or not vim.api.nvim_tabpage_is_valid(tab)
+	self:_navigate(is_first_open)
+
 	if callback then
 		callback()
 	end
@@ -150,6 +164,43 @@ function M.open(name, callback)
 	if ws then
 		ws:open(callback)
 	end
+end
+
+---@param config? WorkspaceConfig
+---@return Workspace?
+function M.setup(config)
+	local tabs = vim.api.nvim_list_tabpages()
+
+	if #tabs ~= 1 then
+		vim.notify("workspaces must be initialized with only a single existing tabpage", vim.log.levels.ERROR)
+		return nil
+	end
+
+	local code_ws_name = "code"
+	local tab = tabs[1]
+	vim.api.nvim_tabpage_set_var(tab, "workspace", code_ws_name)
+	vim.notify(vim.inspect(tab))
+
+	---@type WorkspaceConfig
+	local extended_config = vim.tbl_deep_extend("force", { name = code_ws_name }, config or {}, {
+		tab = tab,
+	})
+
+	vim.notify(vim.inspect(tab))
+
+	local code_ws = setmetatable({
+		name = code_ws_name,
+		tab = tab,
+	}, M.Workspace)
+
+	table.insert(M.workspaces, code_ws)
+	table.insert(M.configs, extended_config)
+
+	if code_ws and extended_config.on_init then
+		extended_config.on_init(code_ws)
+	end
+
+	return code_ws
 end
 
 return M

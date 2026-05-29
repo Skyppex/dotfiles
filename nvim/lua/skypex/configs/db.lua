@@ -157,7 +157,7 @@ map("n", {
 	"<c-w><c-b>",
 	"<c-w>b",
 }, function()
-	db_ws:toggle()
+	db_ws:activate()
 end, "toggle db client")
 
 map("n", "<leader>bl", db.api.ui.next_result_set, "next result set")

@@ -151,7 +151,7 @@ local attempt_ws = require("skypex.workspaces").register({
 })
 
 map("n", { "<c-w><c-s>", "<c-w>s" }, function()
-	attempt_ws:toggle()
+	attempt_ws:activate()
 end, "toggle scratch pad")
 
 map("n", "<leader>AN", function()
