@@ -265,7 +265,7 @@ function M.local_plugin(name, remote)
 				return
 			end
 
-			vim.cmd.packadd("nvim-dbee")
+			vim.cmd.packadd(name)
 		end
 	else
 		vim.pack.add({ remote })
