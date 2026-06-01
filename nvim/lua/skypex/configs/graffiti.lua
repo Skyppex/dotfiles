@@ -6,7 +6,11 @@ if not bin_path:is_file() then
 	bin_path = Path:new(vim.fn.stdpath("data") .. "/graffiti-rs/result/bin/graffiti-rs")
 
 	if not bin_path:is_file() then
-		return
+		bin_path = Path:new(vim.fn.exepath("graffiti-rs"))
+
+		if not bin_path:is_file() then
+			return
+		end
 	end
 end
 
