@@ -245,28 +245,8 @@ end
 function M.local_plugin(name, remote)
 	local local_dir = M.get_code_path() .. "/" .. name
 
-	local Path = require("plenary.path")
-	local local_path = Path:new(local_dir)
-
-	if local_path:is_dir() then
-		local opt_dir = M.get_home() .. "/.local/share/nvim/site/pack/core/opt/" .. name
-		local opt_path = Path:new(opt_dir)
-
-		local stat = vim.uv.fs_lstat(opt_dir)
-		local is_link = stat ~= nil and stat.type == "link"
-
-		if not is_link then
-			opt_path:rm({ recursive = true })
-
-			local success, err = vim.uv.fs_symlink(local_dir, opt_dir, { dir = true })
-
-			if not success then
-				vim.notify(err, vim.log.levels.WARN)
-				return
-			end
-
-			vim.cmd.packadd(name)
-		end
+	if vim.fn.isdirectory(local_dir) == 1 then
+		vim.opt.rtp:prepend(local_dir)
 	else
 		vim.pack.add({ remote }, { confirm = false })
 	end
