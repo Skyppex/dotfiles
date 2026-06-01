@@ -380,9 +380,9 @@ local function should_not_configure(server_name)
 		if server_name == v then
 			return true
 		end
-
-		return false
 	end
+
+	return false
 end
 
 for server_name, config in pairs(M.servers) do

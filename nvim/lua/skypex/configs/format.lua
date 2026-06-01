@@ -115,10 +115,6 @@ end
 
 local ensure_installed = extract_formatters()
 
-vim.tbl_extend("keep", ensure_installed, {
-	"csharpier",
-})
-
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })
