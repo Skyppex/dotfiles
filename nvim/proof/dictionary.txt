@@ -1078,3 +1078,8 @@ chezmoiexact
 jw
 factorio
 sindri
+pwait
+goimport
+frecency
+gw
+plsql
