@@ -268,7 +268,7 @@ function M.local_plugin(name, remote)
 			vim.cmd.packadd(name)
 		end
 	else
-		vim.pack.add({ remote })
+		vim.pack.add({ remote }, { confirm = false })
 	end
 end
 

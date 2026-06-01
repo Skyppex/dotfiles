@@ -179,14 +179,11 @@ function M.setup(config)
 	local code_ws_name = "code"
 	local tab = tabs[1]
 	vim.api.nvim_tabpage_set_var(tab, "workspace", code_ws_name)
-	vim.notify(vim.inspect(tab))
 
 	---@type WorkspaceConfig
 	local extended_config = vim.tbl_deep_extend("force", { name = code_ws_name }, config or {}, {
 		tab = tab,
 	})
-
-	vim.notify(vim.inspect(tab))
 
 	local code_ws = setmetatable({
 		name = code_ws_name,
