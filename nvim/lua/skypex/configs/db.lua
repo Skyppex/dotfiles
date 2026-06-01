@@ -119,6 +119,37 @@ db.setup({
 			number = true,
 			relativenumber = true,
 		},
+		mappings = {
+			{
+				key = "r",
+				mode = "n",
+				action = function()
+					local success, module = pcall(function()
+						require("skypex.blink-dbee")
+					end)
+
+					if success then
+						module._cache = {}
+					end
+
+					db.api.ui.drawer_refresh()
+				end,
+			},
+			{ key = "<CR>", mode = "n", action = "action_1" },
+			-- action_2 renames a note or sets the connection as active manually
+			{ key = "cw", mode = "n", action = "action_2" },
+			-- action_3 deletes a note or connection (removes connection from the file if you configured it like so)
+			{ key = "dd", mode = "n", action = "action_3" },
+			-- these are self-explanatory:
+			-- { key = "c", mode = "n", action = "collapse" },
+			-- { key = "e", mode = "n", action = "expand" },
+			{ key = "o", mode = "n", action = "toggle" },
+			-- mappings for menu popups:
+			{ key = "<CR>", mode = "n", action = "menu_confirm" },
+			{ key = "y", mode = "n", action = "menu_yank" },
+			{ key = "<Esc>", mode = "n", action = "menu_close" },
+			{ key = "q", mode = "n", action = "menu_close" },
+		},
 	},
 	editor = {
 		mappings = {},

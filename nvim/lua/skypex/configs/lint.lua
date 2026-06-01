@@ -47,6 +47,6 @@ for _, linters in pairs(linters_by_ft) do
 	end
 end
 
-require("mason-tool-installer").setup({
-	ensure_installed = ensure_installed,
-})
+-- require("mason-tool-installer").setup({
+-- 	ensure_installed = ensure_installed,
+-- })

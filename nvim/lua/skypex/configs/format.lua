@@ -34,7 +34,7 @@ local formatters_by_ft = {
 	-- Runs the single formatter
 	lua = { "stylua", "injected" },
 	-- Runs each formatter sequentially
-	python = { "ruff_format", "injected" },
+	python = { "ruff", "injected" },
 
 	-- Tries to run each formatter until one succeeds
 	javascript = first_then_injected("prettierd", "eslint_d"),
@@ -48,7 +48,7 @@ local formatters_by_ft = {
 	graphql = first_then_injected("prettierd"),
 	cs = { "csharpier", "injected" },
 	csx = { "csharpier", "injected" },
-	go = { "gofmt", "injected" },
+	go = first_then_injected("goimports", "gofmt"),
 	xml = { "xmlformatter", "injected" },
 	yaml = first_then_injected("yamlfmt", "prettierd"),
 	toml = first_then_injected("tombi", "prettierd"),
@@ -61,8 +61,8 @@ local formatters_by_ft = {
 	kotlin = { "ktfmt", "injected" },
 	nix = { "alejandra", "injected" },
 	jq = { "jqfmt", "injected" },
-	terraform = { "terraform_fmt", "injected" },
-	nu = { "nufmt", "injected" },
+	terraform = { "terraform", "injected" },
+	-- nu = { "nufmt", "injected" },
 }
 
 local external_formatters = {
@@ -70,10 +70,13 @@ local external_formatters = {
 		command = "jqfmt",
 		args = { "-ar", "-ob", "-op", "pipe" },
 	},
+	gofmt = {
+		command = "gofmt",
+	},
 }
 
 local function extract_formatters()
-	local formatters_to_install = {}
+	local unique_formatters = {}
 
 	for _, formatters in pairs(formatters_by_ft) do
 		if type(formatters) == "function" then
@@ -87,22 +90,30 @@ local function extract_formatters()
 			-- this only happens when using a function as the formatter
 			if type(formatter) == "table" then
 				for _, f in pairs(formatter) do
-					formatters_to_install[f] = 1
+					unique_formatters[f] = 1
 				end
 			else
-				formatters_to_install[formatter] = 1
+				unique_formatters[formatter] = 1
 			end
 		end
+	end
+
+	unique_formatters["injected"] = nil
+
+	for formatter, _ in pairs(external_formatters) do
+		unique_formatters[formatter] = nil
+	end
+
+	local formatters_to_install = {}
+
+	for k, _ in pairs(unique_formatters) do
+		table.insert(formatters_to_install, k)
 	end
 
 	return formatters_to_install
 end
 
 local ensure_installed = extract_formatters()
-
-for formatter, _ in pairs(external_formatters) do
-	ensure_installed[formatter] = nil
-end
 
 vim.tbl_extend("keep", ensure_installed, {
 	"csharpier",

@@ -15,7 +15,7 @@ if not bin_path:is_file() then
 end
 
 require("graffiti").setup({
-	server_executable = bin_path,
+	server_executable = bin_path.filename,
 	authorized_keys = "~/.ssh/authorized_keys",
 	client_key = "~/.ssh/id_25519-self",
 })

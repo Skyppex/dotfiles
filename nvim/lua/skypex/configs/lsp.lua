@@ -48,12 +48,17 @@ local function setup_proof(capabilities)
 	vim.lsp.enable("proof")
 end
 
-vim.lsp.log.set_level("DEBUG")
+vim.lsp.log.set_level("OFF")
 
-local cmp_lsp = require("cmp_nvim_lsp")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
-capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+local capabilities = {
+	workspace = {
+		didChangeWatchedFiles = {
+			dynamicRegistration = false,
+		},
+	},
+}
+
+capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 local cs_ls_ex = require("csharpls_extended")
 
@@ -96,7 +101,6 @@ M.servers = {
 				fidget.notify(result.message, result.type)
 			end,
 		},
-		after_attach = function(client) end,
 		settings = {
 			FormattingOptions = {
 				EnableEditorConfigSupport = true,
@@ -187,6 +191,102 @@ M.servers = {
 	},
 }
 
+-- takes only the first item for each starting line number
+local function filter_items(t)
+	local items = {}
+	local lnums = {}
+
+	for _, item in ipairs(t.items) do
+		local lnum = tostring(item.lnum)
+
+		if lnums[lnum] == nil then
+			table.insert(items, item)
+			lnums[lnum] = true
+		end
+	end
+
+	return items
+end
+
+local function jump_to(item)
+	local bufnr = item.bufnr or vim.fn.bufadd(item.filename)
+	vim.bo[bufnr].buflisted = true
+	vim.cmd("normal! m'") -- push current pos to jumplist (optional)
+	local win = vim.api.nvim_get_current_win()
+	vim.api.nvim_win_set_buf(win, bufnr)
+	pcall(vim.api.nvim_win_set_cursor, win, { item.lnum, item.col - 1 })
+	vim.cmd("normal! zz")
+end
+
+local function request(method, on_list)
+	if method == "references" then
+		vim.lsp.buf.references({ includeDeclaration = false }, { on_list = on_list })
+	else
+		vim.lsp.buf[method]({ on_list = on_list })
+	end
+end
+
+local function jump_or_pick(method)
+	return function()
+		request(method, function(t)
+			local items = filter_items(t)
+
+			-- single result: jump straight there
+			if #items == 1 then
+				jump_to(items[1])
+				return
+			end
+
+			-- multiple results: open mini.pick
+			require("mini.pick").start({
+				source = {
+					name = t.title or method,
+					items = vim.tbl_map(function(it)
+						return {
+							text = string.format(
+								"%s:%d:%d: %s",
+								vim.fn.fnamemodify(it.filename, ":~:."),
+								it.lnum,
+								it.col,
+								(it.text or ""):gsub("^%s*", "")
+							),
+							path = it.filename,
+							lnum = it.lnum,
+							col = it.col,
+						}
+					end, items),
+				},
+			})
+		end)
+	end
+end
+
+local function jump_or_qf(method)
+	return function()
+		request(method, function(t)
+			local items = t.items
+
+			-- single result: jump straight there
+			if #items == 1 then
+				jump_to(items[1])
+				return
+			end
+
+			vim.fn.setqflist({}, " ", {
+				title = t.title or method,
+				items = items,
+				context = t.context,
+			})
+
+			local quicker = require("quicker")
+
+			if not quicker.is_open() then
+				quicker.open()
+			end
+		end)
+	end
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
@@ -194,43 +294,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			utils.map(modes, left, right, "lsp: " .. desc, nil, event.buf)
 		end
 
-		local pick = require("mini.extra").pickers
-
-		map("n", "gr", function()
-			pick.lsp({ scope = "references" })
-		end, "Go to References")
-
-		map("n", "gi", function()
-			pick.lsp({ scope = "implementation" })
-		end, "Go to Implementation")
-
-		map("n", "gt", function()
-			pick.lsp({ scope = "type_definition" })
-		end, "Go to Type Definition")
-
-		map("n", "<leader>ss", function()
-			pick.lsp({ scope = "workspace_symbol_live" })
-		end, "Workspace Symbols")
+		map("n", "gr", jump_or_qf("references"), "put references in quickfix list")
+		map("n", "gi", jump_or_qf("implementation"), "put implementations in quickfix list")
+		map("n", "gt", jump_or_pick("type_definition"), "go to type definition")
+		map("n", "gD", jump_or_pick("declaration"), "go to declaration")
+		map("n", "gd", jump_or_pick("definition"), "go to definition")
 
 		map("n", "<leader>rn", function()
 			vim.lsp.buf.rename()
 			vim.schedule(function()
-				vim.api.nvim_cmd({ cmd = "wa" }, {})
+				vim.cmd("wa")
 			end)
-		end, "[R]e[n]ame")
+		end, "rename")
 
-		map("n", "gD", function()
-			pick.lsp({ scope = "declaration" })
-		end, "Go to Declaration")
-
-		map("n", "gd", function()
-			pick.lsp({ scope = "definition" })
-		end, "Go to Definition")
-
-		map("nx", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-		map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
-		map("n", "H", vim.lsp.buf.signature_help, "Signature Help")
-		map("i", "<c-h>", vim.lsp.buf.signature_help, "Signature Help")
+		map("nx", "<leader>ca", vim.lsp.buf.code_action, "code action")
+		map("n", "K", vim.lsp.buf.hover, "hover documentation")
+		map("n", "H", vim.lsp.buf.signature_help, "signature help")
+		map("i", "<c-h>", vim.lsp.buf.signature_help, "signature help")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -242,22 +322,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				server.override_gd(event.buf)
 			elseif not gd_exists then
 				map("n", "gd", function()
-					pick.lsp({ scope = "definition" })
-				end, "Go to Definition")
-			end
-		end
-
-		if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-			map("n", "<leader>th", function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			end, "Toggle Inlay Hints")
-		end
-
-		if client then
-			local server = M.servers[client.name]
-
-			if server and server.after_attach then
-				server.after_attach(client)
+					map("n", "gd", jump_or_pick("definition"), "go to definition")
+				end, "go to definition")
 			end
 		end
 	end,

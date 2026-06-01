@@ -1,213 +1,58 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-local lspkind = require("lspkind")
+local cmp = require("blink.cmp")
+cmp.build():pwait()
 
-local sources = {
-	path = {
-		name = "path",
-		max_item_count = 2,
-	},
-	lsp = {
-		keyword_length = 1,
-		name = "nvim_lsp",
-		max_item_count = 100,
-	},
-	lsp_signature_help = {
-		name = "nvim_lsp_signature_help",
-		max_item_count = 2,
-	},
-	dbee = {
-		name = "cmp-dbee",
-		max_item_count = 100,
-	},
-	luasnip = {
-		name = "luasnip",
-		max_item_count = 2,
-	},
-	buffer = {
-		name = "buffer",
-		option = {
-			keyword_length = 3,
-			get_bufnrs = function()
-				local bufs = {}
-				for _, win in ipairs(vim.api.nvim_list_wins()) do
-					bufs[vim.api.nvim_win_get_buf(win)] = true
-				end
-				return vim.tbl_keys(bufs)
-			end,
-		},
-		max_item_count = 1,
-	},
-	crates = { name = "crates" },
-	obsidian = { name = "obsidian" },
-	obsidian_new = { name = "obsidian_new" },
-	obsidian_tag = { name = "obsidian_tag" },
-	markdown = { name = "render-markdown" },
+local keymap = {
+	preset = "none",
+	["<c-space>"] = { "show" },
+	["<c-j>"] = { "select_next", "fallback" },
+	["<c-k>"] = { "select_prev", "fallback" },
+	["<c-l>"] = { "select_and_accept", "snippet_forward", "fallback" },
+	["<c-u>"] = { "scroll_documentation_up", "fallback" },
+	["<c-d>"] = { "scroll_documentation_down", "fallback" },
+	["<c-e>"] = { "cancel" },
 }
 
-local ft_sources = {
-	sql = {
-		sources.dbee,
-		sources.buffer,
-	},
-	markdown = {
-		sources.buffer,
-		sources.markdown,
-	},
-}
-
----@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
+	completion = {
+		ghost_text = { enabled = true },
+		list = {
+			selection = { preselect = false, auto_insert = false },
+		},
+		documentation = {
+			auto_show = true,
+			auto_show_delay_ms = 0,
+		},
+		trigger = nil,
+	},
+	fuzzy = {
+		sorts = { "exact", "score", "sort_text" },
+	},
+	snippets = { preset = "luasnip" },
+	keymap = keymap,
+	cmdline = {
+		keymap = keymap,
+	},
 	sources = {
-		sources.path,
-		sources.lsp,
-		sources.lsp_signature_help,
-		sources.luasnip,
-		sources.buffer,
-	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.order,
-			cmp.config.compare.kind,
-			cmp.config.compare.score,
-
-			-- copied from cmp-under, but I don't think I need the plugin for this.
-			-- I might add some more of my own.
-			function(entry1, entry2)
-				local _, entry1_under = entry1.completion_item.label:find("^_+")
-				local _, entry2_under = entry2.completion_item.label:find("^_+")
-				entry1_under = entry1_under or 0
-				entry2_under = entry2_under or 0
-				if entry1_under > entry2_under then
-					return false
-				elseif entry1_under < entry2_under then
-					return true
-				end
-			end,
-
-			cmp.config.compare.sort_text,
-			cmp.config.compare.length,
+		default = { "lsp", "path", "snippets", "buffer", "dbee" },
+		providers = {
+			dbee = {
+				name = "Dbee",
+				module = "skypex.blink-dbee",
+				enabled = true,
+				async = true,
+				opts = {
+					filetypes = { "sql", "mysql", "plsql" },
+					cache_ttl = 30,
+				},
+			},
 		},
-	},
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	completion = { completeopt = "menu,menuone,noinsert" },
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	view = {
-		entries = {
-			selection_order = "top_down",
-			vertical_positioning = "above",
-			follow_cursor = false,
-		},
-		docs = {
-			auto_open = true,
-		},
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<a-u>"] = cmp.mapping.scroll_docs(-4),
-		["<a-d>"] = cmp.mapping.scroll_docs(4),
-		["<tab>"] = cmp.mapping.confirm({ select = true }),
-		["<c-e>"] = cmp.mapping.abort(),
-		["<c-space>"] = cmp.mapping.complete({}),
-	}),
-	formatting = {
-		expandable_indicator = true,
-		format = function(entry, vim_item)
-			local kind = lspkind.cmp_format({
-				mode = "symbol", -- show only symbol annotations <symbol|text|symbol_text>
-				maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-				-- can also be a function to dynamically calculate max width such as
-				-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-				ellipsis_char = "..", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-				show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-				-- The function below will be called before any actual modifications from lspkind
-				-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-				-- before = function (entry, vim_item)
-				-- ...
-				-- return vim_item
-				-- end
-			})
-
-			vim_item = kind(entry, vim_item)
-			vim_item.dup = 0
-
-			return vim_item
-		end,
-	},
-	experimental = {
-		ghost_text = true,
 	},
 })
 
-for ft, srcs in pairs(ft_sources) do
-	cmp.setup.filetype({ ft }, {
-		sources = srcs,
-	})
-end
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "Vaults/**/*.md",
+-- always display completion menu in insert mode no matter what happens :)
+vim.api.nvim_create_autocmd({ "InsertEnter", "TextChangedI", "CmdlineChanged" }, {
+	pattern = "*",
 	callback = function()
-		cmp.setup.buffer({
-			sources = {
-				sources.obsidian,
-				sources.obsidian_new,
-				sources.obsidian_tag,
-			},
-		})
+		cmp.show()
 	end,
 })
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "Cargo.toml",
-	callback = function()
-		cmp.setup.buffer({
-			sources = {
-				sources.crates,
-				sources.buffer,
-			},
-		})
-	end,
-})
-
-local colors = require("skypex.colors")
-
-local theme = {
-	Unit = colors.primary,
-	Property = colors.pink,
-	Module = colors.purple,
-	Interface = colors.yellow,
-	Class = colors.yellow,
-	Value = colors.cyan,
-	Variable = colors.cyan,
-	Field = colors.pink,
-	Constructor = colors.yellow,
-	Function = colors.yellow,
-	Method = colors.yellow,
-	TypeParameter = colors.yellow,
-	Operator = colors.orange,
-	Event = colors.yellow,
-	Struct = colors.yellow,
-	Constant = colors.orange,
-	EnumMember = colors.orange,
-	File = colors.blue,
-	Enum = colors.yellow,
-	Keyword = colors.purple,
-	Text = colors.green,
-	Folder = colors.blue,
-	Color = colors.primary,
-	Reference = colors.purple,
-	Snippet = colors.blue,
-}
-
-for name, color in pairs(theme) do
-	vim.cmd.hi("CmpItemKind" .. name .. " guifg=" .. color)
-end

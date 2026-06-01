@@ -48,8 +48,8 @@ utils.run_command(
 				enable = false,
 			},
 			completion = {
-				nvim_cmp = true,
 				min_chars = 2,
+				match_case = false,
 				create_new = false,
 			},
 			picker = {

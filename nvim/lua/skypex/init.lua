@@ -9,7 +9,7 @@ vim.pack.add({
 	"https://github.com/tjdevries/colorbuddy.nvim",
 	"https://github.com/goolord/alpha-nvim",
 	"https://github.com/MaximilianLloyd/ascii.nvim",
-})
+}, { confirm = false })
 
 require("skypex.colorbuddy")
 require("skypex.configs.theming")
@@ -25,7 +25,7 @@ vim.pack.add({
 	"https://github.com/tree-sitter/tree-sitter-c-sharp",
 	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 	"https://github.com/mbbill/undotree",
-})
+}, { confirm = false })
 
 require("skypex.configs.undotree")
 require("skypex.configs.mini")
@@ -34,7 +34,7 @@ require("skypex.configs.oil")
 
 vim.pack.add({
 	"https://github.com/mrjones2014/smart-splits.nvim",
-})
+}, { confirm = false })
 
 require("skypex.configs.navigation")
 
@@ -49,13 +49,33 @@ vim.pack.add({
 	"https://github.com/MunifTanjim/nui.nvim",
 	"https://github.com/nvim-neotest/nvim-nio",
 	"https://github.com/folke/noice.nvim",
-})
+}, { confirm = false })
+
+vim.pack.add({
+	-- completion
+	"https://github.com/saghen/blink.lib",
+	"https://github.com/saghen/blink.cmp",
+	"https://github.com/L3MON4D3/LuaSnip",
+	"https://github.com/rafamadriz/friendly-snippets",
+}, { confirm = false })
+
+require("skypex.configs.cmp")
+require("skypex.blink-dbee")
+
+vim.pack.add({
+	-- lsp
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/williamboman/mason-lspconfig.nvim",
+	"https://github.com/Decodetalkers/csharpls-extended-lsp.nvim",
+}, { confirm = false })
+
+require("skypex.configs.lsp")
 
 vim.pack.add({
 	-- vcs
 	"https://github.com/akinsho/git-conflict.nvim",
 	"https://github.com/lewis6991/gitsigns.nvim",
-})
+}, { confirm = false })
 
 utils.local_plugin("kanji.nvim", "https://github.com/skyppex/kanji.nvim")
 
@@ -65,47 +85,22 @@ vim.pack.add({
 	-- automation
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/mfussenegger/nvim-lint",
-})
+}, { confirm = false })
 
 require("skypex.configs.lint")
 require("skypex.configs.format")
 
 vim.pack.add({
-	-- completion
-	"https://github.com/hrsh7th/nvim-cmp",
-	"https://github.com/hrsh7th/cmp-path",
-	"https://github.com/hrsh7th/cmp-buffer",
-	"https://github.com/hrsh7th/cmp-nvim-lsp-signature-help",
-	"https://github.com/onsails/lspkind.nvim",
-	"https://github.com/MattiasMTS/cmp-dbee",
-	"https://github.com/L3MON4D3/LuaSnip",
-	"https://github.com/saadparwaiz1/cmp_luasnip",
-	"https://github.com/rafamadriz/friendly-snippets",
-})
-
-require("skypex.configs.cmp")
-
-vim.pack.add({
 	-- notifications
 	"https://github.com/j-hui/fidget.nvim",
-})
+}, { confirm = false })
 
 require("skypex.configs.notifications")
 
 vim.pack.add({
-	-- lsp
-	"https://github.com/neovim/nvim-lspconfig",
-	"https://github.com/williamboman/mason-lspconfig.nvim",
-	"https://github.com/Decodetalkers/csharpls-extended-lsp.nvim",
-	"https://github.com/hrsh7th/cmp-nvim-lsp",
-})
-
-require("skypex.configs.lsp")
-
-vim.pack.add({
 	-- clients
 	"https://github.com/mistweaverco/kulala.nvim",
-})
+}, { confirm = false })
 
 utils.local_plugin("nvim-dbee", "https://github.com/skyppex/nvim-dbee")
 utils.local_plugin("attempt.nvim", "https://github.com/skyppex/attempt.nvim")
@@ -131,7 +126,7 @@ vim.pack.add({
 	"https://github.com/rcarriga/nvim-dap-ui",
 	"https://github.com/theHamsta/nvim-dap-virtual-text",
 	"https://github.com/jay-babu/mason-nvim-dap.nvim",
-})
+}, { confirm = false })
 
 require("skypex.configs.dap")
 
@@ -163,7 +158,7 @@ vim.pack.add({
 	"https://github.com/folke/todo-comments.nvim",
 	"https://github.com/tpope/vim-sleuth",
 	"https://github.com/folke/which-key.nvim",
-})
+}, { confirm = false })
 
 utils.local_plugin("graffiti.nvim", "https://github.com/skyppex/graffiti.nvim")
 utils.local_plugin("punch-card.nvim", "https://github.com/skyppex/punch-card.nvim")
