@@ -156,7 +156,8 @@ map("n", "<leader>sg", function()
 			"!**/locales/**",
 			"!**/*.map",
 			"!**/target/**",
-			"!**/result/**",
+			"!result/**",
+			"!vendor/**",
 		},
 	})
 end, "grep files")
