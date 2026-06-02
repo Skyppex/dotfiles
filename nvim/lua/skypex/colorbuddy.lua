@@ -35,7 +35,7 @@ Group.new("Splash", c.yellow)
 
 Group.new("Normal", c.primary, bg)
 Group.new("InvNormal", c.tertiary, bg)
-Group.new("NormalFloat", c.primary)
+Group.new("NormalFloat", c.primary, c.background1)
 Group.new("FloatBorder", c.secondary)
 
 Group.new("LineNr", c.secondary, c.none)
@@ -67,10 +67,14 @@ Group.new("VisualLineMode", g.Visual, g.Visual)
 
 -- Popup Menu
 Group.new("Title", c.primary)
-Group.new("Pmenu", c.primary, c.background0)
-Group.new("PmenuSel", c.primary, c.background1)
-Group.new("PmenuSbar", nil, c.background0)
-Group.new("PmenuThumb", nil, c.background1)
+Group.new("Pmenu", g.NormalFloat, g.NormalFloat)
+Group.new("PmenuSel", c.cyan)
+Group.new("PmenuThumb", c.none, c.cyan)
+Group.new("PmenuSbar", c.none, g.Pmenu)
+Group.new("PmenuBorder", g.FloatBorder, g.FloatBorder)
+Group.new("PmenuExtra", c.warning, g.Pmenu)
+Group.new("PmenuMatch", c.cyan)
+Group.new("PmenuMatchSel", c.cyan)
 
 -- TabLine
 Group.new("TabLine", c.secondary, c.background1)
@@ -352,13 +356,12 @@ Group.new("MiniPickPromptCaret", g.MiniPickPrompt, g.MiniPickPrompt)
 Group.new("MiniPickPromptPrefix", g.MiniPickPrompt, g.MiniPickPrompt)
 
 -- Blink
-Group.new("BlinkCmpMenu", g.Float, g.Float)
-Group.new("BlinkCmpMenuBorder", g.FloatBorder, g.FloatBorder)
-Group.new("BlinkCmpMenuSelection", c.cyan)
-Group.new("BlinkCmpScrollBarThumb", c.none, c.cyan)
-Group.new("BlinkCmpLabel", c.primary)
+Group.new("BlinkCmpMenuBorder", g.PmenuBorder, g.PmenuBorder)
+Group.new("BlinkCmpLabelMatch", g.PmenuMatch, g.PmenuMatch)
 Group.new("BlinkCmpLabelDeprecated", c.red)
-Group.new("BlinkCmpKind", c.cyan)
+
+Group.new("BlinkCmpDocBorder", g.PmenuBorder, g.PmenuBorder)
+Group.new("BlinkCmpDocCursorLine", g.CursorLine, g.CursorLine)
 
 Group.new("BlinkCmpKindText", c.green)
 Group.new("BlinkCmpKindMethod", g.Method)
