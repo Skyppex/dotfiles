@@ -85,6 +85,7 @@ pick.setup({
 	},
 
 	window = {
+		prompt_prefix = " ",
 		-- see :help nvim_open_win()
 		config = function()
 			local height_factor = 0.4
