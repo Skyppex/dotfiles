@@ -153,8 +153,15 @@ def jc [
     }
 
     if ($bookmark | is-not-empty) {
+        let remote = jr --name-only | to text | fzf --height 40% --layout reverse -0 -1
+
+        if ($remote | is-empty) {
+            print -e "no remote selected"
+            return
+        }
+
         jj bookmark set $bookmark
-        jj bookmark track $bookmark --remote origin # assume origin is the correct remote since it is in 99% of cases
+        jj bookmark track $bookmark --remote $remote
         return
     }
 
@@ -183,6 +190,14 @@ def jc [
     }
 
     jj new $bookmark
+
+    let parts = $bookmark | split row @
+
+    let local_bookmark = $parts.0
+    let remote = $parts.1
+
+    jj bookmark create $local_bookmark --revision @
+    jj bookmark track $local_bookmark --remote $remote
 }
 
 def jr [
