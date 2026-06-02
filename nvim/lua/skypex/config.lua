@@ -6,6 +6,11 @@ vim.g.maplocalleader = " "
 
 local utils = require("skypex.utils")
 require("vim._core.ui2").enable({})
+local ui = require("vim._core.ui2")
+local cmdline = require("skypex.cmdline")
+ui.cmd.cmdline_show = cmdline.show
+ui.cmd.cmdline_hide = cmdline.hide
+ui.cmd.cmdline_pos = cmdline.pos
 
 if not utils.is_linux() then
 	vim.cmd("language en_US")
