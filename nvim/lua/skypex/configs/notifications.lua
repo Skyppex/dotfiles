@@ -22,7 +22,10 @@ fidget.setup({
 			-- The window is always trying to show the start of the message, so it's better to not limit the width
 			-- max_width = 50,
 			align = "bottom",
-			border = "rounded",
+			border = require("skypex.style").border,
+			normal_hl = "NormalFloat",
+			x_padding = require("skypex.style").horizontal_padding,
+			y_padding = require("skypex.style").vertical_padding,
 		},
 	},
 })

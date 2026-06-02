@@ -50,6 +50,8 @@ vim.defer_fn(function()
 		"https://github.com/folke/noice.nvim",
 	}, { confirm = false })
 
+	require("skypex.configs.noice")
+
 	vim.pack.add({
 		-- completion
 		"https://github.com/saghen/blink.lib",
@@ -170,7 +172,6 @@ vim.defer_fn(function()
 	require("skypex.configs.graffiti")
 	require("skypex.configs.lualine")
 	require("skypex.configs.markdown")
-	require("skypex.configs.noice")
 	require("skypex.configs.obsidian")
 	require("skypex.configs.punch-card")
 	require("skypex.configs.quicker")

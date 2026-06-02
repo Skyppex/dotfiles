@@ -84,7 +84,7 @@ local function setup_gitsigns()
 			ignore_whitespace = true,
 		},
 		preview_config = {
-			border = "rounded",
+			border = require("skypex.style").border,
 		},
 	})
 

@@ -415,7 +415,7 @@ vim.diagnostic.config({
 	float = {
 		focusable = false,
 		style = "minimal",
-		border = "rounded",
+		border = require("skypex.style").border,
 		source = true,
 		header = "",
 		prefix = "",
