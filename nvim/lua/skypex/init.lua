@@ -46,11 +46,7 @@ vim.defer_fn(function()
 		"https://github.com/williamboman/mason.nvim",
 		"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
 		"https://github.com/MunifTanjim/nui.nvim",
-		"https://github.com/nvim-neotest/nvim-nio",
-		"https://github.com/folke/noice.nvim",
 	}, { confirm = false })
-
-	require("skypex.configs.noice")
 
 	vim.pack.add({
 		-- completion
@@ -124,7 +120,6 @@ vim.defer_fn(function()
 	vim.pack.add({
 		-- dap
 		"https://github.com/mfussenegger/nvim-dap",
-		"https://github.com/rcarriga/nvim-dap-ui",
 		"https://github.com/theHamsta/nvim-dap-virtual-text",
 		"https://github.com/jay-babu/mason-nvim-dap.nvim",
 	}, { confirm = false })
