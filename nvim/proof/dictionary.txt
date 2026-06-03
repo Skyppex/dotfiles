@@ -1085,3 +1085,6 @@ yubioath
 zbirenbaum
 zsh
 ifc
+gltf
+ifcconvert
+gltfpack
