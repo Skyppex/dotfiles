@@ -71,6 +71,8 @@ local extra = require("mini.extra")
 
 pick.setup({
 	mappings = {
+		move_down = "<c-j>",
+		move_up = "<c-k>",
 		quickfix = {
 			char = "<c-q>",
 			func = function()
