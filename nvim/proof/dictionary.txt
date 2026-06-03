@@ -1088,3 +1088,10 @@ ifc
 gltf
 ifcconvert
 gltfpack
+uv
+nxo
+æz
+åz
+æb
+åb
+tj

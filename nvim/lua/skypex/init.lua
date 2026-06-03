@@ -6,12 +6,9 @@ skate = require("skypex.skate")
 vim.pack.add({
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/tjdevries/colorbuddy.nvim",
-	"https://github.com/goolord/alpha-nvim",
-	"https://github.com/MaximilianLloyd/ascii.nvim",
 }, { confirm = false })
 
 require("skypex.colorbuddy")
-require("skypex.configs.theming")
 
 local utils = require("skypex.utils")
 utils.local_plugin("direnv.nvim", "https://github.com/skyppex/direnv.nvim")
@@ -21,19 +18,23 @@ require("skypex.configs.direnv")
 vim.defer_fn(function()
 	vim.pack.add({
 		-- core
+		"https://github.com/mbbill/undotree",
 		"https://github.com/echasnovski/mini.nvim",
-		"https://github.com/stevearc/oil.nvim",
-		"https://github.com/SirZenith/oil-vcs-status",
 		"https://github.com/nvim-treesitter/nvim-treesitter",
 		"https://github.com/tree-sitter/tree-sitter-c-sharp",
 		"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-		"https://github.com/mbbill/undotree",
+		"https://github.com/stevearc/oil.nvim",
+		"https://github.com/SirZenith/oil-vcs-status",
+		"https://github.com/nvim-lualine/lualine.nvim",
+		"https://github.com/windwp/nvim-ts-autotag",
 	}, { confirm = false })
 
 	require("skypex.configs.undotree")
 	require("skypex.configs.mini")
 	require("skypex.configs.treesitter")
 	require("skypex.configs.oil")
+	require("skypex.configs.lualine")
+	require("skypex.configs.tags")
 
 	vim.pack.add({
 		"https://github.com/mrjones2014/smart-splits.nvim",
@@ -41,26 +42,26 @@ vim.defer_fn(function()
 
 	require("skypex.configs.navigation")
 
+	-- deps
 	vim.pack.add({
-		-- deps
 		"https://github.com/williamboman/mason.nvim",
 		"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
 		"https://github.com/MunifTanjim/nui.nvim",
 	}, { confirm = false })
 
+	-- completion
 	vim.pack.add({
-		-- completion
 		"https://github.com/saghen/blink.lib",
 		"https://github.com/saghen/blink.cmp",
 		"https://github.com/L3MON4D3/LuaSnip",
 		"https://github.com/rafamadriz/friendly-snippets",
 	}, { confirm = false })
 
-	require("skypex.configs.cmp")
-	require("skypex.blink-dbee")
+	require("skypex.configs.completion")
+	require("skypex.configs.snippets")
 
+	-- lsp
 	vim.pack.add({
-		-- lsp
 		"https://github.com/neovim/nvim-lspconfig",
 		"https://github.com/williamboman/mason-lspconfig.nvim",
 		"https://github.com/Decodetalkers/csharpls-extended-lsp.nvim",
@@ -68,8 +69,8 @@ vim.defer_fn(function()
 
 	require("skypex.configs.lsp")
 
+	-- vcs
 	vim.pack.add({
-		-- vcs
 		"https://github.com/akinsho/git-conflict.nvim",
 		"https://github.com/lewis6991/gitsigns.nvim",
 	}, { confirm = false })
@@ -78,8 +79,8 @@ vim.defer_fn(function()
 
 	require("skypex.configs.vcs")
 
+	-- automation
 	vim.pack.add({
-		-- automation
 		"https://github.com/stevearc/conform.nvim",
 		"https://github.com/mfussenegger/nvim-lint",
 	}, { confirm = false })
@@ -87,15 +88,15 @@ vim.defer_fn(function()
 	require("skypex.configs.lint")
 	require("skypex.configs.format")
 
+	-- notifications
 	vim.pack.add({
-		-- notifications
 		"https://github.com/j-hui/fidget.nvim",
 	}, { confirm = false })
 
 	require("skypex.configs.notifications")
 
+	-- clients
 	vim.pack.add({
-		-- clients
 		"https://github.com/mistweaverco/kulala.nvim",
 	}, { confirm = false })
 
@@ -113,44 +114,68 @@ vim.defer_fn(function()
 		end, "toggle coding workspace")
 
 		require("skypex.configs.rest")
+		require("skypex.blink-dbee")
 		require("skypex.configs.db")
 		require("skypex.configs.attempt")
 	end
 
+	-- debugging
 	vim.pack.add({
-		-- dap
 		"https://github.com/mfussenegger/nvim-dap",
 		"https://github.com/theHamsta/nvim-dap-virtual-text",
 		"https://github.com/jay-babu/mason-nvim-dap.nvim",
 	}, { confirm = false })
 
-	require("skypex.configs.dap")
+	require("skypex.configs.debugging")
 
 	-- data
+	vim.pack.add({
+		"https://github.com/hat0uma/csvview.nvim",
+	}, { confirm = false })
+
 	utils.local_plugin("bellows.nvim", "https://github.com/skyppex/bellows.nvim")
 	utils.local_plugin("jq-playground.nvim", "https://github.com/skyppex/jq-playground.nvim")
 
+	require("skypex.configs.data")
+
+	-- languages
 	vim.pack.add({
-		-- testing
+		"https://github.com/saecki/crates.nvim",
+		"https://github.com/obsidian-nvim/obsidian.nvim",
+		"https://github.com/mrcjkb/rustaceanvim",
+	}, { confirm = true })
+
+	require("skypex.configs.rust")
+	require("skypex.configs.obsidian")
+
+	-- testing
+	vim.pack.add({
 		"https://github.com/nvim-neotest/neotest",
 		"https://github.com/nvim-neotest/nvim-nio",
 		"https://github.com/antoinemadec/FixCursorHold.nvim",
 		"https://github.com/Issafalcon/neotest-dotnet",
+	}, { confirm = true })
 
-		-- other
+	require("skypex.configs.testing")
+
+	-- presentation
+	vim.pack.add({
 		"https://github.com/laytan/cloak.nvim",
 		"https://github.com/NvChad/nvim-colorizer.lua",
-		"https://github.com/saecki/crates.nvim",
-		"https://github.com/hat0uma/csvview.nvim",
-		"https://github.com/eandrju/cellular-automaton.nvim",
-		"https://github.com/nvim-lualine/lualine.nvim",
 		"https://github.com/MeanderingProgrammer/render-markdown.nvim",
-		"https://github.com/obsidian-nvim/obsidian.nvim",
-		"https://github.com/stevearc/quicker.nvim",
 		"https://github.com/HiPhish/rainbow-delimiters.nvim",
-		"https://github.com/mrcjkb/rustaceanvim",
-		"https://github.com/windwp/nvim-ts-autotag",
 		"https://github.com/folke/todo-comments.nvim",
+	})
+
+	require("skypex.configs.cloak")
+	require("skypex.configs.colorizer")
+	require("skypex.configs.markdown")
+	require("skypex.configs.rainbow-delimiters")
+	require("skypex.configs.todo-comments")
+
+	-- other
+	vim.pack.add({
+		"https://github.com/stevearc/quicker.nvim",
 		"https://github.com/tpope/vim-sleuth",
 		"https://github.com/folke/which-key.nvim",
 	}, { confirm = false })
@@ -158,25 +183,17 @@ vim.defer_fn(function()
 	utils.local_plugin("graffiti.nvim", "https://github.com/skyppex/graffiti.nvim")
 	utils.local_plugin("punch-card.nvim", "https://github.com/skyppex/punch-card.nvim")
 
-	require("skypex.configs.bellows")
-	require("skypex.configs.cloak")
-	require("skypex.configs.colorizer")
-	require("skypex.configs.csv")
-	require("skypex.configs.data")
-	require("skypex.configs.fun")
 	require("skypex.configs.graffiti")
-	require("skypex.configs.lualine")
-	require("skypex.configs.markdown")
-	require("skypex.configs.obsidian")
 	require("skypex.configs.punch-card")
 	require("skypex.configs.quicker")
-	require("skypex.configs.rainbow-delimiters")
-	require("skypex.configs.rust")
-	require("skypex.configs.snippets")
-	require("skypex.configs.tags")
-	require("skypex.configs.todo-comments")
 	require("skypex.configs.which-key")
-	require("skypex.configs.testing")
+
+	-- useless fun
+	vim.pack.add({
+		"https://github.com/eandrju/cellular-automaton.nvim",
+	}, { confirm = true })
+
+	require("skypex.configs.fun")
 
 	-- apply funky environment fix to prioritize nix/direnv over mason
 	if utils.is_linux() then
