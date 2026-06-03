@@ -96,6 +96,16 @@ local flake_snippet = t({
 	"}",
 })
 
+local envrc_snippet = t({
+	"if command -v nix >/dev/null 2>&1; then",
+	"  if [ -f flake.nix ]; then",
+	"    use flake",
+	"  elif [ -f shell.nix ]; then",
+	"    use nix",
+	"  fi",
+	"fi",
+})
+
 local function all_snippets()
 	ls.add_snippets("all", {
 		s("tag", fmt("<{}>{}</{}>", { i(1, "name"), i(2), rep(1) })),
@@ -129,6 +139,12 @@ local function nix_snippets()
 	})
 end
 
+local function direnv_snippets()
+	ls.add_snippets("direnv", {
+		s("envrc", envrc_snippet),
+	})
+end
+
 M.friendly_snippets = function()
 	require("luasnip.loaders.from_vscode").lazy_load()
 end
@@ -145,6 +161,7 @@ M.luasnip = function()
 	cs_snippets()
 	rs_snippets()
 	nix_snippets()
+	direnv_snippets()
 
 	map("n", "<leader><leader>s", "<cmd>lua require('skypex.configs.snippets').all()<cr>", "Source snippets")
 

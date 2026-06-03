@@ -394,3 +394,17 @@ def pick [path: cell-path] {
     $input | where ($it.key in $selection)
 }
 
+def "envrc" [--force(-f)] {
+    if (not $force) and (".envrc" | path exists) {
+        print -e ".envrc already exists. use --force(-f) to overwrite"
+        return
+    }
+
+    "if command -v nix >/dev/null 2>&1; then
+  if [ -f flake.nix ]; then
+    use flake
+  elif [ -f shell.nix ]; then
+    use nix
+  fi
+fi" | save .envrc --force
+}
