@@ -1,7 +1,7 @@
 local M = {}
 
 local offset_x = -1
-local offset_y = -1
+local offset_y = 1
 local prompt_width = 0
 
 local ns = vim.api.nvim_create_namespace("skypex_cmdline")
