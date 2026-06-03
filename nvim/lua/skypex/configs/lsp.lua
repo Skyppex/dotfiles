@@ -50,15 +50,7 @@ end
 
 vim.lsp.log.set_level("OFF")
 
-local capabilities = {
-	workspace = {
-		didChangeWatchedFiles = {
-			dynamicRegistration = false,
-		},
-	},
-}
-
-capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
 
 local cs_ls_ex = require("csharpls_extended")
 
@@ -70,7 +62,7 @@ M.servers = {
 				runtime = { version = "LuaJIT" },
 				workspace = {
 					checkThirdParty = false,
-					library = vim.api.nvim_get_runtime_file("", true),
+					library = vim.api.nvim_get_runtime_file("lua", true),
 				},
 				completion = {
 					callSnippet = "Replace",
@@ -84,7 +76,6 @@ M.servers = {
 				},
 			},
 		},
-		capabilities = capabilities,
 	},
 	csharp_ls = {
 		filetypes = { "cs", "csx" },
@@ -119,14 +110,9 @@ M.servers = {
 				IncludePrereleases = true,
 			},
 		},
-		capabilities = capabilities,
 	},
-	kulala_ls = {
-		capabilities = capabilities,
-	},
-	nushell = {
-		capabilities = capabilities,
-	},
+	kulala_ls = {},
+	nushell = {},
 	qmlls = {
 		handlers = {
 			["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
@@ -161,7 +147,6 @@ M.servers = {
 	},
 	nixd = {
 		cmd = { "nixd", "--inlay-hints=true" },
-		capabilities = capabilities,
 		filetypes = { "nix" },
 		root_markers = { "flake.nix", ".git" },
 		settings = {
