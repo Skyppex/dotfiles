@@ -5,64 +5,50 @@ local toml = require("toml")
 local config_path = utils.get_config_path()
 local background
 
-if utils.is_work_computer() then
+if utils.is_linux() then
+	-- find current.toml and read the dir value
+	local current_path = config_path .. "/themes/current.toml"
+	wezterm.add_to_config_reload_watch_list(current_path)
+	local current_file = io.open(current_path, "r")
+	local current_content = current_file:read("*a")
+	current_file:close()
+	local current = toml.parse(current_content)
+	wezterm.log_info(current.dir)
+
+	local theme_config_path = config_path .. "/themes/" .. current.dir .. "/config.toml"
+	wezterm.add_to_config_reload_watch_list(theme_config_path)
+	local theme_config_file = io.open(theme_config_path, "r")
+	local theme_config_content = theme_config_file:read("*a")
+	theme_config_file:close()
+	local theme_config = toml.parse(theme_config_content)
+	wezterm.log_info(theme_config.term_variant)
+
+	-- find the correct background for current theme
 	background = {
 		source = {
-			File = config_path .. "/wezterm/backgrounds/anime landscape 2560x1080.jpg",
+			File = config_path
+				.. "/themes/"
+				.. current.dir
+				.. "/images/"
+				.. current.dir
+				.. "_"
+				.. theme_config.variant
+				.. "-term.png",
 		},
-		height = "100%",
-		vertical_align = "Bottom",
+		width = "Cover",
+		height = "Cover",
+		vertical_align = "Middle",
+		horizontal_align = "Center",
 		repeat_x = "NoRepeat",
-		hsb = { brightness = 0., saturation = 1 },
 	}
 else
-	if utils.is_linux() then
-		-- find current.toml and read the dir value
-		local current_path = config_path .. "/themes/current.toml"
-		wezterm.add_to_config_reload_watch_list(current_path)
-		local current_file = io.open(current_path, "r")
-		local current_content = current_file:read("*a")
-		current_file:close()
-		local current = toml.parse(current_content)
-		wezterm.log_info(current.dir)
-
-		local theme_config_path = config_path .. "/themes/" .. current.dir .. "/config.toml"
-		wezterm.add_to_config_reload_watch_list(theme_config_path)
-		local theme_config_file = io.open(theme_config_path, "r")
-		local theme_config_content = theme_config_file:read("*a")
-		theme_config_file:close()
-		local theme_config = toml.parse(theme_config_content)
-		wezterm.log_info(theme_config.term_variant)
-
-		-- find the correct background for current theme
-		background = {
-			source = {
-				File = config_path
-					.. "/themes/"
-					.. current.dir
-					.. "/images/"
-					.. current.dir
-					.. "_"
-					.. theme_config.variant
-					.. "-term.png",
-			},
-			width = "Cover",
-			height = "Cover",
-			vertical_align = "Middle",
-			horizontal_align = "Center",
-			repeat_x = "NoRepeat",
-		}
-	else
-		background = {
-			source = {
-				File = config_path .. "/wezterm/backgrounds/nier 2b 2250x4000.jpg",
-			},
-			width = "100%",
-			vertical_align = "Bottom",
-			repeat_x = "NoRepeat",
-			hsb = { brightness = 0.01 },
-		}
-	end
+	background = {
+		source = {
+			Color = require("colors").background0,
+		},
+		width = "100%",
+		height = "100%",
+	}
 end
 
 return { background }
