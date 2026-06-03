@@ -293,7 +293,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, "rename")
 
 		map("nx", "<leader>ca", vim.lsp.buf.code_action, "code action")
-		map("n", "K", vim.lsp.buf.hover, "hover documentation")
+
+		map("n", "K", function()
+			local params = function(client)
+				return vim.lsp.util.make_position_params(nil, client.offset_encoding)
+			end
+			vim.lsp.buf_request(0, "textDocument/hover", params, function(err, result, ctx)
+				if not (result and result.contents) then
+					if err then
+						vim.notify("Hover error: " .. vim.inspect(err), vim.log.levels.WARN)
+					else
+						vim.notify("No information available")
+					end
+
+					return
+				end
+
+				local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+
+				vim.lsp.util.open_floating_preview(contents, "markdown", {
+					focusable = true,
+					focus_id = "hover",
+				})
+			end)
+		end, "hover documentation")
+
 		map("n", "H", vim.lsp.buf.signature_help, "signature help")
 		map("i", "<c-h>", vim.lsp.buf.signature_help, "signature help")
 
