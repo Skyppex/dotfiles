@@ -147,7 +147,14 @@ def --wrapped run [...rest] {
 
     match $selected.type {
         "nix" => {
-            nix run --print-build-logs . -- ...$rest
+            if ($rest | length) > 0 and ($rest | first | str starts-with ".#") {
+                let name = $rest | first
+                let rest = $rest | skip 1
+                nix run --print-build-logs $name -- ...$rest
+            } else {
+                nix run --print-build-logs . -- ...$rest
+            }
+
         }
         "cargo" => {
             cargo run -- ...$rest
