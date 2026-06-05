@@ -131,8 +131,9 @@ map("n", "<leader>sf", function()
 			"--exclude=.idea",
 			"--exclude=node_modules",
 			"--exclude=*.meta",
-			"--exclude=**/target/**",
-			"--exclude=**/result/**",
+			"--exclude=/target/**",
+			"--exclude=/result/**",
+			"--exclude=/vendor/**",
 		},
 	}, {
 		source = {
@@ -158,7 +159,7 @@ map("n", "<leader>sg", function()
 			"!**/assets/**",
 			"!**/locales/**",
 			"!**/*.map",
-			"!**/target/**",
+			"!target/**",
 			"!result/**",
 			"!vendor/**",
 		},
