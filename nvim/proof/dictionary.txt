@@ -1096,3 +1096,17 @@ nxo
 åb
 tj
 raycaster
+fxaa
+tsl
+jsm
+ktx
+meshopt
+mrt
+webgpu
+srgb
+transcoder
+fov
+toolbar
+pointerdown
+pointerup
+pointermove
