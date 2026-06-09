@@ -170,9 +170,35 @@ M.servers = {
 	gopls = {},
 	tsgo = {
 		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+		root_dir = function(buf, on_dir)
+			local fname = vim.api.nvim_buf_get_name(buf)
+			local hent = vim.fn.expand("~/dev/code/hent")
+			local glob = hent .. "/*/apps/**"
+
+			-- if in apps, don't activate
+			if vim.glob.to_lpeg(glob):match(fname) then
+				return
+			end
+
+			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git" })
+			on_dir(root or vim.fn.getcwd())
+		end,
 	},
 	ts_ls = {
-		filetypes = { "vue" },
+		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
+		root_dir = function(buf, on_dir)
+			local fname = vim.api.nvim_buf_get_name(buf)
+			local hent = vim.fn.expand("~/dev/code/hent")
+			local glob = hent .. "/*/apps/**"
+
+			-- if not in apps, don't activate
+			if not vim.glob.to_lpeg(glob):match(fname) then
+				return
+			end
+
+			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git" })
+			on_dir(root or vim.fn.getcwd())
+		end,
 	},
 }
 
