@@ -396,6 +396,36 @@ def "jb rm" [] {
     jj bookmark delete ...($selected | split row "\n")
 }
 
+# Jujutsu bookmark track using fzf
+def "jb track" [] {
+    let bookmarks = jj bookmark list
+    | lines
+    | where not ($it | str starts-with " ")
+    | each { |it|
+        let colon = $it | str index-of ":"
+        $it | str substring ..($colon - 1)
+    }
+    | to text
+
+    let selected = $bookmarks | fzf --multi --height 40% --layout=reverse -0
+
+    if ($selected | is-empty) {
+        print "No bookmark selected"
+        return
+    }
+
+    let remotes = jr --name-only
+
+    let selected_remote = $remotes | fzf --multi --height 40% --layout=reverse -0 -1
+
+    if ($selected_remote | is-empty) {
+        print "No remote selected"
+        return
+    }
+
+    jj bookmark track $selected --remote $selected_remote
+}
+
 # Jujutsu new on main or master
 def jcm [] {
     let completion = jj new main --quiet | complete
