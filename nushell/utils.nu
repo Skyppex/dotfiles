@@ -408,3 +408,28 @@ def "envrc" [--force(-f)] {
   fi
 fi" | save .envrc --force
 }
+
+# turn dbee result table into nushell table
+def "parse db" [] {
+    let input = $in
+
+    let header = $input 
+    | lines 
+    | first 
+    | parse --regex '(?:([^│\s]+)│?)+' 
+    | get capture0
+
+    let num_columns = $header | length
+
+    $input 
+    | lines
+    | skip 2 
+    | parse --regex '(?:([^│\s]+)│?)+' 
+    | window $num_columns --stride $num_columns
+    | each { |row|
+        $header
+        | zip ($row | get capture0)
+        | into record
+    }
+    | reject '#'
+}

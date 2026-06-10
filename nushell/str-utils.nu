@@ -1,15 +1,36 @@
+def "str index-of-n" [
+    occurrence: int
+    pattern: string
+]: string -> int {
+    if $occurrence == 0 {
+        return (-1)
+    }
+
+    let input = $in
+
+    mut current_index = -1
+
+    for $i in 1..$occurrence {
+        let index = $input | str index-of $pattern --range ($current_index + 1)..
+        $current_index = $index
+    }
+
+    $current_index
+}
+
 # take anything after the first occurrence of the pattern
 def "str before" [
     --inclusive(-i)
+    --occurrence(-n): int
     pattern: string
     ...rest: cell-path
 ] {
     let inputs = $in
-
     let type = $inputs | describe
+    let occurrence = if ($occurrence | is-not-empty) { $occurrence } else { 1 }
 
     if $type == string {
-        let pattern_start = $inputs | str index-of $pattern
+        let pattern_start = $inputs | str index-of-n $occurrence $pattern
 
         if $pattern_start == -1 {
             return $inputs
@@ -22,7 +43,7 @@ def "str before" [
         $inputs | str substring ..$index
     } else if $type == "list<string>" {
         $inputs | each {|input|
-            $input | str before --inclusive=$inclusive $pattern ...$rest
+            $input | str before --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         }
     } else if ($type | str starts-with "record") {
         if ($rest | is-empty) {
@@ -32,7 +53,7 @@ def "str before" [
         let input = $inputs 
         | get ($rest | first) ...($rest | skip) 
 
-        let result = $input | str before --inclusive=$inclusive $pattern ...$rest
+        let result = $input | str before --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         let zipped = $rest | zip $result
 
         mut updated = $inputs
@@ -50,7 +71,7 @@ def "str before" [
         let results = $inputs 
         | select ($rest | first) ...($rest | skip) 
         | each { |input|
-            $input | str before --inclusive=$inclusive $pattern ...$rest
+            $input | str before --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         }
 
         mut updated = []
@@ -74,27 +95,16 @@ def "str before" [
 # take anything after the first occurrence of the pattern
 def "str after" [
     --inclusive(-i)
+    --occurrence(-n): int
     pattern: string
     ...rest: cell-path
 ] {
-
-    # let input = $in
-    # let pattern_start = $input | str index-of $pattern
-    #
-    # if $pattern_start == -1 {
-    #     return $input
-    # } 
-    #
-    # let index = $pattern_start + (if not $inclusive { $pattern | str length } else { 0 })
-    #
-    # $input | str substring $index..
-
     let inputs = $in
-
     let type = $inputs | describe
+    let occurrence = if ($occurrence | is-not-empty) { $occurrence } else { 1 }
 
     if $type == string {
-        let pattern_start = $inputs | str index-of $pattern
+        let pattern_start = $inputs | str index-of-n $occurrence $pattern
 
         if $pattern_start == -1 {
             return $inputs
@@ -107,7 +117,7 @@ def "str after" [
         $inputs | str substring $index..
     } else if $type == "list<string>" {
         $inputs | each {|input|
-            $input | str after --inclusive=$inclusive $pattern ...$rest
+            $input | str after --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         }
     } else if ($type | str starts-with "record") {
         if ($rest | is-empty) {
@@ -117,7 +127,7 @@ def "str after" [
         let input = $inputs 
         | get ($rest | first) ...($rest | skip) 
 
-        let result = $input | str after --inclusive=$inclusive $pattern ...$rest
+        let result = $input | str after --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         let zipped = $rest | zip $result
 
         mut updated = $inputs
@@ -135,7 +145,7 @@ def "str after" [
         let results = $inputs 
         | select ($rest | first) ...($rest | skip) 
         | each { |input|
-            $input | str after --inclusive=$inclusive $pattern ...$rest
+            $input | str after --inclusive=$inclusive --occurrence=$occurrence $pattern ...$rest
         }
 
         mut updated = []
