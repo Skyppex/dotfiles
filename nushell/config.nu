@@ -279,7 +279,7 @@ $env.config = {
 
     keybindings: [
         {
-            name: completion_menu
+            name: completion
             modifier: none
             keycode: tab
             mode: [emacs vi_normal vi_insert]
@@ -293,6 +293,19 @@ $env.config = {
                         {edit: movetolineend}
                         {send: historyhintcomplete}
                     ]
+                ]
+            }
+        }
+        {
+            name: completion_menu
+            modifier: control
+            keycode: space
+            mode: [emacs vi_normal vi_insert]
+            event: {
+                until: [
+                    { send: menu name: completion_menu }
+                    { send: menunext }
+                    { edit: complete }
                 ]
             }
         }
