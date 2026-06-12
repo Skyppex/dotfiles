@@ -16,8 +16,8 @@ def main [] {
     let first = $clients | first
 
     if ($first.grouped | is-empty) {
-        hyprctl dispatch focuswindow $"address:($first.address)"
-        hyprctl dispatch togglegroup
+        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($first.address)'})"
+        hyprctl dispatch "hl.dsp.group.toggle()"
     }
 
     let group = $first.grouped
@@ -36,16 +36,16 @@ def main [] {
     }
 
     if ($non_grouped_clients | is-empty) {
-        hyprctl dispatch togglegroup
-        hyprctl dispatch focuswindow $"address:($active.address)"
+        hyprctl dispatch "hl.dsp.group.toggle()"
+        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
         return
     }
 
 
     for $client in $non_grouped_clients {
-        hyprctl dispatch focuswindow $"address:($client.address)"
-        hyprctl dispatch moveintogroup l
+        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($client.address)'})"
+        hyprctl dispatch $"hl.dsp.window.move\({into_group='left'})"
     }
 
-    hyprctl dispatch focuswindow $"address:($active.address)"
+    hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
 }

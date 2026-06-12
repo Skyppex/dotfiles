@@ -1,0 +1,59 @@
+-- hl.config({
+-- 	plugin = {
+-- 		touch_gestures = {
+-- 			sensitivity = 4.0,
+-- 			workspace_swipe_fingers = false,
+-- 			workspace_swipe_edge = false,
+-- 			long_press_delay = 400,
+-- 			resize_on_border_long_press = false,
+-- 			edge_margin = 300,
+-- 		},
+-- 	},
+-- })
+--
+-- local dyn = require("dyn")
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "edge", origin = "u", direction = "d" },
+-- 	action = hl.dsp.exec_cmd("nu " .. require("dyn").focus_or_launch .. " obsidian obsidian"),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "edge", origin = "u", direction = "ld" },
+-- 	action = hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. dyn.terminal_class .. " " .. dyn.terminal_exec),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "edge", origin = "u", direction = "rd" },
+-- 	action = hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. dyn.browser_class .. " " .. dyn.browser_exec),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "edge", origin = "r", direction = "u" },
+-- 	action = hl.dsp.group.prev(),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "edge", origin = "r", direction = "d" },
+-- 	action = hl.dsp.group.next(),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "longpress", fingers = 1 },
+-- 	action = hl.dsp.group.drag(),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "longpress", fingers = 2 },
+-- 	action = hl.dsp.group.resize(),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "tab", fingers = 3 },
+-- 	action = hl.dsp.window.move({ out_of_group = true }),
+-- })
+--
+-- hl.plugin.hyprgrass.bind({
+-- 	pattern = { kind = "tab", fingers = 4 },
+-- 	action = hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/group-workspace"),
+-- })

@@ -56,5 +56,5 @@ def main [] {
         | get initialClass
     }
 
-    hyprctl dispatch focuswindow $"class:($focus)"
+    hyprctl dispatch $"hl.dsp.focus\({window = 'class:($focus)'})"
 }

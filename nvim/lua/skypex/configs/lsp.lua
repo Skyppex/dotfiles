@@ -68,7 +68,7 @@ M.servers = {
 					callSnippet = "Replace",
 				},
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "hl" },
 					disable = { "missing-fields", "undefined-fields" },
 				},
 				telemetry = {

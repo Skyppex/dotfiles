@@ -10,7 +10,7 @@ def --wrapped main [focus: string, ...launch] {
         | to text 
         | rofi -case-smart -dmenu -p $focus -i -window-title "rofi"
 
-        let focused = hyprctl dispatch focuswindow $"title:($selected_title)"
+        let focused = hyprctl dispatch $"hl.dsp.focus\({window = 'title:($selected_title)'})"
 
         if $focused == "ok" {
             return;
@@ -18,7 +18,7 @@ def --wrapped main [focus: string, ...launch] {
 
         exec ...$launch
     } else {
-        let focused = hyprctl dispatch focuswindow $"class:($focus)"
+        let focused = hyprctl dispatch $"hl.dsp.focus\({window = 'class:($focus)'})"
 
         if $focused == "ok" {
             return;

@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 def main [direction: string] {
-    if not ([l, r, u, p] | any {
+    if not ([left, right, up, down] | any {
         |it| $it == $direction
     }) {
         print -e $"invalid direction ($direction)"
@@ -9,7 +9,7 @@ def main [direction: string] {
     }
 
     let active = hyprctl activewindow -j | from json
-    let result = hyprctl dispatch movefocus $direction
+    let result = hyprctl dispatch $"hl.dsp.focus\({direction = '($direction)'})"
 
     if $result != ok {
         return
@@ -18,18 +18,18 @@ def main [direction: string] {
     let adjacent = hyprctl activewindow -j | from json
 
     if ($adjacent.grouped | is-empty) {
-        let result = hyprctl dispatch togglegroup
+        let result = hyprctl dispatch "hl.dsp.group.toggle()"
 
         if $result != ok {
             return
         }
     }
 
-    let result = hyprctl dispatch focuswindow $"address:($active.address)"
+    let result = hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
 
     if $result != ok {
         return
     }
 
-    let _ = hyprctl dispatch moveintogroup $direction
+    let _ = hyprctl dispatch $"hl.dsp.window.move\({into_group = '($direction)'})"
 }

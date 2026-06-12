@@ -1,0 +1,8 @@
+require("env")
+require("monitors")
+require("theme")
+require("plugins")
+require("input")
+require("binds")
+require("rules")
+require("autostart")
