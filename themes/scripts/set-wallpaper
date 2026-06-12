@@ -1,11 +1,11 @@
 #!/usr/bin/env nu
 
-if (which swww | is-empty) {
-    print -e "swww not found"
+if (which awww | is-empty) {
+    print -e "awww not found"
     return
 }
 
-while (swww query | complete | get exit_code) != 0 {
+while (awww query | complete | get exit_code) != 0 {
     sleep 0.2sec
 }
 
@@ -13,17 +13,17 @@ match (sys host).hostname {
     pod => {
         # all wallpapers
         let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-        swww img --outputs "eDP-1" --transition-duration=1 ($path | path expand)
+        awww img --outputs "eDP-1" --transition-duration=1 ($path | path expand)
         return
     }
     tower => {
         # horizontal wallpaper
         let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" h
-        swww img --outputs "DP-1" --transition-duration=1 ($path | path expand)
+        awww img --outputs "DP-1" --transition-duration=1 ($path | path expand)
 
         # vertical wallpaper
         let path = nu $"($env.CONFIG_PATH)/hypr/scripts/get-wallpaper" v
-        swww img --outputs "DP-2" --transition-duration=1 ($path | path expand)
+        awww img --outputs "DP-2" --transition-duration=1 ($path | path expand)
     }
 }
 

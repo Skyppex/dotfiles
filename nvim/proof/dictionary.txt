@@ -2,6 +2,7 @@ accessibilities
 accessoryservice
 ackmode
 activewindow
+activeworkspace
 activityservice
 activitystore
 acwrite
@@ -41,6 +42,7 @@ autosys
 autotag
 autotester
 awscli
+awww
 axaml
 aznhe
 azurerm
@@ -279,6 +281,7 @@ foldtext
 folke
 fontconfig
 formattable
+fov
 fprintf
 frecency
 frontend
@@ -290,6 +293,7 @@ fsp
 fsscript
 fsx
 fullscreen
+fxaa
 fxh
 fzp
 gai
@@ -328,6 +332,8 @@ gitsignscurrentlineblame
 gix
 globpath
 globpattern
+gltf
+gltfpack
 gnumake
 gnupg
 goimport
@@ -413,6 +419,8 @@ hyprpm
 hyprscrolling
 iamcco
 icc
+ifc
+ifcconvert
 ifconfig
 ifcopenshell
 iguanacucumber
@@ -466,6 +474,7 @@ jrb
 jrbo
 jsb
 jsdoc
+jsm
 jsonc
 jsonl
 jsonlint
@@ -494,6 +503,7 @@ kotlin
 kristijanhusak
 ktfmt
 ktlint
+ktx
 kubectl
 kubernete
 kulala
@@ -510,6 +520,7 @@ libexec
 libglvnd
 libvirt
 libvirtd
+linewidth
 linting
 linuxbrew
 lipglos
@@ -562,6 +573,7 @@ menupagepreviou
 menupreviou
 menuright
 menuup
+meshopt
 meshoptimizer
 mfussenegger
 mic
@@ -602,6 +614,7 @@ mqd
 mqh
 mrcjkb
 mrjone
+mrt
 mtr
 multiattack
 multifield
@@ -662,6 +675,7 @@ nxismap
 nxiso
 nxisomap
 nxmap
+nxo
 nxomap
 nxsmap
 nxsomap
@@ -731,6 +745,9 @@ pname
 png
 pnpm
 podman
+pointerdown
+pointermove
+pointerup
 popen
 popin
 popupmenu
@@ -772,6 +789,7 @@ ranarison
 rasi
 ravitemer
 raycast
+raycaster
 rb
 rcarriga
 rcgen
@@ -884,6 +902,7 @@ speedtest
 splitjoin
 spotify
 sqlserver
+srgb
 srv
 ssid
 sso
@@ -910,7 +929,6 @@ surrealql
 svg
 swapgrapheme
 swr
-swww
 sy
 syncbind
 sysctl
@@ -940,6 +958,7 @@ themaxmarchuk
 theprimeagen
 timeline
 timezone
+tj
 tjdevries
 tl
 tldr
@@ -951,16 +970,19 @@ todowrite
 togglefloating
 tokio
 tombi
+toolbar
 toolchain
 tooltip
 touchpad
 tpc
 tpope
 tpp
+transcoder
 trpc
 truesight
 truetype
 tsgo
+tsl
 tsv
 tsx
 ttf
@@ -990,6 +1012,7 @@ urtshader
 usf
 utv
 uuidv
+uv
 uxml
 vadimcn
 valign
@@ -1021,6 +1044,7 @@ wbem
 weatherapi
 weavewing
 webfetch
+webgpu
 webp
 webpki
 websearch
@@ -1084,30 +1108,7 @@ yubikey
 yubioath
 zbirenbaum
 zsh
-ifc
-gltf
-ifcconvert
-gltfpack
-uv
-nxo
-æz
+åb
 åz
 æb
-åb
-tj
-raycaster
-fxaa
-tsl
-jsm
-ktx
-meshopt
-mrt
-webgpu
-srgb
-transcoder
-fov
-toolbar
-pointerdown
-pointerup
-pointermove
-linewidth
+æz
