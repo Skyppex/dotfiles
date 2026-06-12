@@ -15,7 +15,7 @@
     playerctl
     protonup-ng
     rofi
-    swww
+    awww
     vim
     wakeonlan
     wget
