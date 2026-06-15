@@ -1,6 +1,6 @@
 local sensitivity = 0
 
-if os.getenv("HOSTNAME") == "pod" then
+if require("utils").hostname() == "pod" then
 	sensitivity = 0.8
 end
 

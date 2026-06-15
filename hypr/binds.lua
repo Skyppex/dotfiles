@@ -3,9 +3,10 @@ local menu =
 
 require("dyn").terminal_exec = "wezterm start --always-new-process"
 require("dyn").terminal_class = "org.wezfurlong.wezterm"
-if os.getenv("HOSTNAME") == "tower" then
-	require("dyn").browser_Exec = "zen"
-	require("dyn").browser_class = "zen"
+
+if require("utils").hostname() == "tower" then
+	require("dyn").browser_exec = "brave"
+	require("dyn").browser_class = "brave-browser"
 else
 	require("dyn").browser_exec = "zen-browser"
 	require("dyn").browser_class = "zen"
@@ -32,29 +33,38 @@ hl.bind(
 	"SUPER + T",
 	hl.dsp.exec_cmd(
 		"nu " .. dyn.focus_or_launch .. " " .. dyn.terminal_class .. " " .. dyn.terminal_exec,
-		{ float = true, tile = true }
+		{ tile = true }
 	)
 )
 
-hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd(dyn.terminal_exec, { float = true, tile = true }))
+hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd(dyn.terminal_exec, { tile = true }))
 
 hl.bind(
 	"SUPER + B",
-	hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. dyn.browser_class .. " " .. dyn.browser_exec)
+	hl.dsp.exec_cmd(
+		"nu " .. dyn.focus_or_launch .. " " .. dyn.browser_class .. " " .. dyn.browser_exec,
+		{ tile = true }
+	)
 )
 
-hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd(dyn.browser_exec, { float = true, tile = true }))
+hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd(dyn.browser_exec, { tile = true }))
 
-hl.bind("SUPER + G", hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. games_class .. " " .. games_exec))
+hl.bind(
+	"SUPER + G",
+	hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. games_class .. " " .. games_exec, { tile = true })
+)
 
-hl.bind("SUPER + SHIFT + G", hl.dsp.exec_cmd("nu " .. dyn.focus_game, { float = true, tile = true }))
+hl.bind("SUPER + SHIFT + G", hl.dsp.exec_cmd("nu " .. dyn.focus_game, { tile = true }))
 
 hl.bind(
 	"SUPER + M",
-	hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " " .. music_player_class .. " " .. music_player_exec)
+	hl.dsp.exec_cmd(
+		"nu " .. dyn.focus_or_launch .. " " .. music_player_class .. " " .. music_player_exec,
+		{ tile = true }
+	)
 )
 
-hl.bind("SUPER + D", hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " discord discord"))
+hl.bind("SUPER + D", hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " discord discord", { tile = true }))
 
 -- manage windows
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
