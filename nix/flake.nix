@@ -9,19 +9,12 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
     fenix-flake,
-    zen-browser,
     ...
   }:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -61,8 +54,6 @@
 
       home-desktop-tools = import ./home-desktop-tools.nix {
         inherit pkgsUnfree;
-        inherit system;
-        inherit zen-browser;
       };
 
       surface-laptop-tools = import ./surface-laptop-tools.nix {

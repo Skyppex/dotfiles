@@ -804,7 +804,7 @@ def pull [] {
     git submodule update --init --recursive
     chezmoi apply --force
 
-    if $env.OS == "windows" {
+    if (sys host | get name | str downcase) == "windows" {
         print "---- updating scoop ----"
         scoop update
         print "---- installing scoop apps ----"

@@ -111,11 +111,8 @@ $env.SCRIPTS_PATH = $"($nu.home-dir)/.local/share/scripts"
 $env.SCOOP = $"($nu.home-dir)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
-$env.HOSTNAME = (sys host | get hostname)
-$env.OS = (sys host | get name | str downcase)
-$env.OS_VERSION = (sys host | get long_os_version)
 
-match [$env.HOSTNAME, $env.OS] {
+match [(sys host | get hostname), (sys host | get name | str downcase)] {
     ["tower", "nixos"] => {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
@@ -232,12 +229,6 @@ if ($env.DEV_BIN? | is-not-empty) {
 $env.EDITOR = "nvim"
 
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
-
-let api_key = (do -i { skate get openai@api | complete })
-
-if $api_key.exit_code == 0 {
-    $env.OPENAI_API_KEY = $api_key.stdout
-}
 
 which starship
 

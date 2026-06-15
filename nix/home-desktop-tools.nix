@@ -1,8 +1,4 @@
-{
-  pkgsUnfree,
-  system,
-  zen-browser,
-}: let
+{pkgsUnfree}: let
 in
   with pkgsUnfree; [
     ani-cli
@@ -12,5 +8,5 @@ in
     prismlauncher
     r2modman
     signal-desktop
-    zen-browser.packages.${system}.default
+    brave
   ]
