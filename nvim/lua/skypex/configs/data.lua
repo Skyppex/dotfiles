@@ -3,7 +3,9 @@ local map = require("skypex.utils").map
 
 -- json
 local bellows = require("bellows")
-bellows.setup()
+bellows.setup({
+	auto_enable = false,
+})
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function(args)
@@ -25,9 +27,12 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
 		---@diagnostic disable-next-line: need-check-nil
 		if stats.size > 1048576 then
+			bellows.disable_rendering(buf)
 			vim.notify("json file larger than 1MiB. bellows disabled.")
 			return
 		end
+
+		bellows.enable_rendering(buf)
 
 		local function toggle(condition, false_func, true_func)
 			return function()
@@ -43,7 +48,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 			"n",
 			"<leader>z",
 			toggle(bellows.is_on_closed_fold, bellows.fold_closest_block, bellows.unfold_closest_block),
-			"toggle block block",
+			"toggle block fold",
 			nil,
 			args.buf
 		)

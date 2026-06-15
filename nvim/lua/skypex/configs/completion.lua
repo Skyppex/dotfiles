@@ -35,6 +35,9 @@ cmp.setup({
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer", "dbee" },
 		providers = {
+			lsp = {
+				score_offset = 10,
+			},
 			dbee = {
 				name = "Dbee",
 				module = "skypex.blink-dbee",
