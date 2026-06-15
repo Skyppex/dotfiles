@@ -196,6 +196,7 @@ deque
 deserialization
 deserializer
 deserializing
+devenv
 devnull
 devtool
 df
@@ -219,6 +220,7 @@ dpm
 dq
 drun
 dsl
+duh
 eandrju
 eb
 echasnovski
@@ -441,6 +443,7 @@ inputbuf
 instanceof
 internalcall
 interop
+ioredi
 ipinfo
 ipp
 ipv
@@ -619,6 +622,7 @@ mtr
 multiattack
 multifield
 munif
+muninn
 musikk
 mutex
 mva
@@ -1003,7 +1007,9 @@ unarchived
 undotree
 unescape
 unpause
+untrack
 unwatch
+upcase
 upower
 uppercaseword
 urllib
