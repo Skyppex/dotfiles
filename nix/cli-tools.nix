@@ -44,6 +44,7 @@
     cbonsai
     chezmoi
     cowsay
+    devenv
     difftastic
     direnv
     docker
