@@ -6,6 +6,7 @@ const last_active_player = "/tmp/hypr/last-active-player"
 const player_map = [
     [class player];
     [zen firefox]
+    [brave-browser brave]
     [firefox firefox]
     [Spotify spotify]
 ]
