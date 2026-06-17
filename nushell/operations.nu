@@ -1,6 +1,6 @@
 # find a project below the current cwd
 def --env find-projects []: nothing -> table<type: string, opt: any> {
-    let options = fd --type f --max-depth 1 --regex '^(flake\.nix|Cargo\.toml|go\.mod|.*\.slnx?|.*\.csproj|.*\.kt|build\.gradle\.kts|gradlew(\.bat)?)$'
+    let options = fd --type f --max-depth 1 --regex '^((flake)\.nix|Cargo\.toml|go\.mod|.*\.slnx?|.*\.csproj)$'
 
     if ($options | is-empty) {
         if (pwd) == "/" {
@@ -10,7 +10,6 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
             print --stderr ' - cargo (^Cargo.toml$)'
             print --stderr ' - go (^go.mod$)'
             print --stderr ' - dotnet (.*\.slnx?$, .*\.csproj$)'
-            # print --stderr ' - Kotlin (*\.kt$, build\.gradle\.kts$, gradlew(\.bat)?$)'
             return
         }
 
@@ -37,12 +36,6 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
         if (($opt | str contains ".sln")
             or ($opt | str contains ".csproj")) {
             $o = { type: "dotnet", opt: $opt }
-        }
-
-        if (($opt | str contains ".kt")
-            or ($opt | str contains "build.gradle.kts")
-            or ($opt | str contains "gradlew")) {
-            $o = { type: "kotlin", opt: $opt }
         }
 
         $o

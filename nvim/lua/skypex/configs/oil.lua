@@ -93,6 +93,20 @@ local function insert_flake(filepath)
 	end
 end
 
+local function insert_devenv_function(filepath)
+	local file = io.open(filepath, "w")
+
+	if file then
+		file:write([[
+{ pkgs, config, ... }: {
+
+}
+]])
+	end
+
+	file:close()
+end
+
 local function insert_nix_function(filepath)
 	local file = io.open(filepath, "w")
 
@@ -126,6 +140,10 @@ local on_create = {
 	{
 		pattern = "flake%.nix$",
 		action = insert_flake,
+	},
+	{
+		pattern = "devenv%.nix$",
+		action = insert_devenv_function,
 	},
 	{
 		pattern = "%.nix$",

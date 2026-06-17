@@ -166,6 +166,31 @@ M.servers = {
 				-- },
 			},
 		},
+		root_dir = function(buf, on_dir)
+			local fname = vim.api.nvim_buf_get_name(buf)
+
+			if fname:match("devenv%.nix") then
+				return
+			end
+
+			local root = vim.fs.root(buf, { "flake.nix", ".git" })
+			on_dir(root or vim.fn.getcwd())
+		end,
+	},
+	devenv = {
+		cmd = { "devenv", "lsp" },
+		filetypes = { "nix" },
+		root_markers = { "devenv.nix" },
+		root_dir = function(buf, on_dir)
+			local fname = vim.api.nvim_buf_get_name(buf)
+
+			if not fname:match("devenv%.nix") then
+				return
+			end
+
+			local root = vim.fs.root(buf, { "devenv.nix" })
+			on_dir(root or vim.fn.getcwd())
+		end,
 	},
 	gopls = {},
 	tsgo = {

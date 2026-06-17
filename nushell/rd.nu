@@ -84,26 +84,31 @@ export def list [
 export alias ls = list
 export alias keys = list --no-ttl
 
-export def find [--multi] {
+export def find [
+    --multi
+    query?: string
+] {
+    let query = $query | default ""
+
     if $multi {
         keys 
         | builtin get key 
         | to text 
-        | ^fzf --height 40% --layout reverse --multi
+        | ^fzf --height 40% --layout reverse --multi -1 --query $query
         | lines
     } else {
         keys 
         | builtin get key 
         | to text 
-        | ^fzf --height 40% --layout reverse
+        | ^fzf --height 40% --layout reverse -1 --query $query
         | lines
     }
 }
 
 export alias fd = find
 
-export def get [] {
-    let selection = find --multi
+export def get [query?: string] {
+    let selection = find --multi $query
 
     if ($selection | is-empty) {
         print -e "no key selected"

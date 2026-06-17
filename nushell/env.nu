@@ -230,7 +230,7 @@ $env.EDITOR = "nvim"
 
 $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 
-which starship
-
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
+if (which starship | is-not-empty) {
+    mkdir ~/.cache/starship
+    starship init nu | save --force ~/.cache/starship/init.nu
+}

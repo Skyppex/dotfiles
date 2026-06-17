@@ -400,13 +400,17 @@ def "envrc" [--force(-f)] {
         return
     }
 
-    "if command -v nix >/dev/null 2>&1; then
-  if [ -f flake.nix ]; then
+    'if [ -f "devenv.nix" ] && command -v devenv &> /dev/null; then
+  eval "$(devenv direnvrc)"
+  use devenv
+elif command -v nix >/dev/null 2>&1; then
+  if [ -f "flake.nix" ]; then
     use flake
-  elif [ -f shell.nix ]; then
+  elif [ -f "shell.nix" ]; then
     use nix
   fi
-fi" | save .envrc --force
+fi
+' | save .envrc --force
 }
 
 # turn dbee result table into nushell table
