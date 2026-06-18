@@ -1123,3 +1123,10 @@ mebibyte
 bhk
 egas
 noq
+libnotify
+astro
+favicon
+roboto
+segoe
+helvetica
+arial
