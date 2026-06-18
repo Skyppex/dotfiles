@@ -437,3 +437,18 @@ def "parse db" [] {
     }
     | reject '#'
 }
+
+# nix shell with allow unfree and --impure. install anything!
+def --env --wrapped "nsh" [
+    --command(-c): string
+    ...rest: string
+] {
+    let packages = $rest | each {|it| $"nixpkgs#($it)"}
+
+    if ($command | is-empty) {
+        NIXPKGS_ALLOW_UNFREE=1 nix shell --impure ...$packages
+    } else {
+        NIXPKGS_ALLOW_UNFREE=1 nix shell --impure ...$packages --command $command
+    }
+}
+
