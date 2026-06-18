@@ -5,7 +5,7 @@ require("dyn").terminal_exec = "wezterm start --always-new-process"
 require("dyn").terminal_class = "org.wezfurlong.wezterm"
 
 if require("utils").hostname() == "tower" then
-	require("dyn").browser_exec = "brave"
+	require("dyn").browser_exec = "brave --disable-sessions-crashed-bubble"
 	require("dyn").browser_class = "brave-browser"
 else
 	require("dyn").browser_exec = "zen-browser"
@@ -109,8 +109,8 @@ hl.bind("SHIFT + MOD5 + Print", hl.dsp.exec_cmd("hyprpicker --autocopy --no-fanc
 
 -- move/resize with mouse
 hl.bind("MOD5 + mouse:272", hl.dsp.window.drag())
-hl.bind("MOD5 + mouse:272", hl.dsp.window.drag())
-hl.bind("ALT + mouse:273", hl.dsp.window.resize())
+hl.bind("ALT + mouse:272", hl.dsp.window.drag())
+hl.bind("MOD5 + mouse:273", hl.dsp.window.resize())
 hl.bind("ALT + mouse:273", hl.dsp.window.resize())
 
 -- media
