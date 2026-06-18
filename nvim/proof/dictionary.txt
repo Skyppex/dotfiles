@@ -1119,3 +1119,7 @@ zsh
 æb
 æz
 direnvrc
+mebibyte
+bhk
+egas
+noq
