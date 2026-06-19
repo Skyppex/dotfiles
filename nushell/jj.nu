@@ -37,6 +37,19 @@ alias jrb = jj rebase
 # Jujutsu rebase onto
 alias jrbo = jj rebase --onto
 
+# Jujutsu squash
+def --wrapped jsq [...rest] {
+    let before = jj log --no-graph --template 'change_id' --revision @
+
+    jj squash ...$rest
+
+    let after = jj log --no-graph --template 'change_id' --revision @
+
+    if ($before != $after) {
+        jj edit @-
+    }
+}
+
 # Conventional message
 def jj-conventional-message [
     --type(-t): string # Specify the type of the commit
