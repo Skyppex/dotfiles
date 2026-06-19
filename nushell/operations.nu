@@ -46,19 +46,20 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
 
 # select a project from a list of discovered projects
 def select-project [
+    --query(-q): string
     --multi(-m)
 ]: table<type: string, opt: any> -> table<type: string, opt: any> {
     let options = $in
 
-    if ($options | any { |o| $o.type == "nix" }) and (which nix | is-not-empty) {
+    if ($query | is-empty) and ($options | any { |o| $o.type == "nix" }) and (which nix | is-not-empty) {
         let nix = $options | where { |o| $o.type == "nix" }
         return $nix
     }
 
     let selected = if $multi {
-        $options | get type | to text | fzf --multi --height 40% --layout reverse -0 -1
+        $options | get type | to text | fzf --multi --height 40% --layout reverse -0 -1 --query $query
     } else {
-        $options | get type | to text | fzf --height 40% --layout reverse -0 -1
+        $options | get type | to text | fzf --height 40% --layout reverse -0 -1 --query $query
     }
 
     if ($selected | is-empty) {
@@ -73,6 +74,7 @@ def select-project [
 
 # build a project in the current directory
 def --wrapped build [
+    --with: string
     --debug(-d)
     --release(-r)
     ...rest: string
@@ -83,7 +85,7 @@ def --wrapped build [
         return
     }
 
-    let selected = $options | select-project --multi
+    let selected = $options | select-project --query $with --multi
 
     if ($selected | is-empty) {
         print --stderr "No project type selected"
@@ -124,14 +126,17 @@ def --wrapped build [
 
 alias b = build
 
-def --wrapped run [...rest] {
+def --wrapped run [
+    --with: string
+    ...rest
+] {
     let options = find-projects
 
     if ($options | is-empty) {
         return
     }
 
-    let selected = $options | select-project | get 0
+    let selected = $options | select-project --query $with | get 0
 
     if ($selected | is-empty) {
         print --stderr "No project type selected"
