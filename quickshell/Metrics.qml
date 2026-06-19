@@ -4,6 +4,9 @@ Row {
     id: root
     property int elementWidth: 65
     property real size: 1
+    property var panelWindow
+
+    property Item hoveredMetric
 
     property var metrics: [({
                 label: () => Volume.volume > 30 ? "" : Volume.volume > 0 ? "" : "",
@@ -34,7 +37,8 @@ Row {
                 value: () => DiskUsage.averageDiskUsage,
                 minimum: 0,
                 maximum: 100,
-                healthy: () => DiskUsage.healthy
+                healthy: () => DiskUsage.healthy,
+                hover: "DiskDetails.qml"
             }), ({
                 label: () => Battery.percent > 90 ? "" : Battery.percent > 60 ? "" : Battery.percent > 25 ? "" : Battery.percent > 10 ? "" : "",
                 value: () => Battery.percent,
@@ -72,6 +76,29 @@ Row {
                 visible: modelData.healthy()
                 size: root.size
                 anchors.verticalCenter: parent.verticalCenter
+
+                HoverHandler {
+                    onHoveredChanged: {
+                        if (hovered) {
+                            root.hoveredMetric = parent;
+                        } else {
+                            root.hoveredMetric = null;
+                        }
+                    }
+                }
+
+                Loader {
+                    active: root.hoveredMetric === parent && modelData.hover !== undefined
+                    source: modelData.hover || ""
+
+                    onLoaded: {
+                        var met = parent;
+                        item.anchor.window = root.panelWindow;
+                        item.anchor.rect.x = met.mapToItem(null, 0, 0).x;
+                        item.anchor.rect.y = met.mapToItem(null, 0, met.height).y + 6;
+                        item.size = size;
+                    }
+                }
             }
         }
     }

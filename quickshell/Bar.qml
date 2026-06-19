@@ -52,6 +52,7 @@ Scope {
             spacing: 12 * root.size
             anchors.rightMargin: 10 * root.size
             size: root.size
+            panelWindow: bar
         }
     }
 }

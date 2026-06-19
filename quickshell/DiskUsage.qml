@@ -21,6 +21,9 @@ Singleton {
         | each { |it|
             {
                 mount: $it.mount,
+                used: ($it.total - $it.free),
+                free: $it.free,
+                total: $it.total,
                 usage: ((1 - $it.free / $it.total) * 100)
             }
         }
