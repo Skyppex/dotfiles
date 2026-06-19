@@ -2,7 +2,11 @@
   networking.hostName = "tower"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = false;
+  };
+
   systemd.services.NetworkManager-wait-online.enable = false;
 
   networking.interfaces.eno1 = {
