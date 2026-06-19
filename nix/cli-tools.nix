@@ -78,7 +78,6 @@
     lua
     man
     meson
-    mods
     neovim
     nix-output-monitor
     nodejs

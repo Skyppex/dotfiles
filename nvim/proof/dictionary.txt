@@ -23,10 +23,12 @@ appspot
 appxmanifest
 archibate
 archivable
+arial
 asax
 asc
 ascx
 aspx
+astro
 astroterm
 asus
 atoi
@@ -56,6 +58,8 @@ basedpyright
 beautysh
 benfowler
 bezier
+bhk
+bicubic
 bindl
 bindm
 binn
@@ -173,6 +177,7 @@ datetime
 dbeaver
 dbee
 dbout
+dbu
 dbui
 dconf
 debounce
@@ -207,6 +212,7 @@ diffexpt
 difft
 difftastic
 direnv
+direnvrc
 dlisr
 dmenu
 dockerignore
@@ -225,6 +231,7 @@ eandrju
 eb
 echasnovski
 efi
+egas
 egui
 ek
 electroharmonix
@@ -253,6 +260,7 @@ extmark
 factorio
 fastfetch
 fatalf
+favicon
 fenix
 fetchurl
 fetchzip
@@ -271,6 +279,7 @@ financingservice
 firebaseapp
 firefox
 firestore
+floorplan
 fmir
 fnameescape
 focuswindow
@@ -319,6 +328,7 @@ getmetatable
 getpid
 getplaced
 getreg
+gettext
 getutcdate
 gf
 gfr
@@ -378,6 +388,7 @@ hashicorp
 hasturian
 hc
 hcloud
+helvetica
 hetzner
 hexpand
 heyo
@@ -430,6 +441,7 @@ ilen
 imagemagick
 imageservice
 imap
+imgfilter
 indentexpr
 indicatif
 infisical
@@ -444,6 +456,7 @@ instanceof
 internalcall
 interop
 ioredi
+ipc
 ipinfo
 ipp
 ipv
@@ -514,6 +527,7 @@ kvp
 kwh
 kylechui
 kysely
+lanczo
 languageserver
 launchsetting
 layoutopt
@@ -521,8 +535,11 @@ lazydocker
 lazygit
 libexec
 libglvnd
+libnotify
+libssl
 libvirt
 libvirtd
+libxkbcommon
 linewidth
 linting
 linuxbrew
@@ -544,6 +561,7 @@ lte
 luafile
 luarock
 lucka
+machinetoken
 maf
 magick
 mainbox
@@ -553,6 +571,7 @@ makoctl
 mangohud
 manpath
 mantine
+maphandler
 mapnv
 mapv
 marce
@@ -567,6 +586,7 @@ maxwidth
 mbbill
 mcp
 mcphub
+mebibyte
 memcmp
 menudown
 menuleft
@@ -628,7 +648,9 @@ mutex
 mva
 mxx
 naersk
+namespaced
 narg
+nasm
 nbsp
 nc
 nedlastinger
@@ -654,6 +676,7 @@ nogroup
 noice
 noopener
 nop
+noq
 noreferrer
 noto
 npm
@@ -695,6 +718,7 @@ onchange
 oneline
 oneof
 oneshot
+onnxruntime
 onsail
 onstop
 onworkspace
@@ -757,6 +781,7 @@ popin
 popupmenu
 poweroff
 poweron
+powersave
 powf
 pragma
 prefetch
@@ -833,6 +858,7 @@ rmb
 rmd
 rmdl
 rmpc
+roboto
 rofi
 rolloff
 rollplayer
@@ -862,6 +888,7 @@ schemastore
 schibsted
 scifi
 screencopy
+screenpo
 screenshot
 scriptable
 scrollbar
@@ -872,6 +899,7 @@ sdp
 searchability
 searchhistory
 searchservice
+segoe
 sentinelsoftware
 serde
 serverstart
@@ -1043,6 +1071,7 @@ vmap
 vsplit
 vsver
 vue
+vulkan
 wakeonlan
 walkdir
 waybar
@@ -1112,28 +1141,11 @@ youtube
 yubico
 yubikey
 yubioath
+yuv
 zbirenbaum
+zindex
 zsh
 åb
 åz
 æb
 æz
-direnvrc
-mebibyte
-bhk
-egas
-noq
-libnotify
-astro
-favicon
-roboto
-segoe
-helvetica
-arial
-namespaced
-gettext
-screenpo
-zindex
-maphandler
-floorplan
-machinetoken

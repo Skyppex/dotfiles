@@ -2,7 +2,7 @@
 with pkgsUnfree; [
   bluetuith
   bitwarden-cli
-  bitwarden-desktop
+  # bitwarden-desktop
   cliphist
   dbeaver-bin
   discord

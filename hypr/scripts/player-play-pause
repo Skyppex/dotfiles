@@ -9,6 +9,7 @@ const player_map = [
     [brave-browser brave]
     [firefox firefox]
     [Spotify spotify]
+    [spotify spotify]
     [imgfilter imgfilter]
 ]
 

@@ -20,6 +20,12 @@
     wakeonlan
     wget
     wl-clipboard
+    ffmpeg
+    openssl_3 # <-- pulls in libssl.so.3
+    libX11 # if you need X11
+    wayland # if you build for Wayland
+    vulkan-loader # if you use Vulkan shaders
+    vulkan-headers
   ];
 
   programs.firefox = {
@@ -33,4 +39,14 @@
   };
 
   programs.hyprland.enable = true;
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      openssl_3
+      zlib
+      stdenv.cc.cc
+      curl
+    ];
+  };
 }

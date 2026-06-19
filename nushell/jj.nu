@@ -65,7 +65,9 @@ def jj-conventional-message [
         "refactor",
         "test",
         "chore",
+        "perf",
         "revert",
+        "infra",
         "wip"
     ]
 
@@ -77,7 +79,7 @@ def jj-conventional-message [
     }
 
     let type = if ($type | is-empty) {
-        gum filter --height=9 ...$types 
+        gum filter --height=14 ...$types 
     } else {
         $type
     }

@@ -130,6 +130,7 @@ def --wrapped run [
     --with: string
     ...rest
 ] {
+    let stdin = $in
     let options = find-projects
 
     if ($options | is-empty) {
@@ -148,20 +149,40 @@ def --wrapped run [
             if ($rest | length) > 0 and ($rest | first | to text | str starts-with ".#") {
                 let name = $rest | first
                 let rest = $rest | skip 1
-                nix run --print-build-logs $name -- ...$rest
+                if ($in | is-empty) {
+                    nix run --print-build-logs $name -- ...$rest
+                } else {
+                    $in | nix run --print-build-logs $name -- ...$rest
+                }
             } else {
-                nix run --print-build-logs . -- ...$rest
+                if ($in | is-empty) {
+                    nix run --print-build-logs . -- ...$rest
+                } else {
+                    $in | nix run --print-build-logs . -- ...$rest
+                }
             }
 
         }
         "cargo" => {
-            cargo run -- ...$rest
+            if ($in | is-empty) {
+                cargo run -- ...$rest
+            } else {
+                $in | cargo run -- ...$rest
+            }
         }
         "dotnet" => {
-            dn run ...$rest
+            if ($in | is-empty) {
+                dn run ...$rest
+            } else {
+                $in | dn run ...$rest
+            }
         }
         "go" => {
-            go run . ...$rest
+            if ($in | is-empty) {
+                go run . ...$rest
+            } else {
+                $in | go run . ...$rest
+            }
         }
     }
 }

@@ -43,15 +43,35 @@ PopupWindow {
 
                         Text {
                             text: modelData.mount
-                            width: 80 * size
+                            width: 63 * size
                             elide: Text.ElideRight
                             font.family: Theme.fonts.primary
                             font.pixelSize: 14 * size
                             color: Theme.primary
                         }
 
+                        Separator {
+                            thickness: 1 * size
+                            lineColor: Theme.quaternary
+                            fadePower: 0.4
+                        }
+
                         Text {
                             text: `${Math.round(modelData.usage)}%`
+                            width: 35 * size
+                            font.family: Theme.fonts.primary
+                            font.pixelSize: 14 * size
+                            color: Theme.primary
+                        }
+
+                        Separator {
+                            thickness: 1 * size
+                            lineColor: Theme.quaternary
+                            fadePower: 0.4
+                        }
+
+                        Text {
+                            text: `${(modelData.free / 1000 / 1000 / 1000).toFixed(1)} free`
                             font.family: Theme.fonts.primary
                             font.pixelSize: 14 * size
                             color: Theme.primary

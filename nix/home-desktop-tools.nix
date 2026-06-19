@@ -7,6 +7,9 @@ in
     catt
     prismlauncher
     r2modman
+    rpcs3
+    rusty-psn
+    _7zip-zstd
     signal-desktop
     brave
   ]

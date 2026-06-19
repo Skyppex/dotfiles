@@ -12,7 +12,7 @@ hl.config({
 			nogroup_border = style.active,
 			nogroup_border_active = style.inactive,
 		},
-		layout = "master",
+		layout = "dwindle",
 	},
 	decoration = {
 		rounding = style.border_outer_radius,

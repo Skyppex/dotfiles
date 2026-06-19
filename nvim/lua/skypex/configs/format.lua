@@ -37,6 +37,7 @@ local formatters_by_ft = {
 	python = { "ruff", "injected" },
 
 	-- Tries to run each formatter until one succeeds
+	html = first_then_injected("prettierd", "eslint_d"),
 	javascript = first_then_injected("prettierd", "eslint_d"),
 	javascriptreact = first_then_injected("prettierd", "eslint_d"),
 	typescript = first_then_injected("prettierd", "eslint_d"),

@@ -54,6 +54,12 @@ local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
 
 local cs_ls_ex = require("csharpls_extended")
 
+local devenv_lsp_config, exit_code = utils.run_command_ret("devenv", { "lsp", "--print-config" }, nil, {
+	disable_stderr = true,
+})
+
+local devenv_settings = exit_code == 0 and devenv_lsp_config and vim.json.decode(table.concat(devenv_lsp_config))
+
 M.servers = {
 	lua_ls = {
 		filetypes = { "lua" },
@@ -191,6 +197,7 @@ M.servers = {
 			local root = vim.fs.root(buf, { "devenv.nix" })
 			on_dir(root or vim.fn.getcwd())
 		end,
+		settings = devenv_settings,
 	},
 	gopls = {},
 	tsgo = {
