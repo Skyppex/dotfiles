@@ -7,7 +7,7 @@ const player_map = [
     [zen firefox]
     [brave-browser brave]
     [firefox firefox]
-    [spotify spotify]
+    [Spotify spotify]
 ]
 
 mkdir /tmp/hypr

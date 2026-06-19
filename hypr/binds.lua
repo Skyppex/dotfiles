@@ -12,7 +12,7 @@ else
 	require("dyn").browser_class = "zen"
 end
 local music_player_exec = "spotify"
-local music_player_class = "spotify"
+local music_player_class = "Spotify"
 local games_exec = "steam"
 local games_class = "steam"
 
@@ -26,7 +26,7 @@ hl.bind("SUPER + CTRL + Delete", hl.dsp.exec_cmd("systemctl hybrid-sleep"))
 hl.bind("SUPER + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 
 -- manage apps
-hl.bind("SUPER + Q", hl.dsp.window.kill())
+hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/rofi-kill"))
 
 hl.bind(
