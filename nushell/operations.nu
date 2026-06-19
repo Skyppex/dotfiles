@@ -140,7 +140,7 @@ def --wrapped run [...rest] {
 
     match $selected.type {
         "nix" => {
-            if ($rest | length) > 0 and ($rest | first | str starts-with ".#") {
+            if ($rest | length) > 0 and ($rest | first | to text | str starts-with ".#") {
                 let name = $rest | first
                 let rest = $rest | skip 1
                 nix run --print-build-logs $name -- ...$rest
