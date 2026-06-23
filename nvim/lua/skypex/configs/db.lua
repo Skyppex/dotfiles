@@ -124,14 +124,14 @@ db.setup({
 				key = "r",
 				mode = "n",
 				action = function()
-					local success, module = pcall(function()
-						require("skypex.blink-dbee")
-					end)
-
-					if success then
-						module._cache = {}
-					end
-
+					-- local success, module = pcall(function()
+					-- 	require("skypex.blink-dbee")
+					-- end)
+					--
+					-- if success then
+					-- 	module._cache = {}
+					-- end
+					--
 					db.api.ui.drawer_refresh()
 				end,
 			},
