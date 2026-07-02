@@ -1130,3 +1130,5 @@ roboto
 segoe
 helvetica
 arial
+namespaced
+gettext

@@ -75,8 +75,8 @@ end)
 
 local repeatable_move = require("nvim-treesitter-textobjects.repeatable_move")
 
-map("nxo", ";", repeatable_move.repeat_last_move_next)
-map("nxo", ",", repeatable_move.repeat_last_move_previous)
+map("nxo", ";", repeatable_move.repeat_last_move_next, "repeat last move next")
+map("nxo", ",", repeatable_move.repeat_last_move_previous, "repeat last move previous")
 
 local swap = require("nvim-treesitter-textobjects.swap")
 
