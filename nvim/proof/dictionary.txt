@@ -1134,3 +1134,5 @@ namespaced
 gettext
 screenpo
 zindex
+maphandler
+floorplan
