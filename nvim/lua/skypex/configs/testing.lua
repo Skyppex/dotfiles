@@ -29,6 +29,9 @@ nt.setup({
 			discovery_root = "solution",
 		}),
 		require("rustaceanvim.neotest"),
+		require("neotest-nodejs")({
+			nodeCommand = "node",
+		}),
 	},
 })
 

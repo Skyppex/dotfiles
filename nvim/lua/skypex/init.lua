@@ -143,7 +143,7 @@ vim.defer_fn(function()
 		"https://github.com/saecki/crates.nvim",
 		"https://github.com/obsidian-nvim/obsidian.nvim",
 		"https://github.com/mrcjkb/rustaceanvim",
-	}, { confirm = true })
+	}, { confirm = false })
 
 	require("skypex.configs.rust")
 	require("skypex.configs.obsidian")
@@ -154,7 +154,8 @@ vim.defer_fn(function()
 		"https://github.com/nvim-neotest/nvim-nio",
 		"https://github.com/antoinemadec/FixCursorHold.nvim",
 		"https://github.com/Issafalcon/neotest-dotnet",
-	}, { confirm = true })
+		"https://github.com/AkisArou/neotest-nodejs",
+	}, { confirm = false })
 
 	require("skypex.configs.testing")
 
@@ -191,7 +192,7 @@ vim.defer_fn(function()
 	-- useless fun
 	vim.pack.add({
 		"https://github.com/eandrju/cellular-automaton.nvim",
-	}, { confirm = true })
+	}, { confirm = false })
 
 	require("skypex.configs.fun")
 
