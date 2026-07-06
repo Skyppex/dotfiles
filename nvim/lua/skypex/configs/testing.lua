@@ -60,3 +60,7 @@ end, "Terminate tests")
 map("n", "<leader>tn", function()
 	nt.summary.toggle()
 end, "Toggle tests summary")
+
+map("n", "<leader>on", function()
+	nt.output.open({ enter = true })
+end, "Enter output window")
