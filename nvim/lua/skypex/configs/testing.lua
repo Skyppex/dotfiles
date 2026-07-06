@@ -30,14 +30,19 @@ nt.setup({
 		}),
 		require("rustaceanvim.neotest"),
 		require("neotest-nodejs")({
-			nodeCommand = "node",
+			nodeCommand = "pnpm test",
+			cwd = function(file)
+				local dir = vim.fs.dirname(file)
+				local package = vim.fs.find("package.json", { path = dir, upward = true })[1]
+				return package and vim.fs.dirname(package) or vim.fn.getcwd()
+			end,
 		}),
 	},
 })
 
 local map = require("skypex.utils").map
 
-map("n", "<leader>nr", function()
+map("n", "<c-r>", function()
 	nt.run.run()
 end, "Run the nearest test")
 
@@ -45,7 +50,7 @@ map("n", "<leader>nl", function()
 	nt.run.run_last()
 end, "Run the last test")
 
-map("n", "<leader>nf", function()
+map("n", "<s-c-r>", function()
 	nt.run.run(vim.fn.expand("%"))
 end, "Run all tests in the file")
 
@@ -62,5 +67,8 @@ map("n", "<leader>tn", function()
 end, "Toggle tests summary")
 
 map("n", "<leader>on", function()
-	nt.output.open({ enter = true })
+	nt.output.open({
+		enter = true,
+		auto_close = true,
+	})
 end, "Enter output window")
