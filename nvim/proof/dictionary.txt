@@ -1132,3 +1132,5 @@ helvetica
 arial
 namespaced
 gettext
+screenpo
+zindex

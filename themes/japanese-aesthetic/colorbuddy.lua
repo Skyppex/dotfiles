@@ -328,6 +328,15 @@ Group.new("jsonSemicolonError", c.error)
 Group.new("jsonTrailingCommandError", c.error)
 Group.new("jsonMissingCommaError", c.error)
 
+-- cmdline
+Group.new("CmdLineColon", c.cyan)
+Group.new("CmdLineSlash", c.orange)
+Group.new("CmdLineQuestion", c.orange)
+Group.new("CmdLineExpr", c.blue)
+Group.new("CmdLineDebug", c.red)
+Group.new("CmdLineText", c.primary)
+Group.new("CmdLineInput", c.yellow)
+
 -- Mini
 Group.new("MiniIconsAzure", c.cyan)
 Group.new("MiniIconsBlue", c.blue)

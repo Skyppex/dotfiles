@@ -4,11 +4,21 @@ local offset_x = -1
 local offset_y = 1
 local prompt_width = 0
 
+local highlights = {
+	[":"] = "CmdLineColon",
+	["/"] = "CmdLineSlash",
+	["?"] = "CmdLineQuestion",
+	["="] = "CmdLineExpr",
+	[">"] = "CmdLineDebug",
+	["-"] = "CmdLineText",
+	["@"] = "CmdLineInput",
+}
+
 local ns = vim.api.nvim_create_namespace("skypex_cmdline")
 local cmdline_win = nil
 local cmdline_buf = nil
 
-function M.show(content, pos, firstc, prompt, indent, level, hl_id)
+function M.show(content, pos, first_char, prompt, indent, level, hl_id)
 	if cmdline_win and vim.api.nvim_win_is_valid(cmdline_win) then
 		vim.api.nvim_win_close(cmdline_win, true)
 	end
@@ -22,12 +32,18 @@ function M.show(content, pos, firstc, prompt, indent, level, hl_id)
 	vim.bo[cmdline_buf].modifiable = true
 
 	local text = {}
+
 	for _, chunk in ipairs(content) do
 		table.insert(text, chunk[2])
 	end
+
+	if first_char == "" then
+		first_char = vim.fn.getcmdtype()
+	end
+
 	local content_text = table.concat(text, "")
-	local line = firstc .. prompt .. string.rep(" ", indent) .. content_text
-	prompt_width = #firstc + #prompt + indent
+	local line = first_char .. prompt .. string.rep(" ", indent) .. content_text
+	prompt_width = #first_char + #prompt + indent
 
 	vim.api.nvim_buf_set_lines(cmdline_buf, 0, -1, false, { line })
 
@@ -61,6 +77,17 @@ function M.show(content, pos, firstc, prompt, indent, level, hl_id)
 		end)
 	end
 
+	local first_char_hl = highlights[first_char]
+	if first_char_hl and #first_char > 0 then
+		vim.api.nvim_buf_set_extmark(cmdline_buf, ns, 0, 0, {
+			end_col = #first_char,
+			hl_group = first_char_hl,
+			invalidate = true,
+			undo_restore = false,
+			priority = 5000,
+		})
+	end
+
 	cmdline_win = vim.api.nvim_open_win(cmdline_buf, false, {
 		relative = "cursor",
 		row = offset_y,
@@ -75,7 +102,12 @@ function M.show(content, pos, firstc, prompt, indent, level, hl_id)
 	vim.bo[cmdline_buf].modifiable = false
 
 	do
+		if vim.api.nvim__redraw then
+			pcall(vim.api.nvim__redraw, { win = cmdline_win, flush = true })
+		end
+
 		local sp = vim.fn.screenpos(cmdline_win, 1, 1)
+
 		if sp and sp.row then
 			vim.g.ui_cmdline_pos = { sp.row, sp.col }
 		end
