@@ -5,6 +5,17 @@ require("nvim-treesitter").setup({
 	install_dir = vim.fn.stdpath("data") .. "/site",
 })
 
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TSUpdate",
+	callback = function()
+		require("nvim-treesitter.parsers").kulala_http = {
+			install_info = {
+				url = "https://github.com/mistweaverco/tree-sitter-kulala-http",
+			},
+		}
+	end,
+})
+
 require("nvim-treesitter").install({
 	"bash",
 	"diff",
@@ -15,7 +26,6 @@ require("nvim-treesitter").install({
 	"gitignore",
 	"gotmpl",
 	"graphql",
-	"http",
 	"json",
 	"javascript",
 	"jsx",
@@ -265,7 +275,8 @@ local filetype_map = {
 		pattern = "*.http",
 		ext = "http",
 		filetype = "http",
-		commentstring = "##%s",
+		commentstring = "#%s",
+		parser = "kulala_http",
 	},
 	{
 		pattern = "*.env",

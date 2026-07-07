@@ -369,7 +369,16 @@ end
 --- @param predicate fun(buf: number): boolean
 function M.each_buf_where(predicate)
 	local bufs = vim.api.nvim_list_bufs()
-	return table.filter(bufs, predicate)
+
+	local filtered_bufs = {}
+
+	for _, b in ipairs(bufs) do
+		if predicate(b) then
+			table.insert(filtered_bufs, b)
+		end
+	end
+
+	return filtered_bufs
 end
 
 --- @param path string

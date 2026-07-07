@@ -95,6 +95,7 @@
     tldr
     tree-sitter
     unzip
+    websocat
     wezterm
     yazi
     zip

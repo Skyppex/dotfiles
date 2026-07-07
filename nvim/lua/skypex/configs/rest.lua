@@ -64,12 +64,26 @@ end, "toggle rest client")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*.kulala_ui",
 	callback = function(args)
+		local buf = args.buf
 		vim.cmd("normal! zE")
 		local filetype = args.match:gsub("%.kulala_ui$", "")
 		vim.api.nvim_set_option_value("filetype", filetype, { buf = args.buf })
 		vim.api.nvim_set_option_value("buftype", "nofile", { buf = args.buf })
 		vim.api.nvim_set_option_value("bufhidden", "hide", { buf = args.buf })
 		vim.api.nvim_set_option_value("swapfile", false, { buf = args.buf })
+
+		map("n", "ær", kulala.jump_next, "Goto the next request", nil, buf)
+		map("n", "år", kulala.jump_prev, "Goto the previous request", nil, buf)
+		map("n", "<leader>rb", ui.show_body, "Show response body", nil, buf)
+		map("n", "<leader>rv", ui.show_verbose, "Show verbose response body", nil, buf)
+		map("n", "<leader>rh", ui.show_headers_body, "Show headers", nil, buf)
+		map("n", "<leader>rj", ui.show_next, "Show next request", nil, buf)
+		map("n", "<leader>rk", ui.show_previous, "Show previous request", nil, buf)
+		map("n", "<leader>ri", ui.inspect, "Inspect request", nil, buf)
+		map("n", "<leader>rs", ui.show_stats, "Show stats for last request", nil, buf)
+		map("n", "<leader>re", kulala.set_selected_env, "Set selected environment", nil, buf)
+		map("n", "<leader>rq", ui.interrupt_requests, "Interrupt requests", nil, buf)
+		map("n", "<leader>r<cr>", ui.open_ws_message, "Send websocket message", nil, buf)
 	end,
 })
 
@@ -88,6 +102,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		map("n", "<leader>ri", ui.inspect, "Inspect request", nil, buf)
 		map("n", "<leader>rs", ui.show_stats, "Show stats for last request", nil, buf)
 		map("n", "<leader>re", kulala.set_selected_env, "Set selected environment", nil, buf)
+		map("n", "<leader>rq", ui.interrupt_requests, "Interrupt requests", nil, buf)
+		map("n", "<leader>r<cr>", ui.open_ws_message, "Send websocket message", nil, buf)
 
 		map("n", "<leader>sf", function()
 			pick.builtin.cli({
@@ -108,5 +124,13 @@ vim.api.nvim_create_autocmd("FileType", {
 				},
 			})
 		end, "search http files", nil, buf)
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "kulala_ws_input",
+	callback = function(args)
+		local buf = args.buf
+		map("n", "<leader>r<cr>", ui.open_ws_message, "Send websocket message", nil, buf)
 	end,
 })
