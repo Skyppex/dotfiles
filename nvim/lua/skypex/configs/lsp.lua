@@ -148,7 +148,7 @@ M.servers = {
 	nixd = {
 		cmd = { "nixd", "--inlay-hints=true" },
 		filetypes = { "nix" },
-		root_markers = { "flake.nix", ".git" },
+		root_markers = { "flake.nix", ".git", ".jj" },
 		settings = {
 			nixpkgs = {
 				expr = "import <nixpkgs> {}",
@@ -173,7 +173,7 @@ M.servers = {
 				return
 			end
 
-			local root = vim.fs.root(buf, { "flake.nix", ".git" })
+			local root = vim.fs.root(buf, { "flake.nix", ".git", ".jj" })
 			on_dir(root or vim.fn.getcwd())
 		end,
 	},
@@ -205,7 +205,7 @@ M.servers = {
 				return
 			end
 
-			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git" })
+			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git", ".jj" })
 			on_dir(root or vim.fn.getcwd())
 		end,
 	},
@@ -221,9 +221,14 @@ M.servers = {
 				return
 			end
 
-			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git" })
+			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git", ".jj" })
 			on_dir(root or vim.fn.getcwd())
 		end,
+	},
+	clangd = {
+		cmd = { "clangd", "--background-index", "--clang-tidy" },
+		filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+		root_markers = { "version.h", "compile_commands.json", "compile_flags.txt", ".clangd", ".git", ".jj" },
 	},
 }
 
