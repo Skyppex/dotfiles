@@ -7,44 +7,74 @@ def main [] {
     let clients = hyprctl clients -j 
     | from json 
     | where { |it| $it.workspace.id == $workspace.id }
-    | sort-by { |it| $it.at.0 }
+    | sort-by at.1 at.0
 
     if ($clients | is-empty) {
         return
     }
 
-    let first = $clients | first
+    let first_group = $clients 
+    | where { |it| ($it.grouped | length) > 0} 
+    | first 
+    | get grouped?
 
-    if ($first.grouped | is-empty) {
-        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($first.address)'})"
-        hyprctl dispatch "hl.dsp.group.toggle()"
-    }
+    print -e 1
+    print -e ($clients | select title at.0 at.1)
+    print -e $first_group
 
-    let group = $first.grouped
-
-    mut non_grouped_clients = []
-
-    for client in ($clients | skip 1)  { 
-
-        if ($group | any { |it|
-            $it == $client.address
-        }) {
-            continue
-        }
-
-        $non_grouped_clients = ($non_grouped_clients | append $client)
-    }
-
-    if ($non_grouped_clients | is-empty) {
+    if $first_group != null and ($first_group | sort) == ($clients | get address | sort) {
+        print -e 2222
         hyprctl dispatch "hl.dsp.group.toggle()"
         hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
         return
     }
 
+    mut should_group = false
+    
+    for client in $clients { 
+        if ($client.grouped | length) == 0 {
+            $should_group = true
+            break;
+        } else {
+            $should_group = $first_group | any {|it| $it == $client.grouped.0}
+            break;
+        }
+    }
 
-    for $client in $non_grouped_clients {
-        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($client.address)'})"
-        hyprctl dispatch $"hl.dsp.window.move\({into_group='left'})"
+    if $should_group {
+        let top_left = $clients | reduce --fold $active { |el, acc| 
+            if ($el.at.0 <= $acc.at.0) and ($el.at.1 <= $acc.at.1) {
+                $el
+            } else {
+                $acc
+            }
+        }
+
+        for i in 1..10 {
+            print -e $"iteration ($i)"
+            for client in $clients { 
+                if $client.address == $top_left.address {
+                    continue
+                }
+
+                hyprctl dispatch $"hl.dsp.window.move\({ into_or_create_group = 'up', window = 'address:($client.address)' })"
+                hyprctl dispatch $"hl.dsp.window.move\({ into_or_create_group = 'left', window = 'address:($client.address)' })"
+            }
+
+
+            let groups = hyprctl clients -j 
+            | from json 
+            | where { |it| $it.workspace.id == $workspace.id }
+            | get grouped
+            | each {|g| $g | sort}
+
+            if ($groups | uniq | length) == 1 {
+                break
+            }
+        }
+    } else {
+        hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
+        hyprctl dispatch "hl.dsp.group.toggle()"
     }
 
     hyprctl dispatch $"hl.dsp.focus\({window = 'address:($active.address)'})"
