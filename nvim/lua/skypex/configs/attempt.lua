@@ -165,10 +165,6 @@ map("n", "<leader>AI", function()
 	attempt_ws:open(attempt.new_input_ext)
 end, "New Attempt By Extension")
 
-map("n", "<c-r>", attempt.run, "Run Attempt")
-map("n", "<leader>AD", attempt.delete_buf, "Delete Attempt")
-map("n", "<leader>AC", attempt.rename_buf, "Rename Attempt")
-
 map("n", "<leader>AS", function()
 	attempt_ws:open(attempt.open_select)
 end, "Search Attempts")
@@ -271,3 +267,14 @@ local function run_inline_attempt()
 end
 
 map("x", "<leader>AR", run_inline_attempt, "Run Selection as Attempt")
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNew" }, {
+	pattern = "scratch-*",
+	callback = function(args)
+		local buf = args.buf
+
+		map("n", "<c-r>", attempt.run, "Run Attempt", nil, buf)
+		map("n", "<leader>AD", attempt.delete_buf, "Delete Attempt", nil, buf)
+		map("n", "<leader>AC", attempt.rename_buf, "Rename Attempt", nil, buf)
+	end,
+})
