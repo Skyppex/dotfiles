@@ -25,6 +25,7 @@ map("n", "<c-d>", "<c-d>zz")
 map("n", "<c-u>", "<c-u>zz")
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
+map("n", "G", "Gzz")
 
 map("x", "<leader>p", '"_dP')
 
