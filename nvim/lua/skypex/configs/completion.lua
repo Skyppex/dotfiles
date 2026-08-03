@@ -38,22 +38,11 @@ cmp.setup({
 			"path",
 			"snippets",
 			"buffer",
-			-- "dbee",
 		},
 		providers = {
 			lsp = {
 				score_offset = 10,
 			},
-			-- dbee = {
-			-- 	name = "Dbee",
-			-- 	module = "skypex.blink-dbee",
-			-- 	enabled = true,
-			-- 	async = true,
-			-- 	opts = {
-			-- 		filetypes = { "sql", "mysql", "plsql" },
-			-- 		cache_ttl = 30,
-			-- 	},
-			-- },
 		},
 	},
 })
