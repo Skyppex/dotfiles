@@ -193,6 +193,11 @@ let template = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/starshi
 let out = ($env.CONFIG_PATH | path join "starship.toml")
 [{ name: vars, url: $variant_file }] | gompl $template $out
 
+# setup btop
+let template = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/btop.theme.gompl")
+let out = ($env.CONFIG_PATH | path join "btop/themes/japanese-aesthetic.theme")
+[{ name: vars, url: $variant_file }] | gompl $template $out
+
 # setup mako
 let template = ($env.CHEZMOI_PATH | path join "themes/japanese-aesthetic/mako-config.gompl")
 let out = ($env.CONFIG_PATH | path join "mako/config")
