@@ -322,6 +322,7 @@ def "jb add" [
     bookmark: string # name of bookmark to create
     revision?: string # optionally pick which revision to create the bookmark on
 ] {
+    let bookmark = $bookmark | str replace --all " " "-"
     if ($revision | is-empty) {
         jj bookmark create $bookmark
     } else {
