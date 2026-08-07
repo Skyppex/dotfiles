@@ -124,7 +124,7 @@ let rofi = "* {" | append ($kvps | each { |it|
         $value = $"($value)px"
     }
 
-    $"\t($key): ($value);"
+    $"\t($key | str replace --all "_" "-"): ($value);"
 }
 | append ($font_kvps | each { |it|
     let key = $it | get 0
