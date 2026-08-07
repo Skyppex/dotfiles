@@ -409,7 +409,7 @@ def "jb rm" [] {
     }
 
     print $"Removing bookmarks: ($selected)"
-    jj bookmark delete ...($selected | split row "\n")
+    jj bookmark forget --include-remotes ...($selected | split row "\n")
 }
 
 # Jujutsu bookmark track using fzf
@@ -587,3 +587,25 @@ def "jw rm" [] {
     jj workspace forget $workspace.name
     rm -rf $workspace.path
 }
+
+def --wrapped "jp bookmarks" [...rest: string] {
+    let bookmarks = jj bookmark list --all-remotes 
+    | lines 
+    | where ($it | str starts-with " " | n)
+    | each {|it|
+        let colon = $it | str index-of ":"
+        $it | str substring ..($colon - 1)
+    }
+
+    let selected = $bookmarks 
+    | to text 
+    | fzf --multi --height 40% --layout reverse -0
+
+    let flags = $selected | lines | each {|bookmark|
+        $"--bookmark=($bookmark)"
+    }
+
+    jj git push ...$flags ...$rest
+}
+
+alias jpb = jp bookmarks
