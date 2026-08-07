@@ -108,10 +108,37 @@ hl.bind("CTRL + Print", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/toggle-record
 hl.bind("SHIFT + MOD5 + Print", hl.dsp.exec_cmd("hyprpicker --autocopy --no-fancy --lowercase-hex --format hex"))
 
 -- move/resize with mouse
-hl.bind("MOD5 + mouse:272", hl.dsp.window.drag())
-hl.bind("ALT + mouse:272", hl.dsp.window.drag())
-hl.bind("MOD5 + mouse:273", hl.dsp.window.resize())
-hl.bind("ALT + mouse:273", hl.dsp.window.resize())
+hl.bind("MOD5 + mouse:272", function()
+	local window = hl.get_active_window()
+
+	if window ~= nil and window.fullscreen < 2 then
+		hl.dispatch(hl.dsp.window.drag())
+	end
+end)
+
+hl.bind("ALT + mouse:272", function()
+	local window = hl.get_active_window()
+
+	if window ~= nil and window.fullscreen < 2 then
+		hl.dispatch(hl.dsp.window.drag())
+	end
+end)
+
+hl.bind("MOD5 + mouse:273", function()
+	local window = hl.get_active_window()
+
+	if window ~= nil and window.fullscreen < 2 then
+		hl.dispatch(hl.dsp.window.resize())
+	end
+end)
+
+hl.bind("ALT + mouse:273", function()
+	local window = hl.get_active_window()
+
+	if window ~= nil and window.fullscreen < 2 then
+		hl.dispatch(hl.dsp.window.resize())
+	end
+end)
 
 -- media
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
