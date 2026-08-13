@@ -13,6 +13,7 @@
     pamixer
     pavucontrol
     playerctl
+    wiremix
     protonup-ng
     rofi
     awww
