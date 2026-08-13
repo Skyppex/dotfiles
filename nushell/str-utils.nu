@@ -199,14 +199,14 @@ def diff-lines [
 }
 
 # Returns true if a single-character string is an uppercase letter.
-# (Non-letters like digits/spaces upcase and downcase to themselves, so they're excluded.)
+# (Non-letters like digits/spaces uppercase and lowercase to themselves, so they're excluded.)
 def "str is-upper" [c: string] {
-    (($c | str upcase) == $c) and (($c | str downcase) != $c)
+    (($c | str uppercase) == $c) and (($c | str lowercase) != $c)
 }
 
 # Returns true if a single-character string is a lowercase letter.
 def "str is-lower" [c: string] {
-    (($c | str downcase) == $c) and (($c | str upcase) != $c)
+    (($c | str lowercase) == $c) and (($c | str uppercase) != $c)
 }
 
 # split string into words based on common casing styles
@@ -322,32 +322,32 @@ def "str case" [
 
         match $casing_style { 
             'l' => {
-                $words | str downcase | str join $separator
+                $words | str lowercase | str join $separator
             }
             'u' => {
-                $words | str upcase | str join $separator
+                $words | str uppercase | str join $separator
             }
             'p' => {
-                $words | str downcase | str pascal-case | str join $separator
+                $words | str lowercase | str pascal-case | str join $separator
             }
             'c' => {
-                let lower = $words | str downcase
+                let lower = $words | str lowercase
                 let first = $lower | first
                 let rest = $lower | skip | str pascal-case
                 $rest | prepend $first | str join $separator
             }
             's' => {
-                let lower = $words | str downcase
+                let lower = $words | str lowercase
                 let first = $lower | first | str pascal-case
                 let rest = $lower | skip
                 $rest | prepend $first | str join $separator
             }
             'r' => {
                 $words 
-                | str downcase 
+                | str lowercase 
                 | each { |word| $word 
                     | split chars 
-                    | each { |c| if (random bool) { $c | str upcase } else { $c } } 
+                    | each { |c| if (random bool) { $c | str uppercase } else { $c } } 
                     | str join ""
                 } | str join $separator
             }

@@ -407,7 +407,7 @@ export def --wrapped test [
 ] {
     let test_folders = ls -f
     | get name
-    | where ($it | str downcase | str contains "test")
+    | where ($it | str lowercase | str contains "test")
     | where ($it | path type | str contains "dir")
 
     if $verbose {

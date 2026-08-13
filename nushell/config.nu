@@ -215,9 +215,9 @@ $env.config = {
                     dirs add $after
                 }
 
-                if (which direnv | is-not-empty) {
-                    direnv export json | from json | default {} | load-env
-                }
+                # if (which direnv | is-not-empty) {
+                #     direnv export json | from json | default {} | load-env
+                # }
             }] 
         }
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
@@ -804,7 +804,7 @@ def pull [] {
     git submodule update --init --recursive
     chezmoi apply --force
 
-    if (sys host | get name | str downcase) == "windows" {
+    if (sys host | get name | str lowercase) == "windows" {
         print "---- updating scoop ----"
         scoop update
         print "---- installing scoop apps ----"

@@ -151,7 +151,7 @@ export def dominfo [name?: string] {
     mut record = {}
 
     for pair in $parsed {
-        let key = $pair.key | str trim | str downcase | str replace " " "-"
+        let key = $pair.key | str trim | str lowercase | str replace " " "-"
         let value = $pair.value | str trim
         $record = $record | insert $key $pair.value
     }

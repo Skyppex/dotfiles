@@ -112,7 +112,7 @@ $env.SCOOP = $"($nu.home-dir)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
 
-match [(sys host | get hostname), (sys host | get name | str downcase)] {
+match [(sys host | get hostname), (sys host | get name | str lowercase)] {
     ["tower", "nixos"] => {
         $env.DEV = ('~/dev' | path expand)
         $env.CODE = ('~/dev/code' | path expand)
@@ -233,4 +233,9 @@ $env.JQ_COLORS = "0;90:1;31:1;31:1;31:1;32:1;34:1;33:1;35"
 if (which starship | is-not-empty) {
     mkdir ~/.cache/starship
     starship init nu | save --force ~/.cache/starship/init.nu
+}
+
+if (which devenv | is-not-empty) {
+    mkdir ($nu.default-config-dir | path join autoload)
+    devenv hook nu | save --force ($nu.default-config-dir | path join autoload/devenv-hook.nu)
 }
