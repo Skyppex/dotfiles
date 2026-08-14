@@ -19,7 +19,10 @@ def --env find-projects []: nothing -> table<type: string, opt: any> {
     }
 
     let options = $options | lines | each { |opt|
-        mut o: record<type: string, opt: any> = {}
+        mut o: record<type: string, opt: any> = {
+            type: ""
+            opt: null
+        }
 
         if ($opt | str contains "flake.nix") {
             $o = { type: "nix", opt: $opt }
