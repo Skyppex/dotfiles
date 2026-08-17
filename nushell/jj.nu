@@ -374,7 +374,7 @@ def "jb mv" [
     | where not ($it | str starts-with " ")
     | to text
 
-    let selected = $bookmarks | fzf --height 40% --layout=reverse -0 -1
+    let selected = $bookmarks | fzf --height 40% --layout=reverse --multi -0 -1 | lines
 
     if ($selected | is-empty) {
         print "No bookmark selected"
@@ -387,8 +387,10 @@ def "jb mv" [
         $to = "@"
     }
 
-    print $"Moving ($selected) to ($to)"
-    jj bookmark move $selected --allow-backwards --to $to
+    for $bookmark in $selected { 
+        print $"Moving ($bookmark) to ($to)"
+        jj bookmark move $bookmark --allow-backwards --to $to
+    }
 }
 
 # Jujutsu bookmark delete using fzf
