@@ -36,6 +36,9 @@ map("n", "q:", "<nop>")
 -- Alias ctrl+c to Esc
 map("xis", "<c-c>", "<esc>")
 
+-- remove highlights
+map("n", "dh", "<cmd>nohlsearch<cr>", "remove search highlights")
+
 -- Diagnostic keymaps
 local function jump_to_diagnostic(direction)
 	local diagnostics = vim.diagnostic.get(0)
@@ -179,6 +182,26 @@ map("n", "<leader>Dc", "<cmd>windo diffoff<cr>", "Diff buffers")
 -- inspect highlight
 map("n", "<leader>ih", function()
 	vim.notify(vim.inspect(vim.treesitter.get_captures_at_cursor(0)))
+end)
+
+vim.on_key(function(char)
+	if vim.fn.mode() ~= "n" then
+		return
+	end
+
+	local keep = vim.tbl_contains({
+		"n",
+		"N",
+		"*",
+		"#",
+		"?",
+		"/",
+		"z", -- keep on zz because it only changes how the buffer is displayed
+	}, vim.fn.keytrans(char))
+
+	if vim.o.hlsearch ~= keep then
+		vim.o.hlsearch = keep
+	end
 end)
 
 -- Source config

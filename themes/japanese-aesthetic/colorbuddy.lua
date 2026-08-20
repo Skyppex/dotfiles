@@ -17,8 +17,12 @@ Color.new("green", colors.green)
 Color.new("yellow", colors.yellow)
 Color.new("blue", colors.blue)
 Color.new("cyan", colors.cyan)
+Color.new("dark_cyan", colors.dark_cyan)
+Color.new("darker_cyan", colors.darker_cyan)
 Color.new("purple", colors.purple)
 Color.new("orange", colors.orange)
+Color.new("dark_orange", colors.dark_orange)
+Color.new("darker_orange", colors.darker_orange)
 
 Color.new("hint", colors.info)
 Color.new("info", colors.info)
@@ -57,8 +61,9 @@ Group.new("CursorLineNr", c.primary, c.background0)
 Group.new("Directory", c.primary)
 
 -- Search
-Group.new("Search", c.background0, c.blue)
-Group.new("IncSearch", c.background0, c.orange)
+Group.new("Search", c.background0, c.darker_orange)
+Group.new("CurSearch", g.Search, c.orange)
+Group.new("IncSearch", g.Search, c.orange)
 
 -- Visual
 Group.new("Visual", nil, c.background2)
