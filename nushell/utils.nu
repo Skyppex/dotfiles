@@ -452,3 +452,61 @@ def --env --wrapped "nsh" [
     }
 }
 
+
+# invert anything (boolean not)
+def invert [...cells: cell-path]: oneof<bool, list, record, table> -> oneof<bool, list, record, table> {
+    let inputs = $in
+    let type = $inputs | describe
+
+    if $type == bool { 
+        not $inputs
+    } else if ($type | str starts-with "list") {
+        $inputs | each {|input| 
+            $input | invert ...$cells
+        }
+    } else if ($type | str starts-with "record") {
+        if ($cells | is-empty) {
+            error make {msg: "pass cell path for record"}
+        }
+
+        let input = $inputs 
+        | get ($cells | first) ...($cells | skip) 
+
+        let result = $input | invert ...$cells
+        let zipped = $cells | zip $result
+
+        mut updated = $inputs
+
+        for $zip in $zipped { 
+            $updated = $updated | update $zip.0 $zip.1 
+        }
+
+        $updated
+    } else if ($type | str starts-with "table") {
+        if ($cells | is-empty) {
+            error make {msg: "pass cell path for table",}
+        }
+
+        let results = $inputs 
+        | select ($cells | first) ...($cells | skip) 
+        | each { |input|
+            $input | invert ...$cells
+        }
+
+        mut updated = []
+
+        for $zip in ($inputs | zip $results) {
+            let row = $zip.0
+            let result = $zip.1
+            mut u = $row
+
+            for $path in $cells {
+                $u = $u | update $path ($result | get $path)
+            }
+
+            $updated = $updated | append $u
+        }
+
+        $updated
+    }
+}

@@ -121,7 +121,7 @@ def "str after" [
         }
     } else if ($type | str starts-with "record") {
         if ($rest | is-empty) {
-            error make {msg: "pass cell path for table",}
+            error make {msg: "pass cell path for record",}
         }
 
         let input = $inputs 
