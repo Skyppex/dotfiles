@@ -565,7 +565,7 @@ local config = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	config.front_end = "WebGpu" -- OpenGL doesn't work quite well with RDP.
+	config.front_end = "OpenGL" -- OpenGL doesn't work quite well with RDP.
 
 	wezterm.log_info("starting wsl")
 	config.default_prog = { "wsl", "--shell-type", "login", "--cd", "~/.local/share/chezmoi", "nu" }
