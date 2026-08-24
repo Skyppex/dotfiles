@@ -1,5 +1,5 @@
 # Dotnet run from sln using fzf to select project and launch profile
-export def --wrapped run [
+export def --wrapped engage [
     --verbose(-V) # Print verbose output for the nushell script
     ...rest: string
 ] {

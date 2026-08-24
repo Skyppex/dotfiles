@@ -129,7 +129,7 @@ def --wrapped build [
 
 alias b = build
 
-def --wrapped run [
+def --wrapped engage [
     --with: string
     ...rest
 ] {
@@ -175,9 +175,9 @@ def --wrapped run [
         }
         "dotnet" => {
             if ($in | is-empty) {
-                dn run ...$rest
+                dn engage ...$rest
             } else {
-                $in | dn run ...$rest
+                $in | dn engage ...$rest
             }
         }
         "go" => {
@@ -190,7 +190,7 @@ def --wrapped run [
     }
 }
 
-alias r = run
+alias r = engage
 
 def --wrapped test [
     --all(-a)
