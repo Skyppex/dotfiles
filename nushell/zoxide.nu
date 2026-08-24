@@ -21,6 +21,11 @@ def --env z [
         return
     }
 
+    if ($path | first | str starts-with "/") {
+        cd-old ($path | first)
+        return
+    }
+
     let current = $env.PWD
     let path_split = $path
     let path = ($path | str join " ")
