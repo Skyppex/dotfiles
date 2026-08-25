@@ -19,9 +19,6 @@ alias jds = jj describe
 # Jujutsu diff with fzf
 alias jdf = jj diff (jj diff --name-only | fzf --height 40% --layout=reverse)
 
-# Jujutsu new
-alias jn = jj new
-
 # Jujutsu edit
 alias je = jj edit
 
@@ -37,11 +34,28 @@ alias jrb = jj rebase
 # Jujutsu rebase onto
 alias jrbo = jj rebase --onto
 
+# Jujutsu new until prefix is only 1 letter (or failed)
+def --wrapped jn [...rest] {
+    for i in 0..3 { 
+        let new = jj new --color always ...$rest | complete | get stderr | str trim
+
+        let prefix = jj log --revision @ --template 'self.change_id().shortest()' --no-graph
+
+        if ($prefix | str length) == 1 {
+            return $new
+        } else {
+            jj edit @- | complete
+        }
+    }
+
+    jj new ...$rest
+}
+
 # Jujutsu squash
 def --wrapped jsq [...rest] {
     let before = jj log --no-graph --template 'change_id' --revision @
 
-    jj squash ...$rest
+    jj squash ...$rest | ignore --stdout --stderr
 
     let after = jj log --no-graph --template 'change_id' --revision @
 
