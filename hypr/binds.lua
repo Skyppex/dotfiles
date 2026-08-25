@@ -65,6 +65,7 @@ hl.bind(
 )
 
 hl.bind("SUPER + D", hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " discord discord", { tile = true }))
+hl.bind("SUPER + O", hl.dsp.exec_cmd("nu " .. dyn.focus_or_launch .. " md.Obsidian obsidian", { tile = true }))
 
 -- manage windows
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
