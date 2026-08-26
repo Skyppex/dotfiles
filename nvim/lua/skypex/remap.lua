@@ -185,22 +185,36 @@ map("n", "<leader>ih", function()
 end)
 
 vim.on_key(function(char)
+	if char:sub(1, 2) == "\128\253" then
+		return
+	end
+
 	if vim.fn.mode() ~= "n" then
 		return
 	end
 
-	local keep = vim.tbl_contains({
+	local hl_on = vim.tbl_contains({
 		"n",
 		"N",
 		"*",
 		"#",
 		"?",
 		"/",
-		"z", -- keep on zz because it only changes how the buffer is displayed
 	}, vim.fn.keytrans(char))
 
-	if vim.o.hlsearch ~= keep then
-		vim.o.hlsearch = keep
+	-- don't change hl state for some keys
+	local ignore = vim.tbl_contains({
+		"z",
+		"<t_<fd>g>",
+		"<Space>",
+	}, vim.fn.keytrans(char))
+
+	if ignore then
+		return
+	end
+
+	if vim.o.hlsearch ~= hl_on then
+		vim.o.hlsearch = hl_on
 	end
 end)
 
