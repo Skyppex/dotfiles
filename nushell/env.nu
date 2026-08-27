@@ -111,13 +111,12 @@ $env.SCRIPTS_PATH = $"($nu.home-dir)/.local/share/scripts"
 $env.SCOOP = $"($nu.home-dir)/scoop"
 $env.SCOOP_APPS = $"($env.SCOOP)/apps"
 $env.SCOOP_SHIMS = $"($env.SCOOP)/shims"
+$env.DEV = ('~/dev' | path expand)
+$env.CODE = ('~/dev/code' | path expand)
+$env.DEV_BIN = ('~/dev/bin' | path expand)
 
 match [(sys host | get hostname), (sys host | get name | str lowercase)] {
     ["tower", "nixos"] => {
-        $env.DEV = ('~/dev' | path expand)
-        $env.CODE = ('~/dev/code' | path expand)
-        $env.DEV_BIN = ('~/dev/bin' | path expand)
-
         let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 
         if ($nix_path | path exists) {
@@ -146,10 +145,6 @@ match [(sys host | get hostname), (sys host | get name | str lowercase)] {
         }
     }
     ["pod", "arch linux"] => {
-        $env.DEV = ('~/dev' | path expand)
-        $env.CODE = ('~/dev/code' | path expand)
-        $env.DEV_BIN = ('~/dev/bin' | path expand)
-
         let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 
         if ($nix_path | path exists) {
@@ -178,10 +173,6 @@ match [(sys host | get hostname), (sys host | get name | str lowercase)] {
         }
     }
     ["AAD-BYSVZ94", "ubuntu"] => {
-        $env.DEV = ('~/dev' | path expand)
-        $env.CODE = ('~/dev/code' | path expand)
-        $env.DEV_BIN = ('~/dev/bin' | path expand)
-
         let nix_path = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 
         if ($nix_path | path exists) {
