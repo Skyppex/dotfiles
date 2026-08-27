@@ -1151,3 +1151,4 @@ zsh
 æz
 wiremix
 globalstatus
+inbox
