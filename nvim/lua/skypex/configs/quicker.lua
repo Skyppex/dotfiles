@@ -8,6 +8,6 @@ quicker.setup({})
 map("n", "åq", "<cmd>cprev<CR>zz")
 map("n", "æq", "<cmd>cnext<CR>zz")
 
-map("n", "<leader>tq", function()
+map("nx", "<leader>tq", function()
 	quicker.toggle()
 end, "Toggle Quickfix List")
