@@ -1,6 +1,7 @@
 {pkgsUnfree}: let
 in
   with pkgsUnfree; [
+    audacity
     ani-cli
     ani-skip
     blender
