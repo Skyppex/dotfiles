@@ -184,6 +184,15 @@ map("n", "<leader>ih", function()
 	vim.notify(vim.inspect(vim.treesitter.get_captures_at_cursor(0)))
 end)
 
+-- -- Replace operation (expr mapping for register support)
+-- map("nx", "R", require("skypex.replace").replace, "replace", true)
+
+-- want this to allow me to replace from a register instead of typing it out in insert mode
+map("n", "RC", '"_c', "change without writing register")
+map("n", "RP", require("skypex.replace").replace, "change without writing register")
+
+map("x", "R", '"_dP', "change without writing register")
+
 vim.on_key(function(char)
 	if char:sub(1, 2) == "\128\253" then
 		return
