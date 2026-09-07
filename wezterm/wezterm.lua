@@ -343,6 +343,7 @@ local config = {
 		{ key = "f", mods = "LEADER|CTRL", action = act.SendString("\x06") },
 		{ key = "f", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle) },
 		{ key = "g", mods = "CTRL", action = wezterm.action_callback(sessionizer.toggle_ssh) },
+		{ key = "n", mods = "CTRL", action = wezterm.action_callback(sessionizer.new) },
 
 		{ key = "i", mods = "LEADER|CTRL", action = act.ActivateCopyMode },
 		{

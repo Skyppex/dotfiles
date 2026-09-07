@@ -18,6 +18,25 @@ function M.get_home()
 	return string.gsub(home, "\\", "/")
 end
 
+--- @return string?
+function M.get_wsl_home()
+	if not M.is_windows() then
+		return nil
+	end
+
+	local ok, stdout, stderr = require("wezterm").run_child_process({
+		"wsl",
+		"printenv",
+		"HOME",
+	})
+
+	if not ok then
+		return nil
+	end
+
+	return stdout:gsub("[\r\n]+$", "")
+end
+
 --- @return string
 function M.get_config_path()
 	return M.get_home() .. "/.config"
@@ -65,15 +84,15 @@ end
 
 --- @return boolean
 function M.is_linux()
-	return M.is_home_computer_linux() or
-		M.is_home_laptop_linux() or
-		M.is_work_computer_wsl() or
-		M.is_work_computer_linux()
+	return M.is_home_computer_linux()
+		or M.is_home_laptop_linux()
+		or M.is_work_computer_wsl()
+		or M.is_work_computer_linux()
 end
 
 --- @return boolean
 function M.is_windows()
-	return not M.is_linux()
+	return require("wezterm").target_triple:find("windows") ~= nil
 end
 
 --- @return string

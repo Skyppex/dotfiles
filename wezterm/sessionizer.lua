@@ -279,4 +279,161 @@ M.toggle_ssh = function(window, pane)
 	)
 end
 
+M.new = function(window, pane)
+	wezterm.log_info("creating new session in new directory")
+	local repo_dir
+
+	if utils.is_windows() then
+		repo_dir = utils.get_wsl_home() .. "/dev/code/"
+	else
+		repo_dir = utils.get_home() .. "/dev/code/"
+	end
+
+	window:perform_action(
+		act.PromptInputLine({
+			description = "enter new directory name relative to: " .. repo_dir,
+			-- initial_value = repo_dir,
+			action = wezterm.action_callback(function(window, pane, line)
+				if not line then
+					wezterm.log_info("no new dir entered")
+					return
+				end
+
+				wezterm.log_info("entered: '" .. line .. "'")
+				local path = repo_dir .. line
+				wezterm.log_info("full path: '" .. path .. "'")
+
+				local argv_mkdir
+
+				if utils.is_windows() then
+					wezterm.log_info("making dir inside wsl")
+					-- mkdir is a cmd.exe builtin, not an executable, so it needs a shell.
+					-- cmd's mkdir creates intermediates by default but errors if the target exists.
+					argv_mkdir = { "wsl", "mkdir", "-p", path }
+				else
+					argv_mkdir = { "mkdir", "-p", path }
+				end
+
+				local ok, _, stderr = wezterm.run_child_process(argv_mkdir)
+
+				if not ok then
+					wezterm.log_info("failed to create directories")
+					wezterm.log_info(stderr)
+					return
+				end
+
+				local argv_jj_init
+
+				if utils.is_windows() then
+					-- mkdir is a cmd.exe builtin, not an executable, so it needs a shell.
+					-- cmd's mkdir creates intermediates by default but errors if the target exists.
+					argv_jj_init = {
+						"wsl",
+						"--shell-type",
+						"login",
+						"--cd",
+						"/",
+						"nu",
+						"-c",
+						"jj git init " .. path,
+					}
+				else
+					argv_jj_init = { "jj", "git", "init", path }
+				end
+
+				local ok, _, _ = wezterm.run_child_process(argv_jj_init)
+
+				if not ok then
+					wezterm.log_info("failed to init jj repo")
+					return
+				end
+
+				local label = path
+				local id = path:match("([^/]+)/*$") or path
+
+				local nu_args
+				local nvim_args
+
+				if utils.is_windows() then
+					nu_args = { "wsl", "--shell-type", "login", "--cd", label, "nu" }
+					nvim_args = { "wsl", "--shell-type", "login", "--cd", label, "nvim" }
+				else
+					nu_args = { "nu" }
+					nvim_args = { "nvim" }
+				end
+
+				window:perform_action(
+					act.SwitchToWorkspace({
+						name = id,
+						spawn = {
+							label = "nu",
+							cwd = label,
+							args = nu_args,
+						},
+					}),
+					pane
+				)
+
+				wezterm.log_info("Switched to workspace " .. id)
+
+				local windows = mux.all_windows()
+
+				local target = nil
+
+				for _, w in ipairs(windows) do
+					if w:get_workspace() == id then
+						target = w
+						break
+					end
+				end
+
+				-- This should never happen since
+				-- we just created the workspace
+				if target == nil then
+					return
+				end
+
+				if #target:tabs() == 1 then
+					wezterm.log_info("Creating tab")
+
+					local tab = target:tabs()[1]
+
+					if tab:get_title() == nil or tab:get_title() == "" then
+						tab:set_title("nu")
+					end
+
+					wezterm.log_info("Tab " .. tab:get_title())
+
+					local prog
+					local args
+
+					if tab:get_title() == "nu" then
+						prog = "nvim"
+						args = nvim_args
+					else
+						prog = "nu"
+						args = nu_args
+					end
+
+					window:perform_action(
+						act.SpawnCommandInNewTab({
+							label = prog,
+							cwd = label,
+							args = args,
+						}),
+						pane
+					)
+
+					target:tabs()[2]:set_title(prog)
+
+					if prog == "nu" then
+						target:gui_window():perform_action(act.ActivateTabRelative(1), pane)
+					end
+				end
+			end),
+		}),
+		pane
+	)
+end
+
 return M
