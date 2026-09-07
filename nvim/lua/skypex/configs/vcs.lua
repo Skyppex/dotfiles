@@ -144,7 +144,28 @@ local function setup_kanji()
 	map("n", "<leader>vB", kanji.blame_buffer_toggle, "Toggle JJ Blame Buffer")
 	map("n", "<leader>vr", kanji.restore_hunk, "Restore Hunk")
 	map("n", "<leader>vR", kanji.restore_file, "Restore File")
-	map("n", "<leader>vq", kanji.conflicts_to_qf, "Conflicts to Quickfix List")
+	map("n", "<leader>vq", function()
+		kanji.conflicts(function(conflicts)
+			if #conflicts == 0 then
+				return
+			end
+
+			if #conflicts == 1 then
+				local path = conflicts[1].path
+				local start_line = conflicts[1].start_line
+
+				vim.api.nvim_cmd({
+					cmd = "edit",
+					args = { path },
+				}, {})
+
+				local win = vim.api.nvim_get_current_win()
+				vim.api.nvim_win_set_cursor(win, { start_line, 0 })
+			else
+				kanji.conflicts_to_qf()
+			end
+		end)
+	end, "Conflicts to Quickfix List")
 end
 
 local repo_type = jj_then_git()
