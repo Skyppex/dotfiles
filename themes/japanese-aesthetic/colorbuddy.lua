@@ -24,6 +24,7 @@ Color.new("orange", colors.orange)
 Color.new("dark_orange", colors.dark_orange)
 Color.new("darker_orange", colors.darker_orange)
 
+Color.new("success", colors.success)
 Color.new("hint", colors.info)
 Color.new("info", colors.info)
 Color.new("warning", colors.warning)
@@ -245,6 +246,7 @@ Group.new("Variable", c.cyan)
 Group.new("VariableBuiltin", c.pink)
 
 -- Semantic Highlighting
+Group.new("DiagnosticOk", c.success)
 Group.new("DiagnosticError", c.error)
 Group.new("DiagnosticHint", c.hint)
 Group.new("DiagnosticInfo", c.info)
