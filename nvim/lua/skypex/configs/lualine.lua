@@ -34,29 +34,46 @@ local theme = {
 	},
 }
 
+---| "not_loaded" # load() has not been called yet.
+---| "loading"    # A load is in progress.
+---| "loaded"     # The devenv environment is applied.
+---| "none"       # No devenv project was found for the root.
+---| "blocked"    # The project exists but has not been trusted with `devenv allow`.
+---| "failed"     # devenv ran but failed; see `err`.
+---
 --- @generic T
---- @param active T
---- @param pending T
+--- @param not_loaded T
+--- @param loading T
+--- @param loaded T
 --- @param blocked T
+--- @param failed T
 --- @param none? T
 --- @return T?
-local function get_direnv_statusline(active, pending, blocked, none)
-	local status = utils.direnv_status()
+local function get_devenv_statusline(not_loaded, loading, loaded, blocked, failed)
+	local status = require("devenv").status()
 
-	if status == "none" then
-		return none
+	if status == "not_loaded" then
+		return not_loaded
+	end
+
+	if status == "loading" then
+		return loading
+	end
+
+	if status == "loaded" then
+		return loaded
 	end
 
 	if status == "blocked" then
 		return blocked
 	end
 
-	if status == "pending" then
-		return pending
+	if status == "failed" then
+		return failed
 	end
 
-	if status == "active" then
-		return active
+	if status == "none" then
+		return none
 	end
 end
 
@@ -116,7 +133,7 @@ require("lualine").setup({
 		lualine_x = {
 			{
 				function()
-					return get_direnv_statusline("󰌪", "󱋙", "󱋙", "")
+					return get_devenv_statusline("󱋙", "󱋙", "󰌪", "󰂭", "󱋙", "")
 				end,
 				color = function()
 					if not utils.is_linux() then
@@ -124,10 +141,14 @@ require("lualine").setup({
 					end
 
 					local colors = require("skypex.colors")
-					return get_direnv_statusline({
-						fg = colors.success,
+					return get_devenv_statusline({
+						fg = colors.inactive,
 					}, {
 						fg = colors.working,
+					}, {
+						fg = colors.success,
+					}, {
+						fg = colors.error,
 					}, {
 						fg = colors.error,
 					})

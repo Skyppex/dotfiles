@@ -11,9 +11,8 @@ vim.pack.add({
 require("skypex.colorbuddy")
 
 local utils = require("skypex.utils")
-utils.local_plugin("direnv.nvim", "https://github.com/skyppex/direnv.nvim")
-
-require("skypex.configs.direnv")
+utils.local_plugin("devenv.nvim", "https://github.com/skyppex/devenv.nvim")
+require("skypex.configs.devenv")
 
 vim.defer_fn(function()
 	vim.pack.add({
