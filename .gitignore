@@ -17,9 +17,16 @@ yasb/yasb.log
 nushell/history.txt
 .netcoredbg_hist
 mopidy/mopidy.conf
-/.direnv
 /nixos/hardware-configuration.nix
 /nixos/local-*.nix
 /nixos/ssh/*
 !/nixos/ssh/
 !/nixos/ssh/*.pub
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# pre-commit
+.pre-commit-config.yaml
