@@ -158,33 +158,33 @@ def --wrapped engage [
                     $in | nix run --print-build-logs $name -- ...$rest
                 }
             } else {
-                if ($in | is-empty) {
+                if ($stdin | is-empty) {
                     nix run --print-build-logs . -- ...$rest
                 } else {
-                    $in | nix run --print-build-logs . -- ...$rest
+                    $stdin | nix run --print-build-logs . -- ...$rest
                 }
             }
 
         }
         "cargo" => {
-            if ($in | is-empty) {
+            if ($stdin | is-empty) {
                 cargo run -- ...$rest
             } else {
-                $in | cargo run -- ...$rest
+                $stdin | cargo run -- ...$rest
             }
         }
         "dotnet" => {
-            if ($in | is-empty) {
+            if ($stdin | is-empty) {
                 dn engage ...$rest
             } else {
-                $in | dn engage ...$rest
+                $stdin | dn engage ...$rest
             }
         }
         "go" => {
-            if ($in | is-empty) {
+            if ($stdin | is-empty) {
                 go run . ...$rest
             } else {
-                $in | go run . ...$rest
+                $stdin | go run . ...$rest
             }
         }
     }
