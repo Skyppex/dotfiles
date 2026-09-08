@@ -41,3 +41,24 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 		map("n", "<c-q>", devenv.process_panel_line_stop, "stop process below cursor", nil, buf)
 	end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "DevenvBlocked",
+	callback = function()
+		local status = devenv.status()
+		vim.notify("status: " .. status)
+		if status ~= "blocked" then
+			vim.notify("not blocked?")
+			return
+		end
+
+		vim.ui.input({
+			prompt = "allow devenv the load in this project? (y/n)",
+			scope = "cursor",
+		}, function(result)
+			if result == "y" or result == "Y" or result == "yes" or result == "Yes" or result == "YES" then
+				devenv.allow()
+			end
+		end)
+	end,
+})

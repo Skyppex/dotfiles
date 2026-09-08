@@ -1,3 +1,8 @@
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "ConfigLoaded",
+-- 	callback = function () end
+-- })
+
 require("skypex.config")
 require("skypex.remap")
 require("skypex.signcolumn")
@@ -212,4 +217,8 @@ vim.defer_fn(function()
 
 		vim.env.PATH = table.concat(vim.list_extend(normal, mason), ":")
 	end
+
+	vim.api.nvim_exec_autocmds("User", {
+		pattern = "ConfigLoaded",
+	})
 end, 0)
