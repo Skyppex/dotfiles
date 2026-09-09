@@ -4,6 +4,7 @@ devenv.setup({
 	auto_load = true,
 	auto_reload = true,
 	eager_manager = true,
+	watch_trust = true,
 })
 
 local map = require("skypex.utils").map
@@ -53,7 +54,7 @@ vim.api.nvim_create_autocmd("User", {
 		end
 
 		vim.ui.input({
-			prompt = "allow devenv the load in this project? (y/n)",
+			prompt = "trust devenv in this project? (y/n)",
 			scope = "cursor",
 		}, function(result)
 			if result == "y" or result == "Y" or result == "yes" or result == "Yes" or result == "YES" then
