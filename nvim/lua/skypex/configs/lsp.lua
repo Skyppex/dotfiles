@@ -39,7 +39,7 @@ local function setup_proof(capabilities)
 				maxSuggestions = 3,
 				allowImplicitPlurals = true,
 				ignoredWords = {},
-				excludedFilePatterns = { ".*package.json^", ".*.env^" },
+				excludedFilePatterns = { ".*package.json^", ".*.env^", "*/.cargo/*" },
 				excludedFileTypes = { "qf", "gitignore", "registers" },
 			},
 		},
