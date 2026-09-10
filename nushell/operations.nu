@@ -59,6 +59,8 @@ def select-project [
         return $nix
     }
 
+    let query = $query | default ""
+
     let selected = if $multi {
         $options | get type | to text | fzf --multi --height 40% --layout reverse -0 -1 --query $query
     } else {
