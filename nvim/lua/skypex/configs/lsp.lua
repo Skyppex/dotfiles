@@ -151,6 +151,7 @@ M.servers = {
 			},
 		},
 	},
+	yamlls = {},
 	nixd = {
 		cmd = { "nixd", "--inlay-hints=true" },
 		filetypes = { "nix" },

@@ -47,6 +47,7 @@
           yamllint
           tombi
           jq
+          yaml-language-server
           vscode-json-languageserver
           xmlformat
           shellcheck

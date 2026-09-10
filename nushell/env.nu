@@ -228,5 +228,5 @@ if (which starship | is-not-empty) {
 
 if (which devenv | is-not-empty) {
     mkdir ($nu.default-config-dir | path join autoload)
-    devenv hook nu | save --force ($nu.default-config-dir | path join autoload/devenv-hook.nu)
+    devenv --no-tui hook nu | save --force ($nu.default-config-dir | path join autoload/devenv-hook.nu)
 }
