@@ -1153,3 +1153,5 @@ wiremix
 globalstatus
 inbox
 argv
+secretspec
+keyring
