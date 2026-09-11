@@ -38,6 +38,7 @@
   ];
 
   cliPackagesFree = with pkgsFree; [
+    age
     azure-cli
     bat
     btop
