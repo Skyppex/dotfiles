@@ -789,7 +789,7 @@ use ~/.config/nushell/nw.nu
 use ~/.config/nushell/bt.nu
 source ~/.config/nushell/nixos-utils.nu
 use ~/.config/nushell/vm.nu
-use ~/.config/nushell/skate.nu
+use ~/.config/nushell/kv.nu
 use ~/.config/nushell/sc.nu
 use ~/.config/nushell/hc.nu
 use ~/.config/nushell/pass.nu

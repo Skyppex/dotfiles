@@ -1,12 +1,27 @@
+alias manifest = echo $"($env.HOME)/secretspec.toml"
+alias identity = echo $"($env.HOME)/.local/share/age/identity.age"
+
+export alias sec = secretspec --file (manifest)
+
+alias core-get = get
+
+export def --env password [ ] {
+    if ($env.AGE_IDENTITY? | is-not-empty) {
+        return
+    }
+
+    $env.AGE_IDENTITY = ^age -d (identity)
+}
+
 def parse-keys [
     --dbs-only
     db: string = "@default"
 ] {
     $in | lines | each { |it|
         let split = $it | split row "@"
-        let key = $split | get 0
+        let key = $split.0
         let db = if ($split | length) >= 2 {
-            "@" + ($split | get 1)
+            "@" + $split.1
         } else {
             $db
         }
@@ -19,23 +34,16 @@ def parse-keys [
     }
 }
 
-export def --wrapped main [
-    ...$rest
-] {
-    if ($rest | is-empty) {
-        help
-        return
-    }
-
-    ^skate ...$rest
+export def main [] {
+    help
 }
 
 export def help [] {
-    print "Skate, a personal key value store."
+    print "kv, a personal key value store using skate and secretspec."
     print ""
     print "Usage:"
-    print "  skate (options)"
-    print "  skate <command> (options)"
+    print "  kv (options)"
+    print "  kv <command> (options)"
     print ""
     print "Commands:"
     print "  delete, remove, rm           delete a key from a db"
@@ -50,8 +58,9 @@ export def help [] {
     print "  set                          set a value for a key with an optional @ db. if the value is omitted, read value from stdin"
     print ""
     print "Options:"
-    print "  --help, -h                   print skates help text"
-    print "  --version, -v                print the version for skate"
+    print "  --help, -h                   print kvs help text"
+    print ""
+    print "the @secrets db is a special db that uses secretspec over the system keyring"
 }
 
 export def format [
@@ -65,15 +74,24 @@ export def format [
 export alias fmt = format
 
 export def "list dbs" [] {
-    ^skate list-dbs | parse-keys --dbs-only
+    mut dbs = []
+    let skate_dbs = ^skate list-dbs | parse-keys --dbs-only
+
+    $dbs = $dbs | append $skate_dbs
+
+    if (manifest | path exists) {
+        $dbs = $dbs | where db != "@secrets" | append { db: "@secrets"}
+    }
+
+    $dbs
 }
 
 export alias dbs = list dbs
 export alias "ls dbs" = list dbs
 
 export def list [
-    --keys-only(-k) # only show keys (including db)
-    --values-only(-v) # only show values
+    --show-values(-v) # show keys and values (including db)
+    --values-only(-V) # only show values
     --show-binary(-b) # show binary values
     --reverse(-r) # list in reverse lexicographic order
     db: string = "default"
@@ -84,28 +102,50 @@ export def list [
         $db
     }
 
-    let keys = if $reverse {
-        ^skate list --keys-only --reverse $db | lines
+    let keys = if $db == "@secrets" {
+        sec schema | from json | core-get properties | columns
     } else {
         ^skate list --keys-only $db | lines
     }
 
-    if $keys_only {
-        return ($keys | each { |key| 
-            {key: $key, db: $db}
-        })
+    let keys = if $reverse {
+        $keys | reverse
+    } else {
+        $keys
     }
 
-    let kvps = $keys | each { |key|
-        let value = skate get $"($key)($db)"
-        {key: $key, value: $value}
+    if $show_values {
+        if $db == "@secrets" {
+            password
+        }
+
+        return (do --env {
+            ($keys | each { |key|
+                let value = if $show_binary {
+                    get $"($key)($db)" --show-binary
+                } else {
+                    get $"($key)($db)"
+                }
+
+                { key: $key, value: $value }
+            } | insert db $db)
+        })
+        
     }
 
     if $values_only {
-        return ($kvps | select value)
+        if $db == "@secrets" {
+            password
+        }
+
+        return ($keys | each { |key|
+            { value: (get $"($key)($db)") }
+        })
     }
 
-    $kvps | insert db $db
+    return ($keys | each { |key| 
+        {key: $key, db: $db}
+    })
 }
 
 export alias ls = list
@@ -115,7 +155,7 @@ export def "list all" [
     --show-binary(-b) # show binary values
     --reverse(-r) # list in reverse lexicographic order
 ]: nothing -> table<key?: string, value?: string, db?: string> {
-    let dbs = list dbs | get db
+    let dbs = list dbs | core-get db
 
     let all = $dbs | reduce --fold [] { |db, acc|
         if $show_binary {
@@ -124,6 +164,7 @@ export def "list all" [
             $acc ++ (list $db)
         }
     }
+
 
     match [$show_values, $reverse] {
         [true, false] => ($all | sort-by key),
@@ -135,6 +176,51 @@ export def "list all" [
 
 export alias "ls all" = list all
 export alias "ls a" = list all
+
+export def get [
+    --show-binary(-b)
+    key: string # in the format <key>(@<db>) where <db> defaults to "default" if omitted
+] {
+    let split = $key | split row "@"
+    let key = $split.0
+    let db = if ($split | length) >= 2 {
+        "@" + $split.1
+    } else {
+        "@default"
+    }
+
+    if $db == "@secrets" {
+        password
+        sec get $key
+    } else {
+        if $show_binary {
+            ^skate get $"($key)($db)" --show-binary
+        } else {
+            ^skate get $"($key)($db)"
+        }
+    }
+}
+
+alias g = get
+
+export def set [
+    key: string # in the format <key>(@<db>) where <db> defaults to "default" if omitted
+    value: string
+] {
+    let split = $key | split row "@"
+    let key = $split.0
+    let db = if ($split | length) >= 2 {
+        "@" + $split.1
+    } else {
+        "@default"
+    }
+
+    if $db == "@secrets" {
+        sec set $key $value
+    } else {
+        ^skate set $"($key)($db)" $value
+    }
+}
 
 export def fzf [
     --db-only(-d) # print selected db
@@ -151,7 +237,14 @@ export def fzf [
 
     if $db_only {
         let dbs = list dbs
-        let $selected_db = $dbs | get db | to text | ^fzf --height 40% --layout reverse -0
+        let $selected_db = $dbs 
+        | core-get db 
+        | to text 
+        | ^fzf --height 40% --layout reverse -0 --multi 
+        | lines 
+        | each { |it|
+            { db: $it }
+        }
 
         if ($selected_db | is-empty) {
             print -e "no db selected"
@@ -162,7 +255,22 @@ export def fzf [
     }
 
     let keys = list all | format pattern '{key}{db}' | to text
-    let selected = $keys | ^fzf --height 40% --layout reverse -0
+    print -e $keys
+
+    let selected = $keys 
+    | ^fzf --height 40% --layout reverse -0 --multi 
+    | lines
+    | each {|it|
+        let split = $it | split row "@"
+        let key = $split.0
+        let db = if ($split | length) >= 2 {
+            "@" + $split.1
+        } else {
+            "@default"
+        }
+
+        { key: $key, db: $db }
+    }
 
     if ($selected | is-empty) {
         print -e "no key selected"
@@ -173,10 +281,18 @@ export def fzf [
         return $selected
     }
 
+    if ($selected | any {|it| $it.db == "@secrets"}) {
+        password
+    }
+
     if $show_binary {
-        ^skate get --show-binary $selected
+        $selected | each { |it| 
+            get --show-binary $it.key
+        }
     } else {
-        ^skate get $selected
+        $selected | each { |it| 
+            get $it.key
+        }
     }
 }
 
