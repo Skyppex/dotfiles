@@ -19,22 +19,9 @@ map("n", "<leader>er", function()
 	devenv.load()
 end, "Load or reload direnv in cwd")
 
-map("n", "<leader>eu", devenv.up, "start all devenv processes")
-map("n", "<leader>ed", devenv.down, "stop all devenv processes")
-map("n", "<leader>te", devenv.process_panel_toggle, "toggle process_panel")
-
 map("n", "<leader>eq", function()
 	devenv.revoke()
 end, "Prevent devenv from running in cwd")
-
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-	pattern = "devenv://processes",
-	callback = function(args)
-		local buf = args.buf
-		map("n", "<c-r>", devenv.process_panel_line_start, "start process below cursor", nil, buf)
-		map("n", "<c-q>", devenv.process_panel_line_stop, "stop process below cursor", nil, buf)
-	end,
-})
 
 -- vim.api.nvim_create_autocmd("User", {
 -- 	pattern = "DevenvLoaded",
