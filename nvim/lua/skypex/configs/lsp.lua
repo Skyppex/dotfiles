@@ -238,6 +238,11 @@ M.servers = {
 		filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 		root_markers = { "version.h", "compile_commands.json", "compile_flags.txt", ".clangd", ".git", ".jj" },
 	},
+	["slint-lsp"] = {
+		cmd = { "slint-lsp" },
+		filetypes = { "slint" },
+		root_markers = { ".git", ".jj" },
+	},
 }
 
 -- takes only the first item for each starting line number

@@ -63,6 +63,7 @@ local formatters_by_ft = {
 	nix = { "alejandra", "injected" },
 	jq = { "jqfmt", "injected" },
 	terraform = { "terraform", "injected" },
+	slint = { "slint-lsp" },
 	-- nu = { "nufmt", "injected" },
 }
 
@@ -73,6 +74,10 @@ local external_formatters = {
 	},
 	gofmt = {
 		command = "gofmt",
+	},
+	["slint-lsp"] = {
+		command = "slint-lsp",
+		args = { "format", "$FILENAME" },
 	},
 }
 
