@@ -88,6 +88,48 @@ hl.bind("SUPER + down", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/group down"))
 hl.bind("SUPER + up", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/group up"))
 hl.bind("SUPER + right", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/group right"))
 
+local resizeMagnitude = 50
+
+hl.bind(
+	"SUPER + SHIFT + left",
+	hl.dsp.window.resize({
+		x = -resizeMagnitude,
+		y = 0,
+		relative = true,
+	}),
+	{ repeating = true }
+)
+
+hl.bind(
+	"SUPER + SHIFT + down",
+	hl.dsp.window.resize({
+		x = 0,
+		y = resizeMagnitude,
+		relative = true,
+	}),
+	{ repeating = true }
+)
+
+hl.bind(
+	"SUPER + SHIFT + up",
+	hl.dsp.window.resize({
+		x = 0,
+		y = -resizeMagnitude,
+		relative = true,
+	}),
+	{ repeating = true }
+)
+
+hl.bind(
+	"SUPER + SHIFT + right",
+	hl.dsp.window.resize({
+		x = resizeMagnitude,
+		y = 0,
+		relative = true,
+	}),
+	{ repeating = true }
+)
+
 hl.bind("SUPER + code:34", hl.dsp.group.prev())
 hl.bind("SUPER + code:48", hl.dsp.group.next())
 hl.bind("SUPER + S", hl.dsp.exec_cmd("nu ~/.config/hypr/scripts/group-workspace"))
