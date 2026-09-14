@@ -311,3 +311,60 @@ export def delete [] {
 
 export alias del = delete
 export alias rm = delete
+
+export def channels [] {
+    redisd channels
+    | lines
+    | each {|name| { name: $name }}
+}
+
+export alias chans = channels
+
+export def subscribe [
+    query?: string
+] {
+    let query = $query | default ""
+
+    let selection = channels 
+    | builtin get name
+    | to text 
+    | ^fzf --height 40% --layout reverse --multi
+    | lines
+
+    if ($selection | is-empty) {
+        print -e "no channels selected"
+        return
+    }
+
+    redisd subscribe ...$selection
+    | lines
+    | each { |line|
+        let split = $line | split row "\t"
+        let channel = $split.0
+        let message = $split.1
+
+        { channel: $channel, message: $message }
+    }
+}
+
+export alias sub = subscribe
+
+export def publish [
+    query?: string
+] {
+    let message = $in | to json
+    let query = $query | default ""
+
+    let selection = channels 
+    | builtin get name
+    | to text 
+    | ^fzf --height 40% --layout reverse
+    | lines
+
+    if ($selection | is-empty) {
+        print -e "no channel selected"
+        return
+    }
+
+    redisd publish $selection $message
+}
