@@ -61,13 +61,28 @@ map("n", {
 	rest_ws:activate()
 end, "toggle rest client")
 
+local function get_kulala_filetype()
+	local DB = require("kulala.db")
+	local g = DB.global_update()
+	local r = g.responses[g.current_response_pos or #g.responses]
+	if not r then
+		return nil
+	end
+	return require("kulala.ui.markdown").get_body_ft(r._kulala_media_type, r._kulala_body_type)
+end
+
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*.kulala_ui",
+	pattern = "*kulala_ui",
 	callback = function(args)
+		vim.notify(vim.inspect(args))
 		local buf = args.buf
 		vim.cmd("normal! zE")
-		local filetype = args.match:gsub("%.kulala_ui$", "")
-		vim.api.nvim_set_option_value("filetype", filetype, { buf = args.buf })
+		local filetype = get_kulala_filetype()
+
+		if filetype then
+			vim.api.nvim_set_option_value("filetype", filetype, { buf = args.buf })
+		end
+
 		vim.api.nvim_set_option_value("buftype", "nofile", { buf = args.buf })
 		vim.api.nvim_set_option_value("bufhidden", "hide", { buf = args.buf })
 		vim.api.nvim_set_option_value("swapfile", false, { buf = args.buf })

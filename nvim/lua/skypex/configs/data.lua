@@ -21,8 +21,9 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		local stats, err, _ = vim.uv.fs_stat(path)
 
 		if err ~= nil then
-			vim.notify(err, vim.log.levels.ERROR)
-			return
+			local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+			local content = table.concat(lines, "\r\n")
+			stats = { size = #content }
 		end
 
 		---@diagnostic disable-next-line: need-check-nil

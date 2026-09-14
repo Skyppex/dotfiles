@@ -117,7 +117,6 @@ M.servers = {
 			},
 		},
 	},
-	kulala_ls = {},
 	nushell = {},
 	qmlls = {
 		handlers = {
@@ -136,6 +135,22 @@ M.servers = {
 		},
 	},
 	jsonls = {
+		settings = {
+			json = {
+				validate = { enable = true },
+				format = { enable = false },
+				schemaDownload = { enable = true },
+				schemas = {
+					{
+						fileMatch = { "package.json" },
+						url = "https://json.schemastore.org/package.json",
+					},
+				},
+				trace = { server = "off" },
+			},
+		},
+	},
+	["json-lsp"] = {
 		settings = {
 			json = {
 				validate = { enable = true },
@@ -213,7 +228,7 @@ M.servers = {
 				return
 			end
 
-			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git", ".jj" })
+			local root = vim.fs.root(buf, { "package.json", ".git", ".jj" })
 			on_dir(root or vim.fn.getcwd())
 		end,
 	},
@@ -229,9 +244,19 @@ M.servers = {
 				return
 			end
 
-			local root = vim.fs.root(buf, { "tsconfig.json", "package.json", ".git", ".jj" })
+			local root = vim.fs.root(buf, { "package.json", ".git", ".jj" })
 			on_dir(root or vim.fn.getcwd())
 		end,
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = vim.fn.stdpath("data")
+						.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+					languages = { "vue" },
+				},
+			},
+		},
 	},
 	clangd = {
 		cmd = { "clangd", "--background-index", "--clang-tidy" },
@@ -414,7 +439,6 @@ local no_config_servers = {
 
 local no_install_servers = {
 	"nushell",
-	"kulala_ls",
 	"json_ls",
 	"nixd",
 	"terraform-ls",
