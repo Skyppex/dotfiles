@@ -321,6 +321,7 @@ export def channels [] {
 export alias chans = channels
 
 export def subscribe [
+    --take(-t): int
     query?: string
 ] {
     let query = $query | default ""
@@ -336,7 +337,15 @@ export def subscribe [
         return
     }
 
-    redisd subscribe ...$selection
+    mut args = []
+
+    if ($take | is-not-empty) {
+        $args = $args | append $"--take=($take)"
+    }
+
+    $args = $args | append $selection
+
+    redisd subscribe ...$args
     | lines
     | each { |line|
         let split = $line | split row "\t"
@@ -352,7 +361,7 @@ export alias sub = subscribe
 export def publish [
     query?: string
 ] {
-    let message = $in | to json
+    let message = $in
     let query = $query | default ""
 
     let selection = channels 
@@ -360,6 +369,7 @@ export def publish [
     | to text 
     | ^fzf --height 40% --layout reverse
     | lines
+    | first
 
     if ($selection | is-empty) {
         print -e "no channel selected"
@@ -368,3 +378,5 @@ export def publish [
 
     redisd publish $selection $message
 }
+
+export alias pub = publish
