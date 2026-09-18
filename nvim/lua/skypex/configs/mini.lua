@@ -136,6 +136,7 @@ map("n", "<leader>sf", function()
 			"--exclude=/target/**",
 			"--exclude=/result/**",
 			"--exclude=/vendor/**",
+			"--exclude=.crypt/artifacts/telemetry/**",
 		},
 	}, {
 		source = {
@@ -166,6 +167,7 @@ map("n", "<leader>sg", function()
 			"!target/**",
 			"!result/**",
 			"!vendor/**",
+			"!.crypt/artifacts/telemetry/**",
 		},
 	})
 end, "grep files")
