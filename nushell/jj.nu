@@ -604,6 +604,10 @@ def "jw rm" [] {
     rm -rf $workspace.path
 }
 
+alias "jw rn" = jj workspace rename
+alias "jw update" = jj workspace update-stale
+alias "jw u" = jj workspace update-stale
+
 def --wrapped "jp bookmarks" [...rest: string] {
     let bookmarks = jj bookmark list --all-remotes 
     | lines 
