@@ -107,8 +107,14 @@ export def find [
 
 export alias fd = find
 
-export def get [query?: string] {
-    let selection = find --multi $query
+export def get [query?: string]: nothing -> table<key, value>, table<key> -> table<key, value> {
+    let input = $in
+
+    let selection = if ($input | is-empty) {
+        find --multi $query
+    } else {
+        $input | builtin get key
+    }
 
     if ($selection | is-empty) {
         print -e "no key selected"
