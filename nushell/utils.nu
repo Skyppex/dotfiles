@@ -510,3 +510,30 @@ def invert [...cells: cell-path]: oneof<bool, list, record, table> -> oneof<bool
         $updated
     }
 }
+
+def combine []: table -> record {
+    let input = $in
+    let columns = $input | columns
+
+    mut record = {}
+
+    for $column in $columns {
+        let values = $input | get --optional $column
+        # find first non-nothing value
+
+        let first_value = $values | compact | get --optional 0
+
+        if ($first_value | is-not-empty) {
+            for $value in $values {
+                if $value != null and $value != $first_value {
+                    error make "cannot merge records"
+                    return
+                }
+            }
+        }
+
+        $record = $record | insert $column $first_value
+    }
+
+    return $record
+}
