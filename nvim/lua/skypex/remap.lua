@@ -14,7 +14,7 @@ map("n", "<up>", '<cmd>echo "Use k to move!!"<cr>')
 map("n", "<down>", '<cmd>echo "Use j to move!!"<cr>')
 
 -- Save file
-map("n", "<c-s>", "<cmd>wa<cr>")
+map("n", "<c-s>", "<cmd>silent wa<cr>")
 
 -- Move lines of code in visual mode
 map("x", "K", ":m '<-2<cr><cmd>normal! gv=gv<cr>")

@@ -67,7 +67,7 @@ local function open_buffer_in_split_no_focus(bufnr, split, filetype)
 end
 
 local function run_attempt(cmd, args, filetype, stdin)
-	vim.cmd("w")
+	vim.cmd("silent w")
 	local data_buffer = ""
 
 	local job = Job:new({
