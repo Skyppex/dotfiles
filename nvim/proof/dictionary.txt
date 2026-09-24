@@ -1155,3 +1155,5 @@ inbox
 argv
 secretspec
 keyring
+changefeed
+unsubscribe
