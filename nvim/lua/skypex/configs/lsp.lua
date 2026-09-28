@@ -217,6 +217,7 @@ M.servers = {
 	},
 	gopls = {},
 	tsc = {
+		cmd = { utils.get_home() .. "/.nix-profile/bin/tsc", "--lsp", "--stdio" },
 		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 		root_dir = function(buf, on_dir)
 			local fname = vim.api.nvim_buf_get_name(buf)
