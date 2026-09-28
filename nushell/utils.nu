@@ -57,11 +57,14 @@ def --env nudo [func: closure] {
 # Exit
 alias q = exit
 
-
 # Copy to the clipboard
 def clip [] {
     if (sys host | get long_os_version | str contains -i "linux") {
-        $in | wl-copy
+        if (sys host | get kernel_version | str contains -i "wsl") {
+            $in | xclip -selection clipboard
+        } else {
+            $in | wl-copy
+        }
     } else {
         let input = $in | str replace -a "\\" "\\\\"
         copyq add $"($input)"
@@ -69,11 +72,14 @@ def clip [] {
     }
 }
 
-
 # Paste from the clipboard
 def paste [] {
     if (sys host | get long_os_version | str contains -i "linux") {
-        wl-paste
+        if (sys host | get kernel_version | str contains -i "wsl") {
+            xclip -selection clipboard -o
+        } else {
+            wl-paste
+        }
     } else {
         copyq clipboard | complete | get stdout | to text
     }
