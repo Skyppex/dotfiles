@@ -21,8 +21,8 @@ require("dyn").focus_game = "~/.config/hypr/scripts/focus_game"
 
 local dyn = require("dyn")
 -- system
-hl.bind("SUPER + Delete", hl.dsp.exec_cmd("systemctl poweroff"))
-hl.bind("SUPER + CTRL + Delete", hl.dsp.exec_cmd("systemctl hybrid-sleep"))
+hl.bind("SUPER + Delete", hl.dsp.exec_cmd("systemctl poweroff"), { locked = true })
+hl.bind("SUPER + CTRL + Delete", hl.dsp.exec_cmd("systemctl hybrid-sleep"), { locked = true })
 hl.bind("SUPER + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 
 -- manage apps
