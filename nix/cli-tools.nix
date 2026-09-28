@@ -94,6 +94,7 @@
     speedtest-cli
     tldr
     tree-sitter
+    typescript
     unzip
     websocat
     wezterm
