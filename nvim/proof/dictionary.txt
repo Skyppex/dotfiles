@@ -1159,3 +1159,5 @@ changefeed
 unsubscribe
 xclip
 tsc
+miscompile
+deletable
