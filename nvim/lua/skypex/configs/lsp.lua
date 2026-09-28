@@ -216,7 +216,7 @@ M.servers = {
 		settings = devenv_settings,
 	},
 	gopls = {},
-	tsgo = {
+	tsc = {
 		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 		root_dir = function(buf, on_dir)
 			local fname = vim.api.nvim_buf_get_name(buf)
@@ -466,7 +466,7 @@ vim.list_extend(ensure_installed, {
 	"ruff",
 	"pyright",
 	"typescript-language-server",
-	"tsgo",
+	"tsc",
 	"vue-language-server",
 	"graphql-language-service-cli",
 })
