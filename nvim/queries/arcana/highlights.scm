@@ -107,6 +107,7 @@
   "^="
   "->" 
   ".."
+  "@"
 ] @operator
 
 (line_comment) @comment @spell
@@ -209,12 +210,11 @@
   ">" @punctuation.bracket)
 
 (enum_variant
-  variant_name: (type_identifier_name) @constant @spell)
+  variant_name: (type_identifier_name) @type @spell)
 
 (type_constructor
-  member_type_name: (type_annotation
-    (generic_type_annotation
-      (type_identifier_name) @constant @spell)))
+  type_name: (concrete_type_annotation
+    (type_identifier_name) @type @spell))
 
 (union_declaration
   name: (type_identifier_name) @type @spell)
@@ -228,7 +228,7 @@
 (wildcard) @character.special
 ; (rest) @operator
 
-(variable_pattern) @variable
+(binding_pattern) @variable
 
 (constructor_field
   field_pattern: (identifier) @property)
