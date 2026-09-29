@@ -216,6 +216,18 @@ export def set [
     }
 
     if $db == "@secrets" {
+        password
+
+        let k = open (manifest) 
+        | core-get --optional profiles
+        | core-get --optional default
+        | core-get --optional $key 
+        | default ""
+
+        if ($k | is-empty) {
+            sec add $key
+        }
+
         sec set $key $value
     } else {
         ^skate set $"($key)($db)" $value
