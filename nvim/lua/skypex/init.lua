@@ -9,6 +9,16 @@ require("skypex.signcolumn")
 skate = require("skypex.skate")
 
 vim.pack.add({
+	"https://github.com/dont-be-evil-company/kikao.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+	"https://github.com/tree-sitter/tree-sitter-c-sharp",
+	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+}, { confirm = false })
+
+require("skypex.configs.treesitter")
+require("skypex.configs.sessions")
+
+vim.pack.add({
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/tjdevries/colorbuddy.nvim",
 }, { confirm = false })
@@ -24,9 +34,6 @@ vim.defer_fn(function()
 		-- core
 		"https://github.com/mbbill/undotree",
 		"https://github.com/echasnovski/mini.nvim",
-		"https://github.com/nvim-treesitter/nvim-treesitter",
-		"https://github.com/tree-sitter/tree-sitter-c-sharp",
-		"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 		"https://github.com/stevearc/oil.nvim",
 		"https://github.com/SirZenith/oil-vcs-status",
 		"https://github.com/nvim-lualine/lualine.nvim",
@@ -35,7 +42,6 @@ vim.defer_fn(function()
 
 	require("skypex.configs.undotree")
 	require("skypex.configs.mini")
-	require("skypex.configs.treesitter")
 	require("skypex.configs.oil")
 	require("skypex.configs.lualine")
 	require("skypex.configs.tags")

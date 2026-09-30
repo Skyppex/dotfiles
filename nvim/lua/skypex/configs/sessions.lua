@@ -1,0 +1,1 @@
+require("kikao").setup({})
