@@ -172,7 +172,7 @@ vim.defer_fn(function()
 	-- presentation
 	vim.pack.add({
 		"https://github.com/laytan/cloak.nvim",
-		"https://github.com/NvChad/nvim-colorizer.lua",
+		"https://github.com/catgoose/nvim-colorizer.lua",
 		"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 		"https://github.com/HiPhish/rainbow-delimiters.nvim",
 		"https://github.com/folke/todo-comments.nvim",
