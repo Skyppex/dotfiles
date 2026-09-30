@@ -3,4 +3,4 @@ Description=Nix garbage collection
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/env -S nix-collect-garbage --delete-older-than 14d
+ExecStart=/usr/bin/env -S nix-collect-garbage --delete-older-than 7d

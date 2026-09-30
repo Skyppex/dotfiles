@@ -2,7 +2,7 @@
 Description=Run Nix garbage collection weekly
 
 [Timer]
-OnCalendar=weekly
+OnCalendar=daily
 Persistent=true
 
 [Install]
