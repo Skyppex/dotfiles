@@ -20,8 +20,9 @@ local colors = require("skypex.colors")
 
 require("graffiti").setup({
 	server_executable = bin_path.filename,
-	authorized_keys = "~/.ssh/authorized_keys",
-	client_key = "~/.ssh/id_25519-self",
+	authorized_keys = utils.get_home() .. "/.ssh/authorized_keys",
+	client_key = utils.get_home() .. "/.ssh/id_25519-self",
+	protocol_preference = { "ssh", "wss" },
 	cursors = {
 		hi1 = "guifg=" .. colors.background1 .. " guibg=" .. colors.dark_yellow,
 	},
