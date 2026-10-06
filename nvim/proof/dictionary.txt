@@ -23,6 +23,7 @@ appspot
 appxmanifest
 archibate
 archivable
+argv
 arial
 asax
 asc
@@ -104,6 +105,7 @@ cdq
 centerbox
 cginc
 changee
+changefeed
 changegroupactive
 chansend
 charmbracelet
@@ -194,6 +196,7 @@ deflisten
 defpoll
 defwidget
 defwindow
+deletable
 deleteword
 demare
 demoservice
@@ -342,6 +345,7 @@ gitleak
 gitoxide
 gitsignscurrentlineblame
 gix
+globalstatus
 globpath
 globpattern
 gltf
@@ -430,6 +434,7 @@ hyprpaper
 hyprpicker
 hyprpm
 hyprscrolling
+hz
 iamcco
 icc
 ifc
@@ -442,6 +447,7 @@ imagemagick
 imageservice
 imap
 imgfilter
+inbox
 indentexpr
 indicatif
 infisical
@@ -506,6 +512,7 @@ keychain
 keycode
 keyframe
 keyof
+keyring
 keytran
 kh
 kib
@@ -533,6 +540,7 @@ launchsetting
 layoutopt
 lazydocker
 lazygit
+lfo
 libexec
 libglvnd
 libnotify
@@ -606,6 +614,7 @@ mindset
 minecraft
 mingw
 miow
+miscompile
 mistweaverco
 mktemp
 mli
@@ -667,6 +676,7 @@ nixfmt
 nixos
 nixpkg
 nkakouro
+nlbo
 nmcli
 nobbmaestro
 nodeadkey
@@ -876,6 +886,7 @@ rustl
 rustlib
 rustup
 rw
+rx
 saadparwaiz
 saecki
 salesservice
@@ -899,6 +910,7 @@ sdp
 searchability
 searchhistory
 searchservice
+secretspec
 segoe
 sentinelsoftware
 serde
@@ -1013,6 +1025,7 @@ transcoder
 trpc
 truesight
 truetype
+tsc
 tsgo
 tsl
 tsv
@@ -1035,6 +1048,7 @@ unarchived
 undotree
 unescape
 unpause
+unsubscribe
 untrack
 unwatch
 upcase
@@ -1098,6 +1112,7 @@ winfixwidth
 winid
 winopt
 wip
+wiremix
 wireplumber
 wltp
 wonderous
@@ -1112,6 +1127,7 @@ wslayout
 xaml
 xamlx
 xarg
+xclip
 xcursor
 xdg
 ximap
@@ -1149,16 +1165,3 @@ zsh
 åz
 æb
 æz
-wiremix
-globalstatus
-inbox
-argv
-secretspec
-keyring
-changefeed
-unsubscribe
-xclip
-tsc
-miscompile
-deletable
-rx
