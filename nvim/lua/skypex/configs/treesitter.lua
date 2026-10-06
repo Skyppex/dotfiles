@@ -180,7 +180,7 @@ end
 
 add_arcana()
 
--- Add local parser for arcana
+-- Add local parser for lambda
 local function add_lambda()
 	local lambda_parser_path = nil
 
@@ -199,6 +199,24 @@ end
 
 add_lambda()
 
+local function add_rill()
+	local rill_parser_path = nil
+
+	rill_parser_path = utils.get_code_path() .. "/rill/tree-sitter-rill/parser.so"
+
+	local stat = vim.loop.fs_stat(rill_parser_path)
+
+	if not stat or not stat.type == "file" then
+		return
+	end
+
+	vim.treesitter.language.add("rill", {
+		path = rill_parser_path,
+	})
+end
+
+add_rill()
+
 local registry = {
 	{
 		lang = "arcana",
@@ -207,6 +225,10 @@ local registry = {
 	{
 		lang = "lambda",
 		filetype = "lambda",
+	},
+	{
+		lang = "rill",
+		filetype = "rill",
 	},
 }
 
@@ -231,6 +253,12 @@ local filetype_map = {
 		ext = "lambda",
 		filetype = "lambda",
 		commentstring = "#%s",
+	},
+	{
+		pattern = "*.rill",
+		ext = "rill",
+		filetype = "rill",
+		commentstring = "//%s",
 	},
 	{
 		pattern = "csharp",
