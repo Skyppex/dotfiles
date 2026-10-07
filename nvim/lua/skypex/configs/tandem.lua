@@ -47,31 +47,34 @@ local tandem_ws = require("skypex.workspaces").register({
 
 local map = utils.map
 
+-- workspace
 map("n", { "<c-w><c-t>", "<c-w>t" }, function()
 	tandem_ws:activate()
 end, "activate ai chat")
 
-map("n", "<leader>ta", tandem.ask, "ask ai")
-map("n", "<leader>tc", tandem.chat.toggle, "toggle chat dock")
-map("n", "<leader>tq", tandem.interrupt, "interrupt claude")
-map("n", "<leader>tY", tandem.permission.permit, "permit permission request")
-map("n", "<leader>tN", tandem.permission.deny, "deny permission request")
-map("n", "<leader>tS", tandem.session.resume, "resume session")
-map("n", "<leader>tN", tandem.session.resume, "new session")
-map("n", "<leader>td", tandem.answer.dismiss, "dismiss inline answer")
-map("n", "<leader>tD", tandem.answer.clear, "dismiss all inline answers")
-map("n", "<leader>tQ", tandem.quickfix.replace, "replace quickfix list")
+-- sessions and chat
+map("nx", "<leader>ta", tandem.ask, "ask ai")
+map("nx", "<leader>tc", tandem.chat.toggle, "toggle chat dock")
+map("nx", "<leader>tq", tandem.interrupt, "interrupt claude")
+map("nx", "<leader>tY", tandem.permission.permit, "permit permission request")
+map("nx", "<leader>tN", tandem.permission.deny, "deny permission request")
+map("nx", "<leader>tS", tandem.session.resume, "resume session")
+map("nx", "<leader>tN", tandem.session.resume, "new session")
+map("nx", "<leader>td", tandem.answer.dismiss, "dismiss inline answer")
+map("nx", "<leader>tD", tandem.answer.clear, "dismiss all inline answers")
+map("nx", "<leader>tQ", tandem.quickfix.replace, "replace quickfix list")
 
-map("n", "<leader>tr", tandem.review.toggle_global, "toggle review mode")
-map("n", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer")
-map("n", "<leader>tm", tandem.mode.toggle, "toggle mode")
-map("n", "<leader>ts", tandem.hunk.toggle, "toggle old/new suggestion")
-map("n", "<leader>ty", tandem.hunk.approve, "approve suggestion")
-map("n", "<leader>tn", tandem.hunk.reject, "reject suggestion")
-map("n", "<leader>tp", tandem.hunk.peek, "peek at suggestion")
-map("n", "<leader>tl", tandem.list.toggle, "toggle change list")
-map("n", "æt", tandem.list.next, "goto next change")
-map("n", "åt", tandem.list.prev, "goto previous change")
+-- review mode and hunks
+map("nx", "<leader>tr", tandem.review.toggle_global, "toggle review mode")
+map("nx", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer")
+map("nx", "<leader>tm", tandem.mode.toggle, "toggle mode")
+map("nx", "<leader>ts", tandem.hunk.toggle, "toggle old/new suggestion")
+map("nx", "<leader>ty", tandem.hunk.approve, "approve suggestion")
+map("nx", "<leader>tn", tandem.hunk.reject, "reject suggestion")
+map("nx", "<leader>tp", tandem.hunk.peek, "peek at suggestion")
+map("nx", "<leader>tl", tandem.list.toggle, "toggle change list")
+map("nx", "æt", tandem.list.next, "goto next change")
+map("nx", "åt", tandem.list.prev, "goto previous change")
 
 vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 	pattern = "*",
