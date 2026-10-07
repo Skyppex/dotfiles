@@ -561,7 +561,7 @@ local config = {
 		DOTNET_ROOT = utils.get_home() .. "/.nix-profile/share/dotnet",
 		PATH = utils.get_home() .. "/.dotnet/tools" .. ":" .. utils.get_home() .. "/dev/bin" .. ":" .. os.getenv(
 			"PATH"
-		),
+		) .. ":" .. utils.get_home() .. "/.local/bin",
 	}, require("env")),
 }
 
