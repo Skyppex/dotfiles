@@ -60,6 +60,37 @@ local devenv_lsp_config, exit_code = utils.run_command_ret("devenv", { "lsp", "-
 
 local devenv_settings = exit_code == 0 and devenv_lsp_config and vim.json.decode(table.concat(devenv_lsp_config))
 
+local lua_library = {}
+
+local function add_lua_library(path)
+	if path ~= nil and path ~= "" and vim.fn.isdirectory(path) == 1 then
+		table.insert(lua_library, path)
+	end
+end
+
+-- Neovim's Lua annotations live below $VIMRUNTIME/lua, while some
+-- distributions also expose them through the runtime root itself.
+for _, path in ipairs(vim.api.nvim_get_runtime_file("lua", true)) do
+	add_lua_library(path)
+end
+add_lua_library(vim.env.VIMRUNTIME)
+add_lua_library(vim.fs.joinpath(vim.env.VIMRUNTIME or "", "lua"))
+
+-- Hyprland installs its LuaLS annotations in share/hypr/stubs.
+local hyprland = vim.fn.exepath("Hyprland")
+
+if hyprland == "" then
+	hyprland = vim.fn.exepath("hyprland")
+end
+
+if hyprland ~= "" then
+	add_lua_library(vim.fs.joinpath(vim.fs.dirname(vim.fs.dirname(hyprland)), "share", "hypr", "stubs"))
+end
+
+for _, prefix in ipairs({ "/usr", "/usr/local", "/run/current-system/sw" }) do
+	add_lua_library(vim.fs.joinpath(prefix, "share", "hypr", "stubs"))
+end
+
 M.servers = {
 	lua_ls = {
 		filetypes = { "lua" },
@@ -68,7 +99,7 @@ M.servers = {
 				runtime = { version = "LuaJIT" },
 				workspace = {
 					checkThirdParty = false,
-					library = vim.api.nvim_get_runtime_file("lua", true),
+					library = lua_library,
 				},
 				completion = {
 					callSnippet = "Replace",
