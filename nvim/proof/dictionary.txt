@@ -1165,3 +1165,4 @@ zsh
 åz
 æb
 æz
+wavetable

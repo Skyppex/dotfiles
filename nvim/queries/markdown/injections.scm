@@ -23,3 +23,9 @@
     (language) @language (#eq? @language "mage"))
   (code_fence_content) @injection.content
   (#set! "injection.language" "arcana"))
+
+(fenced_code_block
+  (info_string
+    (language) @language (#eq? @language "rill"))
+  (code_fence_content) @injection.content
+  (#set! "injection.language" "rill"))

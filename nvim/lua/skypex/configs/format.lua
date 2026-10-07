@@ -64,6 +64,7 @@ local formatters_by_ft = {
 	jq = { "jqfmt", "injected" },
 	terraform = { "terraform", "injected" },
 	slint = { "slint-lsp" },
+	rill = { "flume" },
 	-- nu = { "nufmt", "injected" },
 }
 
@@ -78,6 +79,10 @@ local external_formatters = {
 	["slint-lsp"] = {
 		command = "slint-lsp",
 		args = { "format", "$FILENAME" },
+	},
+	flume = {
+		command = "flume",
+		args = { "fmt", "--check" },
 	},
 }
 

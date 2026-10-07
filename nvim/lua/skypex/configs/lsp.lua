@@ -269,6 +269,11 @@ M.servers = {
 		filetypes = { "slint" },
 		root_markers = { ".git", ".jj" },
 	},
+	wader = {
+		cmd = { "wader", "serve" },
+		filetypes = { "rill" },
+		root_markers = { "flake.nix", ".git", ".jj" },
+	},
 }
 
 -- takes only the first item for each starting line number
