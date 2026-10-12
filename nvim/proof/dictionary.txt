@@ -1169,3 +1169,4 @@ wavetable
 blep
 lowpas
 arp
+ahdsr
