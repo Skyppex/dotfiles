@@ -34,6 +34,9 @@ alias jrb = jj rebase
 # Jujutsu rebase onto
 alias jrbo = jj rebase --onto
 
+# Jujutsu abandon
+alias jab = jj abandon
+
 # Jujutsu new until prefix is only 1 letter (or failed)
 def --wrapped jn [...rest] {
     for i in 0..3 { 
