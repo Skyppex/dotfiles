@@ -543,3 +543,43 @@ def combine []: table -> record {
 
     return $record
 }
+
+def inplace [interval: duration, closure: closure] {
+    mut prev_rows = 0
+
+    loop {
+        let out = with-env {
+            CLICOLOR_FORCE: "1",
+            FORCE_COLOR: "1",
+            GIT_CONFIG_COUNT: "1",
+            GIT_CONFIG_KEY_0: "color.ui",
+            GIT_CONFIG_VALUE_0: "always",
+        } { do $closure }
+        let text = if ($out | describe) == "string" {
+            $out
+        } else {
+            $out | table | into string
+        }
+        let text = $text | str trim --right
+
+        # Count rows as they appear on screen, including lines that wrap
+        let cols = (term size).columns
+        let rows = $text
+            | lines
+            | each {|line|
+                let width = $line | ansi strip | str length --grapheme-clusters
+                [1 ($width / $cols | math ceil)] | math max
+            }
+            | math sum
+
+        # Move up to where the previous output started, then clear to end of screen
+        if $prev_rows > 0 {
+            print -n (ansi -e $"($prev_rows)F")
+        }
+        print -n (ansi -e "J")
+        print $text
+
+        $prev_rows = $rows
+        sleep $interval
+    }
+}
