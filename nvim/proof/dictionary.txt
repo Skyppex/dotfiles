@@ -1171,3 +1171,7 @@ lowpas
 arp
 ahdsr
 synth
+inplace
+clicolor
+noreply
+perlin
