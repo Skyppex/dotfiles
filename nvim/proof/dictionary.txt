@@ -1175,3 +1175,4 @@ inplace
 clicolor
 noreply
 perlin
+wav
