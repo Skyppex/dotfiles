@@ -105,22 +105,18 @@ require("nvim-treesitter.config").setup({
 			set_jumps = true,
 			goto_next_start = {
 				["æf"] = "@function.outer",
-				["æt"] = "@class.outer",
 				["æc"] = "@comment.outer",
 			},
 			goto_next_end = {
 				["æF"] = "@function.outer",
-				["æT"] = "@class.outer",
 				["æC"] = "@comment.outer",
 			},
 			goto_previous_start = {
 				["åf"] = "@function.outer",
-				["åt"] = "@class.outer",
 				["åc"] = "@comment.outer",
 			},
 			goto_previous_end = {
 				["åF"] = "@function.outer",
-				["åT"] = "@class.outer",
 				["åC"] = "@comment.outer",
 			},
 		},
@@ -142,7 +138,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-utils.map("n", "<leader>tt", function()
+utils.map("n", "<leader>TT", function()
 	local query_bufs = utils.each_buf_where(function(buf)
 		local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
 		return filetype == "query"

@@ -21,7 +21,7 @@ require("mini.pairs").setup()
 -- Splits and joins
 require("mini.splitjoin").setup({
 	mappings = {
-		toggle = "<leader>tw",
+		toggle = "<leader>wt",
 	},
 	detect = {
 		brackets = {

@@ -53,7 +53,7 @@ end
 
 local map = require("skypex.utils").map
 
-map("n", "<leader>tl", function()
+map("n", "<leader>lt", function()
 	vim.ui.select(log_levels, {}, function(selected)
 		set_fidget_log_level(selected)
 	end)

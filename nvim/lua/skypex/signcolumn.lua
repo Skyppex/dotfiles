@@ -111,7 +111,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
 })
 
 local map = require("skypex.utils").map
-map("nx", "<leader>ts", M.toggle_signcolumn_all, "toggle signcolumn")
-map("nx", "<leader>tS", M.toggle_signcolumn_buf, "toggle signcolumn for buffer")
+map("nx", "<leader>st", M.toggle_signcolumn_all, "toggle signcolumn")
+map("nx", "<leader>sT", M.toggle_signcolumn_buf, "toggle signcolumn for buffer")
 
 return M

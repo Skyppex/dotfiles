@@ -225,8 +225,8 @@ _G.format_operator = format_operator
 
 local map = require("skypex.utils").map
 
-map("n", "<leader>tf", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
-map("n", "<leader>tF", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
+map("n", "<leader>ft", "<cmd>FormatToggle<cr>", "Toggle autoformat on save for current buffer")
+map("n", "<leader>fT", "<cmd>FormatToggle!<cr>", "Toggle autoformat on save for all buffers")
 map("n", "<leader>ff", get_format_func(), "Format file")
 map("x", "<leader>f", get_format_func(), "Format selection")
 

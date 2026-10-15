@@ -111,7 +111,7 @@ jq.setup({
 	},
 })
 
-map("n", "<leader>tj", function()
+map("n", "<leader>jt", function()
 	local visible = false
 	local jq_output_buf = utils.bufs_by_name(jq_output_name)
 
@@ -196,4 +196,4 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
-map("n", "<leader>tv", "<cmd>CsvViewToggle<cr>", "Toggle columnar view")
+map("n", "<leader>Vt", "<cmd>CsvViewToggle<cr>", "Toggle columnar view")

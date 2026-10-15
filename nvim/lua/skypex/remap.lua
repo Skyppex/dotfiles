@@ -162,7 +162,7 @@ end)
 
 vim.opt.relativenumber = true
 
-map("nx", "<leader>tr", function()
+map("nx", "<leader>rt", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end, "Toggle relative line numbers")
 

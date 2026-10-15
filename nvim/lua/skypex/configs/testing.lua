@@ -62,7 +62,7 @@ map("n", "<leader>nq", function()
 	nt.run.stop()
 end, "Terminate tests")
 
-map("n", "<leader>tn", function()
+map("n", "<leader>nt", function()
 	nt.summary.toggle()
 end, "Toggle tests summary")
 

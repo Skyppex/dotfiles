@@ -112,6 +112,7 @@ vim.defer_fn(function()
 
 	utils.local_plugin("nvim-dbee", "https://github.com/skyppex/nvim-dbee")
 	utils.local_plugin("attempt.nvim", "https://github.com/skyppex/attempt.nvim")
+	utils.local_plugin("tandem.nvim", "https://github.com/skyppex/tandem.nvim")
 
 	local code_ws = require("skypex.workspaces").setup() -- sets up the initial tab as a workspace
 
@@ -128,6 +129,8 @@ vim.defer_fn(function()
 		require("skypex.configs.db")
 		require("skypex.configs.attempt")
 	end
+
+	require("skypex.configs.tandem")
 
 	-- debugging
 	vim.pack.add({

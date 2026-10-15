@@ -16,10 +16,6 @@ local lint = require("lint")
 
 lint.linters_by_ft = linters_by_ft
 
-require("skypex.utils").map("n", "<leader>l", function()
-	lint.try_lint()
-end, "Lint current file")
-
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
 vim.api.nvim_create_autocmd({
@@ -32,21 +28,3 @@ vim.api.nvim_create_autocmd({
 		lint.try_lint()
 	end,
 })
-
-local ensure_installed = {}
-
-for _, linters in pairs(linters_by_ft) do
-	for _, linter in pairs(linters) do
-		if type(linter) == "table" then
-			for _, l in pairs(linter) do
-				ensure_installed[l] = 1
-			end
-		else
-			ensure_installed[linter] = 1
-		end
-	end
-end
-
--- require("mason-tool-installer").setup({
--- 	ensure_installed = ensure_installed,
--- })
