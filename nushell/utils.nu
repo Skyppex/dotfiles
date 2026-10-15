@@ -445,7 +445,7 @@ def "parse db" [] {
 }
 
 # nix shell with allow unfree and --impure. install anything!
-def --env --wrapped "nsh" [
+def --env --wrapped nsh [
     --command(-c): string
     ...rest: string
 ] {
