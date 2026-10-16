@@ -17,11 +17,15 @@
 	red: #c14a4a;
 	dark-red: #a13737;
 	darker-red: #7b2a2a;
+	very-dark-red: #551d1d;
+	darkest-red: #2f1010;
 	lighter-orange: #f3ccb2;
 	light-orange: #ecaf86;
 	orange: #e5915a;
 	dark-orange: #de742e;
 	darker-orange: #bb5d1d;
+	very-dark-orange: #8f4617;
+	darkest-orange: #633110;
 	lighter-yellow: #ebd2aa;
 	light-yellow: #e2bc80;
 	yellow: #d8a657;
@@ -37,6 +41,8 @@
 	cyan: #83a598;
 	dark-cyan: #678e7f;
 	darker-cyan: #517064;
+	very-dark-cyan: #3c534a;
+	darkest-cyan: #273530;
 	lighter-blue: #8ab5ce;
 	light-blue: #669fbf;
 	blue: #4786ab;
