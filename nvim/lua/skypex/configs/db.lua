@@ -189,7 +189,7 @@ map("n", {
 	"<c-w>b",
 }, function()
 	db_ws:activate()
-end, "toggle db client")
+end, "activate db client")
 
 map("n", "<leader>bl", db.api.ui.next_result_set, "next result set")
 map("n", "<leader>bh", db.api.ui.prev_result_set, "previous result set")

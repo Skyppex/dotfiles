@@ -122,7 +122,7 @@ vim.defer_fn(function()
 			"<c-w>w",
 		}, function()
 			code_ws:activate()
-		end, "toggle coding workspace")
+		end, "activate coding workspace")
 
 		require("skypex.configs.rest")
 		require("skypex.blink-dbee")

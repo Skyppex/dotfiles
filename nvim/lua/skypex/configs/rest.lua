@@ -59,7 +59,7 @@ map("n", {
 	"<c-w>r",
 }, function()
 	rest_ws:activate()
-end, "toggle rest client")
+end, "activate rest client")
 
 local function get_kulala_filetype()
 	local DB = require("kulala.db")

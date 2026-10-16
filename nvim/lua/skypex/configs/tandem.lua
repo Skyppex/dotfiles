@@ -12,25 +12,48 @@ tandem.setup({
 	list = {
 		height = 10,
 	},
+	mode = "manual",
+	on_permission = function(request) -- { id, tool, input, summary, description?, subagent }
+		vim.notify("Claude waits: " .. request.summary, vim.log.levels.WARN)
+	end,
+})
+
+local tandem_ws = require("skypex.workspaces").register({
+	name = "tandem",
+	on_init = function()
+		tandem.chat.focus({ layout = "current" })
+	end,
 })
 
 local map = require("skypex.utils").map
 
-map("n", "<leader>ta", tandem.ask, "ask ai") -- prompt, opens chat split (focus stays)
-map("n", "<leader>tc", tandem.chat.toggle, "toggle chat")
-map("n", "<leader>ts", tandem.interrupt, "interrupt claude")
+map("n", { "<c-w><c-t>", "<c-w>t" }, function()
+	tandem_ws:activate()
+end, "activate ai chat")
+
+map("n", "<leader>ta", tandem.ask, "ask ai")
+map("n", "<leader>tc", tandem.chat.toggle, "toggle chat dock")
+map("n", "<leader>tq", tandem.interrupt, "interrupt claude")
+map("n", "<leader>tY", tandem.permission.permit, "permit permission request")
+map("n", "<leader>tN", tandem.permission.deny, "deny permission request")
+map("n", "<leader>tS", tandem.session.resume, "resume session")
+map("n", "<leader>tN", tandem.session.resume, "new session")
+map("n", "<leader>td", tandem.answer.dismiss, "dismiss inline answer")
+map("n", "<leader>tD", tandem.answer.clear, "dismiss all inline answers")
+
 map("n", "<leader>tr", tandem.review.toggle_global, "toggle review mode")
-map("n", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer") -- buffer-local review mode
-map("n", "<leader>th", tandem.hunk.toggle, "toggle old/new suggestion") -- old/new for nearest suggestion
+map("n", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer")
+map("n", "<leader>tm", tandem.mode.toggle, "toggle mode")
+map("n", "<leader>ts", tandem.hunk.toggle, "toggle old/new suggestion")
 map("n", "<leader>ty", tandem.hunk.approve, "approve suggestion")
 map("n", "<leader>tn", tandem.hunk.reject, "reject suggestion")
-map("n", "<leader>tp", tandem.hunk.peek, "peek at suggestion") -- float, handy for outdated ones
-map("n", "<leader>tl", tandem.list.toggle, "toggle change list") -- suggestion panel (<CR> jumps, q closes)
+map("n", "<leader>tp", tandem.hunk.peek, "peek at suggestion")
+map("n", "<leader>tl", tandem.list.toggle, "toggle change list")
 map("n", "æt", tandem.list.next, "goto next change")
 map("n", "åt", tandem.list.prev, "goto previous change")
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = "*",
 	callback = function(ev)
 		local buf = ev.buf
 
@@ -40,6 +63,22 @@ vim.api.nvim_create_autocmd("FileType", {
 			return
 		end
 
-		map("n", "<CR>", tandem.list.jump, nil, nil, buf)
+		map("n", "<CR>", tandem.list.jump, "jump to suggestion", nil, buf)
+		map("n", "<leader>ty", tandem.list.accept_all, "accept all suggestions", nil, buf)
+		map("n", "<leader>tn", tandem.list.reject_all, "reject all suggestions", nil, buf)
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = "*",
+	callback = function(ev)
+		local buf = ev.buf
+		local name = vim.api.nvim_buf_get_name(buf)
+
+		if name ~= "tandem://chat" then
+			return
+		end
+
+		map("n", "<c-s>", tandem.chat.send, "send message", nil, buf)
 	end,
 })

@@ -140,7 +140,6 @@ require("lualine").setup({
 						return
 					end
 
-					local colors = require("skypex.colors")
 					return get_devenv_statusline({
 						fg = colors.inactive,
 					}, {
@@ -153,6 +152,82 @@ require("lualine").setup({
 						fg = colors.error,
 					})
 				end,
+			},
+		},
+		lualine_y = {
+			{
+				function()
+					local ok, tandem = pcall(require, "tandem")
+
+					if not ok then
+						return ""
+					end
+
+					local reviewing = tandem.review.enabled(vim.api.nvim_get_current_buf())
+
+					if reviewing then
+						return " "
+					end
+
+					return ""
+				end,
+				color = {
+					fg = colors.cyan,
+				},
+			},
+			{
+				function()
+					local ok, tandem = pcall(require, "tandem")
+
+					if not ok then
+						return ""
+					end
+
+					return tandem.mode.get()
+				end,
+				color = function()
+					local ok, tandem = pcall(require, "tandem")
+
+					if not ok then
+						return ""
+					end
+
+					if tandem.mode.get() == "manual" then
+						return {
+							fg = colors.quaternary,
+						}
+					elseif tandem.mode.get() == "auto" then
+						return {
+							fg = colors.yellow,
+						}
+					end
+				end,
+			},
+			{
+				function()
+					local ok, tandem = pcall(require, "tandem")
+
+					if not ok then
+						return ""
+					end
+
+					local total_suggestions = #tandem.list.items()
+
+					if total_suggestions == 0 then
+						return ""
+					end
+
+					local current_suggestion = tandem.list.index()
+
+					if not current_suggestion then
+						return tostring(total_suggestions)
+					end
+
+					return tostring(current_suggestion) .. "/" .. tostring(total_suggestions)
+				end,
+				color = {
+					fg = colors.cyan,
+				},
 			},
 		},
 	},
