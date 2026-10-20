@@ -38,19 +38,7 @@ tandem.setup({
 	end,
 })
 
-local tandem_ws = require("skypex.workspaces").register({
-	name = "tandem",
-	on_init = function()
-		tandem.chat.focus({ layout = "current" })
-	end,
-})
-
 local map = utils.map
-
--- workspace
-map("n", { "<c-w><c-t>", "<c-w>t" }, function()
-	tandem_ws:activate()
-end, "activate ai chat")
 
 -- sessions and chat
 map("nx", "<leader>ta", tandem.ask, "ask ai")
@@ -67,7 +55,7 @@ map("nx", "<leader>tQ", tandem.quickfix.replace, "replace quickfix list")
 -- review mode and hunks
 map("nx", "<leader>tr", tandem.review.toggle_global, "toggle review mode")
 map("nx", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer")
-map("nx", "<leader>tm", tandem.mode.toggle, "toggle mode")
+map("nx", "<leader>tm", tandem.mode.cycle, "cycle mode")
 map("nx", "<leader>ts", tandem.hunk.toggle, "toggle old/new suggestion")
 map("nx", "<leader>ty", tandem.hunk.approve, "approve suggestion")
 map("nx", "<leader>tn", tandem.hunk.reject, "reject suggestion")
@@ -86,7 +74,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 			return
 		end
 
-		map("n", "<c-s>", tandem.chat.send, "send message", nil, buf)
+		map("n", "<c-s>", ":w<cr>", "write", nil, buf)
 		map("n", "<c-q>", tandem.quickfix.replace, "replace quickfix list", nil, buf)
 	end,
 })
@@ -103,7 +91,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 		end
 
 		map("n", "<CR>", tandem.list.jump, "jump to suggestion", nil, buf)
-		map("n", "<leader>ty", tandem.list.accept_all, "accept all suggestions", nil, buf)
+		map("n", "<leader>ty", tandem.list.approve_all, "approve all suggestions", nil, buf)
 		map("n", "<leader>tn", tandem.list.reject_all, "reject all suggestions", nil, buf)
 	end,
 })

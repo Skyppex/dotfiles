@@ -183,7 +183,13 @@ require("lualine").setup({
 						return ""
 					end
 
-					return tandem.mode.get()
+					local map = {
+						["manual"] = "manual",
+						["auto_permissions"] = "auto perms",
+						["auto"] = "auto",
+					}
+
+					return map[tandem.mode.get()]
 				end,
 				color = function()
 					local ok, tandem = pcall(require, "tandem")
@@ -195,6 +201,10 @@ require("lualine").setup({
 					if tandem.mode.get() == "manual" then
 						return {
 							fg = colors.quaternary,
+						}
+					elseif tandem.mode.get() == "auto_permissions" then
+						return {
+							fg = colors.green,
 						}
 					elseif tandem.mode.get() == "auto" then
 						return {
