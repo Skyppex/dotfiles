@@ -36,6 +36,8 @@
 	green: #66ba83;
 	dark-green: #4aa369;
 	darker-green: #3a8053;
+	very-dark-green: #2a5d3c;
+	darkest-green: #1a3a25;
 	lighter-cyan: #bed0c9;
 	light-cyan: #a0bab0;
 	cyan: #83a598;
@@ -48,6 +50,8 @@
 	blue: #4786ab;
 	dark-blue: #386a87;
 	darker-blue: #294e63;
+	very-dark-blue: #1a313f;
+	darkest-blue: #0b151b;
 	lighter-purple: #d3a6ba;
 	light-purple: #c284a0;
 	purple: #b16286;

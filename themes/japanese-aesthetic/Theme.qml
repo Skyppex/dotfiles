@@ -39,6 +39,8 @@ QtObject {
   property color green: "#66ba83";
   property color dark_green: "#4aa369";
   property color darker_green: "#3a8053";
+  property color very_dark_green: "#2a5d3c";
+  property color darkest_green: "#1a3a25";
   property color lighter_cyan: "#bed0c9";
   property color light_cyan: "#a0bab0";
   property color cyan: "#83a598";
@@ -51,6 +53,8 @@ QtObject {
   property color blue: "#4786ab";
   property color dark_blue: "#386a87";
   property color darker_blue: "#294e63";
+  property color very_dark_blue: "#1a313f";
+  property color darkest_blue: "#0b151b";
   property color lighter_purple: "#d3a6ba";
   property color light_purple: "#c284a0";
   property color purple: "#b16286";
