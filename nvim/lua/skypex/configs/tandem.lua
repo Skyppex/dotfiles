@@ -28,6 +28,7 @@ tandem.setup({
 	},
 	chat = {
 		width = 80,
+		input_height = 5,
 	},
 	list = {
 		height = 10,
@@ -42,7 +43,9 @@ local map = utils.map
 
 -- sessions and chat
 map("nx", "<leader>ta", tandem.ask, "ask ai")
-map("nx", "<leader>tc", tandem.chat.toggle, "toggle chat dock")
+map("nx", "<leader>tc", function()
+	tandem.chat.toggle({ focus = "input" })
+end, "toggle chat dock")
 map("nx", "<leader>tq", tandem.interrupt, "interrupt claude")
 map("nx", "<leader>tY", tandem.permission.permit, "permit permission request")
 map("nx", "<leader>tN", tandem.permission.deny, "deny permission request")
@@ -61,8 +64,14 @@ map("nx", "<leader>ty", tandem.hunk.approve, "approve suggestion")
 map("nx", "<leader>tn", tandem.hunk.reject, "reject suggestion")
 map("nx", "<leader>tp", tandem.hunk.peek, "peek at suggestion")
 map("nx", "<leader>tl", tandem.list.toggle, "toggle change list")
-map("nx", "æt", tandem.list.next, "goto next change")
-map("nx", "åt", tandem.list.prev, "goto previous change")
+map("nx", "æt", function()
+	tandem.list.next()
+	tandem.review.set(true)
+end, "goto next change")
+map("nx", "åt", function()
+	tandem.list.prev()
+	tandem.review.set(true)
+end, "goto previous change")
 
 vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 	pattern = "*",
@@ -71,6 +80,21 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 		local name = vim.api.nvim_buf_get_name(buf)
 
 		if name ~= "tandem://chat" then
+			return
+		end
+
+		map("n", "<c-s>", ":w<cr>", "write", nil, buf)
+		map("n", "<c-q>", tandem.quickfix.replace, "replace quickfix list", nil, buf)
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = "*",
+	callback = function(ev)
+		local buf = ev.buf
+		local name = vim.api.nvim_buf_get_name(buf)
+
+		if name ~= "tandem://input" then
 			return
 		end
 

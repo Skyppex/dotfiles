@@ -224,6 +224,11 @@ vim.on_key(function(char)
 	end
 end)
 
+vim.api.nvim_create_user_command("InspectBelow", function()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0)) -- row 1-based, col 0-based
+	vim.show_pos(0, row, col) -- 0-based row, so this is the next line
+end, {})
+
 -- Source config
 map("n", "<leader><leader>c", function()
 	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/configs/*.lua", true, true)

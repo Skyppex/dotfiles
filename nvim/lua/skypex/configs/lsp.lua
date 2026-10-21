@@ -510,10 +510,6 @@ vim.list_extend(ensure_installed, {
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-require("mason-lspconfig").setup({
-	automatic_enable = true,
-})
-
 local function should_not_configure(server_name)
 	for _, v in ipairs(no_config_servers) do
 		if server_name == v then
@@ -539,6 +535,14 @@ for server_name, config in pairs(M.servers) do
 
 	::continue::
 end
+
+-- this file is loaded after VimEnter, so vim.lsp.enable starts servers on
+-- already open buffers immediately. set up mason-lspconfig after our configs
+-- are registered, otherwise mason-installed servers (like lua_ls) start with
+-- only the nvim-lspconfig defaults
+require("mason-lspconfig").setup({
+	automatic_enable = true,
+})
 
 vim.diagnostic.config({
 	signs = false,
