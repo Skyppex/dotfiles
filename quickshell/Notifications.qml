@@ -143,7 +143,7 @@ Scope {
                 summary: notification.summary,
                 body: notification.body,
                 image: notification.image,
-                read: false,
+                read: notification.appName.toLowerCase() === "screenshot" ? true : false,
                 actionCount: notification.actions.length,
                 actionText: notification.actions.length > 0 ? notification.actions[0].text : ""
             });
