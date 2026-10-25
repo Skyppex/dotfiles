@@ -136,6 +136,7 @@ Scope {
                 appName: notification.appName,
                 summary: notification.summary,
                 body: notification.body,
+                image: notification.image,
                 read: false,
                 actionCount: notification.actions.length,
                 actionText: notification.actions.length > 0 ? notification.actions[0].text : ""
@@ -285,6 +286,19 @@ Scope {
                                 }
                             }
 
+                            Image {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(360 * root.size, width * implicitHeight / implicitWidth) : 0
+                                source: modelData.image
+                                visible: source !== ""
+                                fillMode: Image.PreserveAspectFit
+                                horizontalAlignment: Image.AlignHCenter
+                                verticalAlignment: Image.AlignVCenter
+                                smooth: true
+                                mipmap: true
+                                asynchronous: true
+                            }
+
                             Text {
                                 Layout.fillWidth: true
                                 text: modelData.body
@@ -374,6 +388,7 @@ Scope {
                     required property var modelData
                     Layout.fillWidth: true
                     Layout.preferredHeight: popupBody.implicitHeight + 20
+                    Layout.maximumHeight: 320 * root.size
                     radius: Theme.border_outer_radius
                     color: Theme.background0
                     border.width: Theme.border_size
@@ -399,6 +414,19 @@ Scope {
                             font.pixelSize: 14 * root.size
                             font.bold: true
                             elide: Text.ElideRight
+                        }
+
+                        Image {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(360 * root.size, width * implicitHeight / implicitWidth) : 0
+                            source: modelData.image
+                            visible: source !== ""
+                            fillMode: Image.PreserveAspectFit
+                            horizontalAlignment: Image.AlignHCenter
+                            verticalAlignment: Image.AlignVCenter
+                            smooth: true
+                            mipmap: true
+                            asynchronous: true
                         }
 
                         Text {

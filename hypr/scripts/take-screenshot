@@ -1,10 +1,11 @@
 #!/usr/bin/env nu
 
-const screenshot_tmp_file = "/tmp/hypr/screenshot.png"
+let screenshot_tmp_file = $"/tmp/hypr/screenshot-(random uuid).png"
 
 let region = slurp
 let image = grim -g $region -
 $image | save $screenshot_tmp_file --force
 
-notify-send --icon $screenshot_tmp_file "screenshot saved"
+let screenshot_uri = $"file://($screenshot_tmp_file)"
+notify-send --app-name "screenshot" --icon $screenshot_uri "screenshot saved"
 $image | wl-copy
