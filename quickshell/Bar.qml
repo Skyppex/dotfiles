@@ -18,6 +18,12 @@ Scope {
 
     property real size: activeScreen.physicalPixelDensity / 4.250980392156863
 
+    Notifications {
+        id: notifications
+        targetScreen: root.activeScreen
+        size: root.size
+    }
+
     PanelWindow {
         id: bar
 
@@ -42,8 +48,20 @@ Scope {
         }
 
         Clock {
+            id: clock
             anchors.centerIn: parent
             size: root.size
+        }
+
+        Text {
+            anchors.left: clock.right
+            anchors.leftMargin: 12 * root.size
+            anchors.verticalCenter: parent.verticalCenter
+            visible: notifications.unreadCount > 0
+            text: "● " + notifications.unreadCount
+            color: Theme.cyan
+            font.family: Theme.fonts.primary
+            font.pixelSize: 13 * root.size
         }
 
         Metrics {

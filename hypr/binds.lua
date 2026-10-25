@@ -183,6 +183,21 @@ hl.bind("ALT + mouse:273", function()
 	end
 end)
 
+-- notifications
+hl.bind("SUPER + N", hl.dsp.exec_cmd("quickshell ipc call notifications toggle"))
+
+hl.define_submap("notifications", function()
+	hl.bind("J", hl.dsp.exec_cmd("quickshell ipc call notifications next"))
+	hl.bind("K", hl.dsp.exec_cmd("quickshell ipc call notifications previous"))
+	hl.bind("R", hl.dsp.exec_cmd("quickshell ipc call notifications select"))
+	hl.bind("SHIFT + R", hl.dsp.exec_cmd("quickshell ipc call notifications markAllRead"))
+	hl.bind("Return", hl.dsp.exec_cmd("quickshell ipc call notifications action"))
+	hl.bind("Escape", hl.dsp.exec_cmd("quickshell ipc call notifications hide"))
+	hl.bind("Escape", hl.dsp.submap("reset"))
+	hl.bind("SUPER + N", hl.dsp.exec_cmd("quickshell ipc call notifications hide"))
+	hl.bind("SUPER + N", hl.dsp.submap("reset"))
+end)
+
 -- media
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true })

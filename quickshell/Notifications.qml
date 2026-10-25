@@ -1,36 +1,148 @@
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
 
 Scope {
     id: root
+
     property bool centerOpen: false
     property real size: 1
-
+    property var targetScreen: null
+    property int selectedIndex: 0
+    property int unreadCount: 0
+    property var notificationObjects: ({})
+    property var sourceToplevels: ({})
     property ListModel history: ListModel {}
+
+    function updateUnreadCount(): void {
+        let count = 0;
+        for (let i = 0; i < history.count; ++i) {
+            if (!history.get(i).read)
+                ++count;
+        }
+        unreadCount = count;
+        if (history.count === 0)
+            selectedIndex = 0;
+        else
+            selectedIndex = Math.min(selectedIndex, history.count - 1);
+    }
+
+    function selectedNotification(): var {
+        if (history.count === 0)
+            return null;
+        return notificationObjects[history.get(selectedIndex).id] || null;
+    }
+
+    function focusSource(notification, sourceToplevel): void {
+        if (!notification)
+            return;
+
+        if (sourceToplevel && sourceToplevel.wayland) {
+            sourceToplevel.wayland.activate();
+            return;
+        }
+
+        const desktopEntry = notification.desktopEntry.toLowerCase();
+        const appName = notification.appName.toLowerCase();
+
+        for (const toplevel of Hyprland.toplevels) {
+            const appId = (toplevel.appId || "").toLowerCase();
+            if ((desktopEntry !== "" && (appId === desktopEntry || appId.includes(desktopEntry))) || (appName !== "" && appId.includes(appName))) {
+                toplevel.activate();
+                return;
+            }
+        }
+    }
+
+    function markRead(index): void {
+        if (index < 0 || index >= history.count)
+            return;
+
+        const entry = history.get(index);
+        const notification = notificationObjects[entry.id];
+        if (!entry.read) {
+            history.setProperty(index, "read", true);
+            if (notification)
+                notification.tracked = false;
+            updateUnreadCount();
+        }
+        focusSource(notification, sourceToplevels[entry.id] || null);
+    }
+
+    function markAllRead(): void {
+        const notificationsToDismiss = [];
+
+        for (let i = 0; i < history.count; ++i) {
+            const entry = history.get(i);
+            const notification = notificationObjects[entry.id];
+            if (!entry.read) {
+                history.setProperty(i, "read", true);
+                if (notification)
+                    notificationsToDismiss.push(notification);
+            }
+        }
+
+        updateUnreadCount();
+
+        for (const notification of notificationsToDismiss)
+            notification.tracked = false;
+    }
+
+    function moveSelection(delta): void {
+        if (history.count === 0)
+            return;
+        selectedIndex = (selectedIndex + delta + history.count) % history.count;
+    }
+
+    function select(): void {
+        markRead(selectedIndex);
+    }
+
+    function invokeAction(): void {
+        const notification = selectedNotification();
+        if (!notification || notification.actions.length === 0)
+            return;
+        notification.actions[0].invoke();
+        markRead(selectedIndex);
+    }
+
+    function setNotificationSubmap(active): void {
+        Hyprland.dispatch(active ? 'hl.dsp.submap("notifications")' : 'hl.dsp.submap("reset")');
+    }
 
     NotificationServer {
         id: server
 
         actionsSupported: true
+        actionIconsSupported: true
         bodySupported: true
         imageSupported: true
+        bodyImagesSupported: true
+        bodyHyperlinksSupported: true
+        bodyMarkupSupported: false
+        persistenceSupported: false
+        inlineReplySupported: false
+        keepOnReload: true
 
-        onNotification: n => {
-            console.log("got:", n.summary, n.body);
-            console.log(history);
-
-            history.append({
-                summary: n.summary,
-                body: n.body,
-                appName: n.appName,
-                urgency: n.urgency,
-                time: Qt.formatDateTime(new Date(), "HH:mm")
+        onNotification: notification => {
+            notificationObjects[notification.id] = notification;
+            sourceToplevels[notification.id] = Hyprland.activeToplevel;
+            history.insert(0, {
+                id: notification.id,
+                appName: notification.appName,
+                summary: notification.summary,
+                body: notification.body,
+                read: false,
+                actionCount: notification.actions.length,
+                actionText: notification.actions.length > 0 ? notification.actions[0].text : ""
             });
-            n.tracked = true;
+            notification.tracked = true;
+            selectedIndex = 0;
+            updateUnreadCount();
         }
     }
 
@@ -38,44 +150,65 @@ Scope {
         target: "notifications"
 
         function toggle(): void {
-            console.log(history);
-            console.log(history.count);
             root.centerOpen = !root.centerOpen;
+            root.setNotificationSubmap(root.centerOpen);
         }
 
         function show(): void {
             root.centerOpen = true;
+            root.setNotificationSubmap(true);
         }
 
         function hide(): void {
             root.centerOpen = false;
+            root.setNotificationSubmap(false);
+        }
+
+        function next(): void {
+            root.moveSelection(1);
+        }
+
+        function previous(): void {
+            root.moveSelection(-1);
+        }
+
+        function select(): void {
+            root.select();
+        }
+
+        function action(): void {
+            root.invokeAction();
+        }
+
+        function markAllRead(): void {
+            root.markAllRead();
         }
     }
 
     PanelWindow {
         id: center
-        visible: root.centerOpen
 
+        screen: root.targetScreen
+        visible: root.centerOpen
         anchors {
             top: true
-            right: true
+            left: true
         }
-
         margins {
-            top: 12
-            right: 12
+            top: Math.round(32 * root.size)
+            left: Math.max(0, (root.targetScreen.width - implicitWidth) / 2)
         }
 
-        implicitWidth: 380
-        implicitHeight: centerColumn.implicitHeight + 24
+        implicitWidth: 420
+        implicitHeight: Math.min(620, centerColumn.implicitHeight + 24)
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
 
         Rectangle {
             anchors.fill: parent
-            radius: Theme.border_outer_radius
-            color: Theme.background1
-            border.width: Theme.border_size
+            radius: 0
+            color: Theme.background0
+            border.width: 0
             border.color: Theme.secondary
 
             ColumnLayout {
@@ -89,65 +222,54 @@ Scope {
 
                     Text {
                         Layout.fillWidth: true
-                        text: "Notifications"
+                        text: "Notifications (" + root.unreadCount + " unread)"
                         color: Theme.cyan
                         font.family: Theme.fonts.primary
                         font.pixelSize: 14 * root.size
                         font.bold: true
-                        elide: Text.ElideRight
                     }
 
                     Text {
-                        text: "Clear all"
-                        visible: history.count > 0
+                        text: "mark all read"
                         color: Theme.red
                         font.family: Theme.fonts.primary
-                        font.pixelSize: 13 * root.size
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: history.clear()
-                        }
+                        font.pixelSize: 12 * root.size
                     }
                 }
 
-                Repeater {
-                    model: history
+                ListView {
+                    id: historyView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    implicitHeight: Math.min(contentHeight, 570 * root.size)
+                    model: root.history
+                    currentIndex: root.selectedIndex
+                    spacing: 8
+                    clip: true
 
-                    Rectangle {
-                        id: historyCard
+                    delegate: Rectangle {
                         required property var modelData
+                        required property int index
 
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 60
-                        // Layout.preferredHeight: layout.implicitHeight + 20
+                        width: historyView.width
+                        height: cardColumn.implicitHeight + 20
                         radius: Theme.border_outer_radius
-                        color: Theme.background0
+                        color: index === root.selectedIndex ? Theme.background2 : Theme.background0
                         border.width: Theme.border_size
-                        border.color: modelData.urgency === NotificationUrgency.Critical ? Theme.important : Theme.secondary
+                        border.color: modelData.read ? Theme.secondary : Theme.cyan
 
-                        RowLayout {
-                            id: layout
+                        ColumnLayout {
+                            id: cardColumn
                             anchors.fill: parent
                             anchors.margins: 10
-                            spacing: 10
+                            spacing: 4
 
-                            Image {
-                                Layout.preferredHeight: 36
-                                Layout.preferredWidth: 36
-                                Layout.alignment: Qt.AlignTop
-                                fillMode: Image.PreserveAspectFit
-                                visible: source.toString() !== ""
-                                source: historyCard.modelData.image || historyCard.modelData.appIcon || ""
-                            }
-
-                            ColumnLayout {
+                            RowLayout {
                                 Layout.fillWidth: true
-                                spacing: 2
 
                                 Text {
                                     Layout.fillWidth: true
-                                    text: historyCard.modelData.summary
+                                    text: modelData.appName + ": " + modelData.summary
                                     color: Theme.cyan
                                     font.family: Theme.fonts.primary
                                     font.pixelSize: 14 * root.size
@@ -156,47 +278,92 @@ Scope {
                                 }
 
                                 Text {
-                                    Layout.fillWidth: true
-                                    visible: text !== ""
-                                    text: historyCard.modelData.body
-                                    color: Theme.primary
+                                    text: modelData.read ? "read" : "new"
+                                    color: modelData.read ? Theme.quaternary : Theme.green
                                     font.family: Theme.fonts.primary
-                                    font.pixelSize: 13 * size
-                                    wrapMode: Text.WordWrap
+                                    font.pixelSize: 11 * root.size
                                 }
                             }
-                        }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: historyCard.modelData.dismiss()
+                            Text {
+                                Layout.fillWidth: true
+                                text: modelData.body
+                                color: Theme.primary
+                                font.family: Theme.fonts.primary
+                                font.pixelSize: 13 * root.size
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                            }
+
+                            Text {
+                                Layout.fillWidth: true
+                                visible: modelData.actionCount > 0
+                                text: "action: " + (modelData.actionCount > 0 ? modelData.actionText : "")
+                                color: Theme.yellow
+                                font.family: Theme.fonts.primary
+                                font.pixelSize: 11 * root.size
+                                elide: Text.ElideRight
+                            }
                         }
                     }
+
+                    Text {
+                        anchors.centerIn: parent
+                        visible: root.history.count === 0
+                        text: "No notifications"
+                        color: Theme.quaternary
+                        font.family: Theme.fonts.primary
+                        font.pixelSize: 13 * root.size
+                    }
                 }
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: Theme.border_size
+                color: Theme.secondary
+            }
+
+            Rectangle {
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: Theme.border_size
+                color: Theme.secondary
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                height: Theme.border_size
+                color: Theme.secondary
             }
         }
     }
 
     PanelWindow {
-        id: panel
+        id: popup
 
+        screen: root.targetScreen
+        visible: server.trackedNotifications.values.length > 0 && !root.centerOpen
         anchors {
             top: true
             right: true
         }
-
         margins {
             top: 12
             right: 12
         }
-
         implicitWidth: 380
-        implicitHeight: Math.max(1, column.implicitHeight)
+        implicitHeight: Math.min(620, popupColumn.implicitHeight)
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
 
         ColumnLayout {
-            id: column
+            id: popupColumn
             width: parent.width
             spacing: 10
 
@@ -204,67 +371,45 @@ Scope {
                 model: server.trackedNotifications
 
                 Rectangle {
-                    id: card
                     required property var modelData
-
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    // Layout.preferredHeight: layout.implicitHeight + 20
+                    Layout.preferredHeight: popupBody.implicitHeight + 20
                     radius: Theme.border_outer_radius
                     color: Theme.background0
                     border.width: Theme.border_size
                     border.color: modelData.urgency === NotificationUrgency.Critical ? Theme.important : Theme.secondary
 
                     Timer {
-                        running: card.modelData.urgency !== NotificationUrgency.Critical
+                        running: modelData.urgency !== NotificationUrgency.Critical
                         interval: 5000
-                        onTriggered: card.modelData.dismiss()
+                        onTriggered: modelData.tracked = false
                     }
 
-                    RowLayout {
-                        id: layout
+                    ColumnLayout {
+                        id: popupBody
                         anchors.fill: parent
                         anchors.margins: 10
-                        spacing: 10
+                        spacing: 3
 
-                        Image {
-                            Layout.preferredHeight: 36
-                            Layout.preferredWidth: 36
-                            Layout.alignment: Qt.AlignTop
-                            fillMode: Image.PreserveAspectFit
-                            visible: source.toString() !== ""
-                            source: card.modelData.image || card.modelData.appIcon || ""
-                        }
-
-                        ColumnLayout {
+                        Text {
                             Layout.fillWidth: true
-                            spacing: 2
-
-                            Text {
-                                Layout.fillWidth: true
-                                text: card.modelData.summary
-                                color: Theme.cyan
-                                font.family: Theme.fonts.primary
-                                font.pixelSize: 14 * root.size
-                                font.bold: true
-                                elide: Text.ElideRight
-                            }
-
-                            Text {
-                                Layout.fillWidth: true
-                                visible: text !== ""
-                                text: card.modelData.body
-                                color: Theme.primary
-                                font.family: Theme.fonts.primary
-                                font.pixelSize: 13 * size
-                                wrapMode: Text.WordWrap
-                            }
+                            text: modelData.appName + ": " + modelData.summary
+                            color: Theme.cyan
+                            font.family: Theme.fonts.primary
+                            font.pixelSize: 14 * root.size
+                            font.bold: true
+                            elide: Text.ElideRight
                         }
-                    }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: card.modelData.dismiss()
+                        Text {
+                            Layout.fillWidth: true
+                            text: modelData.body
+                            color: Theme.primary
+                            font.family: Theme.fonts.primary
+                            font.pixelSize: 13 * root.size
+                            textFormat: Text.PlainText
+                            wrapMode: Text.WordWrap
+                        }
                     }
                 }
             }

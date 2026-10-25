@@ -1,6 +1,5 @@
 hl.on("hyprland.start", function()
 	hl.exec_cmd("quickshell --daemonize --no-duplicate")
-	hl.exec_cmd("mako --default-timeout 5000")
 	hl.exec_cmd("wl-paste --watch cliphist store")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("awww-daemon")

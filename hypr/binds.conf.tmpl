@@ -87,6 +87,21 @@ bindm = MOD5, mouse:273, resizewindow
 bindm = ALT, mouse:272, movewindow
 bindm = ALT, mouse:273, resizewindow
 
+# Notifications
+bind = $mainMod, N, exec, qs ipc call notifications toggle
+
+submap = notifications
+bind = , bracketright, exec, qs ipc call notifications next
+bind = , bracketleft, exec, qs ipc call notifications previous
+bind = , Enter, exec, qs ipc call notifications select
+bind = SHIFT, N, exec, qs ipc call notifications markAllRead
+bind = , A, exec, qs ipc call notifications action
+bind = , Escape, exec, qs ipc call notifications hide
+bind = , Escape, submap, reset
+bind = $mainMod, N, exec, qs ipc call notifications hide
+bind = $mainMod, N, submap, reset
+submap = reset
+
 # Media
 bindle = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindle = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
