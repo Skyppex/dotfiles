@@ -1,5 +1,6 @@
 local attempt = require("attempt")
 local Job = require("plenary.job")
+local utils = require("skypex.utils")
 local is_inline = false
 
 local function get_or_create_attempt_buf()
@@ -32,15 +33,6 @@ local function overwrite_buffer_with_string(bufnr, data)
 
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {})
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-end
-
-local function get_win_aspect_ratio(win)
-	local width = vim.api.nvim_win_get_width(win) / 2
-	local height = vim.api.nvim_win_get_height(win)
-
-	local aspect_ratio = width / height
-
-	return aspect_ratio
 end
 
 local function open_buffer_in_split_no_focus(bufnr, split, filetype)
@@ -90,7 +82,7 @@ local function run_attempt(cmd, args, filetype, stdin)
 				vim.schedule(function()
 					local attempt_buf = get_or_create_attempt_buf()
 					overwrite_buffer_with_string(attempt_buf, data_buffer)
-					local aspect_ratio = get_win_aspect_ratio(vim.api.nvim_get_current_win())
+					local aspect_ratio = utils.get_win_aspect_ratio(vim.api.nvim_get_current_win())
 					local split = aspect_ratio > 1.0 and "vsplit" or "split"
 					open_buffer_in_split_no_focus(attempt_buf, split, filetype)
 				end)

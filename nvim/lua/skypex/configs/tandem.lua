@@ -28,7 +28,15 @@ tandem.setup({
 	},
 	chat = {
 		width = 80,
+		height = 40,
 		input_height = 5,
+		split = function()
+			local aspect_ratio = utils.get_screen_aspect_ratio()
+			vim.notify(vim.inspect(aspect_ratio))
+			local split = aspect_ratio > 1.0 and "right" or "below"
+			vim.notify(split)
+			return split
+		end,
 	},
 	list = {
 		height = 10,

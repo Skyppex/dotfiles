@@ -433,4 +433,18 @@ function M.deduplicate(tbl)
 	return result
 end
 
+--- @return number aspect_ratio less than 1 for wide windows, more that 1 for tall windows
+function M.get_win_aspect_ratio(win)
+	local width = vim.api.nvim_win_get_width(win) / 2
+	local height = vim.api.nvim_win_get_height(win)
+	return width / height
+end
+
+--- @return number aspect_ratio less than 1 for wide windows, more that 1 for tall windows
+function M.get_screen_aspect_ratio()
+	local width = vim.o.columns / 2
+	local height = vim.o.lines
+	return width / height
+end
+
 return M
