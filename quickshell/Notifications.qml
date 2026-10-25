@@ -98,6 +98,12 @@ Scope {
         selectedIndex = (selectedIndex + delta + history.count) % history.count;
     }
 
+    function dismissTop(): void {
+        const notification = server.trackedNotifications.values[0];
+        if (notification)
+            notification.tracked = false;
+    }
+
     function select(): void {
         markRead(selectedIndex);
     }
@@ -183,6 +189,10 @@ Scope {
 
         function markAllRead(): void {
             root.markAllRead();
+        }
+
+        function dismissTop(): void {
+            root.dismissTop();
         }
     }
 

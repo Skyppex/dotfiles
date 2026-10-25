@@ -185,6 +185,7 @@ end)
 
 -- notifications
 hl.bind("SUPER + N", hl.dsp.exec_cmd("quickshell ipc call notifications toggle"))
+hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("quickshell ipc call notifications dismissTop"))
 
 hl.define_submap("notifications", function()
 	hl.bind("J", hl.dsp.exec_cmd("quickshell ipc call notifications next"))
