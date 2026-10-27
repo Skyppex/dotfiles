@@ -447,4 +447,18 @@ function M.get_screen_aspect_ratio()
 	return width / height
 end
 
+function M.table_append(left, right)
+	local result = {}
+
+	for i = 1, #left do
+		result[#result + 1] = left[i]
+	end
+
+	for i = 1, #right do
+		result[#result + 1] = right[i]
+	end
+
+	return result
+end
+
 return M
