@@ -3,16 +3,16 @@
   "defs": {},
   "theme": {
     "primary": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "secondary": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "accent": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "error": {
       "dark": "error",
@@ -63,12 +63,12 @@
       "light": "background1"
     },
     "diffAdded": {
-      "dark": "green",
-      "light": "green"
+      "dark": "green50",
+      "light": "green50"
     },
     "diffRemoved": {
-      "dark": "red",
-      "light": "red"
+      "dark": "red50",
+      "light": "red50"
     },
     "diffContext": {
       "dark": "secondary",
@@ -79,12 +79,12 @@
       "light": "secondary"
     },
     "diffHighlightAdded": {
-      "dark": "green",
-      "light": "green"
+      "dark": "green50",
+      "light": "green50"
     },
     "diffHighlightRemoved": {
-      "dark": "red",
-      "light": "red"
+      "dark": "red50",
+      "light": "red50"
     },
     "diffAddedBg": {
       "dark": "background3",
@@ -119,44 +119,44 @@
       "light": "primary"
     },
     "markdownLink": {
-      "dark": "blue",
-      "light": "blue"
+      "dark": "blue50",
+      "light": "blue50"
     },
     "markdownLinkText": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "markdownCode": {
-      "dark": "green",
-      "light": "green"
+      "dark": "green50",
+      "light": "green50"
     },
     "markdownBlockQuote": {
       "dark": "background3",
       "light": "background3"
     },
     "markdownEmph": {
-      "dark": "orange",
-      "light": "orange"
+      "dark": "orange50",
+      "light": "orange50"
     },
     "markdownStrong": {
-      "dark": "yellow",
-      "light": "yellow"
+      "dark": "yellow50",
+      "light": "yellow50"
     },
     "markdownHorizontalRule": {
       "dark": "background3",
       "light": "background3"
     },
     "markdownListItem": {
-      "dark": "blue",
-      "light": "blue"
+      "dark": "blue50",
+      "light": "blue50"
     },
     "markdownListEnumeration": {
       "dark": "secondary",
       "light": "secondary"
     },
     "markdownImage": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "markdownImageText": {
       "dark": "secondary",
@@ -171,32 +171,32 @@
       "light": "quaternary"
     },
     "syntaxKeyword": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "syntaxFunction": {
-      "dark": "yellow",
-      "light": "yellow"
+      "dark": "yellow50",
+      "light": "yellow50"
     },
     "syntaxVariable": {
-      "dark": "pink",
-      "light": "pink"
+      "dark": "pink50",
+      "light": "pink50"
     },
     "syntaxString": {
-      "dark": "green",
-      "light": "green"
+      "dark": "green50",
+      "light": "green50"
     },
     "syntaxNumber": {
-      "dark": "purple",
-      "light": "purple"
+      "dark": "purple50",
+      "light": "purple50"
     },
     "syntaxType": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "syntaxOperator": {
-      "dark": "cyan",
-      "light": "cyan"
+      "dark": "cyan50",
+      "light": "cyan50"
     },
     "syntaxPunctuation": {
       "dark": "primary",
@@ -204,4 +204,3 @@
     }
   }
 }
-

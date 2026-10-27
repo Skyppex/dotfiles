@@ -106,7 +106,7 @@ element alternate.active {
 }
 
 element selected.normal {
-    background-color: @cyan;
+    background-color: @cyan50;
     text-color:       @primary;
 }
 
@@ -116,7 +116,7 @@ element selected.urgent {
 }
 
 element selected.active {
-    background-color: @cyan;
+    background-color: @cyan50;
     text-color:       @primary;
 }
 

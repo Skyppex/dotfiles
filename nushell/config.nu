@@ -7,62 +7,62 @@ let theme = {
     # color for nushell primitives
     separator: $colors.background1
     leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: { fg: $colors.blue, attr: b }
-    empty: $colors.cyan
+    header: { fg: $colors.blue50, attr: b }
+    empty: $colors.cyan50
     # Closures can be used to choose colors for specific values.
     # The value (in this case, a bool) is piped into the closure.
     # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
-    bool: $colors.cyan
-    int: $colors.orange
-    filesize: $colors.purple
-    duration: $colors.purple
-    datetime: $colors.orange
+    bool: $colors.cyan50
+    int: $colors.orange50
+    filesize: $colors.purple50
+    duration: $colors.purple50
+    datetime: $colors.orange50
     range: $colors.primary
-    float: $colors.orange
-    string: $colors.green
-    nothing: $colors.red
-    binary: $colors.red
-    cell-path: $colors.orange
-    row_index: $colors.cyan
+    float: $colors.orange50
+    string: $colors.green50
+    nothing: $colors.red50
+    binary: $colors.red50
+    cell-path: $colors.orange50
+    row_index: $colors.cyan50
     record: $colors.primary
     list: $colors.primary
     block: $colors.primary
     hints: $colors.background3
     search_result: $colors.primary
     # shapes are used to change the cli syntax highlighting
-    shape_and: $colors.cyan
-    shape_closure: $colors.blue
-    shape_custom: $colors.yellow
-    shape_datetime: $colors.orange
-    shape_directory: $colors.purple
-    shape_external: $colors.cyan
-    shape_externalarg: $colors.blue
-    shape_external_resolved: $colors.yellow
-    shape_filepath: $colors.green
-    shape_flag: $colors.blue
-    shape_float: $colors.orange
-    shape_garbage: $colors.red
-    shape_globpattern: $colors.green
-    shape_int: $colors.orange
-    shape_internalcall: $colors.cyan
-    shape_keyword: $colors.cyan
+    shape_and: $colors.cyan50
+    shape_closure: $colors.blue50
+    shape_custom: $colors.yellow50
+    shape_datetime: $colors.orange50
+    shape_directory: $colors.purple50
+    shape_external: $colors.cyan50
+    shape_externalarg: $colors.blue50
+    shape_external_resolved: $colors.yellow50
+    shape_filepath: $colors.green50
+    shape_flag: $colors.blue50
+    shape_float: $colors.orange50
+    shape_garbage: $colors.red50
+    shape_globpattern: $colors.green50
+    shape_int: $colors.orange50
+    shape_internalcall: $colors.cyan50
+    shape_keyword: $colors.cyan50
     shape_list: $colors.primary
-    shape_literal: $colors.orange
-    shape_match_pattern: $colors.purple
+    shape_literal: $colors.orange50
+    shape_match_pattern: $colors.purple50
     shape_matching_brackets: $colors.primary
-    shape_nothing: $colors.red
-    shape_operator: $colors.red
-    shape_or: $colors.cyan
-    shape_pipe: $colors.orange
+    shape_nothing: $colors.red50
+    shape_operator: $colors.red50
+    shape_or: $colors.cyan50
+    shape_pipe: $colors.orange50
     shape_range: $colors.primary
     shape_record: $colors.primary
-    shape_redirection: $colors.yellow
-    shape_signature: $colors.cyan
-    shape_string: $colors.green
-    shape_string_interpolation: $colors.cyan
+    shape_redirection: $colors.yellow50
+    shape_signature: $colors.cyan50
+    shape_string: $colors.green50
+    shape_string_interpolation: $colors.cyan50
     shape_table: $colors.primary
-    shape_variable: $colors.pink
-    shape_vardecl: $colors.pink
+    shape_variable: $colors.pink50
+    shape_vardecl: $colors.pink50
 }
 
 def emit-osc7 [] {
@@ -117,15 +117,15 @@ $env.config = {
     explore: {
         status_bar_background: {fg: $colors.background1, bg: $colors.tertiary},
         command_bar_text: {fg: $colors.tertiary},
-        highlight: {fg: $colors.background1, bg: $colors.yellow},
+        highlight: {fg: $colors.background1, bg: $colors.yellow50},
         status: {
-            error: {fg: $colors.primary, bg: $colors.red},
+            error: {fg: $colors.primary, bg: $colors.red50},
             warn: {}
             info: {}
         },
         table: {
             split_line: {fg: $colors.background2},
-            selected_cell: {bg: $colors.cyan},
+            selected_cell: {bg: $colors.cyan50},
             selected_row: {},
             selected_column: {},
         },
@@ -238,9 +238,9 @@ $env.config = {
                 col_padding: 2
             }
             style: {
-                text: $colors.green
-                selected_text: $colors.blue
-                description_text: $colors.yellow
+                text: $colors.green50
+                selected_text: $colors.blue50
+                description_text: $colors.yellow50
             }
         }
         {
@@ -252,9 +252,9 @@ $env.config = {
                 page_size: 10
             }
             style: {
-                text: $colors.green
-                selected_text: $colors.blue
-                description_text: $colors.yellow
+                text: $colors.green50
+                selected_text: $colors.blue50
+                description_text: $colors.yellow50
             }
         }
         {
@@ -270,9 +270,9 @@ $env.config = {
                 description_rows: 10
             }
             style: {
-                text: $colors.green
-                selected_text: $colors.blue
-                description_text: $colors.yellow
+                text: $colors.green50
+                selected_text: $colors.blue50
+                description_text: $colors.yellow50
             }
         }
     ]

@@ -14,7 +14,7 @@ border-radius={{ index $style "border-outer-radius" }}
 border-size={{ index $style "border-size" }}
 
 [urgency=high]
-border-color={{ $colors.orange }}
+border-color={{ $colors.orange50 }}
 
 [app-name=Spotify]
 invisible=1

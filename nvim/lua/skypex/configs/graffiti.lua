@@ -24,7 +24,7 @@ require("graffiti").setup({
 	client_key = utils.get_home() .. "/.ssh/id_25519-self",
 	protocol_preference = { "ssh", "wss" },
 	cursors = {
-		hi1 = "guifg=" .. colors.background1 .. " guibg=" .. colors.dark_yellow,
+		hi1 = "guifg=" .. colors.background1 .. " guibg=" .. colors.yellow40,
 	},
 })
 

@@ -92,41 +92,41 @@ toolbar .toolbarbutton-1 {
 }
 
 .identity-color-blue {
-  --identity-tab-color: var(--blue) !important;
-  --identity-icon-color: var(--blue) !important;
+  --identity-tab-color: var(--blue50) !important;
+  --identity-icon-color: var(--blue50) !important;
 }
 
 .identity-color-turquoise {
-  --identity-tab-color: var(--cyan) !important;
-  --identity-icon-color: var(--cyan) !important;
+  --identity-tab-color: var(--cyan50) !important;
+  --identity-icon-color: var(--cyan50) !important;
 }
 
 .identity-color-green {
-  --identity-tab-color: var(--green) !important;
-  --identity-icon-color: var(--green) !important;
+  --identity-tab-color: var(--green50) !important;
+  --identity-icon-color: var(--green50) !important;
 }
 
 .identity-color-yellow {
-  --identity-tab-color: var(--yellow) !important;
-  --identity-icon-color: var(--yellow) !important;
+  --identity-tab-color: var(--yellow50) !important;
+  --identity-icon-color: var(--yellow50) !important;
 }
 
 .identity-color-orange {
-  --identity-tab-color: var(--orange) !important;
-  --identity-icon-color: var(--orange) !important;
+  --identity-tab-color: var(--orange50) !important;
+  --identity-icon-color: var(--orange50) !important;
 }
 
 .identity-color-red {
-  --identity-tab-color: var(--red) !important;
-  --identity-icon-color: var(--red) !important;
+  --identity-tab-color: var(--red50) !important;
+  --identity-icon-color: var(--red50) !important;
 }
 
 .identity-color-pink {
-  --identity-tab-color: var(--pink) !important;
-  --identity-icon-color: var(--pink) !important;
+  --identity-tab-color: var(--pink50) !important;
+  --identity-icon-color: var(--pink50) !important;
 }
 
 .identity-color-purple {
-  --identity-tab-color: var(--purple) !important;
-  --identity-icon-color: var(--purple) !important;
+  --identity-tab-color: var(--purple50) !important;
+  --identity-icon-color: var(--purple50) !important;
 }

@@ -10,13 +10,13 @@ theme[main_fg]="{{ $colors.primary }}"
 theme[title]="{{ $colors.primary }}"
 
 # Highlight color for keyboard shortcuts
-theme[hi_fg]="{{ $colors.red }}"
+theme[hi_fg]="{{ $colors.red50 }}"
 
 # Background color of selected item in processes box
 theme[selected_bg]="{{ $colors.background0 }}"
 
 # Foreground color of selected item in processes box
-theme[selected_fg]="{{ $colors.cyan }}"
+theme[selected_fg]="{{ $colors.cyan50 }}"
 
 # Color of inactive/disabled text
 theme[inactive_fg]="{{ $colors.background3 }}"
@@ -31,55 +31,55 @@ theme[meter_bg]="{{ $colors.background0 }}"
 theme[proc_misc]="{{ $colors.background0 }}"
 
 # CPU, Memory, Network, Proc box outline colors
-theme[cpu_box]="{{ $colors.darker_green }}"
-theme[mem_box]="{{ $colors.darker_yellow }}"
-theme[net_box]="{{ $colors.darker_blue }}"
-theme[proc_box]="{{ $colors.darker_orange }}"
+theme[cpu_box]="{{ $colors.green30 }}"
+theme[mem_box]="{{ $colors.yellow30 }}"
+theme[net_box]="{{ $colors.blue30 }}"
+theme[proc_box]="{{ $colors.orange30 }}"
 
 # Box divider line and small boxes line color
 theme[div_line]="{{ $colors.background2 }}"
 
 # Temperature graph color (Green -> Yellow -> Red)
-theme[temp_start]="{{ $colors.green }}"
-theme[temp_mid]="{{ $colors.yellow }}"
-theme[temp_end]="{{ $colors.red }}"
+theme[temp_start]="{{ $colors.green50 }}"
+theme[temp_mid]="{{ $colors.yellow50 }}"
+theme[temp_end]="{{ $colors.red50 }}"
 
 # CPU graph colors (Teal -> Lavender)
-theme[cpu_start]="{{ $colors.green }}"
-theme[cpu_mid]="{{ $colors.yellow }}"
-theme[cpu_end]="{{ $colors.red }}"
+theme[cpu_start]="{{ $colors.green50 }}"
+theme[cpu_mid]="{{ $colors.yellow50 }}"
+theme[cpu_end]="{{ $colors.red50 }}"
 
 # Mem/Disk free meter (Mauve -> Lavender -> Blue)
-theme[free_start]="{{ $colors.green }}"
-theme[free_mid]="{{ $colors.green }}"
-theme[free_end]="{{ $colors.green }}"
+theme[free_start]="{{ $colors.green50 }}"
+theme[free_mid]="{{ $colors.green50 }}"
+theme[free_end]="{{ $colors.green50 }}"
 
 # Mem/Disk cached meter (Sapphire -> Lavender)
-theme[cached_start]="{{ $colors.blue }}"
-theme[cached_mid]="{{ $colors.blue }}"
-theme[cached_end]="{{ $colors.blue }}"
+theme[cached_start]="{{ $colors.blue50 }}"
+theme[cached_mid]="{{ $colors.blue50 }}"
+theme[cached_end]="{{ $colors.blue50 }}"
 
 # Mem/Disk available meter (Peach -> Red)
-theme[available_start]="{{ $colors.yellow }}"
-theme[available_mid]="{{ $colors.yellow }}"
-theme[available_end]="{{ $colors.yellow }}"
+theme[available_start]="{{ $colors.yellow50 }}"
+theme[available_mid]="{{ $colors.yellow50 }}"
+theme[available_end]="{{ $colors.yellow50 }}"
 
 # Mem/Disk used meter (Green -> Sky)
-theme[used_start]="{{ $colors.red }}"
-theme[used_mid]="{{ $colors.red }}"
-theme[used_end]="{{ $colors.red }}"
+theme[used_start]="{{ $colors.red50 }}"
+theme[used_mid]="{{ $colors.red50 }}"
+theme[used_end]="{{ $colors.red50 }}"
 
 # Download graph colors (Peach -> Red)
-theme[download_start]="{{ $colors.blue }}"
-theme[download_mid]="{{ $colors.blue }}"
-theme[download_end]="{{ $colors.blue }}"
+theme[download_start]="{{ $colors.blue50 }}"
+theme[download_mid]="{{ $colors.blue50 }}"
+theme[download_end]="{{ $colors.blue50 }}"
 
 # Upload graph colors (Green -> Sky)
-theme[upload_start]="{{ $colors.purple }}"
-theme[upload_mid]="{{ $colors.purple }}"
-theme[upload_end]="{{ $colors.purple }}"
+theme[upload_start]="{{ $colors.purple50 }}"
+theme[upload_mid]="{{ $colors.purple50 }}"
+theme[upload_end]="{{ $colors.purple50 }}"
 
 # Process box color gradient for threads, mem and cpu usage (Sapphire -> Mauve)
-theme[process_start]="{{ $colors.green }}"
-theme[process_mid]="{{ $colors.green }}"
-theme[process_end]="{{ $colors.green }}"
+theme[process_start]="{{ $colors.green50 }}"
+theme[process_mid]="{{ $colors.green50 }}"
+theme[process_end]="{{ $colors.green50 }}"

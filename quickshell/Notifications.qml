@@ -234,7 +234,7 @@ Scope {
                     Text {
                         Layout.fillWidth: true
                         text: "Notifications (" + root.unreadCount + " unread)"
-                        color: Theme.cyan
+                        color: Theme.cyan50
                         font.family: Theme.fonts.primary
                         font.pixelSize: 14 * root.size
                         font.bold: true
@@ -242,7 +242,7 @@ Scope {
 
                     Text {
                         text: "mark all read"
-                        color: Theme.red
+                        color: Theme.red50
                         font.family: Theme.fonts.primary
                         font.pixelSize: 12 * root.size
                     }
@@ -267,7 +267,7 @@ Scope {
                         radius: Theme.border_outer_radius
                         color: index === root.selectedIndex ? Theme.background2 : Theme.background0
                         border.width: Theme.border_size
-                        border.color: modelData.read ? Theme.secondary : Theme.cyan
+                        border.color: modelData.read ? Theme.secondary : Theme.cyan50
 
                         ColumnLayout {
                             id: cardColumn
@@ -281,7 +281,7 @@ Scope {
                                 Text {
                                     Layout.fillWidth: true
                                     text: modelData.appName + ": " + modelData.summary
-                                    color: Theme.cyan
+                                    color: Theme.cyan50
                                     font.family: Theme.fonts.primary
                                     font.pixelSize: 14 * root.size
                                     font.bold: true
@@ -290,7 +290,7 @@ Scope {
 
                                 Text {
                                     text: modelData.read ? "read" : "new"
-                                    color: modelData.read ? Theme.quaternary : Theme.green
+                                    color: modelData.read ? Theme.quaternary : Theme.green50
                                     font.family: Theme.fonts.primary
                                     font.pixelSize: 11 * root.size
                                 }
@@ -323,7 +323,7 @@ Scope {
                                 Layout.fillWidth: true
                                 visible: modelData.actionCount > 0
                                 text: "action: " + (modelData.actionCount > 0 ? modelData.actionText : "")
-                                color: Theme.yellow
+                                color: Theme.yellow50
                                 font.family: Theme.fonts.primary
                                 font.pixelSize: 11 * root.size
                                 elide: Text.ElideRight
@@ -419,7 +419,7 @@ Scope {
                         Text {
                             Layout.fillWidth: true
                             text: modelData.appName + ": " + modelData.summary
-                            color: Theme.cyan
+                            color: Theme.cyan50
                             font.family: Theme.fonts.primary
                             font.pixelSize: 14 * root.size
                             font.bold: true

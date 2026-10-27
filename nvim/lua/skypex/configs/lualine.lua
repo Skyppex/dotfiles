@@ -3,27 +3,27 @@ local colors = require("skypex.colors")
 
 local theme = {
 	normal = {
-		a = { bg = colors.background2, fg = colors.pink, gui = "bold" },
+		a = { bg = colors.background2, fg = colors.pink50, gui = "bold" },
 		b = { bg = colors.background1, fg = colors.primary },
 		c = { bg = colors.background0, fg = colors.primary },
 	},
 	insert = {
-		a = { bg = colors.background2, fg = colors.green, gui = "bold" },
+		a = { bg = colors.background2, fg = colors.green50, gui = "bold" },
 		b = { bg = colors.background1, fg = colors.primary },
 		c = { bg = colors.background0, fg = colors.primary },
 	},
 	visual = {
-		a = { bg = colors.background2, fg = colors.yellow, gui = "bold" },
+		a = { bg = colors.background2, fg = colors.yellow50, gui = "bold" },
 		b = { bg = colors.background1, fg = colors.primary },
 		c = { bg = colors.background0, fg = colors.primary },
 	},
 	replace = {
-		a = { bg = colors.background2, fg = colors.blue, gui = "bold" },
+		a = { bg = colors.background2, fg = colors.blue50, gui = "bold" },
 		b = { bg = colors.background1, fg = colors.primary },
 		c = { bg = colors.background0, fg = colors.primary },
 	},
 	command = {
-		a = { bg = colors.background2, fg = colors.orange, gui = "bold" },
+		a = { bg = colors.background2, fg = colors.orange50, gui = "bold" },
 		b = { bg = colors.background1, fg = colors.primary },
 		c = { bg = colors.background0, fg = colors.primary },
 	},
@@ -172,7 +172,7 @@ require("lualine").setup({
 					return ""
 				end,
 				color = {
-					fg = colors.cyan,
+					fg = colors.cyan50,
 				},
 			},
 			{
@@ -204,11 +204,11 @@ require("lualine").setup({
 						}
 					elseif tandem.mode.get() == "auto_permissions" then
 						return {
-							fg = colors.green,
+							fg = colors.green50,
 						}
 					elseif tandem.mode.get() == "auto" then
 						return {
-							fg = colors.yellow,
+							fg = colors.yellow50,
 						}
 					end
 				end,
@@ -236,7 +236,7 @@ require("lualine").setup({
 					return tostring(current_suggestion) .. "/" .. tostring(total_suggestions)
 				end,
 				color = {
-					fg = colors.cyan,
+					fg = colors.cyan50,
 				},
 			},
 		},

@@ -59,7 +59,7 @@ Scope {
             anchors.verticalCenter: parent.verticalCenter
             visible: notifications.unreadCount > 0
             text: "● " + notifications.unreadCount
-            color: Theme.cyan
+            color: Theme.cyan50
             font.family: Theme.fonts.primary
             font.pixelSize: 13 * root.size
         }
