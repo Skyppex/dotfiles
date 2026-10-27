@@ -36,6 +36,17 @@ Color.new("orange30", colors.orange30)
 Color.new("orange20", colors.orange20)
 Color.new("orange10", colors.orange10)
 
+-- colorbuddy's built-in groups (StatusLine, markdownH1, ...) use these names,
+-- falling back to vim's named colors when unset
+Color.new("red", colors.red50)
+Color.new("pink", colors.pink50)
+Color.new("green", colors.green50)
+Color.new("yellow", colors.yellow50)
+Color.new("blue", colors.blue50)
+Color.new("cyan", colors.cyan50)
+Color.new("purple", colors.purple50)
+Color.new("orange", colors.orange50)
+
 Color.new("success", colors.success)
 Color.new("hint", colors.info)
 Color.new("info", colors.info)
