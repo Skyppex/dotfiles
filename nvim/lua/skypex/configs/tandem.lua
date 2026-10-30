@@ -61,7 +61,7 @@ map("nx", "<leader>tq", tandem.interrupt, "interrupt claude")
 map("nx", "<leader>tY", tandem.permission.permit, "permit permission request")
 map("nx", "<leader>tN", tandem.permission.deny, "deny permission request")
 map("nx", "<leader>ts", tandem.session.resume, "resume session")
-map("nx", "<leader>tS", tandem.session.resume, "new session")
+map("nx", "<leader>tS", tandem.session.new, "new session")
 map("nx", "<leader>td", tandem.answer.dismiss, "dismiss inline answer")
 map("nx", "<leader>tD", tandem.answer.clear, "dismiss all inline answers")
 map("nx", "<leader>tQ", tandem.quickfix.replace, "replace quickfix list")
@@ -176,7 +176,20 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 		end
 
 		map("n", "<c-s>", ":w<cr>", "write", nil, buf)
-		map("n", "<c-q>", tandem.quickfix.replace, "replace quickfix list", nil, buf)
+		map("n", "<c-q>", function()
+			tandem.quickfix.replace({ nearest = true })
+		end, "replace quickfix list with nearest proposal", nil, buf)
+
+		map("n", "gd", function()
+			local loc = tandem.chat.change_location()
+
+			if not loc then
+				return
+			end
+
+			focus_useful_win()
+			tandem.change.focus(loc.index)
+		end)
 	end,
 })
 
