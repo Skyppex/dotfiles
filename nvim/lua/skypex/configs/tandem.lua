@@ -224,3 +224,19 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 		map("n", "<leader>tn", tandem.list.reject_all, "reject all suggestions", nil, buf)
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = "*",
+	callback = function(ev)
+		local buf = ev.buf
+		local name = vim.api.nvim_buf_get_name(buf)
+
+		if name ~= "tandem://peek" then
+			return
+		end
+
+		map("n", "q", function()
+			vim.api.nvim_win_close(vim.api.nvim_get_current_win(), true)
+		end, "close window", nil, buf)
+	end,
+})
