@@ -235,7 +235,7 @@ def distribute [
 
 def --env con [cmd: closure]: any -> any {
     let input = $in
-    mut result = null
+    mut result: any = null
 
     enter $env.CONFIG_PATH
 
