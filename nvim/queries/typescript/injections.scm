@@ -51,3 +51,34 @@
   value: (_
    (string_fragment) @injection.content
    (#set! "injection.language" "sql")))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_
+        (template_string
+            (string_fragment) @injection.content)))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_
+        (template_string
+            (string_fragment) @injection.content))))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_
+        (template_string
+            (string_fragment) @injection.content)))))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_
+        (template_string
+            (string_fragment) @injection.content))))))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_
+        (template_string
+            (string_fragment) @injection.content)))))))
+
+((comment) @injection.language (#offset! @injection.language 0 8 0 0)
+    (_ (_ (_ (_ (_ (_
+        (template_string
+            (string_fragment) @injection.content))))))))
+
