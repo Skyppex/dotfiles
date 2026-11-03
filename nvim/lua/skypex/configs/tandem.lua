@@ -78,7 +78,6 @@ map("nx", "<leader>tl", tandem.list.toggle, "toggle change list")
 
 -- buffers matching these are never chosen as the window to open suggestions in
 local useless_filetypes = {
-	"tandem-input",
 	"tandem-suggestions",
 	"qf",
 	"help",
