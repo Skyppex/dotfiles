@@ -18,7 +18,7 @@ rmd.setup({
 			"###### ",
 		},
 		backgrounds = {
-			"RenderMarkdownH1",
+			"RenderMarkdownH1Bg",
 			"RenderMarkdownH2Bg",
 			"RenderMarkdownH3Bg",
 			"RenderMarkdownH4Bg",
