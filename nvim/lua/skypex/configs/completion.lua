@@ -22,6 +22,7 @@ cmp.setup({
 			auto_show = true,
 			auto_show_delay_ms = 0,
 		},
+		menu = { auto_show = false },
 		trigger = nil,
 	},
 	fuzzy = {
@@ -47,10 +48,34 @@ cmp.setup({
 	},
 })
 
+local no_cmp_names = {
+	"tandem://input",
+}
+
+local no_cmp_filetypes = {
+	"qf",
+}
+
 -- always display completion menu in insert mode no matter what happens :)
 vim.api.nvim_create_autocmd({ "InsertEnter", "TextChangedI", "CmdlineChanged" }, {
 	pattern = "*",
-	callback = function()
+	callback = function(ev)
+		local buf = ev.buf
+		local name = vim.api.nvim_buf_get_name(buf)
+		local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+
+		for _, value in ipairs(no_cmp_names) do
+			if value == name then
+				return
+			end
+		end
+
+		for _, value in ipairs(no_cmp_filetypes) do
+			if value == ft then
+				return
+			end
+		end
+
 		cmp.show()
 	end,
 })
