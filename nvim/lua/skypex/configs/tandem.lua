@@ -244,18 +244,18 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 local line ---@type integer?
 
 map("n", "åq", function()
-	vim.api.nvim_command("normal! cprev")
-	vim.api.nvim_command("normal! zz")
+	vim.cmd("cprev")
 	tandem.quickfix.hide_inline()
 	tandem.quickfix.show_inline({ nearest = true })
+	vim.cmd("normal! zz")
 	line = vim.fn.line(".")
 end, "previous qf list item with tandem preview")
 
 map("n", "æq", function()
-	vim.api.nvim_command("normal! cnext")
-	vim.api.nvim_command("normal! zz")
+	vim.cmd("cnext")
 	tandem.quickfix.hide_inline()
 	tandem.quickfix.show_inline({ nearest = true })
+	vim.cmd("normal! zz")
 	line = vim.fn.line(".")
 end, "next qf list item with tandem preview")
 
