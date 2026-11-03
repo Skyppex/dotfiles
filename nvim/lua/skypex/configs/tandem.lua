@@ -240,3 +240,30 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 		end, "close window", nil, buf)
 	end,
 })
+
+local line ---@type integer?
+
+map("n", "åq", function()
+	vim.api.nvim_command("normal! cprev")
+	vim.api.nvim_command("normal! zz")
+	tandem.quickfix.hide_inline()
+	tandem.quickfix.show_inline({ nearest = true })
+	line = vim.fn.line(".")
+end, "previous qf list item with tandem preview")
+
+map("n", "æq", function()
+	vim.api.nvim_command("normal! cnext")
+	vim.api.nvim_command("normal! zz")
+	tandem.quickfix.hide_inline()
+	tandem.quickfix.show_inline({ nearest = true })
+	line = vim.fn.line(".")
+end, "next qf list item with tandem preview")
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+	callback = function()
+		if line and vim.fn.line(".") ~= line then
+			tandem.quickfix.hide_inline()
+			line = nil
+		end
+	end,
+})

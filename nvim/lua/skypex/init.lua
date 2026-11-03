@@ -38,6 +38,7 @@ vim.defer_fn(function()
 		"https://github.com/SirZenith/oil-vcs-status",
 		"https://github.com/nvim-lualine/lualine.nvim",
 		"https://github.com/windwp/nvim-ts-autotag",
+		"https://github.com/stevearc/quicker.nvim",
 	}, { confirm = false })
 
 	require("skypex.configs.undotree")
@@ -45,6 +46,7 @@ vim.defer_fn(function()
 	require("skypex.configs.oil")
 	require("skypex.configs.lualine")
 	require("skypex.configs.tags")
+	require("skypex.configs.quicker")
 
 	vim.pack.add({
 		"https://github.com/mrjones2014/smart-splits.nvim",
@@ -189,7 +191,6 @@ vim.defer_fn(function()
 
 	-- other
 	vim.pack.add({
-		"https://github.com/stevearc/quicker.nvim",
 		"https://github.com/tpope/vim-sleuth",
 		"https://github.com/folke/which-key.nvim",
 	}, { confirm = false })
@@ -199,7 +200,6 @@ vim.defer_fn(function()
 
 	require("skypex.configs.graffiti")
 	require("skypex.configs.punch-card")
-	require("skypex.configs.quicker")
 	require("skypex.configs.which-key")
 
 	-- useless fun
