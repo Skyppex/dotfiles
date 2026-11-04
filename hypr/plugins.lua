@@ -1,17 +1,6 @@
-if not require("utils").executable_exists("hyprpm") then
-	return
-end
-
-local handle = io.popen("hyprpm list | rg hyprgrass")
-
-if handle == nil then
-	return false
-end
-
-local _ = handle:read("*a")
-local ok = handle:close()
-
-if not ok then
+-- Check the loaded API directly: subprocess exit status is unreliable inside
+-- Hyprland, and an installed plugin may not have been loaded yet.
+if not hl.plugin.hyprgrass then
 	return
 end
 
