@@ -72,7 +72,7 @@ local config = {
 	launch_menu = {},
 	leader = { key = "a", mods = "CTRL" },
 	disable_default_key_bindings = true,
-	enable_kitty_keyboard = true,
+	enable_kitty_keyboard = false,
 	keys = {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = act({ SendString = "\x01" }) },
