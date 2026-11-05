@@ -36,8 +36,14 @@ tandem.setup({
 			return split
 		end,
 	},
+	review = {
+		inline_diff = true,
+	},
 	list = {
 		height = 10,
+	},
+	peek = {
+		follow = true,
 	},
 	mode = "manual",
 	on_permission = function(request) -- { id, tool, input, summary, description?, subagent }
@@ -68,7 +74,6 @@ map("nx", "<leader>tQ", tandem.quickfix.replace, "replace quickfix list")
 
 -- review mode and hunks
 map("nx", "<leader>tr", tandem.review.toggle_global, "toggle review mode")
-map("nx", "<leader>tR", tandem.review.toggle, "toggle review mode for buffer")
 map("nx", "<leader>tm", tandem.mode.cycle, "cycle mode")
 map("nx", "<leader>tf", tandem.hunk.toggle, "toggle old/new suggestion")
 map("nx", "<leader>ty", tandem.hunk.approve, "approve suggestion")
