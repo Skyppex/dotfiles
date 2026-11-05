@@ -17,7 +17,7 @@ map("n", "<leader>er", function()
 	end
 
 	devenv.load()
-end, "Load or reload direnv in cwd")
+end, "Load or reload devenv in cwd")
 
 map("n", "<leader>eq", function()
 	devenv.revoke()
