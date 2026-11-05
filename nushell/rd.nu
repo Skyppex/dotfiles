@@ -27,7 +27,7 @@ export def --wrapped redis [...rest] {
     return ($output.stdout | str trim)
 }
 
-# uses eedisd for known commands, otherwise falls to redis-cli
+# uses redisd for known commands, otherwise falls to redis-cli
 export def --wrapped main [...rest] {
     redis ...$rest
 }
