@@ -192,7 +192,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 			end
 
 			focus_useful_win()
-			tandem.change.focus(loc.index)
+			tandem.change.focus(loc.index, loc.offset)
 		end)
 	end,
 })

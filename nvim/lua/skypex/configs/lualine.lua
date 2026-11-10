@@ -49,7 +49,7 @@ local theme = {
 --- @param failed T
 --- @param none? T
 --- @return T?
-local function get_devenv_statusline(not_loaded, loading, loaded, blocked, failed)
+local function get_devenv_statusline(not_loaded, loading, loaded, blocked, failed, none)
 	local status = require("devenv").status()
 
 	if status == "not_loaded" then
