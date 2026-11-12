@@ -194,6 +194,9 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 			focus_useful_win()
 			tandem.change.focus(loc.index, loc.offset)
 		end)
+
+		map("n", "K", tandem.chat.open_bash, "inspect stdout of bash command")
+		map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr")
 	end,
 })
 
@@ -271,3 +274,23 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 		end
 	end,
 })
+
+for _, v in ipairs({ "stdout", "stderr" }) do
+	vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+		pattern = "*",
+		callback = function(ev)
+			local buf = ev.buf
+			local name = vim.api.nvim_buf_get_name(buf)
+
+			if name ~= "tandem://" .. v then
+				return
+			end
+
+			map("n", "q", function()
+				vim.api.nvim_win_close(vim.api.nvim_get_current_win(), true)
+			end, "close window", nil, buf)
+
+			map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr")
+		end,
+	})
+end
