@@ -18,6 +18,11 @@ Scope {
     property var sourceToplevels: ({})
     property ListModel history: ListModel {}
 
+    onCenterOpenChanged: {
+        if (centerOpen)
+            historyView.positionViewAtBeginning();
+    }
+
     function updateUnreadCount(): void {
         let count = 0;
         for (let i = 0; i < history.count; ++i) {
@@ -261,6 +266,7 @@ Scope {
                     delegate: Rectangle {
                         required property var modelData
                         required property int index
+                        property bool screenshotNotification: modelData.appName.toLowerCase() === "screenshot"
 
                         width: historyView.width
                         height: cardColumn.implicitHeight + 20
@@ -277,56 +283,130 @@ Scope {
 
                             RowLayout {
                                 Layout.fillWidth: true
+                                spacing: 8
+                                visible: !screenshotNotification
+
+                                Image {
+                                    Layout.preferredWidth: visible ? 32 * root.size : 0
+                                    Layout.preferredHeight: visible ? 32 * root.size : 0
+                                    Layout.maximumWidth: 32 * root.size
+                                    Layout.maximumHeight: 32 * root.size
+                                    source: modelData.image
+                                    visible: source !== ""
+                                    fillMode: Image.PreserveAspectFit
+                                    horizontalAlignment: Image.AlignHCenter
+                                    verticalAlignment: Image.AlignVCenter
+                                    smooth: true
+                                    mipmap: true
+                                    asynchronous: true
+                                }
+
+                                ColumnLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 4
+
+                                    RowLayout {
+                                        Layout.fillWidth: true
+
+                                        Text {
+                                            Layout.fillWidth: true
+                                            text: modelData.appName + ": " + modelData.summary
+                                            color: Theme.cyan50
+                                            font.family: Theme.fonts.primary
+                                            font.pixelSize: 14 * root.size
+                                            font.bold: true
+                                            elide: Text.ElideRight
+                                        }
+
+                                        Text {
+                                            text: modelData.read ? "read" : "new"
+                                            color: modelData.read ? Theme.quaternary : Theme.green50
+                                            font.family: Theme.fonts.primary
+                                            font.pixelSize: 11 * root.size
+                                        }
+                                    }
+
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: modelData.body
+                                        color: Theme.primary
+                                        font.family: Theme.fonts.primary
+                                        font.pixelSize: 13 * root.size
+                                        textFormat: Text.PlainText
+                                        wrapMode: Text.WordWrap
+                                    }
+
+                                    Text {
+                                        Layout.fillWidth: true
+                                        visible: modelData.actionCount > 0
+                                        text: "action: " + (modelData.actionCount > 0 ? modelData.actionText : "")
+                                        color: Theme.yellow50
+                                        font.family: Theme.fonts.primary
+                                        font.pixelSize: 11 * root.size
+                                        elide: Text.ElideRight
+                                    }
+                                }
+                            }
+
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 4
+                                visible: screenshotNotification
+
+                                RowLayout {
+                                    Layout.fillWidth: true
+
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: modelData.appName + ": " + modelData.summary
+                                        color: Theme.cyan50
+                                        font.family: Theme.fonts.primary
+                                        font.pixelSize: 14 * root.size
+                                        font.bold: true
+                                        elide: Text.ElideRight
+                                    }
+
+                                    Text {
+                                        text: modelData.read ? "read" : "new"
+                                        color: modelData.read ? Theme.quaternary : Theme.green50
+                                        font.family: Theme.fonts.primary
+                                        font.pixelSize: 11 * root.size
+                                    }
+                                }
+
+                                Image {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(240 * root.size, width * implicitHeight / implicitWidth) : 0
+                                    Layout.maximumHeight: 240 * root.size
+                                    source: modelData.image
+                                    visible: source !== ""
+                                    fillMode: Image.PreserveAspectFit
+                                    horizontalAlignment: Image.AlignHCenter
+                                    verticalAlignment: Image.AlignVCenter
+                                    smooth: true
+                                    mipmap: true
+                                    asynchronous: true
+                                }
 
                                 Text {
                                     Layout.fillWidth: true
-                                    text: modelData.appName + ": " + modelData.summary
-                                    color: Theme.cyan50
+                                    text: modelData.body
+                                    color: Theme.primary
                                     font.family: Theme.fonts.primary
-                                    font.pixelSize: 14 * root.size
-                                    font.bold: true
-                                    elide: Text.ElideRight
+                                    font.pixelSize: 13 * root.size
+                                    textFormat: Text.PlainText
+                                    wrapMode: Text.WordWrap
                                 }
 
                                 Text {
-                                    text: modelData.read ? "read" : "new"
-                                    color: modelData.read ? Theme.quaternary : Theme.green50
+                                    Layout.fillWidth: true
+                                    visible: modelData.actionCount > 0
+                                    text: "action: " + (modelData.actionCount > 0 ? modelData.actionText : "")
+                                    color: Theme.yellow50
                                     font.family: Theme.fonts.primary
                                     font.pixelSize: 11 * root.size
+                                    elide: Text.ElideRight
                                 }
-                            }
-
-                            Image {
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(360 * root.size, width * implicitHeight / implicitWidth) : 0
-                                source: modelData.image
-                                visible: source !== ""
-                                fillMode: Image.PreserveAspectFit
-                                horizontalAlignment: Image.AlignHCenter
-                                verticalAlignment: Image.AlignVCenter
-                                smooth: true
-                                mipmap: true
-                                asynchronous: true
-                            }
-
-                            Text {
-                                Layout.fillWidth: true
-                                text: modelData.body
-                                color: Theme.primary
-                                font.family: Theme.fonts.primary
-                                font.pixelSize: 13 * root.size
-                                textFormat: Text.PlainText
-                                wrapMode: Text.WordWrap
-                            }
-
-                            Text {
-                                Layout.fillWidth: true
-                                visible: modelData.actionCount > 0
-                                text: "action: " + (modelData.actionCount > 0 ? modelData.actionText : "")
-                                color: Theme.yellow50
-                                font.family: Theme.fonts.primary
-                                font.pixelSize: 11 * root.size
-                                elide: Text.ElideRight
                             }
                         }
                     }
@@ -396,6 +476,7 @@ Scope {
 
                 Rectangle {
                     required property var modelData
+                    property bool screenshotNotification: modelData.appName.toLowerCase() === "screenshot"
                     Layout.fillWidth: true
                     Layout.preferredHeight: popupBody.implicitHeight + 20
                     Layout.maximumHeight: 320 * root.size
@@ -416,37 +497,90 @@ Scope {
                         anchors.margins: 10
                         spacing: 3
 
-                        Text {
+                        RowLayout {
                             Layout.fillWidth: true
-                            text: modelData.appName + ": " + modelData.summary
-                            color: Theme.cyan50
-                            font.family: Theme.fonts.primary
-                            font.pixelSize: 14 * root.size
-                            font.bold: true
-                            elide: Text.ElideRight
+                            spacing: 8
+                            visible: !screenshotNotification
+
+                            Image {
+                                Layout.preferredWidth: visible ? 32 * root.size : 0
+                                Layout.preferredHeight: visible ? 32 * root.size : 0
+                                Layout.maximumWidth: 32 * root.size
+                                Layout.maximumHeight: 32 * root.size
+                                source: modelData.image
+                                visible: source !== ""
+                                fillMode: Image.PreserveAspectFit
+                                horizontalAlignment: Image.AlignHCenter
+                                verticalAlignment: Image.AlignVCenter
+                                smooth: true
+                                mipmap: true
+                                asynchronous: true
+                            }
+
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 3
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: modelData.appName + ": " + modelData.summary
+                                    color: Theme.cyan50
+                                    font.family: Theme.fonts.primary
+                                    font.pixelSize: 14 * root.size
+                                    font.bold: true
+                                    elide: Text.ElideRight
+                                }
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: modelData.body
+                                    color: Theme.primary
+                                    font.family: Theme.fonts.primary
+                                    font.pixelSize: 13 * root.size
+                                    textFormat: Text.PlainText
+                                    wrapMode: Text.WordWrap
+                                }
+                            }
                         }
 
-                        Image {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(360 * root.size, width * implicitHeight / implicitWidth) : 0
-                            source: modelData.image
-                            visible: source !== ""
-                            fillMode: Image.PreserveAspectFit
-                            horizontalAlignment: Image.AlignHCenter
-                            verticalAlignment: Image.AlignVCenter
-                            smooth: true
-                            mipmap: true
-                            asynchronous: true
-                        }
+                            spacing: 3
+                            visible: screenshotNotification
 
-                        Text {
-                            Layout.fillWidth: true
-                            text: modelData.body
-                            color: Theme.primary
-                            font.family: Theme.fonts.primary
-                            font.pixelSize: 13 * root.size
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
+                            Text {
+                                Layout.fillWidth: true
+                                text: modelData.appName + ": " + modelData.summary
+                                color: Theme.cyan50
+                                font.family: Theme.fonts.primary
+                                font.pixelSize: 14 * root.size
+                                font.bold: true
+                                elide: Text.ElideRight
+                            }
+
+                            Image {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: visible && implicitWidth > 0 ? Math.min(240 * root.size, width * implicitHeight / implicitWidth) : 0
+                                Layout.maximumHeight: 240 * root.size
+                                source: modelData.image
+                                visible: source !== ""
+                                fillMode: Image.PreserveAspectFit
+                                horizontalAlignment: Image.AlignHCenter
+                                verticalAlignment: Image.AlignVCenter
+                                smooth: true
+                                mipmap: true
+                                asynchronous: true
+                            }
+
+                            Text {
+                                Layout.fillWidth: true
+                                text: modelData.body
+                                color: Theme.primary
+                                font.family: Theme.fonts.primary
+                                font.pixelSize: 13 * root.size
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                            }
                         }
                     }
                 }
