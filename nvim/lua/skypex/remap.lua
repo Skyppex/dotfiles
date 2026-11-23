@@ -229,6 +229,20 @@ vim.api.nvim_create_user_command("InspectBelow", function()
 	vim.show_pos(0, row, col) -- 0-based row, so this is the next line
 end, {})
 
+local profiling = false
+
+map("n", "<leader>P", function()
+	if not profiling then
+		require("jit.p").start("10,i1,s,m0", "/tmp/nvim-profile.txt")
+		profiling = true
+		vim.notify("Profiling started")
+	else
+		require("jit.p").stop()
+		profiling = false
+		vim.notify("Profile written to /tmp/nvim-profile.txt")
+	end
+end, "toggle profiling")
+
 -- Source config
 map("n", "<leader><leader>c", function()
 	local files = vim.fn.glob(utils.get_config_path() .. "/**/skypex/configs/*.lua", true, true)
