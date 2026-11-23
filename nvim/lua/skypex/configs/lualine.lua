@@ -183,13 +183,7 @@ require("lualine").setup({
 						return ""
 					end
 
-					local map = {
-						["manual"] = "manual",
-						["auto_permissions"] = "auto perms",
-						["auto"] = "auto",
-					}
-
-					return map[tandem.mode.get()]
+					return require("skypex.configs.tandem").modes[tandem.mode.get()].name
 				end,
 				color = function()
 					local ok, tandem = pcall(require, "tandem")
@@ -198,19 +192,7 @@ require("lualine").setup({
 						return ""
 					end
 
-					if tandem.mode.get() == "manual" then
-						return {
-							fg = colors.quaternary,
-						}
-					elseif tandem.mode.get() == "auto_permissions" then
-						return {
-							fg = colors.green50,
-						}
-					elseif tandem.mode.get() == "auto" then
-						return {
-							fg = colors.yellow50,
-						}
-					end
+					return { fg = require("skypex.configs.tandem").modes[tandem.mode.get()].color }
 				end,
 			},
 			{

@@ -1,7 +1,42 @@
 local tandem = require("tandem")
 local utils = require("skypex.utils")
+local colors = require("skypex.colors")
+
+local M = {}
+
+M.modes = {
+	manual = {
+		name = "manual",
+		color = colors.quaternary,
+		edit = "suggest",
+		write = "suggest",
+		delete = "suggest",
+		bash = "ask",
+		other = "ask",
+	},
+	auto_perms = {
+		name = "auto perms",
+		color = colors.green50,
+		edit = "suggest",
+		write = "suggest",
+		delete = "suggest",
+		bash = "allow",
+		other = "allow",
+	},
+	auto = {
+		name = "auto",
+		color = colors.yellow50,
+		edit = "allow",
+		write = "allow",
+		delete = "allow",
+		bash = "allow",
+		other = "allow",
+	},
+}
 
 tandem.setup({
+	mode_order = { "manual", "auto_perms", "auto" },
+	modes = M.modes,
 	provider = function()
 		if utils.is_home_computer_linux() then
 			return "codex"
@@ -45,11 +80,10 @@ tandem.setup({
 	peek = {
 		follow = true,
 	},
-	mode = "manual",
 	on_permission = function(request) -- { id, tool, input, summary, description?, subagent }
 		vim.notify("Claude waits: " .. request.summary, vim.log.levels.WARN)
 	end,
-	always_write = utils.table_append(require("tandem.config").defaults, {
+	always_write = utils.table_append(require("tandem.config").defaults.always_write, {
 		function()
 			return vim.fn.getcwd() .. "/.crypt"
 		end,
@@ -294,3 +328,5 @@ for _, v in ipairs({ "stdout", "stderr" }) do
 		end,
 	})
 end
+
+return M
