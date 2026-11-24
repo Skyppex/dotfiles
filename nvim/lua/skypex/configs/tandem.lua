@@ -227,10 +227,10 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 
 			focus_useful_win()
 			tandem.change.focus(loc.index, loc.offset)
-		end)
+		end, nil, buf)
 
-		map("n", "K", tandem.chat.open_bash, "inspect stdout of bash command")
-		map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr")
+		map("n", "K", tandem.chat.open_bash, "inspect stdout of bash command", nil, buf)
+		map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr", nil, buf)
 	end,
 })
 
@@ -324,7 +324,7 @@ for _, v in ipairs({ "stdout", "stderr" }) do
 				vim.api.nvim_win_close(vim.api.nvim_get_current_win(), true)
 			end, "close window", nil, buf)
 
-			map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr")
+			map("n", "L", tandem.bash.toggle_stdio, "switch between stdout and stderr", nil, buf)
 		end,
 	})
 end

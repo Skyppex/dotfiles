@@ -1,6 +1,9 @@
 local nt = require("neotest")
 
 nt.setup({
+	summary = {
+		open = "topleft vsplit | vertical resize 50",
+	},
 	adapters = {
 		require("neotest-dotnet")({
 			dap = {
