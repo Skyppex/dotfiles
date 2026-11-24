@@ -1177,3 +1177,4 @@ noreply
 perlin
 wav
 swapable
+pdf
