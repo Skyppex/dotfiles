@@ -293,7 +293,11 @@ M.servers = {
 	clangd = {
 		cmd = { "clangd", "--background-index", "--clang-tidy" },
 		filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-		root_markers = { "version.h", "compile_commands.json", "compile_flags.txt", ".clangd", ".git", ".jj" },
+		root_markers = {
+			{ ".clangd", ".clang-format", ".clang-tidy", "compile_commands.json", "compile_flags.txt" },
+			".git",
+			".jj",
+		},
 	},
 	["slint-lsp"] = {
 		cmd = { "slint-lsp" },

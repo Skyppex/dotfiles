@@ -35,7 +35,6 @@ vim.defer_fn(function()
 		"https://github.com/mbbill/undotree",
 		"https://github.com/echasnovski/mini.nvim",
 		"https://github.com/stevearc/oil.nvim",
-		"https://github.com/SirZenith/oil-vcs-status",
 		"https://github.com/nvim-lualine/lualine.nvim",
 		"https://github.com/windwp/nvim-ts-autotag",
 		"https://github.com/stevearc/quicker.nvim",

@@ -47,6 +47,8 @@ local formatters_by_ft = {
 	scss = first_then_injected("prettierd", "stylelint"),
 	json = first_then_injected("jq", "prettierd"),
 	graphql = first_then_injected("prettierd"),
+	c = { "clang_format", "injected" },
+	cpp = { "clang_format", "injected" },
 	cs = { "csharpier", "injected" },
 	csx = { "csharpier", "injected" },
 	go = first_then_injected("goimports", "gofmt"),
@@ -75,6 +77,9 @@ local external_formatters = {
 	},
 	gofmt = {
 		command = "gofmt",
+	},
+	clang_format = {
+		command = "clang-format",
 	},
 	["slint-lsp"] = {
 		command = "slint-lsp",
@@ -140,8 +145,6 @@ conform.setup({
 		end
 
 		local disable_filetypes = {
-			c = true,
-			cpp = true,
 			javascript = true,
 			javascriptreact = true,
 			typescript = true,
